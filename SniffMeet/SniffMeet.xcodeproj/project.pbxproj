@@ -64,6 +64,9 @@
 		320047DE2CFE9E0400D08B6D /* Extension + UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320047DD2CFE9DFB00D08B6D /* Extension + UIApplication.swift */; };
 		3200480C2CFF0FB400D08B6D /* ProfileDropAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200480B2CFF0FA600D08B6D /* ProfileDropAnimation.swift */; };
 		320522BE2D0181A800F1677C /* ImageCacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320522BD2D0181A700F1677C /* ImageCacheable.swift */; };
+		3284D34E2D2F941C000ABC04 /* DataStoragable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3284D34D2D2F9417000ABC04 /* DataStoragable.swift */; };
+		3284D34F2D2F941C000ABC04 /* DataStoragable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3284D34D2D2F9417000ABC04 /* DataStoragable.swift */; };
+		3284D3502D2F941C000ABC04 /* DataStoragable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3284D34D2D2F9417000ABC04 /* DataStoragable.swift */; };
 		32A7563C2D00398100965F0A /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7563B2D00397D00965F0A /* CacheManager.swift */; };
 		32A7563D2D00398100965F0A /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7563B2D00397D00965F0A /* CacheManager.swift */; };
 		32A7563E2D00398100965F0A /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7563B2D00397D00965F0A /* CacheManager.swift */; };
@@ -312,6 +315,7 @@
 		320047DD2CFE9DFB00D08B6D /* Extension + UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIApplication.swift"; sourceTree = "<group>"; };
 		3200480B2CFF0FA600D08B6D /* ProfileDropAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropAnimation.swift; sourceTree = "<group>"; };
 		320522BD2D0181A700F1677C /* ImageCacheable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheable.swift; sourceTree = "<group>"; };
+		3284D34D2D2F9417000ABC04 /* DataStoragable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoragable.swift; sourceTree = "<group>"; };
 		32A7563B2D00397D00965F0A /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPage.swift; sourceTree = "<group>"; };
 		9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserInfoRemoteUseCase.swift; sourceTree = "<group>"; };
@@ -849,6 +853,7 @@
 		FD69B1B12CE3BC55009D71DC /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				3284D34D2D2F9417000ABC04 /* DataStoragable.swift */,
 				32A7563B2D00397D00965F0A /* CacheManager.swift */,
 				320045342CF4353400D08B6D /* SNMFileManager.swift */,
 				FD69B1B42CE3BC79009D71DC /* UserDefaultsManager.swift */,
@@ -1888,6 +1893,7 @@
 				FD331A852CF33D0500F39426 /* SupabaseSessionResponse.swift in Sources */,
 				FD331A862CF33D0500F39426 /* SupabaseUserResponse.swift in Sources */,
 				FD331A872CF33D0500F39426 /* SupabaseRefreshResponse.swift in Sources */,
+				3284D34F2D2F941C000ABC04 /* DataStoragable.swift in Sources */,
 				FD331A882CF33D0500F39426 /* SupabaseTokenRequest.swift in Sources */,
 				FD331A892CF33D0500F39426 /* SupabaseDatabaseManager.swift in Sources */,
 				FD331A8A2CF33D0500F39426 /* SupabaseDatabaseRequest.swift in Sources */,
@@ -1970,6 +1976,7 @@
 				320047B62CFCB8D000D08B6D /* EventConstant.swift in Sources */,
 				3200441C2CE48C5C00D08B6D /* MPCAdvertiser.swift in Sources */,
 				FD880B5A2CECE8FC0093BEB9 /* SNMLogger.swift in Sources */,
+				3284D3502D2F941C000ABC04 /* DataStoragable.swift in Sources */,
 				A2F825D12CDF4BA6000C5419 /* HomeViewController.swift in Sources */,
 				A2BA1BA92CF34A6A0080575A /* RequestMateListUseCase.swift in Sources */,
 				FD5134232CEC2BDE002E76F3 /* Routable.swift in Sources */,
@@ -2099,6 +2106,7 @@
 				320045352CF4353900D08B6D /* SNMFileManager.swift in Sources */,
 				3200453A2CF43F3800D08B6D /* FileManagerTest.swift in Sources */,
 				FD69B1C42CE3BCE4009D71DC /* KeychainManager.swift in Sources */,
+				3284D34E2D2F941C000ABC04 /* DataStoragable.swift in Sources */,
 				FD69B1CD2CE3E9BB009D71DC /* KeychainTests.swift in Sources */,
 				32A7563E2D00398100965F0A /* CacheManager.swift in Sources */,
 			);

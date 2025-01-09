@@ -1,9 +1,8 @@
 //
-//  DataStorageable.swift
+//  DataStoragable.swift
 //  SniffMeet
 //
 //  Created by 윤지성 on 1/9/25.
-//
 //
 import Foundation
 

@@ -82,7 +82,6 @@
 		99FA4E792CE0FBBF00553C2E /* ProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */; };
 		A202A1152CEDD50700B98203 /* SupabaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */; };
 		A202A1172CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */; };
-		A20E71502CEC595C00272B25 /* SupabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20E714F2CEC595C00272B25 /* SupabaseError.swift */; };
 		A20E71522CEC5FE900272B25 /* SupabaseUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20E71512CEC5FE900272B25 /* SupabaseUserResponse.swift */; };
 		A21435F72CE20D2500564A4D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21435F62CE20D2500564A4D /* TabBarController.swift */; };
 		A220400B2CF6B89800D1E8CB /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */; };
@@ -90,7 +89,7 @@
 		A24082612CEB244C009109A0 /* SupabaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082602CEB244C009109A0 /* SupabaseConfig.swift */; };
 		A24082642CEB2470009109A0 /* SupabaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */; };
 		A24082672CEB2539009109A0 /* SupabaseSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082662CEB2539009109A0 /* SupabaseSessionResponse.swift */; };
-		A24082702CEB27DE009109A0 /* SupabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240826F2CEB27DE009109A0 /* SupabaseRequest.swift */; };
+		A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */; };
 		A24082722CEB36B8009109A0 /* SupabaseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082712CEB36B8009109A0 /* SupabaseTokenRequest.swift */; };
 		A25BE4522CEBB5A900886763 /* SupabaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4512CEBB5A900886763 /* SupabaseSession.swift */; };
 		A25BE4562CEBB63A00886763 /* SupabaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4552CEBB63A00886763 /* SupabaseUser.swift */; };
@@ -100,6 +99,7 @@
 		A288A63D2CDC595000D11C34 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A28D4F582CFED0CB00A79543 /* AddMateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28D4F572CFED0CB00A79543 /* AddMateButton.swift */; };
 		A2AFC9492D016BFF0062B34E /* SNMToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AFC9482D016BFF0062B34E /* SNMToast.swift */; };
+		A2B58F522D2FA0DC00C15B12 /* SNMError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B58F512D2FA0DC00C15B12 /* SNMError.swift */; };
 		A2BA1B922CF1E8C60080575A /* MateListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA1B912CF1E8C60080575A /* MateListViewController.swift */; };
 		A2BA1B962CF2606B0080575A /* MateListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA1B952CF2606B0080575A /* MateListInteractor.swift */; };
 		A2BA1B982CF260780080575A /* MateListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA1B972CF260780080575A /* MateListPresenter.swift */; };
@@ -160,10 +160,9 @@
 		FD331A7C2CF33CF200F39426 /* AnyEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0634302CE62573003C9D6B /* AnyEncodable.swift */; };
 		FD331A7D2CF33D0500F39426 /* SupabaseStorageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A5F2CF339AA00F39426 /* SupabaseStorageRequest.swift */; };
 		FD331A7E2CF33D0500F39426 /* SupabaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082602CEB244C009109A0 /* SupabaseConfig.swift */; };
-		FD331A7F2CF33D0500F39426 /* SupabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20E714F2CEC595C00272B25 /* SupabaseError.swift */; };
 		FD331A802CF33D0500F39426 /* SupabaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */; };
 		FD331A812CF33D0500F39426 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4592CEC2BA300886763 /* SessionManager.swift */; };
-		FD331A822CF33D0500F39426 /* SupabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240826F2CEB27DE009109A0 /* SupabaseRequest.swift */; };
+		FD331A822CF33D0500F39426 /* SupabaseAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */; };
 		FD331A832CF33D0500F39426 /* SupabaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4512CEBB5A900886763 /* SupabaseSession.swift */; };
 		FD331A842CF33D0500F39426 /* SupabaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4552CEBB63A00886763 /* SupabaseUser.swift */; };
 		FD331A852CF33D0500F39426 /* SupabaseSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082662CEB2539009109A0 /* SupabaseSessionResponse.swift */; };
@@ -327,7 +326,6 @@
 		99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputViewController.swift; sourceTree = "<group>"; };
 		A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDatabaseManager.swift; sourceTree = "<group>"; };
 		A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDatabaseRequest.swift; sourceTree = "<group>"; };
-		A20E714F2CEC595C00272B25 /* SupabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseError.swift; sourceTree = "<group>"; };
 		A20E71512CEC5FE900272B25 /* SupabaseUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseUserResponse.swift; sourceTree = "<group>"; };
 		A21435F62CE20D2500564A4D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
@@ -335,7 +333,7 @@
 		A24082602CEB244C009109A0 /* SupabaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseConfig.swift; sourceTree = "<group>"; };
 		A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAuthManager.swift; sourceTree = "<group>"; };
 		A24082662CEB2539009109A0 /* SupabaseSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSessionResponse.swift; sourceTree = "<group>"; };
-		A240826F2CEB27DE009109A0 /* SupabaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseRequest.swift; sourceTree = "<group>"; };
+		A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAuthRequest.swift; sourceTree = "<group>"; };
 		A24082712CEB36B8009109A0 /* SupabaseTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseTokenRequest.swift; sourceTree = "<group>"; };
 		A25BE4512CEBB5A900886763 /* SupabaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSession.swift; sourceTree = "<group>"; };
 		A25BE4552CEBB63A00886763 /* SupabaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseUser.swift; sourceTree = "<group>"; };
@@ -344,6 +342,7 @@
 		A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountUseCase.swift; sourceTree = "<group>"; };
 		A28D4F572CFED0CB00A79543 /* AddMateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateButton.swift; sourceTree = "<group>"; };
 		A2AFC9482D016BFF0062B34E /* SNMToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMToast.swift; sourceTree = "<group>"; };
+		A2B58F512D2FA0DC00C15B12 /* SNMError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMError.swift; sourceTree = "<group>"; };
 		A2BA1B912CF1E8C60080575A /* MateListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateListViewController.swift; sourceTree = "<group>"; };
 		A2BA1B952CF2606B0080575A /* MateListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateListInteractor.swift; sourceTree = "<group>"; };
 		A2BA1B972CF260780080575A /* MateListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateListPresenter.swift; sourceTree = "<group>"; };
@@ -682,10 +681,9 @@
 		A24082622CEB2464009109A0 /* Supabase */ = {
 			isa = PBXGroup;
 			children = (
-				FD331A5E2CF339A400F39426 /* Storage */,
 				A24082602CEB244C009109A0 /* SupabaseConfig.swift */,
-				A20E714F2CEC595C00272B25 /* SupabaseError.swift */,
 				A24082652CEB2475009109A0 /* Auth */,
+				FD331A5E2CF339A400F39426 /* Storage */,
 				A202A1132CEDD4CD00B98203 /* Database */,
 			);
 			path = Supabase;
@@ -696,7 +694,7 @@
 			children = (
 				A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */,
 				A25BE4592CEC2BA300886763 /* SessionManager.swift */,
-				A240826F2CEB27DE009109A0 /* SupabaseRequest.swift */,
+				A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */,
 				A25BE4532CEBB60200886763 /* Entity */,
 			);
 			path = Auth;
@@ -986,6 +984,7 @@
 				A2C328912CE3BEA000D255AB /* AppRouter.swift */,
 				FD5134222CEC2BDB002E76F3 /* Routable.swift */,
 				320047B32CFC90C100D08B6D /* SessionViewController.swift */,
+				A2B58F512D2FA0DC00C15B12 /* SNMError.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1877,11 +1876,10 @@
 				FD331A8C2CF33E7100F39426 /* KeychainManager.swift in Sources */,
 				FD331A7D2CF33D0500F39426 /* SupabaseStorageRequest.swift in Sources */,
 				FD331A7E2CF33D0500F39426 /* SupabaseConfig.swift in Sources */,
-				FD331A7F2CF33D0500F39426 /* SupabaseError.swift in Sources */,
 				FD331A802CF33D0500F39426 /* SupabaseAuthManager.swift in Sources */,
 				FD331A812CF33D0500F39426 /* SessionManager.swift in Sources */,
 				FD331A8E2CF33F6700F39426 /* SupabaseStorageManager.swift in Sources */,
-				FD331A822CF33D0500F39426 /* SupabaseRequest.swift in Sources */,
+				FD331A822CF33D0500F39426 /* SupabaseAuthRequest.swift in Sources */,
 				FD331A832CF33D0500F39426 /* SupabaseSession.swift in Sources */,
 				FD331A842CF33D0500F39426 /* SupabaseUser.swift in Sources */,
 				32A7563D2D00398100965F0A /* CacheManager.swift in Sources */,
@@ -1913,7 +1911,7 @@
 				995D94622CE598FD005A47BF /* NIManager.swift in Sources */,
 				FDBFA9A12CE1E51500AA9220 /* SNMColor.swift in Sources */,
 				FDE7689F2CF7858F00B5DE88 /* Extension + UIViewController.swift in Sources */,
-				A24082702CEB27DE009109A0 /* SupabaseRequest.swift in Sources */,
+				A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */,
 				A2C844D12CDBE1E5007F2970 /* (null) in Sources */,
 				A2BD49F62CF72B4000AC72A7 /* WalkNotiDTO.swift in Sources */,
 				3200444E2CE595EA00D08B6D /* ProfileCreatePresenter.swift in Sources */,
@@ -1946,8 +1944,6 @@
 				A21435F72CE20D2500564A4D /* TabBarController.swift in Sources */,
 				320043762CDCA18E00D08B6D /* (null) in Sources */,
 				995D94D22CEDF037005A47BF /* MPCProfileDropDTO.swift in Sources */,
-				A20E71502CEC595C00272B25 /* SupabaseError.swift in Sources */,
-				A20E71502CEC595C00272B25 /* SupabaseError.swift in Sources */,
 				32A7563C2D00398100965F0A /* CacheManager.swift in Sources */,
 				FD11527D2CFC901A008955C4 /* NotificationListRouter.swift in Sources */,
 				FDCD02CF2CE917D800B627D8 /* MockRequest.swift in Sources */,
@@ -1970,6 +1966,7 @@
 				320047B62CFCB8D000D08B6D /* EventConstant.swift in Sources */,
 				3200441C2CE48C5C00D08B6D /* MPCAdvertiser.swift in Sources */,
 				FD880B5A2CECE8FC0093BEB9 /* SNMLogger.swift in Sources */,
+				A2B58F522D2FA0DC00C15B12 /* SNMError.swift in Sources */,
 				A2F825D12CDF4BA6000C5419 /* HomeViewController.swift in Sources */,
 				A2BA1BA92CF34A6A0080575A /* RequestMateListUseCase.swift in Sources */,
 				FD5134232CEC2BDE002E76F3 /* Routable.swift in Sources */,

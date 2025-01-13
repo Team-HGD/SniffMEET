@@ -30,7 +30,7 @@ struct RespondMateRequestUseCaseImpl: RespondMateRequestUseCase {
         }
         do {
             guard let userID = SessionManager.shared.session?.user?.userID else {
-                throw SupabaseError.sessionNotExist
+                throw SupabaseAuthError.sessionNotExist
             }
             
             mateList.append(mateId)

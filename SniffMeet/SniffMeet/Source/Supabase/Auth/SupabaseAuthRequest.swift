@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum SupabaseRequest {
+enum SupabaseAuthRequest {
     case signInAnonymously
     case refreshToken(refreshToken: String)
     case refreshUser(accessToken: String)
 }
 
-extension SupabaseRequest: SNMRequestConvertible {
+extension SupabaseAuthRequest: SNMRequestConvertible {
     var endpoint: Endpoint {
         switch self {
         case .signInAnonymously:

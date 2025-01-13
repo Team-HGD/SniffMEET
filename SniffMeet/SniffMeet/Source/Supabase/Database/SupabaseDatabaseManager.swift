@@ -27,89 +27,125 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
     }
 
     func fetchData(from table: String, query: [String: String]) async throws -> Data {
-        if SessionManager.shared.isExpired {
-            try await SupabaseAuthManager.shared.refreshSession()
-        }
-        guard let session = SessionManager.shared.session else {
-            throw SupabaseError.sessionNotExist
-        }
-        let response = try await networkProvider.request(
-            with: SupabaseDatabaseRequest.fetchData(
-                table: table,
-                accessToken: session.accessToken,
-                query: query
+        do {
+            if SessionManager.shared.isExpired {
+                try await SupabaseAuthManager.shared.refreshSession()
+            }
+            guard let session = SessionManager.shared.session else {
+                throw SupabaseAuthError.sessionNotExist
+            }
+            let response = try await networkProvider.request(
+                with: SupabaseDatabaseRequest.fetchData(
+                    table: table,
+                    accessToken: session.accessToken,
+                    query: query
+                )
             )
-        )
-        return response.data
+            return response.data
+        } catch {
+            throw SupabaseDBError.fetchDataFailed
+        }
     }
 
     func insertData(into table: String, with data: Data) async throws {
-        if SessionManager.shared.isExpired {
-            try await SupabaseAuthManager.shared.refreshSession()
-        }
-        guard let session = SessionManager.shared.session else {
-            throw SupabaseError.sessionNotExist
-        }
-        _ = try await networkProvider.request(
-            with: SupabaseDatabaseRequest.insertData(
-                table: table,
-                accessToken: session.accessToken,
-                data: data
+        do {
+            if SessionManager.shared.isExpired {
+                try await SupabaseAuthManager.shared.refreshSession()
+            }
+            guard let session = SessionManager.shared.session else {
+                throw SupabaseAuthError.sessionNotExist
+            }
+            _ = try await networkProvider.request(
+                with: SupabaseDatabaseRequest.insertData(
+                    table: table,
+                    accessToken: session.accessToken,
+                    data: data
+                )
             )
-        )
+        } catch {
+            throw SupabaseDBError.insertDataFailed
+        }
     }
 
     func updateData(into table: String, with data: Data) async throws {
-        if SessionManager.shared.isExpired {
-            try await SupabaseAuthManager.shared.refreshSession()
-        }
-        guard let session = SessionManager.shared.session else {
-            throw SupabaseError.sessionNotExist
-        }
-        guard let userID = SessionManager.shared.session?.user?.userID else { return }
-        
-        _ = try await networkProvider.request(
-            with: SupabaseDatabaseRequest.updateData(
-                table: table,
-                id: userID,
-                accessToken: session.accessToken,
-                data: data
+        do {
+            if SessionManager.shared.isExpired {
+                try await SupabaseAuthManager.shared.refreshSession()
+            }
+            guard let session = SessionManager.shared.session else {
+                throw SupabaseAuthError.sessionNotExist
+            }
+            guard let userID = SessionManager.shared.session?.user?.userID else { return }
+            
+            _ = try await networkProvider.request(
+                with: SupabaseDatabaseRequest.updateData(
+                    table: table,
+                    id: userID,
+                    accessToken: session.accessToken,
+                    data: data
+                )
             )
-        )
+        } catch {
+            throw SupabaseDBError.updateDataFailed
+        }
     }
     
     func updateData(into table: String, at id: UUID, with data: Data) async throws {
-        if SessionManager.shared.isExpired {
-            try await SupabaseAuthManager.shared.refreshSession()
-        }
-        guard let session = SessionManager.shared.session else {
-            throw SupabaseError.sessionNotExist
-        }        
-        _ = try await networkProvider.request(
-            with: SupabaseDatabaseRequest.updateData(
-                table: table,
-                id: id,
-                accessToken: session.accessToken,
-                data: data
+        do {
+            if SessionManager.shared.isExpired {
+                try await SupabaseAuthManager.shared.refreshSession()
+            }
+            guard let session = SessionManager.shared.session else {
+                throw SupabaseAuthError.sessionNotExist
+            }
+            _ = try await networkProvider.request(
+                with: SupabaseDatabaseRequest.updateData(
+                    table: table,
+                    id: id,
+                    accessToken: session.accessToken,
+                    data: data
+                )
             )
-        )
+        } catch {
+            throw SupabaseDBError.updateDataFailed
+        }
     }
     
     func fetchList(into table: String, with data: Data) async throws -> Data {
-        if SessionManager.shared.isExpired {
-            try await SupabaseAuthManager.shared.refreshSession()
-        }
-        guard let session = SessionManager.shared.session else {
-            throw SupabaseError.sessionNotExist
-        }
+        do {
+            if SessionManager.shared.isExpired {
+                try await SupabaseAuthManager.shared.refreshSession()
+            }
+            guard let session = SessionManager.shared.session else {
+                throw SupabaseAuthError.sessionNotExist
+            }
 
-        let response = try await networkProvider.request(
-            with: SupabaseDatabaseRequest.fetchList(
-                table: table,
-                data: data,
-                accessToken: session.accessToken
+            let response = try await networkProvider.request(
+                with: SupabaseDatabaseRequest.fetchList(
+                    table: table,
+                    data: data,
+                    accessToken: session.accessToken
+                )
             )
-        )
-        return response.data
+            return response.data
+        } catch {
+            throw SupabaseDBError.fetchDataFailed
+        }
+    }
+}
+
+// MARK: - SupabaseDBError
+
+enum SupabaseDBError: LocalizedError {
+    case fetchDataFailed
+    case insertDataFailed
+    case updateDataFailed
+    
+    var errorDescription: String? {
+        switch self {
+        case .fetchDataFailed: "데이터 불러오기 실패"
+        case .insertDataFailed: "데이터 삽입 실패"
+        case .updateDataFailed: "데이터 업데이트 실패"
+        }
     }
 }

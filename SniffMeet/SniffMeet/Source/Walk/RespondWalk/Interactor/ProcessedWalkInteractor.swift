@@ -39,7 +39,7 @@ final class ProcessedWalkInteractor: ProcessedWalkInteractable {
                     mateId: userId
                 ) else {
                     presenter?.didFailToFetchWalkRequest(
-                        error: SupabaseError.notFound
+                        error: SupabaseAuthError.userNotFound
                     )
                     return
                 }

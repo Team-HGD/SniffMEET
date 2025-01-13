@@ -14,8 +14,8 @@ enum SNMLogger {
     static func print(_ message: String...) {
         logger.debug("⚙️ \(message.joined(separator: " "))")
     }
-    static func error(_ message: String...) {
-        logger.error("🚨 \(message.joined(separator: " "))")
+    static func error(file: String = #file, function: String = #function , _ message: String...) {
+        logger.error("🚨 \(file) \(function) \(message.joined(separator: " "))")
     }
     static func info(_ message: String...) {
         logger.info("📄 \(message.joined(separator: " "))")

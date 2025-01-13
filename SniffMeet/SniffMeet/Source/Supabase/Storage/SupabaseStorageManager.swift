@@ -30,31 +30,52 @@ struct SupabaseStorageManager: RemoteImageManagable {
         fileName: String,
         mimeType: MimeType = .image
     ) async throws {
-        if SessionManager.shared.isExpired {
-            try await SupabaseAuthManager.shared.refreshSession()
-        }
-        guard let session = SessionManager.shared.session else {
-            throw SupabaseError.sessionNotExist
-        }
-        let response = try await networkProvider.request(
-            with: SupabaseStorageRequest.upload(
-                accessToken: session.accessToken,
-                image: imageData,
-                fileName: fileName,
-                mimeType: mimeType
+        do {
+            if SessionManager.shared.isExpired {
+                try await SupabaseAuthManager.shared.refreshSession()
+            }
+            guard let session = SessionManager.shared.session else {
+                throw SupabaseAuthError.sessionNotExist
+            }
+            _ = try await networkProvider.request(
+                with: SupabaseStorageRequest.upload(
+                    accessToken: session.accessToken,
+                    image: imageData,
+                    fileName: fileName,
+                    mimeType: mimeType
+                )
             )
-        )
+        } catch {
+            throw SupabaseStorageError.uploadFailed
+        }
     }
     func download(fileName: String, lastModified: String) async throws -> RemoteImage {
-        let response: SNMNetworkResponse = try await networkProvider.request(
-            with: SupabaseStorageRequest.download(fileName: fileName,
-                                                       lastModified: lastModified)
-        )
-        let recentLastModified = response.header?["Last-Modified"] as? String
-        let imageResponse = RemoteImage(isModified: response.statusCode != .notModified,
-                                        imageData: response.data,
-                                        lastModified: recentLastModified ?? "" )
-        return imageResponse
+        do {
+            let response: SNMNetworkResponse = try await networkProvider.request(
+                with: SupabaseStorageRequest.download(fileName: fileName,
+                                                           lastModified: lastModified)
+            )
+            let recentLastModified = response.header?["Last-Modified"] as? String
+            let imageResponse = RemoteImage(isModified: response.statusCode != .notModified,
+                                            imageData: response.data,
+                                            lastModified: recentLastModified ?? "" )
+            return imageResponse
+        } catch {
+            throw SupabaseStorageError.downloadFailed
+        }
     }
+}
 
+// MARK: - SupabaseStorageError
+
+enum SupabaseStorageError: LocalizedError {
+    case uploadFailed
+    case downloadFailed
+    
+    var errorDescription: String? {
+        switch self {
+        case .uploadFailed: "업로드 실패"
+        case .downloadFailed: "다운로드 실패"
+        }
+    }
 }

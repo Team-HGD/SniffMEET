@@ -38,7 +38,7 @@ final class ProfileCreateInteractor: ProfileCreateInteractable {
     func signInWithProfileData(dogInfo: UserInfo, imageData: (png: Data?, jpg: Data?)) {
         Task {
             do {
-                await SupabaseAuthManager.shared.signInAnonymously()
+                try await SupabaseAuthManager.shared.signInAnonymously()
                 try saveUserInfoUseCase.execute(dog: UserInfo(
                     name: dogInfo.name,
                     age: dogInfo.age,

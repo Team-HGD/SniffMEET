@@ -57,7 +57,7 @@ final class RespondWalkInteractor: RespondWalkInteractable {
                     mateId: userId
                 ) else {
                     presenter?.didFailToFetchWalkRequest(
-                        error: SupabaseError.notFound
+                        error: SupabaseAuthError.userNotFound
                     )
                     return
                 }

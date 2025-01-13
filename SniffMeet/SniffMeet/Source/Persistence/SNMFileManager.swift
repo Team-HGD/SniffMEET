@@ -6,26 +6,22 @@
 //
 import Foundation
 
-protocol ImageManagable {
-    func image(forKey: String) throws -> Data?
-    func setImage(imageData: Data, forKey: String) throws
-    func deleteImage(forKey: String) throws
-}
-protocol FileManageable {
-    func fetch(forKey: String) throws -> Data?
-    func set(data: Data, forKey: String) throws
-    func delete(forKey: String) throws
-}
-
-struct SNMFileManager: FileManageable {
+struct SNMFileManager: FileManagable {
+    var fileType: FileType
+    
     private var fileManager: FileManager { FileManager.default }
     private var documentsDir: URL? {
         fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
     }
+    private func fullURL(for fileName: String) -> URL? {
+        guard fileType == .data else {
+            return documentsDir?.appendingPathComponent(fileName)
+        }
+        return documentsDir?.appendingPathComponent(fileName, conformingTo: .jpeg)
+       }
     
     func fileExists(forKey path: String) -> Bool {
-        guard let documentsDir else { return false }
-        let fileURL = documentsDir.appendingPathComponent(path, conformingTo: .png)
+        guard let fileURL = fullURL(for: path) else { return false }
         if #available(iOS 16.0, *) {
             return fileManager.fileExists(atPath: fileURL.path())
         } else {
@@ -34,70 +30,29 @@ struct SNMFileManager: FileManageable {
     }
     
     /// key 값은 Environment.FileManagerKey를 이용하시면 됩니다.
-    func fetch(forKey: String) throws -> Data? {
-        guard let documentsDir else {
+    func get(forKey: String) throws -> Data {
+        guard let fileURL = fullURL(for: forKey) else {
             throw FileManagerError.directoryNotFound
         }
-        let fileURL = documentsDir.appendingPathComponent(forKey)
+        
         guard fileManager.fileExists(atPath: fileURL.path) else {
             throw FileManagerError.fileNotFound
         }
-        return try? Data(contentsOf: fileURL)
+        return try Data(contentsOf: fileURL)
     }
-    
-    func set(data: Data, forKey: String) throws {
-        guard let documentsDir else {
+
+    func set(value data: Data, forKey: String) throws {
+        guard let fileURL = fullURL(for: forKey) else {
             throw FileManagerError.directoryNotFound
         }
-        let fileURL = documentsDir.appendingPathComponent(forKey)
-        do {
-            try data.write(to: fileURL)
-        } catch {
-            SNMLogger.log(error.localizedDescription)
-            throw FileManagerError.writeError
-        }
+        try data.write(to: fileURL)
     }
     
     func delete(forKey: String) throws {
-        guard let documentsDir else {
+        guard let fileURL = fullURL(for: forKey) else {
             throw FileManagerError.directoryNotFound
         }
-        let fileURL = documentsDir.appendingPathComponent(forKey, conformingTo: .png)
-        do {
-            try fileManager.removeItem(at: fileURL)
-        } catch {
-            throw FileManagerError.deleteError
-        }
-    }
-}
-
-extension SNMFileManager: ImageManagable {
-    func image(forKey: String) throws -> Data? {
-        guard let documentsDir else {
-            throw FileManagerError.directoryNotFound
-        }
-        let fileURL = documentsDir.appendingPathComponent(forKey, conformingTo: .png)
-        guard fileManager.fileExists(atPath: fileURL.path) else {
-            throw FileManagerError.fileNotFound
-        }
-        return try? Data(contentsOf: fileURL)
-    }
-    
-    func setImage(imageData: Data, forKey: String) throws {
-        guard let documentsDir else {
-            throw FileManagerError.directoryNotFound
-        }
-        let fileURL = documentsDir.appendingPathComponent(forKey, conformingTo: .png)
-        do {
-            try imageData.write(to: fileURL)
-        } catch {
-            SNMLogger.log(error.localizedDescription)
-            throw FileManagerError.writeError
-        }
-    }
-    
-    func deleteImage(forKey: String) throws {
-        try delete(forKey: forKey)
+        try fileManager.removeItem(at: fileURL)
     }
 }
 

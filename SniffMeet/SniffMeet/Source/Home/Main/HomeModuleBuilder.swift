@@ -14,7 +14,7 @@ enum HomeModuleBuilder {
         let interactor = HomeInteractor(
             loadUserInfoUseCase: LoadUserInfoUseCaseImpl(
                 dataLoadable: LocalDataManager(),
-                imageManageable: SNMFileManager()
+                imageManageable: SNMFileManager(fileType: .image)
             ),
             checkFirstLaunchUseCase: CheckFirstLaunchUseCaseImpl(
                 userDefaultsManager: UserDefaultsManager.shared

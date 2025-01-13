@@ -12,13 +12,13 @@ protocol SaveUserInfoUseCase {
 
 struct SaveUserInfoUseCaseImpl: SaveUserInfoUseCase {
     let localDataManager: DataStorable
-    let imageManager: ImageManagable
+    let imageManager: any FileManagable
     
     func execute(dog: UserInfo) throws {
         try localDataManager.storeData(data: dog, key: Environment.UserDefaultsKey.dogInfo)
         guard let imageData = dog.profileImage else { return }
         do {
-            try imageManager.setImage(imageData: imageData,
+            try imageManager.set(value: imageData,
                                       forKey: Environment.FileManagerKey.profileImage)
         } catch {
             SNMLogger.error("프로필 이미지 저장 실패: \(error.localizedDescription)")

@@ -16,7 +16,7 @@ final class ImageNSCacheManager {
     static let shared = ImageNSCacheManager()
     
     private let cache: NSCache<NSString, CacheableImage>
-    private let fileManager: FileManageable
+    private let fileManager: any FileManagable
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     
@@ -28,7 +28,7 @@ final class ImageNSCacheManager {
 
     private init(
         cache: NSCache<NSString, CacheableImage> = NSCache<NSString, CacheableImage>(),
-        fileManager: FileManageable = SNMFileManager())
+        fileManager: any FileManagable = SNMFileManager(fileType: .data))
     {
         self.cache = cache
         self.fileManager = fileManager
@@ -42,7 +42,7 @@ final class ImageNSCacheManager {
     func saveDiskCache(urlString: String, cacheableImage: CacheableImage) {
         do {
             let data = try encoder.encode(cacheableImage)
-            try fileManager.set(data: data, forKey: urlString)
+            try fileManager.set(value: data, forKey: urlString)
         } catch {
             SNMLogger.error("CacheManager-saveDiskCache: \(error.localizedDescription) ")
         }
@@ -54,8 +54,7 @@ final class ImageNSCacheManager {
     
     func imageFromDiskCache(urlString: String) -> CacheableImage? {
         do {
-            let data = try fileManager.fetch(forKey: urlString)
-            guard let data else { return nil }
+            let data = try fileManager.get(forKey: urlString)
             return try? decoder.decode(CacheableImage.self, from: data)
         } catch {
             SNMLogger.error("CacheManager-imageFromDiskCache: \(error.localizedDescription) ")

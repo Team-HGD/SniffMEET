@@ -13,12 +13,12 @@ protocol RemoteSaveDeviceTokenUseCase {
 
 struct RemoteSaveDeviceTokenUseCaseImpl: RemoteSaveDeviceTokenUseCase {
     private let jsonEncoder: JSONEncoder
-    private let keychainManager: any KeychainManagable
+    private let keychainManager: any TokenManagable
     private let remoteDBManager: any RemoteDatabaseManager
 
     init(
         jsonEncoder: JSONEncoder,
-        keychainManager: any KeychainManagable,
+        keychainManager: any TokenManagable,
         remoteDBManager: any RemoteDatabaseManager
     ) {
         self.jsonEncoder = jsonEncoder

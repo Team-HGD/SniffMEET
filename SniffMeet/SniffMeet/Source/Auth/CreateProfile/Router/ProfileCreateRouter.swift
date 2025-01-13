@@ -33,7 +33,7 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
         let saveUserInfoUseCase: SaveUserInfoUseCase =
         SaveUserInfoUseCaseImpl(
             localDataManager: LocalDataManager(),
-            imageManager: SNMFileManager()
+            imageManager: SNMFileManager(fileType: .image)
         )
         let saveProfileImageUseCase: SaveProfileImageUseCase =
         SaveProfileImageUseCaseImpl(

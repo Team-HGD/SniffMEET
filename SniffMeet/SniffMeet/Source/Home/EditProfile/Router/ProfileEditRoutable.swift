@@ -27,7 +27,7 @@ extension ProfileEditRouter: ProfileEditBuildable {
     static func createProfileEditModule(userInfo: UserInfo) -> UIViewController {
         let saveUserInfoUseCase: SaveUserInfoUseCase = SaveUserInfoUseCaseImpl(
             localDataManager: LocalDataManager(),
-            imageManager: SNMFileManager()
+            imageManager: SNMFileManager(fileType: .image)
         )
         let updateUserInfoRemoteUseCase: UpdateUserInfoUseCase = UpdateUserInfoUseCaseImpl()
         let saveProfileImageUseCase: SaveProfileImageUseCase = SaveProfileImageUseCaseImpl(
@@ -44,7 +44,7 @@ extension ProfileEditRouter: ProfileEditBuildable {
                 saveProfileImageUseCase: saveProfileImageUseCase,
                 loadUserInfoUseCase: LoadUserInfoUseCaseImpl(
                 dataLoadable: LocalDataManager(),
-                imageManageable: SNMFileManager()
+                imageManageable: SNMFileManager(fileType: .image)
             )
         )
         let presenter: ProfileEditPresentable & ProfileEditInteractorOutput =

@@ -4,18 +4,9 @@
 //
 //  Created by sole on 11/7/24.
 //
-
 import Foundation
 
-protocol KeychainManagable {
-    func get(forKey: String) throws -> String
-    func set(value: String, forKey: String) throws
-    func delete(forKey: String) throws
-}
-
-/// Keychain에 접근할 수 있는 싱글톤 인스턴스입니다.
-/// key, value 타입은 String으로 한정합니다.
-final class KeychainManager: KeychainManagable {
+final class KeychainManager: TokenManagable {
     private init() {}
 
     func get(forKey key: String) throws -> String {

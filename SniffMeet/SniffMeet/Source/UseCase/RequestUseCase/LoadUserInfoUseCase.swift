@@ -11,9 +11,9 @@ protocol LoadUserInfoUseCase {
 
 struct LoadUserInfoUseCaseImpl: LoadUserInfoUseCase {
     private let dataLoadable: (any DataLoadable)
-    private let imageManageable: (any ImageManagable)
+    private let imageManageable: (any FileManagable)
 
-    init(dataLoadable: any DataLoadable, imageManageable: any ImageManagable) {
+    init(dataLoadable: any DataLoadable, imageManageable: any FileManagable) {
         self.dataLoadable = dataLoadable
         self.imageManageable = imageManageable
     }
@@ -21,7 +21,7 @@ struct LoadUserInfoUseCaseImpl: LoadUserInfoUseCase {
     func execute() throws -> UserInfo {
         var userInfo = try dataLoadable.loadData(forKey: Environment.UserDefaultsKey.dogInfo,
                                                  type: UserInfo.self)
-        userInfo.profileImage = try imageManageable.image(forKey: Environment.FileManagerKey.profileImage)
+        userInfo.profileImage = try imageManageable.get(forKey: Environment.FileManagerKey.profileImage)
         return userInfo
     }
 }

@@ -12,9 +12,9 @@ protocol RegisterDeviceTokenUseCase {
 }
 
 struct RegisterDeviceTokenUseCaseImpl: RegisterDeviceTokenUseCase {
-    private let keychainManager: any KeychainManagable
+    private let keychainManager: any TokenManagable
 
-    init(keychainManager: any KeychainManagable) {
+    init(keychainManager: any TokenManagable) {
         self.keychainManager = keychainManager
     }
 

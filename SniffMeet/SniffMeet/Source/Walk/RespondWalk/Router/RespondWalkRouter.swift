@@ -48,7 +48,7 @@ RequestProfileImageUseCaseImpl(
         )
         let loadUserUseCase = LoadUserInfoUseCaseImpl(
             dataLoadable: LocalDataManager(),
-            imageManageable: SNMFileManager()
+            imageManageable: SNMFileManager(fileType: .image)
         )
 
         let view: RespondWalkViewable & UIViewController = RespondWalkViewController()

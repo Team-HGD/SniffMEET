@@ -53,7 +53,7 @@ extension RequestWalkRouter: RequestWalkBuildable {
         )
         let loadInfoUseCase: LoadUserInfoUseCase = LoadUserInfoUseCaseImpl(
             dataLoadable: LocalDataManager(),
-            imageManageable: SNMFileManager()
+            imageManageable: SNMFileManager(fileType: .image)
             )
         let view: RequestWalkViewable & UIViewController = RequestWalkViewController()
         let presenter: RequestWalkPresentable & RequestWalkInteractorOutput = RequestWalkPresenter()

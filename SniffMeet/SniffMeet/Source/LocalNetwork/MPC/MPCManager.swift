@@ -20,7 +20,6 @@ final class MPCManager: NSObject {
     let browser: MPCBrowser
     let session: MCSession
     let mypeerID: MCPeerID
-    var timer: Timer?
     var dog: UserInfo?
     var profile: DogProfileDTO?
 
@@ -114,9 +113,7 @@ final class MPCManager: NSObject {
             let encodedData = try JSONEncoder().encode(dataToSend)
             SNMLogger.info("encodedData is  \(encodedData)")
             sendProfileData(data: encodedData)
-            timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { [weak self] _ in
-                self?.sendProfileData(data: encodedData)
-            }
+
         } catch {
             SNMLogger.error("DogProfileInfo 전송 실패: \(error.localizedDescription)")
         }
@@ -160,7 +157,6 @@ extension MPCManager: MCSessionDelegate {
                 SNMLogger.log("notConnected to MPCSession")
                 SNMLogger.info("notConnected: \(session.connectedPeers)")
                 self.paired = false
-                timer?.invalidate()
             }
         case .connected:
             Task { @MainActor in

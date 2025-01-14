@@ -89,6 +89,15 @@ final class ImageNSCacheManager {
             try? fileManager.delete(forKey: oldestKey)
         }
     }
+
+    func printDiskCacheDirectory() {
+        let cacheDirectory = ImageNSCacheManager.shared.cacheDirectoryPath
+        print("Disk cache directory: \(cacheDirectory.path)")
+
+        if let contents = try? FileManager.default.contentsOfDirectory(atPath: cacheDirectory.path) {
+            print("Disk cache contents: \(contents)")
+        }
+    }
 }
 
 extension ImageNSCacheManager: ImageCacheable {
@@ -99,6 +108,7 @@ extension ImageNSCacheManager: ImageCacheable {
         
         saveMemoryCache(urlString: urlString, cacheableImage: cacheableImage)
         saveDiskCache(urlString: urlString, cacheableImage: cacheableImage)
+        printDiskCacheDirectory()
     }
     
     func image(urlString: String) -> CacheableImage? {

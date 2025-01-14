@@ -82,7 +82,7 @@
 		995D94D22CEDF037005A47BF /* MPCProfileDropDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995D94D12CEDF031005A47BF /* MPCProfileDropDTO.swift */; };
 		99A5A1B32CFFE545002F1D2D /* ProfileDrop.gif in Resources */ = {isa = PBXBuildFile; fileRef = 99A5A1B22CFFE544002F1D2D /* ProfileDrop.gif */; };
 		99A5A1B42CFFE545002F1D2D /* ProfileDrop.gif in Resources */ = {isa = PBXBuildFile; fileRef = 99A5A1B22CFFE544002F1D2D /* ProfileDrop.gif */; };
-		99A5E1A92D300CE9003B00A8 /* SupabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20E714F2CEC595C00272B25 /* SupabaseError.swift */; };
+		99A5E1A92D300CE9003B00A8 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		99A5E1B92D302D65003B00A8 /* ImageCacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320522BD2D0181A700F1677C /* ImageCacheable.swift */; };
 		99A5E1BA2D303144003B00A8 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7563B2D00397D00965F0A /* CacheManager.swift */; };
 		99A5E1BB2D30322C003B00A8 /* SNMLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B592CECE8F90093BEB9 /* SNMLogger.swift */; };
@@ -98,6 +98,8 @@
 		A24082672CEB2539009109A0 /* SupabaseSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082662CEB2539009109A0 /* SupabaseSessionResponse.swift */; };
 		A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */; };
 		A24082722CEB36B8009109A0 /* SupabaseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082712CEB36B8009109A0 /* SupabaseTokenRequest.swift */; };
+		A24CD92B2D362E8F00492339 /* FindMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24CD92A2D362E8F00492339 /* FindMateUseCase.swift */; };
+		A24CD92E2D36324300492339 /* SendProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24CD92D2D36324300492339 /* SendProfileUseCase.swift */; };
 		A25BE4522CEBB5A900886763 /* SupabaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4512CEBB5A900886763 /* SupabaseSession.swift */; };
 		A25BE4562CEBB63A00886763 /* SupabaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4552CEBB63A00886763 /* SupabaseUser.swift */; };
 		A25BE4582CEBB95C00886763 /* SupabaseRefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */; };
@@ -343,6 +345,8 @@
 		A24082662CEB2539009109A0 /* SupabaseSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSessionResponse.swift; sourceTree = "<group>"; };
 		A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAuthRequest.swift; sourceTree = "<group>"; };
 		A24082712CEB36B8009109A0 /* SupabaseTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseTokenRequest.swift; sourceTree = "<group>"; };
+		A24CD92A2D362E8F00492339 /* FindMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindMateUseCase.swift; sourceTree = "<group>"; };
+		A24CD92D2D36324300492339 /* SendProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendProfileUseCase.swift; sourceTree = "<group>"; };
 		A25BE4512CEBB5A900886763 /* SupabaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSession.swift; sourceTree = "<group>"; };
 		A25BE4552CEBB63A00886763 /* SupabaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseUser.swift; sourceTree = "<group>"; };
 		A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseRefreshResponse.swift; sourceTree = "<group>"; };
@@ -532,6 +536,7 @@
 				320047A42CF9E2A200D08B6D /* RequestUseCase */,
 				320047A62CF9E36500D08B6D /* RespondUseCase */,
 				320047A32CF9E24E00D08B6D /* ComputeUseCase */,
+				A24CD92C2D362E9B00492339 /* LocalNetworkUseCase */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -716,6 +721,15 @@
 				A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		A24CD92C2D362E9B00492339 /* LocalNetworkUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				A24CD92A2D362E8F00492339 /* FindMateUseCase.swift */,
+				A24CD92D2D36324300492339 /* SendProfileUseCase.swift */,
+			);
+			path = LocalNetworkUseCase;
 			sourceTree = "<group>";
 		};
 		A25BE4532CEBB60200886763 /* Entity */ = {
@@ -1917,7 +1931,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99A5E1A92D300CE9003B00A8 /* SupabaseError.swift in Sources */,
+				99A5E1A92D300CE9003B00A8 /* (null) in Sources */,
 				A202A1152CEDD50700B98203 /* SupabaseDatabaseManager.swift in Sources */,
 				995D94622CE598FD005A47BF /* NIManager.swift in Sources */,
 				FDBFA9A12CE1E51500AA9220 /* SNMColor.swift in Sources */,
@@ -1946,6 +1960,7 @@
 				320047B42CFC90C100D08B6D /* SessionViewController.swift in Sources */,
 				320045362CF4353900D08B6D /* SNMFileManager.swift in Sources */,
 				320044582CE5B04C00D08B6D /* ProfileCreateRouter.swift in Sources */,
+				A24CD92E2D36324300492339 /* SendProfileUseCase.swift in Sources */,
 				A25BE4582CEBB95C00886763 /* SupabaseRefreshResponse.swift in Sources */,
 				FDEAEA7C2CE314A7005890FA /* BaseViewController.swift in Sources */,
 				FDE768A12CF7873600B5DE88 /* RequestNotificationAuthUseCase.swift in Sources */,
@@ -1980,6 +1995,7 @@
 				A2B58F522D2FA0DC00C15B12 /* SNMError.swift in Sources */,
 				3284D3502D2F941C000ABC04 /* DataStoragable.swift in Sources */,
 				A2F825D12CDF4BA6000C5419 /* HomeViewController.swift in Sources */,
+				A24CD92B2D362E8F00492339 /* FindMateUseCase.swift in Sources */,
 				A2BA1BA92CF34A6A0080575A /* RequestMateListUseCase.swift in Sources */,
 				FD5134232CEC2BDE002E76F3 /* Routable.swift in Sources */,
 				FD0634282CE596BD003C9D6B /* SNMRequestConvertible.swift in Sources */,

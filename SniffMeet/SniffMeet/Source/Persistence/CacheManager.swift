@@ -19,7 +19,9 @@ final class ImageNSCacheManager {
     private let fileManager: any FileManagable
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
-    
+    private var usageOrder: [String] = []
+    private let cacheLimit: Int = 50
+
     private var cacheDirectoryPath: URL {
         let cachesURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         let diskCacheURL = cachesURL.appendingPathComponent("DownloadedCache")
@@ -43,6 +45,10 @@ final class ImageNSCacheManager {
         do {
             let data = try encoder.encode(cacheableImage)
             try fileManager.set(value: data, forKey: urlString)
+
+            // 디스크 캐시에 저장 후 사용 순서 업데이트
+            updateDiskUsageOrder(urlString: urlString)
+            removeOldestDiskImage()
         } catch {
             SNMLogger.error("CacheManager-saveDiskCache: \(error.localizedDescription) ")
         }
@@ -55,11 +61,33 @@ final class ImageNSCacheManager {
     func imageFromDiskCache(urlString: String) -> CacheableImage? {
         do {
             let data = try fileManager.get(forKey: urlString)
+            updateDiskUsageOrder(urlString: urlString)
             return try? decoder.decode(CacheableImage.self, from: data)
         } catch {
             SNMLogger.error("CacheManager-imageFromDiskCache: \(error.localizedDescription) ")
         }
         return nil
+    }
+
+    private func updateDiskUsageOrder(urlString: String) {
+        if !usageOrder.contains(urlString) {
+            usageOrder.append(urlString)
+        }
+
+        if let index = usageOrder.firstIndex(of: urlString) {
+            usageOrder.remove(at: index)
+            usageOrder.append(urlString)
+        }
+    }
+
+    private func removeOldestDiskImage() {
+        SNMLogger.info("usageOrderCount: \(usageOrder.count)")
+        while usageOrder.count > cacheLimit {
+            guard let oldestKey = usageOrder.first else { return }
+            usageOrder.removeFirst()
+
+            try? fileManager.delete(forKey: oldestKey)
+        }
     }
 }
 

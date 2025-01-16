@@ -22,8 +22,6 @@ final class MPCManager {
     let encoder: JSONEncoder
 
     private var cancellables = Set<AnyCancellable>()
-    @Published var paired: Bool = false
-
     var receivedTokenPublisher = PassthroughSubject<Data, Never>()
     var receivedDataPublisher = PassthroughSubject<DogProfileDTO, Never>()
     var receivedViewTransitionPublisher = PassthroughSubject<String, Never>()
@@ -56,7 +54,8 @@ final class MPCManager {
         encoder = JSONEncoder()
     }
     
-    convenience init(yourName: String) {
+    convenience init() {
+        let yourName = String(UUID().uuidString.suffix(8))
         let peerID = MCPeerID(displayName: yourName)
         let serviceType = String.serviceName
         let session = MCSession(peer: peerID)

@@ -60,7 +60,7 @@ extension MateListRouter: MateListBuildable {
             networkProvider: SNMNetworkProvider()),
             cacheManager: ImageNSCacheManager.shared
         )
-        let mpcManager = MPCManager(yourName: String(UUID().uuidString.suffix(8)))
+        let mpcManager = MPCManager()
         let niManager = NIManager(mpcManager: mpcManager)
         let tryProfileDropUseCase: TryProfileDropUseCase =
         TryProfileDropUseCaseImpl(dataManager: LocalDataManager(), niManager: niManager, mpcManager: mpcManager)

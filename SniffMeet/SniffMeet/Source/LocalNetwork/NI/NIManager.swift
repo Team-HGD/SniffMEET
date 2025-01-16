@@ -6,17 +6,12 @@
 //
 
 import Combine
-import MultipeerConnectivity
 import NearbyInteraction
 
 final class NIManager: NSObject {
     var niSession: NISession?
     private var cancellables = Set<AnyCancellable>()
-
-    @Published var niPaired: Bool = false
     var mpcManager: MPCManager
-    var isViewTransitioning = PassthroughSubject<Bool, Never>()
-    var viewTransitionInfo = Set<String>()
 
     init(mpcManager: MPCManager) {
         self.mpcManager = mpcManager
@@ -24,11 +19,10 @@ final class NIManager: NSObject {
         setupNISession()
     }
 
-    private func setupNISession() {
+    func setupNISession() {
         niSession = NISession()
     }
 
-    // discoveryToken 전송
     func sendDiscoveryToken() {
         guard let niSession = niSession, let discoveryToken = niSession.discoveryToken else {
             SNMLogger.log("Discovery token is not available.")
@@ -73,6 +67,5 @@ final class NIManager: NSObject {
         mpcManager.session.disconnect()
         mpcManager.isAvailableToBeConnected = false
         SNMLogger.log("MPC 세션 종료")
-        niPaired = false
     }
 }

@@ -21,52 +21,19 @@ final class NIManager: NSObject {
     init(mpcManager: MPCManager) {
         self.mpcManager = mpcManager
         super.init()
-
         setupNISession()
-        setupBindings()
     }
 
     private func setupNISession() {
         niSession = NISession()
     }
 
-    private func setupBindings() {
-        // MPC 연결 완료 시 discoveryToken을 주고받기
-        mpcManager.$paired
-            .receive(on: RunLoop.main)
-            .sink { [weak self] isPaired in
-                if isPaired {
-                    self?.sendDiscoveryToken()
-                }
-            }
-            .store(in: &cancellables)
-
-        // MPC로 discoveryToken 수신 시 NI 세션 업데이트
-        mpcManager.receivedTokenPublisher
-            .sink { [weak self] token in
-                self?.handleReceivedDiscoveryToken(token)
-            }
-            .store(in: &cancellables)
-
-        mpcManager.receivedViewTransitionPublisher
-            .sink { [weak self] isViewTransitioning in
-                self?.viewTransitionInfo.insert(isViewTransitioning) // receive 메세지가 들어옴
-                SNMLogger.info("viewTrnasitionInfo: \(self?.viewTransitionInfo ?? [])")
-                
-                if self?.viewTransitionInfo.count == 2 {
-                    self?.endSession()
-                }
-            }
-            .store(in: &cancellables)
-    }
-
     // discoveryToken 전송
-    private func sendDiscoveryToken() {
+    func sendDiscoveryToken() {
         guard let niSession = niSession, let discoveryToken = niSession.discoveryToken else {
             SNMLogger.log("Discovery token is not available.")
             return
         }
-
         do {
             let tokenData = try NSKeyedArchiver.archivedData(
                 withRootObject: discoveryToken,
@@ -80,22 +47,23 @@ final class NIManager: NSObject {
     }
 
     // discoveryToken 수신 처리
-    private func handleReceivedDiscoveryToken(_ data: Data) {
+    func handleReceivedDiscoveryToken(_ data: Data) -> Bool {
         do {
             guard let token = try NSKeyedUnarchiver.unarchivedObject(
                 ofClass: NIDiscoveryToken.self,
                 from: data
             ) else {
                 SNMLogger.log("Invalid discovery token received.")
-                return
+                return false
             }
 
             let config = NINearbyPeerConfiguration(peerToken: token)
             niSession?.run(config)
-            niPaired = true
             SNMLogger.log("NearbyInteraction session started with received discovery token.")
+            return true
         } catch {
             SNMLogger.error("Failed to decode discovery token: \(error)")
+            return false
         }
     }
 

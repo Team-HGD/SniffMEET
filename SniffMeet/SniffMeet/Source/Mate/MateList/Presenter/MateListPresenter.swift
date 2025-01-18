@@ -54,6 +54,7 @@ final class MateListPresenter: MateListPresentable {
     }
 
     func didTableViewCellLoad(mateID: UUID, imageName: String?) {
+        guard let imageName else { return }
         interactor?.requestProfileImage(id: mateID, imageName: imageName)
     }
 

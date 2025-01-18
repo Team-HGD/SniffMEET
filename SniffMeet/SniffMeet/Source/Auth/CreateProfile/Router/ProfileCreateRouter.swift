@@ -40,7 +40,8 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: SNMNetworkProvider()
             ),
-            userDefaultsManager: UserDefaultsManager.shared
+            userDefaultsManager: UserDefaultsManager.shared,
+            imageSampler: ImageSampler()
         )
         let createAccountUseCase: CreateAccountUseCase = CreateAccountUseCaseImpl()
 

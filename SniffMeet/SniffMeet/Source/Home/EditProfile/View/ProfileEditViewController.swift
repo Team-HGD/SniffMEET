@@ -310,7 +310,7 @@ extension ProfileEditViewController: PHPickerViewControllerDelegate {
             itemProvider.loadObject(ofClass: UIImage.self) { image, error in
                 guard let selectedImage = image as? UIImage else { return }
                 Task { @MainActor [weak self] in
-                    self?.profileImageView.image =  selectedImage
+                    self?.profileImageView.image = selectedImage
                 }
             }
         }

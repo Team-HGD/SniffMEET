@@ -40,7 +40,6 @@ final class ProfileCreatePresenter: ProfileCreatePresentable {
     }
 
     func didTapSubmitButton(nickname: String, image: UIImage?) {
-        let pngData = interactor?.convertImageToPNGData(image: image)
         let jpgData = interactor?.convertImageToJPGData(image: image)
         let userInfo = UserInfo(
             name: dogInfo.name,
@@ -55,7 +54,7 @@ final class ProfileCreatePresenter: ProfileCreatePresentable {
         // TODO: SubmitButton disable 필요
         interactor?.signInWithProfileData(
             dogInfo: userInfo,
-            imageData: (png: pngData, jpg: jpgData)
+            imageData: jpgData
         )
     }
 }

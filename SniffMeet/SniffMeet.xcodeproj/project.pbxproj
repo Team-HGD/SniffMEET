@@ -96,6 +96,11 @@
 		A24082672CEB2539009109A0 /* SupabaseSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082662CEB2539009109A0 /* SupabaseSessionResponse.swift */; };
 		A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */; };
 		A24082722CEB36B8009109A0 /* SupabaseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082712CEB36B8009109A0 /* SupabaseTokenRequest.swift */; };
+		A24B1F2F2D3C33500012B860 /* ImageSampleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F2E2D3C33500012B860 /* ImageSampleable.swift */; };
+		A24B1F302D3C33500012B860 /* ImageSampleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F2E2D3C33500012B860 /* ImageSampleable.swift */; };
+		A24B1F322D3C33660012B860 /* Extension + CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F312D3C33660012B860 /* Extension + CGImage.swift */; };
+		A24B1F332D3C33660012B860 /* Extension + CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F312D3C33660012B860 /* Extension + CGImage.swift */; };
+		A24B1F382D3C349F0012B860 /* ImageSamplingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F372D3C349F0012B860 /* ImageSamplingTests.swift */; };
 		A25BE4522CEBB5A900886763 /* SupabaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4512CEBB5A900886763 /* SupabaseSession.swift */; };
 		A25BE4562CEBB63A00886763 /* SupabaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4552CEBB63A00886763 /* SupabaseUser.swift */; };
 		A25BE4582CEBB95C00886763 /* SupabaseRefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */; };
@@ -250,6 +255,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A24B1F292D3C32960012B860 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD3A03182CD8CDE50047B7ED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FD3A031F2CD8CDE50047B7ED;
+			remoteInfo = SniffMeet;
+		};
 		FD331A692CF33C6700F39426 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FD3A03182CD8CDE50047B7ED /* Project object */;
@@ -342,6 +354,11 @@
 		A24082662CEB2539009109A0 /* SupabaseSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSessionResponse.swift; sourceTree = "<group>"; };
 		A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAuthRequest.swift; sourceTree = "<group>"; };
 		A24082712CEB36B8009109A0 /* SupabaseTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseTokenRequest.swift; sourceTree = "<group>"; };
+		A24B1F252D3C32960012B860 /* SNMUtilityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMUtilityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A24B1F2E2D3C33500012B860 /* ImageSampleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSampleable.swift; sourceTree = "<group>"; };
+		A24B1F312D3C33660012B860 /* Extension + CGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + CGImage.swift"; sourceTree = "<group>"; };
+		A24B1F372D3C349F0012B860 /* ImageSamplingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSamplingTests.swift; sourceTree = "<group>"; };
+		A24B1F392D3C35C60012B860 /* SNMUtilityTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SNMUtilityTestPlan.xctestplan; sourceTree = "<group>"; };
 		A25BE4512CEBB5A900886763 /* SupabaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSession.swift; sourceTree = "<group>"; };
 		A25BE4552CEBB63A00886763 /* SupabaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseUser.swift; sourceTree = "<group>"; };
 		A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseRefreshResponse.swift; sourceTree = "<group>"; };
@@ -466,6 +483,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A24B1F222D3C32960012B860 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FD331A622CF33C6700F39426 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -721,6 +745,14 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		A24B1F352D3C338B0012B860 /* SNMUtilityTests */ = {
+			isa = PBXGroup;
+			children = (
+				A24B1F372D3C349F0012B860 /* ImageSamplingTests.swift */,
+			);
+			path = SNMUtilityTests;
+			sourceTree = "<group>";
+		};
 		A25BE4532CEBB60200886763 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -789,6 +821,7 @@
 		FD011EF12D3520240071327A /* TestPlan */ = {
 			isa = PBXGroup;
 			children = (
+				A24B1F392D3C35C60012B860 /* SNMUtilityTestPlan.xctestplan */,
 				FD011EF02D351FCF0071327A /* SNMNetworkTestPlan.xctestplan */,
 				FD159A7C2D35104500B425D9 /* SNMTestplan.xctestplan */,
 				FD3E57352D35210D003F3E01 /* SupabaseTestPlan.xctestplan */,
@@ -842,6 +875,7 @@
 				FD69B1C62CE3BCED009D71DC /* SNMPersistenceTests */,
 				FDCD02D42CE9182200B627D8 /* SNMNetworkTests */,
 				FD331A6F2CF33C7B00F39426 /* SupabaseTests */,
+				A24B1F352D3C338B0012B860 /* SNMUtilityTests */,
 				FD3A03212CD8CDE50047B7ED /* Products */,
 			);
 			sourceTree = "<group>";
@@ -853,6 +887,7 @@
 				FD69B1BA2CE3BCDC009D71DC /* SNMPersistenceTests.xctest */,
 				FDCD02BE2CE9172600B627D8 /* SNMNetworkTests.xctest */,
 				FD331A652CF33C6700F39426 /* SupabaseTests.xctest */,
+				A24B1F252D3C32960012B860 /* SNMUtilityTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1691,6 +1726,8 @@
 				995D94252CE32EC1005A47BF /* Extension + Keyboard.swift */,
 				320043962CDF493600D08B6D /* Extension + UIView.swift */,
 				3200438C2CDF3D7F00D08B6D /* Extension + Navigation.swift */,
+				A24B1F2E2D3C33500012B860 /* ImageSampleable.swift */,
+				A24B1F312D3C33660012B860 /* Extension + CGImage.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1723,6 +1760,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A24B1F242D3C32960012B860 /* SNMUtilityTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A24B1F2D2D3C32960012B860 /* Build configuration list for PBXNativeTarget "SNMUtilityTests" */;
+			buildPhases = (
+				A24B1F212D3C32960012B860 /* Sources */,
+				A24B1F222D3C32960012B860 /* Frameworks */,
+				A24B1F232D3C32960012B860 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A24B1F2A2D3C32960012B860 /* PBXTargetDependency */,
+			);
+			name = SNMUtilityTests;
+			packageProductDependencies = (
+			);
+			productName = SNMUtilityTests;
+			productReference = A24B1F252D3C32960012B860 /* SNMUtilityTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		FD331A642CF33C6700F39426 /* SupabaseTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD331A6B2CF33C6700F39426 /* Build configuration list for PBXNativeTarget "SupabaseTests" */;
@@ -1812,9 +1869,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					A24B1F242D3C32960012B860 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					FD331A642CF33C6700F39426 = {
 						CreatedOnToolsVersion = 16.1;
 					};
@@ -1850,11 +1910,19 @@
 				FD69B1B92CE3BCDC009D71DC /* SNMPersistenceTests */,
 				FDCD02BD2CE9172600B627D8 /* SNMNetworkTests */,
 				FD331A642CF33C6700F39426 /* SupabaseTests */,
+				A24B1F242D3C32960012B860 /* SNMUtilityTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A24B1F232D3C32960012B860 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FD331A632CF33C6700F39426 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1892,6 +1960,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A24B1F212D3C32960012B860 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A24B1F382D3C349F0012B860 /* ImageSamplingTests.swift in Sources */,
+				A24B1F302D3C33500012B860 /* ImageSampleable.swift in Sources */,
+				A24B1F332D3C33660012B860 /* Extension + CGImage.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FD331A612CF33C6700F39426 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1937,6 +2015,7 @@
 				995D94622CE598FD005A47BF /* NIManager.swift in Sources */,
 				FDBFA9A12CE1E51500AA9220 /* SNMColor.swift in Sources */,
 				FDE7689F2CF7858F00B5DE88 /* Extension + UIViewController.swift in Sources */,
+				A24B1F322D3C33660012B860 /* Extension + CGImage.swift in Sources */,
 				A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */,
 				A2C844D12CDBE1E5007F2970 /* (null) in Sources */,
 				A2BD49F62CF72B4000AC72A7 /* WalkNotiDTO.swift in Sources */,
@@ -2067,6 +2146,7 @@
 				A2BD4A012CF7AD4300AC72A7 /* RequestMateInfoUseCase.swift in Sources */,
 				FD119F502CED87E500BE22BD /* SelectLocationRouter.swift in Sources */,
 				FD880B602CF4327F0093BEB9 /* SaveProfileImageUseCase.swift in Sources */,
+				A24B1F2F2D3C33500012B860 /* ImageSampleable.swift in Sources */,
 				320047652CF6B86D00D08B6D /* RespondMateRequestUseCase.swift in Sources */,
 				320047BB2CFD368100D08B6D /* PushNotificationRequest.swift in Sources */,
 				FD331A562CF23C5300F39426 /* WalkLogListViewController.swift in Sources */,
@@ -2157,6 +2237,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A24B1F2A2D3C32960012B860 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FD3A031F2CD8CDE50047B7ED /* SniffMeet */;
+			targetProxy = A24B1F292D3C32960012B860 /* PBXContainerItemProxy */;
+		};
 		FD331A6A2CF33C6700F39426 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FD3A031F2CD8CDE50047B7ED /* SniffMeet */;
@@ -2185,6 +2270,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A24B1F2B2D3C32960012B860 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kelly.SNMUtilityTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		A24B1F2C2D3C32960012B860 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kelly.SNMUtilityTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		FD331A6C2CF33C6700F39426 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2509,6 +2636,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A24B1F2D2D3C32960012B860 /* Build configuration list for PBXNativeTarget "SNMUtilityTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A24B1F2B2D3C32960012B860 /* Debug */,
+				A24B1F2C2D3C32960012B860 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FD331A6B2CF33C6700F39426 /* Build configuration list for PBXNativeTarget "SupabaseTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

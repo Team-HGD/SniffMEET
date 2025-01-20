@@ -68,7 +68,7 @@ final class MateListInteractor: MateListInteractable {
 
         tryProfileDropUseCase.profilePublisher
             .receive(on: RunLoop.main)
-            .sink { [weak self] (profile) in
+            .sink {[weak self] (profile) in
                 guard let profile else { return }
                 if self?.tryProfileDropUseCase.isTransistioned == false {
                     self?.presenter?.receiveProfileData(profile)
@@ -79,8 +79,10 @@ final class MateListInteractor: MateListInteractable {
     }
     
     func tryProfileDrop() {
-        if tryProfileDropUseCase.triedBefore {
+        if tryProfileDropUseCase.isTransistioned {
             tryProfileDropUseCase.reset()
+            tryProfileDropUseCase.isTransistioned = false
+
         }
         tryProfileDropUseCase.execute()
     }

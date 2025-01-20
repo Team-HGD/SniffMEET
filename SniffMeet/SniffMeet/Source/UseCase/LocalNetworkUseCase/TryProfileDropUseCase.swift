@@ -10,7 +10,7 @@ import MultipeerConnectivity
 import NearbyInteraction
 
 protocol TryProfileDropUseCase {
-    var profilePublisher: CurrentValueSubject<DogProfileDTO?, Never>  { get set }
+    var profilePublisher: CurrentValueSubject<DogDTO?, Never>  { get set }
     var isNIConnected: CurrentValueSubject<Bool, Never> { get set }
     var transmissionFlag: Set<String> { get set }
     var isTransistioned: Bool { get set }
@@ -22,33 +22,29 @@ protocol TryProfileDropUseCase {
 }
 
 final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
-    var profilePublisher: CurrentValueSubject<DogProfileDTO?, Never> = CurrentValueSubject(nil)
+    var profilePublisher: CurrentValueSubject<DogDTO?, Never> = CurrentValueSubject(nil)
     var isNIConnected: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
     var transmissionFlag: Set<String>
     var isTransistioned: Bool = false
-    let lock = NSLock()
     var triedBefore: Bool = false
+    let lock = NSLock()
 
     let dataManager: DataLoadable
     private var niManager: NIManager
     private var mpcManager: MPCManager
     let encoder: JSONEncoder
     let decoder: JSONDecoder
-    var profileData: Data? = nil
-    var receivedFlagData: Data? = nil
+    private var profileData: Data? = nil
+    private var receivedFlagData: Data? = nil
     
-    init(
-        dataManager: DataLoadable,
-        niManager: NIManager,
-        mpcManager: MPCManager
-    ) {
+    init(dataManager: DataLoadable, niManager: NIManager, mpcManager: MPCManager) {
         self.dataManager = dataManager
         self.niManager = niManager
         self.mpcManager = mpcManager
         self.encoder = JSONEncoder()
         self.decoder = JSONDecoder()
         transmissionFlag = []
-        
+
         super.init()
         niManager.niSession?.delegate = self
         mpcManager.session.delegate = self
@@ -59,6 +55,7 @@ final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
         profilePublisher.value = nil
         transmissionFlag = []
         isTransistioned = false
+        triedBefore = false
         
         mpcManager = MPCManager()
         niManager = NIManager(mpcManager: mpcManager)
@@ -81,21 +78,26 @@ final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
     func execute()  {
         triedBefore = true
         loadProfileData()
-        niManager.mpcManager.isAvailableToBeConnected = true
+        mpcManager.isAvailableToBeConnected = true
     }
     
     func loadProfileData() {
         do {
-            let dog = try dataManager.loadData(forKey: "dogInfo", type: UserInfo.self)
+            let dog = try dataManager.loadData(
+                forKey: Environment.UserDefaultsKey.dogInfo,
+                type: UserInfo.self)
             guard let userID = SessionManager.shared.session?.user?.userID else { return }
-            let dogProfileDTO = DogProfileDTO(
-                id: userID,
+            let imageURL = try? dataManager.loadData(
+                forKey: Environment.UserDefaultsKey.profileImage,
+                type: String.self)
+            
+            let dogProfile = DogDTO( id: userID,
                 name: dog.name,
                 keywords: dog.keywords,
-                profileImage: dog.profileImage
+                profileImage: imageURL
             )
-            let dataToSend = MPCProfileDropDTO(token: nil, profile: dogProfileDTO, transitionMessage: nil)
-            profileData = try encoder.encode(dataToSend)
+            let profileDropDTO = MPCProfileDropDTO(token: nil, profile: dogProfile, transitionMessage: nil)
+            profileData = try encoder.encode(profileDropDTO)
         } catch {
             SNMLogger.error("loadData error : \(error)")
         }
@@ -117,38 +119,38 @@ extension TryProfileDropUseCaseImpl: MCSessionDelegate {
                 niManager.mpcManager.isAvailableToBeConnected = false
             }
         default:
-            Task { @MainActor in
-            }
+            niManager.mpcManager.isAvailableToBeConnected = false
         }
     }
 
     // 수신
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        SNMLogger.info("didReceive bytes \(data.count) bytes")
-        do {
-            let receivedData = try decoder.decode(MPCProfileDropDTO.self, from: data)
-            if let token = receivedData.token { // 토큰
-                let niConnected =  niManager.handleReceivedDiscoveryToken(token)
-                isNIConnected.send(niConnected)
-            } else if let profile = receivedData.profile { // 프로필 데이터
-                Task { @MainActor [weak self] in
+        Task {@MainActor [weak self] in
+            SNMLogger.info("didReceive bytes \(data.count) bytes")
+            do {
+                let receivedData = try self?.decoder.decode(MPCProfileDropDTO.self, from: data)
+                if let token = receivedData?.token { // 토큰
+                    guard let niConnected = self?.niManager.handleReceivedDiscoveryToken(token) else { return }
+                    self?.isNIConnected.send(niConnected)
+                } else if let profile = receivedData?.profile { // 프로필 데이터
                     self?.profilePublisher.send(profile)
+                    guard let receivedFlagData = self?.receivedFlagData else { return }
+                    self?.mpcManager.send(data: receivedFlagData)
+                    SNMLogger.log("Receive profile data")
+                } else if let message = receivedData?.transitionMessage { // 수신 여부 플래그
+                    SNMLogger.log("flag message: \(message)")
+                    self?.lock.lock()
+                    self?.transmissionFlag.insert(message)
+                    self?.lock.unlock()
                 }
-                guard let receivedFlagData else { return }
-                // 수신 플래그 송신
-                mpcManager.send(data: receivedFlagData)
-            } else if let message = receivedData.transitionMessage { // 수신 여부 플래그
-                SNMLogger.log("flag message: \(message)")
-                lock.lock()
-                transmissionFlag.insert(message)
-                lock.unlock()
+            } catch {
+                SNMLogger.error("Failed to decode received data: \(error)")
             }
-            if transmissionFlag.contains( Context.peerReceived) && isTransistioned {
-                niManager.endSession()
-                isTransistioned = false
+            if self?.transmissionFlag.contains(Context.peerReceived) == true && self?.isTransistioned == true {
+                self?.niManager.endSession()
+                self?.reset()
+                SNMLogger.log("End all session")
             }
-        } catch {
-            SNMLogger.error("Failed to decode received data: \(error)")
         }
     }
 
@@ -182,21 +184,18 @@ extension TryProfileDropUseCaseImpl: MCSessionDelegate {
 }
 
 extension TryProfileDropUseCaseImpl: NISessionDelegate {
-    // 송신
     func session(_ session: NISession, didUpdate nearbyObjects: [NINearbyObject])  {
         guard let nearbyObject = nearbyObjects.first else { return }
         let distance = nearbyObject.distance ?? 0
-        let direction = nearbyObject.direction ?? simd_float3(0.1, 0.1, 0.1)
+        Task(priority: .low) { [weak self] in
+            if distance > Context.minDistance && distance < Context.maxDistance {
+                SNMLogger.log("조건 만족")
 
-        if distance > Context.minDistance && distance < Context.maxDistance {
-            guard let profileData else { return }
-            SNMLogger.log("거리와 방향 조건 만족")
-            if !transmissionFlag.contains(Context.peerReceived) {
-                // 프로필 데이터 송신
-                Task {
-                    SNMLogger.log("강아지 프로필 데이터 전송 ")
-                    mpcManager.send(data: profileData)
-                    try await Task.sleep(nanoseconds: 3000000000)
+                guard let profileData = self?.profileData else { return }
+                if self?.transmissionFlag.contains(Context.peerReceived) == false {
+                    self?.mpcManager.send(data: profileData)
+                    SNMLogger.log("프로필 데이터 보낸다.")
+                    try await Task.sleep(nanoseconds: 2000000000)
                 }
             }
         }
@@ -205,11 +204,9 @@ extension TryProfileDropUseCaseImpl: NISessionDelegate {
     func sessionWasSuspended(_ session: NISession) {
         SNMLogger.log("NearbyInteraction session suspended.")
     }
-
     func sessionSuspensionEnded(_ session: NISession) {
         SNMLogger.log("NearbyInteraction session suspension ended.")
     }
-
     func session(_ session: NISession, didInvalidateWith error: Error) {
         SNMLogger.error("NearbyInteraction session invalidated: \(error)")
     }

@@ -15,6 +15,9 @@ struct SaveUserInfoUseCaseImpl: SaveUserInfoUseCase {
     let imageManager: any FileManagable
     
     func execute(dog: UserInfo) throws {
+        let dog = UserInfo(
+            name: dog.name, age: dog.age, sex: dog.sex, sexUponIntake: dog.sexUponIntake,
+            size: dog.size, keywords: dog.keywords, nickname: dog.nickname)
         try localDataManager.storeData(data: dog, key: Environment.UserDefaultsKey.dogInfo)
         guard let imageData = dog.profileImage else { return }
         do {

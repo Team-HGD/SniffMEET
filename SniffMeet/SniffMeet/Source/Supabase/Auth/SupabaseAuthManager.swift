@@ -109,7 +109,7 @@ final class SupabaseAuthManager: AuthManager {
             try KeychainManager.shared.set(value: session.accessToken, forKey: "accessToken")
             try KeychainManager.shared.set(value: session.refreshToken, forKey: "refreshToken")
             try UserDefaultsManager.shared.set(value: session.expiresAt, forKey: "expiresAt")
-            try UserDefaultsManager.shared.set(value: session.user, forKey: Environment.UserDefaultsKey.dogInfo)
+            try UserDefaultsManager.shared.set(value: session.user, forKey: Environment.UserDefaultsKey.sessionUserInfo)
             SessionManager.shared.session = session
         } catch {
             throw SupabaseAuthError.sessionNotExist

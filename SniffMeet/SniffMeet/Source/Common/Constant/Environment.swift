@@ -9,6 +9,7 @@ enum Environment {
     enum UserDefaultsKey {
         static let profileImage: String = "profileImage"
         static let dogInfo: String = "dogInfo"
+        static let sessionUserInfo: String = "sessionUserInfo"
         static let expiresAt: String = "expiresAt"
         static let mateList: String = "mateList"
         static let isFirstLaunch: String = "isFirstLaunch"

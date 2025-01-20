@@ -17,16 +17,14 @@ protocol DataLoadable {
 
 // TODO: -  dataManager를 주입받을 수 있도록 수정 예정
 final class LocalDataManager: DataStorable {
-    private let dataManager = UserDefaultsManager(userDefaults: UserDefaults(suiteName: "demo")!,
-                                                  jsonEncoder: JSONEncoder(),
-                                                  jsonDecoder: JSONDecoder())
+    private let dataManager = UserDefaultsManager.shared
+    
     func storeData(data: any Encodable, key: String) throws {
         try dataManager.set(value: data, forKey: key)
     }
 }
 
 // MARK: - LocalDataManager+DataLoadable
-
 extension LocalDataManager: DataLoadable {
     func loadData<T>(forKey: String, type: T.Type) throws -> T where T: Decodable {
         try dataManager.get(forKey: forKey, type: type)

@@ -64,7 +64,7 @@ extension MateListRouter: MateListBuildable {
         let niManager = NIManager(mpcManager: mpcManager)
         let tryProfileDropUseCase: TryProfileDropUseCase =
         TryProfileDropUseCaseImpl(
-            dataManager: UserDefaultsManager.shared,
+            dataManager: LocalDataManager(),
             niManager: niManager,
             mpcManager: mpcManager)
         let quitProfileDropUseCase: QuitProfileDropUseCase = QuitProfileDropUseCaseImpl(niManager: niManager)

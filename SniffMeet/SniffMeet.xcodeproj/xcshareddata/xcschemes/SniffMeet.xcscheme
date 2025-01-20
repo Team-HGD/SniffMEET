@@ -27,8 +27,22 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:TestPlan/SNMPersistenceTestPlan.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+         <TestPlanReference
+            reference = "container:TestPlan/SNMNetworkTestPlan.xctestplan">
+         </TestPlanReference>
+         <TestPlanReference
+            reference = "container:TestPlan/SupabaseTestPlan.xctestplan">
+         </TestPlanReference>
+         <TestPlanReference
+            reference = "container:TestPlan/SNMTestplan.xctestplan">
+         </TestPlanReference>
+      </TestPlans>
       <Testables>
          <TestableReference
             skipped = "NO"

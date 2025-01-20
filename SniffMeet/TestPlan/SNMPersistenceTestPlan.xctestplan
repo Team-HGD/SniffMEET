@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "BCAE8A27-E2E9-4F66-B52A-00B3AC5A6743",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SniffMeet.xcodeproj",
+        "identifier" : "FD69B1B92CE3BCDC009D71DC",
+        "name" : "SNMPersistenceTests"
+      }
+    }
+  ],
+  "version" : 1
+}

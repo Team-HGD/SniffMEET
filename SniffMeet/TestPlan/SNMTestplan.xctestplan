@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "40ED9A94-C31C-4A98-B1DE-7F7DD43877FC",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SniffMeet.xcodeproj",
+        "identifier" : "FD69B1B92CE3BCDC009D71DC",
+        "name" : "SNMPersistenceTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SniffMeet.xcodeproj",
+        "identifier" : "FDCD02BD2CE9172600B627D8",
+        "name" : "SNMNetworkTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SniffMeet.xcodeproj",
+        "identifier" : "FD331A642CF33C6700F39426",
+        "name" : "SupabaseTests"
+      }
+    }
+  ],
+  "version" : 1
+}

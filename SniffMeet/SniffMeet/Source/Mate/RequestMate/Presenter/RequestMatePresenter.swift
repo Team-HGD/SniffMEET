@@ -36,12 +36,12 @@ final class RequestMatePresenter: RequestMatePresentable {
         self.router = router
     }
     func viewDidLoad(fileName: String) {
-        do {
-            Task {
-               try await interactor?.fetchDogProfileImage(fileName: fileName)
+        Task {
+            do {
+                try await interactor?.fetchDogProfileImage(fileName: fileName)
+            } catch {
+                SNMLogger.error("Fail to fetch image(RequestMateView): \(error.localizedDescription)")
             }
-        } catch {
-            SNMLogger.error("Fail to fetch image(RequestMateView): \(error.localizedDescription)")
         }
     }
 

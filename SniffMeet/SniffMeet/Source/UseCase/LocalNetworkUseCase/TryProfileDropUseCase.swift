@@ -186,7 +186,7 @@ extension TryProfileDropUseCaseImpl: NISessionDelegate {
     func session(_ session: NISession, didUpdate nearbyObjects: [NINearbyObject])  {
         guard let nearbyObject = nearbyObjects.first else { return }
         let distance = nearbyObject.distance ?? 0
-        Task(priority: .low) { [weak self] in
+        Task { [weak self] in
             if distance > Context.minDistance && distance < Context.maxDistance {
                 SNMLogger.log("조건 만족")
 

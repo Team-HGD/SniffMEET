@@ -37,6 +37,7 @@ final class ProfileCreateInteractor: ProfileCreateInteractable {
 
     func signInWithProfileData(dogInfo: UserInfo, imageData: (png: Data?, jpg: Data?)) {
         Task {
+            let state = SNMLogger.begin(name: "RegisterProfile")
             do {
                 try await SupabaseAuthManager.shared.signInAnonymously()
                 async let saveUserInfoTask =  saveUserInfoUseCase.execute(dog: UserInfo(
@@ -78,6 +79,10 @@ final class ProfileCreateInteractor: ProfileCreateInteractable {
             } catch {
                 presenter?.didFailToSaveUserInfo(error: error)
             }
+            defer {
+                SNMLogger.end(name: "RegisterProfile", state: state)
+            }
+            print("RegisterProfile")
         }
     }
     func convertImageToPNGData(image: UIImage?) -> Data? {

@@ -21,7 +21,7 @@ final class MateListInteractor: MateListInteractable {
     private let requestMateListUseCase: any RequestMateListUseCase
     private let requestProfileImageUseCase: any RequestProfileImageUseCase
     private var tryProfileDropUseCase: any TryProfileDropUseCase
-    private let quitProfileDropUseCase: any QuitProfileDropUseCase
+    private var quitProfileDropUseCase: any QuitProfileDropUseCase
     private var cancellables: Set<AnyCancellable> = []
     
     init(
@@ -80,7 +80,10 @@ final class MateListInteractor: MateListInteractable {
     
     func tryProfileDrop() {
         if tryProfileDropUseCase.isTransistioned {
-            tryProfileDropUseCase.reset()
+            let mpcManager = MPCManager()
+            let niManager = NIManager(mpcManager: mpcManager)
+            tryProfileDropUseCase.reset(mpcManager: mpcManager, nimanager: niManager)
+            quitProfileDropUseCase.reset(niManager: niManager)
             tryProfileDropUseCase.isTransistioned = false
 
         }

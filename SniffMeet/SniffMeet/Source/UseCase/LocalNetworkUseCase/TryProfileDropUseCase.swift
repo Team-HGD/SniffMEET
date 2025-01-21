@@ -18,7 +18,7 @@ protocol TryProfileDropUseCase {
 
     func execute()
     func loadProfileData()
-    func reset()
+    func reset(mpcManager: MPCManager, nimanager: NIManager)
 }
 
 final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
@@ -50,18 +50,18 @@ final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
         mpcManager.session.delegate = self
         encodeFlagData()
     }
-    func reset() {
+    func reset(mpcManager: MPCManager, nimanager: NIManager) {
         isNIConnected.value = false
         profilePublisher.value = nil
         transmissionFlag = []
         isTransistioned = false
         triedBefore = false
         
-        mpcManager = MPCManager()
-        niManager = NIManager(mpcManager: mpcManager)
+        self.mpcManager = mpcManager
+        self.niManager = nimanager
         
-        niManager.niSession?.delegate = self
-        mpcManager.session.delegate = self
+        self.niManager.niSession?.delegate = self
+        self.mpcManager.session.delegate = self
     }
     
     func encodeFlagData() {
@@ -148,7 +148,6 @@ extension TryProfileDropUseCaseImpl: MCSessionDelegate {
             }
             if self?.transmissionFlag.contains(Context.peerReceived) == true && self?.isTransistioned == true {
                 self?.niManager.endSession()
-                self?.reset()
                 SNMLogger.log("End all session")
             }
         }

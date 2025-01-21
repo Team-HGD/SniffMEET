@@ -9,12 +9,17 @@ import Foundation
 
 protocol QuitProfileDropUseCase {
     func execute()
+    mutating func reset(niManager: NIManager)
 }
 
 struct QuitProfileDropUseCaseImpl: QuitProfileDropUseCase {
-    let niManager: NIManager
+    private var niManager: NIManager
     
     init(niManager: NIManager) {
+        self.niManager = niManager
+    }
+    
+    mutating func reset(niManager: NIManager) {
         self.niManager = niManager
     }
     

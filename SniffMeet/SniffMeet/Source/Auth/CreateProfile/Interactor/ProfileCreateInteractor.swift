@@ -39,7 +39,7 @@ final class ProfileCreateInteractor: ProfileCreateInteractable {
         Task {
             do {
                 try await SupabaseAuthManager.shared.signInAnonymously()
-                try saveUserInfoUseCase.execute(dog: UserInfo(
+                async let saveUserInfoTask =  saveUserInfoUseCase.execute(dog: UserInfo(
                     name: dogInfo.name,
                     age: dogInfo.age,
                     sex: dogInfo.sex,
@@ -49,12 +49,15 @@ final class ProfileCreateInteractor: ProfileCreateInteractable {
                     nickname: dogInfo.nickname,
                     profileImage: imageData.png)
                 )
-                var fileName: String? = nil
-                if let jpgData = imageData.jpg {
-                    fileName = try await saveProfileImageUseCase.execute(
+                async let fileNameTask: String? = {
+                    guard let jpgData = imageData.jpg else { return nil }
+                    return try await saveProfileImageUseCase.execute(
                         imageData: jpgData
                     )
-                }
+                }()
+
+                let (userResult, fileName) = try await (saveUserInfoTask, fileNameTask)
+
                 guard let userID = SessionManager.shared.session?.user?.userID else {
                     return
                 }

@@ -25,6 +25,17 @@
                ReferencedContainer = "container:SniffMeet.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "32BD48272D3FEC9D0078DA9C"
+               BuildableName = "SNMSceneTests.xctest"
+               BlueprintName = "SNMSceneTests"
+               ReferencedContainer = "container:SniffMeet.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -54,15 +65,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FD3A031F2CD8CDE50047B7ED"
-            BuildableName = "SniffMeet.app"
-            BlueprintName = "SniffMeet"
-            ReferencedContainer = "container:SniffMeet.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

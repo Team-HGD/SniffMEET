@@ -12,21 +12,23 @@ import XCTest
 
 final class ImageSamplingTests: XCTestCase {
     private var imageSampler: (any ImageSampleable)!
+    private var imageCoder: CGImageCoder!
     
     override func setUp() {
         super.setUp()
+        self.imageCoder = CGImageCoder()
         self.imageSampler = ImageSampler()
     }
     
     func test_입력으로_들어온_가로가_더_긴_이미지를_프로필에_맞게_다운스케일링_한다() async {
-        if let testImage = makeTestImage(width: 6000, height: 2000)?.jpgData,
+        if let testData = makeTestImage(width: 6000, height: 2000),
            let downscaledImage = try? await imageSampler.downscaleImage(
-            from: testImage,
+            from: testData,
             targetSize: ImageConstants.profileTargetSize,
             croppingTo: nil
            ) {
             XCTAssertEqual(
-                CGImage.createFromData(data: downscaledImage)?.height,
+                imageCoder.decode(from: downscaledImage)?.height,
                 Int(ImageConstants.profileTargetSize.height),
                 "세로 크기가 목표 크기와 같아야 한다."
             )
@@ -36,14 +38,14 @@ final class ImageSamplingTests: XCTestCase {
     }
     
     func test_입력으로_들어온_세로가_더_긴_이미지를_프로필에_맞게_다운스케일링_한다() async {
-        if let testImage = makeTestImage(width: 2000, height: 6000)?.jpgData,
+        if let testData = makeTestImage(width: 2000, height: 6000),
            let downscaledImage = try? await imageSampler.downscaleImage(
-            from: testImage,
+            from: testData,
             targetSize: ImageConstants.profileTargetSize,
             croppingTo: nil
            ) {
             XCTAssertEqual(
-                CGImage.createFromData(data: downscaledImage)?.width,
+                imageCoder.decode(from: downscaledImage)?.width,
                 Int(ImageConstants.profileTargetSize.width),
                 "가로 크기가 목표 크기와 같아야 한다."
             )
@@ -53,13 +55,13 @@ final class ImageSamplingTests: XCTestCase {
     }
     
     func test_썸네일_이미지_크기에_맞게_다운샘플링_한다() async {
-        if let testImage = makeTestImage(width: 2000, height: 6000)?.jpgData,
+        if let testData = makeTestImage(width: 2000, height: 6000),
            let downscaledImage = try? await imageSampler.downscaleImage(
-            from: testImage,
+            from: testData,
             targetSize: ImageConstants.thumbnailSize,
             croppingTo: ImageConstants.thumbnailSize
            ),
-           let cgImage = CGImage.createFromData(data: downscaledImage) {
+           let cgImage = imageCoder.decode(from: downscaledImage) {
             XCTAssertEqual(
                 cgImage.height,
                 Int(ImageConstants.thumbnailSize.height),
@@ -75,9 +77,10 @@ final class ImageSamplingTests: XCTestCase {
         }
     }
     
-    func makeTestImage(width: CGFloat, height: CGFloat) -> CGImage? {
+    func makeTestImage(width: CGFloat, height: CGFloat) -> Data? {
         let size = CGSize(width: width, height: height)
         let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let imageCoder = CGImageCoder()
         guard let context = CGContext(
             data: nil,
             width: Int(size.width),
@@ -91,7 +94,8 @@ final class ImageSamplingTests: XCTestCase {
         }
         context.setFillColor(UIColor.white.cgColor)
         context.fill(CGRect(origin: .zero, size: size))
-        return context.makeImage()
+        guard let image = context.makeImage() else { return nil }
+        return imageCoder.encode(from: image, as: .jpeg)
     }
     
     private enum ImageConstants {

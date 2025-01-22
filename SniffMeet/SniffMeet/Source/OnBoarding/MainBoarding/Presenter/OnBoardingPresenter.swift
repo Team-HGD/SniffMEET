@@ -36,7 +36,6 @@ final class OnBoardingPresenter: OnBoardingPresentable {
     func viewDidLoad() {
         SNMLogger.log("presenter viewDidLoad")
         pages = interactor?.fetchPages() ?? []
-        SNMLogger.info("page3: \(pages)")
         view?.updatePages(pages)
     }
 

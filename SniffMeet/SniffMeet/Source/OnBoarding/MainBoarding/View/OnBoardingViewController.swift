@@ -82,8 +82,6 @@ class OnBoardingViewController: BaseViewController, OnBoardingViewable {
     }
 
     private func setupPageViewController() {
-        SNMLogger.log("setupPageViewController")
-        SNMLogger.info("page: \(pages)")
         pageViewController = UIPageViewController(
             transitionStyle: .scroll,
             navigationOrientation: .horizontal

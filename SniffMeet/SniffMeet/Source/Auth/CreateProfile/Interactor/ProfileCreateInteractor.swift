@@ -39,22 +39,34 @@ final class ProfileCreateInteractor: ProfileCreateInteractable {
         Task {
             do {
                 try await SupabaseAuthManager.shared.signInAnonymously()
-                try saveUserInfoUseCase.execute(dog: UserInfo(
-                    name: dogInfo.name,
-                    age: dogInfo.age,
-                    sex: dogInfo.sex,
-                    sexUponIntake: dogInfo.sexUponIntake,
-                    size: dogInfo.size,
-                    keywords: dogInfo.keywords,
-                    nickname: dogInfo.nickname,
-                    profileImage: imageData.png)
-                )
-                var fileName: String? = nil
-                if let jpgData = imageData.jpg {
-                    fileName = try await saveProfileImageUseCase.execute(
-                        imageData: jpgData
-                    )
+                let fileName = try await withThrowingTaskGroup(of: String?.self) { [weak self] group in
+                    group.addTask {
+                        try self?.saveUserInfoUseCase.execute(dog: UserInfo(
+                            name: dogInfo.name,
+                            age: dogInfo.age,
+                            sex: dogInfo.sex,
+                            sexUponIntake: dogInfo.sexUponIntake,
+                            size: dogInfo.size,
+                            keywords: dogInfo.keywords,
+                            nickname: dogInfo.nickname,
+                            profileImage: imageData.png)
+                        )
+                        return nil
+                    }
+                    if let jpgData = imageData.jpg {
+                        group.addTask {
+                            return try await self?.saveProfileImageUseCase.execute(imageData: jpgData)
+                        }
+                    }
+                    var savedFileName: String? = nil
+                    for try await result in group {
+                        if let name = result {
+                            savedFileName = name
+                        }
+                    }
+                    return savedFileName
                 }
+
                 guard let userID = SessionManager.shared.session?.user?.userID else {
                     return
                 }

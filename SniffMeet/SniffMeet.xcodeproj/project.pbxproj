@@ -98,14 +98,15 @@
 		A24082722CEB36B8009109A0 /* SupabaseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082712CEB36B8009109A0 /* SupabaseTokenRequest.swift */; };
 		A24B1F2F2D3C33500012B860 /* ImageSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F2E2D3C33500012B860 /* ImageSampler.swift */; };
 		A24B1F302D3C33500012B860 /* ImageSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F2E2D3C33500012B860 /* ImageSampler.swift */; };
-		A24B1F322D3C33660012B860 /* Extension + CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F312D3C33660012B860 /* Extension + CGImage.swift */; };
-		A24B1F332D3C33660012B860 /* Extension + CGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F312D3C33660012B860 /* Extension + CGImage.swift */; };
+		A24B1F322D3C33660012B860 /* CGImageCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F312D3C33660012B860 /* CGImageCoder.swift */; };
+		A24B1F332D3C33660012B860 /* CGImageCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F312D3C33660012B860 /* CGImageCoder.swift */; };
 		A24B1F382D3C349F0012B860 /* ImageSamplingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F372D3C349F0012B860 /* ImageSamplingTests.swift */; };
 		A25BE4522CEBB5A900886763 /* SupabaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4512CEBB5A900886763 /* SupabaseSession.swift */; };
 		A25BE4562CEBB63A00886763 /* SupabaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4552CEBB63A00886763 /* SupabaseUser.swift */; };
 		A25BE4582CEBB95C00886763 /* SupabaseRefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */; };
 		A25BE45A2CEC2BA300886763 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4592CEC2BA300886763 /* SessionManager.swift */; };
 		A266A2602CF5CF4A002C2B3A /* CreateAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */; };
+		A26F3E572D40B1C3006CC1A9 /* Extension + UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F3E562D40B1C3006CC1A9 /* Extension + UIImage.swift */; };
 		A288A63D2CDC595000D11C34 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A28D4F582CFED0CB00A79543 /* AddMateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28D4F572CFED0CB00A79543 /* AddMateButton.swift */; };
 		A2AFC9492D016BFF0062B34E /* SNMToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AFC9482D016BFF0062B34E /* SNMToast.swift */; };
@@ -204,7 +205,6 @@
 		FD69B1C42CE3BCE4009D71DC /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD69B1B22CE3BC68009D71DC /* KeychainManager.swift */; };
 		FD69B1CB2CE3E9B4009D71DC /* UserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD69B1CA2CE3E9B4009D71DC /* UserDefaultsTests.swift */; };
 		FD69B1CD2CE3E9BB009D71DC /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD69B1CC2CE3E9B8009D71DC /* KeychainTests.swift */; };
-		FD8020FE2CF8C8DE0089B349 /* Extension + UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8020FD2CF8C8DA0089B349 /* Extension + UIImage.swift */; };
 		FD880B5A2CECE8FC0093BEB9 /* SNMLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B592CECE8F90093BEB9 /* SNMLogger.swift */; };
 		FD880B602CF4327F0093BEB9 /* SaveProfileImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B5F2CF432780093BEB9 /* SaveProfileImageUseCase.swift */; };
 		FD880B622CF433AF0093BEB9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B612CF433AC0093BEB9 /* Environment.swift */; };
@@ -356,7 +356,7 @@
 		A24082712CEB36B8009109A0 /* SupabaseTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseTokenRequest.swift; sourceTree = "<group>"; };
 		A24B1F252D3C32960012B860 /* SNMUtilityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMUtilityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A24B1F2E2D3C33500012B860 /* ImageSampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSampler.swift; sourceTree = "<group>"; };
-		A24B1F312D3C33660012B860 /* Extension + CGImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + CGImage.swift"; sourceTree = "<group>"; };
+		A24B1F312D3C33660012B860 /* CGImageCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGImageCoder.swift; sourceTree = "<group>"; };
 		A24B1F372D3C349F0012B860 /* ImageSamplingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSamplingTests.swift; sourceTree = "<group>"; };
 		A24B1F392D3C35C60012B860 /* SNMUtilityTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SNMUtilityTestPlan.xctestplan; sourceTree = "<group>"; };
 		A25BE4512CEBB5A900886763 /* SupabaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSession.swift; sourceTree = "<group>"; };
@@ -364,6 +364,7 @@
 		A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseRefreshResponse.swift; sourceTree = "<group>"; };
 		A25BE4592CEC2BA300886763 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountUseCase.swift; sourceTree = "<group>"; };
+		A26F3E562D40B1C3006CC1A9 /* Extension + UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImage.swift"; sourceTree = "<group>"; };
 		A28D4F572CFED0CB00A79543 /* AddMateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateButton.swift; sourceTree = "<group>"; };
 		A2AFC9482D016BFF0062B34E /* SNMToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMToast.swift; sourceTree = "<group>"; };
 		A2B58F512D2FA0DC00C15B12 /* SNMError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMError.swift; sourceTree = "<group>"; };
@@ -438,7 +439,6 @@
 		FD69B1BA2CE3BCDC009D71DC /* SNMPersistenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMPersistenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD69B1CA2CE3E9B4009D71DC /* UserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
 		FD69B1CC2CE3E9B8009D71DC /* KeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
-		FD8020FD2CF8C8DA0089B349 /* Extension + UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImage.swift"; sourceTree = "<group>"; };
 		FD880B592CECE8F90093BEB9 /* SNMLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMLogger.swift; sourceTree = "<group>"; };
 		FD880B5F2CF432780093BEB9 /* SaveProfileImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfileImageUseCase.swift; sourceTree = "<group>"; };
 		FD880B612CF433AC0093BEB9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -1717,7 +1717,7 @@
 			isa = PBXGroup;
 			children = (
 				320047DD2CFE9DFB00D08B6D /* Extension + UIApplication.swift */,
-				FD8020FD2CF8C8DA0089B349 /* Extension + UIImage.swift */,
+				A26F3E562D40B1C3006CC1A9 /* Extension + UIImage.swift */,
 				FDE7689E2CF7858D00B5DE88 /* Extension + UIViewController.swift */,
 				FDE768912CF7828600B5DE88 /* AnyJSONSerializable.swift */,
 				FDE7688F2CF7827900B5DE88 /* AnyDecodable.swift */,
@@ -1727,7 +1727,7 @@
 				320043962CDF493600D08B6D /* Extension + UIView.swift */,
 				3200438C2CDF3D7F00D08B6D /* Extension + Navigation.swift */,
 				A24B1F2E2D3C33500012B860 /* ImageSampler.swift */,
-				A24B1F312D3C33660012B860 /* Extension + CGImage.swift */,
+				A24B1F312D3C33660012B860 /* CGImageCoder.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1966,7 +1966,7 @@
 			files = (
 				A24B1F382D3C349F0012B860 /* ImageSamplingTests.swift in Sources */,
 				A24B1F302D3C33500012B860 /* ImageSampler.swift in Sources */,
-				A24B1F332D3C33660012B860 /* Extension + CGImage.swift in Sources */,
+				A24B1F332D3C33660012B860 /* CGImageCoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2015,7 +2015,7 @@
 				995D94622CE598FD005A47BF /* NIManager.swift in Sources */,
 				FDBFA9A12CE1E51500AA9220 /* SNMColor.swift in Sources */,
 				FDE7689F2CF7858F00B5DE88 /* Extension + UIViewController.swift in Sources */,
-				A24B1F322D3C33660012B860 /* Extension + CGImage.swift in Sources */,
+				A24B1F322D3C33660012B860 /* CGImageCoder.swift in Sources */,
 				A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */,
 				A2C844D12CDBE1E5007F2970 /* (null) in Sources */,
 				A2BD49F62CF72B4000AC72A7 /* WalkNotiDTO.swift in Sources */,
@@ -2025,10 +2025,10 @@
 				FD3A03422CD8CF460047B7ED /* AppDelegate.swift in Sources */,
 				995D94A82CECEF91005A47BF /* RequestMateViewController.swift in Sources */,
 				A2BA1B962CF2606B0080575A /* MateListInteractor.swift in Sources */,
+				A26F3E572D40B1C3006CC1A9 /* Extension + UIImage.swift in Sources */,
 				A202A1172CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift in Sources */,
 				FD3A03432CD8CF460047B7ED /* SceneDelegate.swift in Sources */,
 				99FA4E792CE0FBBF00553C2E /* ProfileInputViewController.swift in Sources */,
-				FD8020FE2CF8C8DE0089B349 /* Extension + UIImage.swift in Sources */,
 				3200448D2CEC878300D08B6D /* RespondWalkViewController.swift in Sources */,
 				A28D4F582CFED0CB00A79543 /* AddMateButton.swift in Sources */,
 				FD331A932CF3463200F39426 /* NotificationCell.swift in Sources */,

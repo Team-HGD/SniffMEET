@@ -14,7 +14,7 @@ protocol MateListViewable: AnyObject {
 
 final class MateListViewController: BaseViewController, MateListViewable {
     var presenter: (any MateListPresentable)?
-    private var mateCell: [UUID: UITableViewCell] = [:] // [mateID: Cell]
+    private var mateCellDictionary: [UUID: UITableViewCell] = [:] // [mateID: Cell]
     private var imageDataSource: [UUID: Data] = [:] // [mateID: mate의 profileImage Data]
     private var cancellables: Set<AnyCancellable> = []
     private let tableView: UITableView = UITableView()
@@ -84,14 +84,10 @@ final class MateListViewController: BaseViewController, MateListViewable {
             .receive(on: RunLoop.main)
             .sink { [weak self] (mateID, imageData) in
                 self?.imageDataSource[mateID] = imageData
-                guard let cell = self?.mateCell[mateID],
+                guard let cell = self?.mateCellDictionary[mateID],
                       let imageData,
                       let profileImage = UIImage(data: imageData) else { return }
-                cell.configure(
-                    image: profileImage.clipToSquareWithBackgroundColor(
-                        with: ItemSize.profileImageSize.width
-                    ) ?? .app
-                )
+                cell.configure(image: profileImage)
             }
             .store(in: &cancellables)
         addMateButton.publisher(event: .touchUpInside)
@@ -142,10 +138,10 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
             cornerRadius: ItemSize.profileImageCornerRadius
         )
         if let mate = presenter?.output.mates.value[indexPath.row] {
-            if let prev = mateCell.keys.first(where: { mateCell[$0] === cell }) {
-                mateCell[prev] = nil
+            if let prev = mateCellDictionary.keys.first(where: { mateCellDictionary[$0] === cell }) {
+                mateCellDictionary[prev] = nil
             }
-            mateCell[mate.userID] = cell // 현재 사용하고 있는 cell의 참조값을 저장합니다.
+            mateCellDictionary[mate.userID] = cell // 현재 사용하고 있는 cell의 참조값을 저장합니다.
             configureMateListCell(cell: cell, mate: mate)
         }
 
@@ -159,11 +155,7 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
     private func configureMateListCell(cell: UITableViewCell, mate: Mate) {
         if let imageData = imageDataSource[mate.userID],
            let profileImage = UIImage(data: imageData) {
-            cell.configure(
-                image: profileImage.clipToSquareWithBackgroundColor(
-                    with: ItemSize.profileImageSize.width
-                ) ?? .app
-            )
+            cell.configure(image: profileImage)
         }
         cell.configure(text: mate.name)
         cell.accessoryView = createAccessoryButton(mate: mate)

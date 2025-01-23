@@ -26,7 +26,7 @@ struct CreateAccountUseCaseImpl: CreateAccountUseCase {
             SNMLogger.error("\(error.localizedDescription)")
         }
         do {
-            let mateListData = try encoder.encode(MateListInsertDTO(id: info.id))
+            let mateListData = try encoder.encode(MateListInsertDTO(id: info.id, mates: nil))
             try await SupabaseDatabaseManager.shared.insertData(
                 into: Environment.SupabaseTableName.matelist,
                 with: mateListData

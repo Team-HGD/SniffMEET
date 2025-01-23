@@ -9,7 +9,7 @@ import Foundation
 
 protocol RequestMateListUseCase {
     var remoteDatabaseManager: RemoteDatabaseManager { get }
-    func execute() async -> [Mate]
+    func execute(page: Int, pageSize: Int) async throws -> [Mate]
 }
 
 struct RequestMateListUseCaseImpl: RequestMateListUseCase {
@@ -23,13 +23,20 @@ struct RequestMateListUseCaseImpl: RequestMateListUseCase {
         encoder = JSONEncoder()
     }
     
-    func execute() async -> [Mate] {
+    func execute(page: Int, pageSize: Int) async throws -> [Mate] {
         do {
             let tableName = Environment.SupabaseTableName.matelistFunction
-            guard let userID = SessionManager.shared.session?.user?.userID else { return [] }
+            guard let userID = SessionManager.shared.session?.user?.userID else {
+                throw SNMError(level: .user, error: SupabaseAuthError.sessionNotExist)
+            }
             let requestData = try encoder.encode(MateListRequestDTO(userId: userID))
-            
-            let data = try await remoteDatabaseManager.fetchList(into: tableName,with: requestData)
+
+            let data = try await remoteDatabaseManager.fetchList(
+                into: tableName,
+                with: requestData,
+                page: page,
+                pageSize: pageSize
+            )
             let mateDTOList = try decoder.decode([UserInfoDTO].self, from: data)
             return mateDTOList.map {
                 Mate(name: $0.dogName,
@@ -37,9 +44,12 @@ struct RequestMateListUseCaseImpl: RequestMateListUseCase {
                      keywords: $0.keywords,
                      profileImageURLString: $0.profileImageURL)
             }
+        } catch let error as SupabaseDBError where error == .noMoreData {
+            throw SNMError(level: .user, error: error)
+        } catch let error as SupabaseAuthError {
+            throw SNMError(level: .user, error: error)
         } catch {
-            SNMLogger.error("RequestMateListUseCaseImpl: \(error.localizedDescription)")
-            return []
+            throw SNMError(level: .developer, error: error)
         }
     }
 }

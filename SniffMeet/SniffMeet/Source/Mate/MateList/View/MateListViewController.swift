@@ -14,7 +14,8 @@ protocol MateListViewable: AnyObject {
 
 final class MateListViewController: BaseViewController, MateListViewable {
     var presenter: (any MateListPresentable)?
-    var imageDataSource: [UUID: Data] = [:]
+    private var mateCellDictionary: [UUID: UITableViewCell] = [:] // [mateID: Cell]
+    private var imageDataSource: [UUID: Data] = [:] // [mateID: mate의 profileImage Data]
     private var cancellables: Set<AnyCancellable> = []
     private let tableView: UITableView = UITableView()
     private let addMateButton = AddMateButton(title: "새 메이트를 연결하세요")
@@ -83,11 +84,10 @@ final class MateListViewController: BaseViewController, MateListViewable {
             .receive(on: RunLoop.main)
             .sink { [weak self] (mateID, imageData) in
                 self?.imageDataSource[mateID] = imageData
-                guard let index = self?.presenter?.output.mates.value.firstIndex(where: {
-                    $0.userID == mateID
-                }) else { return }
-                let indexPath = IndexPath(item: index, section: 0)
-                self?.tableView.reloadRows(at: [indexPath], with: .none)
+                guard let cell = self?.mateCellDictionary[mateID],
+                      let imageData,
+                      let profileImage = UIImage(data: imageData) else { return }
+                cell.configure(image: profileImage)
             }
             .store(in: &cancellables)
         addMateButton.publisher(event: .touchUpInside)
@@ -126,39 +126,40 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter?.output.mates.value.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: Identifier.mateCellID,
             for: indexPath
         )
-        guard let mate = presenter?.output.mates.value[indexPath.row] else { return cell }
-        var content = cell.defaultContentConfiguration()
-        content.image = .app
-        if let imageData = imageDataSource[mate.userID] {
-            var profileImage = UIImage(data: imageData)
-            profileImage = profileImage?.clipToSquareWithBackgroundColor(
-                with: ItemSize.profileImageSize.width)
-            content.image = profileImage
-        } else {
-            presenter?.didTableViewCellLoad(
-                mateID: mate.userID,
-                imageName: mate.profileImageURLString
-            )
-        }
-        content.imageProperties.maximumSize = ItemSize.profileImageSize
-        content.imageProperties.cornerRadius = ItemSize.profileImageCornerRadius
-        content.text = presenter?.output.mates.value[indexPath.row].name
-        cell.contentConfiguration = content
+        cell.configure(
+            image: UIImage.app,
+            maximumSize: ItemSize.profileImageSize,
+            cornerRadius: ItemSize.profileImageCornerRadius
+        )
         if let mate = presenter?.output.mates.value[indexPath.row] {
-            cell.accessoryView = createAccessoryButton(mate: mate)
+            if let prev = mateCellDictionary.keys.first(where: { mateCellDictionary[$0] === cell }) {
+                mateCellDictionary[prev] = nil
+            }
+            mateCellDictionary[mate.userID] = cell // 현재 사용하고 있는 cell의 참조값을 저장합니다.
+            configureMateListCell(cell: cell, mate: mate)
         }
-        cell.selectionStyle = .none
+
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         ItemSize.cellHeight
+    }
+
+    private func configureMateListCell(cell: UITableViewCell, mate: Mate) {
+        if let imageData = imageDataSource[mate.userID],
+           let profileImage = UIImage(data: imageData) {
+            cell.configure(image: profileImage)
+        }
+        cell.configure(text: mate.name)
+        cell.accessoryView = createAccessoryButton(mate: mate)
+        cell.selectionStyle = .none
     }
 
     private func createAccessoryButton(mate: Mate) -> UIButton {
@@ -177,6 +178,17 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
             }
             .store(in: &cancellables)
         return button
+    }
+}
+
+// MARK: - MateListViewController+UIScrollViewDelegate
+
+extension MateListViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y - 50 >
+            scrollView.contentSize.height - scrollView.frame.height {
+            presenter?.didScrollToBottom()
+        }
     }
 }
 

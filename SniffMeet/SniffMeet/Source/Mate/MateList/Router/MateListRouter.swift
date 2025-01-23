@@ -69,8 +69,7 @@ extension MateListRouter: MateListBuildable {
             mpcManager: mpcManager)
         let quitProfileDropUseCase: QuitProfileDropUseCase = QuitProfileDropUseCaseImpl(niManager: niManager)
         let view: MateListViewable & UIViewController = MateListViewController()
-        let presenter: MateListPresentable & MateListInteractorOutput =
-        MateListPresenter()
+        let presenter: MateListPresentable & MateListInteractorOutput = MateListPresenter()
         let interactor: MateListInteractable = MateListInteractor(
             requestMateListUseCase: requestMateListUseCase,
             requestProfileImageUseCase: requestProfileImageUseCase,

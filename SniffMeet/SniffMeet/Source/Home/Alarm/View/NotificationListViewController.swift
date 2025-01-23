@@ -157,3 +157,14 @@ extension NotificationListViewController: UITableViewDelegate {
         presenter?.didDeleteNotificationCell(index: index)
     }
 }
+
+// MARK: - NotificationListViewController+UIScrollViewDelegate
+
+extension NotificationListViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y - 50 >
+            scrollView.contentSize.height - scrollView.frame.height {
+            presenter?.didScrollToBottom()
+        }
+    }
+}

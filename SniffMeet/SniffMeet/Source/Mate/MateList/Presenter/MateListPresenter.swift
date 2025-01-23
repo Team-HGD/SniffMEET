@@ -15,16 +15,14 @@ protocol MateListPresentable: AnyObject {
     var output: any MateListPresenterOutput { get }
     
     func viewWillAppear()
-    func didTableViewCellLoad(mateID: UUID, imageName: String?)
     func didTabAccessoryButton(mate: Mate)
     func showAlertConnected()
     func showAlertDisconnected()
+    func didScrollToBottom()
     func startProfileDrop()
 }
 
 protocol MateListInteractorOutput: AnyObject {
-    func didFetchMateList(mateList: [Mate])
-    func didFetchProfileImage(id: UUID, imageData: Data?)
     func receiveProfileData(_ data: DogDTO)
     func didConnectNISession()
     func failToConnectNISession()
@@ -36,6 +34,13 @@ final class MateListPresenter: MateListPresentable {
     var router: (any MateListRoutable)?
     let output: any MateListPresenterOutput
 
+    private var isFetching: Bool = false
+    private var isReachedBottom: Bool = false
+    private var currentPage: Int = 0
+    private let pageSize: Int = 20
+
+    private let queue: TaskSerialQueue = TaskSerialQueue()
+
     init(
         view: (any MateListViewable)? = nil,
         output: any MateListPresenterOutput = DefaultMateListPresenterOutput()
@@ -46,18 +51,9 @@ final class MateListPresenter: MateListPresentable {
     }
 
     func viewWillAppear() {
-        guard let userID = SessionManager.shared.session?.user?.userID else {
-            SNMLogger.error("세션 없음")
-            // FIXME: 세션 없음 - 앱 라우터에서 로그인으로 튕기게 하거나 해야할듯
-            return
-        }
-        interactor?.requestMateList(userID: userID)
+        guard !isReachedBottom, !isFetching else { return }
+        fetchMateList()
         SNMLogger.info("메이트 리스트 호출")
-    }
-
-    func didTableViewCellLoad(mateID: UUID, imageName: String?) {
-        guard let imageName else { return }
-        interactor?.requestProfileImage(id: mateID, imageName: imageName)
     }
 
     func didTabAccessoryButton(mate: Mate) {
@@ -87,28 +83,88 @@ final class MateListPresenter: MateListPresentable {
         guard let view else { return }
         router?.showMateRequestView(mateListView: view, data: data)
     }
+
     func startProfileDrop() {
         interactor?.tryProfileDrop()
     }
     func quitProfileDrop() {
         interactor?.quitProfileDrop()
     }
+
+    func didScrollToBottom() {
+        guard !isReachedBottom, !isFetching else { return }
+        isFetching = true
+        currentPage += 1
+        fetchMateList()
+    }
+
+    private func fetchMateList() {
+        Task { [weak self] in
+            guard let self else { return }
+            do {
+                guard let mateList = try await self.interactor?.requestMateList(
+                    page: self.currentPage,
+                    pageSize: self.pageSize
+                ) else { return }
+                self.didFetchMateList(mateList: mateList)
+            } catch let snmError as SNMError where snmError.level == .user {
+                switch snmError.error {
+                case let error as SupabaseDBError where error == .noMoreData:
+                    self.didReachEndOfMateList()
+                case let error as SupabaseAuthError where error == .sessionNotExist:
+                    SNMLogger.error("세션이 존재하지 않습니다.")
+                    // TODO: 로그인 화면으로 이동
+                default:
+                    SNMLogger.error(snmError.localizedDescription)
+                }
+            } catch let snmError as SNMError where snmError.level == .developer {
+                SNMLogger.error(snmError.localizedDescription)
+            }
+        }
+    }
+
+    private func didFetchMateList(mateList: [Mate]) {
+        output.mates.send(output.mates.value + mateList)
+        isFetching = false
+        let chunkedSize: Int = 5
+
+        Task { [weak self] in
+            // 최대 5개의 이미지 요청만 수행합니다.
+            for mates in mateList.chunked(into: chunkedSize) {
+                await self?.queue.addTask { [weak self] in
+                    if let profileImages = await self?.interactor?.requestProfileImages(
+                        mates: mates
+                    ) {
+                        self?.didFetchProfileImages(
+                            profileImages: profileImages
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private func didFetchProfileImages(profileImages: [(mateID: UUID, imageData: Data)]) {
+        profileImages.forEach {
+            self.output.profileImageData.send($0)
+        }
+    }
+    private func didFetchProfileImage(mateID: UUID, imageData: Data?) {
+        guard let imageData else { return }
+        output.profileImageData.send((mateID, imageData))
+    }
+
+    private func didReachEndOfMateList() {
+        isReachedBottom = true
+    }
 }
 
 extension MateListPresenter: MateListInteractorOutput {
-    func didFetchMateList(mateList: [Mate]) {
-        output.mates.send(mateList)
-    }
-
-    func didFetchProfileImage(id: UUID, imageData: Data?) {
-        guard let imageData else { return }
-        output.profileImageData.send((id, imageData))
-    }
     func didConnectNISession() {
         //showAlertConnected()
         view?.changeMPCButtonState(to: .success)
     }
-    
+
     func failToConnectNISession() {
         view?.changeMPCButtonState(to: .normal)
     }

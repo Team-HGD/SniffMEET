@@ -8,7 +8,7 @@ import Foundation
 
 protocol RequestNotiListUseCase {
     var remoteManager: (any RemoteDatabaseManager) { get }
-    func execute() async -> [WalkNoti]
+    func execute(page: Int, pageSize: Int) async throws -> [WalkNoti]
 }
 
 struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
@@ -22,20 +22,30 @@ struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
         encoder = JSONEncoder()
     }
     
-    func execute() async -> [WalkNoti] {
+    func execute(page: Int = 0, pageSize: Int = 100) async throws -> [WalkNoti] {
         let tableName = Environment.SupabaseTableName.notificationListFunction
 
         do {
-            guard let userID = SessionManager.shared.session?.user?.userID else { return [] }
-            
+            guard let userID = SessionManager.shared.session?.user?.userID else {
+                throw SNMError(level: .user, error: SupabaseAuthError.sessionNotExist)
+            }
+
             let requestData = try encoder.encode(WalkNotiListRequestDTO(userId: userID))
-            let data = try await remoteManager.fetchList(into: tableName, with: requestData)
+            let data = try await remoteManager.fetchList(
+                into: tableName,
+                with: requestData,
+                page: page,
+                pageSize: pageSize
+            )
             let walkDTOList = try decoder.decode([WalkNotiDTO].self, from: data)
             
             return walkDTOList.map { $0.toEntity() }
+        } catch let error as SupabaseDBError where error == .noMoreData {
+            throw SNMError(level: .user, error: error)
+        } catch let error as SupabaseAuthError {
+            throw SNMError(level: .user, error: error)
         } catch {
-            SNMLogger.error("RequestNotiListUseCaseImpl: \(error.localizedDescription)")
-            return []
+            throw SNMError(level: .developer, error: error)
         }
     }
 }

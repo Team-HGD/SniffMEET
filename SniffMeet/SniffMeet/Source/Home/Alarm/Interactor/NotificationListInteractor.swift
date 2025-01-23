@@ -6,26 +6,23 @@
 //
 
 protocol NotificationListInteractable: AnyObject {
-    var presenter: (any NotificationListInteractorOutput)? { get set }
-    func fetchNotificationList()
+    var presenter: (any NotificationListPresentable)? { get set }
+    func fetchNotificationList(page: Int, pageSize: Int) async throws -> [WalkNoti]
 }
 
 final class NotificationListInteractor: NotificationListInteractable {
-    weak var presenter: (any NotificationListInteractorOutput)?
+    weak var presenter: (any NotificationListPresentable)?
     private let requestNotiListUseCase: (any RequestNotiListUseCase)
 
     init(
-        presenter: (any NotificationListInteractorOutput)? = nil,
+        presenter: (any NotificationListPresentable)? = nil,
         requestNotiListUseCase: any RequestNotiListUseCase
     ) {
         self.presenter = presenter
         self.requestNotiListUseCase = requestNotiListUseCase
     }
 
-    func fetchNotificationList() {
-        Task {
-            let notiList = await requestNotiListUseCase.execute()
-            presenter?.didFetchNotificationList(with: notiList)
-        }
+    func fetchNotificationList(page: Int, pageSize: Int) async throws -> [WalkNoti] {
+        try await requestNotiListUseCase.execute(page: page, pageSize: pageSize)
     }
 }

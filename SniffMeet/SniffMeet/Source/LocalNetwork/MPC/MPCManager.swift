@@ -49,44 +49,26 @@ final class MPCManager: NSObject {
         let serviceType = String.serviceName
         let session = MCSession(peer: peerID)
 
-        self.init(advertiser: MPCAdvertiser(session: session,
-                                            myPeerID: peerID,
-                                            serviceType: serviceType),
-                  browser:  MPCBrowser(session: session,
-                                       myPeerID: peerID,
-                                       serviceType: serviceType),
-                  session: session,
-                  mypeerID: peerID)
+        self.init(
+            advertiser: MPCAdvertiser(
+                session: session,
+                myPeerID: peerID,
+                serviceType: serviceType
+            ),
+            browser: MPCBrowser(
+                session: session,
+                myPeerID: peerID,
+                serviceType: serviceType
+            ),
+            session: session,
+            mypeerID: peerID
+        )
     }
-    
     deinit {
         advertiser.stopAdvertising()
         browser.stopBrowsing()
     }
 
-    func sendToken(discoveryToken: Data) async {
-        guard let connectedPeer = await connectedPeerManager.connectedPeer else { return }
-        do {
-            let dataToSend = MPCProfileDropDTO(
-                token: discoveryToken,
-                profile: nil,
-                transitionMessage: nil
-            )
-            let encodedData = try encoder.encode(dataToSend)
-            try session.send(encodedData, toPeers: [connectedPeer], with: .reliable)
-        } catch {
-            SNMLogger.error("error sending \(error.localizedDescription)")
-        }
-    }
-    /// 연결된 한명의 피어에게만 데이터를 전송합니다.
-    func send(data: Data) async {
-        guard let connectedPeer = await connectedPeerManager.connectedPeer else { return }
-        do {
-            try self.session.send(data, toPeers: [connectedPeer], with: .reliable)
-        } catch {
-            SNMLogger.error("DogProfileInfo 전송 실패 \(error.localizedDescription)")
-        }
-    }
     private func bind() {
         isAvailableToBeConnected
             .sink { [weak self] isAvailable in
@@ -102,7 +84,6 @@ final class MPCManager: NSObject {
     }
 }
 
-
 extension MPCManager: MCNearbyServiceAdvertiserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
                     didNotStartAdvertisingPeer error: Error) {
@@ -116,7 +97,6 @@ extension MPCManager: MCNearbyServiceAdvertiserDelegate {
     {
         SNMLogger.info("Received invitation from \(peerID)")
         invitationHandler(true, session)
-        
     }
 }
 
@@ -134,17 +114,30 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
         guard !self.availablePeers.contains(peerID) else { return }
         self.availablePeers.insert(peerID)
 
-        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
-            if (self?.session.connectedPeers.contains(peerID) == false) {
-                self?.browser.invite(peerID: peerID)
-            }
-        }
+        self.browser.invite(peerID: peerID)
+//        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
+//            if (self?.session.connectedPeers.contains(peerID) == false) {
+//                self?.browser.invite(peerID: peerID)
+//            }
+//        }
         SNMLogger.info("availablePeers: \(self.availablePeers)")
     }
 
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         guard let index = availablePeers.firstIndex(of: peerID) else { return }
         self.availablePeers.remove(at: index)
+    }
+}
+
+extension MPCManager {
+    /// 연결된 한명의 피어에게만 데이터를 전송합니다.
+    func send(data: Data) async {
+        guard let connectedPeer = await connectedPeerManager.connectedPeer else { return }
+        do {
+            try self.session.send(data, toPeers: [connectedPeer], with: .reliable)
+        } catch {
+            SNMLogger.error("DogProfileInfo 전송 실패 \(error.localizedDescription)")
+        }
     }
 }
 

@@ -8,36 +8,23 @@
 import Combine
 import NearbyInteraction
 
-final class NIManager: NSObject {
+final class NIManager {
     var niSession: NISession?
     private var cancellables = Set<AnyCancellable>()
-    var mpcManager: MPCManager
 
-    init(mpcManager: MPCManager) {
-        self.mpcManager = mpcManager
-        super.init()
-        setupNISession()
-    }
-
-    func setupNISession() {
+    init() {
         niSession = NISession()
     }
 
-    func sendDiscoveryToken() async {
+    func discoveryToken() -> Data? {
         guard let niSession = niSession, let discoveryToken = niSession.discoveryToken else {
             SNMLogger.log("Discovery token is not available.")
-            return
+            return nil
         }
-        do {
-            let tokenData = try NSKeyedArchiver.archivedData(
-                withRootObject: discoveryToken,
-                requiringSecureCoding: true
-            )
-            await mpcManager.sendToken(discoveryToken: tokenData)
-            SNMLogger.log("Discovery token sent to peer.")
-        } catch {
-            SNMLogger.error("Failed to encode discovery token: \(error)")
-        }
+        return try? NSKeyedArchiver.archivedData(
+            withRootObject: discoveryToken,
+            requiringSecureCoding: true
+        )
     }
 
     // discoveryToken 수신 처리
@@ -63,7 +50,5 @@ final class NIManager: NSObject {
 
     func endSession() {
         niSession?.invalidate()
-        mpcManager.session.disconnect()
-        mpcManager.isAvailableToBeConnected.send(false)
     }
 }

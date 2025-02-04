@@ -119,7 +119,14 @@ extension TryProfileDropUseCaseImpl: MCSessionDelegate {
             Task {
                 SNMLogger.log("successfully connected to MPCSession: \(session.connectedPeers)")
                 await mpcManager.connectedPeerManager.connect(peer: peerID)
-                await niManager.sendDiscoveryToken()
+                guard let token = niManager.discoveryToken() else { return }
+                let data = try encoder.encode(
+                    MPCProfileDropDTO(
+                        token: token,
+                        profile: nil,
+                        transitionMessage: nil)
+                )
+                await mpcManager.send(data: data)
                 niManager.mpcManager.isAvailableToBeConnected.send(false)
             }
         default:

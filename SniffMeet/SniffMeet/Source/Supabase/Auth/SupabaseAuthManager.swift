@@ -13,13 +13,15 @@ protocol AuthManageable {
 }
 
 final class SupabaseAuthManager: AuthManageable {
-    private let networkProvider: SNMNetworkProvider
+    private let networkProvider: any NetworkProvider
     private let decoder: JSONDecoder
-    static let shared: AuthManageable = SupabaseAuthManager()
     
-    private init() {
-        networkProvider = SNMNetworkProvider()
-        decoder = JSONDecoder()
+    init(
+        networkProvider: any NetworkProvider,
+        decoder: JSONDecoder
+    ) {
+        self.networkProvider = networkProvider
+        self.decoder = decoder
     }
     
     func signInAnonymously() async throws {

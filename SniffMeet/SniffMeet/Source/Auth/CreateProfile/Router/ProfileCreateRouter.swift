@@ -43,7 +43,11 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
         )
         let createAccountUseCase: CreateAccountUseCase = CreateAccountUseCaseImpl()
         let signInUseCase: SignInUseCase = SignInUseCaseImpl(
-            authManager: SupabaseAuthManager.shared
+            authManager: SupabaseAuthManager(
+                // TODO: 중복된 Provider, 의존성을 어떻게 처리할지 고민해보기
+                networkProvider: SNMNetworkProvider(),
+                decoder: JSONDecoder()
+            )
         )
         
         let view: ProfileCreateViewable & UIViewController = ProfileCreateViewController()

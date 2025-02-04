@@ -8,22 +8,30 @@ import MultipeerConnectivity
 import os
 
 final class MPCBrowser {
-    let browser: MCNearbyServiceBrowser
+    var browser: MCNearbyServiceBrowser
     let session: MCSession
-    let myPeerId: MCPeerID
-    
+    var myPeerId: MCPeerID
+    let serviceType: String
+
     init(browser: MCNearbyServiceBrowser,
          session: MCSession,
-         myPeerId: MCPeerID)
+         myPeerId: MCPeerID,
+         serviceType: String)
     {
         self.browser = browser
         self.session = session
         self.myPeerId = myPeerId
+        self.serviceType = serviceType
     }
     convenience init(session: MCSession, myPeerID: MCPeerID, serviceType: String) {
         let newBrowser = MCNearbyServiceBrowser(peer: myPeerID,
                                                 serviceType: serviceType)
-        self.init(browser: newBrowser, session: session, myPeerId: myPeerID)
+        self.init(
+            browser: newBrowser,
+            session: session,
+            myPeerId: myPeerID,
+            serviceType: serviceType
+        )
     }
     
     func startBrowsing() {
@@ -41,5 +49,10 @@ final class MPCBrowser {
     func invite(peerID: MCPeerID, tokenData: Data) {
         browser.invitePeer(peerID, to: session, withContext: tokenData, timeout: 30)
         SNMLogger.log("invitePeer tokenData")
+    }
+    func setMyPeerID(peerID: MCPeerID) {
+        myPeerId = peerID
+        browser = MCNearbyServiceBrowser(peer: myPeerId,
+                                         serviceType: serviceType)
     }
 }

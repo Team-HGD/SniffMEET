@@ -62,8 +62,8 @@ extension MateListRouter: MateListBuildable {
         )
 
         // FIXME: nickName 설정하는 부분 변경 필요
-        let mpcManager = MPCManager(nickName: "")
-        let niManager = NIManager(mpcManager: mpcManager)
+        let mpcManager = MPCManager(nickName: Environment.LocalNetworkKey.defaultPeerName)
+        let niManager = NIManager()
         let tryProfileDropUseCase: TryProfileDropUseCase =
         TryProfileDropUseCaseImpl(
             dataManager: LocalDataManager(),

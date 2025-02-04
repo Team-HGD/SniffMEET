@@ -4,8 +4,10 @@
 //
 //  Created by Kelly Chui on 11/21/24.
 //
+
 import Combine
 import Foundation
+import MultipeerConnectivity
 
 protocol MateListInteractable: AnyObject {
     var presenter: (any MateListInteractorOutput)? { get set }
@@ -94,14 +96,13 @@ final class MateListInteractor: MateListInteractable {
     }
     
     func tryProfileDrop() {
+        // 정보 load
         if tryProfileDropUseCase.isTransistioned {
-            // FIXME: nickName 설정 필요 
-            let mpcManager = MPCManager(nickName: "")
-            let niManager = NIManager(mpcManager: mpcManager)
+            let mpcManager = MPCManager(nickName: Environment.LocalNetworkKey.defaultPeerName)
+            let niManager = NIManager()
             tryProfileDropUseCase.reset(mpcManager: mpcManager, nimanager: niManager)
             quitProfileDropUseCase.reset(niManager: niManager)
             tryProfileDropUseCase.isTransistioned = false
-
         }
         tryProfileDropUseCase.execute()
     }

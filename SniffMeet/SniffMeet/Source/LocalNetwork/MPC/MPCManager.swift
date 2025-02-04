@@ -15,26 +15,19 @@ extension String {
 }
 
 final class MPCManager: NSObject {
-    let advertiser: MPCAdvertiser
-    let browser: MPCBrowser
+    var advertiser: MPCAdvertiser
+    var browser: MPCBrowser
     let session: MCSession
-    let mypeerID: MCPeerID
-    private let encoder: JSONEncoder
 
+    private var cancellables = Set<AnyCancellable>()
     var availablePeers = Set<MCPeerID>()
     var connectedPeerManager: ConnectedPeerManager
-    private var cancellables = Set<AnyCancellable>()
-    var receivedTokenPublisher = PassthroughSubject<Data, Never>()
-    var receivedDataPublisher = PassthroughSubject<DogProfileDTO, Never>()
-    var receivedViewTransitionPublisher = PassthroughSubject<String, Never>()
     var isAvailableToBeConnected = CurrentValueSubject<Bool, Never>(false)
 
-    init(advertiser: MPCAdvertiser, browser: MPCBrowser, session: MCSession, mypeerID: MCPeerID) {
+    init(advertiser: MPCAdvertiser, browser: MPCBrowser, session: MCSession) {
         self.advertiser = advertiser
         self.browser = browser
         self.session = session
-        self.mypeerID = mypeerID
-        encoder = JSONEncoder()
         connectedPeerManager = ConnectedPeerManager()
         super.init()
 
@@ -42,7 +35,12 @@ final class MPCManager: NSObject {
         self.advertiser.advertiser.delegate = self
         self.bind()
     }
-    
+
+    func setMyPeerID(_ peerName: String) {
+        let peerID = MCPeerID(displayName: peerName)
+        advertiser.setMyPeerID(peerID: peerID)
+        browser.setMyPeerID(peerID: peerID)
+    }
     convenience init(nickName: String) {
         let yourName = nickName
         let peerID = MCPeerID(displayName: yourName)
@@ -60,8 +58,7 @@ final class MPCManager: NSObject {
                 myPeerID: peerID,
                 serviceType: serviceType
             ),
-            session: session,
-            mypeerID: peerID
+            session: session
         )
     }
     deinit {

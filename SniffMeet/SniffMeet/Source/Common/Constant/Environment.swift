@@ -24,7 +24,11 @@ enum Environment {
     enum FileManagerKey {
         static let profileImage: String = "profile"
     }
-    
+
+    enum LocalNetworkKey {
+        static let defaultPeerName: String = "SniffMeet"
+    }
+
     enum SupabaseTableName {
         static let userInfo = "user_info"
         static let notification = "notification"

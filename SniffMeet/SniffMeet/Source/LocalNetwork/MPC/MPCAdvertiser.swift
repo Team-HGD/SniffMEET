@@ -8,24 +8,32 @@ import MultipeerConnectivity
 import os
 
 final class MPCAdvertiser {
-    let advertiser: MCNearbyServiceAdvertiser
+    var advertiser: MCNearbyServiceAdvertiser
     let session: MCSession
-    let myPeerID: MCPeerID
-    
+    var myPeerID: MCPeerID
+    let serviceType: String
+
     init(advertiser: MCNearbyServiceAdvertiser,
          session: MCSession,
-         myPeerID: MCPeerID)
+         myPeerID: MCPeerID,
+         serviceType: String)
     {
         self.advertiser = advertiser
         self.session = session
         self.myPeerID = myPeerID
+        self.serviceType = serviceType
     }
     
     convenience init(session: MCSession, myPeerID: MCPeerID, serviceType: String) {
         let newAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerID,
                                                       discoveryInfo: nil,
                                                       serviceType: serviceType)
-        self.init(advertiser: newAdvertiser, session: session, myPeerID: myPeerID)
+        self.init(
+            advertiser: newAdvertiser,
+            session: session,
+            myPeerID: myPeerID,
+            serviceType: serviceType
+        )
         SNMLogger.log("Created new MCNearbyServiceAdvertiser instance")
     }
     func startAdvertising() {
@@ -36,5 +44,11 @@ final class MPCAdvertiser {
     func stopAdvertising() {
         advertiser.stopAdvertisingPeer()
         SNMLogger.log("stop advertising")
+    }
+    func setMyPeerID(peerID: MCPeerID) {
+        myPeerID = peerID
+        advertiser = MCNearbyServiceAdvertiser(peer: myPeerID,
+                                               discoveryInfo: nil,
+                                               serviceType: serviceType)
     }
 }

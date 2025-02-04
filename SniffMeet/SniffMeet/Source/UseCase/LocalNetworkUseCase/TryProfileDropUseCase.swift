@@ -78,7 +78,7 @@ final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
     func execute()  {
         triedBefore = true
         loadProfileData()
-        mpcManager.isAvailableToBeConnected = true
+        mpcManager.isAvailableToBeConnected.send(true)
     }
     
     func loadProfileData() {
@@ -112,14 +112,17 @@ extension TryProfileDropUseCaseImpl: MCSessionDelegate {
             Task { @MainActor in
                 SNMLogger.log("notConnected to MPCSession: \(session.connectedPeers)")
             }
+        case .connecting:
+            SNMLogger.log("connecting to MPCSession:")
+
         case .connected:
             Task { @MainActor in
                 SNMLogger.log("successfully connected to MPCSession: \(session.connectedPeers)")
                 niManager.sendDiscoveryToken()
-                niManager.mpcManager.isAvailableToBeConnected = false
+                niManager.mpcManager.isAvailableToBeConnected.send(false)
             }
         default:
-            niManager.mpcManager.isAvailableToBeConnected = false
+            niManager.mpcManager.isAvailableToBeConnected.send(false)
         }
     }
 

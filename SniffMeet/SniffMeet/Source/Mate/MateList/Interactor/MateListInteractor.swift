@@ -95,7 +95,8 @@ final class MateListInteractor: MateListInteractable {
     
     func tryProfileDrop() {
         if tryProfileDropUseCase.isTransistioned {
-            let mpcManager = MPCManager()
+            // FIXME: nickName 설정 필요 
+            let mpcManager = MPCManager(nickName: "")
             let niManager = NIManager(mpcManager: mpcManager)
             tryProfileDropUseCase.reset(mpcManager: mpcManager, nimanager: niManager)
             quitProfileDropUseCase.reset(niManager: niManager)

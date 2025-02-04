@@ -60,7 +60,9 @@ extension MateListRouter: MateListBuildable {
             networkProvider: SNMNetworkProvider()),
             cacheManager: CacheManager.shared
         )
-        let mpcManager = MPCManager()
+
+        // FIXME: nickName 설정하는 부분 변경 필요
+        let mpcManager = MPCManager(nickName: "")
         let niManager = NIManager(mpcManager: mpcManager)
         let tryProfileDropUseCase: TryProfileDropUseCase =
         TryProfileDropUseCaseImpl(

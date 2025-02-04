@@ -62,10 +62,8 @@ final class NIManager: NSObject {
     }
 
     func endSession() {
-        SNMLogger.log("NI 세션 종료")
         niSession?.invalidate()
         mpcManager.session.disconnect()
-        mpcManager.isAvailableToBeConnected = false
-        SNMLogger.log("MPC 세션 종료")
+        mpcManager.isAvailableToBeConnected.send(false)
     }
 }

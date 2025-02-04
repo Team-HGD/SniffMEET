@@ -14,48 +14,37 @@ extension String {
     static var serviceName = "SniffMeet"
 }
 
-final class MPCManager {
+final class MPCManager: NSObject {
     let advertiser: MPCAdvertiser
     let browser: MPCBrowser
     let session: MCSession
     let mypeerID: MCPeerID
-    let encoder: JSONEncoder
+    private let encoder: JSONEncoder
+
+    var availablePeers = Set<MCPeerID>()
+    var connectedPeer: MCPeerID?
 
     private var cancellables = Set<AnyCancellable>()
     var receivedTokenPublisher = PassthroughSubject<Data, Never>()
     var receivedDataPublisher = PassthroughSubject<DogProfileDTO, Never>()
     var receivedViewTransitionPublisher = PassthroughSubject<String, Never>()
-    var isAvailableToBeConnected: Bool = false {
-        didSet {
-            if isAvailableToBeConnected {
-                advertiser.startAdvertising()
-                browser.startBrowsing()
-            } else {
-                advertiser.stopAdvertising()
-                browser.stopBrowsing()
-            }
+    var isAvailableToBeConnected = CurrentValueSubject<Bool, Never>(false)
 
-            advertiser.receivedInvite
-                .sink { [weak self] bool in
-                    SNMLogger.info("receivedInvite : \(bool)")
-                    if bool {
-                        self?.browser.stopBrowsing()
-                    }
-                }
-                .store(in: &cancellables)
-        }
-    }
-    
     init(advertiser: MPCAdvertiser, browser: MPCBrowser, session: MCSession, mypeerID: MCPeerID) {
         self.advertiser = advertiser
         self.browser = browser
         self.session = session
         self.mypeerID = mypeerID
         encoder = JSONEncoder()
+        super.init()
+
+        self.browser.browser.delegate = self
+        self.advertiser.advertiser.delegate = self
+        self.bind()
     }
     
-    convenience init() {
-        let yourName = String(UUID().uuidString.suffix(8))
+    convenience init(nickName: String) {
+        let yourName = nickName
         let peerID = MCPeerID(displayName: yourName)
         let serviceType = String.serviceName
         let session = MCSession(peer: peerID)
@@ -76,44 +65,91 @@ final class MPCManager {
     }
 
     func sendToken(discoveryToken: Data) {
-        guard !session.connectedPeers.isEmpty else { return }
-
+        guard let connectedPeer else { return }
         do {
-            let dataToSend = MPCProfileDropDTO(token: discoveryToken, profile: nil, transitionMessage: nil)
+            let dataToSend = MPCProfileDropDTO(
+                token: discoveryToken,
+                profile: nil,
+                transitionMessage: nil
+            )
             let encodedData = try encoder.encode(dataToSend)
-            SNMLogger.info("encodedToken is  \(encodedData)")
-            try session.send(encodedData, toPeers: session.connectedPeers, with: .reliable)
+            try session.send(encodedData, toPeers: [connectedPeer], with: .reliable)
         } catch {
             SNMLogger.error("error sending \(error.localizedDescription)")
         }
     }
-    
+    /// 연결된 한명의 피어에게만 데이터를 전송합니다.
     func send(data: Data) {
-        guard !session.connectedPeers.isEmpty else {
-            SNMLogger.log("no one is connected")
-            isAvailableToBeConnected = true
-            return
-        }
+        guard let connectedPeer else { return }
+
         do {
-            let decodedData = try JSONDecoder().decode(MPCProfileDropDTO.self, from: data)
-            if let flag = decodedData.transitionMessage {
-                SNMLogger.log("transitionMessage flag 전송 성공")
-            }
-            try self.session.send(data, toPeers: session.connectedPeers, with: .reliable)
+            try self.session.send(data, toPeers: [connectedPeer], with: .reliable)
         } catch {
             SNMLogger.error("DogProfileInfo 전송 실패 \(error.localizedDescription)")
         }
     }
-    func send(viewTransitionInfo: String) {
-        guard !session.connectedPeers.isEmpty else { return }
-
-        do {
-            let dataToSend = MPCProfileDropDTO(token: nil, profile: nil, transitionMessage: viewTransitionInfo)
-            let encodedData = try JSONEncoder().encode(dataToSend)
-            SNMLogger.info("encodedToken is  \(encodedData)")
-            try session.send(encodedData, toPeers: session.connectedPeers, with: .reliable)
-        } catch {
-            SNMLogger.error("error sending \(error.localizedDescription)")
-        }
+    private func bind() {
+        isAvailableToBeConnected
+            .sink { [weak self] isAvailable in
+                if isAvailable {
+                    self?.advertiser.startAdvertising()
+                    self?.browser.startBrowsing()
+                } else {
+                    self?.advertiser.stopAdvertising()
+                    self?.browser.stopBrowsing()
+                }
+            }
+            .store(in: &cancellables)
     }
+}
+
+
+extension MPCManager: MCNearbyServiceAdvertiserDelegate {
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
+                    didNotStartAdvertisingPeer error: Error) {
+        SNMLogger.info("Advertiser failed to start: \(error)")
+    }
+
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
+                    didReceiveInvitationFromPeer peerID: MCPeerID,
+                    withContext context: Data?,
+                    invitationHandler: @escaping (Bool, MCSession?) -> Void)
+    {
+        SNMLogger.info("Received invitation from \(peerID)")
+        invitationHandler(true, session)
+    }
+}
+
+extension MPCManager: MCNearbyServiceBrowserDelegate {
+    func browser(_ browser: MCNearbyServiceBrowser,
+                 foundPeer peerID: MCPeerID,
+                 withDiscoveryInfo info: [String : String]?)
+    {
+        if let info = info {
+            SNMLogger.info("Found peer with info: \(info)")
+        }
+
+        // info에 해당되는 peer에 대해서만 availablepeers에 넣을 수 있다
+        SNMLogger.info("ServiceBrowser found peer: \(peerID)")
+        guard !self.availablePeers.contains(peerID) else { return }
+        self.availablePeers.insert(peerID)
+
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
+            if (self?.session.connectedPeers.contains(peerID) == false) {
+                self?.browser.invite(peerID: peerID)
+            }
+        }
+        SNMLogger.info("availablePeers: \(self.availablePeers)")
+    }
+
+
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        guard let index = availablePeers.firstIndex(of: peerID) else { return }
+        self.availablePeers.remove(at: index)
+    }
+}
+
+// connected peer에 대해서만 동시성 문제 발생 예상
+actor ConnectedPeerManager {
+
 }

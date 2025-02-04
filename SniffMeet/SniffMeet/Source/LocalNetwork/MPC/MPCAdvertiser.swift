@@ -8,14 +8,14 @@ import Combine
 import MultipeerConnectivity
 import os
 
-final class MPCAdvertiser: NSObject {
+final class MPCAdvertiser {
     let advertiser: MCNearbyServiceAdvertiser
     let session: MCSession
     let myPeerID: MCPeerID
 
     static var sharedAdvertiser: MCNearbyServiceAdvertiser?
 
-    var receivedInvite = PassthroughSubject<Bool, Never>()
+//    var receivedInvite = PassthroughSubject<Bool, Never>()
 
     @Published var receivedInviteFrom: MCPeerID?
     @Published var invitationHandler: ((Bool, MCSession?) -> Void)?
@@ -31,9 +31,6 @@ final class MPCAdvertiser: NSObject {
         self.myPeerID = myPeerID
         self.receivedInviteFrom = receivedInviteFrom
         self.invitationHandler = invitationHandler
-        
-        super.init()
-        advertiser.delegate = self
     }
     
     convenience init(session: MCSession, myPeerID: MCPeerID, serviceType: String) {
@@ -63,24 +60,7 @@ final class MPCAdvertiser: NSObject {
     
     func stopAdvertising() {
         advertiser.stopAdvertisingPeer()
-        receivedInvite.send(false)
+//        receivedInvite.send(false)
         SNMLogger.log("stop advertising")
-    }
-}
-
-extension MPCAdvertiser: MCNearbyServiceAdvertiserDelegate {
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
-                    didNotStartAdvertisingPeer error: Error) {
-        SNMLogger.info("Advertiser failed to start: \(error)")
-    }
-
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
-                    didReceiveInvitationFromPeer peerID: MCPeerID,
-                    withContext context: Data?,
-                    invitationHandler: @escaping (Bool, MCSession?) -> Void)
-    {
-        SNMLogger.info("Received invitation from \(peerID)")
-        invitationHandler(true, session)
-        receivedInvite.send(true)
     }
 }

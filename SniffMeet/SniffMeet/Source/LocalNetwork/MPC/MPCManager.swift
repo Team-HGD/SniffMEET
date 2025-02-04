@@ -22,8 +22,7 @@ final class MPCManager: NSObject {
     private let encoder: JSONEncoder
 
     var availablePeers = Set<MCPeerID>()
-    var connectedPeer: MCPeerID?
-
+    var connectedPeerManager: ConnectedPeerManager
     private var cancellables = Set<AnyCancellable>()
     var receivedTokenPublisher = PassthroughSubject<Data, Never>()
     var receivedDataPublisher = PassthroughSubject<DogProfileDTO, Never>()
@@ -36,6 +35,7 @@ final class MPCManager: NSObject {
         self.session = session
         self.mypeerID = mypeerID
         encoder = JSONEncoder()
+        connectedPeerManager = ConnectedPeerManager()
         super.init()
 
         self.browser.browser.delegate = self
@@ -64,8 +64,8 @@ final class MPCManager: NSObject {
         browser.stopBrowsing()
     }
 
-    func sendToken(discoveryToken: Data) {
-        guard let connectedPeer else { return }
+    func sendToken(discoveryToken: Data) async {
+        guard let connectedPeer = await connectedPeerManager.connectedPeer else { return }
         do {
             let dataToSend = MPCProfileDropDTO(
                 token: discoveryToken,
@@ -79,9 +79,8 @@ final class MPCManager: NSObject {
         }
     }
     /// 연결된 한명의 피어에게만 데이터를 전송합니다.
-    func send(data: Data) {
-        guard let connectedPeer else { return }
-
+    func send(data: Data) async {
+        guard let connectedPeer = await connectedPeerManager.connectedPeer else { return }
         do {
             try self.session.send(data, toPeers: [connectedPeer], with: .reliable)
         } catch {
@@ -117,6 +116,7 @@ extension MPCManager: MCNearbyServiceAdvertiserDelegate {
     {
         SNMLogger.info("Received invitation from \(peerID)")
         invitationHandler(true, session)
+        
     }
 }
 
@@ -142,7 +142,6 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
         SNMLogger.info("availablePeers: \(self.availablePeers)")
     }
 
-
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         guard let index = availablePeers.firstIndex(of: peerID) else { return }
         self.availablePeers.remove(at: index)
@@ -151,5 +150,13 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
 
 // connected peer에 대해서만 동시성 문제 발생 예상
 actor ConnectedPeerManager {
-
+    var connectedPeer: MCPeerID?
+    
+    func connect(peer: MCPeerID) {
+        if connectedPeer != nil { return }
+        connectedPeer = peer
+    }
+    func disconnect() {
+        connectedPeer = nil
+    }
 }

@@ -23,7 +23,7 @@ final class NIManager: NSObject {
         niSession = NISession()
     }
 
-    func sendDiscoveryToken() {
+    func sendDiscoveryToken() async {
         guard let niSession = niSession, let discoveryToken = niSession.discoveryToken else {
             SNMLogger.log("Discovery token is not available.")
             return
@@ -33,7 +33,7 @@ final class NIManager: NSObject {
                 withRootObject: discoveryToken,
                 requiringSecureCoding: true
             )
-            mpcManager.sendToken(discoveryToken: tokenData)
+            await mpcManager.sendToken(discoveryToken: tokenData)
             SNMLogger.log("Discovery token sent to peer.")
         } catch {
             SNMLogger.error("Failed to encode discovery token: \(error)")

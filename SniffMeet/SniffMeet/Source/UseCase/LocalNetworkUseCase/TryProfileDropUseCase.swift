@@ -116,9 +116,10 @@ extension TryProfileDropUseCaseImpl: MCSessionDelegate {
             SNMLogger.log("connecting to MPCSession:")
 
         case .connected:
-            Task { @MainActor in
+            Task {
                 SNMLogger.log("successfully connected to MPCSession: \(session.connectedPeers)")
-                niManager.sendDiscoveryToken()
+                await mpcManager.connectedPeerManager.connect(peer: peerID)
+                await niManager.sendDiscoveryToken()
                 niManager.mpcManager.isAvailableToBeConnected.send(false)
             }
         default:
@@ -138,7 +139,7 @@ extension TryProfileDropUseCaseImpl: MCSessionDelegate {
                 } else if let profile = receivedData?.profile { // 프로필 데이터
                     self?.profilePublisher.send(profile)
                     guard let receivedFlagData = self?.receivedFlagData else { return }
-                    self?.mpcManager.send(data: receivedFlagData)
+                    await self?.mpcManager.send(data: receivedFlagData)
                     SNMLogger.log("Receive profile data")
                 } else if let message = receivedData?.transitionMessage { // 수신 여부 플래그
                     SNMLogger.log("flag message: \(message)")
@@ -195,7 +196,7 @@ extension TryProfileDropUseCaseImpl: NISessionDelegate {
 
                 guard let profileData = self?.profileData else { return }
                 if self?.transmissionFlag.contains(Context.peerReceived) == false {
-                    self?.mpcManager.send(data: profileData)
+                    await self?.mpcManager.send(data: profileData)
                     SNMLogger.log("프로필 데이터 보낸다.")
                     try await Task.sleep(nanoseconds: 2000000000)
                 }

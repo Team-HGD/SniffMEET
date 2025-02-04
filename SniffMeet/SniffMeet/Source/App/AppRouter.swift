@@ -18,7 +18,7 @@ final class AppRouter: NSObject, Routable {
     func displayInitialScreen() {
         Task { @MainActor in
             do {
-                try await SupabaseAuthManager.shared.restoreSession()
+                try await SessionManager.shared.restoreSession()
                 displayTabBar()
             } catch {
                 displayOnBoardingView()
@@ -57,7 +57,7 @@ final class AppRouter: NSObject, Routable {
     func initializeViewAndPresentRespondView(walkNoti: WalkNoti) {
         Task { @MainActor in
             do {
-                try await SupabaseAuthManager.shared.restoreSession()
+                try await SessionManager.shared.restoreSession()
                 displayTabBar()
                 presentRespondWalkView(walkNoti: walkNoti)
             } catch {
@@ -69,7 +69,7 @@ final class AppRouter: NSObject, Routable {
     func initializeViewAndPresentProcessedWalkView(walkNoti: WalkNoti) {
         Task { @MainActor in
             do {
-                try await SupabaseAuthManager.shared.restoreSession()
+                try await SessionManager.shared.restoreSession()
                 displayTabBar()
                 presentProcessedWalkView(walkNoti: walkNoti)
             } catch {

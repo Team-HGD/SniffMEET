@@ -68,7 +68,7 @@ final class ProfileEditInteractor: ProfileEditInteractable {
                         imageData: jpgData
                     )
                 }
-                guard let userID = SessionManager.shared.session?.user?.userID else {
+                guard let userID = SessionManager.shared.userID else {
                     return
                 }
                 await updateUserInfoRemoteUseCase.execute(

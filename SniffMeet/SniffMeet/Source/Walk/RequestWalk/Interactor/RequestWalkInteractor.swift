@@ -39,7 +39,7 @@ final class RequestWalkInteractor: RequestWalkInteractable {
     }
 
     func sendWalkRequest(message: String, latitude: Double, longtitude: Double, location: String) {
-        guard let id = SessionManager.shared.session?.user?.userID else { return }
+        guard let id = SessionManager.shared.userID else { return }
         guard let myInfo = try? loadUserInfoUseCase.execute() else { return }
         
         let walkNoti = WalkNotiDTO(id: UUID(),

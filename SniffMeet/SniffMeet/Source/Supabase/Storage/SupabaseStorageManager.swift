@@ -31,11 +31,11 @@ struct SupabaseStorageManager: RemoteImageManagable {
         mimeType: MimeType = .image
     ) async throws {
         do {
-            if SessionManager.shared.isExpired {
-                try await SupabaseAuthManager.shared.refreshSession()
+            if try SessionManager.shared.checkSessionExpiration() {
+                try await SessionManager.shared.refreshSession()
             }
             guard let session = SessionManager.shared.session else {
-                throw SupabaseAuthError.sessionNotExist
+                throw SupabaseSessionError.sessionNotExist
             }
             _ = try await networkProvider.request(
                 with: SupabaseStorageRequest.upload(

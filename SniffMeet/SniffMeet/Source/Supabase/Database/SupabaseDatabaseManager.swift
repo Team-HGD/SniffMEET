@@ -33,11 +33,11 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
 
     func fetchData(from table: String, query: [String: String]) async throws -> Data {
         do {
-            if SessionManager.shared.isExpired {
-                try await SupabaseAuthManager.shared.refreshSession()
+            if try SessionManager.shared.checkSessionExpiration() {
+                try await SessionManager.shared.refreshSession()
             }
             guard let session = SessionManager.shared.session else {
-                throw SupabaseAuthError.sessionNotExist
+                throw SupabaseSessionError.sessionNotExist
             }
             let response = try await networkProvider.request(
                 with: SupabaseDatabaseRequest.fetchData(
@@ -54,11 +54,11 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
 
     func insertData(into table: String, with data: Data) async throws {
         do {
-            if SessionManager.shared.isExpired {
-                try await SupabaseAuthManager.shared.refreshSession()
+            if try SessionManager.shared.checkSessionExpiration() {
+                try await SessionManager.shared.refreshSession()
             }
             guard let session = SessionManager.shared.session else {
-                throw SupabaseAuthError.sessionNotExist
+                throw SupabaseSessionError.sessionNotExist
             }
             _ = try await networkProvider.request(
                 with: SupabaseDatabaseRequest.insertData(
@@ -74,11 +74,11 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
 
     func updateData(into table: String, with data: Data) async throws {
         do {
-            if SessionManager.shared.isExpired {
-                try await SupabaseAuthManager.shared.refreshSession()
+            if try SessionManager.shared.checkSessionExpiration() {
+                try await SessionManager.shared.refreshSession()
             }
             guard let session = SessionManager.shared.session else {
-                throw SupabaseAuthError.sessionNotExist
+                throw SupabaseSessionError.sessionNotExist
             }
             guard let userID = SessionManager.shared.session?.user?.userID else { return }
             
@@ -97,11 +97,11 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
     
     func updateData(into table: String, at id: UUID, with data: Data) async throws {
         do {
-            if SessionManager.shared.isExpired {
-                try await SupabaseAuthManager.shared.refreshSession()
+            if try SessionManager.shared.checkSessionExpiration() {
+                try await SessionManager.shared.refreshSession()
             }
             guard let session = SessionManager.shared.session else {
-                throw SupabaseAuthError.sessionNotExist
+                throw SupabaseSessionError.sessionNotExist
             }
             _ = try await networkProvider.request(
                 with: SupabaseDatabaseRequest.updateData(
@@ -123,11 +123,11 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
         pageSize: Int = 100
     ) async throws -> Data {
         do {
-            if SessionManager.shared.isExpired {
-                try await SupabaseAuthManager.shared.refreshSession()
+            if try SessionManager.shared.checkSessionExpiration() {
+                try await SessionManager.shared.refreshSession()
             }
             guard let session = SessionManager.shared.session else {
-                throw SupabaseAuthError.sessionNotExist
+                throw SupabaseSessionError.sessionNotExist
             }
 
             let response = try await networkProvider.request(

@@ -13,8 +13,8 @@ protocol RequestUserInfoRemoteUseCase {
 
 struct RequestUserInfoRemoteUseCaseImpl: RequestUserInfoRemoteUseCase {
     func execute() async throws -> [UserInfoDTO] {
-        guard let userID = SessionManager.shared.session?.user?.userID else {
-            throw SupabaseAuthError.sessionNotExist
+        guard let userID = SessionManager.shared.userID else {
+            throw SupabaseSessionError.sessionNotExist
         }
         let data = try await SupabaseDatabaseManager.shared.fetchData(
             from: Environment.SupabaseTableName.userInfo,

@@ -26,8 +26,8 @@ struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
         let tableName = Environment.SupabaseTableName.notificationListFunction
 
         do {
-            guard let userID = SessionManager.shared.session?.user?.userID else {
-                throw SNMError(level: .user, error: SupabaseAuthError.sessionNotExist)
+            guard let userID = SessionManager.shared.userID else {
+                throw SNMError(level: .user, error: SupabaseSessionError.sessionNotExist)
             }
 
             let requestData = try encoder.encode(WalkNotiListRequestDTO(userId: userID))

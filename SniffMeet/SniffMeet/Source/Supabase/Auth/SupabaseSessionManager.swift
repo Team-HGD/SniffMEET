@@ -8,8 +8,8 @@
 import Combine
 import Foundation
 
-final class SessionManager {
-    static let shared = SessionManager()
+final class SupabaseSessionManager {
+    static let shared = SupabaseSessionManager()
     var session: SupabaseSession?
     var isExpired: Bool {
         guard let session else { return true }

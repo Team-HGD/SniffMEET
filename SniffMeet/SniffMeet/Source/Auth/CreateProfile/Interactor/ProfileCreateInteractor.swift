@@ -67,7 +67,7 @@ final class ProfileCreateInteractor: ProfileCreateInteractable {
                     return savedFileName
                 }
 
-                guard let userID = SessionManager.shared.session?.user?.userID else {
+                guard let userID = SessionManager.shared.userID else {
                     return
                 }
                 await saveUserInfoRemoteUseCase.execute(

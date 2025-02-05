@@ -50,9 +50,5 @@ final class MPCBrowser {
         browser.invitePeer(peerID, to: session, withContext: tokenData, timeout: 30)
         SNMLogger.log("invitePeer tokenData")
     }
-    func setMyPeerID(peerID: MCPeerID) {
-        myPeerId = peerID
-        browser = MCNearbyServiceBrowser(peer: myPeerId,
-                                         serviceType: serviceType)
     }
 }

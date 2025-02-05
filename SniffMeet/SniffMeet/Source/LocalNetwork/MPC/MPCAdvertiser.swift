@@ -45,10 +45,5 @@ final class MPCAdvertiser {
         advertiser.stopAdvertisingPeer()
         SNMLogger.log("stop advertising")
     }
-    func setMyPeerID(peerID: MCPeerID) {
-        myPeerID = peerID
-        advertiser = MCNearbyServiceAdvertiser(peer: myPeerID,
-                                               discoveryInfo: nil,
-                                               serviceType: serviceType)
     }
 }

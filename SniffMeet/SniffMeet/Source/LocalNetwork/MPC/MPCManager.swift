@@ -35,15 +35,13 @@ final class MPCManager: NSObject {
         self.advertiser.advertiser.delegate = self
         self.bind()
     }
-
-    func setMyPeerID(_ peerName: String) {
-        let peerID = MCPeerID(displayName: peerName)
-        advertiser.setMyPeerID(peerID: peerID)
-        browser.setMyPeerID(peerID: peerID)
-    }
-    convenience init(nickName: String) {
-        let yourName = nickName
-        let peerID = MCPeerID(displayName: yourName)
+    convenience init?(dataManager: DataLoadable) {
+        guard let dog = try? dataManager.loadData(
+            forKey: Environment.UserDefaultsKey.dogInfo,
+            type: UserInfo.self
+        ) else { return nil }
+        let myName: String = "\(dog.name)의 \(dog.nickname)"
+        let peerID = MCPeerID(displayName: myName)
         let serviceType = String.serviceName
         let session = MCSession(peer: peerID)
 

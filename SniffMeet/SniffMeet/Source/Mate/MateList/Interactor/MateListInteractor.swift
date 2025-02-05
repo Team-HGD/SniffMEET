@@ -98,11 +98,11 @@ final class MateListInteractor: MateListInteractable {
     func tryProfileDrop() {
         // 정보 load
         if tryProfileDropUseCase.isTransistioned {
-            let mpcManager = MPCManager(nickName: Environment.LocalNetworkKey.defaultPeerName)
+            guard let mpcManager = MPCManager(dataManager: LocalDataManager())
+            else { return }
             let niManager = NIManager()
             tryProfileDropUseCase.reset(mpcManager: mpcManager, nimanager: niManager)
             quitProfileDropUseCase.reset(niManager: niManager)
-            tryProfileDropUseCase.isTransistioned = false
         }
         tryProfileDropUseCase.execute()
     }

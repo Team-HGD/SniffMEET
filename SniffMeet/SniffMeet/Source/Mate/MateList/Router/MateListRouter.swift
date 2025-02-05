@@ -57,12 +57,13 @@ extension MateListRouter: MateListBuildable {
             remoteDatabaseManager: SupabaseDatabaseManager.shared)
         let requestProfileImageUseCase: RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
-            networkProvider: SNMNetworkProvider()),
+                networkProvider: SNMNetworkProvider()),
             cacheManager: CacheManager.shared
         )
 
-        // FIXME: nickName 설정하는 부분 변경 필요
-        let mpcManager = MPCManager(nickName: Environment.LocalNetworkKey.defaultPeerName)
+        guard let mpcManager = MPCManager(dataManager: LocalDataManager()) else {
+            return UIViewController()
+        }
         let niManager = NIManager()
         let tryProfileDropUseCase: TryProfileDropUseCase =
         TryProfileDropUseCaseImpl(

@@ -87,9 +87,9 @@ final class MateListInteractor: MateListInteractable {
             .receive(on: RunLoop.main)
             .sink {[weak self] (profile) in
                 guard let profile else { return }
-                if self?.tryProfileDropUseCase.isTransistioned == false {
+                if self?.tryProfileDropUseCase.isTransitioned == false {
                     self?.presenter?.receiveProfileData(profile)
-                    self?.tryProfileDropUseCase.isTransistioned = true
+                    self?.tryProfileDropUseCase.isTransitioned = true
                 }
             }
             .store(in: &cancellables)
@@ -97,7 +97,7 @@ final class MateListInteractor: MateListInteractable {
     
     func tryProfileDrop() {
         // 정보 load
-        if tryProfileDropUseCase.isTransistioned {
+        if tryProfileDropUseCase.isTransitioned {
             guard let mpcManager = MPCManager(dataManager: LocalDataManager())
             else { return }
             let niManager = NIManager()

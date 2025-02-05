@@ -13,8 +13,14 @@ protocol RequestMateInfoUseCase {
 }
 
 struct RequestMateInfoUsecaseImpl: RequestMateInfoUseCase {
+    private let remoteDBManager: any RemoteDBManageable
+    
+    init(remoteDBManager: any RemoteDBManageable) {
+        self.remoteDBManager = remoteDBManager
+    }
+    
     func execute(mateId: UUID) async throws -> UserInfoDTO? {
-        let mateInfoData = try await SupabaseDatabaseManager.shared.fetchData(
+        let mateInfoData = try await remoteDBManager.fetchData(
             from: "user_info",
             query: ["id": "eq.\(mateId.uuidString)"]
         )

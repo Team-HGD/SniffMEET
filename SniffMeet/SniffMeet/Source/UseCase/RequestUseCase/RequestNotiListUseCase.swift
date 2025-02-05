@@ -7,16 +7,15 @@
 import Foundation
 
 protocol RequestNotiListUseCase {
-    var remoteManager: (any RemoteDatabaseManager) { get }
     func execute(page: Int, pageSize: Int) async throws -> [WalkNoti]
 }
 
 struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
-    var remoteManager: (any RemoteDatabaseManager)
+    var remoteManager: any RemoteDBManageable
     let encoder: JSONEncoder
     let decoder: JSONDecoder
     
-    init(remoteManager: any RemoteDatabaseManager) {
+    init(remoteManager: any RemoteDBManageable) {
         self.remoteManager = remoteManager
         decoder = JSONDecoder()
         encoder = JSONEncoder()

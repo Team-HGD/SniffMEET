@@ -32,9 +32,11 @@ final class RespondWalkRouter: RespondWalkRoutable {
 
 extension RespondWalkRouter: RespondWalkBuildable {
     static func createRespondtWalkModule(walkNoti: WalkNoti) -> UIViewController {
-        let requestUserInfoUseCase: RequestMateInfoUseCase = RequestMateInfoUsecaseImpl()
+        let requestUserInfoUseCase: RequestMateInfoUseCase = RequestMateInfoUsecaseImpl(
+            remoteDBManager: SupabaseDBManager.shared
+        )
         let respondUseCase: RespondWalkRequestUseCase = RespondWalkRequestUseCaseImpl(
-            remoteDatabaseManager: SupabaseDatabaseManager.shared
+            remoteDBManager: SupabaseDBManager.shared
         )
         let calculateTimeUseCase: CalculateTimeLimitUseCase = CalculateTimeLimitUseCaseImpl()
         let convertLocationToTextUseCase: ConvertLocationToTextUseCase =

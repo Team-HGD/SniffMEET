@@ -12,10 +12,16 @@ protocol UpdateUserInfoUseCase {
 }
 
 struct UpdateUserInfoUseCaseImpl: UpdateUserInfoUseCase {
+    private let remoteDBManager: any RemoteDBManageable
+    
+    init(remoteDBManager: any RemoteDBManageable) {
+        self.remoteDBManager = remoteDBManager
+    }
+    
     func execute(info: UserInfoDTO) async {
         do {
             let userData = try JSONEncoder().encode(info)
-            try await SupabaseDatabaseManager.shared.updateData(
+            try await remoteDBManager.updateData(
                 into: Environment.SupabaseTableName.userInfo,
                 with: userData
             )

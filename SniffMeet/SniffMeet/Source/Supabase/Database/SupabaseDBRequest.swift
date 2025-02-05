@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum SupabaseDatabaseRequest {
+enum SupabaseDBRequest {
     case fetchData(table: String, accessToken: String, query: [String: String])
     case insertData(table: String, accessToken: String, data: Data)
     case updateData(table: String, id: UUID, accessToken: String, data: Data)
     case fetchList(table: String, data: Data, accessToken: String, page: Int, pageSize: Int)
 }
 
-extension SupabaseDatabaseRequest: SNMRequestConvertible {
+extension SupabaseDBRequest: SNMRequestConvertible {
     var endpoint: Endpoint {
         switch self {
         case .fetchData(let table, _, let query):

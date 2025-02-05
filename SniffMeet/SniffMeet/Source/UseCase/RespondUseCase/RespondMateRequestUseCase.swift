@@ -13,7 +13,7 @@ protocol RespondMateRequestUseCase {
 
 struct RespondMateRequestUseCaseImpl: RespondMateRequestUseCase {
     var localDataManager: DataStorable & DataLoadable
-    var remoteDataManger: RemoteDatabaseManager
+    var remoteDataManger: any RemoteDBManageable
     
     func execute(mateId: UUID, isAccepted: Bool) async {
         if isAccepted {

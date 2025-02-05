@@ -8,17 +8,16 @@
 import Foundation
 
 protocol RequestMateListUseCase {
-    var remoteDatabaseManager: RemoteDatabaseManager { get }
     func execute(page: Int, pageSize: Int) async throws -> [Mate]
 }
 
 struct RequestMateListUseCaseImpl: RequestMateListUseCase {
-    var remoteDatabaseManager: (any RemoteDatabaseManager)
+    private let remoteDBManager: any RemoteDBManageable
     let decoder: JSONDecoder
     let encoder: JSONEncoder
     
-    init(remoteDatabaseManager: any RemoteDatabaseManager) {
-        self.remoteDatabaseManager = remoteDatabaseManager
+    init(remoteDBManager: any RemoteDBManageable) {
+        self.remoteDBManager = remoteDBManager
         decoder = JSONDecoder()
         encoder = JSONEncoder()
     }
@@ -31,7 +30,7 @@ struct RequestMateListUseCaseImpl: RequestMateListUseCase {
             }
             let requestData = try encoder.encode(MateListRequestDTO(userId: userID))
 
-            let data = try await remoteDatabaseManager.fetchList(
+            let data = try await remoteDBManager.fetchList(
                 into: tableName,
                 with: requestData,
                 page: page,

@@ -41,10 +41,11 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
             userDefaultsManager: UserDefaultsManager.shared,
             imageSampler: ImageSampler()
         )
-        let createAccountUseCase: CreateAccountUseCase = CreateAccountUseCaseImpl()
+        let createAccountUseCase: CreateAccountUseCase = CreateAccountUseCaseImpl(
+            remoteDBManager: SupabaseDBManager.shared
+        )
         let signInUseCase: SignInUseCase = SignInUseCaseImpl(
             authManager: SupabaseAuthManager(
-                // TODO: 중복된 Provider, 의존성을 어떻게 처리할지 고민해보기
                 networkProvider: SNMNetworkProvider(),
                 decoder: JSONDecoder()
             )

@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol RemoteDatabaseManager {
+protocol RemoteDBManageable {
     func fetchData(from table: String, query: [String: String]) async throws -> Data
     func insertData(into table: String, with data: Data) async throws
     func updateData(into table: String, with data: Data) async throws
@@ -21,14 +21,13 @@ protocol RemoteDatabaseManager {
     ) async throws -> Data
 }
 
-final class SupabaseDatabaseManager: RemoteDatabaseManager {
-    static let shared: RemoteDatabaseManager = SupabaseDatabaseManager()
-    private let networkProvider: SNMNetworkProvider
+final class SupabaseDBManager: RemoteDBManageable {
+    private let networkProvider: any NetworkProvider
     private let decoder: JSONDecoder
 
     private init() {
-        networkProvider = SNMNetworkProvider()
-        decoder = JSONDecoder()
+        self.networkProvider = SNMNetworkProvider()
+        self.decoder = JSONDecoder()
     }
 
     func fetchData(from table: String, query: [String: String]) async throws -> Data {
@@ -40,7 +39,7 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
                 throw SupabaseSessionError.sessionNotExist
             }
             let response = try await networkProvider.request(
-                with: SupabaseDatabaseRequest.fetchData(
+                with: SupabaseDBRequest.fetchData(
                     table: table,
                     accessToken: session.accessToken,
                     query: query
@@ -61,7 +60,7 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
                 throw SupabaseSessionError.sessionNotExist
             }
             _ = try await networkProvider.request(
-                with: SupabaseDatabaseRequest.insertData(
+                with: SupabaseDBRequest.insertData(
                     table: table,
                     accessToken: session.accessToken,
                     data: data
@@ -83,7 +82,7 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
             guard let userID = SessionManager.shared.session?.user?.userID else { return }
             
             _ = try await networkProvider.request(
-                with: SupabaseDatabaseRequest.updateData(
+                with: SupabaseDBRequest.updateData(
                     table: table,
                     id: userID,
                     accessToken: session.accessToken,
@@ -104,7 +103,7 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
                 throw SupabaseSessionError.sessionNotExist
             }
             _ = try await networkProvider.request(
-                with: SupabaseDatabaseRequest.updateData(
+                with: SupabaseDBRequest.updateData(
                     table: table,
                     id: id,
                     accessToken: session.accessToken,
@@ -131,7 +130,7 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
             }
 
             let response = try await networkProvider.request(
-                with: SupabaseDatabaseRequest.fetchList(
+                with: SupabaseDBRequest.fetchList(
                     table: table,
                     data: data,
                     accessToken: session.accessToken,
@@ -150,6 +149,12 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
             throw SupabaseDBError.fetchDataFailed
         }
     }
+}
+
+// MARK: - SupabaseDBManager+singleton instance
+
+extension SupabaseDBManager {
+    static let shared: RemoteDBManageable = SupabaseDBManager()
 }
 
 // MARK: - SupabaseDBError

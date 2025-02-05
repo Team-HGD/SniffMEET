@@ -12,12 +12,17 @@ protocol CreateAccountUseCase {
 }
 
 struct CreateAccountUseCaseImpl: CreateAccountUseCase {
-    // RLS 정책은 ID 기반으로 인증이 됩니다. 따라서 info에 id 정보가 필요합니다.
+    private let remoteDBManager: any RemoteDBManageable
+    
+    init(remoteDBManager: any RemoteDBManageable) {
+        self.remoteDBManager = remoteDBManager
+    }
+    
     func execute(info: UserInfoDTO) async {
         let encoder = JSONEncoder()
         do {
             let userData = try encoder.encode(info)
-            try await SupabaseDatabaseManager.shared.insertData(
+            try await remoteDBManager.insertData(
                 into: Environment.SupabaseTableName.userInfo,
                 with: userData
             )
@@ -27,7 +32,7 @@ struct CreateAccountUseCaseImpl: CreateAccountUseCase {
         }
         do {
             let mateListData = try encoder.encode(MateListInsertDTO(id: info.id, mates: nil))
-            try await SupabaseDatabaseManager.shared.insertData(
+            try await remoteDBManager.insertData(
                 into: Environment.SupabaseTableName.matelist,
                 with: mateListData
             )
@@ -36,7 +41,7 @@ struct CreateAccountUseCaseImpl: CreateAccountUseCase {
         }
         do {
             let notiListData = try encoder.encode(WalkNotiListInsertDTO(id: info.id))
-            try await SupabaseDatabaseManager.shared.insertData(
+            try await remoteDBManager.insertData(
                 into: Environment.SupabaseTableName.notificationList,
                 with: notiListData
             )

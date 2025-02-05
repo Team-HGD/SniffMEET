@@ -12,13 +12,13 @@ protocol RequestWalkUseCase {
 }
 
 struct RequestWalkUseCaseImpl: RequestWalkUseCase {
+    private let remoteDBManager: any RemoteDBManageable
     private let session: URLSession
     private let encoder = JSONEncoder()
-    private let remoteDatabaseManager: RemoteDatabaseManager
     
-    init(session: URLSession = URLSession.shared, remoteDatabaseManager: RemoteDatabaseManager) {
+    init(session: URLSession = URLSession.shared, remoteDBManager: RemoteDBManageable) {
         self.session = session
-        self.remoteDatabaseManager = remoteDatabaseManager
+        self.remoteDBManager = remoteDBManager
     }
     func execute(walkNoti: WalkNotiDTO) async throws {
         guard let requestData = try? encoder.encode(walkNoti) else { return }
@@ -35,7 +35,7 @@ struct RequestWalkUseCaseImpl: RequestWalkUseCase {
                                                    longitude: walkNoti.longtitude,
                                                    state: .pending)
             let data = try encoder.encode(requestData)
-            try await remoteDatabaseManager.insertData(
+            try await remoteDBManager.insertData(
                 into: Environment.SupabaseTableName.walkRequest,
                 with: data
             )

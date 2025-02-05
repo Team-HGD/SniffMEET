@@ -19,7 +19,6 @@ protocol RemoteDatabaseManager {
         page: Int,
         pageSize: Int
     ) async throws -> Data
-    func deleteMateData(from table: String, userID: UUID, mateID: UUID) async throws
 }
 
 final class SupabaseDatabaseManager: RemoteDatabaseManager {
@@ -149,46 +148,6 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
             throw error
         } catch {
             throw SupabaseDBError.fetchDataFailed
-        }
-    }
-
-    func deleteMateData(from table: String, userID: UUID, mateID: UUID) async throws {
-        do {
-            if SessionManager.shared.isExpired {
-                try await SupabaseAuthManager.shared.refreshSession()
-            }
-            guard let session = SessionManager.shared.session else {
-                throw SupabaseAuthError.sessionNotExist
-            }
-
-            let userMateListData = try await fetchData(
-                from: table,
-                query: ["id": "eq.\(userID)"]
-            )
-            guard let jsonString = String(data: userMateListData, encoding: .utf8),
-                  let jsonData = jsonString.data(using: .utf8),
-                  let userMateListArray = try JSONSerialization.jsonObject(with: jsonData) as? [[String: Any]],
-                  let userMateListJSON = userMateListArray.first,
-                  let mates = userMateListJSON["mates"] as? [String] else {
-                throw SupabaseDBError.fetchDataFailed
-            }
-
-            var matesToUUID = mates.compactMap { UUID(uuidString: $0) }
-            matesToUUID.removeAll { $0 == mateID }
-            SNMLogger.log("mates: \(matesToUUID)")
-
-            let updatedData = try JSONSerialization.data(withJSONObject: ["mates": matesToUUID.map { $0.uuidString }])
-
-            _ = try await networkProvider.request(
-                with: SupabaseDatabaseRequest.updateData(
-                    table: table,
-                    id: userID,
-                    accessToken: session.accessToken,
-                    data: updatedData
-                )
-            )
-        } catch {
-            throw SupabaseDBError.deleteDataFailed
         }
     }
 }

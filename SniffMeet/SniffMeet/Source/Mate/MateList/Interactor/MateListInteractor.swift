@@ -23,6 +23,7 @@ final class MateListInteractor: MateListInteractable {
     private let requestProfileImageUseCase: any RequestProfileImageUseCase
     private var tryProfileDropUseCase: any TryProfileDropUseCase
     private var quitProfileDropUseCase: any QuitProfileDropUseCase
+    private var deleteMateUseCase: any DeleteMateUseCase
     private var cancellables: Set<AnyCancellable> = []
     
     init(
@@ -30,14 +31,16 @@ final class MateListInteractor: MateListInteractable {
         requestMateListUseCase: any RequestMateListUseCase,
         requestProfileImageUseCase: any RequestProfileImageUseCase,
         tryProfileDropUseCase: any TryProfileDropUseCase,
-        quitProfileDropUseCase: any QuitProfileDropUseCase
+        quitProfileDropUseCase: any QuitProfileDropUseCase,
+        deleteMateUseCase: any DeleteMateUseCase
     ) {
         self.presenter = presenter
         self.requestMateListUseCase = requestMateListUseCase
         self.requestProfileImageUseCase = requestProfileImageUseCase
         self.tryProfileDropUseCase = tryProfileDropUseCase
         self.quitProfileDropUseCase = quitProfileDropUseCase
-        
+        self.deleteMateUseCase = deleteMateUseCase
+
         bind()
     }
 
@@ -72,12 +75,7 @@ final class MateListInteractor: MateListInteractable {
 
     func deleteMate(mate: Mate) async throws {
         do {
-            guard let userID = SessionManager.shared.session?.user?.userID else {
-                throw SNMError(level: .user, error: SupabaseAuthError.sessionNotExist)
-            }
-            let mateID = mate.userID
-            let tableName = Environment.SupabaseTableName.matelist
-            try await SupabaseDatabaseManager.shared.deleteMateData(from: tableName, userID: userID, mateID: mateID)
+            try await deleteMateUseCase.execute(mate: mate)
             presenter?.didDeleteMate(mate)
         } catch {
             throw SupabaseDBError.deleteDataFailed

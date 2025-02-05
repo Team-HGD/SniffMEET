@@ -13,14 +13,14 @@ struct RemoteImage {
     let lastModified: String?
 }
 
-protocol RemoteImageManagable {
+protocol RemoteImageManageable {
     func upload(imageData: Data, fileName: String, mimeType: MimeType) async throws
 //    func download(fileName: String) async throws -> Data
     func download(fileName: String, lastModified: String) async throws -> RemoteImage
 }
 
-struct SupabaseStorageManager: RemoteImageManagable {
-    private let networkProvider: SNMNetworkProvider
+struct SupabaseStorageManager: RemoteImageManageable {
+    private let networkProvider: any NetworkProvider
 
     init(networkProvider: SNMNetworkProvider) {
         self.networkProvider = networkProvider

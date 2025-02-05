@@ -12,11 +12,11 @@ protocol RequestProfileImageUseCase {
 }
 
 struct RequestProfileImageUseCaseImpl: RequestProfileImageUseCase {
-    private let remoteImageManager: any RemoteImageManagable
+    private let remoteImageManager: any RemoteImageManageable
     private let cacheManager: any ImageCacheable
 
     init(
-        remoteImageManager: any RemoteImageManagable,
+        remoteImageManager: any RemoteImageManageable,
         cacheManager: any ImageCacheable
     ) {
         self.remoteImageManager = remoteImageManager

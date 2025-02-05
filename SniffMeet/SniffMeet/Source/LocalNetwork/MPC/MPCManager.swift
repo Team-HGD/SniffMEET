@@ -17,13 +17,14 @@ extension String {
 final class MPCManager: NSObject {
     var advertiser: MPCAdvertiser
     var browser: MPCBrowser
-    let session: MCSession
+    var session: MCSession
 
     private var cancellables = Set<AnyCancellable>()
     var availablePeers = Set<MCPeerID>()
     var connectedPeerManager: ConnectedPeerManager
     var isAvailableToBeConnected = CurrentValueSubject<Bool, Never>(false)
 
+    
     init(advertiser: MPCAdvertiser, browser: MPCBrowser, session: MCSession) {
         self.advertiser = advertiser
         self.browser = browser
@@ -60,10 +61,13 @@ final class MPCManager: NSObject {
         )
     }
     deinit {
+        browser.browser.delegate = nil
+        advertiser.advertiser.delegate = nil
         advertiser.stopAdvertising()
         browser.stopBrowsing()
+        session.disconnect()
+        SNMLogger.print("deinit MPCManager")
     }
-
     private func bind() {
         isAvailableToBeConnected
             .sink { [weak self] isAvailable in
@@ -71,8 +75,13 @@ final class MPCManager: NSObject {
                     self?.advertiser.startAdvertising()
                     self?.browser.startBrowsing()
                 } else {
+                    self?.session.disconnect()
+                    self?.session.delegate = nil
                     self?.advertiser.stopAdvertising()
                     self?.browser.stopBrowsing()
+                    Task {
+                        await self?.connectedPeerManager.disconnect()
+                    }
                 }
             }
             .store(in: &cancellables)
@@ -108,17 +117,24 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
         SNMLogger.info("ServiceBrowser found peer: \(peerID)")
         guard !self.availablePeers.contains(peerID) else { return }
         self.availablePeers.insert(peerID)
-
         self.browser.invite(peerID: peerID)
-//        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
-//            if (self?.session.connectedPeers.contains(peerID) == false) {
-//                self?.browser.invite(peerID: peerID)
-//            }
-//        }
+        Task { [weak self] in
+            try await Task.sleep(nanoseconds: 100_000_000)
+            if (self?.session.connectedPeers.contains(peerID) == false) {
+                self?.browser.invite(peerID: peerID)
+            }
+        }
         SNMLogger.info("availablePeers: \(self.availablePeers)")
     }
 
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        Task {
+            if let connectedPeer = await connectedPeerManager.connectedPeer,
+               connectedPeer == peerID
+            {
+                await connectedPeerManager.disconnect()
+            }
+        }
         guard let index = availablePeers.firstIndex(of: peerID) else { return }
         self.availablePeers.remove(at: index)
     }
@@ -127,7 +143,12 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
 extension MPCManager {
     /// 연결된 한명의 피어에게만 데이터를 전송합니다.
     func send(data: Data) async {
-        guard let connectedPeer = await connectedPeerManager.connectedPeer else { return }
+        guard let connectedPeer = await connectedPeerManager.connectedPeer,
+              availablePeers.contains(connectedPeer)
+        else {
+            await connectedPeerManager.disconnect()
+            return
+        }
         do {
             try self.session.send(data, toPeers: [connectedPeer], with: .reliable)
         } catch {

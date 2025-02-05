@@ -49,6 +49,7 @@ final class NIManager {
     }
 
     func endSession() {
+        niSession?.delegate = nil
         niSession?.invalidate()
     }
 }

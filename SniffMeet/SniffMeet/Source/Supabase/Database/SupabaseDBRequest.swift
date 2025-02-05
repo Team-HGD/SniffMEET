@@ -52,35 +52,32 @@ extension SupabaseDBRequest: SNMRequestConvertible {
         }
     }
     var requestType: SNMRequestType {
-        var header = [
-            "Content-Type": "application/json",
-            "apikey": SupabaseConfig.apiKey
-        ]
         switch self {
         case .fetchData(_, let accessToken, _):
-            header["Authorization"] = "Bearer \(accessToken)"
-            return SNMRequestType.header(
-                with: header
-            )
-        case .insertData(_, let accessToken, let data):
-            header["Authorization"] = "Bearer \(accessToken)"
-            return SNMRequestType.compositePlain(
-                header: header,
-                body: data
-            )
-        case .updateData(_, _, let accessToken, let data):
-            header["Authorization"] = "Bearer \(accessToken)"
-            return SNMRequestType.compositePlain(
-                header: header,
+            return .header(with: createAuthHeader(accessToken: accessToken))
+        case .insertData(_, let accessToken, let data),
+             .updateData(_, _, let accessToken, let data):
+            return .compositePlain(
+                header: createAuthHeader(accessToken: accessToken),
                 body: data
             )
         case .fetchList(_, let data, let accessToken, _, _):
-            header["Authorization"] = "Bearer \(accessToken)"
-            
-            return SNMRequestType.compositePlain(
-                header: header,
+            return .compositePlain(
+                header: createAuthHeader(accessToken: accessToken),
                 body: data
             )
         }
+    }
+}
+
+// MARK: - SupabaseDBRequest+HelperMethods
+
+extension SupabaseDBRequest {
+    func createAuthHeader(accessToken: String) -> [String: String] {
+        return [
+            "Content-Type": "application/json",
+            "apikey": SupabaseConfig.apiKey,
+            "Authorization": "Bearer \(accessToken)"
+        ]
     }
 }

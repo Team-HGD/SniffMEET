@@ -11,8 +11,11 @@ import Foundation
 protocol RemoteDBManageable {
     func fetchData(from table: String, query: [String: String]) async throws -> Data
     func insertData(into table: String, with data: Data) async throws
-    func updateData(into table: String, with data: Data) async throws
-    func updateData(into table: String, at id: UUID, with data: Data) async throws 
+    func updateData(
+        in table: String,
+        at id: UUID,
+        with data: Data
+    ) async throws
     func fetchList(
         into table: String,
         with data: Data,
@@ -22,20 +25,22 @@ protocol RemoteDBManageable {
 }
 
 final class SupabaseDBManager: RemoteDBManageable {
+    private let sessionManager: any SessionManageable
     private let networkProvider: any NetworkProvider
     private let decoder: JSONDecoder
-
+    
     private init() {
+        self.sessionManager = SessionManager.shared
         self.networkProvider = SNMNetworkProvider()
         self.decoder = JSONDecoder()
     }
-
+    
     func fetchData(from table: String, query: [String: String]) async throws -> Data {
         do {
-            if try SessionManager.shared.checkSessionExpiration() {
-                try await SessionManager.shared.refreshSession()
+            if try sessionManager.checkSessionExpiration() {
+                try await sessionManager.refreshSession()
             }
-            guard let session = SessionManager.shared.session else {
+            guard let session = sessionManager.session else {
                 throw SupabaseSessionError.sessionNotExist
             }
             let response = try await networkProvider.request(
@@ -50,13 +55,13 @@ final class SupabaseDBManager: RemoteDBManageable {
             throw SupabaseDBError.fetchDataFailed
         }
     }
-
+    
     func insertData(into table: String, with data: Data) async throws {
         do {
-            if try SessionManager.shared.checkSessionExpiration() {
+            if try sessionManager.checkSessionExpiration() {
                 try await SessionManager.shared.refreshSession()
             }
-            guard let session = SessionManager.shared.session else {
+            guard let session = sessionManager.session else {
                 throw SupabaseSessionError.sessionNotExist
             }
             _ = try await networkProvider.request(
@@ -70,36 +75,13 @@ final class SupabaseDBManager: RemoteDBManageable {
             throw SupabaseDBError.insertDataFailed
         }
     }
-
-    func updateData(into table: String, with data: Data) async throws {
-        do {
-            if try SessionManager.shared.checkSessionExpiration() {
-                try await SessionManager.shared.refreshSession()
-            }
-            guard let session = SessionManager.shared.session else {
-                throw SupabaseSessionError.sessionNotExist
-            }
-            guard let userID = SessionManager.shared.session?.user?.userID else { return }
-            
-            _ = try await networkProvider.request(
-                with: SupabaseDBRequest.updateData(
-                    table: table,
-                    id: userID,
-                    accessToken: session.accessToken,
-                    data: data
-                )
-            )
-        } catch {
-            throw SupabaseDBError.updateDataFailed
-        }
-    }
     
-    func updateData(into table: String, at id: UUID, with data: Data) async throws {
+    func updateData(in table: String, at id: UUID, with data: Data) async throws {
         do {
-            if try SessionManager.shared.checkSessionExpiration() {
+            if try sessionManager.checkSessionExpiration() {
                 try await SessionManager.shared.refreshSession()
             }
-            guard let session = SessionManager.shared.session else {
+            guard let session = sessionManager.session else {
                 throw SupabaseSessionError.sessionNotExist
             }
             _ = try await networkProvider.request(
@@ -122,13 +104,13 @@ final class SupabaseDBManager: RemoteDBManageable {
         pageSize: Int = 100
     ) async throws -> Data {
         do {
-            if try SessionManager.shared.checkSessionExpiration() {
-                try await SessionManager.shared.refreshSession()
+            if try sessionManager.checkSessionExpiration() {
+                try await sessionManager.refreshSession()
             }
-            guard let session = SessionManager.shared.session else {
+            guard let session = sessionManager.session else {
                 throw SupabaseSessionError.sessionNotExist
             }
-
+            
             let response = try await networkProvider.request(
                 with: SupabaseDBRequest.fetchList(
                     table: table,
@@ -139,7 +121,7 @@ final class SupabaseDBManager: RemoteDBManageable {
                 )
             )
             if let range = response.header?["content-range"] as? String,
-            range == "*/*" {
+               range == "*/*" {
                 throw SupabaseDBError.noMoreData
             }
             return response.data
@@ -164,7 +146,7 @@ enum SupabaseDBError: LocalizedError {
     case insertDataFailed
     case updateDataFailed
     case noMoreData
-
+    
     var errorDescription: String? {
         switch self {
         case .fetchDataFailed: "데이터 불러오기 실패"

@@ -153,9 +153,10 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let mate = presenter?.output.mates.value[indexPath.row] else { return nil }
+
         let delete = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, success in
-            // mate_list DB 속 해당 유저 정보 삭제
-            // 해당 셀 제거
+            self?.presenter?.didSwipeToDelete(mate: mate)
             success(true)
         }
 

@@ -12,6 +12,7 @@ protocol MateListInteractable: AnyObject {
 
     func requestMateList(page: Int, pageSize: Int) async throws -> [Mate]
     func requestProfileImages(mates: [Mate]) async -> [(mateID: UUID, imageData: Data)]
+    func deleteMate(mate: Mate) async throws
     func tryProfileDrop()
     func quitProfileDrop()
 }
@@ -68,7 +69,21 @@ final class MateListInteractor: MateListInteractable {
         }
         return result
     }
-    
+
+    func deleteMate(mate: Mate) async throws {
+        do {
+            guard let userID = SessionManager.shared.session?.user?.userID else {
+                throw SNMError(level: .user, error: SupabaseAuthError.sessionNotExist)
+            }
+            let mateID = mate.userID
+            let tableName = Environment.SupabaseTableName.matelist
+            try await SupabaseDatabaseManager.shared.deleteMateData(from: tableName, userID: userID, mateID: mateID)
+            presenter?.didDeleteMate(mate)
+        } catch {
+            throw SupabaseDBError.deleteDataFailed
+        }
+    }
+
     func bind() {
         tryProfileDropUseCase.isNIConnected
             .receive(on: RunLoop.main)

@@ -16,6 +16,7 @@ protocol MateListPresentable: AnyObject {
     
     func viewWillAppear()
     func didTabAccessoryButton(mate: Mate)
+    func didSwipeToDelete(mate: Mate)
     func showAlertConnected()
     func showAlertDisconnected()
     func didScrollToBottom()
@@ -24,6 +25,7 @@ protocol MateListPresentable: AnyObject {
 
 protocol MateListInteractorOutput: AnyObject {
     func receiveProfileData(_ data: DogDTO)
+    func didDeleteMate(_ mate: Mate)
     func didConnectNISession()
     func failToConnectNISession()
 }
@@ -59,6 +61,16 @@ final class MateListPresenter: MateListPresentable {
     func didTabAccessoryButton(mate: Mate) {
         guard let view else { return }
         router?.presentWalkRequestView(mateListView: view, mate: mate)
+    }
+
+    func didSwipeToDelete(mate: Mate) {
+        Task {
+            do {
+                try await interactor?.deleteMate(mate: mate)
+            } catch {
+                SNMLogger.error("deleteMate error: \(error)")
+            }
+        }
     }
 
     func showAlertConnected() {
@@ -156,6 +168,10 @@ final class MateListPresenter: MateListPresentable {
 }
 
 extension MateListPresenter: MateListInteractorOutput {
+    func didDeleteMate(_ mate: Mate) {
+        output.mates.value.removeAll { $0.userID == mate.userID }
+    }
+    
     func didConnectNISession() {
         //showAlertConnected()
         view?.changeMPCButtonState(to: .success)

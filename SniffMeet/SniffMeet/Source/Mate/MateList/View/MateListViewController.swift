@@ -152,6 +152,21 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
         ItemSize.cellHeight
     }
 
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, success in
+            // mate_list DB 속 해당 유저 정보 삭제
+            // 해당 셀 제거
+            success(true)
+        }
+
+        let declare = UIContextualAction(style: .normal, title: "신고") { [weak self] _, _, success in
+            // 신고 여부 alert 띄우기
+            // 신고 DB에 누적
+            success(true)
+        }
+        return UISwipeActionsConfiguration(actions:[delete, declare])
+    }
+
     private func configureMateListCell(cell: UITableViewCell, mate: Mate) {
         if let imageData = imageDataSource[mate.userID],
            let profileImage = UIImage(data: imageData) {

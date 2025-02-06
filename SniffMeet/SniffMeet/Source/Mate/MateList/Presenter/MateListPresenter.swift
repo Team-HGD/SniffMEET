@@ -17,6 +17,7 @@ protocol MateListPresentable: AnyObject {
     func viewWillAppear()
     func didTabAccessoryButton(mate: Mate)
     func didSwipeToDelete(mate: Mate)
+    func didSwipeToReport(mate: Mate)
     func showAlertConnected()
     func showAlertDisconnected()
     func didScrollToBottom()
@@ -73,6 +74,11 @@ final class MateListPresenter: MateListPresentable {
         }
     }
 
+    func didSwipeToReport(mate: Mate) {
+        guard let view else { return }
+        router?.showReportMateView(mateListView: view, data: mate)
+    }
+    
     func showAlertConnected() {
         guard let view else { return }
         router?.showAlert(

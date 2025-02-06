@@ -161,8 +161,7 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         let declare = UIContextualAction(style: .normal, title: "신고") { [weak self] _, _, success in
-            // 신고 여부 alert 띄우기
-            // 신고 DB에 누적
+            self?.presenter?.didSwipeToReport(mate: mate)
             success(true)
         }
         return UISwipeActionsConfiguration(actions:[delete, declare])

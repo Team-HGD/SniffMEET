@@ -13,7 +13,7 @@ struct RequestMateListUseCaseMock: RequestMateListUseCase {
     var mateList: [UserInfoDTO]
     
     init(mateList: [UserInfoDTO]) {
-        remoteDBManager = remoteDBManagerMock(fetchData: nil, fetchListData: nil)
+        remoteDBManager = remoteDBManagerMock(data: nil)
         self.mateList = mateList
     }
     

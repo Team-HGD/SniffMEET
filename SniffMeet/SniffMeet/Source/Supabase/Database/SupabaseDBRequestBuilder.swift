@@ -14,11 +14,14 @@ enum SupabaseDBTask {
     case rpc
 }
 
-protocol SupabaseDBRequestBuildable {
+protocol RemoteDBRequestBuildable {
+    func setTable(_ table: String) -> Self
+    func setData(_ data: Data) -> Self
+    func setQuery(_ parameter: SupabaseQueryParameter) -> Self
     func request() async throws -> Data
 }
 
-final class SupabaseDBRequestBuilder: SupabaseDBRequestBuildable {
+final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {
     private let networkProvider: any NetworkProvider
     private let accessToken: String // 만료부터 30초 미리 갱신하기 때문에 중간에 바뀔 일이 없습니다.
     private var task: SupabaseDBTask

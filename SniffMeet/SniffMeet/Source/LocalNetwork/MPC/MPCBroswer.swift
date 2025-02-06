@@ -50,5 +50,4 @@ final class MPCBrowser {
         browser.invitePeer(peerID, to: session, withContext: tokenData, timeout: 30)
         SNMLogger.log("invitePeer tokenData")
     }
-    }
 }

@@ -45,5 +45,4 @@ final class MPCAdvertiser {
         advertiser.stopAdvertisingPeer()
         SNMLogger.log("stop advertising")
     }
-    }
 }

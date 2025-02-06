@@ -46,15 +46,10 @@ struct RespondMateRequestUseCaseImpl: RespondMateRequestUseCase {
             mateList.append(mateId)
             mateList = Array(Set(mateList))
             let mateListData = try encoder.encode(MateListDTO(mates: mateList))
-//            try await remoteDBManager.updateData(
-//                in: Environment.SupabaseTableName.matelist,
-//                at: id,
-//                with: mateListData
-//            )
             try await remoteDBManager.insertData()
                 .setTable(Environment.SupabaseTableName.matelist)
-                .setBody(mateListData)
-                .setQuery(key: "id", value: "eq.\(id)")
+                .setData(mateListData)
+                .setQuery(.equal("id", id))
                 .request()
             
             try localDataManager.storeData(data:mateList, key: Environment.UserDefaultsKey.mateList)

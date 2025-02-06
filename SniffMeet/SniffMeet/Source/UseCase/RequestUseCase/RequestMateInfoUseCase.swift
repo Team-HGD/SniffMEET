@@ -20,13 +20,9 @@ struct RequestMateInfoUsecaseImpl: RequestMateInfoUseCase {
     }
     
     func execute(mateID: UUID) async throws -> UserInfoDTO? {
-//        let mateInfoData = try await remoteDBManager.fetchData(
-//            from: "user_info",
-//            query: ["id": "eq.\(mateID.uuidString)"]
-//        )
         let mateInfoData = try await remoteDBManager.fetchData()
             .setTable(Environment.SupabaseTableName.userInfo)
-            .setQuery(key: "id", value: "eq.\(mateID.uuidString)")
+            .setQuery(.equal("id", mateID.uuidString))
             .request()
         let mateInfo = try JSONDecoder().decode([UserInfoDTO].self, from: mateInfoData)
         return mateInfo.first

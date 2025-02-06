@@ -41,7 +41,7 @@ struct RequestWalkUseCaseImpl: RequestWalkUseCase {
 //            )
             try await remoteDBManager.insertData()
                 .setTable(Environment.SupabaseTableName.walkRequest)
-                .setBody(data)
+                .setData(data)
                 .request()
         } catch {
             SNMLogger.error("notifiaction list insert error: \(error.localizedDescription)")

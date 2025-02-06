@@ -28,7 +28,7 @@ struct CreateAccountUseCaseImpl: CreateAccountUseCase {
 //            )
             try await remoteDBManager.insertData()
                 .setTable(Environment.SupabaseTableName.userInfo)
-                .setBody(userData)
+                .setData(userData)
                 .request()
             
         } catch {
@@ -42,7 +42,7 @@ struct CreateAccountUseCaseImpl: CreateAccountUseCase {
 //            )
             try await remoteDBManager.insertData()
                 .setTable(Environment.SupabaseTableName.matelist)
-                .setBody(mateListData)
+                .setData(mateListData)
                 .request()
         } catch {
             SNMLogger.error("mate list insert error: \(error.localizedDescription)")
@@ -55,7 +55,7 @@ struct CreateAccountUseCaseImpl: CreateAccountUseCase {
 //            )
             try await remoteDBManager.insertData()
                 .setTable(Environment.SupabaseTableName.notificationList)
-                .setBody(notiListData)
+                .setData(notiListData)
                 .request()
         } catch {
             SNMLogger.error("notifiaction list insert error: \(error.localizedDescription)")

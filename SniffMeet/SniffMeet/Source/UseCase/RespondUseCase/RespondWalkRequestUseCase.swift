@@ -38,15 +38,10 @@ struct RespondWalkRequestUseCaseImpl: RespondWalkRequestUseCase {
         guard let tableData else { return }
         let data = try JSONEncoder().encode(tableData)
         Task {
-//            try await remoteDBManager.updateData(
-//                in: Environment.SupabaseTableName.walkRequest,
-//                at: requestID,
-//                with: data
-//            )
             try await remoteDBManager.updateData()
                 .setTable(Environment.SupabaseTableName.walkRequest)
-                .setBody(data)
-                .setQuery(key: "id", value: "eq.\(requestID)")
+                .setData(data)
+                .setQuery(.equal("id", requestID))
                 .request()
         }
     }

@@ -285,6 +285,10 @@
 		99E79F972D548B6700E48552 /* ReportPickerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F952D548B6000E48552 /* ReportPickerRouter.swift */; };
 		99E79F992D548D9A00E48552 /* ReportMateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F982D548D9100E48552 /* ReportMateInteractor.swift */; };
 		99E79F9A2D548D9A00E48552 /* ReportMateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F982D548D9100E48552 /* ReportMateInteractor.swift */; };
+		99E79F9C2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F9B2D54D0A000E48552 /* ReportPickerPresenter.swift */; };
+		99E79F9D2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F9B2D54D0A000E48552 /* ReportPickerPresenter.swift */; };
+		99E79F9F2D54D45600E48552 /* ReportPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F9E2D54D44D00E48552 /* ReportPickerInteractor.swift */; };
+		99E79FA02D54D45600E48552 /* ReportPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F9E2D54D44D00E48552 /* ReportPickerInteractor.swift */; };
 		99FA4E792CE0FBBF00553C2E /* ProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */; };
 		A202A1152CEDD50700B98203 /* SupabaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */; };
 		A202A1172CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */; };
@@ -568,6 +572,8 @@
 		99E79F922D54880800E48552 /* ReportMatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMatePresenter.swift; sourceTree = "<group>"; };
 		99E79F952D548B6000E48552 /* ReportPickerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPickerRouter.swift; sourceTree = "<group>"; };
 		99E79F982D548D9100E48552 /* ReportMateInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMateInteractor.swift; sourceTree = "<group>"; };
+		99E79F9B2D54D0A000E48552 /* ReportPickerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPickerPresenter.swift; sourceTree = "<group>"; };
+		99E79F9E2D54D44D00E48552 /* ReportPickerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPickerInteractor.swift; sourceTree = "<group>"; };
 		99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputViewController.swift; sourceTree = "<group>"; };
 		A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDatabaseManager.swift; sourceTree = "<group>"; };
 		A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDatabaseRequest.swift; sourceTree = "<group>"; };
@@ -1868,6 +1874,7 @@
 		FDA4918D2CDA7C3400A36FB0 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				99E79F9E2D54D44D00E48552 /* ReportPickerInteractor.swift */,
 				99E79F982D548D9100E48552 /* ReportMateInteractor.swift */,
 			);
 			path = Interactor;
@@ -1876,6 +1883,7 @@
 		FDA4918E2CDA7C3400A36FB0 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				99E79F9B2D54D0A000E48552 /* ReportPickerPresenter.swift */,
 				99E79F922D54880800E48552 /* ReportMatePresenter.swift */,
 			);
 			path = Presenter;
@@ -2335,6 +2343,7 @@
 				32BD48572D3FF02C0078DA9C /* RequestUserLocationUseCase.swift in Sources */,
 				32BD48582D3FF02C0078DA9C /* RequestWalkUseCase.swift in Sources */,
 				32BD48592D3FF02C0078DA9C /* RequestMateListUseCase.swift in Sources */,
+				99E79F9F2D54D45600E48552 /* ReportPickerInteractor.swift in Sources */,
 				32BD485A2D3FF02C0078DA9C /* RequestProfileImageUseCase.swift in Sources */,
 				32BD485B2D3FF02C0078DA9C /* LoadUserInfoUseCase.swift in Sources */,
 				32BD485C2D3FF02C0078DA9C /* RespondWalkRequestUseCase.swift in Sources */,
@@ -2382,6 +2391,7 @@
 				32BD48832D3FF02C0078DA9C /* EventConstant.swift in Sources */,
 				32BD48842D3FF02C0078DA9C /* InputTextField.swift in Sources */,
 				32BD48852D3FF02C0078DA9C /* KeywordButton.swift in Sources */,
+				99E79F9C2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */,
 				32BD48862D3FF02C0078DA9C /* KeywordView.swift in Sources */,
 				32BD48872D3FF02C0078DA9C /* PrimaryButton.swift in Sources */,
 				32BD48882D3FF02C0078DA9C /* SNMLineTabBar.swift in Sources */,
@@ -2653,6 +2663,7 @@
 				A25BE45A2CEC2BA300886763 /* SessionManager.swift in Sources */,
 				99E79F8A2D5436B700E48552 /* ReportMateViewController.swift in Sources */,
 				A24082672CEB2539009109A0 /* SupabaseSessionResponse.swift in Sources */,
+				99E79FA02D54D45600E48552 /* ReportPickerInteractor.swift in Sources */,
 				FD51341B2CEB7AE8002E76F3 /* HomePresenter.swift in Sources */,
 				FD11527F2CFC9029008955C4 /* NotificationListInteractor.swift in Sources */,
 				320043942CDF3D7F00D08B6D /* PrimaryButton.swift in Sources */,
@@ -2692,6 +2703,7 @@
 				320044732CEB47B100D08B6D /* RequestWalkInteractor.swift in Sources */,
 				320044942CED80B700D08B6D /* RespondWalkInteractor.swift in Sources */,
 				FD331A912CF3461B00F39426 /* NotificationListViewController.swift in Sources */,
+				99E79F9D2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */,
 				FDE768922CF7828700B5DE88 /* AnyJSONSerializable.swift in Sources */,
 				9937361D2CF80D6600E3DD58 /* RequestUserInfoRemoteUseCase.swift in Sources */,
 				FD331A602CF339B000F39426 /* SupabaseStorageRequest.swift in Sources */,

@@ -78,12 +78,23 @@ final class ReportMateViewController: BaseViewController, ReportMateViewable {
     override func configureAttributes() {
         configureNavigationControllerAttributes()
         hideKeyboardWhenTappedAround()
+        selectionViewTapGesture()
     }
 
     private func configureNavigationControllerAttributes() {
         navigationController?.navigationBar.configureBackButton()
         navigationItem.title = Context.title
         navigationItem.largeTitleDisplayMode = .never
+    }
+
+    private func selectionViewTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectionViewTapped))
+        selectionView.addGestureRecognizer(tapGesture)
+        selectionView.isUserInteractionEnabled = true
+    }
+
+    @objc private func selectionViewTapped() {
+        presenter?.didTapSelectReportView()
     }
 
     override func configureHierachy() {

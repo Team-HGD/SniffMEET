@@ -14,6 +14,7 @@ protocol ReportMatePresentable: AnyObject {
     var output: any ReportMatePresenterOutput { get }
 
     func viewDidLoad()
+    func didTapSelectReportView()
 }
 
 protocol ReportMateInteractorOutput: AnyObject {
@@ -54,6 +55,10 @@ final class ReportMatePresenter: ReportMatePresentable {
         interactor?.fetchMateInfo()
     }
 
+    func didTapSelectReportView() {
+        guard let view else { return }
+        router?.showSelectReportView(reportMateView: view)
+    }
 }
 
 extension ReportMatePresenter: ReportMateInteractorOutput {

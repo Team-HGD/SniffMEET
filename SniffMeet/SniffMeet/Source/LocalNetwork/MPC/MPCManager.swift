@@ -10,7 +10,7 @@ import MultipeerConnectivity
 import NearbyInteraction
 import os
 
-extension String {
+fileprivate extension String {
     static var serviceName = "SniffMeet"
 }
 
@@ -23,7 +23,6 @@ final class MPCManager: NSObject {
     var availablePeers = Set<MCPeerID>()
     var connectedPeerManager: ConnectedPeerManager
     var isAvailableToBeConnected = CurrentValueSubject<Bool, Never>(false)
-
     
     init(advertiser: MPCAdvertiser, browser: MPCBrowser, session: MCSession) {
         self.advertiser = advertiser

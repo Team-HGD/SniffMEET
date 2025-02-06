@@ -387,6 +387,9 @@
 		FD3A03412CD8CF460047B7ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD3A033C2CD8CF460047B7ED /* LaunchScreen.storyboard */; };
 		FD3A03422CD8CF460047B7ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3A03382CD8CF460047B7ED /* AppDelegate.swift */; };
 		FD3A03432CD8CF460047B7ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3A033D2CD8CF460047B7ED /* SceneDelegate.swift */; };
+		FD4855222D548F8200C66429 /* ConnectedPeerManagerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4855212D548F7A00C66429 /* ConnectedPeerManagerSpy.swift */; };
+		FD4855242D54996800C66429 /* ConnectedPeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4855232D54996100C66429 /* ConnectedPeerManager.swift */; };
+		FD4855252D54996800C66429 /* ConnectedPeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4855232D54996100C66429 /* ConnectedPeerManager.swift */; };
 		FD5134172CEB738D002E76F3 /* UIControl + Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5134162CEB7388002E76F3 /* UIControl + Publisher.swift */; };
 		FD5134192CEB7ADE002E76F3 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5134182CEB7AD9002E76F3 /* HomeRouter.swift */; };
 		FD51341B2CEB7AE8002E76F3 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD51341A2CEB7AE3002E76F3 /* HomePresenter.swift */; };
@@ -641,6 +644,8 @@
 		FD3A033B2CD8CF460047B7ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD3A033D2CD8CF460047B7ED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FD3E57352D35210D003F3E01 /* SupabaseTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SupabaseTestPlan.xctestplan; sourceTree = "<group>"; };
+		FD4855212D548F7A00C66429 /* ConnectedPeerManagerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedPeerManagerSpy.swift; sourceTree = "<group>"; };
+		FD4855232D54996100C66429 /* ConnectedPeerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedPeerManager.swift; sourceTree = "<group>"; };
 		FD5134162CEB7388002E76F3 /* UIControl + Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl + Publisher.swift"; sourceTree = "<group>"; };
 		FD5134182CEB7AD9002E76F3 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		FD51341A2CEB7AE3002E76F3 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
@@ -763,6 +768,7 @@
 		320044182CE48A1900D08B6D /* MPC */ = {
 			isa = PBXGroup;
 			children = (
+				FD4855232D54996100C66429 /* ConnectedPeerManager.swift */,
 				3200441D2CE48D1F00D08B6D /* MPCManager.swift */,
 				3200441B2CE48C5600D08B6D /* MPCAdvertiser.swift */,
 				320044192CE48A3100D08B6D /* MPCBroswer.swift */,
@@ -921,6 +927,7 @@
 		32081A662D547F4F00D19235 /* LocalNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				FD4855212D548F7A00C66429 /* ConnectedPeerManagerSpy.swift */,
 				32081A6B2D547FAB00D19235 /* MockMPCSession.swift */,
 				32081A692D547F9F00D19235 /* MPCSessionConcurrencyTest.swift */,
 			);
@@ -2359,6 +2366,7 @@
 				32BD487C2D3FF02C0078DA9C /* AnyDecodable.swift in Sources */,
 				32BD487D2D3FF02C0078DA9C /* Extension + Date.swift in Sources */,
 				32BD487E2D3FF02C0078DA9C /* UIControl + Publisher.swift in Sources */,
+				FD4855222D548F8200C66429 /* ConnectedPeerManagerSpy.swift in Sources */,
 				32BD487F2D3FF02C0078DA9C /* Extension + Keyboard.swift in Sources */,
 				32BD48802D3FF02C0078DA9C /* Extension + UIView.swift in Sources */,
 				32BD48812D3FF02C0078DA9C /* Extension + Navigation.swift in Sources */,
@@ -2429,6 +2437,7 @@
 				32BD48C62D3FF02C0078DA9C /* WalkLogPageViewController.swift in Sources */,
 				32BD48C72D3FF02C0078DA9C /* AddMateButton.swift in Sources */,
 				32BD48C82D3FF02C0078DA9C /* MateListViewController.swift in Sources */,
+				FD4855252D54996800C66429 /* ConnectedPeerManager.swift in Sources */,
 				32081A6C2D547FB700D19235 /* MockMPCSession.swift in Sources */,
 				32BD48C92D3FF02C0078DA9C /* MateListInteractor.swift in Sources */,
 				32BD48CA2D3FF02C0078DA9C /* MateListPresenter.swift in Sources */,
@@ -2565,6 +2574,7 @@
 				320044712CEB45E000D08B6D /* RequestWalkPresenter.swift in Sources */,
 				995D94262CE32ECE005A47BF /* Extension + Keyboard.swift in Sources */,
 				FD9468D42CFD590700417DC1 /* ProfileEditViewController.swift in Sources */,
+				FD4855242D54996800C66429 /* ConnectedPeerManager.swift in Sources */,
 				FD9468D52CFD590700417DC1 /* ProfileEditPresenter.swift in Sources */,
 				FD9468D62CFD590700417DC1 /* ProfileEditInteractor.swift in Sources */,
 				FD9468D72CFD590700417DC1 /* ProfileEditRoutable.swift in Sources */,

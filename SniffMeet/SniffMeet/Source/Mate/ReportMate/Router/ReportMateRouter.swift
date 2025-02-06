@@ -9,7 +9,7 @@ import UIKit
 
 protocol ReportMateRoutable: Routable {
     var presenter: (any ReportMatePresentable)? { get set }
-    func showSelectReportView(reportMateView: any ReportMateViewable)
+    func showSelectReportView(reportMateView: any ReportMateViewable, matePresenter: ReportMatePresenter)
 }
 
 protocol ReportMateBuildable {
@@ -19,9 +19,10 @@ protocol ReportMateBuildable {
 final class ReportMateRouter: ReportMateRoutable {
     weak var presenter: (any ReportMatePresentable)?
     
-    func showSelectReportView(reportMateView: any ReportMateViewable) {
+    func showSelectReportView(reportMateView: any ReportMateViewable, matePresenter: ReportMatePresenter) {
         guard let reportMateView = reportMateView as? UIViewController else { return }
-        let reportPickerViewController = ReportPickerRouter.createReportPickerModule()
+        guard let reportPickerViewController = ReportPickerRouter.createReportPickerModule() as? ReportPickerViewController else { return }
+        reportPickerViewController.matePresenter = matePresenter
         reportPickerViewController.modalPresentationStyle = .formSheet
 
         if #available(iOS 16.0, *) {
@@ -56,7 +57,7 @@ extension ReportMateRouter: ReportMateBuildable {
             mate: profile,
             requestProfileImageUseCase: requestProfileImageUseCase
         )
-        SNMLogger.log("profile: \(profile)")
+
         view.presenter = presenter
         presenter.view = view
         presenter.router = router

@@ -27,7 +27,6 @@ final class ReportMateInteractor: ReportMateInteractable {
     }
 
     func fetchMateInfo() {
-        SNMLogger.log("interactor mate: \(mate)")
         presenter?.didFetchMateInfo(mateInfo: mate)
     }
 

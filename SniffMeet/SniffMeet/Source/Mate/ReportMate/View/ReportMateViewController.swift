@@ -169,6 +169,13 @@ final class ReportMateViewController: BaseViewController, ReportMateViewable {
                 }
             }
             .store(in: &cancellables)
+        presenter?.output.reportOption
+            .receive(on: RunLoop.main)
+            .sink { [weak self] option in
+                self?.selectionLabel.text = option
+                self?.selectionLabel.textColor = .black
+            }
+            .store(in: &cancellables)
     }
 }
 

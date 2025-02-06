@@ -4,17 +4,19 @@
 //
 //  Created by 배현진 on 2/6/25.
 //
-
+import Combine
 import UIKit
 
 protocol ReportPickerViewable: AnyObject {
-//    var presenter: (any ReportPickerPresentable)? { get set }
+    var presenter: (any ReportPickerPresentable)? { get set }
 }
 
-final class ReportPickerViewController: UIViewController, ReportPickerViewable {
-//    var presenter: (any ReportPickerPresentable)?
+final class ReportPickerViewController: BaseViewController, ReportPickerViewable {
+    var presenter: (any ReportPickerPresentable)?
     var options: [String] = ["산책 시 폭력적인 행동", "불쾌한 언행", "기타"]
-    var didSelectOption: ((String) -> Void)?
+    var selectedOption: String?
+    var cancellables = Set<AnyCancellable>()
+    var matePresenter: ReportMatePresenter?
 
     private let tableView = UITableView()
 
@@ -37,6 +39,16 @@ final class ReportPickerViewController: UIViewController, ReportPickerViewable {
         tableView.frame = view.bounds
         view.addSubview(tableView)
     }
+
+    override func bind() {
+        presenter?.output.selectedReportOption
+            .receive(on: RunLoop.main)
+            .sink { [weak self] option in
+                guard let self = self else { return }
+                self.matePresenter?.updateSelectedReportOption(option)
+            }
+            .store(in: &cancellables)
+    }
 }
 
 extension ReportPickerViewController: UITableViewDelegate, UITableViewDataSource {
@@ -53,7 +65,6 @@ extension ReportPickerViewController: UITableViewDelegate, UITableViewDataSource
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        didSelectOption?(options[indexPath.row])
-        dismiss(animated: true)
+        presenter?.didSelectOption(options[indexPath.row])
     }
 }

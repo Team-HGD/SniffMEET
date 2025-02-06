@@ -20,16 +20,19 @@ protocol ReportMatePresentable: AnyObject {
 protocol ReportMateInteractorOutput: AnyObject {
     func didFetchMateInfo(mateInfo: Mate?)
     func didFetchProfileImage(data: Data?)
+    func updateSelectedReportOption(_ option: String)
 }
 
 protocol ReportMatePresenterOutput {
     var mateInfo: PassthroughSubject<Mate?, Never> { get }
     var profileImageData: PassthroughSubject<Data?, Never> { get }
+    var reportOption: PassthroughSubject<String, Never> { get }
 }
 
 struct DefaultReportMatePresenterOutput: ReportMatePresenterOutput {
     var profileImageData: PassthroughSubject<Data?, Never>
     var mateInfo: PassthroughSubject<Mate?, Never>
+    var reportOption: PassthroughSubject<String, Never>
 }
 
 final class ReportMatePresenter: ReportMatePresentable {
@@ -37,12 +40,16 @@ final class ReportMatePresenter: ReportMatePresentable {
     var interactor: ReportMateInteractable?
     var router: ReportMateRoutable?
     var output: any ReportMatePresenterOutput
+    var cancellables = Set<AnyCancellable>()
 
     init(
         view: ReportMateViewable? = nil,
         interactor: ReportMateInteractable? = nil,
         router: ReportMateRoutable? = nil,
-        output: ReportMatePresenterOutput = DefaultReportMatePresenterOutput(profileImageData: PassthroughSubject<Data?, Never>(), mateInfo: PassthroughSubject<Mate?, Never>()
+        output: ReportMatePresenterOutput = DefaultReportMatePresenterOutput(
+            profileImageData: PassthroughSubject<Data?, Never>(),
+            mateInfo: PassthroughSubject<Mate?, Never>(),
+            reportOption: PassthroughSubject<String, Never>()
         )
     ) {
         self.view = view
@@ -57,14 +64,12 @@ final class ReportMatePresenter: ReportMatePresentable {
 
     func didTapSelectReportView() {
         guard let view else { return }
-        router?.showSelectReportView(reportMateView: view)
+        router?.showSelectReportView(reportMateView: view, matePresenter: self)
     }
 }
 
 extension ReportMatePresenter: ReportMateInteractorOutput {
     func didFetchMateInfo(mateInfo: Mate?) {
-        SNMLogger.log("presenter mate: \(String(describing: mateInfo))")
-        SNMLogger.log("presenter mate2: \(mateInfo)")
         output.mateInfo.send(mateInfo)
         if let profileImageName = mateInfo?.profileImageURLString {
             interactor?.requestProfileImage(imageName: profileImageName)
@@ -72,6 +77,9 @@ extension ReportMatePresenter: ReportMateInteractorOutput {
     }
     func didFetchProfileImage(data: Data?) {
         output.profileImageData.send(data)
+    }
+    func updateSelectedReportOption(_ option: String) {
+        output.reportOption.send(option)
     }
 }
 

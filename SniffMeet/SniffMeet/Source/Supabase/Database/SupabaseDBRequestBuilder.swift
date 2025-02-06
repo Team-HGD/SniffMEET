@@ -14,13 +14,16 @@ enum SupabaseDBTask {
     case rpc
 }
 
-final class SupabaseDBRequestBuilder {
+protocol SupabaseDBRequestBuildable {
+    func request() async throws -> Data
+}
+
+final class SupabaseDBRequestBuilder: SupabaseDBRequestBuildable {
     private let networkProvider: any NetworkProvider
     private let accessToken: String // 만료부터 30초 미리 갱신하기 때문에 중간에 바뀔 일이 없습니다.
     private var task: SupabaseDBTask
     private var table: String?
-    private var headers: [String: String] = [:]
-    private var body: Data?
+    private var data: Data?
     private var query: [String: String]?
     
     init(networkProvider: any NetworkProvider, accessToken: String, task: SupabaseDBTask) {
@@ -33,20 +36,15 @@ final class SupabaseDBRequestBuilder {
         self.table = table
         return self
     }
-    
-    func setHeaders(_ token: String) -> Self {
-        self.headers["Authorization"] = "Bearer \(token)"
+
+    func setData(_ data: Data) -> Self {
+        self.data = data
         return self
     }
 
-    func setBody(_ body: Data) -> Self {
-        self.body = body
-        return self
-    }
-
-    func setQuery(key: String, value: String) -> Self {
-        if query == nil { query = [:] }
-        query?[key] = value
+    func setQuery(_ parameter: SupabaseQueryParameter) -> Self {
+        query = query ?? [:]
+        query?[parameter.key] = parameter.value
         return self
     }
 
@@ -60,31 +58,31 @@ final class SupabaseDBRequestBuilder {
                 query: self.query ?? [:]
             )
         case .insert:
-            guard let body = self.body,
+            guard let data = self.data,
                   let table = self.table else { throw SupabaseDBError.insertDataFailed }
             return SupabaseDBRequest.insertData(
                 table: table,
                 accessToken: accessToken,
-                data: body
+                data: data
             )
         case .update:
-            guard let body = self.body,
+            guard let data = self.data,
                   let query = self.query,
                   let table = self.table else { throw SupabaseDBError.updateDataFailed }
             return SupabaseDBRequest.updateData(
                 table: table,
                 accessToken: accessToken,
-                data: body,
+                data: data,
                 query: query
             )
         case .rpc:
-            guard let body = self.body,
+            guard let data = self.data,
                   let query = self.query,
                   let table = self.table else { throw SupabaseDBError.rpcFailed }
             return SupabaseDBRequest.rpc(
                 table: table,
                 accessToken: accessToken,
-                data: body,
+                data: data,
                 query: query
             )
         }
@@ -95,7 +93,6 @@ final class SupabaseDBRequestBuilder {
         let response = try await networkProvider.request(
             with: try build()
         )
-        SNMLogger.info("요청!")
         return response.data
     }
 }

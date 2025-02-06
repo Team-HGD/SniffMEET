@@ -5,14 +5,16 @@
 //  Created by 배현진 on 2/6/25.
 //
 
+import Combine
 import UIKit
 
 protocol ReportMateViewable: AnyObject {
-//    var presenter: (any ReportMatePresentable)? { get set }
+    var presenter: (any ReportMatePresentable)? { get set }
 }
 
 final class ReportMateViewController: BaseViewController, ReportMateViewable {
-    //    var presenter: (any ReportMatePresentable)?
+    var presenter: (any ReportMatePresentable)?
+    private var cancellables: Set<AnyCancellable> = []
     private var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "ImagePlaceholder")
@@ -36,7 +38,7 @@ final class ReportMateViewController: BaseViewController, ReportMateViewable {
     private var selectionLabel: UILabel = {
         let label = UILabel()
         label.text = Context.reportTitlePlaceholder
-        label.textColor = .darkGray
+        label.textColor = .lightGray
         label.font = SNMFont.subheadline
         return label
     }()
@@ -65,22 +67,26 @@ final class ReportMateViewController: BaseViewController, ReportMateViewable {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-//        presenter?.viewDidLoad()
+        presenter?.viewDidLoad()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        profileImageView.makeViewCircular()
     }
 
     override func configureAttributes() {
-        // 키보드 숨기기, UI 업뎃 관련 등
         configureNavigationControllerAttributes()
-        profileImageView.makeViewCircular()
         hideKeyboardWhenTappedAround()
     }
+
     private func configureNavigationControllerAttributes() {
         navigationController?.navigationBar.configureBackButton()
         navigationItem.title = Context.title
         navigationItem.largeTitleDisplayMode = .never
     }
+
     override func configureHierachy() {
-        // addSubView 등
         [profileImageView,
          nickNameLabel,
          selectionView,
@@ -95,8 +101,8 @@ final class ReportMateViewController: BaseViewController, ReportMateViewable {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
+
     override func configureConstraints() {
-        // Constraints 등
         setConstraint()
         setSelectionConstraint()
     }
@@ -123,21 +129,43 @@ final class ReportMateViewController: BaseViewController, ReportMateViewable {
     }
     private func setSelectionConstraint() {
         NSLayoutConstraint.activate([
-            selectionLabel.leadingAnchor.constraint(equalTo: selectionView.leadingAnchor, constant: LayoutConstant.xsmallVerticalPadding),
+            selectionLabel.leadingAnchor.constraint(equalTo: selectionView.leadingAnchor, constant: LayoutConstant.edgePadding),
             selectionLabel.topAnchor.constraint(equalTo: selectionView.topAnchor, constant: LayoutConstant.edgePadding),
             selectionLabel.bottomAnchor.constraint(equalTo: selectionView.bottomAnchor, constant: -LayoutConstant.edgePadding),
-            chevronImageView.trailingAnchor.constraint(equalTo: selectionView.trailingAnchor, constant: -LayoutConstant.xsmallVerticalPadding),
+            chevronImageView.trailingAnchor.constraint(equalTo: selectionView.trailingAnchor, constant: -LayoutConstant.edgePadding),
             chevronImageView.topAnchor.constraint(equalTo: selectionView.topAnchor, constant: LayoutConstant.edgePadding)
         ])
     }
-    override func bind() {}
+    override func bind() {
+        presenter?.output.mateInfo
+            .receive(on: RunLoop.main)
+            .sink { [weak self] mateInfo in
+                guard let mateInfo else {
+                    SNMLogger.error("Mate 바인딩 실패")
+                    return
+                }
+                self?.nickNameLabel.text = mateInfo.name
+            }
+            .store(in: &cancellables)
+        presenter?.output.profileImageData
+            .receive(on: RunLoop.main)
+            .sink { [weak self] data in
+                if let data = data {
+                    let profileImage = UIImage(data: data)
+                    self?.profileImageView.image = profileImage
+                } else {
+                    self?.profileImageView.image = UIImage.imagePlaceholder
+                }
+            }
+            .store(in: &cancellables)
+    }
 }
 
 private extension ReportMateViewController {
     enum Context {
         static let title: String = "신고"
         static let nickName: String = "닉네임"
-        static let reportTitlePlaceholder: String = "신고 이유를 선택해주세요."
+        static let reportTitlePlaceholder: String = " 신고 이유를 선택해주세요."
         static let reportMessagePlaceholder: String = "자세한 신고 내용을 입력해주세요."
         static let submitButtonTitle: String = "제출하기"
         static let topMargin: CGFloat = 150

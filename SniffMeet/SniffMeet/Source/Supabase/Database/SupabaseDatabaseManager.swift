@@ -68,6 +68,7 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
                 )
             )
         } catch {
+            SNMLogger.error("supabase 응답 오류: \(error.localizedDescription)")
             throw SupabaseDBError.insertDataFailed
         }
     }

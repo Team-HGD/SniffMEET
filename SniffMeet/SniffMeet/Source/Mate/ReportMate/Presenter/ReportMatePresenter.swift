@@ -15,12 +15,14 @@ protocol ReportMatePresentable: AnyObject {
 
     func viewDidLoad()
     func didTapSelectReportView()
+    func requestReport(option: String, message: String)
 }
 
 protocol ReportMateInteractorOutput: AnyObject {
     func didFetchMateInfo(mateInfo: Mate?)
     func didFetchProfileImage(data: Data?)
     func updateSelectedReportOption(_ option: String)
+    func didCloseTheView()
 }
 
 protocol ReportMatePresenterOutput {
@@ -57,14 +59,16 @@ final class ReportMatePresenter: ReportMatePresentable {
         self.router = router
         self.output = output
     }
-
+    
     func viewDidLoad() {
         interactor?.fetchMateInfo()
     }
-
     func didTapSelectReportView() {
         guard let view else { return }
         router?.showSelectReportView(reportMateView: view, matePresenter: self)
+    }
+    func requestReport(option: String, message: String) {
+        interactor?.sendReportRequest(option: option, message: message)
     }
 }
 
@@ -80,6 +84,10 @@ extension ReportMatePresenter: ReportMateInteractorOutput {
     }
     func updateSelectedReportOption(_ option: String) {
         output.reportOption.send(option)
+    }
+    func didCloseTheView() {
+        guard let view else { return }
+        router?.dismissView(view: view)
     }
 }
 

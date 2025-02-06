@@ -7,9 +7,11 @@
 
 import UIKit
 
-protocol ReportMateRoutable: Routable {
+protocol ReportMateRoutable: AnyObject, Routable {
     var presenter: (any ReportMatePresentable)? { get set }
-    func showSelectReportView(reportMateView: any ReportMateViewable, matePresenter: ReportMatePresenter)
+    func dismissView(view: any ReportMateViewable)
+    func showSelectReportView(reportMateView: any ReportMateViewable,
+                              matePresenter: ReportMatePresenter)
 }
 
 protocol ReportMateBuildable {
@@ -18,7 +20,14 @@ protocol ReportMateBuildable {
 
 final class ReportMateRouter: ReportMateRoutable {
     weak var presenter: (any ReportMatePresentable)?
-    
+
+    func dismissView(view: any ReportMateViewable) {
+        if let view = view as? UIViewController {
+            Task { @MainActor in
+                pop(from: view, animated: true)
+            }
+        }
+    }
     func showSelectReportView(reportMateView: any ReportMateViewable, matePresenter: ReportMatePresenter) {
         guard let reportMateView = reportMateView as? UIViewController else { return }
         guard let reportPickerViewController = ReportPickerRouter.createReportPickerModule() as? ReportPickerViewController else { return }
@@ -50,12 +59,14 @@ extension ReportMateRouter: ReportMateBuildable {
             networkProvider: SNMNetworkProvider()),
             cacheManager: CacheManager.shared
         )
+        let requestReportUseCase: RequestReportUseCase = RequestReportUseCaseImpl(remoteDatabaseManager: SupabaseDatabaseManager.shared)
         let view: ReportMateViewable & UIViewController = ReportMateViewController()
-        var router: ReportMateRoutable & ReportMateBuildable = ReportMateRouter()
+        let router: ReportMateRoutable & ReportMateBuildable = ReportMateRouter()
         let presenter: ReportMatePresentable & ReportMateInteractorOutput = ReportMatePresenter()
         let interactor: ReportMateInteractable = ReportMateInteractor(
             mate: profile,
-            requestProfileImageUseCase: requestProfileImageUseCase
+            requestProfileImageUseCase: requestProfileImageUseCase,
+            requestReportUseCase: requestReportUseCase
         )
 
         view.presenter = presenter

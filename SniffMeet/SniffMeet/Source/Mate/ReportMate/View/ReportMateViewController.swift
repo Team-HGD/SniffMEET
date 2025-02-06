@@ -179,6 +179,14 @@ final class ReportMateViewController: BaseViewController, ReportMateViewable {
                 self?.selectionLabel.textColor = .black
             }
             .store(in: &cancellables)
+        submitButton.publisher(event: .touchUpInside)
+            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
+            .sink { [weak self] _ in
+                guard let option = self?.selectionLabel.text,
+                      let message = self?.reportTextView.text else { return }
+                self?.presenter?.requestReport(option: option, message: message)
+            }
+            .store(in: &cancellables)
     }
     func updateSubmitButtonState() {
         if textViewEdited == false {

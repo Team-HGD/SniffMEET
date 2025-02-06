@@ -192,38 +192,16 @@ final class ReportMateViewController: BaseViewController, ReportMateViewable {
 
 extension ReportMateViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == Context.reportMessagePlaceholder {
-            textView.text = nil
-            textView.textColor = .black
-            textViewEdited = true
-        }
+        textViewDidBeginEditing(textView, placeholder: Context.reportMessagePlaceholder, textViewEdited: &textViewEdited)
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = Context.reportMessagePlaceholder
-            textView.textColor = .lightGray
-        }
+        textViewDidEndEditing(textView, placeholder: Context.reportMessagePlaceholder)
     }
     func textViewDidChange(_ textView: UITextView) {
         updateSubmitButtonState()
     }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            textView.resignFirstResponder()
-            return false
-        }
-        let inputString = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard let oldString = textView.text,
-              let newRange = Range(range, in: oldString) else {
-            return true
-        }
-        let newString = oldString.replacingCharacters(
-            in: newRange,
-            with: inputString
-        ).trimmingCharacters(in: .whitespacesAndNewlines)
-        let characterCount = newString.count
-        guard characterCount <= Context.characterCountLimit else { return false }
-        return true
+        return shouldChangeText(textView, range: range, replacementText: text, limit: Context.characterCountLimit)
     }
 }
 

@@ -30,12 +30,18 @@ struct RequestMateListUseCaseImpl: RequestMateListUseCase {
             }
             let requestData = try encoder.encode(MateListRequestDTO(userId: userID))
 
-            let data = try await remoteDBManager.fetchList(
-                into: tableName,
-                with: requestData,
-                page: page,
-                pageSize: pageSize
-            )
+//            let data = try await remoteDBManager.fetchList(
+//                into: tableName,
+//                with: requestData,
+//                page: page,
+//                pageSize: pageSize
+//            )
+            let data = try await remoteDBManager.rpc()
+                .setTable(tableName)
+                .setBody(requestData)
+                .setQuery(key: "limit", value: String(pageSize))
+                .setQuery(key: "offset", value: String(pageSize * page))
+                .request()
             let mateDTOList = try decoder.decode([UserInfoDTO].self, from: data)
             return mateDTOList.map {
                 Mate(name: $0.dogName,

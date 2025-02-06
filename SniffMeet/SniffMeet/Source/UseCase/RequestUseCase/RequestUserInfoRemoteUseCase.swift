@@ -22,9 +22,13 @@ struct RequestUserInfoRemoteUseCaseImpl: RequestUserInfoRemoteUseCase {
         guard let userID = SessionManager.shared.userID else {
             throw SupabaseSessionError.sessionNotExist
         }
-        let data = try await remoteDBManager.fetchData(
-            from: Environment.SupabaseTableName.userInfo,
-            query: ["id": "eq.\(userID)"])
+//        let data = try await remoteDBManager.fetchData(
+//            from: Environment.SupabaseTableName.userInfo,
+//            query: ["id": "eq.\(userID)"])
+        let data = try await remoteDBManager.fetchData()
+            .setTable(Environment.SupabaseTableName.userInfo)
+            .setQuery(key: "id", value: "eq.\(userID)")
+            .request()
         let decoder = JSONDecoder()
         let info = try decoder.decode([UserInfoDTO].self, from: data)
         return info

@@ -30,12 +30,12 @@ struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
             }
 
             let requestData = try encoder.encode(WalkNotiListRequestDTO(userId: userID))
-            let data = try await remoteManager.fetchList(
-                into: tableName,
-                with: requestData,
-                page: page,
-                pageSize: pageSize
-            )
+            let data = try await remoteManager.rpc()
+                .setTable(tableName)
+                .setBody(requestData)
+                .setQuery(key: "limit", value: String(pageSize))
+                .setQuery(key: "offset", value: String(pageSize * page))
+                .request()
             let walkDTOList = try decoder.decode([WalkNotiDTO].self, from: data)
             
             return walkDTOList.map { $0.toEntity() }

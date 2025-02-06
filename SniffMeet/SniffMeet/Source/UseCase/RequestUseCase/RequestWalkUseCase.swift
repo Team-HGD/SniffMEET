@@ -35,10 +35,14 @@ struct RequestWalkUseCaseImpl: RequestWalkUseCase {
                                                    longitude: walkNoti.longtitude,
                                                    state: .pending)
             let data = try encoder.encode(requestData)
-            try await remoteDBManager.insertData(
-                into: Environment.SupabaseTableName.walkRequest,
-                with: data
-            )
+//            try await remoteDBManager.insertData(
+//                into: Environment.SupabaseTableName.walkRequest,
+//                with: data
+//            )
+            try await remoteDBManager.insertData()
+                .setTable(Environment.SupabaseTableName.walkRequest)
+                .setBody(data)
+                .request()
         } catch {
             SNMLogger.error("notifiaction list insert error: \(error.localizedDescription)")
         }

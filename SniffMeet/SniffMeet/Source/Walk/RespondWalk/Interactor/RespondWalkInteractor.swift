@@ -54,7 +54,7 @@ final class RespondWalkInteractor: RespondWalkInteractable {
         Task {
             do {
                 guard let senderInfo = try await requestUserInfoUseCase.execute(
-                    mateId: userId
+                    mateID: userId
                 ) else {
                     presenter?.didFailToFetchWalkRequest(
                         error: SupabaseAuthError.userNotFound

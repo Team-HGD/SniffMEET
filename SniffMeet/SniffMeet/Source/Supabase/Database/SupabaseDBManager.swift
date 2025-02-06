@@ -9,19 +9,10 @@ import Combine
 import Foundation
 
 protocol RemoteDBManageable {
-    func fetchData(from table: String, query: [String: String]) async throws -> Data
-    func insertData(into table: String, with data: Data) async throws
-    func updateData(
-        in table: String,
-        at id: UUID,
-        with data: Data
-    ) async throws
-    func fetchList(
-        into table: String,
-        with data: Data,
-        page: Int,
-        pageSize: Int
-    ) async throws -> Data
+    func fetchData() throws -> SupabaseDBRequestBuilder
+    func insertData() throws -> SupabaseDBRequestBuilder
+    func updateData() throws -> SupabaseDBRequestBuilder
+    func rpc() throws -> SupabaseDBRequestBuilder
 }
 
 final class SupabaseDBManager: RemoteDBManageable {
@@ -35,101 +26,48 @@ final class SupabaseDBManager: RemoteDBManageable {
         self.decoder = JSONDecoder()
     }
     
-    func fetchData(from table: String, query: [String: String]) async throws -> Data {
-        do {
-            if try sessionManager.checkSessionExpiration() {
-                try await sessionManager.refreshSession()
-            }
-            guard let session = sessionManager.session else {
-                throw SupabaseSessionError.sessionNotExist
-            }
-            let response = try await networkProvider.request(
-                with: SupabaseDBRequest.fetchData(
-                    table: table,
-                    accessToken: session.accessToken,
-                    query: query
-                )
-            )
-            return response.data
-        } catch {
-            throw SupabaseDBError.fetchDataFailed
+    func fetchData() throws -> SupabaseDBRequestBuilder {
+        guard let accessToken = sessionManager.session?.accessToken else {
+            throw SupabaseSessionError.sessionNotExist
         }
+        return SupabaseDBRequestBuilder(
+            networkProvider: networkProvider,
+            accessToken: accessToken,
+            task: .fetch
+        )
     }
     
-    func insertData(into table: String, with data: Data) async throws {
-        do {
-            if try sessionManager.checkSessionExpiration() {
-                try await SessionManager.shared.refreshSession()
-            }
-            guard let session = sessionManager.session else {
-                throw SupabaseSessionError.sessionNotExist
-            }
-            _ = try await networkProvider.request(
-                with: SupabaseDBRequest.insertData(
-                    table: table,
-                    accessToken: session.accessToken,
-                    data: data
-                )
-            )
-        } catch {
-            throw SupabaseDBError.insertDataFailed
+    func insertData() throws -> SupabaseDBRequestBuilder {
+        guard let accessToken = sessionManager.session?.accessToken else {
+            throw SupabaseSessionError.sessionNotExist
         }
+        return SupabaseDBRequestBuilder(
+            networkProvider: networkProvider,
+            accessToken: accessToken,
+            task: .insert
+        )
     }
     
-    func updateData(in table: String, at id: UUID, with data: Data) async throws {
-        do {
-            if try sessionManager.checkSessionExpiration() {
-                try await SessionManager.shared.refreshSession()
-            }
-            guard let session = sessionManager.session else {
-                throw SupabaseSessionError.sessionNotExist
-            }
-            _ = try await networkProvider.request(
-                with: SupabaseDBRequest.updateData(
-                    table: table,
-                    accessToken: session.accessToken,
-                    data: data,
-                    id: id
-                )
-            )
-        } catch {
-            throw SupabaseDBError.updateDataFailed
+    func updateData() throws -> SupabaseDBRequestBuilder {
+        guard let accessToken = sessionManager.session?.accessToken else {
+            throw SupabaseSessionError.sessionNotExist
         }
+        return SupabaseDBRequestBuilder(
+            networkProvider: networkProvider,
+            accessToken: accessToken,
+            task: .update
+        )
     }
     
-    func fetchList(
-        into table: String,
-        with data: Data,
-        page: Int = 0,
-        pageSize: Int = 100
-    ) async throws -> Data {
-        do {
-            if try sessionManager.checkSessionExpiration() {
-                try await sessionManager.refreshSession()
-            }
-            guard let session = sessionManager.session else {
-                throw SupabaseSessionError.sessionNotExist
-            }
-            
-            let response = try await networkProvider.request(
-                with: SupabaseDBRequest.fetchList(
-                    table: table,
-                    accessToken: session.accessToken,
-                    data: data,
-                    page: page,
-                    pageSize: pageSize
-                )
-            )
-            if let range = response.header?["content-range"] as? String,
-               range == "*/*" {
-                throw SupabaseDBError.noMoreData
-            }
-            return response.data
-        } catch let error as SupabaseDBError {
-            throw error
-        } catch {
-            throw SupabaseDBError.fetchDataFailed
+    func rpc() throws -> SupabaseDBRequestBuilder {
+        guard let accessToken = sessionManager.session?.accessToken else {
+            throw SupabaseSessionError.sessionNotExist
         }
+        return SupabaseDBRequestBuilder(
+            networkProvider: networkProvider,
+            accessToken: accessToken,
+            task: .rpc
+        )
     }
 }
 
@@ -145,6 +83,7 @@ enum SupabaseDBError: LocalizedError {
     case fetchDataFailed
     case insertDataFailed
     case updateDataFailed
+    case rpcFailed
     case noMoreData
     
     var errorDescription: String? {
@@ -152,6 +91,7 @@ enum SupabaseDBError: LocalizedError {
         case .fetchDataFailed: "데이터 불러오기 실패"
         case .insertDataFailed: "데이터 삽입 실패"
         case .updateDataFailed: "데이터 업데이트 실패"
+        case .rpcFailed: "RPC 호출 실패"
         case .noMoreData: "더 불러올 데이터 없음"
         }
     }

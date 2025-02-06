@@ -12,7 +12,7 @@ protocol RespondMateRequestUseCase {
 
 struct RespondMateRequestUseCaseImpl: RespondMateRequestUseCase {
     private let localDataManager: DataStorable & DataLoadable
-    private let remoteDataManger: any RemoteDBManageable
+    private let remoteDBManager: any RemoteDBManageable
     private let sessionManager: any SessionManageable
     
     init(
@@ -21,7 +21,7 @@ struct RespondMateRequestUseCaseImpl: RespondMateRequestUseCase {
         sessionManager: any SessionManageable
     ) {
         self.localDataManager = localDataManager
-        self.remoteDataManger = remoteDataManger
+        self.remoteDBManager = remoteDataManger
         self.sessionManager = sessionManager
     }
     
@@ -46,11 +46,16 @@ struct RespondMateRequestUseCaseImpl: RespondMateRequestUseCase {
             mateList.append(mateId)
             mateList = Array(Set(mateList))
             let mateListData = try encoder.encode(MateListDTO(mates: mateList))
-            try await remoteDataManger.updateData(
-                in: Environment.SupabaseTableName.matelist,
-                at: id,
-                with: mateListData
-            )
+//            try await remoteDBManager.updateData(
+//                in: Environment.SupabaseTableName.matelist,
+//                at: id,
+//                with: mateListData
+//            )
+            try await remoteDBManager.insertData()
+                .setTable(Environment.SupabaseTableName.matelist)
+                .setBody(mateListData)
+                .setQuery(key: "id", value: "eq.\(id)")
+                .request()
             
             try localDataManager.storeData(data:mateList, key: Environment.UserDefaultsKey.mateList)
         } catch {

@@ -37,11 +37,11 @@ struct RemoteSaveDeviceTokenUseCaseImpl: RemoteSaveDeviceTokenUseCase {
             let deviceToken = try keychainManager.get(forKey: Environment.KeychainKey.deviceToken)
             let deviceTokenDTO = SaveDeviceTokenDTO(deviceToken: deviceToken)
             let deviceTokenData = try jsonEncoder.encode(deviceTokenDTO)
-            try await remoteDBManager.updateData(
-                in: Environment.SupabaseTableName.userInfo,
-                at: id,
-                with: deviceTokenData
-            )
+            try await remoteDBManager.updateData()
+                .setTable(Environment.SupabaseTableName.userInfo)
+                .setBody(deviceTokenData)
+                .setQuery(key: "id", value: "eq.\(id)")
+                .request()
         } catch let error as SupabaseAuthError {
             throw SNMError(level: .user, error: error)
         } catch let error as SupabaseSessionError {

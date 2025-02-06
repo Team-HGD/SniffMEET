@@ -10,8 +10,8 @@ import Foundation
 enum SupabaseDBRequest {
     case fetchData(table: String, accessToken: String, query: [String: String])
     case insertData(table: String, accessToken: String, data: Data)
-    case updateData(table: String, accessToken: String, data: Data, id: UUID)
-    case fetchList(table: String, accessToken: String, data: Data, page: Int, pageSize: Int)
+    case updateData(table: String, accessToken: String, data: Data, query: [String: String])
+    case rpc(table: String, accessToken: String, data: Data, query: [String: String])
 }
 
 extension SupabaseDBRequest: SNMRequestConvertible {
@@ -31,23 +31,20 @@ extension SupabaseDBRequest: SNMRequestConvertible {
                 method: .post,
                 query: nil
             )
-        case .updateData(let table, _, _, let id):
+        case .updateData(let table, _, _, let query):
             return Endpoint(
                 baseURL: SupabaseConfig.baseURL,
                 path: "rest/v1/\(table)",
                 method: .patch,
-                query: ["id": "eq.\(id)"]
+                query: query
             )
             
-        case .fetchList(let table,  _, _, let page, let size):
+        case .rpc(let table,  _, _, let query):
             return Endpoint(
                 baseURL: SupabaseConfig.baseURL,
                 path: "rest/v1/\(table)",
                 method: .post, // SQL 함수 호출은 POST 요청으로 수행
-                query: [
-                    "limit": "\(size)",
-                    "offset": "\(page * size)"
-                ]
+                query: query
             )
         }
     }
@@ -61,7 +58,7 @@ extension SupabaseDBRequest: SNMRequestConvertible {
                 header: createAuthHeader(accessToken: accessToken),
                 body: data
             )
-        case .fetchList(_, let accessToken, let data, _, _):
+        case .rpc(_, let accessToken, let data, _):
             return .compositePlain(
                 header: createAuthHeader(accessToken: accessToken),
                 body: data

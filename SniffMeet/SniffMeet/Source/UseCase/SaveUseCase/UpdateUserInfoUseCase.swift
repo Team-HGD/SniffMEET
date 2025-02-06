@@ -29,11 +29,16 @@ struct UpdateUserInfoUseCaseImpl: UpdateUserInfoUseCase {
                 throw SupabaseAuthError.userNotFound
             }
             let userData = try JSONEncoder().encode(info)
-            try await remoteDBManager.updateData(
-                in: Environment.SupabaseTableName.userInfo,
-                at: id,
-                with: userData
-            )
+//            try await remoteDBManager.updateData(
+//                in: Environment.SupabaseTableName.userInfo,
+//                at: id,
+//                with: userData
+//            )
+            try await remoteDBManager.updateData()
+                .setTable(Environment.SupabaseTableName.userInfo)
+                .setBody(userData)
+                .setQuery(key: "id", value: "eq.\(id)")
+                .request()
         } catch {
             SNMLogger.error("\(error.localizedDescription)")
         }

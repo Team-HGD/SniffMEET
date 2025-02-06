@@ -21,14 +21,19 @@ final class MPCManager: NSObject {
 
     private var cancellables = Set<AnyCancellable>()
     var availablePeers = Set<MCPeerID>()
-    var connectedPeerManager: ConnectedPeerManager
+    var connectedPeerManager: ConnectedPeerManagable
     var isAvailableToBeConnected = CurrentValueSubject<Bool, Never>(false)
     
-    init(advertiser: MPCAdvertiser, browser: MPCBrowser, session: MCSession) {
+    init(
+        advertiser: MPCAdvertiser,
+        browser: MPCBrowser,
+        session: MCSession,
+        connectedPeerManager: ConnectedPeerManagable = ConnectedPeerManager()
+    ) {
         self.advertiser = advertiser
         self.browser = browser
         self.session = session
-        connectedPeerManager = ConnectedPeerManager()
+        self.connectedPeerManager = connectedPeerManager
         super.init()
 
         self.browser.browser.delegate = self
@@ -153,18 +158,5 @@ extension MPCManager {
         } catch {
             SNMLogger.error("Fail to send data through mpcSession: \(error.localizedDescription)")
         }
-    }
-}
-
-// connected peer에 대해서만 동시성 문제 발생 예상
-actor ConnectedPeerManager {
-    var connectedPeer: MCPeerID?
-    
-    func connect(peer: MCPeerID) {
-        if connectedPeer != nil { return }
-        connectedPeer = peer
-    }
-    func disconnect() {
-        connectedPeer = nil
     }
 }

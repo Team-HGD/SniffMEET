@@ -87,9 +87,9 @@ final class SupabaseDBManager: RemoteDBManageable {
             _ = try await networkProvider.request(
                 with: SupabaseDBRequest.updateData(
                     table: table,
-                    id: id,
                     accessToken: session.accessToken,
-                    data: data
+                    data: data,
+                    id: id
                 )
             )
         } catch {
@@ -114,8 +114,8 @@ final class SupabaseDBManager: RemoteDBManageable {
             let response = try await networkProvider.request(
                 with: SupabaseDBRequest.fetchList(
                     table: table,
-                    data: data,
                     accessToken: session.accessToken,
+                    data: data,
                     page: page,
                     pageSize: pageSize
                 )

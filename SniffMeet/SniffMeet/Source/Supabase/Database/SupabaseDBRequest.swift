@@ -10,8 +10,8 @@ import Foundation
 enum SupabaseDBRequest {
     case fetchData(table: String, accessToken: String, query: [String: String])
     case insertData(table: String, accessToken: String, data: Data)
-    case updateData(table: String, id: UUID, accessToken: String, data: Data)
-    case fetchList(table: String, data: Data, accessToken: String, page: Int, pageSize: Int)
+    case updateData(table: String, accessToken: String, data: Data, id: UUID)
+    case fetchList(table: String, accessToken: String, data: Data, page: Int, pageSize: Int)
 }
 
 extension SupabaseDBRequest: SNMRequestConvertible {
@@ -31,7 +31,7 @@ extension SupabaseDBRequest: SNMRequestConvertible {
                 method: .post,
                 query: nil
             )
-        case .updateData(let table, let id, _, _):
+        case .updateData(let table, _, _, let id):
             return Endpoint(
                 baseURL: SupabaseConfig.baseURL,
                 path: "rest/v1/\(table)",
@@ -56,12 +56,12 @@ extension SupabaseDBRequest: SNMRequestConvertible {
         case .fetchData(_, let accessToken, _):
             return .header(with: createAuthHeader(accessToken: accessToken))
         case .insertData(_, let accessToken, let data),
-             .updateData(_, _, let accessToken, let data):
+             .updateData(_, let accessToken, let data, _):
             return .compositePlain(
                 header: createAuthHeader(accessToken: accessToken),
                 body: data
             )
-        case .fetchList(_, let data, let accessToken, _, _):
+        case .fetchList(_, let accessToken, let data, _, _):
             return .compositePlain(
                 header: createAuthHeader(accessToken: accessToken),
                 body: data

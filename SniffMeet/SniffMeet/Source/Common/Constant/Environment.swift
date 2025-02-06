@@ -33,5 +33,6 @@ enum Environment {
         static let matelistFunction = "rpc/get_user_info_from_mate_list"
         static let notificationListFunction = "rpc/notification_list"
         static let walkRequest = "walk_request"
+        static let reportlist = "report_list"
     }
 }

@@ -34,6 +34,9 @@ final class MockMPCSession: NSObject, MCSessionDelegate {
             connectedState = .connecting
         case .notConnected:
             connectedState = .notConnected
+            Task {
+                await mpcManager.connectedPeerManager.disconnect()
+            }
         @unknown default:
             break
         }

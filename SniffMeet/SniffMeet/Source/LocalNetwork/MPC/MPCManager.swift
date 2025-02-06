@@ -152,7 +152,7 @@ extension MPCManager {
         do {
             try self.session.send(data, toPeers: [connectedPeer], with: .reliable)
         } catch {
-            SNMLogger.error("DogProfileInfo 전송 실패 \(error.localizedDescription)")
+            SNMLogger.error("Fail to send data through mpcSession: \(error.localizedDescription)")
         }
     }
 }

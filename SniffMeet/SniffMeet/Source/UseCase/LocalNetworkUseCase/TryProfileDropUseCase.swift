@@ -117,11 +117,11 @@ final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
 extension TryProfileDropUseCaseImpl: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         guard session !== recentInvalidMPCSession else { return }
-
+        
         SNMLogger.info("peer \(peerID) didChangeState: \(state.rawValue)")
-        Task {
-            switch state {
-            case .connected:
+        switch state {
+        case .connected:
+            Task {
                 do {
                     SNMLogger.log("successfully connected to MPCSession: \(session.connectedPeers) session \(session)")
                     await mpcManager.connectedPeerManager.connect(peer: peerID)
@@ -136,9 +136,9 @@ extension TryProfileDropUseCaseImpl: MCSessionDelegate {
                 } catch {
                     SNMLogger.error(error.localizedDescription)
                 }
-            default:
-                break
             }
+        default:
+            break
         }
     }
 

@@ -15,6 +15,7 @@ protocol ReportMateViewable: AnyObject {
 final class ReportMateViewController: BaseViewController, ReportMateViewable {
     var presenter: (any ReportMatePresentable)?
     private var cancellables: Set<AnyCancellable> = []
+    private var textViewEdited: Bool = false
     private var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "ImagePlaceholder")
@@ -66,6 +67,7 @@ final class ReportMateViewController: BaseViewController, ReportMateViewable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        reportTextView.delegate = self
         view.backgroundColor = .systemBackground
         presenter?.viewDidLoad()
     }
@@ -77,6 +79,7 @@ final class ReportMateViewController: BaseViewController, ReportMateViewable {
 
     override func configureAttributes() {
         configureNavigationControllerAttributes()
+        updateSubmitButtonState()
         hideKeyboardWhenTappedAround()
         selectionViewTapGesture()
     }
@@ -177,6 +180,51 @@ final class ReportMateViewController: BaseViewController, ReportMateViewable {
             }
             .store(in: &cancellables)
     }
+    func updateSubmitButtonState() {
+        if textViewEdited == false {
+            submitButton.isEnabled = false
+        } else {
+            submitButton.isEnabled = (reportTextView.text.isEmpty == false) && (selectionLabel.text != Context.reportTitlePlaceholder)
+        }
+
+    }
+}
+
+extension ReportMateViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == Context.reportMessagePlaceholder {
+            textView.text = nil
+            textView.textColor = .black
+            textViewEdited = true
+        }
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = Context.reportMessagePlaceholder
+            textView.textColor = .lightGray
+        }
+    }
+    func textViewDidChange(_ textView: UITextView) {
+        updateSubmitButtonState()
+    }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        let inputString = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let oldString = textView.text,
+              let newRange = Range(range, in: oldString) else {
+            return true
+        }
+        let newString = oldString.replacingCharacters(
+            in: newRange,
+            with: inputString
+        ).trimmingCharacters(in: .whitespacesAndNewlines)
+        let characterCount = newString.count
+        guard characterCount <= Context.characterCountLimit else { return false }
+        return true
+    }
 }
 
 private extension ReportMateViewController {
@@ -187,5 +235,6 @@ private extension ReportMateViewController {
         static let reportMessagePlaceholder: String = "자세한 신고 내용을 입력해주세요."
         static let submitButtonTitle: String = "제출하기"
         static let topMargin: CGFloat = 150
+        static let characterCountLimit: Int = 100
     }
 }

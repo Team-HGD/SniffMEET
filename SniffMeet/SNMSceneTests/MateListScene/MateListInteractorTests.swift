@@ -14,6 +14,7 @@ final class MateListInteractorTests: XCTestCase {
     private var requestProfileImageUseCaseMock: RequestProfileImageUseCase!
     private var tryProfileDropUseCaseMock: TryProfileDropUseCase!
     private var quitProfileDropUseCaseMock: QuitProfileDropUseCase!
+    private var deleteMateUseCaseMock: DeleteMateUseCase!
     private var userInfoDTOList = [
         UserInfoDTO(id: UUID(), dogName: "젤리", age: 1, sex: .female, sexUponIntake: true, size: .small, keywords: [.energetic], nickname: "구아바", profileImageURL: nil),
         UserInfoDTO(id: UUID(), dogName: "딸기", age: 1, sex: .female, sexUponIntake: true, size: .small, keywords: [.energetic], nickname: "생크림", profileImageURL: nil),
@@ -26,12 +27,14 @@ final class MateListInteractorTests: XCTestCase {
         requestProfileImageUseCaseMock = RequestProfileImageUseCaseMock()
         tryProfileDropUseCaseMock = TryProfileDropUseCaseMock()
         quitProfileDropUseCaseMock = QuitProfileDropUseCaseMock()
+        deleteMateUseCaseMock = DeleteMateUseCaseMock()
         sut = MateListInteractor(
             presenter: presenterSpy,
             requestMateListUseCase: requestMateListUseCaseMock,
             requestProfileImageUseCase: requestProfileImageUseCaseMock,
             tryProfileDropUseCase: tryProfileDropUseCaseMock,
-            quitProfileDropUseCase: quitProfileDropUseCaseMock
+            quitProfileDropUseCase: quitProfileDropUseCaseMock,
+            deleteMateUseCase: deleteMateUseCaseMock
         )
     }
 

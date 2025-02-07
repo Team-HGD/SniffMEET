@@ -38,4 +38,8 @@ final class MateListPresenterSpy: MateListInteractorOutput {
     func failToConnectNISession() {
         presentNINotConnectedCalled = true
     }
+
+    func didDeleteMate(_ mate: Mate) {
+        // didDeleteMate
+    }
 }

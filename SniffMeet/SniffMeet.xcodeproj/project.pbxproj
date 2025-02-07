@@ -297,6 +297,7 @@
 		99E79FA92D556E1900E48552 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FA72D556E1500E48552 /* Report.swift */; };
 		99E79FAB2D556E8600E48552 /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FAA2D556E7100E48552 /* ReportDTO.swift */; };
 		99E79FAC2D556E8600E48552 /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FAA2D556E7100E48552 /* ReportDTO.swift */; };
+		99E79FAD2D55EC8600E48552 /* SNMLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B592CECE8F90093BEB9 /* SNMLogger.swift */; };
 		99FA4E792CE0FBBF00553C2E /* ProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */; };
 		A202A1152CEDD50700B98203 /* SupabaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */; };
 		A202A1172CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */; };
@@ -2523,6 +2524,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99E79FAD2D55EC8600E48552 /* SNMLogger.swift in Sources */,
 				FD159A7D2D35166D00B425D9 /* Environment.swift in Sources */,
 				FD331A8B2CF33E7100F39426 /* UserDefaultsManager.swift in Sources */,
 				FD331A8C2CF33E7100F39426 /* KeychainManager.swift in Sources */,

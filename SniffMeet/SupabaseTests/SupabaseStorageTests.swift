@@ -13,7 +13,8 @@ final class SupabaseStorageTests: XCTestCase {
 
     override func setUp() {
         self.storageManager = SupabaseStorageManager(
-            networkProvider: SNMNetworkProvider()
+            networkProvider: SNMNetworkProvider(),
+            sessionManager: SupabaseSessionManager.shared
         )
     }
 

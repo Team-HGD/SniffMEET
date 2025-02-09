@@ -49,7 +49,7 @@ extension RequestWalkRouter: RequestWalkBuildable {
         RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: SNMNetworkProvider(),
-                sessionManager: SessionManager.shared
+                sessionManager: SupabaseSessionManager.shared
             ),
             cacheManager: CacheManager.shared
         )

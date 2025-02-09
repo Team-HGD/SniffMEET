@@ -78,7 +78,7 @@ final class RespondWalkInteractor: RespondWalkInteractable {
                     // TODO: 에러 핸들링 필요
                     return
                 }
-                let userID = try SessionManager.shared.userID.get()
+                let userID = try SupabaseSessionManager.shared.userID.get()
                 let userInfo = try loadUserUseCase.execute()
                 let walkNoti = WalkNotiDTO(id: UUID(),
                                            createdAt: date,

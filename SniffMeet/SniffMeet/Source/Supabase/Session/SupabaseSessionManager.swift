@@ -16,7 +16,7 @@ protocol SessionManageable {
     func checkSession() async throws
 }
 
-final class SessionManager: SessionManageable {
+final class SupabaseSessionManager: SessionManageable {
     private let networkProvider: SNMNetworkProvider
     private let decoder: JSONDecoder
     private var session: SupabaseSession?
@@ -46,10 +46,22 @@ final class SessionManager: SessionManageable {
     func saveSession(for session: SupabaseSession?) throws {
         guard let session else { throw SupabaseSessionError.sessionNotExist }
         do {
-            try KeychainManager.shared.set(value: session.accessToken, forKey: "accessToken")
-            try KeychainManager.shared.set(value: session.refreshToken, forKey: "refreshToken")
-            try UserDefaultsManager.shared.set(value: session.expiresAt, forKey: "expiresAt")
-            try UserDefaultsManager.shared.set(value: session.user, forKey: Environment.UserDefaultsKey.sessionUserInfo)
+            try KeychainManager.shared.set(
+                value: session.accessToken,
+                forKey: Environment.KeychainKey.accessToken
+            )
+            try KeychainManager.shared.set(
+                value: session.refreshToken,
+                forKey: Environment.KeychainKey.refreshToken
+            )
+            try UserDefaultsManager.shared.set(
+                value: session.expiresAt,
+                forKey: Environment.UserDefaultsKey.expiresAt
+            )
+            try UserDefaultsManager.shared.set(
+                value: session.user,
+                forKey: Environment.UserDefaultsKey.sessionUserInfo
+            )
             self.session = session
         } catch {
             throw SupabaseSessionError.sessionNotExist
@@ -58,7 +70,7 @@ final class SessionManager: SessionManageable {
     
     func checkSession() async throws {
         guard let session else { throw SupabaseSessionError.sessionNotExist }
-        if Date(timeIntervalSince1970: TimeInterval(session.expiresAt + 30)) < Date() {
+        if Date(timeIntervalSince1970: TimeInterval(session.expiresAt + Constants.bufferTime)) < Date() {
             try await refreshSession()
         }
     }
@@ -90,9 +102,16 @@ final class SessionManager: SessionManageable {
     
     private func loadTokens() throws {
         do {
-            let accessToken = try KeychainManager.shared.get(forKey: "accessToken")
-            let refreshToken = try KeychainManager.shared.get(forKey: "refreshToken")
-            let expiresAt = try UserDefaultsManager.shared.get(forKey: "expiresAt", type: Int.self)
+            let accessToken = try KeychainManager.shared.get(
+                forKey: Environment.KeychainKey.accessToken
+            )
+            let refreshToken = try KeychainManager.shared.get(
+                forKey: Environment.KeychainKey.refreshToken
+            )
+            let expiresAt = try UserDefaultsManager.shared.get(
+                forKey: Environment.UserDefaultsKey.expiresAt,
+                type: Int.self
+            )
             self.session = SupabaseSession(
                 accessToken: accessToken,
                 expiresAt: expiresAt,
@@ -106,8 +125,17 @@ final class SessionManager: SessionManageable {
 
 // MARK: - SessionManager+Singleton instance
 
-extension SessionManager {
-    static let shared = SessionManager()
+extension SupabaseSessionManager {
+    static let shared = SupabaseSessionManager()
+}
+
+// MARK: - SupabaseSessionManager+Constants
+
+extension SupabaseSessionManager {
+    enum Constants {
+        /// 세션이 만료되기 **bufferTime** 초 전에 미리 갱신을 시도함
+        static let bufferTime: Int = 30
+    }
 }
 
 // MARK: - SupabaseSessionError

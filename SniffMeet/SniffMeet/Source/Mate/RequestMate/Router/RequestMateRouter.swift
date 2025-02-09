@@ -33,13 +33,13 @@ extension RequestMateRouter: RequestMateBuildable {
         let respondMateRequestUseCase: RespondMateRequestUseCase = RespondMateRequestUseCaseImpl(
             localDataManager: LocalDataManager(),
             remoteDataManger: SupabaseDBManager.shared,
-            sessionManager: SessionManager.shared
+            sessionManager: SupabaseSessionManager.shared
         )
         let requestProfileImageUseCase: RequestProfileImageUseCase =
         RequestProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: SNMNetworkProvider(),
-                sessionManager: SessionManager.shared
+                sessionManager: SupabaseSessionManager.shared
             ),
             cacheManager: CacheManager.shared)
         let view = RequestMateViewController(dogDTO: profile)

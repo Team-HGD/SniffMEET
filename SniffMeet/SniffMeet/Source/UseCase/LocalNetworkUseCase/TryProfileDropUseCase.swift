@@ -86,7 +86,7 @@ final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
             let dog = try dataManager.loadData(
                 forKey: Environment.UserDefaultsKey.dogInfo,
                 type: UserInfo.self)
-            let userID = try SessionManager.shared.userID.get()
+            let userID = try SupabaseSessionManager.shared.userID.get()
             let imageURL = try? dataManager.loadData(
                 forKey: Environment.UserDefaultsKey.profileImage,
                 type: String.self)

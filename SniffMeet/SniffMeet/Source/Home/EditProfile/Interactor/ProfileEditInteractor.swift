@@ -72,7 +72,7 @@ final class ProfileEditInteractor: ProfileEditInteractable {
                         imageData: jpgData
                     )
                 }
-                let userID = try SessionManager.shared.userID.get()
+                let userID = try SupabaseSessionManager.shared.userID.get()
                 await updateUserInfoRemoteUseCase.execute(
                     info: UserInfoDTO(
                         id: userID,

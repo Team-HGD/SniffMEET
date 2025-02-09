@@ -27,7 +27,7 @@ enum HomeModuleBuilder {
                 jsonEncoder: JSONEncoder(),
                 keychainManager: KeychainManager.shared,
                 remoteDBManager: SupabaseDBManager.shared,
-                sessionManager: SessionManager.shared
+                sessionManager: SupabaseSessionManager.shared
             )
         )
         view.presenter = HomePresenter(view: view, router: router, interactor: interactor)

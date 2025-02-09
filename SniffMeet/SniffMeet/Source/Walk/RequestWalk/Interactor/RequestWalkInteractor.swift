@@ -42,7 +42,7 @@ final class RequestWalkInteractor: RequestWalkInteractable {
         Task {
             do {
                 let myInfo = try loadUserInfoUseCase.execute()
-                let id = try SessionManager.shared.userID.get()
+                let id = try SupabaseSessionManager.shared.userID.get()
                 let walkNoti = WalkNotiDTO(
                     id: UUID(),
                     createdAt: Date().convertDateToISO8601String(),

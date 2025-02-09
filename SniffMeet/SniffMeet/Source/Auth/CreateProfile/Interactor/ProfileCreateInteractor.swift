@@ -84,7 +84,7 @@ final class ProfileCreateInteractor: ProfileCreateInteractable {
     }
     
     private func saveUserInfoToRemote(dogInfo: UserInfo, profileImageFileName: String?) async throws {
-        guard let userID = try? SessionManager.shared.userID.get() else {
+        guard let userID = try? SupabaseSessionManager.shared.userID.get() else {
             throw SupabaseSessionError.sessionNotExist
         }
         let userInfoDTO = UserInfoDTO(

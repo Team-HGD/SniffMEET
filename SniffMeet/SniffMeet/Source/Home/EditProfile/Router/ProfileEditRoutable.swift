@@ -31,12 +31,12 @@ extension ProfileEditRouter: ProfileEditBuildable {
         )
         let updateUserInfoRemoteUseCase: UpdateUserInfoUseCase = UpdateUserInfoUseCaseImpl(
             remoteDBManager: SupabaseDBManager.shared,
-            sessionManager: SessionManager.shared
+            sessionManager: SupabaseSessionManager.shared
         )
         let saveProfileImageUseCase: SaveProfileImageUseCase = SaveProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: SNMNetworkProvider(),
-                sessionManager: SessionManager.shared
+                sessionManager: SupabaseSessionManager.shared
             ),
             userDefaultsManager: UserDefaultsManager.shared,
             imageSampler: ImageSampler()

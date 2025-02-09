@@ -44,7 +44,7 @@ extension RespondWalkRouter: RespondWalkBuildable {
         let requestProfileImageUseCase: RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: SNMNetworkProvider(),
-                sessionManager: SessionManager.shared
+                sessionManager: SupabaseSessionManager.shared
             ),
             cacheManager: CacheManager.shared
         )

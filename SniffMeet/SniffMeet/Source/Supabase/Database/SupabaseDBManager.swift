@@ -21,7 +21,7 @@ final class SupabaseDBManager: RemoteDBManageable {
     private let decoder: JSONDecoder
     
     private init() {
-        self.sessionManager = SessionManager.shared
+        self.sessionManager = SupabaseSessionManager.shared
         self.networkProvider = SNMNetworkProvider()
         self.decoder = JSONDecoder()
     }

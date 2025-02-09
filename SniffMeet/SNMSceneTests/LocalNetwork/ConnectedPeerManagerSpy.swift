@@ -7,7 +7,7 @@
 
 import MultipeerConnectivity
 
-actor ConnectedPeerManagerSpy: @preconcurrency ConnectedPeerManagable {
+actor ConnectedPeerManagerSpy: ConnectedPeerManagable {
     var previousConnectedPeer: MCPeerID?
     var connectedPeer: MCPeerID?
     var connectedPeerCount: Int = 0

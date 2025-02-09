@@ -7,13 +7,13 @@
 
 import MultipeerConnectivity
 
-protocol ConnectedPeerManagable {
+protocol ConnectedPeerManagable: Actor {
     var connectedPeer: MCPeerID? { get }
     func connect(peer: MCPeerID) async
     func disconnect() async
 }
 
-actor ConnectedPeerManager: @preconcurrency ConnectedPeerManagable {
+actor ConnectedPeerManager: ConnectedPeerManagable {
     var connectedPeer: MCPeerID?
 
     func connect(peer: MCPeerID) {

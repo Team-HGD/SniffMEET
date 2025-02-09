@@ -13,15 +13,15 @@ protocol RequestUserInfoRemoteUseCase {
 
 struct RequestUserInfoRemoteUseCaseImpl: RequestUserInfoRemoteUseCase {
     private let remoteDBManager: any RemoteDBManageable
+    private let sessionManager: any SessionManageable
     
-    init(remoteDBManager: any RemoteDBManageable) {
+    init(remoteDBManager: any RemoteDBManageable, sessionManager: any SessionManageable) {
         self.remoteDBManager = remoteDBManager
+        self.sessionManager = sessionManager
     }
     
     func execute() async throws -> [UserInfoDTO] {
-        guard let userID = SessionManager.shared.userID else {
-            throw SupabaseSessionError.sessionNotExist
-        }
+        let userID = try sessionManager.userID.get()
         let data = try await remoteDBManager.fetchData()
             .setTable(Environment.SupabaseTableName.userInfo)
             .setQuery(.equal("id", userID))

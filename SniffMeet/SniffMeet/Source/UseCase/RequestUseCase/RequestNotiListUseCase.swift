@@ -11,12 +11,14 @@ protocol RequestNotiListUseCase {
 }
 
 struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
-    var remoteManager: any RemoteDBManageable
+    private let remoteManager: any RemoteDBManageable
+    private let sessionManager: any SessionManageable
     let encoder: JSONEncoder
     let decoder: JSONDecoder
     
-    init(remoteManager: any RemoteDBManageable) {
+    init(remoteManager: any RemoteDBManageable, sessionManager: any SessionManageable) {
         self.remoteManager = remoteManager
+        self.sessionManager = sessionManager
         decoder = JSONDecoder()
         encoder = JSONEncoder()
     }
@@ -25,10 +27,7 @@ struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
         let tableName = Environment.SupabaseTableName.notificationListFunction
 
         do {
-            guard let userID = SessionManager.shared.userID else {
-                throw SNMError(level: .user, error: SupabaseSessionError.sessionNotExist)
-            }
-
+            let userID = try sessionManager.userID.get()
             let requestData = try encoder.encode(WalkNotiListRequestDTO(userId: userID))
             let data = try await remoteManager.rpc()
                 .setTable(tableName)
@@ -42,6 +41,8 @@ struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
         } catch let error as SupabaseDBError where error == .noMoreData {
             throw SNMError(level: .user, error: error)
         } catch let error as SupabaseAuthError {
+            throw SNMError(level: .user, error: error)
+        } catch let error as SupabaseSessionError {
             throw SNMError(level: .user, error: error)
         } catch {
             throw SNMError(level: .developer, error: error)

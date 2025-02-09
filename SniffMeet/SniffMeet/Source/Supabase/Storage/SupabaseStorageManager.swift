@@ -21,25 +21,24 @@ protocol RemoteImageManageable {
 
 struct SupabaseStorageManager: RemoteImageManageable {
     private let networkProvider: any NetworkProvider
+    private let sessionManager: any SessionManageable
 
-    init(networkProvider: SNMNetworkProvider) {
+    init(networkProvider: any NetworkProvider, sessionManager: any SessionManageable) {
         self.networkProvider = networkProvider
+        self.sessionManager = sessionManager
     }
+    
     func upload(
         imageData: Data,
         fileName: String,
         mimeType: MimeType = .image
     ) async throws {
         do {
-            if try SessionManager.shared.checkSessionExpiration() {
-                try await SessionManager.shared.refreshSession()
-            }
-            guard let session = SessionManager.shared.session else {
-                throw SupabaseSessionError.sessionNotExist
-            }
+            let accessToken = try sessionManager.accessToken.get()
+            try await sessionManager.checkSession()
             _ = try await networkProvider.request(
                 with: SupabaseStorageRequest.upload(
-                    accessToken: session.accessToken,
+                    accessToken: accessToken,
                     image: imageData,
                     fileName: fileName,
                     mimeType: mimeType

@@ -21,7 +21,7 @@ final class RequestWalkInteractor: RequestWalkInteractable {
     // private let requestMateInfoUseCase: any RequestMateInfoUseCase
     private let requestProfileImageUseCase: any RequestProfileImageUseCase
     private let loadUserInfoUseCase: any LoadUserInfoUseCase
-
+    
     init(
         mate: Mate,
         presenter: RequestWalkInteractorOutput? = nil,
@@ -37,39 +37,40 @@ final class RequestWalkInteractor: RequestWalkInteractable {
         self.requestProfileImageUseCase = requestProfileImageUseCase
         self.loadUserInfoUseCase = loadUserInfoUseCase
     }
-
+    
     func sendWalkRequest(message: String, latitude: Double, longtitude: Double, location: String) {
-        guard let id = SessionManager.shared.userID else { return }
-        guard let myInfo = try? loadUserInfoUseCase.execute() else { return }
-        
-        let walkNoti = WalkNotiDTO(id: UUID(),
-                                   createdAt: Date().convertDateToISO8601String(),
-                                   message: message,
-                                   latitude: latitude,
-                                   longtitude: longtitude,
-                                   senderId: id,
-                                   receiverId: mate.userID,
-                                   senderName: myInfo.name,
-                                   category: .walkRequest)
         Task {
             do {
+                let myInfo = try loadUserInfoUseCase.execute()
+                let id = try SessionManager.shared.userID.get()
+                let walkNoti = WalkNotiDTO(
+                    id: UUID(),
+                    createdAt: Date().convertDateToISO8601String(),
+                    message: message,
+                    latitude: latitude,
+                    longtitude: longtitude,
+                    senderId: id,
+                    receiverId: mate.userID,
+                    senderName: myInfo.name,
+                    category: .walkRequest
+                )
                 try await requestWalkUseCase.execute(walkNoti: walkNoti)
-
             } catch {
+                // TODO: 이 부분은 Mapper를 통해 정리할 수 있을 것 같습니다.
                 SNMLogger.error("RequestWalkInteractor: \(error.localizedDescription)")
             }
         }
         presenter?.didSendWalkRequest()
     }
-
+    
     func requestMateInfo() {
         presenter?.didFetchMateInfo(mateInfo: mate)
     }
-
+    
     func requestProfileImage(imageName: String?) {
         Task { @MainActor in
             let fileName = mate.profileImageURLString ?? ""
-            let imageData = try await requestProfileImageUseCase.execute(fileName: fileName)
+            let imageData = await requestProfileImageUseCase.execute(fileName: fileName)
             presenter?.didFetchProfileImage(imageData: imageData)
         }
     }

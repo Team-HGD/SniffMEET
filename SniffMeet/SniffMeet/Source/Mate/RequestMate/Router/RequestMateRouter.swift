@@ -38,7 +38,8 @@ extension RequestMateRouter: RequestMateBuildable {
         let requestProfileImageUseCase: RequestProfileImageUseCase =
         RequestProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
-                networkProvider: SNMNetworkProvider()
+                networkProvider: SNMNetworkProvider(),
+                sessionManager: SessionManager.shared
             ),
             cacheManager: CacheManager.shared)
         let view = RequestMateViewController(dogDTO: profile)

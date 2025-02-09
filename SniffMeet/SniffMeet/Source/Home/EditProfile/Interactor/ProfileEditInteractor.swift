@@ -12,7 +12,7 @@ protocol ProfileEditInteractable: AnyObject {
     var saveUserInfoUseCase: SaveUserInfoUseCase { get set }
     var updateUserInfoRemoteUseCase: UpdateUserInfoUseCase { get set }
     var saveProfileImageUseCase: SaveProfileImageUseCase { get set }
-
+    
     func requestUserInfo() throws -> UserInfo
     func updateUserInfo(name: String?,
                         age: UInt8?,
@@ -28,7 +28,7 @@ final class ProfileEditInteractor: ProfileEditInteractable {
     var updateUserInfoRemoteUseCase: UpdateUserInfoUseCase
     var saveProfileImageUseCase: SaveProfileImageUseCase
     private let loadUserInfoUseCase: LoadUserInfoUseCase
-
+    
     init(
         presenter: (any ProfileEditInteractorOutput)? = nil,
         saveUserInfoUseCase: SaveUserInfoUseCase,
@@ -45,32 +45,34 @@ final class ProfileEditInteractor: ProfileEditInteractable {
     func requestUserInfo() throws -> UserInfo {
         try loadUserInfoUseCase.execute()
     }
-    func updateUserInfo(name: String?,
-                        age: UInt8?,
-                        size: String,
-                        keywords: [String]?,
-                        profileImageData: (Data?, Data?))
-    {
+    func updateUserInfo(
+        name: String?,
+        age: UInt8?,
+        size: String,
+        keywords: [String]?,
+        profileImageData: (Data?, Data?)
+    ) {
         Task {
             do {
                 let convertedKeywords: [Keyword]? = keywords?.compactMap { Keyword(rawValue: $0) }
-                try saveUserInfoUseCase.execute(dog: UserInfo(name: name ?? "",
-                                                              age: age ?? 0,
-                                                              sex: Sex.female,
-                                                              sexUponIntake: true,
-                                                              size: Size(rawValue: size) ?? .small,
-                                                              keywords: convertedKeywords ?? [],
-                                                              nickname: "",
-                                                              profileImage: profileImageData.0))
+                try saveUserInfoUseCase.execute(
+                    dog: UserInfo(
+                        name: name ?? "",
+                        age: age ?? 0,
+                        sex: Sex.female,
+                        sexUponIntake: true,
+                        size: Size(rawValue: size) ?? .small,
+                        keywords: convertedKeywords ?? [],
+                        nickname: "",
+                        profileImage: profileImageData.0)
+                )
                 var fileName: String? = nil
                 if let jpgData = profileImageData.1 {
                     fileName = try await saveProfileImageUseCase.execute(
                         imageData: jpgData
                     )
                 }
-                guard let userID = SessionManager.shared.userID else {
-                    return
-                }
+                let userID = try SessionManager.shared.userID.get()
                 await updateUserInfoRemoteUseCase.execute(
                     info: UserInfoDTO(
                         id: userID,

@@ -25,14 +25,12 @@ struct UpdateUserInfoUseCaseImpl: UpdateUserInfoUseCase {
     
     func execute(info: UserInfoDTO) async {
         do {
-            guard let id = sessionManager.userID else {
-                throw SupabaseAuthError.userNotFound
-            }
+            let userID = try sessionManager.userID.get()
             let userData = try JSONEncoder().encode(info)
             try await remoteDBManager.updateData()
                 .setTable(Environment.SupabaseTableName.userInfo)
                 .setData(userData)
-                .setQuery(.equal("id", id))
+                .setQuery(.equal("id", userID))
                 .request()
         } catch {
             SNMLogger.error("\(error.localizedDescription)")

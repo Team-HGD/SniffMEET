@@ -25,9 +25,7 @@ struct RequestMateListUseCaseImpl: RequestMateListUseCase {
     func execute(page: Int, pageSize: Int) async throws -> [Mate] {
         do {
             let tableName = Environment.SupabaseTableName.matelistFunction
-            guard let userID = SessionManager.shared.userID else {
-                throw SNMError(level: .user, error: SupabaseSessionError.sessionNotExist)
-            }
+            let userID = try SessionManager.shared.userID.get()
             let requestData = try encoder.encode(MateListRequestDTO(userId: userID))
             let data = try await remoteDBManager.rpc()
                 .setTable(tableName)

@@ -31,9 +31,7 @@ struct RemoteSaveDeviceTokenUseCaseImpl: RemoteSaveDeviceTokenUseCase {
 
     func execute() async throws {
         do {
-            guard let id = sessionManager.userID else {
-                throw SupabaseAuthError.userNotFound
-            }
+            let id = try sessionManager.userID.get()
             let deviceToken = try keychainManager.get(forKey: Environment.KeychainKey.deviceToken)
             let deviceTokenDTO = SaveDeviceTokenDTO(deviceToken: deviceToken)
             let deviceTokenData = try jsonEncoder.encode(deviceTokenDTO)

@@ -9,19 +9,29 @@ import Combine
 import Foundation
 
 protocol SessionManageable {
-    var session: SupabaseSession? { get }
-    var userID: UUID? { get }
+    var userID: Result<UUID, SupabaseSessionError> { get }
+    var accessToken: Result<String, SupabaseSessionError> { get }
     func restoreSession() async throws
-    func refreshSession() async throws
     func saveSession(for session: SupabaseSession?) throws
-    func checkSessionExpiration() throws -> Bool
+    func checkSession() async throws
 }
 
 final class SessionManager: SessionManageable {
     private let networkProvider: SNMNetworkProvider
     private let decoder: JSONDecoder
-    var session: SupabaseSession?
-    var userID: UUID? { session?.user?.userID }
+    private var session: SupabaseSession?
+    var userID: Result<UUID, SupabaseSessionError> {
+        guard let userID = session?.user?.userID else {
+            return .failure(.sessionNotExist)
+        }
+        return .success(userID)
+    }
+    var accessToken: Result<String, SupabaseSessionError> {
+        guard let accessToken = session?.accessToken else {
+            return .failure(.sessionNotExist)
+        }
+        return .success(accessToken)
+    }
     
     private init() {
         networkProvider = SNMNetworkProvider()
@@ -33,7 +43,27 @@ final class SessionManager: SessionManageable {
         try await refreshSession()
     }
     
-    func refreshSession() async throws {
+    func saveSession(for session: SupabaseSession?) throws {
+        guard let session else { throw SupabaseSessionError.sessionNotExist }
+        do {
+            try KeychainManager.shared.set(value: session.accessToken, forKey: "accessToken")
+            try KeychainManager.shared.set(value: session.refreshToken, forKey: "refreshToken")
+            try UserDefaultsManager.shared.set(value: session.expiresAt, forKey: "expiresAt")
+            try UserDefaultsManager.shared.set(value: session.user, forKey: Environment.UserDefaultsKey.sessionUserInfo)
+            self.session = session
+        } catch {
+            throw SupabaseSessionError.sessionNotExist
+        }
+    }
+    
+    func checkSession() async throws {
+        guard let session else { throw SupabaseSessionError.sessionNotExist }
+        if Date(timeIntervalSince1970: TimeInterval(session.expiresAt + 30)) < Date() {
+            try await refreshSession()
+        }
+    }
+    
+    private func refreshSession() async throws {
         do {
             guard let refreshToken = session?.refreshToken else {
                 throw SupabaseSessionError.sessionNotExist
@@ -56,26 +86,6 @@ final class SessionManager: SessionManageable {
         } catch {
             throw SupabaseSessionError.refreshSessionFailed
         }
-    }
-    
-    func saveSession(for session: SupabaseSession?) throws {
-        guard let session else { throw SupabaseSessionError.sessionNotExist }
-        do {
-            try KeychainManager.shared.set(value: session.accessToken, forKey: "accessToken")
-            try KeychainManager.shared.set(value: session.refreshToken, forKey: "refreshToken")
-            try UserDefaultsManager.shared.set(value: session.expiresAt, forKey: "expiresAt")
-            try UserDefaultsManager.shared.set(value: session.user, forKey: Environment.UserDefaultsKey.sessionUserInfo)
-            self.session = session
-        } catch {
-            throw SupabaseSessionError.sessionNotExist
-        }
-    }
-    
-    func checkSessionExpiration() throws -> Bool {
-        guard let session else {
-            throw SupabaseSessionError.sessionNotExist
-        }
-        return Date(timeIntervalSince1970: TimeInterval(session.expiresAt + 30)) < Date()
     }
     
     private func loadTokens() throws {

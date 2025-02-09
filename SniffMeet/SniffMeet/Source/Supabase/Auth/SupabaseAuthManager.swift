@@ -14,13 +14,16 @@ protocol AuthManageable {
 
 final class SupabaseAuthManager: AuthManageable {
     private let networkProvider: any NetworkProvider
+    private let sessionManager: any SessionManageable
     private let decoder: JSONDecoder
     
     init(
         networkProvider: any NetworkProvider,
+        sessionManager: any SessionManageable,
         decoder: JSONDecoder
     ) {
         self.networkProvider = networkProvider
+        self.sessionManager = sessionManager
         self.decoder = decoder
     }
     
@@ -39,7 +42,7 @@ final class SupabaseAuthManager: AuthManageable {
                 refreshToken: sessionResponse.refreshToken,
                 user: SupabaseUser(from: sessionResponse.user)
             )
-            try SessionManager.shared.saveSession(for: session)
+            try sessionManager.saveSession(for: session)
             
         } catch {
             throw SupabaseAuthError.signInFailed

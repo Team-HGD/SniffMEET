@@ -35,7 +35,8 @@ extension ProfileEditRouter: ProfileEditBuildable {
         )
         let saveProfileImageUseCase: SaveProfileImageUseCase = SaveProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
-            networkProvider: SNMNetworkProvider()
+                networkProvider: SNMNetworkProvider(),
+                sessionManager: SessionManager.shared
             ),
             userDefaultsManager: UserDefaultsManager.shared,
             imageSampler: ImageSampler()
@@ -43,10 +44,10 @@ extension ProfileEditRouter: ProfileEditBuildable {
         let view: ProfileEditViewable & UIViewController = ProfileEditViewController()
         let router: ProfileEditRoutable & ProfileEditBuildable = ProfileEditRouter()
         let interactor: ProfileEditInteractable = ProfileEditInteractor(
-                saveUserInfoUseCase: saveUserInfoUseCase,
-                updateUserInfoRemoteUseCase: updateUserInfoRemoteUseCase,
-                saveProfileImageUseCase: saveProfileImageUseCase,
-                loadUserInfoUseCase: LoadUserInfoUseCaseImpl(
+            saveUserInfoUseCase: saveUserInfoUseCase,
+            updateUserInfoRemoteUseCase: updateUserInfoRemoteUseCase,
+            saveProfileImageUseCase: saveProfileImageUseCase,
+            loadUserInfoUseCase: LoadUserInfoUseCaseImpl(
                 dataLoadable: LocalDataManager(),
                 imageManageable: SNMFileManager(fileType: .image)
             )

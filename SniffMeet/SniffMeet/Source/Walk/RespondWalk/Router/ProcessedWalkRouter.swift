@@ -43,7 +43,8 @@ extension ProcessedWalkModuleBuildable {
             ),
             requestProfileImageUseCase: RequestProfileImageUseCaseImpl(
                 remoteImageManager: SupabaseStorageManager(
-                    networkProvider: SNMNetworkProvider()
+                    networkProvider: SNMNetworkProvider(),
+                    sessionManager: SessionManager.shared
                 ),
                 cacheManager: CacheManager.shared
             )

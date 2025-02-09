@@ -37,7 +37,8 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
         )
         let saveProfileImageUseCase: SaveProfileImageUseCase = SaveProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
-                networkProvider: networkProvider
+                networkProvider: networkProvider,
+                sessionManager: SessionManager.shared
             ),
             userDefaultsManager: UserDefaultsManager.shared,
             imageSampler: ImageSampler()
@@ -48,6 +49,7 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
         let signInUseCase: SignInUseCase = SignInUseCaseImpl(
             authManager: SupabaseAuthManager(
                 networkProvider: networkProvider,
+                sessionManager: SessionManager.shared,
                 decoder: JSONDecoder()
             )
         )

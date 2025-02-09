@@ -69,12 +69,16 @@ final class RespondWalkInteractor: RespondWalkInteractable {
             }
         }
     }
+    
     func respondWalkRequest(isAccepted: Bool, receivedNoti: WalkNoti) {
         let walkNotiCategory: WalkNotiCategory = isAccepted ? .walkAccepted : .walkDeclined
         Task {
             do {
-                guard let date = receivedNoti.createdAt?.convertDateToISO8601String(),
-                      let userID = SessionManager.shared.userID else { return }
+                guard let date = receivedNoti.createdAt?.convertDateToISO8601String() else {
+                    // TODO: 에러 핸들링 필요
+                    return
+                }
+                let userID = try SessionManager.shared.userID.get()
                 let userInfo = try loadUserUseCase.execute()
                 let walkNoti = WalkNotiDTO(id: UUID(),
                                            createdAt: date,

@@ -9,10 +9,10 @@ import Combine
 import Foundation
 
 protocol RemoteDBManageable {
-    func fetchData() throws -> RemoteDBRequestBuildable
-    func insertData() throws -> RemoteDBRequestBuildable
-    func updateData() throws -> RemoteDBRequestBuildable
-    func rpc() throws -> RemoteDBRequestBuildable
+    func fetchData() async throws -> RemoteDBRequestBuildable
+    func insertData() async throws -> RemoteDBRequestBuildable
+    func updateData() async throws -> RemoteDBRequestBuildable
+    func rpc() async throws -> RemoteDBRequestBuildable
 }
 
 final class SupabaseDBManager: RemoteDBManageable {
@@ -26,10 +26,9 @@ final class SupabaseDBManager: RemoteDBManageable {
         self.decoder = JSONDecoder()
     }
     
-    func fetchData() throws -> RemoteDBRequestBuildable {
-        guard let accessToken = sessionManager.session?.accessToken else {
-            throw SupabaseSessionError.sessionNotExist
-        }
+    func fetchData() async throws -> RemoteDBRequestBuildable {
+        let accessToken = try sessionManager.accessToken.get()
+        try await sessionManager.checkSession()
         return SupabaseDBRequestBuilder(
             networkProvider: networkProvider,
             accessToken: accessToken,
@@ -37,10 +36,9 @@ final class SupabaseDBManager: RemoteDBManageable {
         )
     }
     
-    func insertData() throws -> RemoteDBRequestBuildable {
-        guard let accessToken = sessionManager.session?.accessToken else {
-            throw SupabaseSessionError.sessionNotExist
-        }
+    func insertData() async throws -> RemoteDBRequestBuildable {
+        let accessToken = try sessionManager.accessToken.get()
+        try await sessionManager.checkSession()
         return SupabaseDBRequestBuilder(
             networkProvider: networkProvider,
             accessToken: accessToken,
@@ -48,10 +46,9 @@ final class SupabaseDBManager: RemoteDBManageable {
         )
     }
     
-    func updateData() throws -> RemoteDBRequestBuildable {
-        guard let accessToken = sessionManager.session?.accessToken else {
-            throw SupabaseSessionError.sessionNotExist
-        }
+    func updateData() async throws -> RemoteDBRequestBuildable {
+        let accessToken = try sessionManager.accessToken.get()
+        try await sessionManager.checkSession()
         return SupabaseDBRequestBuilder(
             networkProvider: networkProvider,
             accessToken: accessToken,
@@ -59,10 +56,9 @@ final class SupabaseDBManager: RemoteDBManageable {
         )
     }
     
-    func rpc() throws -> RemoteDBRequestBuildable {
-        guard let accessToken = sessionManager.session?.accessToken else {
-            throw SupabaseSessionError.sessionNotExist
-        }
+    func rpc() async throws -> RemoteDBRequestBuildable {
+        let accessToken = try sessionManager.accessToken.get()
+        try await sessionManager.checkSession()
         return SupabaseDBRequestBuilder(
             networkProvider: networkProvider,
             accessToken: accessToken,

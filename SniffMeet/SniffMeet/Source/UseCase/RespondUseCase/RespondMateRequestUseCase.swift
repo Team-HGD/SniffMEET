@@ -40,16 +40,14 @@ struct RespondMateRequestUseCaseImpl: RespondMateRequestUseCase {
             mateList = []
         }
         do {
-            guard let id = sessionManager.userID else {
-                throw SupabaseAuthError.userNotFound
-            }
+            let userID = try sessionManager.userID.get()
             mateList.append(mateId)
             mateList = Array(Set(mateList))
             let mateListData = try encoder.encode(MateListDTO(mates: mateList))
             try await remoteDBManager.insertData()
                 .setTable(Environment.SupabaseTableName.matelist)
                 .setData(mateListData)
-                .setQuery(.equal("id", id))
+                .setQuery(.equal("id", userID))
                 .request()
             
             try localDataManager.storeData(data:mateList, key: Environment.UserDefaultsKey.mateList)

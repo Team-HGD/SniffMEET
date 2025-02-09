@@ -41,10 +41,10 @@ extension RespondWalkRouter: RespondWalkBuildable {
         let calculateTimeUseCase: CalculateTimeLimitUseCase = CalculateTimeLimitUseCaseImpl()
         let convertLocationToTextUseCase: ConvertLocationToTextUseCase =
         ConvertLocationToTextUseCaseImpl()
-        let requestProfileImageUseCase: RequestProfileImageUseCase =
-RequestProfileImageUseCaseImpl(
+        let requestProfileImageUseCase: RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
-                networkProvider: SNMNetworkProvider()
+                networkProvider: SNMNetworkProvider(),
+                sessionManager: SessionManager.shared
             ),
             cacheManager: CacheManager.shared
         )

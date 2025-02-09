@@ -18,7 +18,7 @@ protocol RemoteDBRequestBuildable {
     func setTable(_ table: String) -> Self
     func setData(_ data: Data) -> Self
     func setQuery(_ parameter: SupabaseQueryParameter) -> Self
-    func request() async throws -> Data
+    @discardableResult func request() async throws -> Data
 }
 
 final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {

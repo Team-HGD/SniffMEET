@@ -62,8 +62,11 @@ extension MateListRouter: MateListBuildable {
             ),
             cacheManager: CacheManager.shared
         )
-        let mpcManager = MPCManager()
-        let niManager = NIManager(mpcManager: mpcManager)
+
+        guard let mpcManager = MPCManager(dataManager: LocalDataManager()) else {
+            return UIViewController()
+        }
+        let niManager = NIManager()
         let tryProfileDropUseCase: TryProfileDropUseCase =
         TryProfileDropUseCaseImpl(
             dataManager: LocalDataManager(),

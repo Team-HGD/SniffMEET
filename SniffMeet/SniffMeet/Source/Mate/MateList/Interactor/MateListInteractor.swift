@@ -4,8 +4,10 @@
 //
 //  Created by Kelly Chui on 11/21/24.
 //
+
 import Combine
 import Foundation
+import MultipeerConnectivity
 
 protocol MateListInteractable: AnyObject {
     var presenter: (any MateListInteractorOutput)? { get set }
@@ -85,22 +87,22 @@ final class MateListInteractor: MateListInteractable {
             .receive(on: RunLoop.main)
             .sink {[weak self] (profile) in
                 guard let profile else { return }
-                if self?.tryProfileDropUseCase.isTransistioned == false {
+                if self?.tryProfileDropUseCase.isTransitioned == false {
                     self?.presenter?.receiveProfileData(profile)
-                    self?.tryProfileDropUseCase.isTransistioned = true
+                    self?.tryProfileDropUseCase.isTransitioned = true
                 }
             }
             .store(in: &cancellables)
     }
     
     func tryProfileDrop() {
-        if tryProfileDropUseCase.isTransistioned {
-            let mpcManager = MPCManager()
-            let niManager = NIManager(mpcManager: mpcManager)
+        // 정보 load
+        if tryProfileDropUseCase.isTransitioned {
+            guard let mpcManager = MPCManager(dataManager: LocalDataManager())
+            else { return }
+            let niManager = NIManager()
             tryProfileDropUseCase.reset(mpcManager: mpcManager, nimanager: niManager)
             quitProfileDropUseCase.reset(niManager: niManager)
-            tryProfileDropUseCase.isTransistioned = false
-
         }
         tryProfileDropUseCase.execute()
     }

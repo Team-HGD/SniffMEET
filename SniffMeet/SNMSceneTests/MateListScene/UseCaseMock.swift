@@ -37,7 +37,7 @@ final class TryProfileDropUseCaseMock: TryProfileDropUseCase {
     var profilePublisher: CurrentValueSubject<DogDTO?, Never> = CurrentValueSubject(nil)
     var isNIConnected: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
     var transmissionFlag: Set<String> = []
-    var isTransistioned: Bool = false
+    var isTransitioned: Bool = false
     var triedBefore: Bool = false
     
     init() {

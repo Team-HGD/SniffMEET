@@ -1,12 +1,12 @@
 //
-//  remoteDBManagerMock.swift
+//  RemoteDBManagerMock.swift
 //  SniffMeet
 //
 //  Created by 윤지성 on 1/22/25.
 //
 import Foundation
 
-final class remoteDBManagerMock: RemoteDBManageable {
+final class RemoteDBManagerMock: RemoteDBManageable {
     var data: Data?
     var hasInserted: Bool = false
     var hasUpdated: Bool = false

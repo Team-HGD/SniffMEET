@@ -34,8 +34,9 @@ jobs:
           sudo xcode-select -s /Applications/Xcode_16.0.app
       - name: Create .xcconfig file
         run: |
-          echo "SERVER_URL" = ${{ secrets.SERVER_URL }} >> SniffMeet/Resource/Debug.xcconfig
-          echo "PUBLIC_KEY" = ${{ secrets.PUBLIC_KEY }} >> SniffMeet/Resource/Debug.xcconfig
+          touch SniffMeet/SniffMeet/Resource/Debug.xcconfig
+          echo "SERVER_URL" = ${{ secrets.SERVER_URL }} >> SniffMeet/SniffMeet/Resource/Debug.xcconfig
+          echo "PUBLIC_KEY" = ${{ secrets.PUBLIC_KEY }} >> SniffMeet/SniffMeet/Resource/Debug.xcconfig
       - name: List available devices
         run: xcrun simctl list devices
       - name: Install SwiftLint

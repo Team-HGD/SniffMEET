@@ -22,7 +22,7 @@ enum SupabaseConfig {
         }
         return publicKey
     }()
-    #else
+#else
     static let baseURL: URL = {
         guard let urlString = Bundle.main.object(forInfoDictionaryKey: "SERVER_URL") as? String,
               let url = URL(string: urlString.replacingOccurrences(of: "\\", with: "")) else {

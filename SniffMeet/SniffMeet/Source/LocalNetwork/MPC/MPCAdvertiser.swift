@@ -36,6 +36,7 @@ final class MPCAdvertiser {
         )
         SNMLogger.log("Created new MCNearbyServiceAdvertiser instance")
     }
+    
     func startAdvertising() {
         advertiser.startAdvertisingPeer()
         SNMLogger.log("start advertising")

@@ -61,3 +61,8 @@ struct QuitProfileDropUseCaseMock: QuitProfileDropUseCase {
     mutating func reset(niManager: NIManager) {
     }
 }
+
+struct DeleteMateUseCaseMock: DeleteMateUseCase {
+    func execute(mate: Mate) async throws {
+    }
+}

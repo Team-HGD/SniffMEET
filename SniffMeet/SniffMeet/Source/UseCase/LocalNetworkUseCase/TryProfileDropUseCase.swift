@@ -53,6 +53,7 @@ final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
         encodeFlagData()
         loadProfileData()
     }
+    
     func reset(mpcManager: MPCManager, nimanager: NIManager) {
         isNIConnected.value = false
         profilePublisher.value = nil
@@ -161,7 +162,8 @@ extension TryProfileDropUseCaseImpl: MCSessionDelegate {
             } catch {
                 SNMLogger.error("Failed to decode received data: \(error)")
             }
-            if self?.transmissionFlag.contains(Context.peerReceived) == true && self?.isTransitioned == true {
+            if self?.transmissionFlag.contains(Context.peerReceived) == true
+                && self?.isTransitioned == true {
                 self?.niManager.endSession()
                 self?.mpcManager.isAvailableToBeConnected.send(false)
             }

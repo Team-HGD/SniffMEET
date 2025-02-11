@@ -37,6 +37,7 @@ jobs:
           touch SniffMeet/SniffMeet/Resource/Debug.xcconfig
           echo "SERVER_URL" = ${{ secrets.SERVER_URL }} >> SniffMeet/SniffMeet/Resource/Debug.xcconfig
           echo "PUBLIC_KEY" = ${{ secrets.PUBLIC_KEY }} >> SniffMeet/SniffMeet/Resource/Debug.xcconfig
+          echo "NOTIFICATION_SERVER" = ${{ secrets.NOTIFICATION_SERVER }} >> SniffMeet/SniffMeet/Resource/Debug.xcconfig
       - name: List available devices
         run: xcrun simctl list devices
       - name: Install SwiftLint

@@ -40,5 +40,7 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>NOTIFICATION_SERVER</key>
+	<string>$(NOTIFICATION_SERVER)</string>
 </dict>
 </plist>

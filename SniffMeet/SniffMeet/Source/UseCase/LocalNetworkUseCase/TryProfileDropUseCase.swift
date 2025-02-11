@@ -53,6 +53,7 @@ final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
         encodeFlagData()
         loadProfileData()
     }
+    
     func reset(mpcManager: MPCManager, nimanager: NIManager) {
         isNIConnected.value = false
         profilePublisher.value = nil
@@ -89,9 +90,8 @@ final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
         do {
             let dog = try dataManager.loadData(
                 forKey: Environment.UserDefaultsKey.dogInfo,
-                type: UserInfo.self
-            )
-            guard let userID = SessionManager.shared.session?.user?.userID else { return }
+                type: UserInfo.self)
+            let userID = try SupabaseSessionManager.shared.userID.get()
             let imageURL = try? dataManager.loadData(
                 forKey: Environment.UserDefaultsKey.profileImage,
                 type: String.self
@@ -162,7 +162,8 @@ extension TryProfileDropUseCaseImpl: MCSessionDelegate {
             } catch {
                 SNMLogger.error("Failed to decode received data: \(error)")
             }
-            if self?.transmissionFlag.contains(Context.peerReceived) == true && self?.isTransitioned == true {
+            if self?.transmissionFlag.contains(Context.peerReceived) == true
+                && self?.isTransitioned == true {
                 self?.niManager.endSession()
                 self?.mpcManager.isAvailableToBeConnected.send(false)
             }

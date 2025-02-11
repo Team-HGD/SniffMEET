@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 struct RequestMateListUseCaseMock: RequestMateListUseCase {
-    var remoteDatabaseManager: any RemoteDatabaseManager
+    var remoteDBManager: any RemoteDBManageable
     var mateList: [UserInfoDTO]
     
     init(mateList: [UserInfoDTO]) {
-        remoteDatabaseManager = RemoteDatabaseManagerMock(fetchData: nil, fetchListData: nil)
+        remoteDBManager = RemoteDBManagerMock(data: nil)
         self.mateList = mateList
     }
     
@@ -59,5 +59,10 @@ struct QuitProfileDropUseCaseMock: QuitProfileDropUseCase {
     }
     
     mutating func reset(niManager: NIManager) {
+    }
+}
+
+struct DeleteMateUseCaseMock: DeleteMateUseCase {
+    func execute(mate: Mate) async throws {
     }
 }

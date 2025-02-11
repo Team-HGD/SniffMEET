@@ -161,6 +161,21 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let mate = presenter?.output.mates.value[indexPath.row] else { return nil }
+
+        let delete = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, success in
+            self?.presenter?.didSwipeToDelete(mate: mate)
+            success(true)
+        }
+
+        let declare = UIContextualAction(style: .normal, title: "신고") { [weak self] _, _, success in
+            self?.presenter?.didSwipeToReport(mate: mate)
+            success(true)
+        }
+        return UISwipeActionsConfiguration(actions:[delete, declare])
+    }
+
     private func configureMateListCell(cell: UITableViewCell, mate: Mate) {
         if let imageData = imageDataSource[mate.userID],
            let profileImage = UIImage(data: imageData) {

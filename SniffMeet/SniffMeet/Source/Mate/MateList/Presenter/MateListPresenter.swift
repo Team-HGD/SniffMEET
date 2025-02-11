@@ -16,6 +16,8 @@ protocol MateListPresentable: AnyObject {
     
     func viewWillAppear()
     func didTabMateListCell(mate: Mate)
+    func didSwipeToDelete(mate: Mate)
+    func didSwipeToReport(mate: Mate)
     func showAlertConnected()
     func showAlertDisconnected()
     func didScrollToBottom()
@@ -24,6 +26,7 @@ protocol MateListPresentable: AnyObject {
 
 protocol MateListInteractorOutput: AnyObject {
     func receiveProfileData(_ data: DogDTO)
+    func didDeleteMate(_ mate: Mate)
     func didConnectNISession()
     func failToConnectNISession()
 }
@@ -61,6 +64,21 @@ final class MateListPresenter: MateListPresentable {
         router?.presentWalkRequestView(mateListView: view, mate: mate)
     }
 
+    func didSwipeToDelete(mate: Mate) {
+        Task {
+            do {
+                try await interactor?.deleteMate(mate: mate)
+            } catch {
+                SNMLogger.error("deleteMate error: \(error)")
+            }
+        }
+    }
+
+    func didSwipeToReport(mate: Mate) {
+        guard let view else { return }
+        router?.showReportMateView(mateListView: view, data: mate)
+    }
+    
     func showAlertConnected() {
         guard let view else { return }
         router?.showAlert(
@@ -111,7 +129,7 @@ final class MateListPresenter: MateListPresentable {
                 switch snmError.error {
                 case let error as SupabaseDBError where error == .noMoreData:
                     self.didReachEndOfMateList()
-                case let error as SupabaseAuthError where error == .sessionNotExist:
+                case let error as SupabaseSessionError where error == .sessionNotExist:
                     SNMLogger.error("세션이 존재하지 않습니다.")
                     // TODO: 로그인 화면으로 이동
                 default:
@@ -156,6 +174,10 @@ final class MateListPresenter: MateListPresentable {
 }
 
 extension MateListPresenter: MateListInteractorOutput {
+    func didDeleteMate(_ mate: Mate) {
+        output.mates.value.removeAll { $0.userID == mate.userID }
+    }
+    
     func didConnectNISession() {
         //showAlertConnected()
         view?.changeMPCButtonState(to: .success)

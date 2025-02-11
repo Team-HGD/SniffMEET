@@ -9,15 +9,21 @@ import Foundation
 
 // RequestUserInfoUseCase와 통합이 가능하다고 예상됩니다.
 protocol RequestMateInfoUseCase {
-    func execute(mateId: UUID) async throws -> UserInfoDTO?
+    func execute(mateID: UUID) async throws -> UserInfoDTO?
 }
 
 struct RequestMateInfoUsecaseImpl: RequestMateInfoUseCase {
-    func execute(mateId: UUID) async throws -> UserInfoDTO? {
-        let mateInfoData = try await SupabaseDatabaseManager.shared.fetchData(
-            from: "user_info",
-            query: ["id": "eq.\(mateId.uuidString)"]
-        )
+    private let remoteDBManager: any RemoteDBManageable
+    
+    init(remoteDBManager: any RemoteDBManageable) {
+        self.remoteDBManager = remoteDBManager
+    }
+    
+    func execute(mateID: UUID) async throws -> UserInfoDTO? {
+        let mateInfoData = try await remoteDBManager.fetchData()
+            .setTable(Environment.SupabaseTableName.userInfo)
+            .setQuery(.equal("id", mateID.uuidString))
+            .request()
         let mateInfo = try JSONDecoder().decode([UserInfoDTO].self, from: mateInfoData)
         return mateInfo.first
     }

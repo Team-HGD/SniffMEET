@@ -8,17 +8,16 @@
 import Foundation
 
 protocol RequestMateListUseCase {
-    var remoteDatabaseManager: RemoteDatabaseManager { get }
     func execute(page: Int, pageSize: Int) async throws -> [Mate]
 }
 
 struct RequestMateListUseCaseImpl: RequestMateListUseCase {
-    var remoteDatabaseManager: (any RemoteDatabaseManager)
+    private let remoteDBManager: any RemoteDBManageable
     let decoder: JSONDecoder
     let encoder: JSONEncoder
     
-    init(remoteDatabaseManager: any RemoteDatabaseManager) {
-        self.remoteDatabaseManager = remoteDatabaseManager
+    init(remoteDBManager: any RemoteDBManageable) {
+        self.remoteDBManager = remoteDBManager
         decoder = JSONDecoder()
         encoder = JSONEncoder()
     }
@@ -26,17 +25,14 @@ struct RequestMateListUseCaseImpl: RequestMateListUseCase {
     func execute(page: Int, pageSize: Int) async throws -> [Mate] {
         do {
             let tableName = Environment.SupabaseTableName.matelistFunction
-            guard let userID = SessionManager.shared.session?.user?.userID else {
-                throw SNMError(level: .user, error: SupabaseAuthError.sessionNotExist)
-            }
+            let userID = try SupabaseSessionManager.shared.userID.get()
             let requestData = try encoder.encode(MateListRequestDTO(userId: userID))
-
-            let data = try await remoteDatabaseManager.fetchList(
-                into: tableName,
-                with: requestData,
-                page: page,
-                pageSize: pageSize
-            )
+            let data = try await remoteDBManager.rpc()
+                .setTable(tableName)
+                .setData(requestData)
+                .setQuery(.custom("limit", pageSize))
+                .setQuery(.custom("offset", pageSize * page))
+                .request()
             let mateDTOList = try decoder.decode([UserInfoDTO].self, from: data)
             return mateDTOList.map {
                 Mate(name: $0.dogName,

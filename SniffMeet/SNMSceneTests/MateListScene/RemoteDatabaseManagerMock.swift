@@ -1,42 +1,46 @@
 //
-//  RemoteDatabaseManagerMock.swift
+//  RemoteDBManagerMock.swift
 //  SniffMeet
 //
 //  Created by 윤지성 on 1/22/25.
 //
 import Foundation
 
-final class RemoteDatabaseManagerMock: RemoteDatabaseManager {
-    var fetchData: Data?
+final class RemoteDBManagerMock: RemoteDBManageable {
+    var data: Data?
     var hasInserted: Bool = false
     var hasUpdated: Bool = false
-    var hasUpdatedWithId: Bool = false
-    var fetchListData: Data?
     
-    init(fetchData: Data?, fetchListData: Data?) {
-        self.fetchData = fetchData
-        self.fetchListData = fetchListData
+    init(data: Data?) {
+        self.data = data
     }
     
-    func fetchData(from table: String, query: [String : String]) async throws -> Data {
-        guard let fetchData else { throw SNMNetworkError.failedStatusCode(reason: .notFound)}
-        return fetchData
+    func fetchData() throws -> RemoteDBRequestBuildable {
+        return RemoteDBRequestBuilderMock(
+            requestType: .fetch
+        )
     }
     
-    func insertData(into table: String, with data: Data) async throws {
+    func insertData() throws -> RemoteDBRequestBuildable {
         hasInserted = true
+        return RemoteDBRequestBuilderMock(
+            requestType: .insert,
+            data: data
+        )
     }
     
-    func updateData(into table: String, with data: Data) async throws {
+    func updateData() throws -> RemoteDBRequestBuildable {
         hasUpdated = true
+        return RemoteDBRequestBuilderMock(
+            requestType: .update,
+            data: data
+        )
     }
     
-    func updateData(into table: String, at id: UUID, with data: Data) async throws {
-        self.hasUpdated = true
-    }
-    
-    func fetchList(into table: String = "", with data: Data, page: Int, pageSize: Int = 0 ) async throws -> Data {
-        guard let fetchListData else { throw SNMNetworkError.failedStatusCode(reason: .notFound)}
-        return fetchListData
+    func rpc() throws -> RemoteDBRequestBuildable {
+        return RemoteDBRequestBuilderMock(
+            requestType: .rpc,
+            data: data
+        )
     }
 }

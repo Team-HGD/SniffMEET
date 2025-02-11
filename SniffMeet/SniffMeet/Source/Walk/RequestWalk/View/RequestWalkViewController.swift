@@ -243,18 +243,10 @@ extension RequestWalkViewController: UITextViewDelegate {
             try? await Task.sleep(nanoseconds: 10_000_000) // 50ms (0.05초)
             self?.scrollView.scrollRectToVisible(textView.frame, animated: true)
         }
-
-        if textView.text == Context.messagePlaceholder {
-            textView.text = nil
-            textView.textColor = .black
-            textViewEdited = true
-        }
+        textViewDidBeginEditing(textView, placeholder: Context.messagePlaceholder, textViewEdited: &textViewEdited)
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = Context.messagePlaceholder
-            textView.textColor = .lightGray
-        }
+        textViewDidEndEditing(textView, placeholder: Context.messagePlaceholder)
     }
     func textViewDidChange(_ textView: UITextView) {
         updateSubmitButtonState()
@@ -264,21 +256,6 @@ extension RequestWalkViewController: UITextViewDelegate {
         shouldChangeTextIn range: NSRange,
         replacementText text: String
     ) -> Bool {
-        if text == "\n" {
-            textView.resignFirstResponder()
-            return false
-        }
-        let inputString = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard let oldString = textView.text,
-              let newRange = Range(range, in: oldString) else {
-            return true
-        }
-        let newString = oldString.replacingCharacters(
-            in: newRange,
-            with: inputString
-        ).trimmingCharacters(in: .whitespacesAndNewlines)
-        let characterCount = newString.count
-        guard characterCount <= Context.characterCountLimit else { return false }
-        return true
+        return shouldChangeText(textView, range: range, replacementText: text, limit: Context.characterCountLimit)
     }
 }

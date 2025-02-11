@@ -12,6 +12,7 @@ protocol MateListRoutable: Routable {
     func presentWalkRequestView(mateListView: any MateListViewable, mate: Mate)
     func showAlert(mateListView: any MateListViewable, title: String, message: String)
     func showMateRequestView(mateListView: any MateListViewable, data: DogDTO)
+    func showReportMateView(mateListView: any MateListViewable, data: Mate)
 }
 
 protocol MateListBuildable {
@@ -49,15 +50,21 @@ final class MateListRouter: MateListRoutable {
         requestMateViewController.transitioningDelegate = transitionDelegate
         present(from: mateListView, with: requestMateViewController, animated: true)
     }
+    func showReportMateView(mateListView: any MateListViewable, data: Mate) {
+        guard let mateListView = mateListView as? UIViewController else { return }
+        let reportMateViewController = ReportMateRouter.createReportMateModule(profile: data)
+        pushNoBottomBar(from: mateListView, to: reportMateViewController, animated: true)
+    }
 }
 
 extension MateListRouter: MateListBuildable {
     static func createMateListModule() -> UIViewController {
         let requestMateListUseCase: RequestMateListUseCase = RequestMateListUseCaseImpl(
-            remoteDatabaseManager: SupabaseDatabaseManager.shared)
+            remoteDBManager: SupabaseDBManager.shared)
         let requestProfileImageUseCase: RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
-                networkProvider: SNMNetworkProvider()
+                networkProvider: SNMNetworkProvider(),
+                sessionManager: SupabaseSessionManager.shared
             ),
             cacheManager: CacheManager.shared
         )
@@ -72,13 +79,19 @@ extension MateListRouter: MateListBuildable {
             niManager: niManager,
             mpcManager: mpcManager)
         let quitProfileDropUseCase: QuitProfileDropUseCase = QuitProfileDropUseCaseImpl(niManager: niManager)
+        let deleteMateUseCase: DeleteMateUseCase = DeleteMateUseCaseImpl(
+            remoteDBManager: SupabaseDBManager.shared,
+            sessionManager: SupabaseSessionManager.shared
+        )
+
         let view: MateListViewable & UIViewController = MateListViewController()
         let presenter: MateListPresentable & MateListInteractorOutput = MateListPresenter()
         let interactor: MateListInteractable = MateListInteractor(
             requestMateListUseCase: requestMateListUseCase,
             requestProfileImageUseCase: requestProfileImageUseCase,
             tryProfileDropUseCase: tryProfileDropUseCase,
-            quitProfileDropUseCase: quitProfileDropUseCase
+            quitProfileDropUseCase: quitProfileDropUseCase,
+            deleteMateUseCase: deleteMateUseCase
         )
 
         let router: MateListRoutable & MateListBuildable = MateListRouter()

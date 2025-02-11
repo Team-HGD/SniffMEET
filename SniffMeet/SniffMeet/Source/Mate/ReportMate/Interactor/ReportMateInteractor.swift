@@ -34,7 +34,7 @@ final class ReportMateInteractor: ReportMateInteractable {
         presenter?.didFetchMateInfo(mateInfo: mate)
     }
     func requestProfileImage(imageName: String?) {
-        Task { @MainActor in
+        Task {
             let fileName = mate.profileImageURLString ?? ""
             guard let imageData = await requestProfileImageUseCase.execute(fileName: fileName) else { return }
             presenter?.didFetchProfileImage(data: imageData)
@@ -49,10 +49,10 @@ final class ReportMateInteractor: ReportMateInteractable {
         Task {
             do {
                 try await requestReportUseCase.execute(report: report)
+                presenter?.didCloseTheView()
             } catch {
                 SNMLogger.error("RequesrReportUseCase Error: \(error.localizedDescription)")
             }
         }
-        presenter?.didCloseTheView()
     }
 }

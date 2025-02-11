@@ -7,13 +7,8 @@
 
 protocol ReportPickerInteractable: AnyObject {
     var presenter: (any ReportPickerInteractorOutput)? { get set }
-    func selectReportOption(_ option: String)
 }
 
 final class ReportPickerInteractor: ReportPickerInteractable {
     weak var presenter: (any ReportPickerInteractorOutput)?
-
-    func selectReportOption(_ option: String) {
-        presenter?.didSelectReportData(option: option)
-    }
 }

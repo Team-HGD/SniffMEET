@@ -12,12 +12,10 @@ protocol RequestReportUseCase {
 }
 
 struct RequestReportUseCaseImpl: RequestReportUseCase {
-    private let session: URLSession
     private let encoder = JSONEncoder()
     private let remoteDatabaseManager: RemoteDatabaseManager
 
-    init(session: URLSession = URLSession.shared, remoteDatabaseManager: RemoteDatabaseManager) {
-        self.session = session
+    init(remoteDatabaseManager: RemoteDatabaseManager) {
         self.remoteDatabaseManager = remoteDatabaseManager
     }
 

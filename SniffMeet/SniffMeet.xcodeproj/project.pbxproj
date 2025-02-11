@@ -1989,8 +1989,8 @@
 				FD0634292CE596C2003C9D6B /* NetworkProvider.swift */,
 				FDE14A512CE8D331001F7A9D /* SNMRequestType.swift */,
 				FD0634272CE596BA003C9D6B /* SNMRequestConvertible.swift */,
-				FD0634252CE596B2003C9D6B /* Endpoint.swift */,
 				FD06342B2CE59843003C9D6B /* SNMNetworkResponse.swift */,
+				FD0634252CE596B2003C9D6B /* Endpoint.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";

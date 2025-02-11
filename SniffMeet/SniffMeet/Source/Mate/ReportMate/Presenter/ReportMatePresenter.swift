@@ -8,9 +8,9 @@ import Combine
 import Foundation
 
 protocol ReportMatePresentable: AnyObject {
-    var view: ReportMateViewable? { get set }
-    var interactor: ReportMateInteractable? { get set }
-    var router: ReportMateRoutable? { get set }
+    var view: (any ReportMateViewable)? { get set }
+    var interactor: (any ReportMateInteractable)? { get set }
+    var router: (any ReportMateRoutable)? { get set }
     var output: any ReportMatePresenterOutput { get }
 
     func viewDidLoad()
@@ -38,9 +38,9 @@ struct DefaultReportMatePresenterOutput: ReportMatePresenterOutput {
 }
 
 final class ReportMatePresenter: ReportMatePresentable {
-    weak var view: ReportMateViewable?
-    var interactor: ReportMateInteractable?
-    var router: ReportMateRoutable?
+    weak var view: (any ReportMateViewable)?
+    var interactor: (any ReportMateInteractable)?
+    var router: (any ReportMateRoutable)?
     var output: any ReportMatePresenterOutput
     var cancellables = Set<AnyCancellable>()
 

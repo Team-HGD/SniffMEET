@@ -47,7 +47,7 @@ final class ReportPickerPresenter: ReportPickerPresentable {
     }
 
     func didSelectOption(_ option: String) {
-        interactor?.selectReportOption(option)
+        didSelectReportData(option: option)
     }
 }
 

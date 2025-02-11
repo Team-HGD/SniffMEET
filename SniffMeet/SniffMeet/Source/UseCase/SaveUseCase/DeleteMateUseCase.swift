@@ -12,15 +12,18 @@ protocol DeleteMateUseCase {
 }
 
 final class DeleteMateUseCaseImpl: DeleteMateUseCase {
+    private let networkProvider: any NetworkProvider
     private let remoteDBManager: any RemoteDBManageable
     private let sessionManager: any SessionManageable
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
 
     init(
+        networkProvider: any NetworkProvider,
         remoteDBManager: any RemoteDBManageable,
         sessionManager: any SessionManageable
     ) {
+        self.networkProvider = networkProvider
         self.remoteDBManager = remoteDBManager
         self.sessionManager = sessionManager
     }
@@ -51,6 +54,13 @@ final class DeleteMateUseCaseImpl: DeleteMateUseCase {
                 .setData(updatedData)
                 .setQuery(.equal("id", userID))
                 .request()
+
+            _ = try await networkProvider.request(
+                with: PushNotificationRequest.sendDeleteMate(
+                    senderID: userID.uuidString,
+                    receiverID: mateID.uuidString
+                )
+            )
         } catch let error as SupabaseDBError where error == .fetchDataFailed || error == .updateDataFailed{
             throw SNMError(level: .user, error: error)
         } catch let error as SupabaseAuthError {

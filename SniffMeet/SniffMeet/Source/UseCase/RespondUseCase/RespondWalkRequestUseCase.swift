@@ -11,13 +11,13 @@ protocol RespondWalkRequestUseCase {
 }
 
 struct RespondWalkRequestUseCaseImpl: RespondWalkRequestUseCase {
+    private let remoteDBManager: any RemoteDBManageable
     private let session: URLSession
     private let encoder = JSONEncoder()
-    private let remoteDatabaseManager: RemoteDatabaseManager
     
-    init(session: URLSession = URLSession.shared, remoteDatabaseManager: RemoteDatabaseManager) {
+    init(session: URLSession = URLSession.shared, remoteDBManager: RemoteDBManageable) {
         self.session = session
-        self.remoteDatabaseManager = remoteDatabaseManager
+        self.remoteDBManager = remoteDBManager
     }
     
     func execute(requestID: UUID, walkNoti: WalkNotiDTO) async throws {
@@ -38,10 +38,11 @@ struct RespondWalkRequestUseCaseImpl: RespondWalkRequestUseCase {
         guard let tableData else { return }
         let data = try JSONEncoder().encode(tableData)
         Task {
-            try await remoteDatabaseManager.updateData(
-                into: Environment.SupabaseTableName.walkRequest,
-                at: requestID,
-                with: data)
+            try await remoteDBManager.updateData()
+                .setTable(Environment.SupabaseTableName.walkRequest)
+                .setData(data)
+                .setQuery(.equal("id", requestID))
+                .request()
         }
     }
 }

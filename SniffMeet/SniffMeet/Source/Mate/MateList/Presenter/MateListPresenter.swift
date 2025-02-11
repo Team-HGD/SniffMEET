@@ -129,7 +129,7 @@ final class MateListPresenter: MateListPresentable {
                 switch snmError.error {
                 case let error as SupabaseDBError where error == .noMoreData:
                     self.didReachEndOfMateList()
-                case let error as SupabaseAuthError where error == .sessionNotExist:
+                case let error as SupabaseSessionError where error == .sessionNotExist:
                     SNMLogger.error("세션이 존재하지 않습니다.")
                     // TODO: 로그인 화면으로 이동
                 default:

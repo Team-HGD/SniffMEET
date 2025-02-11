@@ -32,7 +32,7 @@ final class RequestWalkRouter: RequestWalkRoutable {
         let selectViewController = SelectLocationRouter.build()
         let selectView = selectViewController as? SelectLocationViewable
         selectView?.presenter?.router?.delegate = self
-
+        
         fullScreen(from: view, with: selectViewController, animated: true)
         // push(from: view, to: selectViewController, animated: true)
     }
@@ -44,17 +44,19 @@ extension RequestWalkRouter: RequestWalkBuildable {
     /// 서버에 요청할 반려견 mateID를 함께 전달
     static func createRequestWalkModule(mate: Mate) -> UIViewController {
         let requestWalkUseCase: RequestWalkUseCase =
-        RequestWalkUseCaseImpl(remoteDatabaseManager: SupabaseDatabaseManager.shared)
+        RequestWalkUseCaseImpl(remoteDBManager: SupabaseDBManager.shared)
         let requestProfileImageUseCase:
         RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
-            networkProvider: SNMNetworkProvider()),
+                networkProvider: SNMNetworkProvider(),
+                sessionManager: SupabaseSessionManager.shared
+            ),
             cacheManager: CacheManager.shared
         )
         let loadInfoUseCase: LoadUserInfoUseCase = LoadUserInfoUseCaseImpl(
             dataLoadable: LocalDataManager(),
             imageManageable: SNMFileManager(fileType: .image)
-            )
+        )
         let view: RequestWalkViewable & UIViewController = RequestWalkViewController()
         let presenter: RequestWalkPresentable & RequestWalkInteractorOutput = RequestWalkPresenter()
         let interactor: RequestWalkInteractable = RequestWalkInteractor(
@@ -64,14 +66,14 @@ extension RequestWalkRouter: RequestWalkBuildable {
             loadUserInfoUseCase: loadInfoUseCase
         )
         let router: RequestWalkRoutable & RequestWalkBuildable = RequestWalkRouter()
-
+        
         view.presenter = presenter
         presenter.view = view
         presenter.router = router
         presenter.interactor = interactor
         interactor.presenter = presenter
         router.presenter = presenter
-
+        
         return view
     }
 }

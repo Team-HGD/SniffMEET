@@ -36,7 +36,7 @@ final class ProcessedWalkInteractor: ProcessedWalkInteractable {
         Task {
             do {
                 guard let senderInfo = try await requestUserInfoUseCase.execute(
-                    mateId: userId
+                    mateID: userId
                 ) else {
                     presenter?.didFailToFetchWalkRequest(
                         error: SupabaseAuthError.userNotFound

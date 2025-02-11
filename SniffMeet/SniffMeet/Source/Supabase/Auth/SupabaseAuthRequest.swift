@@ -9,8 +9,6 @@ import Foundation
 
 enum SupabaseAuthRequest {
     case signInAnonymously
-    case refreshToken(refreshToken: String)
-    case refreshUser(accessToken: String)
 }
 
 extension SupabaseAuthRequest: SNMRequestConvertible {
@@ -22,26 +20,10 @@ extension SupabaseAuthRequest: SNMRequestConvertible {
                 path: "auth/v1/signup",
                 method: .post
             )
-        case .refreshToken:
-            return Endpoint(
-                baseURL: SupabaseConfig.baseURL,
-                path: "auth/v1/token",
-                method: .post,
-                query: [
-                    "grant_type": "refresh_token"
-                ]
-            )
-        case .refreshUser:
-            return Endpoint(
-                baseURL: SupabaseConfig.baseURL,
-                path: "auth/v1/user",
-                method: .get
-            )
         }
-
     }
     var requestType: SNMRequestType {
-        var header = [
+        let header = [
             "Content-Type": "application/json",
             "Authorization": "Bearer \(SupabaseConfig.apiKey)",
             "apikey": SupabaseConfig.apiKey
@@ -51,17 +33,6 @@ extension SupabaseAuthRequest: SNMRequestConvertible {
             return SNMRequestType.compositePlain(
                 header: header,
                 body: Data("{}".utf8)
-            )
-        case .refreshToken(let refreshToken):
-            header["Authorization"] = nil
-            return SNMRequestType.compositePlain(
-                header: header,
-                body: Data("{ \"refresh_token\": \"\(refreshToken)\" }".utf8)
-            )
-        case .refreshUser(let accessToken):
-            header["Authorization"] = "Bearer \(accessToken)"
-            return SNMRequestType.header(
-                with: header
             )
         }
     }

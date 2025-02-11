@@ -13,33 +13,32 @@ struct RemoteImage {
     let lastModified: String?
 }
 
-protocol RemoteImageManagable {
+protocol RemoteImageManageable {
     func upload(imageData: Data, fileName: String, mimeType: MimeType) async throws
 //    func download(fileName: String) async throws -> Data
     func download(fileName: String, lastModified: String) async throws -> RemoteImage
 }
 
-struct SupabaseStorageManager: RemoteImageManagable {
-    private let networkProvider: SNMNetworkProvider
+struct SupabaseStorageManager: RemoteImageManageable {
+    private let networkProvider: any NetworkProvider
+    private let sessionManager: any SessionManageable
 
-    init(networkProvider: SNMNetworkProvider) {
+    init(networkProvider: any NetworkProvider, sessionManager: any SessionManageable) {
         self.networkProvider = networkProvider
+        self.sessionManager = sessionManager
     }
+    
     func upload(
         imageData: Data,
         fileName: String,
         mimeType: MimeType = .image
     ) async throws {
         do {
-            if SessionManager.shared.isExpired {
-                try await SupabaseAuthManager.shared.refreshSession()
-            }
-            guard let session = SessionManager.shared.session else {
-                throw SupabaseAuthError.sessionNotExist
-            }
+            let accessToken = try sessionManager.accessToken.get()
+            try await sessionManager.checkSession()
             _ = try await networkProvider.request(
                 with: SupabaseStorageRequest.upload(
-                    accessToken: session.accessToken,
+                    accessToken: accessToken,
                     image: imageData,
                     fileName: fileName,
                     mimeType: mimeType

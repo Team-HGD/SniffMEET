@@ -12,34 +12,51 @@ protocol CreateAccountUseCase {
 }
 
 struct CreateAccountUseCaseImpl: CreateAccountUseCase {
-    // RLS 정책은 ID 기반으로 인증이 됩니다. 따라서 info에 id 정보가 필요합니다.
+    private let remoteDBManager: any RemoteDBManageable
+    
+    init(remoteDBManager: any RemoteDBManageable) {
+        self.remoteDBManager = remoteDBManager
+    }
+    
     func execute(info: UserInfoDTO) async {
         let encoder = JSONEncoder()
         do {
             let userData = try encoder.encode(info)
-            try await SupabaseDatabaseManager.shared.insertData(
-                into: Environment.SupabaseTableName.userInfo,
-                with: userData
-            )
+//            try await remoteDBManager.insertData(
+//                into: Environment.SupabaseTableName.userInfo,
+//                with: userData
+//            )
+            try await remoteDBManager.insertData()
+                .setTable(Environment.SupabaseTableName.userInfo)
+                .setData(userData)
+                .request()
             
         } catch {
             SNMLogger.error("\(error.localizedDescription)")
         }
         do {
             let mateListData = try encoder.encode(MateListInsertDTO(id: info.id, mates: nil))
-            try await SupabaseDatabaseManager.shared.insertData(
-                into: Environment.SupabaseTableName.matelist,
-                with: mateListData
-            )
+//            try await remoteDBManager.insertData(
+//                into: Environment.SupabaseTableName.matelist,
+//                with: mateListData
+//            )
+            try await remoteDBManager.insertData()
+                .setTable(Environment.SupabaseTableName.matelist)
+                .setData(mateListData)
+                .request()
         } catch {
             SNMLogger.error("mate list insert error: \(error.localizedDescription)")
         }
         do {
             let notiListData = try encoder.encode(WalkNotiListInsertDTO(id: info.id))
-            try await SupabaseDatabaseManager.shared.insertData(
-                into: Environment.SupabaseTableName.notificationList,
-                with: notiListData
-            )
+//            try await remoteDBManager.insertData(
+//                into: Environment.SupabaseTableName.notificationList,
+//                with: notiListData
+//            )
+            try await remoteDBManager.insertData()
+                .setTable(Environment.SupabaseTableName.notificationList)
+                .setData(notiListData)
+                .request()
         } catch {
             SNMLogger.error("notifiaction list insert error: \(error.localizedDescription)")
         }

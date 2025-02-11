@@ -13,11 +13,11 @@ protocol SaveProfileImageUseCase {
 }
 
 struct SaveProfileImageUseCaseImpl: SaveProfileImageUseCase {
-    private let remoteImageManager: any RemoteImageManagable
+    private let remoteImageManager: any RemoteImageManageable
     private let userDefaultsManager: any UserDefaultsManagable
     private let imageSampler: any ImageSampleable
     init(
-        remoteImageManager: any RemoteImageManagable,
+        remoteImageManager: any RemoteImageManageable,
         userDefaultsManager: any UserDefaultsManagable,
         imageSampler: any ImageSampleable
     ) {

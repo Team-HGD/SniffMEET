@@ -32,11 +32,14 @@ extension RequestMateRouter: RequestMateBuildable {
     static func createRequestMateModule(profile: DogDTO) -> UIViewController {
         let respondMateRequestUseCase: RespondMateRequestUseCase = RespondMateRequestUseCaseImpl(
             localDataManager: LocalDataManager(),
-            remoteDataManger: SupabaseDatabaseManager.shared)
+            remoteDataManger: SupabaseDBManager.shared,
+            sessionManager: SupabaseSessionManager.shared
+        )
         let requestProfileImageUseCase: RequestProfileImageUseCase =
         RequestProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
-                networkProvider: SNMNetworkProvider()
+                networkProvider: SNMNetworkProvider(),
+                sessionManager: SupabaseSessionManager.shared
             ),
             cacheManager: CacheManager.shared)
         let view = RequestMateViewController(dogDTO: profile)

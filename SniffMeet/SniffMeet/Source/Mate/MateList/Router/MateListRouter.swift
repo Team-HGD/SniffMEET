@@ -72,8 +72,8 @@ extension MateListRouter: MateListBuildable {
             return UIViewController()
         }
         let niManager = NIManager()
-        let tryProfileDropUseCase: TryProfileDropUseCase =
-        TryProfileDropUseCaseImpl(
+        let tryProfileDropUseCase: NearByProfileDropUseCase =
+        NearByProfileDropUseCaseImpl(
             dataManager: LocalDataManager(),
             niManager: niManager,
             mpcManager: mpcManager)

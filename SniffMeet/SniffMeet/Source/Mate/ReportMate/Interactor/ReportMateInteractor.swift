@@ -41,7 +41,7 @@ final class ReportMateInteractor: ReportMateInteractable {
         }
     }
     func sendReportRequest(option: String, message: String) {
-        guard let id = SessionManager.shared.session?.user?.userID else { return }
+        guard let id = try? SupabaseSessionManager.shared.userID.get() else { return }
         let report = Report(reporterID: id,
                             reportedID: mate.userID,
                             option: option,

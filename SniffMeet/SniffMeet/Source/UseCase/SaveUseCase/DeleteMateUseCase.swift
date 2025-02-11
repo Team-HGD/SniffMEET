@@ -12,26 +12,29 @@ protocol DeleteMateUseCase {
 }
 
 final class DeleteMateUseCaseImpl: DeleteMateUseCase {
-    private let remoteDatabaseManager: RemoteDatabaseManager
+    private let remoteDBManager: any RemoteDBManageable
+    private let sessionManager: any SessionManageable
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
 
-    init(remoteDatabaseManager: any RemoteDatabaseManager) {
-        self.remoteDatabaseManager = remoteDatabaseManager
+    init(
+        remoteDBManager: any RemoteDBManageable,
+        sessionManager: any SessionManageable
+    ) {
+        self.remoteDBManager = remoteDBManager
+        self.sessionManager = sessionManager
     }
 
     func execute(mate: Mate) async throws {
         do {
-            guard let userID = SessionManager.shared.session?.user?.userID else {
-                throw SNMError(level: .user, error: SupabaseAuthError.sessionNotExist)
-            }
+            let userID = try sessionManager.userID.get()
             let mateID = mate.userID
             let tableName = Environment.SupabaseTableName.matelist
 
-            let userMateListData = try await remoteDatabaseManager.fetchData(
-                from: tableName,
-                query: ["id": "eq.\(userID)"]
-            )
+            let userMateListData = try await remoteDBManager.fetchData()
+                .setTable(tableName)
+                .setQuery(.equal("id", userID))
+                .request()
 
             let mateListDTO = try decoder.decode([MateListDTO].self, from: userMateListData)
             guard let mateList = mateListDTO.first else {
@@ -43,7 +46,11 @@ final class DeleteMateUseCaseImpl: DeleteMateUseCase {
             SNMLogger.log("mates: \(matesToUUID)")
 
             let updatedData = try encoder.encode(MateListInsertDTO(id: userID, mates: matesToUUID))
-            try await remoteDatabaseManager.updateData(into: tableName, at: userID, with: updatedData)
+            try await remoteDBManager.updateData()
+                .setTable(tableName)
+                .setData(updatedData)
+                .setQuery(.equal("id", userID))
+                .request()
         } catch let error as SupabaseDBError where error == .fetchDataFailed || error == .updateDataFailed{
             throw SNMError(level: .user, error: error)
         } catch let error as SupabaseAuthError {

@@ -79,6 +79,7 @@ enum SupabaseDBError: LocalizedError {
     case fetchDataFailed
     case insertDataFailed
     case updateDataFailed
+    case deleteDataFailed
     case rpcFailed
     case noMoreData
     
@@ -89,6 +90,7 @@ enum SupabaseDBError: LocalizedError {
         case .updateDataFailed: "데이터 업데이트 실패"
         case .rpcFailed: "RPC 호출 실패"
         case .noMoreData: "더 불러올 데이터 없음"
+        case .deleteDataFailed: "데이터 삭제 실패"
         }
     }
 }

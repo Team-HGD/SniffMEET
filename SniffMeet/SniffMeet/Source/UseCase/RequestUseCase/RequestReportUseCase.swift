@@ -12,26 +12,29 @@ protocol RequestReportUseCase {
 }
 
 struct RequestReportUseCaseImpl: RequestReportUseCase {
-    private let encoder = JSONEncoder()
-    private let remoteDatabaseManager: RemoteDatabaseManager
-
-    init(remoteDatabaseManager: RemoteDatabaseManager) {
-        self.remoteDatabaseManager = remoteDatabaseManager
+    private let encoder: JSONEncoder
+    private let remoteDBManager: any RemoteDBManageable
+    
+    init(remoteDBManager: any RemoteDBManageable) {
+        self.encoder = JSONEncoder()
+        self.remoteDBManager = remoteDBManager
     }
-
+    
     func execute(report: Report) async throws {
         do {
-            let requestData = ReportDTO(id: UUID(),
-                                        createdAt: Date().convertDateToISO8601String(),
-                                        reporterID: report.reporterID,
-                                        reportedID: report.reportedID,
-                                        reportOption: report.option,
-                                        reportMessage: report.message)
-            let data = try encoder.encode(requestData)
-            try await remoteDatabaseManager.insertData(
-                into: Environment.SupabaseTableName.reportlist,
-                with: data
+            let requestData = ReportDTO(
+                id: UUID(),
+                createdAt: Date().convertDateToISO8601String(),
+                reporterID: report.reporterID,
+                reportedID: report.reportedID,
+                reportOption: report.option,
+                reportMessage: report.message
             )
+            let data = try encoder.encode(requestData)
+            try await remoteDBManager.insertData()
+                .setTable(Environment.SupabaseTableName.reportlist)
+                .setData(data)
+                .request()
         } catch {
             SNMLogger.error("Report list insert error: \(error.localizedDescription)")
         }

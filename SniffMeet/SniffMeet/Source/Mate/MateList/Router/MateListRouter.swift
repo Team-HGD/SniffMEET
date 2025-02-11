@@ -79,7 +79,10 @@ extension MateListRouter: MateListBuildable {
             niManager: niManager,
             mpcManager: mpcManager)
         let quitProfileDropUseCase: QuitProfileDropUseCase = QuitProfileDropUseCaseImpl(niManager: niManager)
-        let deleteMateUseCase: DeleteMateUseCase = DeleteMateUseCaseImpl(remoteDatabaseManager: SupabaseDatabaseManager.shared)
+        let deleteMateUseCase: DeleteMateUseCase = DeleteMateUseCaseImpl(
+            remoteDBManager: SupabaseDBManager.shared,
+            sessionManager: SupabaseSessionManager.shared
+        )
 
         let view: MateListViewable & UIViewController = MateListViewController()
         let presenter: MateListPresentable & MateListInteractorOutput = MateListPresenter()

@@ -37,6 +37,8 @@ final class MateListViewController: BaseViewController, MateListViewable {
 
     override func configureAttributes() {
         navigationItem.title = Context.title
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
         setTableView()
     }
 
@@ -183,7 +185,7 @@ extension MateListViewController: UIScrollViewDelegate {
 
 extension MateListViewController {
     private enum Context {
-        static let title = "메이트"
+        static let title = "Mates"
         static let primaryButtonLabel = "메이트 연결하기"
         static let accessoryButtonLabel = "산책 신청하기"
     }

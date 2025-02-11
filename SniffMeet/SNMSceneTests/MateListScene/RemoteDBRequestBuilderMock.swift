@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DBRequestBuilderMock: RemoteDBRequestBuildable {
+final class RemoteDBRequestBuilderMock: RemoteDBRequestBuildable {
     private var requestType: SupabaseDBTask
     private var data: Data?
     

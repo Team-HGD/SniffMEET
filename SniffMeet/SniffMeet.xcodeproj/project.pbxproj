@@ -330,7 +330,7 @@
 		A2FE77722D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */; };
 		A2FE77732D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */; };
 		A2FE77742D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */; };
-		A2FE77762D55448800239F05 /* DBRequestBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77752D55448800239F05 /* DBRequestBuilderMock.swift */; };
+		A2FE77762D55448800239F05 /* RemoteDBRequestBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77752D55448800239F05 /* RemoteDBRequestBuilderMock.swift */; };
 		FD01D8F52D40AC5300AD4940 /* Extension + UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01D8F42D40AC4100AD4940 /* Extension + UITableViewCell.swift */; };
 		FD01D8F72D40AC8600AD4940 /* TaskSerialQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01D8F62D40AC8000AD4940 /* TaskSerialQueue.swift */; };
 		FD01D8F82D40AC8600AD4940 /* TaskSerialQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01D8F62D40AC8000AD4940 /* TaskSerialQueue.swift */; };
@@ -607,7 +607,7 @@
 		A2FE772A2D52224700239F05 /* SignInAnonUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAnonUseCase.swift; sourceTree = "<group>"; };
 		A2FE772D2D5378B400239F05 /* SupabaseQueryParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseQueryParameter.swift; sourceTree = "<group>"; };
 		A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRequestBuilder.swift; sourceTree = "<group>"; };
-		A2FE77752D55448800239F05 /* DBRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBRequestBuilderMock.swift; sourceTree = "<group>"; };
+		A2FE77752D55448800239F05 /* RemoteDBRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDBRequestBuilderMock.swift; sourceTree = "<group>"; };
 		FD011EF02D351FCF0071327A /* SNMNetworkTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SNMNetworkTestPlan.xctestplan; sourceTree = "<group>"; };
 		FD011EF22D35203C0071327A /* SNMPersistenceTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SNMPersistenceTestPlan.xctestplan; sourceTree = "<group>"; };
 		FD01D8F42D40AC4100AD4940 /* Extension + UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITableViewCell.swift"; sourceTree = "<group>"; };
@@ -943,7 +943,7 @@
 		32BD48352D3FECFD0078DA9C /* MateListScene */ = {
 			isa = PBXGroup;
 			children = (
-				A2FE77752D55448800239F05 /* DBRequestBuilderMock.swift */,
+				A2FE77752D55448800239F05 /* RemoteDBRequestBuilderMock.swift */,
 				32BD48E92D40AEB50078DA9C /* RemoteDatabaseManagerMock.swift */,
 				32BD48E52D408C3A0078DA9C /* UseCaseMock.swift */,
 				32BD48E32D4085540078DA9C /* MateListPresenterSpy.swift */,
@@ -2464,7 +2464,7 @@
 				32BD48D52D3FF02C0078DA9C /* SupabaseConfig.swift in Sources */,
 				32BD48D62D3FF02C0078DA9C /* SupabaseAuthManager.swift in Sources */,
 				32BD48D82D3FF02C0078DA9C /* SupabaseAuthRequest.swift in Sources */,
-				A2FE77762D55448800239F05 /* DBRequestBuilderMock.swift in Sources */,
+				A2FE77762D55448800239F05 /* RemoteDBRequestBuilderMock.swift in Sources */,
 				32BD48D92D3FF02C0078DA9C /* SupabaseSession.swift in Sources */,
 				32BD48DA2D3FF02C0078DA9C /* SupabaseUser.swift in Sources */,
 				32BD48DB2D3FF02C0078DA9C /* SupabaseSessionResponse.swift in Sources */,

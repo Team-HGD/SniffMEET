@@ -7,17 +7,18 @@
 import Foundation
 
 protocol RequestNotiListUseCase {
-    var remoteManager: (any RemoteDatabaseManager) { get }
     func execute(page: Int, pageSize: Int) async throws -> [WalkNoti]
 }
 
 struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
-    var remoteManager: (any RemoteDatabaseManager)
+    private let remoteManager: any RemoteDBManageable
+    private let sessionManager: any SessionManageable
     let encoder: JSONEncoder
     let decoder: JSONDecoder
     
-    init(remoteManager: any RemoteDatabaseManager) {
+    init(remoteManager: any RemoteDBManageable, sessionManager: any SessionManageable) {
         self.remoteManager = remoteManager
+        self.sessionManager = sessionManager
         decoder = JSONDecoder()
         encoder = JSONEncoder()
     }
@@ -26,23 +27,22 @@ struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
         let tableName = Environment.SupabaseTableName.notificationListFunction
 
         do {
-            guard let userID = SessionManager.shared.session?.user?.userID else {
-                throw SNMError(level: .user, error: SupabaseAuthError.sessionNotExist)
-            }
-
+            let userID = try sessionManager.userID.get()
             let requestData = try encoder.encode(WalkNotiListRequestDTO(userId: userID))
-            let data = try await remoteManager.fetchList(
-                into: tableName,
-                with: requestData,
-                page: page,
-                pageSize: pageSize
-            )
+            let data = try await remoteManager.rpc()
+                .setTable(tableName)
+                .setData(requestData)
+                .setQuery(.custom("limit", pageSize))
+                .setQuery(.custom("offset", pageSize * page))
+                .request()
             let walkDTOList = try decoder.decode([WalkNotiDTO].self, from: data)
             
             return walkDTOList.map { $0.toEntity() }
         } catch let error as SupabaseDBError where error == .noMoreData {
             throw SNMError(level: .user, error: error)
         } catch let error as SupabaseAuthError {
+            throw SNMError(level: .user, error: error)
+        } catch let error as SupabaseSessionError {
             throw SNMError(level: .user, error: error)
         } catch {
             throw SNMError(level: .developer, error: error)

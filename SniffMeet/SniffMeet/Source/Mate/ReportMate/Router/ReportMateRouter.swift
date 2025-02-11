@@ -56,10 +56,13 @@ extension ReportMateRouter: ReportMateBuildable {
         let requestProfileImageUseCase:
         RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
-            networkProvider: SNMNetworkProvider()),
+                networkProvider: SNMNetworkProvider(),
+                sessionManager: SupabaseSessionManager.shared),
             cacheManager: CacheManager.shared
         )
-        let requestReportUseCase: RequestReportUseCase = RequestReportUseCaseImpl(remoteDatabaseManager: SupabaseDatabaseManager.shared)
+        let requestReportUseCase: RequestReportUseCase = RequestReportUseCaseImpl(
+            remoteDBManager: SupabaseDBManager.shared
+        )
         let view: ReportMateViewable & UIViewController = ReportMateViewController()
         let router: ReportMateRoutable & ReportMateBuildable = ReportMateRouter()
         let presenter: ReportMatePresentable & ReportMateInteractorOutput = ReportMatePresenter()

@@ -233,7 +233,6 @@
 		32BD48D42D3FF02C0078DA9C /* MPCBroswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044192CE48A3100D08B6D /* MPCBroswer.swift */; };
 		32BD48D52D3FF02C0078DA9C /* SupabaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082602CEB244C009109A0 /* SupabaseConfig.swift */; };
 		32BD48D62D3FF02C0078DA9C /* SupabaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */; };
-		32BD48D72D3FF02C0078DA9C /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4592CEC2BA300886763 /* SessionManager.swift */; };
 		32BD48D82D3FF02C0078DA9C /* SupabaseAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */; };
 		32BD48D92D3FF02C0078DA9C /* SupabaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4512CEBB5A900886763 /* SupabaseSession.swift */; };
 		32BD48DA2D3FF02C0078DA9C /* SupabaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4552CEBB63A00886763 /* SupabaseUser.swift */; };
@@ -243,8 +242,8 @@
 		32BD48DE2D3FF02C0078DA9C /* SupabaseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082712CEB36B8009109A0 /* SupabaseTokenRequest.swift */; };
 		32BD48DF2D3FF02C0078DA9C /* SupabaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A8D2CF33F6100F39426 /* SupabaseStorageManager.swift */; };
 		32BD48E02D3FF02C0078DA9C /* SupabaseStorageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A5F2CF339AA00F39426 /* SupabaseStorageRequest.swift */; };
-		32BD48E12D3FF02C0078DA9C /* SupabaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */; };
-		32BD48E22D3FF02C0078DA9C /* SupabaseDatabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */; };
+		32BD48E12D3FF02C0078DA9C /* SupabaseDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */; };
+		32BD48E22D3FF02C0078DA9C /* SupabaseDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */; };
 		32BD48E42D40855D0078DA9C /* MateListPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BD48E32D4085540078DA9C /* MateListPresenterSpy.swift */; };
 		32BD48E62D408C3E0078DA9C /* UseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BD48E52D408C3A0078DA9C /* UseCaseMock.swift */; };
 		32BD48EA2D40AEBC0078DA9C /* RemoteDatabaseManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BD48E92D40AEB50078DA9C /* RemoteDatabaseManagerMock.swift */; };
@@ -303,8 +302,8 @@
 		99E79FAC2D556E8600E48552 /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FAA2D556E7100E48552 /* ReportDTO.swift */; };
 		99E79FAD2D55EC8600E48552 /* SNMLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B592CECE8F90093BEB9 /* SNMLogger.swift */; };
 		99FA4E792CE0FBBF00553C2E /* ProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */; };
-		A202A1152CEDD50700B98203 /* SupabaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */; };
-		A202A1172CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */; };
+		A202A1152CEDD50700B98203 /* SupabaseDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */; };
+		A202A1172CEDD5EF00B98203 /* SupabaseDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */; };
 		A20E71522CEC5FE900272B25 /* SupabaseUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20E71512CEC5FE900272B25 /* SupabaseUserResponse.swift */; };
 		A21435F72CE20D2500564A4D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21435F62CE20D2500564A4D /* TabBarController.swift */; };
 		A220400B2CF6B89800D1E8CB /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */; };
@@ -324,7 +323,6 @@
 		A25BE4522CEBB5A900886763 /* SupabaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4512CEBB5A900886763 /* SupabaseSession.swift */; };
 		A25BE4562CEBB63A00886763 /* SupabaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4552CEBB63A00886763 /* SupabaseUser.swift */; };
 		A25BE4582CEBB95C00886763 /* SupabaseRefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */; };
-		A25BE45A2CEC2BA300886763 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4592CEC2BA300886763 /* SessionManager.swift */; };
 		A266A2602CF5CF4A002C2B3A /* CreateAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */; };
 		A288A63D2CDC595000D11C34 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A28D4F582CFED0CB00A79543 /* AddMateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28D4F572CFED0CB00A79543 /* AddMateButton.swift */; };
@@ -349,6 +347,21 @@
 		A2C844D72CDBEF8B007F2970 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A2F825D12CDF4BA6000C5419 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F825D02CDF4BA6000C5419 /* HomeViewController.swift */; };
 		A2F825DD2CDFBEB4000C5419 /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F825DC2CDFBEB4000C5419 /* ProfileCardView.swift */; };
+		A2FE77232D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77222D5211C700239F05 /* SupabaseSessionRequest.swift */; };
+		A2FE77242D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77222D5211C700239F05 /* SupabaseSessionRequest.swift */; };
+		A2FE77252D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77222D5211C700239F05 /* SupabaseSessionRequest.swift */; };
+		A2FE77272D521FB200239F05 /* SupabaseSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77262D521FB200239F05 /* SupabaseSessionManager.swift */; };
+		A2FE77282D521FB200239F05 /* SupabaseSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77262D521FB200239F05 /* SupabaseSessionManager.swift */; };
+		A2FE77292D521FB200239F05 /* SupabaseSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77262D521FB200239F05 /* SupabaseSessionManager.swift */; };
+		A2FE772B2D52224700239F05 /* SignInAnonUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE772A2D52224700239F05 /* SignInAnonUseCase.swift */; };
+		A2FE772C2D52224700239F05 /* SignInAnonUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE772A2D52224700239F05 /* SignInAnonUseCase.swift */; };
+		A2FE772E2D5378B400239F05 /* SupabaseQueryParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE772D2D5378B400239F05 /* SupabaseQueryParameter.swift */; };
+		A2FE772F2D5378B400239F05 /* SupabaseQueryParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE772D2D5378B400239F05 /* SupabaseQueryParameter.swift */; };
+		A2FE77302D5378B400239F05 /* SupabaseQueryParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE772D2D5378B400239F05 /* SupabaseQueryParameter.swift */; };
+		A2FE77722D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */; };
+		A2FE77732D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */; };
+		A2FE77742D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */; };
+		A2FE77762D55448800239F05 /* RemoteDBRequestBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77752D55448800239F05 /* RemoteDBRequestBuilderMock.swift */; };
 		FD01D8F52D40AC5300AD4940 /* Extension + UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01D8F42D40AC4100AD4940 /* Extension + UITableViewCell.swift */; };
 		FD01D8F72D40AC8600AD4940 /* TaskSerialQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01D8F62D40AC8000AD4940 /* TaskSerialQueue.swift */; };
 		FD01D8F82D40AC8600AD4940 /* TaskSerialQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01D8F62D40AC8000AD4940 /* TaskSerialQueue.swift */; };
@@ -396,7 +409,6 @@
 		FD331A7D2CF33D0500F39426 /* SupabaseStorageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A5F2CF339AA00F39426 /* SupabaseStorageRequest.swift */; };
 		FD331A7E2CF33D0500F39426 /* SupabaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082602CEB244C009109A0 /* SupabaseConfig.swift */; };
 		FD331A802CF33D0500F39426 /* SupabaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */; };
-		FD331A812CF33D0500F39426 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4592CEC2BA300886763 /* SessionManager.swift */; };
 		FD331A822CF33D0500F39426 /* SupabaseAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */; };
 		FD331A832CF33D0500F39426 /* SupabaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4512CEBB5A900886763 /* SupabaseSession.swift */; };
 		FD331A842CF33D0500F39426 /* SupabaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4552CEBB63A00886763 /* SupabaseUser.swift */; };
@@ -404,8 +416,8 @@
 		FD331A862CF33D0500F39426 /* SupabaseUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20E71512CEC5FE900272B25 /* SupabaseUserResponse.swift */; };
 		FD331A872CF33D0500F39426 /* SupabaseRefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */; };
 		FD331A882CF33D0500F39426 /* SupabaseTokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082712CEB36B8009109A0 /* SupabaseTokenRequest.swift */; };
-		FD331A892CF33D0500F39426 /* SupabaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */; };
-		FD331A8A2CF33D0500F39426 /* SupabaseDatabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */; };
+		FD331A892CF33D0500F39426 /* SupabaseDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */; };
+		FD331A8A2CF33D0500F39426 /* SupabaseDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */; };
 		FD331A8B2CF33E7100F39426 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD69B1B42CE3BC79009D71DC /* UserDefaultsManager.swift */; };
 		FD331A8C2CF33E7100F39426 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD69B1B22CE3BC68009D71DC /* KeychainManager.swift */; };
 		FD331A8E2CF33F6700F39426 /* SupabaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A8D2CF33F6100F39426 /* SupabaseStorageManager.swift */; };
@@ -598,8 +610,8 @@
 		99E79FA72D556E1500E48552 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		99E79FAA2D556E7100E48552 /* ReportDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDTO.swift; sourceTree = "<group>"; };
 		99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputViewController.swift; sourceTree = "<group>"; };
-		A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDatabaseManager.swift; sourceTree = "<group>"; };
-		A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDatabaseRequest.swift; sourceTree = "<group>"; };
+		A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBManager.swift; sourceTree = "<group>"; };
+		A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRequest.swift; sourceTree = "<group>"; };
 		A20E71512CEC5FE900272B25 /* SupabaseUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseUserResponse.swift; sourceTree = "<group>"; };
 		A21435F62CE20D2500564A4D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
@@ -619,7 +631,6 @@
 		A25BE4512CEBB5A900886763 /* SupabaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSession.swift; sourceTree = "<group>"; };
 		A25BE4552CEBB63A00886763 /* SupabaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseUser.swift; sourceTree = "<group>"; };
 		A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseRefreshResponse.swift; sourceTree = "<group>"; };
-		A25BE4592CEC2BA300886763 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountUseCase.swift; sourceTree = "<group>"; };
 		A28D4F572CFED0CB00A79543 /* AddMateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateButton.swift; sourceTree = "<group>"; };
 		A2AFC9482D016BFF0062B34E /* SNMToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMToast.swift; sourceTree = "<group>"; };
@@ -641,6 +652,12 @@
 		A2C328912CE3BEA000D255AB /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		A2F825D02CDF4BA6000C5419 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A2F825DC2CDFBEB4000C5419 /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
+		A2FE77222D5211C700239F05 /* SupabaseSessionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSessionRequest.swift; sourceTree = "<group>"; };
+		A2FE77262D521FB200239F05 /* SupabaseSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSessionManager.swift; sourceTree = "<group>"; };
+		A2FE772A2D52224700239F05 /* SignInAnonUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAnonUseCase.swift; sourceTree = "<group>"; };
+		A2FE772D2D5378B400239F05 /* SupabaseQueryParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseQueryParameter.swift; sourceTree = "<group>"; };
+		A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRequestBuilder.swift; sourceTree = "<group>"; };
+		A2FE77752D55448800239F05 /* RemoteDBRequestBuilderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDBRequestBuilderMock.swift; sourceTree = "<group>"; };
 		FD011EF02D351FCF0071327A /* SNMNetworkTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SNMNetworkTestPlan.xctestplan; sourceTree = "<group>"; };
 		FD011EF22D35203C0071327A /* SNMPersistenceTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SNMPersistenceTestPlan.xctestplan; sourceTree = "<group>"; };
 		FD01D8F42D40AC4100AD4940 /* Extension + UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITableViewCell.swift"; sourceTree = "<group>"; };
@@ -933,6 +950,7 @@
 				A2BA1BA82CF34A6A0080575A /* RequestMateListUseCase.swift */,
 				A2BA1BAB2CF34A860080575A /* RequestProfileImageUseCase.swift */,
 				FD51341E2CEB7AF6002E76F3 /* LoadUserInfoUseCase.swift */,
+				A2FE772A2D52224700239F05 /* SignInAnonUseCase.swift */,
 			);
 			path = RequestUseCase;
 			sourceTree = "<group>";
@@ -992,6 +1010,7 @@
 		32BD48352D3FECFD0078DA9C /* MateListScene */ = {
 			isa = PBXGroup;
 			children = (
+				A2FE77752D55448800239F05 /* RemoteDBRequestBuilderMock.swift */,
 				32BD48E92D40AEB50078DA9C /* RemoteDatabaseManagerMock.swift */,
 				32BD48E52D408C3A0078DA9C /* UseCaseMock.swift */,
 				32BD48E32D4085540078DA9C /* MateListPresenterSpy.swift */,
@@ -1011,8 +1030,10 @@
 		A202A1132CEDD4CD00B98203 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */,
-				A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */,
+				A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */,
+				A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */,
+				A2FE772D2D5378B400239F05 /* SupabaseQueryParameter.swift */,
+				A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -1030,6 +1051,7 @@
 			isa = PBXGroup;
 			children = (
 				A24082602CEB244C009109A0 /* SupabaseConfig.swift */,
+				A2FE77092D52104E00239F05 /* Session */,
 				A24082652CEB2475009109A0 /* Auth */,
 				FD331A5E2CF339A400F39426 /* Storage */,
 				A202A1132CEDD4CD00B98203 /* Database */,
@@ -1041,9 +1063,7 @@
 			isa = PBXGroup;
 			children = (
 				A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */,
-				A25BE4592CEC2BA300886763 /* SessionManager.swift */,
 				A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */,
-				A25BE4532CEBB60200886763 /* Entity */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1140,6 +1160,16 @@
 				FDE768862CF7810E00B5DE88 /* Design System */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		A2FE77092D52104E00239F05 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				A2FE77262D521FB200239F05 /* SupabaseSessionManager.swift */,
+				A2FE77222D5211C700239F05 /* SupabaseSessionRequest.swift */,
+				A25BE4532CEBB60200886763 /* Entity */,
+			);
+			path = Session;
 			sourceTree = "<group>";
 		};
 		FD011EF12D3520240071327A /* TestPlan */ = {
@@ -2398,6 +2428,7 @@
 				32BD48612D3FF02C0078DA9C /* NearByProfileDropUseCase.swift in Sources */,
 				32BD48622D3FF02C0078DA9C /* QuitProfileDropUseCase.swift in Sources */,
 				32BD48632D3FF02C0078DA9C /* MultipartFormData.swift in Sources */,
+				A2FE772C2D52224700239F05 /* SignInAnonUseCase.swift in Sources */,
 				32BD48642D3FF02C0078DA9C /* HTTPStatusCode.swift in Sources */,
 				32BD48652D3FF02C0078DA9C /* NetworkProvider.swift in Sources */,
 				32BD48662D3FF02C0078DA9C /* SNMRequestType.swift in Sources */,
@@ -2415,6 +2446,7 @@
 				32BD48712D3FF02C0078DA9C /* SNMFileManager.swift in Sources */,
 				32BD48722D3FF02C0078DA9C /* UserDefaultsManager.swift in Sources */,
 				32BD48732D3FF02C0078DA9C /* KeychainManager.swift in Sources */,
+				A2FE77302D5378B400239F05 /* SupabaseQueryParameter.swift in Sources */,
 				32BD48742D3FF02C0078DA9C /* BaseView.swift in Sources */,
 				32BD48E42D40855D0078DA9C /* MateListPresenterSpy.swift in Sources */,
 				32BD48752D3FF02C0078DA9C /* BaseViewController.swift in Sources */,
@@ -2434,6 +2466,8 @@
 				32BD48822D3FF02C0078DA9C /* ProfileDropAnimation.swift in Sources */,
 				99E79F902D544A4700E48552 /* ReportMateRouter.swift in Sources */,
 				32BD48832D3FF02C0078DA9C /* EventConstant.swift in Sources */,
+				A2FE77232D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */,
+				A2FE77722D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
 				32BD48842D3FF02C0078DA9C /* InputTextField.swift in Sources */,
 				32BD48852D3FF02C0078DA9C /* KeywordButton.swift in Sources */,
 				99E79F9C2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */,
@@ -2502,6 +2536,7 @@
 				32BD48C42D3FF02C0078DA9C /* WalkLogCell.swift in Sources */,
 				32BD48C52D3FF02C0078DA9C /* WalkLogListViewController.swift in Sources */,
 				32BD48C62D3FF02C0078DA9C /* WalkLogPageViewController.swift in Sources */,
+				A2FE77282D521FB200239F05 /* SupabaseSessionManager.swift in Sources */,
 				32BD48C72D3FF02C0078DA9C /* AddMateButton.swift in Sources */,
 				32BD48C82D3FF02C0078DA9C /* MateListViewController.swift in Sources */,
 				FD4855252D54996800C66429 /* ConnectedPeerManager.swift in Sources */,
@@ -2522,10 +2557,10 @@
 				32BD48D42D3FF02C0078DA9C /* MPCBroswer.swift in Sources */,
 				32BD48D52D3FF02C0078DA9C /* SupabaseConfig.swift in Sources */,
 				32BD48D62D3FF02C0078DA9C /* SupabaseAuthManager.swift in Sources */,
-				32BD48D72D3FF02C0078DA9C /* SessionManager.swift in Sources */,
 				99E79F992D548D9A00E48552 /* ReportMateInteractor.swift in Sources */,
 				99E79FA82D556E1900E48552 /* Report.swift in Sources */,
 				32BD48D82D3FF02C0078DA9C /* SupabaseAuthRequest.swift in Sources */,
+				A2FE77762D55448800239F05 /* RemoteDBRequestBuilderMock.swift in Sources */,
 				32BD48D92D3FF02C0078DA9C /* SupabaseSession.swift in Sources */,
 				32BD48DA2D3FF02C0078DA9C /* SupabaseUser.swift in Sources */,
 				32BD48DB2D3FF02C0078DA9C /* SupabaseSessionResponse.swift in Sources */,
@@ -2534,8 +2569,8 @@
 				32BD48DE2D3FF02C0078DA9C /* SupabaseTokenRequest.swift in Sources */,
 				32BD48DF2D3FF02C0078DA9C /* SupabaseStorageManager.swift in Sources */,
 				32BD48E02D3FF02C0078DA9C /* SupabaseStorageRequest.swift in Sources */,
-				32BD48E12D3FF02C0078DA9C /* SupabaseDatabaseManager.swift in Sources */,
-				32BD48E22D3FF02C0078DA9C /* SupabaseDatabaseRequest.swift in Sources */,
+				32BD48E12D3FF02C0078DA9C /* SupabaseDBManager.swift in Sources */,
+				32BD48E22D3FF02C0078DA9C /* SupabaseDBRequest.swift in Sources */,
 				32BD48332D3FECAE0078DA9C /* MateListInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2558,22 +2593,24 @@
 				FD159A7D2D35166D00B425D9 /* Environment.swift in Sources */,
 				FD331A8B2CF33E7100F39426 /* UserDefaultsManager.swift in Sources */,
 				FD331A8C2CF33E7100F39426 /* KeychainManager.swift in Sources */,
+				A2FE77742D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
 				FD331A7D2CF33D0500F39426 /* SupabaseStorageRequest.swift in Sources */,
 				FD331A7E2CF33D0500F39426 /* SupabaseConfig.swift in Sources */,
 				FD331A802CF33D0500F39426 /* SupabaseAuthManager.swift in Sources */,
-				FD331A812CF33D0500F39426 /* SessionManager.swift in Sources */,
 				FD331A8E2CF33F6700F39426 /* SupabaseStorageManager.swift in Sources */,
 				FD331A822CF33D0500F39426 /* SupabaseAuthRequest.swift in Sources */,
 				FD331A832CF33D0500F39426 /* SupabaseSession.swift in Sources */,
 				FD331A842CF33D0500F39426 /* SupabaseUser.swift in Sources */,
 				FD331A852CF33D0500F39426 /* SupabaseSessionResponse.swift in Sources */,
+				A2FE77252D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */,
 				FD331A862CF33D0500F39426 /* SupabaseUserResponse.swift in Sources */,
 				FD331A872CF33D0500F39426 /* SupabaseRefreshResponse.swift in Sources */,
 				3284D34F2D2F941C000ABC04 /* DataStoragable.swift in Sources */,
 				FD331A882CF33D0500F39426 /* SupabaseTokenRequest.swift in Sources */,
-				FD331A892CF33D0500F39426 /* SupabaseDatabaseManager.swift in Sources */,
-				FD331A8A2CF33D0500F39426 /* SupabaseDatabaseRequest.swift in Sources */,
+				FD331A892CF33D0500F39426 /* SupabaseDBManager.swift in Sources */,
+				FD331A8A2CF33D0500F39426 /* SupabaseDBRequest.swift in Sources */,
 				FD331A732CF33CF200F39426 /* MultipartFormData.swift in Sources */,
+				A2FE77272D521FB200239F05 /* SupabaseSessionManager.swift in Sources */,
 				FD331A742CF33CF200F39426 /* HTTPStatusCode.swift in Sources */,
 				FD331A752CF33CF200F39426 /* NetworkProvider.swift in Sources */,
 				FD331A762CF33CF200F39426 /* SNMRequestType.swift in Sources */,
@@ -2583,6 +2620,7 @@
 				FD331A7A2CF33CF200F39426 /* Data + append.swift in Sources */,
 				FD331A7B2CF33CF200F39426 /* URLRequest + append.swift in Sources */,
 				FD331A7C2CF33CF200F39426 /* AnyEncodable.swift in Sources */,
+				A2FE772E2D5378B400239F05 /* SupabaseQueryParameter.swift in Sources */,
 				FD331A722CF33C8400F39426 /* SupabaseStorageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2592,7 +2630,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99A5E1A92D300CE9003B00A8 /* (null) in Sources */,
-				A202A1152CEDD50700B98203 /* SupabaseDatabaseManager.swift in Sources */,
+				A202A1152CEDD50700B98203 /* SupabaseDBManager.swift in Sources */,
 				995D94622CE598FD005A47BF /* NIManager.swift in Sources */,
 				FDBFA9A12CE1E51500AA9220 /* SNMColor.swift in Sources */,
 				FDE7689F2CF7858F00B5DE88 /* Extension + UIViewController.swift in Sources */,
@@ -2605,8 +2643,9 @@
 				FD331A8F2CF33F6700F39426 /* SupabaseStorageManager.swift in Sources */,
 				FD3A03422CD8CF460047B7ED /* AppDelegate.swift in Sources */,
 				995D94A82CECEF91005A47BF /* RequestMateViewController.swift in Sources */,
+				A2FE77292D521FB200239F05 /* SupabaseSessionManager.swift in Sources */,
 				A2BA1B962CF2606B0080575A /* MateListInteractor.swift in Sources */,
-				A202A1172CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift in Sources */,
+				A202A1172CEDD5EF00B98203 /* SupabaseDBRequest.swift in Sources */,
 				FD3A03432CD8CF460047B7ED /* SceneDelegate.swift in Sources */,
 				99FA4E792CE0FBBF00553C2E /* ProfileInputViewController.swift in Sources */,
 				3200448D2CEC878300D08B6D /* RespondWalkViewController.swift in Sources */,
@@ -2614,6 +2653,7 @@
 				FD331A932CF3463200F39426 /* NotificationCell.swift in Sources */,
 				FDA04AA92CE91DF8002605AC /* Data + append.swift in Sources */,
 				FDE768982CF7836C00B5DE88 /* RemoteSaveDeviceTokenUseCase.swift in Sources */,
+				A2FE772F2D5378B400239F05 /* SupabaseQueryParameter.swift in Sources */,
 				FD119F462CED868D00BE22BD /* ConvertLocationToTextUseCase.swift in Sources */,
 				99E79F942D54881300E48552 /* ReportMatePresenter.swift in Sources */,
 				A20E71522CEC5FE900272B25 /* SupabaseUserResponse.swift in Sources */,
@@ -2629,6 +2669,7 @@
 				FDDDB93A2D00423D000D4528 /* ProcessedWalkRouter.swift in Sources */,
 				320047852CF80B2600D08B6D /* MateListDTO.swift in Sources */,
 				A21435F72CE20D2500564A4D /* TabBarController.swift in Sources */,
+				A2FE772B2D52224700239F05 /* SignInAnonUseCase.swift in Sources */,
 				320043762CDCA18E00D08B6D /* (null) in Sources */,
 				995D94D22CEDF037005A47BF /* MPCProfileDropDTO.swift in Sources */,
 				32A7563C2D00398100965F0A /* CacheManager.swift in Sources */,
@@ -2715,7 +2756,6 @@
 				3200445E2CE5CA1B00D08B6D /* SaveUserInfoUseCase.swift in Sources */,
 				995D94AA2CECF8DD005A47BF /* RequestMateInteractor.swift in Sources */,
 				320522BE2D0181A800F1677C /* ImageCacheable.swift in Sources */,
-				A25BE45A2CEC2BA300886763 /* SessionManager.swift in Sources */,
 				99E79F8A2D5436B700E48552 /* ReportMateViewController.swift in Sources */,
 				A24082672CEB2539009109A0 /* SupabaseSessionResponse.swift in Sources */,
 				99E79FA02D54D45600E48552 /* ReportPickerInteractor.swift in Sources */,
@@ -2739,6 +2779,7 @@
 				3200453D2CF5A60E00D08B6D /* Extension + Date.swift in Sources */,
 				320044562CE59DF500D08B6D /* ProfileInputRouter.swift in Sources */,
 				A2C844D72CDBEF8B007F2970 /* (null) in Sources */,
+				A2FE77732D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
 				99E79F962D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
 				3200438B2CDF3BEF00D08B6D /* ProfileCreateViewController.swift in Sources */,
 				A2BD4A012CF7AD4300AC72A7 /* RequestMateInfoUseCase.swift in Sources */,
@@ -2751,6 +2792,7 @@
 				320047AA2CFB1C6200D08B6D /* RequestNotiListUseCase.swift in Sources */,
 				320044672CE6125100D08B6D /* DataManager.swift in Sources */,
 				3200449C2CEDA87800D08B6D /* RespondWalkRequestUseCase.swift in Sources */,
+				A2FE77242D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */,
 				FDEAEA7A2CE3148D005890FA /* BaseView.swift in Sources */,
 				FDA04AA52CE91DBF002605AC /* MultipartFormData.swift in Sources */,
 				FD119F522CED881300BE22BD /* SelectLocationModuleBuildable.swift in Sources */,

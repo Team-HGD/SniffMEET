@@ -158,6 +158,7 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
         // TODO: 에러를 어떻게 전달해야 할까요? Result 타입을 쓰는게 좋을까요?
         guard let mate = presenter?.output.mates.value[indexPath.row] else {return }
         presenter?.didTabMateListCell(mate: mate)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     private func configureMateListCell(cell: UITableViewCell, mate: Mate) {
@@ -166,7 +167,6 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configure(image: profileImage)
         }
         cell.configure(text: mate.name)
-        cell.selectionStyle = .none
     }
 }
 

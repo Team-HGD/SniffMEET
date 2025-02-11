@@ -115,6 +115,7 @@ final class MateListViewController: BaseViewController, MateListViewable {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifier.mateCellID)
         tableView.separatorStyle = .none
     }
+    
     func changeMPCButtonState(to buttonState: AddMateButton.ButtonState) {
         addMateButton.buttonState = buttonState
     }
@@ -144,12 +145,17 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
             mateCellDictionary[mate.userID] = cell // 현재 사용하고 있는 cell의 참조값을 저장합니다.
             configureMateListCell(cell: cell, mate: mate)
         }
-
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         ItemSize.cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: 에러를 어떻게 전달해야 할까요? Result 타입을 쓰는게 좋을까요?
+        guard let mate = presenter?.output.mates.value[indexPath.row] else {return }
+        presenter?.didTabMateListCell(mate: mate)
     }
 
     private func configureMateListCell(cell: UITableViewCell, mate: Mate) {
@@ -158,26 +164,7 @@ extension MateListViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configure(image: profileImage)
         }
         cell.configure(text: mate.name)
-        cell.accessoryView = createAccessoryButton(mate: mate)
         cell.selectionStyle = .none
-    }
-
-    private func createAccessoryButton(mate: Mate) -> UIButton {
-        let button = UIButton(type: .roundedRect)
-        button.frame = CGRect(origin: .zero, size: ItemSize.accessoryButtonSize)
-        button.backgroundColor = SNMColor.mainBrown
-        button.setTitle(Context.accessoryButtonLabel, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = button.frame.height / 2
-        button.clipsToBounds = true
-
-        button.publisher(event: .touchUpInside)
-            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
-            .sink { [weak self] _ in
-                self?.presenter?.didTabAccessoryButton(mate: mate)
-            }
-            .store(in: &cancellables)
-        return button
     }
 }
 

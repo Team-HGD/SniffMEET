@@ -68,6 +68,7 @@ final class SupabaseDatabaseManager: RemoteDatabaseManager {
                 )
             )
         } catch {
+            SNMLogger.error("supabase 응답 오류: \(error.localizedDescription)")
             throw SupabaseDBError.insertDataFailed
         }
     }
@@ -159,6 +160,7 @@ enum SupabaseDBError: LocalizedError {
     case insertDataFailed
     case updateDataFailed
     case noMoreData
+    case deleteDataFailed
 
     var errorDescription: String? {
         switch self {
@@ -166,6 +168,7 @@ enum SupabaseDBError: LocalizedError {
         case .insertDataFailed: "데이터 삽입 실패"
         case .updateDataFailed: "데이터 업데이트 실패"
         case .noMoreData: "더 불러올 데이터 없음"
+        case .deleteDataFailed: "데이터 삭제 실패"
         }
     }
 }

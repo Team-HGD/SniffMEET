@@ -273,6 +273,33 @@
 		99A5E1BB2D30322C003B00A8 /* SNMLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B592CECE8F90093BEB9 /* SNMLogger.swift */; };
 		99A9C0532D394AD100E669C8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 99A9C0522D394AD100E669C8 /* OrderedCollections */; };
 		99A9C0572D3DE5D300E669C8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 99A9C0562D3DE5D300E669C8 /* OrderedCollections */; };
+		99E79F5B2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F5A2D5392AF00E48552 /* DeleteMateUseCase.swift */; };
+		99E79F5C2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F5A2D5392AF00E48552 /* DeleteMateUseCase.swift */; };
+		99E79F8A2D5436B700E48552 /* ReportMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F892D5436B700E48552 /* ReportMateViewController.swift */; };
+		99E79F8B2D5436B700E48552 /* ReportMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F892D5436B700E48552 /* ReportMateViewController.swift */; };
+		99E79F8D2D543F4900E48552 /* ReportPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F8C2D543F4900E48552 /* ReportPickerViewController.swift */; };
+		99E79F8E2D543F4900E48552 /* ReportPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F8C2D543F4900E48552 /* ReportPickerViewController.swift */; };
+		99E79F902D544A4700E48552 /* ReportMateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F8F2D544A3C00E48552 /* ReportMateRouter.swift */; };
+		99E79F912D544A4700E48552 /* ReportMateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F8F2D544A3C00E48552 /* ReportMateRouter.swift */; };
+		99E79F932D54881300E48552 /* ReportMatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F922D54880800E48552 /* ReportMatePresenter.swift */; };
+		99E79F942D54881300E48552 /* ReportMatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F922D54880800E48552 /* ReportMatePresenter.swift */; };
+		99E79F962D548B6700E48552 /* ReportPickerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F952D548B6000E48552 /* ReportPickerRouter.swift */; };
+		99E79F972D548B6700E48552 /* ReportPickerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F952D548B6000E48552 /* ReportPickerRouter.swift */; };
+		99E79F992D548D9A00E48552 /* ReportMateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F982D548D9100E48552 /* ReportMateInteractor.swift */; };
+		99E79F9A2D548D9A00E48552 /* ReportMateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F982D548D9100E48552 /* ReportMateInteractor.swift */; };
+		99E79F9C2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F9B2D54D0A000E48552 /* ReportPickerPresenter.swift */; };
+		99E79F9D2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F9B2D54D0A000E48552 /* ReportPickerPresenter.swift */; };
+		99E79F9F2D54D45600E48552 /* ReportPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F9E2D54D44D00E48552 /* ReportPickerInteractor.swift */; };
+		99E79FA02D54D45600E48552 /* ReportPickerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F9E2D54D44D00E48552 /* ReportPickerInteractor.swift */; };
+		99E79FA22D55627F00E48552 /* Extension + UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FA12D55627100E48552 /* Extension + UITextViewDelegate.swift */; };
+		99E79FA32D55627F00E48552 /* Extension + UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FA12D55627100E48552 /* Extension + UITextViewDelegate.swift */; };
+		99E79FA52D556C6400E48552 /* RequestReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FA42D556C5600E48552 /* RequestReportUseCase.swift */; };
+		99E79FA62D556C6400E48552 /* RequestReportUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FA42D556C5600E48552 /* RequestReportUseCase.swift */; };
+		99E79FA82D556E1900E48552 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FA72D556E1500E48552 /* Report.swift */; };
+		99E79FA92D556E1900E48552 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FA72D556E1500E48552 /* Report.swift */; };
+		99E79FAB2D556E8600E48552 /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FAA2D556E7100E48552 /* ReportDTO.swift */; };
+		99E79FAC2D556E8600E48552 /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FAA2D556E7100E48552 /* ReportDTO.swift */; };
+		99E79FAD2D55EC8600E48552 /* SNMLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B592CECE8F90093BEB9 /* SNMLogger.swift */; };
 		99FA4E792CE0FBBF00553C2E /* ProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */; };
 		A202A1152CEDD50700B98203 /* SupabaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */; };
 		A202A1172CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */; };
@@ -554,6 +581,19 @@
 		995D94AD2CED0093005A47BF /* RequestMateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMateRouter.swift; sourceTree = "<group>"; };
 		995D94D12CEDF031005A47BF /* MPCProfileDropDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCProfileDropDTO.swift; sourceTree = "<group>"; };
 		99A5A1B22CFFE544002F1D2D /* ProfileDrop.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ProfileDrop.gif; sourceTree = "<group>"; };
+		99E79F5A2D5392AF00E48552 /* DeleteMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMateUseCase.swift; sourceTree = "<group>"; };
+		99E79F892D5436B700E48552 /* ReportMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMateViewController.swift; sourceTree = "<group>"; };
+		99E79F8C2D543F4900E48552 /* ReportPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPickerViewController.swift; sourceTree = "<group>"; };
+		99E79F8F2D544A3C00E48552 /* ReportMateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMateRouter.swift; sourceTree = "<group>"; };
+		99E79F922D54880800E48552 /* ReportMatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMatePresenter.swift; sourceTree = "<group>"; };
+		99E79F952D548B6000E48552 /* ReportPickerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPickerRouter.swift; sourceTree = "<group>"; };
+		99E79F982D548D9100E48552 /* ReportMateInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMateInteractor.swift; sourceTree = "<group>"; };
+		99E79F9B2D54D0A000E48552 /* ReportPickerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPickerPresenter.swift; sourceTree = "<group>"; };
+		99E79F9E2D54D44D00E48552 /* ReportPickerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPickerInteractor.swift; sourceTree = "<group>"; };
+		99E79FA12D55627100E48552 /* Extension + UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UITextViewDelegate.swift"; sourceTree = "<group>"; };
+		99E79FA42D556C5600E48552 /* RequestReportUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReportUseCase.swift; sourceTree = "<group>"; };
+		99E79FA72D556E1500E48552 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		99E79FAA2D556E7100E48552 /* ReportDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDTO.swift; sourceTree = "<group>"; };
 		99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputViewController.swift; sourceTree = "<group>"; };
 		A202A1142CEDD50700B98203 /* SupabaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDatabaseManager.swift; sourceTree = "<group>"; };
 		A202A1162CEDD5EF00B98203 /* SupabaseDatabaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDatabaseRequest.swift; sourceTree = "<group>"; };
@@ -803,6 +843,7 @@
 		320044792CEC490600D08B6D /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				99E79FA72D556E1500E48552 /* Report.swift */,
 				320522BD2D0181A700F1677C /* ImageCacheable.swift */,
 				9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */,
 				FD331A512CF23BCE00F39426 /* WalkLog.swift */,
@@ -877,6 +918,7 @@
 		320047A42CF9E2A200D08B6D /* RequestUseCase */ = {
 			isa = PBXGroup;
 			children = (
+				99E79FA42D556C5600E48552 /* RequestReportUseCase.swift */,
 				FD1152742CFB9F33008955C4 /* CheckFirstLaunchUseCase.swift */,
 				320047A92CFB1C5300D08B6D /* RequestNotiListUseCase.swift */,
 				FDE768A02CF7872E00B5DE88 /* RequestNotificationAuthUseCase.swift */,
@@ -895,6 +937,7 @@
 		320047A52CF9E33200D08B6D /* SaveUseCase */ = {
 			isa = PBXGroup;
 			children = (
+				99E79F5A2D5392AF00E48552 /* DeleteMateUseCase.swift */,
 				993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */,
 				FD1152762CFBA083008955C4 /* SaveFirstLaunchUseCase.swift */,
 				A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */,
@@ -1051,6 +1094,7 @@
 		A2BD49F02CF72A8800AC72A7 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				99E79FAA2D556E7100E48552 /* ReportDTO.swift */,
 				320047BD2CFDE36C00D08B6D /* WalkRequestDTO.swift */,
 				FDE768932CF782E500B5DE88 /* WalkAPSDTO.swift */,
 				FD1152782CFC3B23008955C4 /* SaveDeviceTokenDTO.swift */,
@@ -1858,6 +1902,8 @@
 		FDA4918C2CDA7C3400A36FB0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				99E79F892D5436B700E48552 /* ReportMateViewController.swift */,
+				99E79F8C2D543F4900E48552 /* ReportPickerViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1865,6 +1911,8 @@
 		FDA4918D2CDA7C3400A36FB0 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				99E79F9E2D54D44D00E48552 /* ReportPickerInteractor.swift */,
+				99E79F982D548D9100E48552 /* ReportMateInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1872,6 +1920,8 @@
 		FDA4918E2CDA7C3400A36FB0 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				99E79F9B2D54D0A000E48552 /* ReportPickerPresenter.swift */,
+				99E79F922D54880800E48552 /* ReportMatePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -1886,6 +1936,8 @@
 		FDA491902CDA7C3400A36FB0 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				99E79F952D548B6000E48552 /* ReportPickerRouter.swift */,
+				99E79F8F2D544A3C00E48552 /* ReportMateRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1958,8 +2010,8 @@
 				FD0634292CE596C2003C9D6B /* NetworkProvider.swift */,
 				FDE14A512CE8D331001F7A9D /* SNMRequestType.swift */,
 				FD0634272CE596BA003C9D6B /* SNMRequestConvertible.swift */,
-				FD0634252CE596B2003C9D6B /* Endpoint.swift */,
 				FD06342B2CE59843003C9D6B /* SNMNetworkResponse.swift */,
+				FD0634252CE596B2003C9D6B /* Endpoint.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1995,6 +2047,7 @@
 		FDE768872CF7811400B5DE88 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				99E79FA12D55627100E48552 /* Extension + UITextViewDelegate.swift */,
 				FD01D8F92D40ACAB00AD4940 /* Extension + Array.swift */,
 				FD01D8F42D40AC4100AD4940 /* Extension + UITableViewCell.swift */,
 				320047DD2CFE9DFB00D08B6D /* Extension + UIApplication.swift */,
@@ -2293,6 +2346,7 @@
 				32BD48EC2D40B4880078DA9C /* Assets.xcassets in Sources */,
 				32BD48EB2D40B4790078DA9C /* SNMColor.swift in Sources */,
 				32BD48EA2D40AEBC0078DA9C /* RemoteDatabaseManagerMock.swift in Sources */,
+				99E79F5C2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */,
 				32BD48382D3FF02C0078DA9C /* WalkRequestDTO.swift in Sources */,
 				32BD48392D3FF02C0078DA9C /* WalkAPSDTO.swift in Sources */,
 				32BD483A2D3FF02C0078DA9C /* SaveDeviceTokenDTO.swift in Sources */,
@@ -2328,6 +2382,7 @@
 				32BD48572D3FF02C0078DA9C /* RequestUserLocationUseCase.swift in Sources */,
 				32BD48582D3FF02C0078DA9C /* RequestWalkUseCase.swift in Sources */,
 				32BD48592D3FF02C0078DA9C /* RequestMateListUseCase.swift in Sources */,
+				99E79F9F2D54D45600E48552 /* ReportPickerInteractor.swift in Sources */,
 				32BD485A2D3FF02C0078DA9C /* RequestProfileImageUseCase.swift in Sources */,
 				32BD485B2D3FF02C0078DA9C /* LoadUserInfoUseCase.swift in Sources */,
 				32BD485C2D3FF02C0078DA9C /* RespondWalkRequestUseCase.swift in Sources */,
@@ -2341,6 +2396,7 @@
 				32BD48642D3FF02C0078DA9C /* HTTPStatusCode.swift in Sources */,
 				32BD48652D3FF02C0078DA9C /* NetworkProvider.swift in Sources */,
 				32BD48662D3FF02C0078DA9C /* SNMRequestType.swift in Sources */,
+				99E79F932D54881300E48552 /* ReportMatePresenter.swift in Sources */,
 				32BD48672D3FF02C0078DA9C /* SNMRequestConvertible.swift in Sources */,
 				32BD48682D3FF02C0078DA9C /* Endpoint.swift in Sources */,
 				32BD48692D3FF02C0078DA9C /* SNMNetworkResponse.swift in Sources */,
@@ -2371,19 +2427,24 @@
 				32BD48802D3FF02C0078DA9C /* Extension + UIView.swift in Sources */,
 				32BD48812D3FF02C0078DA9C /* Extension + Navigation.swift in Sources */,
 				32BD48822D3FF02C0078DA9C /* ProfileDropAnimation.swift in Sources */,
+				99E79F902D544A4700E48552 /* ReportMateRouter.swift in Sources */,
 				32BD48832D3FF02C0078DA9C /* EventConstant.swift in Sources */,
 				32BD48842D3FF02C0078DA9C /* InputTextField.swift in Sources */,
 				32BD48852D3FF02C0078DA9C /* KeywordButton.swift in Sources */,
+				99E79F9C2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */,
 				32BD48862D3FF02C0078DA9C /* KeywordView.swift in Sources */,
 				32BD48872D3FF02C0078DA9C /* PrimaryButton.swift in Sources */,
 				32BD48882D3FF02C0078DA9C /* SNMLineTabBar.swift in Sources */,
+				99E79FA52D556C6400E48552 /* RequestReportUseCase.swift in Sources */,
 				32BD48892D3FF02C0078DA9C /* PaddingLabel.swift in Sources */,
+				99E79F8E2D543F4900E48552 /* ReportPickerViewController.swift in Sources */,
 				32BD488A2D3FF02C0078DA9C /* LayoutConstant.swift in Sources */,
 				32BD488C2D3FF02C0078DA9C /* SNMFont.swift in Sources */,
 				32BD488D2D3FF02C0078DA9C /* SNMToast.swift in Sources */,
 				32BD48912D3FF02C0078DA9C /* Routable.swift in Sources */,
 				32BD48932D3FF02C0078DA9C /* SNMError.swift in Sources */,
 				32BD48942D3FF02C0078DA9C /* TabBarModuleBuilder.swift in Sources */,
+				99E79F972D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
 				32BD48952D3FF02C0078DA9C /* TabBarController.swift in Sources */,
 				32BD48962D3FF02C0078DA9C /* ProfileInputViewController.swift in Sources */,
 				32BD48972D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */,
@@ -2429,6 +2490,7 @@
 				32BD48BE2D3FF02C0078DA9C /* RequestWalkInteractor.swift in Sources */,
 				32BD48BF2D3FF02C0078DA9C /* SelectLocationPresenter.swift in Sources */,
 				32BD48C02D3FF02C0078DA9C /* RequestWalkPresenter.swift in Sources */,
+				99E79F8B2D5436B700E48552 /* ReportMateViewController.swift in Sources */,
 				32BD48C12D3FF02C0078DA9C /* SelectLocationModuleBuildable.swift in Sources */,
 				32BD48C22D3FF02C0078DA9C /* RequestWalkRouter.swift in Sources */,
 				32BD48C32D3FF02C0078DA9C /* SelectLocationRouter.swift in Sources */,
@@ -2444,16 +2506,20 @@
 				32BD48CB2D3FF02C0078DA9C /* MateListRouter.swift in Sources */,
 				32BD48CC2D3FF02C0078DA9C /* RequestMateViewController.swift in Sources */,
 				32BD48CD2D3FF02C0078DA9C /* RequestMateInteractor.swift in Sources */,
+				99E79FA22D55627F00E48552 /* Extension + UITextViewDelegate.swift in Sources */,
 				32BD48CE2D3FF02C0078DA9C /* RequestMatePresenter.swift in Sources */,
 				32BD48CF2D3FF02C0078DA9C /* RequestMateRouter.swift in Sources */,
 				32BD48D02D3FF02C0078DA9C /* DataManager.swift in Sources */,
 				32BD48D12D3FF02C0078DA9C /* NIManager.swift in Sources */,
+				99E79FAB2D556E8600E48552 /* ReportDTO.swift in Sources */,
 				32BD48D22D3FF02C0078DA9C /* MPCManager.swift in Sources */,
 				32BD48D32D3FF02C0078DA9C /* MPCAdvertiser.swift in Sources */,
 				32BD48D42D3FF02C0078DA9C /* MPCBroswer.swift in Sources */,
 				32BD48D52D3FF02C0078DA9C /* SupabaseConfig.swift in Sources */,
 				32BD48D62D3FF02C0078DA9C /* SupabaseAuthManager.swift in Sources */,
 				32BD48D72D3FF02C0078DA9C /* SessionManager.swift in Sources */,
+				99E79F992D548D9A00E48552 /* ReportMateInteractor.swift in Sources */,
+				99E79FA82D556E1900E48552 /* Report.swift in Sources */,
 				32BD48D82D3FF02C0078DA9C /* SupabaseAuthRequest.swift in Sources */,
 				32BD48D92D3FF02C0078DA9C /* SupabaseSession.swift in Sources */,
 				32BD48DA2D3FF02C0078DA9C /* SupabaseUser.swift in Sources */,
@@ -2483,6 +2549,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99E79FAD2D55EC8600E48552 /* SNMLogger.swift in Sources */,
 				FD159A7D2D35166D00B425D9 /* Environment.swift in Sources */,
 				FD331A8B2CF33E7100F39426 /* UserDefaultsManager.swift in Sources */,
 				FD331A8C2CF33E7100F39426 /* KeychainManager.swift in Sources */,
@@ -2543,6 +2610,7 @@
 				FDA04AA92CE91DF8002605AC /* Data + append.swift in Sources */,
 				FDE768982CF7836C00B5DE88 /* RemoteSaveDeviceTokenUseCase.swift in Sources */,
 				FD119F462CED868D00BE22BD /* ConvertLocationToTextUseCase.swift in Sources */,
+				99E79F942D54881300E48552 /* ReportMatePresenter.swift in Sources */,
 				A20E71522CEC5FE900272B25 /* SupabaseUserResponse.swift in Sources */,
 				9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */,
 				320047B42CFC90C100D08B6D /* SessionViewController.swift in Sources */,
@@ -2551,6 +2619,7 @@
 				A25BE4582CEBB95C00886763 /* SupabaseRefreshResponse.swift in Sources */,
 				FDEAEA7C2CE314A7005890FA /* BaseViewController.swift in Sources */,
 				FDE768A12CF7873600B5DE88 /* RequestNotificationAuthUseCase.swift in Sources */,
+				99E79F8D2D543F4900E48552 /* ReportPickerViewController.swift in Sources */,
 				FD1152712CFB3872008955C4 /* RespondMapPresenter.swift in Sources */,
 				FDDDB93A2D00423D000D4528 /* ProcessedWalkRouter.swift in Sources */,
 				320047852CF80B2600D08B6D /* MateListDTO.swift in Sources */,
@@ -2571,6 +2640,7 @@
 				A2BD49FF2CF7712800AC72A7 /* Keyword.swift in Sources */,
 				A2C328882CE2481900D255AB /* HomeModuleBuilder.swift in Sources */,
 				FD01D8F72D40AC8600AD4940 /* TaskSerialQueue.swift in Sources */,
+				99E79F9A2D548D9A00E48552 /* ReportMateInteractor.swift in Sources */,
 				320044712CEB45E000D08B6D /* RequestWalkPresenter.swift in Sources */,
 				995D94262CE32ECE005A47BF /* Extension + Keyboard.swift in Sources */,
 				FD9468D42CFD590700417DC1 /* ProfileEditViewController.swift in Sources */,
@@ -2605,13 +2675,16 @@
 				320043782CDCA49100D08B6D /* (null) in Sources */,
 				FDDDB9382D004233000D4528 /* ProcessedWalkPresenter.swift in Sources */,
 				A24082612CEB244C009109A0 /* SupabaseConfig.swift in Sources */,
+				99E79FA62D556C6400E48552 /* RequestReportUseCase.swift in Sources */,
 				FD06342A2CE596D0003C9D6B /* NetworkProvider.swift in Sources */,
 				A2BD49F22CF72A9500AC72A7 /* DogProfileDTO.swift in Sources */,
 				FDBFA9B12CE1FE5500AA9220 /* LayoutConstant.swift in Sources */,
 				320044752CEB4D6900D08B6D /* RequestWalkRouter.swift in Sources */,
 				320044962CED80DA00D08B6D /* RespondWalkRouter.swift in Sources */,
 				A24CD93F2D364F0400492339 /* QuitProfileDropUseCase.swift in Sources */,
+				99E79F5B2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */,
 				FDE768942CF782E900B5DE88 /* WalkAPSDTO.swift in Sources */,
+				99E79F912D544A4700E48552 /* ReportMateRouter.swift in Sources */,
 				320043912CDF3D7F00D08B6D /* KeywordButton.swift in Sources */,
 				FD01D8F52D40AC5300AD4940 /* Extension + UITableViewCell.swift in Sources */,
 				FD11526F2CFB33B6008955C4 /* RespondMapViewController.swift in Sources */,
@@ -2637,7 +2710,9 @@
 				995D94AA2CECF8DD005A47BF /* RequestMateInteractor.swift in Sources */,
 				320522BE2D0181A800F1677C /* ImageCacheable.swift in Sources */,
 				A25BE45A2CEC2BA300886763 /* SessionManager.swift in Sources */,
+				99E79F8A2D5436B700E48552 /* ReportMateViewController.swift in Sources */,
 				A24082672CEB2539009109A0 /* SupabaseSessionResponse.swift in Sources */,
+				99E79FA02D54D45600E48552 /* ReportPickerInteractor.swift in Sources */,
 				FD51341B2CEB7AE8002E76F3 /* HomePresenter.swift in Sources */,
 				FD11527F2CFC9029008955C4 /* NotificationListInteractor.swift in Sources */,
 				320043942CDF3D7F00D08B6D /* PrimaryButton.swift in Sources */,
@@ -2648,14 +2723,17 @@
 				320047B92CFD367300D08B6D /* PushNotificationConfig.swift in Sources */,
 				FDBFA99F2CE1E50C00AA9220 /* SNMFont.swift in Sources */,
 				FD119F4E2CED87C200BE22BD /* SelectLocationPresenter.swift in Sources */,
+				99E79FAC2D556E8600E48552 /* ReportDTO.swift in Sources */,
 				FD5134192CEB7ADE002E76F3 /* HomeRouter.swift in Sources */,
 				FD51341D2CEB7AF0002E76F3 /* HomeInteractor.swift in Sources */,
 				3200453F2CF5A8B800D08B6D /* CalculateTimeLimitUseCase.swift in Sources */,
 				320044532CE59A8A00D08B6D /* UserInfo.swift in Sources */,
+				99E79FA32D55627F00E48552 /* Extension + UITextViewDelegate.swift in Sources */,
 				A24082642CEB2470009109A0 /* SupabaseAuthManager.swift in Sources */,
 				3200453D2CF5A60E00D08B6D /* Extension + Date.swift in Sources */,
 				320044562CE59DF500D08B6D /* ProfileInputRouter.swift in Sources */,
 				A2C844D72CDBEF8B007F2970 /* (null) in Sources */,
+				99E79F962D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
 				3200438B2CDF3BEF00D08B6D /* ProfileCreateViewController.swift in Sources */,
 				A2BD4A012CF7AD4300AC72A7 /* RequestMateInfoUseCase.swift in Sources */,
 				FD119F502CED87E500BE22BD /* SelectLocationRouter.swift in Sources */,
@@ -2676,6 +2754,7 @@
 				320044732CEB47B100D08B6D /* RequestWalkInteractor.swift in Sources */,
 				320044942CED80B700D08B6D /* RespondWalkInteractor.swift in Sources */,
 				FD331A912CF3461B00F39426 /* NotificationListViewController.swift in Sources */,
+				99E79F9D2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */,
 				FDE768922CF7828700B5DE88 /* AnyJSONSerializable.swift in Sources */,
 				9937361D2CF80D6600E3DD58 /* RequestUserInfoRemoteUseCase.swift in Sources */,
 				FD331A602CF339B000F39426 /* SupabaseStorageRequest.swift in Sources */,
@@ -2695,6 +2774,7 @@
 				FD0634312CE62578003C9D6B /* AnyEncodable.swift in Sources */,
 				FDE768962CF7831000B5DE88 /* RegisterDeviceTokenUseCase.swift in Sources */,
 				A23A3B732CF4683F00A58705 /* Mate.swift in Sources */,
+				99E79FA92D556E1900E48552 /* Report.swift in Sources */,
 				FD1152752CFB9F44008955C4 /* CheckFirstLaunchUseCase.swift in Sources */,
 				3200441A2CE48A3D00D08B6D /* MPCBroswer.swift in Sources */,
 				A25BE4562CEBB63A00886763 /* SupabaseUser.swift in Sources */,

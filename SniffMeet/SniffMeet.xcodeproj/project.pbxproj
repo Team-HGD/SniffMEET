@@ -299,6 +299,16 @@
 		99E79FAB2D556E8600E48552 /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FAA2D556E7100E48552 /* ReportDTO.swift */; };
 		99E79FAC2D556E8600E48552 /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FAA2D556E7100E48552 /* ReportDTO.swift */; };
 		99E79FAD2D55EC8600E48552 /* SNMLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B592CECE8F90093BEB9 /* SNMLogger.swift */; };
+		99E7A0052D5C10A600E48552 /* ProfileDropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0042D5C10A600E48552 /* ProfileDropViewController.swift */; };
+		99E7A0062D5C10A600E48552 /* ProfileDropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0042D5C10A600E48552 /* ProfileDropViewController.swift */; };
+		99E7A0082D5C112600E48552 /* ProfileDropPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0072D5C111F00E48552 /* ProfileDropPresenter.swift */; };
+		99E7A0092D5C112600E48552 /* ProfileDropPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0072D5C111F00E48552 /* ProfileDropPresenter.swift */; };
+		99E7A00B2D5C126300E48552 /* ProfileDropInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A00A2D5C125900E48552 /* ProfileDropInteractor.swift */; };
+		99E7A00C2D5C126300E48552 /* ProfileDropInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A00A2D5C125900E48552 /* ProfileDropInteractor.swift */; };
+		99E7A00E2D5C134C00E48552 /* ProfileDropRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A00D2D5C134200E48552 /* ProfileDropRouter.swift */; };
+		99E7A00F2D5C134C00E48552 /* ProfileDropRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A00D2D5C134200E48552 /* ProfileDropRouter.swift */; };
+		99E7A0112D5C45F900E48552 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0102D5C45EF00E48552 /* ConnectionState.swift */; };
+		99E7A0122D5C45F900E48552 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0102D5C45EF00E48552 /* ConnectionState.swift */; };
 		99FA4E792CE0FBBF00553C2E /* ProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */; };
 		A202A1152CEDD50700B98203 /* SupabaseDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */; };
 		A202A1172CEDD5EF00B98203 /* SupabaseDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */; };
@@ -606,6 +616,11 @@
 		99E79FA42D556C5600E48552 /* RequestReportUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReportUseCase.swift; sourceTree = "<group>"; };
 		99E79FA72D556E1500E48552 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		99E79FAA2D556E7100E48552 /* ReportDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDTO.swift; sourceTree = "<group>"; };
+		99E7A0042D5C10A600E48552 /* ProfileDropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropViewController.swift; sourceTree = "<group>"; };
+		99E7A0072D5C111F00E48552 /* ProfileDropPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropPresenter.swift; sourceTree = "<group>"; };
+		99E7A00A2D5C125900E48552 /* ProfileDropInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropInteractor.swift; sourceTree = "<group>"; };
+		99E7A00D2D5C134200E48552 /* ProfileDropRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropRouter.swift; sourceTree = "<group>"; };
+		99E7A0102D5C45EF00E48552 /* ConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionState.swift; sourceTree = "<group>"; };
 		99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputViewController.swift; sourceTree = "<group>"; };
 		A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBManager.swift; sourceTree = "<group>"; };
 		A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRequest.swift; sourceTree = "<group>"; };
@@ -1024,6 +1039,49 @@
 			path = NI;
 			sourceTree = "<group>";
 		};
+		99E79FFF2D5C102B00E48552 /* AddMate */ = {
+			isa = PBXGroup;
+			children = (
+				99E7A0032D5C106800E48552 /* Router */,
+				99E7A0022D5C106200E48552 /* Presenter */,
+				99E7A0012D5C105800E48552 /* Interactor */,
+				99E7A0002D5C104600E48552 /* View */,
+			);
+			path = AddMate;
+			sourceTree = "<group>";
+		};
+		99E7A0002D5C104600E48552 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99E7A0042D5C10A600E48552 /* ProfileDropViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		99E7A0012D5C105800E48552 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				99E7A00A2D5C125900E48552 /* ProfileDropInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		99E7A0022D5C106200E48552 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				99E7A0072D5C111F00E48552 /* ProfileDropPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		99E7A0032D5C106800E48552 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				99E7A00D2D5C134200E48552 /* ProfileDropRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		A202A1132CEDD4CD00B98203 /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -1435,6 +1493,7 @@
 		FDA4913E2CDA05F900A36FB0 /* Mate */ = {
 			isa = PBXGroup;
 			children = (
+				99E79FFF2D5C102B00E48552 /* AddMate */,
 				FDA491552CDA69AB00A36FB0 /* MateList */,
 				FDA491622CDA7A8D00A36FB0 /* RequestMate */,
 				FDA491562CDA6ABC00A36FB0 /* ReportMate */,
@@ -2058,6 +2117,7 @@
 		FDE768862CF7810E00B5DE88 /* Design System */ = {
 			isa = PBXGroup;
 			children = (
+				99E7A0102D5C45EF00E48552 /* ConnectionState.swift */,
 				3200480B2CFF0FA600D08B6D /* ProfileDropAnimation.swift */,
 				320047B52CFCB8CA00D08B6D /* EventConstant.swift */,
 				3200438D2CDF3D7F00D08B6D /* InputTextField.swift */,
@@ -2362,6 +2422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32192B2B2D41EB1700C876BA /* Extension + Array.swift in Sources */,
+				99E7A00E2D5C134C00E48552 /* ProfileDropRouter.swift in Sources */,
 				32192B2A2D41EB1200C876BA /* Extension + UITableViewCell.swift in Sources */,
 				32192B292D41EAF600C876BA /* CGImageCoder.swift in Sources */,
 				32192B282D41E91200C876BA /* TaskSerialQueue.swift in Sources */,
@@ -2420,7 +2481,9 @@
 				32BD485E2D3FF02C0078DA9C /* ConvertToWalkAPSUseCase.swift in Sources */,
 				32BD485F2D3FF02C0078DA9C /* CalculateTimeLimitUseCase.swift in Sources */,
 				32BD48602D3FF02C0078DA9C /* ConvertLocationToTextUseCase.swift in Sources */,
+				99E7A0122D5C45F900E48552 /* ConnectionState.swift in Sources */,
 				32BD48612D3FF02C0078DA9C /* TryProfileDropUseCase.swift in Sources */,
+				99E7A00B2D5C126300E48552 /* ProfileDropInteractor.swift in Sources */,
 				32BD48622D3FF02C0078DA9C /* QuitProfileDropUseCase.swift in Sources */,
 				32BD48632D3FF02C0078DA9C /* MultipartFormData.swift in Sources */,
 				A2FE772C2D52224700239F05 /* SignInAnonUseCase.swift in Sources */,
@@ -2445,6 +2508,7 @@
 				32BD48742D3FF02C0078DA9C /* BaseView.swift in Sources */,
 				32BD48E42D40855D0078DA9C /* MateListPresenterSpy.swift in Sources */,
 				32BD48752D3FF02C0078DA9C /* BaseViewController.swift in Sources */,
+				99E7A0092D5C112600E48552 /* ProfileDropPresenter.swift in Sources */,
 				32BD48762D3FF02C0078DA9C /* Environment.swift in Sources */,
 				32BD48772D3FF02C0078DA9C /* SNMLogger.swift in Sources */,
 				32BD48782D3FF02C0078DA9C /* Extension + UIApplication.swift in Sources */,
@@ -2567,6 +2631,7 @@
 				32BD48E12D3FF02C0078DA9C /* SupabaseDBManager.swift in Sources */,
 				32BD48E22D3FF02C0078DA9C /* SupabaseDBRequest.swift in Sources */,
 				32BD48332D3FECAE0078DA9C /* MateListInteractorTests.swift in Sources */,
+				99E7A0052D5C10A600E48552 /* ProfileDropViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2625,9 +2690,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				99A5E1A92D300CE9003B00A8 /* (null) in Sources */,
+				99E7A00C2D5C126300E48552 /* ProfileDropInteractor.swift in Sources */,
 				A202A1152CEDD50700B98203 /* SupabaseDBManager.swift in Sources */,
 				995D94622CE598FD005A47BF /* NIManager.swift in Sources */,
 				FDBFA9A12CE1E51500AA9220 /* SNMColor.swift in Sources */,
+				99E7A00F2D5C134C00E48552 /* ProfileDropRouter.swift in Sources */,
 				FDE7689F2CF7858F00B5DE88 /* Extension + UIViewController.swift in Sources */,
 				A24B1F322D3C33660012B860 /* CGImageCoder.swift in Sources */,
 				A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */,
@@ -2683,6 +2750,7 @@
 				FD01D8F72D40AC8600AD4940 /* TaskSerialQueue.swift in Sources */,
 				99E79F9A2D548D9A00E48552 /* ReportMateInteractor.swift in Sources */,
 				320044712CEB45E000D08B6D /* RequestWalkPresenter.swift in Sources */,
+				99E7A0062D5C10A600E48552 /* ProfileDropViewController.swift in Sources */,
 				995D94262CE32ECE005A47BF /* Extension + Keyboard.swift in Sources */,
 				FD9468D42CFD590700417DC1 /* ProfileEditViewController.swift in Sources */,
 				FD4855242D54996800C66429 /* ConnectedPeerManager.swift in Sources */,
@@ -2695,6 +2763,7 @@
 				FD880B5A2CECE8FC0093BEB9 /* SNMLogger.swift in Sources */,
 				A2B58F522D2FA0DC00C15B12 /* SNMError.swift in Sources */,
 				3284D3502D2F941C000ABC04 /* DataStoragable.swift in Sources */,
+				99E7A0082D5C112600E48552 /* ProfileDropPresenter.swift in Sources */,
 				A2F825D12CDF4BA6000C5419 /* HomeViewController.swift in Sources */,
 				A24CD92B2D362E8F00492339 /* TryProfileDropUseCase.swift in Sources */,
 				A2BA1BA92CF34A6A0080575A /* RequestMateListUseCase.swift in Sources */,
@@ -2791,6 +2860,7 @@
 				FDA04AA52CE91DBF002605AC /* MultipartFormData.swift in Sources */,
 				FD119F522CED881300BE22BD /* SelectLocationModuleBuildable.swift in Sources */,
 				FD331A522CF23BD000F39426 /* WalkLog.swift in Sources */,
+				99E7A0112D5C45F900E48552 /* ConnectionState.swift in Sources */,
 				FD11527B2CFC900F008955C4 /* NotificationListPresenter.swift in Sources */,
 				A2C328862CE245AC00D255AB /* TabBarModuleBuilder.swift in Sources */,
 				320044732CEB47B100D08B6D /* RequestWalkInteractor.swift in Sources */,

@@ -40,6 +40,8 @@ jobs:
           echo "NOTIFICATION_SERVER" = ${{ secrets.NOTIFICATION_SERVER }} >> SniffMeet/SniffMeet/Resource/Debug.xcconfig
       - name: List available devices
         run: xcrun simctl list devices
+      - name: Resolve SPM Dependencies
+        run: xcodebuild -resolvePackageDependencies
       - name: Install SwiftLint
         run: brew install swiftlint
       - name: Build Xcode

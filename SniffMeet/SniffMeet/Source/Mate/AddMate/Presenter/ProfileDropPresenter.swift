@@ -4,6 +4,7 @@
 //
 //  Created by 배현진 on 2/11/25.
 //
+import Foundation
 
 protocol ProfileDropPresentable: AnyObject {
     var view: (any ProfileDropViewable)? { get set }
@@ -12,10 +13,15 @@ protocol ProfileDropPresentable: AnyObject {
     var output: any ProfileDropPresenterOutput { get }
 
     func viewDidLoad()
+    func startProfileDrop()
+    func quitProfileDrop()
 }
 
 protocol ProfileDropInteractorOutput: AnyObject {
     func didCloseTheView()
+    func didConnectNISession()
+    func failToConnectNISession()
+    func receiveProfileData(_ data: DogDTO)
 }
 
 protocol ProfileDropPresenterOutput {
@@ -44,9 +50,25 @@ final class ProfileDropPresenter: ProfileDropPresentable {
 
     func viewDidLoad() {
     }
+    func startProfileDrop() {
+        interactor?.tryProfileDrop()
+    }
+    func quitProfileDrop() {
+        interactor?.quitProfileDrop()
+    }
 }
 
 extension ProfileDropPresenter: ProfileDropInteractorOutput {
     func didCloseTheView() {
+    }
+    func didConnectNISession() {
+        view?.changeState(to: .success)
+    }
+    func failToConnectNISession() {
+        view?.changeState(to: .failure)
+    }
+    func receiveProfileData(_ data: DogDTO) {
+        guard let view else { return }
+        router?.showMateRequestView(profileDropView: view, data: data)
     }
 }

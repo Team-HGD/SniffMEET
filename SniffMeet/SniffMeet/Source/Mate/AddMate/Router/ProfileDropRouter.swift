@@ -10,6 +10,7 @@ import UIKit
 protocol ProfileDropRoutable: AnyObject, Routable {
     var presenter: (any ProfileDropPresentable)? { get set }
     func dismissView(view: any ProfileDropViewable)
+    func showMateRequestView(profileDropView: any ProfileDropViewable, data: DogDTO)
 }
 
 protocol ProfileDropBuildable {
@@ -26,14 +27,35 @@ final class ProfileDropRouter: ProfileDropRoutable {
             }
         }
     }
+
+    func showMateRequestView(profileDropView: any ProfileDropViewable, data: DogDTO) {
+        guard let profileDropView = profileDropView as? UIViewController else { return }
+        let requestMateViewController = RequestMateRouter.createRequestMateModule(profile: data)
+        let transitionDelegate = ProfileDropTransitionDelegate()
+        requestMateViewController.modalPresentationStyle = .fullScreen
+        requestMateViewController.transitioningDelegate = transitionDelegate
+        present(from: profileDropView, with: requestMateViewController, animated: true)
+    }
 }
 
 extension ProfileDropRouter: ProfileDropBuildable {
     static func createProfileDropModule() -> UIViewController {
+        guard let mpcManager = MPCManager(dataManager: LocalDataManager()) else {
+            return UIViewController()
+        }
+        let niManager = NIManager()
+        let tryProfileDropUseCase: TryProfileDropUseCase =
+        TryProfileDropUseCaseImpl(
+            dataManager: LocalDataManager(),
+            niManager: niManager,
+            mpcManager: mpcManager)
+        let quitProfileDropUseCase: QuitProfileDropUseCase =
+        QuitProfileDropUseCaseImpl(niManager: niManager)
+
         let view: ProfileDropViewable & UIViewController = ProfileDropViewController()
         let router: ProfileDropRoutable & ProfileDropBuildable = ProfileDropRouter()
         let presenter: ProfileDropPresentable & ProfileDropInteractorOutput = ProfileDropPresenter()
-        let interactor: ProfileDropInteractable = ProfileDropInteractor()
+        let interactor: ProfileDropInteractable = ProfileDropInteractor(tryProfileDropUseCase: tryProfileDropUseCase, quitProfileDropUseCase: quitProfileDropUseCase)
 
         view.presenter = presenter
         presenter.view = view

@@ -9,7 +9,6 @@ import UIKit
 
 protocol MateListViewable: AnyObject {
     var presenter: (any MateListPresentable)? { get set }
-    func changeMPCButtonState(to buttonState: AddMateButton.ButtonState)
 }
 
 final class MateListViewController: BaseViewController, MateListViewable {
@@ -112,9 +111,6 @@ final class MateListViewController: BaseViewController, MateListViewable {
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifier.mateCellID)
         tableView.separatorStyle = .none
-    }
-    func changeMPCButtonState(to buttonState: AddMateButton.ButtonState) {
-        addMateButton.buttonState = buttonState
     }
 }
 

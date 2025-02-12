@@ -5,6 +5,9 @@
 //  Created by sole on 11/4/24.
 //
 
+#if !DEBUG
+import Firebase
+#endif
 import UIKit
 
 @main
@@ -18,6 +21,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         UNUserNotificationCenter.current().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
+#if !DEBUG
+        FirebaseApp.configure()
+#endif
         return true
     }
     func application(

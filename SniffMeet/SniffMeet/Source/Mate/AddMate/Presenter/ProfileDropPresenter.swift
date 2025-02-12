@@ -15,6 +15,7 @@ protocol ProfileDropPresentable: AnyObject {
     func viewDidLoad()
     func startProfileDrop()
     func quitProfileDrop()
+    func didTapHelp()
 }
 
 protocol ProfileDropInteractorOutput: AnyObject {
@@ -55,6 +56,10 @@ final class ProfileDropPresenter: ProfileDropPresentable {
     }
     func quitProfileDrop() {
         interactor?.quitProfileDrop()
+    }
+    func didTapHelp() {
+        guard let view else { return }
+        router?.showHelpView(profileDropView: view)
     }
 }
 

@@ -11,6 +11,7 @@ protocol ProfileDropRoutable: AnyObject, Routable {
     var presenter: (any ProfileDropPresentable)? { get set }
     func dismissView(view: any ProfileDropViewable)
     func showMateRequestView(profileDropView: any ProfileDropViewable, data: DogDTO)
+    func showHelpView(profileDropView: any ProfileDropViewable)
 }
 
 protocol ProfileDropBuildable {
@@ -35,6 +36,12 @@ final class ProfileDropRouter: ProfileDropRoutable {
         requestMateViewController.modalPresentationStyle = .fullScreen
         requestMateViewController.transitioningDelegate = transitionDelegate
         present(from: profileDropView, with: requestMateViewController, animated: true)
+    }
+    func showHelpView(profileDropView: any ProfileDropViewable) {
+        guard let profileDropView = profileDropView as? UIViewController else { return }
+        let helpURLString = "https://check-it.notion.site/198f6d0576c280f1abeee0feeb5cb78e?pvs=4"
+        guard let url = URL(string: helpURLString) else { return }
+        presentSafari(from: profileDropView, animated: true, url: url)
     }
 }
 

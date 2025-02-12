@@ -15,6 +15,7 @@ protocol ProfileDropViewable: AnyObject {
 
 final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
     var presenter: (any ProfileDropPresentable)?
+    private let tapGesture = UITapGestureRecognizer()
     private var cancellables: Set<AnyCancellable> = []
     private var contentLabel: UILabel = {
         let label = UILabel()
@@ -54,6 +55,7 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
         label.textColor = .lightGray
         label.textAlignment = .center
         label.font = SNMFont.caption2
+        label.isUserInteractionEnabled = true
         let attributedString = NSMutableAttributedString(string: Context.help)
         attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributedString.length))
         label.attributedText = attributedString
@@ -145,6 +147,21 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
                     )
                     self?.presenter?.quitProfileDrop()
                 }
+            }
+            .store(in: &cancellables)
+        manualButton.publisher(event: .touchUpInside)
+            .throttle(for: .seconds(EventConstant.throttleInterval),
+                      scheduler: RunLoop.main,
+                      latest: false)
+            .sink { [weak self] _ in
+                // TODO: - 수동 연결 버튼 이벤트 구현
+            }
+            .store(in: &cancellables)
+        helpLabel.addGestureRecognizer(tapGesture)
+        tapGesture.publisher(for: \.state)
+            .filter { $0 == .ended }
+            .sink { [weak self] _ in
+                self?.presenter?.didTapHelp()
             }
             .store(in: &cancellables)
     }

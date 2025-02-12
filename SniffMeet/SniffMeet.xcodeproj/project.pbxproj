@@ -863,6 +863,7 @@
 		320044792CEC490600D08B6D /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				A2BD49F02CF72A8800AC72A7 /* DTO */,
 				99E79FA72D556E1500E48552 /* Report.swift */,
 				320522BD2D0181A700F1677C /* ImageCacheable.swift */,
 				9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */,
@@ -996,6 +997,33 @@
 				32081A692D547F9F00D19235 /* MPCSessionConcurrencyTest.swift */,
 			);
 			path = LocalNetwork;
+			sourceTree = "<group>";
+		};
+		32081B1F2D5C7FFA00D19235 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				320047B72CFD365700D08B6D /* PushNotification */,
+				FDA4913A2CDA04BB00A36FB0 /* Repository */,
+				FD0634242CE596A7003C9D6B /* SNMNetwork */,
+				FD69B1B12CE3BC55009D71DC /* Persistence */,
+				320044172CE489A900D08B6D /* LocalNetwork */,
+				A24082622CEB2464009109A0 /* Supabase */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		32081B202D5C800000D19235 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				991910492CFF52FD008F86D6 /* OnBoarding */,
+				FDA491392CD9FEC400A36FB0 /* App */,
+				A21435F52CE20CF600564A4D /* Tab */,
+				FDA4915E2CDA790300A36FB0 /* Auth */,
+				FDA4913B2CDA055900A36FB0 /* Home */,
+				FDA4913C2CDA056400A36FB0 /* Walk */,
+				FDA4913E2CDA05F900A36FB0 /* Mate */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		32BD48322D3FECAE0078DA9C /* SNMSceneTests */ = {
@@ -1340,23 +1368,11 @@
 		FDA491332CD9FE7C00A36FB0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				991910492CFF52FD008F86D6 /* OnBoarding */,
-				320047B72CFD365700D08B6D /* PushNotification */,
-				A2BD49F02CF72A8800AC72A7 /* DTO */,
+				A2C844CF2CDBE1CB007F2970 /* Common */,
 				320044792CEC490600D08B6D /* Entity */,
 				320044782CEC48FB00D08B6D /* UseCase */,
-				FD0634242CE596A7003C9D6B /* SNMNetwork */,
-				FD69B1B12CE3BC55009D71DC /* Persistence */,
-				A2C844CF2CDBE1CB007F2970 /* Common */,
-				FDA491392CD9FEC400A36FB0 /* App */,
-				A21435F52CE20CF600564A4D /* Tab */,
-				FDA4915E2CDA790300A36FB0 /* Auth */,
-				FDA4913B2CDA055900A36FB0 /* Home */,
-				FDA4913C2CDA056400A36FB0 /* Walk */,
-				FDA4913E2CDA05F900A36FB0 /* Mate */,
-				FDA4913A2CDA04BB00A36FB0 /* Repository */,
-				320044172CE489A900D08B6D /* LocalNetwork */,
-				A24082622CEB2464009109A0 /* Supabase */,
+				32081B202D5C800000D19235 /* Scene */,
+				32081B1F2D5C7FFA00D19235 /* Core */,
 			);
 			path = Source;
 			sourceTree = "<group>";

@@ -91,12 +91,10 @@ final class MateListViewController: BaseViewController, MateListViewable {
             }
             .store(in: &cancellables)
         addMateButton.publisher(event: .touchUpInside)
-            .throttle(for: .seconds(EventConstant.throttleInterval),
-                      scheduler: RunLoop.main,
-                      latest: false)
+            .debounce(for: .seconds(EventConstant.debounceInterval),
+                      scheduler: RunLoop.main)
             .sink { [weak self] _ in
-                self?.addMateButton.buttonState = .connecting
-                self?.presenter?.startProfileDrop()
+                self?.presenter?.didTapAddMateButton()
             }
             .store(in: &cancellables)
     }

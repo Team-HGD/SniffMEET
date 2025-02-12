@@ -13,6 +13,7 @@ protocol MateListRoutable: Routable {
     func showAlert(mateListView: any MateListViewable, title: String, message: String)
     func showMateRequestView(mateListView: any MateListViewable, data: DogDTO)
     func showReportMateView(mateListView: any MateListViewable, data: Mate)
+    func showProfileDropView(mateListView: any MateListViewable)
 }
 
 protocol MateListBuildable {
@@ -54,6 +55,11 @@ final class MateListRouter: MateListRoutable {
         guard let mateListView = mateListView as? UIViewController else { return }
         let reportMateViewController = ReportMateRouter.createReportMateModule(profile: data)
         pushNoBottomBar(from: mateListView, to: reportMateViewController, animated: true)
+    }
+    func showProfileDropView(mateListView: any MateListViewable) {
+        guard let mateListView = mateListView as? UIViewController else { return }
+        let profileDropViewController = ProfileDropRouter.createProfileDropModule()
+        pushNoBottomBar(from: mateListView, to: profileDropViewController, animated: true)
     }
 }
 

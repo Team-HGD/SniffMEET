@@ -714,6 +714,8 @@
 		FD69B1BA2CE3BCDC009D71DC /* SNMPersistenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMPersistenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD69B1CA2CE3E9B4009D71DC /* UserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
 		FD69B1CC2CE3E9B8009D71DC /* KeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
+		FD6C73E32D5BC26A00E7AB14 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		FD6C73E42D5BC27C00E7AB14 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		FD880B592CECE8F90093BEB9 /* SNMLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMLogger.swift; sourceTree = "<group>"; };
 		FD880B5F2CF432780093BEB9 /* SaveProfileImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfileImageUseCase.swift; sourceTree = "<group>"; };
 		FD880B612CF433AC0093BEB9 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 		FDBFA99E2CE1E50900AA9220 /* SNMFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMFont.swift; sourceTree = "<group>"; };
 		FDBFA9A02CE1E51000AA9220 /* SNMColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMColor.swift; sourceTree = "<group>"; };
 		FDBFA9B02CE1FDED00AA9220 /* LayoutConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstant.swift; sourceTree = "<group>"; };
+		FDC5D9B92D5BD5D900380533 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FDCD02BE2CE9172600B627D8 /* SNMNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDCD02CD2CE917D400B627D8 /* MockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRequest.swift; sourceTree = "<group>"; };
 		FDCD02D02CE917E200B627D8 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
@@ -1213,6 +1216,7 @@
 		FD331A6F2CF33C7B00F39426 /* SupabaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				FDC5D9B92D5BD5D900380533 /* Info.plist */,
 				FD331A712CF33C7F00F39426 /* SupabaseStorageTests.swift */,
 			);
 			path = SupabaseTests;
@@ -1325,6 +1329,8 @@
 			children = (
 				99A5A1B22CFFE544002F1D2D /* ProfileDrop.gif */,
 				FD3A033C2CD8CF460047B7ED /* LaunchScreen.storyboard */,
+				FD6C73E42D5BC27C00E7AB14 /* Release.xcconfig */,
+				FD6C73E32D5BC26A00E7AB14 /* Debug.xcconfig */,
 				FD3A033A2CD8CF460047B7ED /* Info.plist */,
 				FD3A03392CD8CF460047B7ED /* Assets.xcassets */,
 			);
@@ -2984,11 +2990,13 @@
 		};
 		FD331A6C2CF33C6700F39426 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD6C73E32D5BC26A00E7AB14 /* Debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SupabaseTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sole.SupabaseTests;
@@ -2997,6 +3005,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited) TEST";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3005,11 +3014,13 @@
 		};
 		FD331A6D2CF33C6700F39426 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD6C73E42D5BC27C00E7AB14 /* Release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SupabaseTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sole.SupabaseTests;
@@ -3018,6 +3029,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = TEST;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3026,6 +3038,7 @@
 		};
 		FD3A03342CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD6C73E32D5BC26A00E7AB14 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3064,6 +3077,7 @@
 		};
 		FD3A03352CD8CDE60047B7ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD6C73E42D5BC27C00E7AB14 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3102,6 +3116,7 @@
 		};
 		FD3A03362CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD6C73E32D5BC26A00E7AB14 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3165,6 +3180,7 @@
 		};
 		FD3A03372CD8CDE60047B7ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD6C73E42D5BC27C00E7AB14 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3313,7 +3329,7 @@
 				32BD482F2D3FEC9D0078DA9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A24B1F2D2D3C32960012B860 /* Build configuration list for PBXNativeTarget "SNMUtilityTests" */ = {
 			isa = XCConfigurationList;
@@ -3322,7 +3338,7 @@
 				A24B1F2C2D3C32960012B860 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		FD331A6B2CF33C6700F39426 /* Build configuration list for PBXNativeTarget "SupabaseTests" */ = {
 			isa = XCConfigurationList;
@@ -3331,7 +3347,7 @@
 				FD331A6D2CF33C6700F39426 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		FD3A031B2CD8CDE50047B7ED /* Build configuration list for PBXProject "SniffMeet" */ = {
 			isa = XCConfigurationList;
@@ -3340,7 +3356,7 @@
 				FD3A03372CD8CDE60047B7ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		FD3A03332CD8CDE60047B7ED /* Build configuration list for PBXNativeTarget "SniffMeet" */ = {
 			isa = XCConfigurationList;
@@ -3349,7 +3365,7 @@
 				FD3A03352CD8CDE60047B7ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		FD69B1C02CE3BCDC009D71DC /* Build configuration list for PBXNativeTarget "SNMPersistenceTests" */ = {
 			isa = XCConfigurationList;
@@ -3358,7 +3374,7 @@
 				FD69B1C22CE3BCDC009D71DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		FDCD02C42CE9172600B627D8 /* Build configuration list for PBXNativeTarget "SNMNetworkTests" */ = {
 			isa = XCConfigurationList;
@@ -3367,7 +3383,7 @@
 				FDCD02C32CE9172600B627D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

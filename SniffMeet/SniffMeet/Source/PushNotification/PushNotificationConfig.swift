@@ -7,5 +7,11 @@
 import Foundation
 
 enum PushNotificationConfig {
-    static let baseURL = URL(string: "https://sniff.fly.dev")!
+    static let baseURL: URL = {
+        guard let serverURLString = Bundle.main.object(forInfoDictionaryKey: "NOTIFICATION_SERVER") as? String,
+              let serverURL = URL(string: serverURLString.replacingOccurrences(of: "\\", with: "")) else {
+            fatalError("invalid server url")
+        }
+        return serverURL
+    }()
 }

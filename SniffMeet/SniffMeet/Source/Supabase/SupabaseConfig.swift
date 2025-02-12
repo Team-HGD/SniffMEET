@@ -8,7 +8,34 @@
 import Foundation
 
 enum SupabaseConfig {
-    static let baseURL = URL(string: "https://lltjsznuclppbhxfwslo.supabase.co")!
-    static let apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxsdGpzem51Y2xwcGJoeGZ3c2xvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE0MDA5MjgsImV4cCI6MjA0Njk3NjkyOH0.qrzmB2tiwWevRhKQeptsf5m8iCLUIkscuQ1MzKNtqh4" // 공개키
+#if TEST
+    static let baseURL: URL = {
+        guard let urlString = Bundle(for: SupabaseStorageTests.self).object(forInfoDictionaryKey: "SERVER_URL") as? String,
+              let url = URL(string: urlString.replacingOccurrences(of: "\\", with: "")) else {
+            fatalError("invalid SERVER_URL")
+        }
+        return url
+    }()
+    static let apiKey: String = {
+        guard let publicKey = Bundle(for: SupabaseStorageTests.self).object(forInfoDictionaryKey: "PUBLIC_KEY") as? String else {
+            fatalError("invalid PUBLIC_KEY")
+        }
+        return publicKey
+    }()
+#else
+    static let baseURL: URL = {
+        guard let urlString = Bundle.main.object(forInfoDictionaryKey: "SERVER_URL") as? String,
+              let url = URL(string: urlString.replacingOccurrences(of: "\\", with: "")) else {
+            fatalError("invalid SERVER_URL")
+        }
+        return url
+    }()
+    static let apiKey: String = {
+        guard let publicKey = Bundle.main.object(forInfoDictionaryKey: "PUBLIC_KEY") as? String else {
+            fatalError("invalid PUBLIC_KEY")
+        }
+        return publicKey
+    }()
+    #endif
     static let bucketName: String = "image"
 }

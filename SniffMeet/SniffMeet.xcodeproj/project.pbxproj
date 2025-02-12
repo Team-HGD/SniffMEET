@@ -466,11 +466,11 @@
 		FDBFA99F2CE1E50C00AA9220 /* SNMFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBFA99E2CE1E50900AA9220 /* SNMFont.swift */; };
 		FDBFA9A12CE1E51500AA9220 /* SNMColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBFA9A02CE1E51000AA9220 /* SNMColor.swift */; };
 		FDBFA9B12CE1FE5500AA9220 /* LayoutConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBFA9B02CE1FDED00AA9220 /* LayoutConstant.swift */; };
-		FDC5D9BD2D5C7E0400380533 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9BC2D5C7E0400380533 /* FirebaseAnalytics */; settings = {ATTRIBUTES = (Required, ); }; };
-		FDC5D9BF2D5C7E0400380533 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9BE2D5C7E0400380533 /* FirebaseAnalyticsOnDeviceConversion */; };
-		FDC5D9C12D5C7E0400380533 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C02D5C7E0400380533 /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		FDC5D9C32D5C7E0400380533 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C22D5C7E0400380533 /* FirebaseCore */; };
-		FDC5D9C52D5C7E0400380533 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C42D5C7E0400380533 /* FirebaseCrashlytics */; };
+		FDC5D9BD2D5C7E0400380533 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9BC2D5C7E0400380533 /* FirebaseAnalytics */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FDC5D9BF2D5C7E0400380533 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9BE2D5C7E0400380533 /* FirebaseAnalyticsOnDeviceConversion */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FDC5D9C12D5C7E0400380533 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C02D5C7E0400380533 /* FirebaseAnalyticsWithoutAdIdSupport */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FDC5D9C32D5C7E0400380533 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C22D5C7E0400380533 /* FirebaseCore */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FDC5D9C52D5C7E0400380533 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C42D5C7E0400380533 /* FirebaseCrashlytics */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FDC5D9C92D5C852600380533 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDC5D9C82D5C852600380533 /* GoogleService-Info.plist */; };
 		FDCD02C52CE917A400B627D8 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE14A4D2CE8D13E001F7A9D /* HTTPStatusCode.swift */; };
 		FDCD02C62CE917A400B627D8 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0634292CE596C2003C9D6B /* NetworkProvider.swift */; };

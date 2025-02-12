@@ -8,6 +8,7 @@
 import CoreGraphics
 import Foundation
 import ImageIO
+import UniformTypeIdentifiers
 
 protocol ImageSampleable {
     func downscaleImage(
@@ -24,68 +25,59 @@ final class ImageSampler: ImageSampleable {
         self.imageCoder = imageCoder
     }
     
-    private func resizeImage(to targetSize: CGSize) -> CGContext? {
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        guard let context = CGContext(
-            data: nil,
-            width: Int(targetSize.width),
-            height: Int(targetSize.height),
-            bitsPerComponent: 8,
-            bytesPerRow: 0,
-            space: colorSpace,
-            bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue
+    func downscaleImage(from imageData: Data, targetSize: CGSize, croppingTo cropSize: CGSize? = nil) throws -> Data {
+        guard let imageSource = CGImageSourceCreateWithData(imageData as CFData, nil),
+              let properties = CGImageSourceCopyPropertiesAtIndex(
+                imageSource, 0, nil
+              ) as? [String: Any],
+              let pixelWidth = properties[kCGImagePropertyPixelWidth as String] as? CGFloat,
+              let pixelHeight = properties[kCGImagePropertyPixelHeight as String] as? CGFloat else {
+            throw ImageSamplingError.downsamplingFailed
+        }
+        let imageAspectRatio = pixelWidth / pixelHeight
+        let targetAspectRatio = targetSize.width / targetSize.height
+        let maxPixelSize = imageAspectRatio > targetAspectRatio ? targetSize.height * imageAspectRatio : targetSize.width / imageAspectRatio
+        let options: [CFString: Any] = [
+            kCGImageSourceShouldCache: false,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceThumbnailMaxPixelSize: maxPixelSize
+        ]
+        guard let downscaledImage = CGImageSourceCreateThumbnailAtIndex(
+            imageSource, 0, options as CFDictionary
         ) else {
-            return nil
+            throw ImageSamplingError.downsamplingFailed
         }
         
-        return context
+        if let cropSize {
+            let cropRect = createCropRect(
+                of: CGSize(width: downscaledImage.width, height: downscaledImage.height),
+                to: cropSize
+            )
+            guard let croppedImage = downscaledImage.cropping(to: cropRect),
+                  let downsampledImageData = imageCoder.encode(
+                    from: croppedImage,
+                    as: .jpeg
+                  ) else {
+                throw ImageSamplingError.encodingFailed
+            }
+            return downsampledImageData
+        }
+        guard let downsampledImageData = imageCoder.encode(
+            from: downscaledImage,
+            as: .jpeg
+        ) else {
+            throw ImageSamplingError.encodingFailed
+        }
+        return downsampledImageData
     }
     
-    func cropCenter(of cgImage: CGImage, size: CGSize) -> CGImage? {
-        let imageSize = (width: cgImage.width, height: cgImage.height)
+    private func createCropRect(of imageSize: CGSize, to size: CGSize) -> CGRect {
+        let imageSize = (width: Int(imageSize.width), height: Int(imageSize.height))
         let cropSize = (width: Int(size.width), height: Int(size.height))
         let cropX = (imageSize.width - cropSize.width) / 2
         let cropY = (imageSize.height - cropSize.height) / 2
-        let cropRect = CGRect(x: cropX, y: cropY, width: cropSize.width, height: cropSize.height)
-        
-        return cgImage.cropping(to: cropRect)
-    }
-    
-    func downscaleImage(
-        from imageData: Data,
-        targetSize: CGSize,
-        croppingTo cropSize: CGSize? = nil
-    ) async throws -> Data {
-        guard let cgImage = imageCoder.decode(from: imageData) else {
-            throw ImageSamplingError.invalidImageData
-        }
-        
-        let downscaleRatio = cgImage.width > cgImage.height ?
-        targetSize.height / Double(cgImage.height) :
-        targetSize.width / Double(cgImage.width)
-        let newSize = CGSize(
-            width: Double(cgImage.width) * downscaleRatio,
-            height: Double(cgImage.height) * downscaleRatio
-        )
-        guard let downsampledImageContext = resizeImage(to: newSize) else {
-            throw ImageSamplingError.downsamplingFailed
-        }
-        downsampledImageContext.draw(
-            cgImage,
-            in: CGRect(origin: .zero, size: newSize)
-        )
-        guard var downsampledImage = downsampledImageContext.makeImage() else {
-            throw ImageSamplingError.downsamplingFailed
-        }
-        if let cropSize = cropSize,
-           let croppedImage = cropCenter(of: downsampledImage, size: cropSize) {
-            downsampledImage = croppedImage
-        }
-        guard let downsampledImageData = imageCoder.encode(from: downsampledImage, as: .jpeg) else {
-            throw ImageSamplingError.downsamplingFailed
-        }
-        
-        return downsampledImageData
+        return CGRect(x: cropX, y: cropY, width: cropSize.width, height: cropSize.height)
     }
 }
 
@@ -93,4 +85,5 @@ enum ImageSamplingError: LocalizedError {
     case downsamplingFailed
     case invalidImageData
     case invalidCropArea
+    case encodingFailed
 }

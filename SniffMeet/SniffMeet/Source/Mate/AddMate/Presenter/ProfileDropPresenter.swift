@@ -23,6 +23,7 @@ protocol ProfileDropInteractorOutput: AnyObject {
     func didConnectNISession()
     func failToConnectNISession()
     func receiveProfileData(_ data: DogDTO)
+    func updateDeviceInfo()
 }
 
 protocol ProfileDropPresenterOutput {
@@ -50,6 +51,7 @@ final class ProfileDropPresenter: ProfileDropPresentable {
     }
 
     func viewDidLoad() {
+        checkNISupport()
     }
     func startProfileDrop() {
         interactor?.tryProfileDrop()
@@ -60,6 +62,9 @@ final class ProfileDropPresenter: ProfileDropPresentable {
     func didTapHelp() {
         guard let view else { return }
         router?.showHelpView(profileDropView: view)
+    }
+    private func checkNISupport() {
+        interactor?.checkNISupport()
     }
 }
 
@@ -75,5 +80,8 @@ extension ProfileDropPresenter: ProfileDropInteractorOutput {
     func receiveProfileData(_ data: DogDTO) {
         guard let view else { return }
         router?.showMateRequestView(profileDropView: view, data: data)
+    }
+    func updateDeviceInfo() {
+        view?.changeNotSupportedNI()
     }
 }

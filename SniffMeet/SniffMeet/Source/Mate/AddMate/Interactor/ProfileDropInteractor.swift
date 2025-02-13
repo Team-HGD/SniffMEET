@@ -20,18 +20,18 @@ final class ProfileDropInteractor: ProfileDropInteractable {
     private var tryProfileDropUseCase: any TryProfileDropUseCase
     private var quitProfileDropUseCase: any QuitProfileDropUseCase
     private var cancellables: Set<AnyCancellable> = []
-    private let deviceInfoFinder: DeviceInfoFinderProtocol
+    private let niDeviceChecker: NIDeviceCheckerProtocol
 
     init(
         presenter: ProfileDropInteractorOutput? = nil,
         tryProfileDropUseCase: any TryProfileDropUseCase,
         quitProfileDropUseCase: any QuitProfileDropUseCase,
-        deviceInfoFinder: DeviceInfoFinderProtocol
+        niDeviceChecker: NIDeviceCheckerProtocol
     ) {
         self.presenter = presenter
         self.tryProfileDropUseCase = tryProfileDropUseCase
         self.quitProfileDropUseCase = quitProfileDropUseCase
-        self.deviceInfoFinder = deviceInfoFinder
+        self.niDeviceChecker = niDeviceChecker
 
         bind()
     }
@@ -76,9 +76,8 @@ final class ProfileDropInteractor: ProfileDropInteractable {
     }
 
     func checkNISupport() {
-        let isSupportedNI = deviceInfoFinder.isDeviceSupportedNI()
-        SNMLogger.log("isSupportedNI: \(isSupportedNI)")
-        if isSupportedNI == false {
+        let isSupported = niDeviceChecker.isNISupported()
+        if isSupported == false {
             presenter?.updateDeviceInfo()
         }
     }

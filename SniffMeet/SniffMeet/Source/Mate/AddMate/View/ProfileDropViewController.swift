@@ -50,6 +50,7 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
     }()
     private var autoButton = PrimaryButton(title: Context.autoConnect)
     private var manualButton = PrimaryButton(title: Context.manualConnect)
+    private var manualButtonExpanded: NSLayoutConstraint!
     private var helpLabel: UILabel = {
         let label = UILabel()
         label.text = Context.help
@@ -97,6 +98,9 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
         navigationItem.largeTitleDisplayMode = .never
     }
     private func setConstraint() {
+        manualButtonExpanded = manualButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstant.horizontalPadding)
+        manualButtonExpanded.isActive = false
+
         NSLayoutConstraint.activate([
             contentLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(Context.spacing2)),
             contentLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -121,33 +125,13 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
                       scheduler: RunLoop.main,
                       latest: false)
             .sink { [weak self] _ in
-                guard let connectionState = self?.connectionStateLabel.isHidden else { return }
+                guard let self else { return }
+                let connectionState = self.connectionStateLabel.isHidden
+                self.updateUI(for: connectionState)
                 if connectionState {
-                    self?.connectionStateLabel.isHidden = false
-                    self?.contentLabel.isHidden = true
-                    self?.descriptionLabel.isHidden = true
-                    self?.contentImageView.isHidden = true
-                    self?.autoButton.configuration?.background.backgroundColor = SNMColor.mainBrown
-                    self?.autoButton.configuration?.attributedTitle = AttributedString(
-                        Context.cancelConnect,
-                        attributes: AttributeContainer(
-                            [.font: UIFont.systemFont(ofSize: 16.0, weight: .bold)]
-                        )
-                    )
-                    self?.presenter?.startProfileDrop()
+                    self.presenter?.startProfileDrop()
                 } else {
-                    self?.connectionStateLabel.isHidden = true
-                    self?.contentLabel.isHidden = false
-                    self?.descriptionLabel.isHidden = false
-                    self?.contentImageView.isHidden = false
-                    self?.autoButton.configuration?.background.backgroundColor = SNMColor.mainNavy
-                    self?.autoButton.configuration?.attributedTitle = AttributedString(
-                        Context.autoConnect,
-                        attributes: AttributeContainer(
-                            [.font: UIFont.systemFont(ofSize: 16.0, weight: .bold)]
-                        )
-                    )
-                    self?.presenter?.quitProfileDrop()
+                    self.presenter?.quitProfileDrop()
                 }
             }
             .store(in: &cancellables)
@@ -167,14 +151,25 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
             }
             .store(in: &cancellables)
     }
+    private func updateUI(for state: Bool) {
+        connectionStateLabel.isHidden = !state
+        contentLabel.isHidden = state
+        descriptionLabel.isHidden = state
+        contentImageView.isHidden = state
+        autoButton.configuration?.background.backgroundColor = state ? SNMColor.mainBrown : SNMColor.mainNavy
+        autoButton.configuration?.attributedTitle = AttributedString(
+            state ? Context.cancelConnect : Context.autoConnect,
+            attributes: AttributeContainer(
+                [.font: UIFont.systemFont(ofSize: 16.0, weight: .bold)]
+            )
+        )
+    }
     func changeState(to connectionState: ConnectionState) {
         connectionStateLabel.text = connectionState.description
     }
     func changeNotSupportedNI() {
         autoButton.isHidden = true
-        NSLayoutConstraint.activate([
-        manualButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstant.horizontalPadding)
-        ])
+        NSLayoutConstraint.activate([manualButtonExpanded])
         connectionStateLabel.isHidden = true
         contentLabel.isHidden = false
         contentLabel.text = Context.notNIContentLabel

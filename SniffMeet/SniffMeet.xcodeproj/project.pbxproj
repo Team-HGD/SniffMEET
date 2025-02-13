@@ -311,6 +311,8 @@
 		99E7A0122D5C45F900E48552 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0102D5C45EF00E48552 /* ConnectionState.swift */; };
 		99E7A0202D5C58D200E48552 /* NIDeviceChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A01F2D5C58B900E48552 /* NIDeviceChecker.swift */; };
 		99E7A0212D5C58D200E48552 /* NIDeviceChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A01F2D5C58B900E48552 /* NIDeviceChecker.swift */; };
+		99E7A0632D5DB75A00E48552 /* Extension + GIFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0622D5DB74600E48552 /* Extension + GIFImageView.swift */; };
+		99E7A0642D5DB75A00E48552 /* Extension + GIFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0622D5DB74600E48552 /* Extension + GIFImageView.swift */; };
 		99FA4E792CE0FBBF00553C2E /* ProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */; };
 		A202A1152CEDD50700B98203 /* SupabaseDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */; };
 		A202A1172CEDD5EF00B98203 /* SupabaseDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */; };
@@ -624,6 +626,7 @@
 		99E7A00D2D5C134200E48552 /* ProfileDropRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropRouter.swift; sourceTree = "<group>"; };
 		99E7A0102D5C45EF00E48552 /* ConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionState.swift; sourceTree = "<group>"; };
 		99E7A01F2D5C58B900E48552 /* NIDeviceChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIDeviceChecker.swift; sourceTree = "<group>"; };
+		99E7A0622D5DB74600E48552 /* Extension + GIFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + GIFImageView.swift"; sourceTree = "<group>"; };
 		99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputViewController.swift; sourceTree = "<group>"; };
 		A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBManager.swift; sourceTree = "<group>"; };
 		A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRequest.swift; sourceTree = "<group>"; };
@@ -2141,6 +2144,7 @@
 		FDE768872CF7811400B5DE88 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				99E7A0622D5DB74600E48552 /* Extension + GIFImageView.swift */,
 				99E79FA12D55627100E48552 /* Extension + UITextViewDelegate.swift */,
 				FD01D8F92D40ACAB00AD4940 /* Extension + Array.swift */,
 				FD01D8F42D40AC4100AD4940 /* Extension + UITableViewCell.swift */,
@@ -2464,6 +2468,7 @@
 				32BD484A2D3FF02C0078DA9C /* UpdateUserInfoUseCase.swift in Sources */,
 				32BD484B2D3FF02C0078DA9C /* SaveFirstLaunchUseCase.swift in Sources */,
 				32BD484C2D3FF02C0078DA9C /* CreateAccountUseCase.swift in Sources */,
+				99E7A0642D5DB75A00E48552 /* Extension + GIFImageView.swift in Sources */,
 				32BD484D2D3FF02C0078DA9C /* SaveProfileImageUseCase.swift in Sources */,
 				32BD484E2D3FF02C0078DA9C /* SaveUserInfoUseCase.swift in Sources */,
 				32BD484F2D3FF02C0078DA9C /* RemoteSaveDeviceTokenUseCase.swift in Sources */,
@@ -2726,6 +2731,7 @@
 				A20E71522CEC5FE900272B25 /* SupabaseUserResponse.swift in Sources */,
 				9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */,
 				320047B42CFC90C100D08B6D /* SessionViewController.swift in Sources */,
+				99E7A0632D5DB75A00E48552 /* Extension + GIFImageView.swift in Sources */,
 				320045362CF4353900D08B6D /* SNMFileManager.swift in Sources */,
 				320044582CE5B04C00D08B6D /* ProfileCreateRouter.swift in Sources */,
 				A25BE4582CEBB95C00886763 /* SupabaseRefreshResponse.swift in Sources */,

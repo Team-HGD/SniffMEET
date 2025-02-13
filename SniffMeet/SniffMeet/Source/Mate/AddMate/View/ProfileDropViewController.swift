@@ -70,7 +70,7 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
     }
     override func configureAttributes() {
         configureNavigationControllerAttributes()
-        if let gifImageView = createGIFImageView(named: Context.profileDropImg) {
+        if let gifImageView = UIImageView().createGIFImageView(named: Context.profileDropImg) {
             contentImageView.removeFromSuperview()
             contentImageView = gifImageView
             contentImageView.contentMode = .scaleAspectFill
@@ -171,11 +171,9 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
         autoButton.isHidden = true
         NSLayoutConstraint.activate([manualButtonExpanded])
         connectionStateLabel.isHidden = true
-        contentLabel.isHidden = false
         contentLabel.text = Context.notNIContentLabel
-        descriptionLabel.isHidden = false
         descriptionLabel.text = Context.notNIDescriptionLabel
-        contentImageView.isHidden = true
+//        TODO: - contentImageView의 이미지 변경
     }
 }
 
@@ -195,36 +193,5 @@ private extension ProfileDropViewController {
         static let placeholderImg: String = "ImagePlaceholder"
         static let spacing: Int = 100
         static let spacing2: Int = 200
-    }
-}
-
-private extension ProfileDropViewController {
-    func createGIFImageView(named gifName: String) -> UIImageView? {
-        guard let gifPath = Bundle.main.path(forResource: gifName, ofType: "gif"),
-              let gifData = try? Data(contentsOf: URL(fileURLWithPath: gifPath)),
-              let source = CGImageSourceCreateWithData(gifData as CFData, nil) else {
-            return nil
-        }
-
-        var images = [UIImage]()
-        var duration: Double = 0
-
-        let frameCount = CGImageSourceGetCount(source)
-        for frame in 0..<frameCount {
-            guard let cgImage = CGImageSourceCreateImageAtIndex(source, frame, nil) else { continue }
-            images.append(UIImage(cgImage: cgImage))
-
-            let frameProperties = CGImageSourceCopyPropertiesAtIndex(source, frame, nil) as? [String: Any]
-            let gifProperties = frameProperties?[kCGImagePropertyGIFDictionary as String] as? [String: Any]
-            let frameDuration = gifProperties?[kCGImagePropertyGIFDelayTime as String] as? Double ?? 0
-            duration += frameDuration
-        }
-
-        let imageView = UIImageView()
-        imageView.animationImages = images
-        imageView.animationDuration = duration
-        imageView.startAnimating()
-
-        return imageView
     }
 }

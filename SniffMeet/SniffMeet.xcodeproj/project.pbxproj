@@ -309,8 +309,8 @@
 		99E7A00F2D5C134C00E48552 /* ProfileDropRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A00D2D5C134200E48552 /* ProfileDropRouter.swift */; };
 		99E7A0112D5C45F900E48552 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0102D5C45EF00E48552 /* ConnectionState.swift */; };
 		99E7A0122D5C45F900E48552 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0102D5C45EF00E48552 /* ConnectionState.swift */; };
-		99E7A0202D5C58D200E48552 /* DeviceInfoFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A01F2D5C58B900E48552 /* DeviceInfoFinder.swift */; };
-		99E7A0212D5C58D200E48552 /* DeviceInfoFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A01F2D5C58B900E48552 /* DeviceInfoFinder.swift */; };
+		99E7A0202D5C58D200E48552 /* NIDeviceChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A01F2D5C58B900E48552 /* NIDeviceChecker.swift */; };
+		99E7A0212D5C58D200E48552 /* NIDeviceChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A01F2D5C58B900E48552 /* NIDeviceChecker.swift */; };
 		99FA4E792CE0FBBF00553C2E /* ProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */; };
 		A202A1152CEDD50700B98203 /* SupabaseDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */; };
 		A202A1172CEDD5EF00B98203 /* SupabaseDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */; };
@@ -623,7 +623,7 @@
 		99E7A00A2D5C125900E48552 /* ProfileDropInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropInteractor.swift; sourceTree = "<group>"; };
 		99E7A00D2D5C134200E48552 /* ProfileDropRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropRouter.swift; sourceTree = "<group>"; };
 		99E7A0102D5C45EF00E48552 /* ConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionState.swift; sourceTree = "<group>"; };
-		99E7A01F2D5C58B900E48552 /* DeviceInfoFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoFinder.swift; sourceTree = "<group>"; };
+		99E7A01F2D5C58B900E48552 /* NIDeviceChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIDeviceChecker.swift; sourceTree = "<group>"; };
 		99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputViewController.swift; sourceTree = "<group>"; };
 		A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBManager.swift; sourceTree = "<group>"; };
 		A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRequest.swift; sourceTree = "<group>"; };
@@ -1038,6 +1038,7 @@
 			isa = PBXGroup;
 			children = (
 				995D94612CE598F0005A47BF /* NIManager.swift */,
+				99E7A01F2D5C58B900E48552 /* NIDeviceChecker.swift */,
 			);
 			path = NI;
 			sourceTree = "<group>";
@@ -2140,7 +2141,6 @@
 		FDE768872CF7811400B5DE88 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				99E7A01F2D5C58B900E48552 /* DeviceInfoFinder.swift */,
 				99E79FA12D55627100E48552 /* Extension + UITextViewDelegate.swift */,
 				FD01D8F92D40ACAB00AD4940 /* Extension + Array.swift */,
 				FD01D8F42D40AC4100AD4940 /* Extension + UITableViewCell.swift */,
@@ -2467,7 +2467,7 @@
 				32BD484D2D3FF02C0078DA9C /* SaveProfileImageUseCase.swift in Sources */,
 				32BD484E2D3FF02C0078DA9C /* SaveUserInfoUseCase.swift in Sources */,
 				32BD484F2D3FF02C0078DA9C /* RemoteSaveDeviceTokenUseCase.swift in Sources */,
-				99E7A0212D5C58D200E48552 /* DeviceInfoFinder.swift in Sources */,
+				99E7A0212D5C58D200E48552 /* NIDeviceChecker.swift in Sources */,
 				32BD48502D3FF02C0078DA9C /* RegisterDeviceTokenUseCase.swift in Sources */,
 				32BD48512D3FF02C0078DA9C /* CheckFirstLaunchUseCase.swift in Sources */,
 				32BD48522D3FF02C0078DA9C /* RequestNotiListUseCase.swift in Sources */,
@@ -2874,7 +2874,7 @@
 				99E79F9D2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */,
 				FDE768922CF7828700B5DE88 /* AnyJSONSerializable.swift in Sources */,
 				9937361D2CF80D6600E3DD58 /* RequestUserInfoRemoteUseCase.swift in Sources */,
-				99E7A0202D5C58D200E48552 /* DeviceInfoFinder.swift in Sources */,
+				99E7A0202D5C58D200E48552 /* NIDeviceChecker.swift in Sources */,
 				FD331A602CF339B000F39426 /* SupabaseStorageRequest.swift in Sources */,
 				FDDDB93C2D004247000D4528 /* ProcessedWalkInteractor.swift in Sources */,
 				320044892CEC862D00D08B6D /* LocationSelectionView.swift in Sources */,

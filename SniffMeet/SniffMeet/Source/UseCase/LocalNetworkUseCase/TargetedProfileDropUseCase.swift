@@ -81,7 +81,7 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
                 forKey: Environment.UserDefaultsKey.dogInfo,
                 type: UserInfo.self
             )
-            guard let userID = SessionManager.shared.session?.user?.userID else { return }
+            guard let userID = try? SupabaseSessionManager.shared.userID.get() else { return }
             let imageURL = try? dataManager.loadData(
                 forKey: Environment.UserDefaultsKey.profileImage,
                 type: String.self

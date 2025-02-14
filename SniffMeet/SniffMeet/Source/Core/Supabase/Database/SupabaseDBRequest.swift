@@ -8,10 +8,10 @@
 import Foundation
 
 enum SupabaseDBRequest {
-    case fetchData(table: String, accessToken: String, query: [String: String])
-    case insertData(table: String, accessToken: String, data: Data)
-    case updateData(table: String, accessToken: String, data: Data, query: [String: String])
-    case rpc(table: String, accessToken: String, data: Data, query: [String: String])
+    case fetchData(table: String, accessToken: String?, query: [String: String]?)
+    case insertData(table: String, accessToken: String?, data: Data)
+    case updateData(table: String, accessToken: String?, data: Data, query: [String: String]?)
+    case rpc(table: String, accessToken: String?, data: Data, query: [String: String]?)
 }
 
 extension SupabaseDBRequest: SNMRequestConvertible {
@@ -70,11 +70,14 @@ extension SupabaseDBRequest: SNMRequestConvertible {
 // MARK: - SupabaseDBRequest+HelperMethods
 
 extension SupabaseDBRequest {
-    func createAuthHeader(accessToken: String) -> [String: String] {
-        return [
+    func createAuthHeader(accessToken: String?) -> [String: String] {
+        var header: [String: String] = [
             "Content-Type": "application/json",
             "apikey": SupabaseConfig.apiKey,
-            "Authorization": "Bearer \(accessToken)"
         ]
+        if let accessToken = accessToken {
+            header["Authorization"] = "Bearer \(accessToken)"
+        }
+        return header
     }
 }

@@ -332,6 +332,8 @@
 		A25BE4562CEBB63A00886763 /* SupabaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4552CEBB63A00886763 /* SupabaseUser.swift */; };
 		A25BE4582CEBB95C00886763 /* SupabaseRefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */; };
 		A266A2602CF5CF4A002C2B3A /* CreateAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */; };
+		A26DCA082D5E3F2900D8D75A /* CheckNicknameDuplicationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26DCA072D5E3F2900D8D75A /* CheckNicknameDuplicationUseCase.swift */; };
+		A26DCA092D5E3F2900D8D75A /* CheckNicknameDuplicationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26DCA072D5E3F2900D8D75A /* CheckNicknameDuplicationUseCase.swift */; };
 		A288A63D2CDC595000D11C34 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		A28D4F582CFED0CB00A79543 /* AddMateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28D4F572CFED0CB00A79543 /* AddMateButton.swift */; };
 		A2AFC9492D016BFF0062B34E /* SNMToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AFC9482D016BFF0062B34E /* SNMToast.swift */; };
@@ -649,6 +651,7 @@
 		A25BE4552CEBB63A00886763 /* SupabaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseUser.swift; sourceTree = "<group>"; };
 		A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseRefreshResponse.swift; sourceTree = "<group>"; };
 		A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountUseCase.swift; sourceTree = "<group>"; };
+		A26DCA072D5E3F2900D8D75A /* CheckNicknameDuplicationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNicknameDuplicationUseCase.swift; sourceTree = "<group>"; };
 		A28D4F572CFED0CB00A79543 /* AddMateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateButton.swift; sourceTree = "<group>"; };
 		A2AFC9482D016BFF0062B34E /* SNMToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMToast.swift; sourceTree = "<group>"; };
 		A2B58F512D2FA0DC00C15B12 /* SNMError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMError.swift; sourceTree = "<group>"; };
@@ -959,6 +962,7 @@
 				A2BA1BAB2CF34A860080575A /* RequestProfileImageUseCase.swift */,
 				FD51341E2CEB7AF6002E76F3 /* LoadUserInfoUseCase.swift */,
 				A2FE772A2D52224700239F05 /* SignInAnonUseCase.swift */,
+				A26DCA072D5E3F2900D8D75A /* CheckNicknameDuplicationUseCase.swift */,
 			);
 			path = RequestUseCase;
 			sourceTree = "<group>";
@@ -2547,6 +2551,7 @@
 				32BD487F2D3FF02C0078DA9C /* Extension + Keyboard.swift in Sources */,
 				32BD48802D3FF02C0078DA9C /* Extension + UIView.swift in Sources */,
 				32BD48812D3FF02C0078DA9C /* Extension + Navigation.swift in Sources */,
+				A26DCA092D5E3F2900D8D75A /* CheckNicknameDuplicationUseCase.swift in Sources */,
 				32BD48822D3FF02C0078DA9C /* ProfileDropAnimation.swift in Sources */,
 				99E79F902D544A4700E48552 /* ReportMateRouter.swift in Sources */,
 				32BD48832D3FF02C0078DA9C /* EventConstant.swift in Sources */,
@@ -2804,6 +2809,7 @@
 				FD0634262CE596B5003C9D6B /* Endpoint.swift in Sources */,
 				320044872CEC85CB00D08B6D /* ProfileView.swift in Sources */,
 				320044502CE595F700D08B6D /* ProfileInputPresenter.swift in Sources */,
+				A26DCA082D5E3F2900D8D75A /* CheckNicknameDuplicationUseCase.swift in Sources */,
 				FDE14A522CE8D338001F7A9D /* SNMRequestType.swift in Sources */,
 				FD69B1B32CE3BC76009D71DC /* KeychainManager.swift in Sources */,
 				FD1152732CFB3A8A008955C4 /* RespondMapRouter.swift in Sources */,
@@ -3131,9 +3137,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SniffMeet/SniffMeet.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4N97P5J52N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SniffMeet/Resource/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "'SniffMEET'은 Nearby Interaction과 ARKit을 위해 카메라 접근이 필요합니다.";
@@ -3145,14 +3153,17 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.boostcamp9.SniffMeet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3170,9 +3181,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SniffMeet/SniffMeet.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4N97P5J52N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SniffMeet/Resource/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "'SniffMEET'은 Nearby Interaction과 ARKit을 위해 카메라 접근이 필요합니다.";
@@ -3184,14 +3197,17 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.boostcamp9.SniffMeet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SniffMEET Distribution";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

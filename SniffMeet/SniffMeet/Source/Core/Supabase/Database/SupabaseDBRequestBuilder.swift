@@ -11,6 +11,7 @@ enum SupabaseDBTask {
     case fetch
     case insert
     case update
+    case delete
     case rpc
 }
 
@@ -76,6 +77,14 @@ final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {
                 table: table,
                 accessToken: accessToken,
                 data: data,
+                query: query
+            )
+        case .delete:
+            guard let query = self.query,
+                  let table = self.table else { throw SupabaseDBError.deleteDataFailed }
+            return SupabaseDBRequest.deleteData(
+                table: table,
+                accessToken: accessToken,
                 query: query
             )
         case .rpc:

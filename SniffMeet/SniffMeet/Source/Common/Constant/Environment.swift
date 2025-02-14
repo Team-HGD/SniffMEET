@@ -38,5 +38,6 @@ enum Environment {
         static let notificationListFunction = "rpc/notification_list"
         static let walkRequest = "walk_request"
         static let reportlist = "report_list"
+        static let checkDuplicateNicknameFunction = "rpc/is_duplicate_nickname"
     }
 }

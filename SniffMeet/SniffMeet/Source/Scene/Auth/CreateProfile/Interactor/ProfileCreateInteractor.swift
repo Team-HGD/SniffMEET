@@ -8,33 +8,37 @@
 import UIKit
 
 protocol ProfileCreateInteractable: AnyObject {
-    var presenter: DogInfoInteractorOutput? { get set }
-    var saveUserInfoUseCase: SaveUserInfoUseCase { get set }
-    var saveProfileImageUseCase: SaveProfileImageUseCase { get }
+    var presenter: (any DogInfoInteractorOutput)? { get set }
+    var saveUserInfoUseCase: any SaveUserInfoUseCase { get set }
+    var saveProfileImageUseCase: any SaveProfileImageUseCase { get }
     
     func signInWithProfileData(dogInfo: UserInfo, imageData: Data?)
     func convertImageToPNGData(image: UIImage?) -> Data?
     func convertImageToJPGData(image: UIImage?) -> Data?
+    func isNicknameTaken(_ nickname: String)
 }
 
 final class ProfileCreateInteractor: ProfileCreateInteractable {
-    weak var presenter: DogInfoInteractorOutput?
-    var saveUserInfoUseCase: SaveUserInfoUseCase
-    var saveProfileImageUseCase: SaveProfileImageUseCase
-    var saveUserInfoRemoteUseCase: CreateAccountUseCase
-    var signInUseCase: SignInUseCase
+    weak var presenter: (any DogInfoInteractorOutput)?
+    var saveUserInfoUseCase: any SaveUserInfoUseCase
+    var saveProfileImageUseCase: any SaveProfileImageUseCase
+    var saveUserInfoRemoteUseCase: any CreateAccountUseCase
+    var signInUseCase: any SignInUseCase
+    var checkNicknameDuplicationUseCase: any CheckNicknameDuplicationUseCase
     
     init(
-        presenter: DogInfoInteractorOutput? = nil,
-        saveUserInfoUseCase: SaveUserInfoUseCase,
-        saveProfileImageUseCase: SaveProfileImageUseCase,
-        saveUserInfoRemoteUseCase: CreateAccountUseCase,
-        signInUseCase: SignInUseCase
+        presenter: (any DogInfoInteractorOutput)? = nil,
+        saveUserInfoUseCase: any SaveUserInfoUseCase,
+        saveProfileImageUseCase: any SaveProfileImageUseCase,
+        saveUserInfoRemoteUseCase: any CreateAccountUseCase,
+        signInUseCase: any SignInUseCase,
+        checkNicknameDuplicationUseCase: any CheckNicknameDuplicationUseCase
     ) {
         self.presenter = presenter
         self.saveUserInfoUseCase = saveUserInfoUseCase
         self.saveProfileImageUseCase = saveProfileImageUseCase
         self.saveUserInfoRemoteUseCase = saveUserInfoRemoteUseCase
+        self.checkNicknameDuplicationUseCase = checkNicknameDuplicationUseCase
         self.signInUseCase = signInUseCase
     }
     
@@ -109,5 +113,14 @@ final class ProfileCreateInteractor: ProfileCreateInteractable {
     func convertImageToJPGData(image: UIImage?) -> Data? {
         guard let image else { return nil }
         return image.jpegData(compressionQuality: 0.8)
+    }
+    
+    func isNicknameTaken(_ nickname: String) {
+        Task {
+            let isDuplicated = try await checkNicknameDuplicationUseCase.execute(
+                nickname: nickname
+            )
+            presenter?.notifyNicknameDuplication(isDuplicated)
+        }
     }
 }

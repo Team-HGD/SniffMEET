@@ -4,6 +4,8 @@
 //
 //  Created by 윤지성 on 11/14/24.
 //
+
+import Combine
 import Foundation
 import UIKit
 
@@ -12,31 +14,37 @@ protocol ProfileCreatePresentable : AnyObject{
     var view: ProfileCreateViewable? { get set }
     var interactor: ProfileCreateInteractable? { get set }
     var router: ProfileCreateRoutable? { get set }
+    var output: any ProfileCreatePresenterOutput { get }
     
     func didTapSubmitButton(nickname: String, image: UIImage?)
+    func didtextFieldEndEditing(text: String)
 }
 
 protocol DogInfoInteractorOutput: AnyObject {
     func didSaveUserInfo()
     func didFailToSaveUserInfo(error: Error)
+    func notifyNicknameDuplication(_ isDuplicated: Bool)
 }
 
 
 final class ProfileCreatePresenter: ProfileCreatePresentable {
+    weak var view: (any ProfileCreateViewable)?
+    var interactor: (any ProfileCreateInteractable)?
+    var router: (any ProfileCreateRoutable)?
+    let output: any ProfileCreatePresenterOutput
     var dogInfo: DogInfo
-    weak var view: ProfileCreateViewable?
-    var interactor: ProfileCreateInteractable?
-    var router: ProfileCreateRoutable?
     
     init(dogInfo: DogInfo,
-         view: ProfileCreateViewable? = nil,
-         interactor: ProfileCreateInteractable? = nil,
-         router: ProfileCreateRoutable? = nil)
-    {
+         view: (any ProfileCreateViewable)? = nil,
+         interactor: (any ProfileCreateInteractable)? = nil,
+         router: (any ProfileCreateRoutable)? = nil,
+         output: any ProfileCreatePresenterOutput = DefaultProfileCreatePresenterOutput()
+    ) {
         self.dogInfo = dogInfo
         self.view = view
         self.interactor = interactor
         self.router = router
+        self.output = output
     }
 
     func didTapSubmitButton(nickname: String, image: UIImage?) {
@@ -57,6 +65,10 @@ final class ProfileCreatePresenter: ProfileCreatePresentable {
             imageData: jpgData
         )
     }
+    
+    func didtextFieldEndEditing(text: String) {
+        interactor?.isNicknameTaken(text)
+    }
 }
 
 extension ProfileCreatePresenter: DogInfoInteractorOutput {
@@ -70,4 +82,17 @@ extension ProfileCreatePresenter: DogInfoInteractorOutput {
         // TODO: -  alert 올리는데 어떻게 올릴지 정하기
         // TODO: submit button enable
     }
+    
+    func notifyNicknameDuplication(_ isDuplicated: Bool) {
+        output.isDuplicated.send(isDuplicated)
+    }
+}
+
+// MARK: - MateListPresenterOutput
+protocol ProfileCreatePresenterOutput {
+    var isDuplicated: PassthroughSubject<Bool, Never> { get }
+}
+
+struct DefaultProfileCreatePresenterOutput: ProfileCreatePresenterOutput {
+    var isDuplicated = PassthroughSubject<Bool, Never>()
 }

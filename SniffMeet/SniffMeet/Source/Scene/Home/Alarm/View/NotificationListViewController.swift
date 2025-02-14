@@ -76,11 +76,9 @@ final class NotificationListViewController: BaseViewController, NotificationList
             .store(in: &cancellables)
     }
 
-    @objc func didTapDismissButton() {
+    @objc private func didTapDismissButton() {
         presenter?.didTapDismissButton()
     }
-    @objc func didTapTrashcanButton() {
-        // TODO: 모든 알림 삭제 필요
     @objc private func didTapTrashcanButton() {
         presenter?.didTapTrashcanButton()
     }
@@ -121,7 +119,7 @@ extension NotificationListViewController: UITableViewDataSource {
         cell.configure(
             section: selectedData.category.label,
             description: selectedData.senderName + selectedData.category.description,
-            dateString: "\(selectedData.createdAt?.hoursDifferenceFromNow() ?? 14)시간 전"
+            dateString: "\(selectedData.createdAt?.differenceFromNow() ?? "")"
         )
         return cell
     }

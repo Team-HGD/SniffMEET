@@ -71,6 +71,9 @@ extension NotificationListModuleBuildable {
             requestNotiListUseCase: RequestNotiListUseCaseImpl(
                 remoteManager: SupabaseDBManager.shared,
                 sessionManager: SupabaseSessionManager.shared
+            ),
+            deleteNotificationUseCase: DeleteNotificationUseCaseImpl(
+                remoteDataManager: SupabaseDBManager.shared
             )
         )
         let router = NotificationListRouter()

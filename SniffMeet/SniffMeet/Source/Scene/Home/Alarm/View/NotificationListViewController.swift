@@ -81,6 +81,8 @@ final class NotificationListViewController: BaseViewController, NotificationList
     }
     @objc func didTapTrashcanButton() {
         // TODO: 모든 알림 삭제 필요
+    @objc private func didTapTrashcanButton() {
+        presenter?.didTapTrashcanButton()
     }
 }
 

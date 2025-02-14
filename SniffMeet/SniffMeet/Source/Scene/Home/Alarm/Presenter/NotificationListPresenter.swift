@@ -16,6 +16,7 @@ protocol NotificationListPresentable: AnyObject {
     func viewDidLoad()
     func didTapNotificationCell(index: Int)
     func didDeleteNotificationCell(index: Int)
+    func didTapTrashcanButton()
     func didTapDismissButton()
     func didScrollToBottom()
 }
@@ -52,9 +53,32 @@ final class NotificationListPresenter: NotificationListPresentable {
     }
     func didDeleteNotificationCell(index: Int) {
         var notiList = output.notificationList.value
+        let deleteNoti: WalkNoti = notiList[index]
+        Task { [weak self] in
+            guard let self else { return }
+            do {
+                try await self.interactor?.deleteNotifcation(
+                    notificationID: deleteNoti.id
+                )
+            } catch {
+                // TODO: Error Map 필요
+                SNMLogger.error(error.localizedDescription)
+            }
+        }
         notiList.remove(at: index)
         output.notificationList.send(notiList)
-        // TODO: 서버에도 반영 필요 
+    }
+    func didTapTrashcanButton() {
+        let notifications = output.notificationList.value.map{ $0.id }
+        Task { [weak self] in
+            do {
+                try await self?.interactor?.deleteNotifications(notifications: notifications)
+            } catch {
+                // TODO: Error Map 필요
+                SNMLogger.error(error.localizedDescription)
+            }
+        }
+        output.notificationList.send([])
     }
     func didTapDismissButton() {
         guard let view else { return }

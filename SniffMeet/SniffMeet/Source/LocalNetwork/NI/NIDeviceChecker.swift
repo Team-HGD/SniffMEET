@@ -10,7 +10,7 @@ protocol NIDeviceCheckerProtocol {
     func isNISupported() -> Bool
 }
 
-final class NIDeviceChecker: NIDeviceCheckerProtocol {
+struct NIDeviceChecker: NIDeviceCheckerProtocol {
     func isNISupported() -> Bool {
         if #available(iOS 16.0, *) {
             return NISession.deviceCapabilities.supportsPreciseDistanceMeasurement

@@ -1060,6 +1060,7 @@
 		99E7A0002D5C104600E48552 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				99E7A0102D5C45EF00E48552 /* ConnectionState.swift */,
 				99E7A0042D5C10A600E48552 /* ProfileDropViewController.swift */,
 			);
 			path = View;
@@ -2124,7 +2125,6 @@
 		FDE768862CF7810E00B5DE88 /* Design System */ = {
 			isa = PBXGroup;
 			children = (
-				99E7A0102D5C45EF00E48552 /* ConnectionState.swift */,
 				3200480B2CFF0FA600D08B6D /* ProfileDropAnimation.swift */,
 				320047B52CFCB8CA00D08B6D /* EventConstant.swift */,
 				3200438D2CDF3D7F00D08B6D /* InputTextField.swift */,

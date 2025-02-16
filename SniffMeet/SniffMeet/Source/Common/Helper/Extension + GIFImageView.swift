@@ -7,11 +7,15 @@
 
 import UIKit
 
-extension UIImageView {
-    func createGIFImageView(named gifName: String) -> UIImageView? {
+class GIFImageView: UIImageView {
+    init?(named gifName: String) {
+        super.init(frame: .zero)
+
+        let options: [CFString: Any] = [kCGImageSourceShouldCache: false]
+
         guard let gifPath = Bundle.main.path(forResource: gifName, ofType: "gif"),
               let gifData = try? Data(contentsOf: URL(fileURLWithPath: gifPath)),
-              let source = CGImageSourceCreateWithData(gifData as CFData, nil) else {
+              let source = CGImageSourceCreateWithData(gifData as CFData, options as CFDictionary) else {
             return nil
         }
 
@@ -29,11 +33,13 @@ extension UIImageView {
             duration += frameDuration
         }
 
-        let imageView = UIImageView()
-        imageView.animationImages = images
-        imageView.animationDuration = duration
-        imageView.startAnimating()
-
-        return imageView
+//        let imageView = UIImageView()
+        self.animationImages = images
+        self.animationDuration = duration
+        self.startAnimating()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

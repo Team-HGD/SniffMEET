@@ -39,4 +39,8 @@ enum Environment {
         static let walkRequest = "walk_request"
         static let reportlist = "report_list"
     }
+
+    enum URLString {
+        static let helpPage = "https://check-it.notion.site/198f6d0576c280f1abeee0feeb5cb78e?pvs=4"
+    }
 }

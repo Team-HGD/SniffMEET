@@ -39,7 +39,7 @@ final class ProfileDropRouter: ProfileDropRoutable {
     }
     func showHelpView(profileDropView: any ProfileDropViewable) {
         guard let profileDropView = profileDropView as? UIViewController else { return }
-        let helpURLString = "https://check-it.notion.site/198f6d0576c280f1abeee0feeb5cb78e?pvs=4"
+        let helpURLString = Environment.URLString.helpPage
         guard let url = URL(string: helpURLString) else { return }
         presentSafari(from: profileDropView, animated: true, url: url)
     }
@@ -63,7 +63,10 @@ extension ProfileDropRouter: ProfileDropBuildable {
         let view: ProfileDropViewable & UIViewController = ProfileDropViewController()
         let router: ProfileDropRoutable & ProfileDropBuildable = ProfileDropRouter()
         let presenter: ProfileDropPresentable & ProfileDropInteractorOutput = ProfileDropPresenter()
-        let interactor: ProfileDropInteractable = ProfileDropInteractor(tryProfileDropUseCase: tryProfileDropUseCase, quitProfileDropUseCase: quitProfileDropUseCase, niDeviceChecker: niDeviceChecker)
+        let interactor: ProfileDropInteractable = ProfileDropInteractor(
+            tryProfileDropUseCase: tryProfileDropUseCase,
+            quitProfileDropUseCase: quitProfileDropUseCase,
+            niDeviceChecker: niDeviceChecker)
 
         view.presenter = presenter
         presenter.view = view

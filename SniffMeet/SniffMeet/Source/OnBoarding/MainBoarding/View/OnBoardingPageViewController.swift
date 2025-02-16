@@ -52,7 +52,7 @@ class OnBoardingPageViewController: BaseViewController {
         )
         descriptionLabel.text = page.description
         if page.isGif {
-            if let gifImageView = UIImageView().createGIFImageView(named: page.imageName) {
+            if let gifImageView = GIFImageView(named: page.imageName) {
                 imageView.removeFromSuperview()
                 imageView = gifImageView
                 imageView.contentMode = .scaleAspectFit

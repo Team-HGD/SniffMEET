@@ -48,8 +48,8 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    private var autoButton = PrimaryButton(title: Context.autoConnect)
-    private var manualButton = PrimaryButton(title: Context.manualConnect)
+    private var autoProfileDropButton = PrimaryButton(title: Context.autoConnect)
+    private var manualProfileDropButton = PrimaryButton(title: Context.manualConnect)
     private var manualButtonExpanded: NSLayoutConstraint!
     private var helpLabel: UILabel = {
         let label = UILabel()
@@ -59,7 +59,11 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
         label.font = SNMFont.caption2
         label.isUserInteractionEnabled = true
         let attributedString = NSMutableAttributedString(string: Context.help)
-        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(
+            .underlineStyle,
+            value: NSUnderlineStyle.single.rawValue,
+            range: NSMakeRange(0, attributedString.length)
+        )
         label.attributedText = attributedString
         return label
     }()
@@ -70,20 +74,21 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
     }
     override func configureAttributes() {
         configureNavigationControllerAttributes()
-        if let gifImageView = UIImageView().createGIFImageView(named: Context.profileDropImg) {
+        if let gifImageView = GIFImageView(named: Context.profileDropImg) {
             contentImageView.removeFromSuperview()
             contentImageView = gifImageView
             contentImageView.contentMode = .scaleAspectFill
         }
         connectionStateLabel.isHidden = true
+        helpLabel.addGestureRecognizer(tapGesture)
     }
     override func configureHierachy() {
         [contentLabel,
          descriptionLabel,
          contentImageView,
          connectionStateLabel,
-         autoButton,
-         manualButton,
+         autoProfileDropButton,
+         manualProfileDropButton,
          helpLabel].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -98,11 +103,16 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
         navigationItem.largeTitleDisplayMode = .never
     }
     private func setConstraint() {
-        manualButtonExpanded = manualButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstant.horizontalPadding)
+        manualButtonExpanded = manualProfileDropButton.leadingAnchor.constraint(
+            equalTo: view.leadingAnchor,
+            constant: LayoutConstant.horizontalPadding
+        )
         manualButtonExpanded.isActive = false
 
         NSLayoutConstraint.activate([
-            contentLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(Context.spacing2)),
+            contentLabel.topAnchor.constraint(
+                equalTo: view.topAnchor,
+                constant: CGFloat(Context.spacing2)),
             contentLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             descriptionLabel.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: LayoutConstant.largeVerticalPadding),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -110,17 +120,27 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
             contentImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             connectionStateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             connectionStateLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            autoButton.bottomAnchor.constraint(equalTo: helpLabel.topAnchor, constant: -LayoutConstant.smallVerticalPadding),
-            autoButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstant.horizontalPadding),
-            autoButton.trailingAnchor.constraint(equalTo: manualButton.leadingAnchor, constant: -LayoutConstant.horizontalPadding),
-            manualButton.bottomAnchor.constraint(equalTo: helpLabel.topAnchor, constant: -LayoutConstant.smallVerticalPadding),
-            manualButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstant.horizontalPadding),
-            helpLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -LayoutConstant.largeVerticalPadding),
+            autoProfileDropButton.bottomAnchor.constraint(equalTo: helpLabel.topAnchor, constant: -LayoutConstant.smallVerticalPadding),
+            autoProfileDropButton.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: LayoutConstant.horizontalPadding),
+            autoProfileDropButton.trailingAnchor.constraint(
+                equalTo: manualProfileDropButton.leadingAnchor,
+                constant: -LayoutConstant.horizontalPadding),
+            manualProfileDropButton.bottomAnchor.constraint(
+                equalTo: helpLabel.topAnchor,
+                constant: -LayoutConstant.smallVerticalPadding),
+            manualProfileDropButton.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -LayoutConstant.horizontalPadding),
+            helpLabel.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -LayoutConstant.largeVerticalPadding),
             helpLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     override func bind() {
-        autoButton.publisher(event: .touchUpInside)
+        autoProfileDropButton.publisher(event: .touchUpInside)
             .throttle(for: .seconds(EventConstant.throttleInterval),
                       scheduler: RunLoop.main,
                       latest: false)
@@ -135,7 +155,7 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
                 }
             }
             .store(in: &cancellables)
-        manualButton.publisher(event: .touchUpInside)
+        manualProfileDropButton.publisher(event: .touchUpInside)
             .throttle(for: .seconds(EventConstant.throttleInterval),
                       scheduler: RunLoop.main,
                       latest: false)
@@ -143,7 +163,6 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
                 // TODO: - 수동 연결 버튼 이벤트 구현
             }
             .store(in: &cancellables)
-        helpLabel.addGestureRecognizer(tapGesture)
         tapGesture.publisher(for: \.state)
             .filter { $0 == .ended }
             .sink { [weak self] _ in
@@ -156,8 +175,8 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
         contentLabel.isHidden = state
         descriptionLabel.isHidden = state
         contentImageView.isHidden = state
-        autoButton.configuration?.background.backgroundColor = state ? SNMColor.mainBrown : SNMColor.mainNavy
-        autoButton.configuration?.attributedTitle = AttributedString(
+        autoProfileDropButton.configuration?.background.backgroundColor = state ? SNMColor.mainBrown : SNMColor.mainNavy
+        autoProfileDropButton.configuration?.attributedTitle = AttributedString(
             state ? Context.cancelConnect : Context.autoConnect,
             attributes: AttributeContainer(
                 [.font: UIFont.systemFont(ofSize: 16.0, weight: .bold)]
@@ -168,7 +187,7 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
         connectionStateLabel.text = connectionState.description
     }
     func changeNotSupportedNI() {
-        autoButton.isHidden = true
+        autoProfileDropButton.isHidden = true
         NSLayoutConstraint.activate([manualButtonExpanded])
         connectionStateLabel.isHidden = true
         contentLabel.text = Context.notNIContentLabel

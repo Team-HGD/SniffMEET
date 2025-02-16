@@ -23,7 +23,7 @@ final class MateListInteractor: MateListInteractable {
     weak var presenter: (any MateListInteractorOutput)?
     private let requestMateListUseCase: any RequestMateListUseCase
     private let requestProfileImageUseCase: any RequestProfileImageUseCase
-    private var tryProfileDropUseCase: any TryProfileDropUseCase
+    private var tryProfileDropUseCase: any NearByProfileDropUseCase
     private var quitProfileDropUseCase: any QuitProfileDropUseCase
     private var deleteMateUseCase: any DeleteMateUseCase
     private var cancellables: Set<AnyCancellable> = []
@@ -32,7 +32,7 @@ final class MateListInteractor: MateListInteractable {
         presenter: (any MateListInteractorOutput)? = nil,
         requestMateListUseCase: any RequestMateListUseCase,
         requestProfileImageUseCase: any RequestProfileImageUseCase,
-        tryProfileDropUseCase: any TryProfileDropUseCase,
+        tryProfileDropUseCase: any NearByProfileDropUseCase,
         quitProfileDropUseCase: any QuitProfileDropUseCase,
         deleteMateUseCase: any DeleteMateUseCase
     ) {

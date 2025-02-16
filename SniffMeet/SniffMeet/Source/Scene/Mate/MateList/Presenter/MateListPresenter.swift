@@ -16,19 +16,16 @@ protocol MateListPresentable: AnyObject {
     
     func viewWillAppear()
     func didTabMateListCell(mate: Mate)
+    func didTapAddMateButton()
     func didSwipeToDelete(mate: Mate)
     func didSwipeToReport(mate: Mate)
-    func showAlertConnected()
-    func showAlertDisconnected()
+//    func showAlertConnected()
+//    func showAlertDisconnected()
     func didScrollToBottom()
-    func startProfileDrop()
 }
 
 protocol MateListInteractorOutput: AnyObject {
-    func receiveProfileData(_ data: DogDTO)
     func didDeleteMate(_ mate: Mate)
-    func didConnectNISession()
-    func failToConnectNISession()
 }
 
 final class MateListPresenter: MateListPresentable {
@@ -64,6 +61,11 @@ final class MateListPresenter: MateListPresentable {
         router?.presentWalkRequestView(mateListView: view, mate: mate)
     }
 
+    func didTapAddMateButton() {
+        guard let view else { return }
+        router?.showProfileDropView(mateListView: view)
+    }
+
     func didSwipeToDelete(mate: Mate) {
         Task {
             do {
@@ -79,35 +81,23 @@ final class MateListPresenter: MateListPresentable {
         router?.showReportMateView(mateListView: view, data: mate)
     }
     
-    func showAlertConnected() {
-        guard let view else { return }
-        router?.showAlert(
-            mateListView: view,
-            title: "Connected",
-            message: "성공적으로 연결되었습니다.\n핸드폰끼리 카메라 방향으로 가까이하여 프로필을 교환해보세요."
-        )
-    }
-
-    func showAlertDisconnected() {
-        guard let view else { return }
-        router?.showAlert(
-            mateListView: view,
-            title: "Disconnected",
-            message: "메이트 찾기 실패하였습니다.\n 와이파이와 블루투스가 켜져있는 상태인지 확인해주세요."
-        )
-    }
-
-    func receiveProfileData(_ data: DogDTO) {
-        guard let view else { return }
-        router?.showMateRequestView(mateListView: view, data: data)
-    }
-
-    func startProfileDrop() {
-        interactor?.tryProfileDrop()
-    }
-    func quitProfileDrop() {
-        interactor?.quitProfileDrop()
-    }
+//    func showAlertConnected() {
+//        guard let view else { return }
+//        router?.showAlert(
+//            mateListView: view,
+//            title: "Connected",
+//            message: "성공적으로 연결되었습니다.\n핸드폰끼리 카메라 방향으로 가까이하여 프로필을 교환해보세요."
+//        )
+//    }
+//
+//    func showAlertDisconnected() {
+//        guard let view else { return }
+//        router?.showAlert(
+//            mateListView: view,
+//            title: "Disconnected",
+//            message: "메이트 찾기 실패하였습니다.\n 와이파이와 블루투스가 켜져있는 상태인지 확인해주세요."
+//        )
+//    }
 
     func didScrollToBottom() {
         guard !isReachedBottom, !isFetching else { return }
@@ -176,15 +166,6 @@ final class MateListPresenter: MateListPresentable {
 extension MateListPresenter: MateListInteractorOutput {
     func didDeleteMate(_ mate: Mate) {
         output.mates.value.removeAll { $0.userID == mate.userID }
-    }
-    
-    func didConnectNISession() {
-        //showAlertConnected()
-        view?.changeMPCButtonState(to: .success)
-    }
-
-    func failToConnectNISession() {
-        view?.changeMPCButtonState(to: .normal)
     }
 }
 

@@ -84,6 +84,16 @@
 		32081B942D6180A000D19235 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32081B932D6180A000D19235 /* Debug.xcconfig */; };
 		32081B952D6180A000D19235 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32081B932D6180A000D19235 /* Debug.xcconfig */; };
 		32081B962D6180A000D19235 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32081B932D6180A000D19235 /* Debug.xcconfig */; };
+		32081C052D618D0000D19235 /* ProfileDropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081C022D618D0000D19235 /* ProfileDropViewController.swift */; };
+		32081C062D618D0000D19235 /* ProfileDropInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081BFB2D618D0000D19235 /* ProfileDropInteractor.swift */; };
+		32081C072D618D0000D19235 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081C012D618D0000D19235 /* ConnectionState.swift */; };
+		32081C082D618D0000D19235 /* ProfileDropPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081BFD2D618D0000D19235 /* ProfileDropPresenter.swift */; };
+		32081C092D618D0000D19235 /* ProfileDropRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081BFF2D618D0000D19235 /* ProfileDropRouter.swift */; };
+		32081C0A2D618D0000D19235 /* ProfileDropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081C022D618D0000D19235 /* ProfileDropViewController.swift */; };
+		32081C0B2D618D0000D19235 /* ProfileDropInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081BFB2D618D0000D19235 /* ProfileDropInteractor.swift */; };
+		32081C0C2D618D0000D19235 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081C012D618D0000D19235 /* ConnectionState.swift */; };
+		32081C0D2D618D0000D19235 /* ProfileDropPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081BFD2D618D0000D19235 /* ProfileDropPresenter.swift */; };
+		32081C0E2D618D0000D19235 /* ProfileDropRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081BFF2D618D0000D19235 /* ProfileDropRouter.swift */; };
 		32192B272D41E8FD00C876BA /* ImageSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F2E2D3C33500012B860 /* ImageSampler.swift */; };
 		32192B282D41E91200C876BA /* TaskSerialQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01D8F62D40AC8000AD4940 /* TaskSerialQueue.swift */; };
 		32192B292D41EAF600C876BA /* CGImageCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B1F312D3C33660012B860 /* CGImageCoder.swift */; };
@@ -94,7 +104,6 @@
 		3284D3502D2F941C000ABC04 /* DataStoragable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3284D34D2D2F9417000ABC04 /* DataStoragable.swift */; };
 		32A7563C2D00398100965F0A /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7563B2D00397D00965F0A /* CacheManager.swift */; };
 		32A7563E2D00398100965F0A /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A7563B2D00397D00965F0A /* CacheManager.swift */; };
-		32BD48332D3FECAE0078DA9C /* MateListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BD48312D3FECAE0078DA9C /* MateListInteractorTests.swift */; };
 		32BD48382D3FF02C0078DA9C /* WalkRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320047BD2CFDE36C00D08B6D /* WalkRequestDTO.swift */; };
 		32BD48392D3FF02C0078DA9C /* WalkAPSDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE768932CF782E500B5DE88 /* WalkAPSDTO.swift */; };
 		32BD483A2D3FF02C0078DA9C /* SaveDeviceTokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1152782CFC3B23008955C4 /* SaveDeviceTokenDTO.swift */; };
@@ -317,6 +326,10 @@
 		99E79FAB2D556E8600E48552 /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FAA2D556E7100E48552 /* ReportDTO.swift */; };
 		99E79FAC2D556E8600E48552 /* ReportDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79FAA2D556E7100E48552 /* ReportDTO.swift */; };
 		99E79FAD2D55EC8600E48552 /* SNMLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B592CECE8F90093BEB9 /* SNMLogger.swift */; };
+		99E7A0202D5C58D200E48552 /* NIDeviceChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A01F2D5C58B900E48552 /* NIDeviceChecker.swift */; };
+		99E7A0212D5C58D200E48552 /* NIDeviceChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A01F2D5C58B900E48552 /* NIDeviceChecker.swift */; };
+		99E7A0632D5DB75A00E48552 /* Extension + GIFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0622D5DB74600E48552 /* Extension + GIFImageView.swift */; };
+		99E7A0642D5DB75A00E48552 /* Extension + GIFImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7A0622D5DB74600E48552 /* Extension + GIFImageView.swift */; };
 		99FA4E792CE0FBBF00553C2E /* ProfileInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */; };
 		A202A1152CEDD50700B98203 /* SupabaseDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */; };
 		A202A1172CEDD5EF00B98203 /* SupabaseDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */; };
@@ -605,10 +618,14 @@
 		32081B282D5C84EC00D19235 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		32081B8F2D61809900D19235 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		32081B932D6180A000D19235 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		32081BFB2D618D0000D19235 /* ProfileDropInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropInteractor.swift; sourceTree = "<group>"; };
+		32081BFD2D618D0000D19235 /* ProfileDropPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropPresenter.swift; sourceTree = "<group>"; };
+		32081BFF2D618D0000D19235 /* ProfileDropRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropRouter.swift; sourceTree = "<group>"; };
+		32081C012D618D0000D19235 /* ConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionState.swift; sourceTree = "<group>"; };
+		32081C022D618D0000D19235 /* ProfileDropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropViewController.swift; sourceTree = "<group>"; };
 		3284D34D2D2F9417000ABC04 /* DataStoragable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoragable.swift; sourceTree = "<group>"; };
 		32A7563B2D00397D00965F0A /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		32BD48282D3FEC9D0078DA9C /* SNMSceneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMSceneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		32BD48312D3FECAE0078DA9C /* MateListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateListInteractorTests.swift; sourceTree = "<group>"; };
 		32BD48342D3FECD30078DA9C /* SNMSceneTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SNMSceneTestPlan.xctestplan; sourceTree = "<group>"; };
 		32BD48E32D4085540078DA9C /* MateListPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateListPresenterSpy.swift; sourceTree = "<group>"; };
 		32BD48E52D408C3A0078DA9C /* UseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseMock.swift; sourceTree = "<group>"; };
@@ -637,6 +654,8 @@
 		99E79FA42D556C5600E48552 /* RequestReportUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReportUseCase.swift; sourceTree = "<group>"; };
 		99E79FA72D556E1500E48552 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		99E79FAA2D556E7100E48552 /* ReportDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDTO.swift; sourceTree = "<group>"; };
+		99E7A01F2D5C58B900E48552 /* NIDeviceChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIDeviceChecker.swift; sourceTree = "<group>"; };
+		99E7A0622D5DB74600E48552 /* Extension + GIFImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + GIFImageView.swift"; sourceTree = "<group>"; };
 		99FA4E782CE0FBBF00553C2E /* ProfileInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputViewController.swift; sourceTree = "<group>"; };
 		A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBManager.swift; sourceTree = "<group>"; };
 		A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRequest.swift; sourceTree = "<group>"; };
@@ -1094,6 +1113,50 @@
 			path = OnBoarding;
 			sourceTree = "<group>";
 		};
+		32081BFC2D618D0000D19235 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				32081BFB2D618D0000D19235 /* ProfileDropInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		32081BFE2D618D0000D19235 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				32081BFD2D618D0000D19235 /* ProfileDropPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		32081C002D618D0000D19235 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				32081BFF2D618D0000D19235 /* ProfileDropRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		32081C032D618D0000D19235 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				32081C012D618D0000D19235 /* ConnectionState.swift */,
+				32081C022D618D0000D19235 /* ProfileDropViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		32081C042D618D0000D19235 /* AddMate */ = {
+			isa = PBXGroup;
+			children = (
+				32081BFC2D618D0000D19235 /* Interactor */,
+				32081BFE2D618D0000D19235 /* Presenter */,
+				32081C002D618D0000D19235 /* Router */,
+				32081C032D618D0000D19235 /* View */,
+			);
+			path = AddMate;
+			sourceTree = "<group>";
+		};
 		32BD48322D3FECAE0078DA9C /* SNMSceneTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1110,7 +1173,6 @@
 				32BD48E92D40AEB50078DA9C /* RemoteDatabaseManagerMock.swift */,
 				32BD48E52D408C3A0078DA9C /* UseCaseMock.swift */,
 				32BD48E32D4085540078DA9C /* MateListPresenterSpy.swift */,
-				32BD48312D3FECAE0078DA9C /* MateListInteractorTests.swift */,
 			);
 			path = MateListScene;
 			sourceTree = "<group>";
@@ -1119,6 +1181,7 @@
 			isa = PBXGroup;
 			children = (
 				995D94612CE598F0005A47BF /* NIManager.swift */,
+				99E7A01F2D5C58B900E48552 /* NIDeviceChecker.swift */,
 			);
 			path = NI;
 			sourceTree = "<group>";
@@ -1526,6 +1589,7 @@
 		FDA4913E2CDA05F900A36FB0 /* Mate */ = {
 			isa = PBXGroup;
 			children = (
+				32081C042D618D0000D19235 /* AddMate */,
 				FDA491552CDA69AB00A36FB0 /* MateList */,
 				FDA491622CDA7A8D00A36FB0 /* RequestMate */,
 				FDA491562CDA6ABC00A36FB0 /* ReportMate */,
@@ -2168,6 +2232,7 @@
 		FDE768872CF7811400B5DE88 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				99E7A0622D5DB74600E48552 /* Extension + GIFImageView.swift */,
 				99E79FA12D55627100E48552 /* Extension + UITextViewDelegate.swift */,
 				FD01D8F92D40ACAB00AD4940 /* Extension + Array.swift */,
 				FD01D8F42D40AC4100AD4940 /* Extension + UITableViewCell.swift */,
@@ -2500,9 +2565,11 @@
 				32BD484A2D3FF02C0078DA9C /* UpdateUserInfoUseCase.swift in Sources */,
 				32BD484B2D3FF02C0078DA9C /* SaveFirstLaunchUseCase.swift in Sources */,
 				32BD484C2D3FF02C0078DA9C /* CreateAccountUseCase.swift in Sources */,
+				99E7A0642D5DB75A00E48552 /* Extension + GIFImageView.swift in Sources */,
 				32BD484D2D3FF02C0078DA9C /* SaveProfileImageUseCase.swift in Sources */,
 				32BD484E2D3FF02C0078DA9C /* SaveUserInfoUseCase.swift in Sources */,
 				32BD484F2D3FF02C0078DA9C /* RemoteSaveDeviceTokenUseCase.swift in Sources */,
+				99E7A0212D5C58D200E48552 /* NIDeviceChecker.swift in Sources */,
 				32BD48502D3FF02C0078DA9C /* RegisterDeviceTokenUseCase.swift in Sources */,
 				32BD48512D3FF02C0078DA9C /* CheckFirstLaunchUseCase.swift in Sources */,
 				32BD48522D3FF02C0078DA9C /* RequestNotiListUseCase.swift in Sources */,
@@ -2641,6 +2708,11 @@
 				32BD48C72D3FF02C0078DA9C /* AddMateButton.swift in Sources */,
 				32BD48C82D3FF02C0078DA9C /* MateListViewController.swift in Sources */,
 				FD4855252D54996800C66429 /* ConnectedPeerManager.swift in Sources */,
+				32081C0A2D618D0000D19235 /* ProfileDropViewController.swift in Sources */,
+				32081C0B2D618D0000D19235 /* ProfileDropInteractor.swift in Sources */,
+				32081C0C2D618D0000D19235 /* ConnectionState.swift in Sources */,
+				32081C0D2D618D0000D19235 /* ProfileDropPresenter.swift in Sources */,
+				32081C0E2D618D0000D19235 /* ProfileDropRouter.swift in Sources */,
 				32081A6C2D547FB700D19235 /* MockMPCSession.swift in Sources */,
 				32BD48C92D3FF02C0078DA9C /* MateListInteractor.swift in Sources */,
 				32BD48CA2D3FF02C0078DA9C /* MateListPresenter.swift in Sources */,
@@ -2672,7 +2744,6 @@
 				32BD48E02D3FF02C0078DA9C /* SupabaseStorageRequest.swift in Sources */,
 				32BD48E12D3FF02C0078DA9C /* SupabaseDBManager.swift in Sources */,
 				32BD48E22D3FF02C0078DA9C /* SupabaseDBRequest.swift in Sources */,
-				32BD48332D3FECAE0078DA9C /* MateListInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2760,6 +2831,7 @@
 				A20E71522CEC5FE900272B25 /* SupabaseUserResponse.swift in Sources */,
 				9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */,
 				320047B42CFC90C100D08B6D /* SessionViewController.swift in Sources */,
+				99E7A0632D5DB75A00E48552 /* Extension + GIFImageView.swift in Sources */,
 				32081B2C2D5C84EC00D19235 /* OnBoardingInteractor.swift in Sources */,
 				32081B2D2D5C84EC00D19235 /* OnBoardingPresenter.swift in Sources */,
 				32081B2E2D5C84EC00D19235 /* OnBoardingRouter.swift in Sources */,
@@ -2780,6 +2852,11 @@
 				995D94D22CEDF037005A47BF /* MPCProfileDropDTO.swift in Sources */,
 				32A7563C2D00398100965F0A /* CacheManager.swift in Sources */,
 				FD11527D2CFC901A008955C4 /* NotificationListRouter.swift in Sources */,
+				32081C052D618D0000D19235 /* ProfileDropViewController.swift in Sources */,
+				32081C062D618D0000D19235 /* ProfileDropInteractor.swift in Sources */,
+				32081C072D618D0000D19235 /* ConnectionState.swift in Sources */,
+				32081C082D618D0000D19235 /* ProfileDropPresenter.swift in Sources */,
+				32081C092D618D0000D19235 /* ProfileDropRouter.swift in Sources */,
 				FDCD02CF2CE917D800B627D8 /* MockRequest.swift in Sources */,
 				A2BD49FD2CF7712000AC72A7 /* Size.swift in Sources */,
 				A2F825DD2CDFBEB4000C5419 /* ProfileCardView.swift in Sources */,
@@ -2911,6 +2988,7 @@
 				99E79F9D2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */,
 				FDE768922CF7828700B5DE88 /* AnyJSONSerializable.swift in Sources */,
 				9937361D2CF80D6600E3DD58 /* RequestUserInfoRemoteUseCase.swift in Sources */,
+				99E7A0202D5C58D200E48552 /* NIDeviceChecker.swift in Sources */,
 				FD331A602CF339B000F39426 /* SupabaseStorageRequest.swift in Sources */,
 				FDDDB93C2D004247000D4528 /* ProcessedWalkInteractor.swift in Sources */,
 				320044892CEC862D00D08B6D /* LocationSelectionView.swift in Sources */,
@@ -3243,6 +3321,7 @@
 		};
 		FD3A03362CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3306,6 +3385,7 @@
 		};
 		FD3A03372CD8CDE60047B7ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32081B8F2D61809900D19235 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3454,7 +3534,7 @@
 				32BD482F2D3FEC9D0078DA9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		A24B1F2D2D3C32960012B860 /* Build configuration list for PBXNativeTarget "SNMUtilityTests" */ = {
 			isa = XCConfigurationList;
@@ -3463,7 +3543,7 @@
 				A24B1F2C2D3C32960012B860 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD331A6B2CF33C6700F39426 /* Build configuration list for PBXNativeTarget "SupabaseTests" */ = {
 			isa = XCConfigurationList;
@@ -3472,7 +3552,7 @@
 				FD331A6D2CF33C6700F39426 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD3A031B2CD8CDE50047B7ED /* Build configuration list for PBXProject "SniffMeet" */ = {
 			isa = XCConfigurationList;
@@ -3481,7 +3561,7 @@
 				FD3A03372CD8CDE60047B7ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD3A03332CD8CDE60047B7ED /* Build configuration list for PBXNativeTarget "SniffMeet" */ = {
 			isa = XCConfigurationList;
@@ -3490,7 +3570,7 @@
 				FD3A03352CD8CDE60047B7ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD69B1C02CE3BCDC009D71DC /* Build configuration list for PBXNativeTarget "SNMPersistenceTests" */ = {
 			isa = XCConfigurationList;
@@ -3499,7 +3579,7 @@
 				FD69B1C22CE3BCDC009D71DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FDCD02C42CE9172600B627D8 /* Build configuration list for PBXNativeTarget "SNMNetworkTests" */ = {
 			isa = XCConfigurationList;
@@ -3508,7 +3588,7 @@
 				FDCD02C32CE9172600B627D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

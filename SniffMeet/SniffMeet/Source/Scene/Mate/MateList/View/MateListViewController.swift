@@ -9,7 +9,6 @@ import UIKit
 
 protocol MateListViewable: AnyObject {
     var presenter: (any MateListPresentable)? { get set }
-    func changeMPCButtonState(to buttonState: AddMateButton.ButtonState)
 }
 
 final class MateListViewController: BaseViewController, MateListViewable {
@@ -93,12 +92,10 @@ final class MateListViewController: BaseViewController, MateListViewable {
             }
             .store(in: &cancellables)
         addMateButton.publisher(event: .touchUpInside)
-            .throttle(for: .seconds(EventConstant.throttleInterval),
-                      scheduler: RunLoop.main,
-                      latest: false)
+            .debounce(for: .seconds(EventConstant.debounceInterval),
+                      scheduler: RunLoop.main)
             .sink { [weak self] _ in
-                self?.addMateButton.buttonState = .connecting
-                self?.presenter?.startProfileDrop()
+                self?.presenter?.didTapAddMateButton()
             }
             .store(in: &cancellables)
     }
@@ -118,9 +115,6 @@ final class MateListViewController: BaseViewController, MateListViewable {
         tableView.separatorStyle = .none
     }
     
-    func changeMPCButtonState(to buttonState: AddMateButton.ButtonState) {
-        addMateButton.buttonState = buttonState
-    }
 }
 
 // MARK: - MateListViewController+UITableViewDelegate & UITableViewDataSource

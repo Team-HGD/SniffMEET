@@ -23,6 +23,7 @@ final class MPCManager: NSObject {
     var availablePeers = Set<MCPeerID>()
     var connectedPeerManager: ConnectedPeerManagable
     var isAvailableToBeConnected = CurrentValueSubject<Bool, Never>(false)
+    var inviteAutomatically: Bool = true
     
     init(
         advertiser: MPCAdvertiser,
@@ -121,6 +122,7 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
         SNMLogger.info("ServiceBrowser found peer: \(peerID)")
         guard !self.availablePeers.contains(peerID) else { return }
         self.availablePeers.insert(peerID)
+        guard inviteAutomatically else { return }
         self.browser.invite(peerID: peerID)
         Task { [weak self] in
             try await Task.sleep(nanoseconds: 100_000_000)

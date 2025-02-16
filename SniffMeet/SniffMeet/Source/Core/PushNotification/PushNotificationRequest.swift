@@ -9,6 +9,7 @@ import Foundation
 enum PushNotificationRequest {
     case sendWalkRequest(data: Data)
     case sendWalkRespond(data: Data)
+    case sendDeleteMate(senderID: String, receiverID: String)
 }
 
 extension PushNotificationRequest: SNMRequestConvertible {
@@ -24,6 +25,11 @@ extension PushNotificationRequest: SNMRequestConvertible {
             return Endpoint(baseURL: PushNotificationConfig.baseURL,
                             path: "notification/walkRespond",
                             method: .post)
+        case .sendDeleteMate(let senderID, let receiverID):
+            return Endpoint(baseURL: PushNotificationConfig.baseURL,
+                            path: "mate",
+                            method: .delete,
+                            query: ["senderID": senderID, "receiverID": receiverID])
         }
     }
     
@@ -39,6 +45,8 @@ extension PushNotificationRequest: SNMRequestConvertible {
         case .sendWalkRespond(let data):
             return SNMRequestType.compositePlain(header: header,
                                                  body: data)
+        case .sendDeleteMate:
+            return SNMRequestType.plain
         }
     }
 }

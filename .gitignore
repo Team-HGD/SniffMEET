@@ -74,4 +74,6 @@ xcuserdata/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+*.xcconfig
+GoogleService-Info.plist
 # End of https://www.toptal.com/developers/gitignore/api/xcode,macos,fastlane

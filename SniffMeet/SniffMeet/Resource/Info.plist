@@ -32,9 +32,15 @@
 			</array>
 		</dict>
 	</dict>
+	<key>SERVER_URL</key>
+	<string>$(SERVER_URL)</string>
+	<key>PUBLIC_KEY</key>
+	<string>$(PUBLIC_KEY)</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>NOTIFICATION_SERVER</key>
+	<string>$(NOTIFICATION_SERVER)</string>
 </dict>
 </plist>

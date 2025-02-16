@@ -12,7 +12,7 @@ final class MateListInteractorTests: XCTestCase {
     private var presenterSpy: MateListPresenterSpy!
     private var requestMateListUseCaseMock: RequestMateListUseCase!
     private var requestProfileImageUseCaseMock: RequestProfileImageUseCase!
-    private var tryProfileDropUseCaseMock: TryProfileDropUseCase!
+    private var tryProfileDropUseCaseMock: NearByProfileDropUseCase!
     private var quitProfileDropUseCaseMock: QuitProfileDropUseCase!
     private var deleteMateUseCaseMock: DeleteMateUseCase!
     private var userInfoDTOList = [
@@ -25,7 +25,7 @@ final class MateListInteractorTests: XCTestCase {
         presenterSpy = MateListPresenterSpy()
         requestMateListUseCaseMock = RequestMateListUseCaseMock(mateList: userInfoDTOList)
         requestProfileImageUseCaseMock = RequestProfileImageUseCaseMock()
-        tryProfileDropUseCaseMock = TryProfileDropUseCaseMock()
+        tryProfileDropUseCaseMock = NearByProfileDropUseCaseMock()
         quitProfileDropUseCaseMock = QuitProfileDropUseCaseMock()
         deleteMateUseCaseMock = DeleteMateUseCaseMock()
         sut = MateListInteractor(

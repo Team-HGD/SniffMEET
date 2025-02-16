@@ -9,7 +9,7 @@ import Foundation
 import MultipeerConnectivity
 import NearbyInteraction
 
-protocol TryProfileDropUseCase {
+protocol NearByProfileDropUseCase {
     var profilePublisher: CurrentValueSubject<DogDTO?, Never>  { get set }
     var isNIConnected: CurrentValueSubject<Bool, Never> { get set }
     var transmissionFlag: Set<String> { get set }
@@ -21,7 +21,7 @@ protocol TryProfileDropUseCase {
     func reset(mpcManager: MPCManager, nimanager: NIManager)
 }
 
-final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
+final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
     var profilePublisher: CurrentValueSubject<DogDTO?, Never> = CurrentValueSubject(nil)
     var isNIConnected: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
     var transmissionFlag: Set<String>
@@ -114,7 +114,7 @@ final class TryProfileDropUseCaseImpl: NSObject, TryProfileDropUseCase {
     }
 }
 // MARK: - MCSessionDelegate
-extension TryProfileDropUseCaseImpl: MCSessionDelegate {
+extension NearByProfileDropUseCaseImpl: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         guard session !== recentInvalidMPCSession else { return }
         
@@ -201,7 +201,7 @@ extension TryProfileDropUseCaseImpl: MCSessionDelegate {
 
 // MARK: - TryProfileDropUseCaseImpl+NISessionDelegate
 
-extension TryProfileDropUseCaseImpl: NISessionDelegate {
+extension NearByProfileDropUseCaseImpl: NISessionDelegate {
     func session(_ session: NISession, didUpdate nearbyObjects: [NINearbyObject])  {
         guard session !== recentInvalidNISession else { return }
 
@@ -232,7 +232,7 @@ extension TryProfileDropUseCaseImpl: NISessionDelegate {
     }
 }
 
-extension TryProfileDropUseCaseImpl {
+extension NearByProfileDropUseCaseImpl {
     private enum Context {
         static let minDistance: Float = 0.09
         static let maxDistance: Float = 0.15

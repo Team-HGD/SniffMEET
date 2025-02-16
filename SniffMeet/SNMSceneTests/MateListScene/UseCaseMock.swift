@@ -33,7 +33,7 @@ struct RequestProfileImageUseCaseMock: RequestProfileImageUseCase {
     }
 }
 
-final class TryProfileDropUseCaseMock: TryProfileDropUseCase {
+final class NearByProfileDropUseCaseMock: NearByProfileDropUseCase {
     var profilePublisher: CurrentValueSubject<DogDTO?, Never> = CurrentValueSubject(nil)
     var isNIConnected: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
     var transmissionFlag: Set<String> = []

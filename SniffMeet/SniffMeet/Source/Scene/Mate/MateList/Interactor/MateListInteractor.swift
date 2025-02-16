@@ -76,12 +76,8 @@ final class MateListInteractor: MateListInteractable {
     }
 
     func deleteMate(mate: Mate) async throws {
-        do {
-            try await deleteMateUseCase.execute(mate: mate)
-            presenter?.didDeleteMate(mate)
-        } catch {
-            throw SupabaseDBError.deleteDataFailed
-        }
+        try await deleteMateUseCase.execute(mate: mate)
+        presenter?.didDeleteMate(mate)
     }
 
     func bind() {

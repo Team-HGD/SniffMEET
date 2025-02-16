@@ -15,7 +15,7 @@ protocol MateListPresentable: AnyObject {
     var output: any MateListPresenterOutput { get }
     
     func viewWillAppear()
-    func didTabAccessoryButton(mate: Mate)
+    func didTabMateListCell(mate: Mate)
     func didSwipeToDelete(mate: Mate)
     func didSwipeToReport(mate: Mate)
     func showAlertConnected()
@@ -59,7 +59,7 @@ final class MateListPresenter: MateListPresentable {
         SNMLogger.info("메이트 리스트 호출")
     }
 
-    func didTabAccessoryButton(mate: Mate) {
+    func didTabMateListCell(mate: Mate) {
         guard let view else { return }
         router?.presentWalkRequestView(mateListView: view, mate: mate)
     }

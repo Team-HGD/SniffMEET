@@ -53,10 +53,7 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
                 decoder: JSONDecoder()
             )
         )
-        let checkNicknameDuplicationUseCase: CheckNicknameDuplicationUseCase = CheckNicknameDuplicationUseCaseImpl(
-            remoteDBManager: SupabaseDBManager.shared,
-            sessionManager: SupabaseSessionManager.shared
-        )
+        let checkNicknameDuplicationUseCase: CheckNicknameDuplicationUseCase = CheckNicknameDuplicationUseCaseImpl(remoteDBManager: SupabaseDBManager.shared)
 
         let view: ProfileCreateViewable & UIViewController = ProfileCreateViewController()
         let presenter: ProfileCreatePresentable & DogInfoInteractorOutput

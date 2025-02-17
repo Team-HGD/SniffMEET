@@ -69,5 +69,6 @@ extension ProfileCreatePresenter: DogInfoInteractorOutput {
     func didFailToSaveUserInfo(error: any Error) {
         // TODO: -  alert 올리는데 어떻게 올릴지 정하기
         // TODO: submit button enable
+        view?.didFailToCreateProfile()
     }
 }

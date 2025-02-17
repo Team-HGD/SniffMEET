@@ -11,6 +11,7 @@ import UIKit
 
 protocol ProfileCreateViewable: AnyObject {
     var presenter: ProfileCreatePresentable? { get set }
+    func didFailToCreateProfile()
 }
 
 final class ProfileCreateViewController: BaseViewController, ProfileCreateViewable {
@@ -92,6 +93,14 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
                 self?.snmProgressToast.show(in: self?.view)
             }
             .store(in: &cancellables)
+    }
+
+    func didFailToCreateProfile() {
+        Task { @MainActor [weak self] in
+            self?.snmProgressToast.hidden { _ in
+                self?.submitButton.isEnabled = true
+            }
+        }
     }
 }
 

@@ -11,6 +11,7 @@ import UIKit
 
 protocol ProfileEditViewable: AnyObject {
     var presenter: (any ProfileEditPresentable)? { get set }
+    func didFailEditProfile()
 }
 
 final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
@@ -264,6 +265,14 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
                 self?.completeEditButton.isEnabled = isEnabled
             }
             .store(in: &cancellables)
+    }
+
+    func didFailEditProfile() {
+        Task { @MainActor [weak self] in
+            self?.snmProgressToast.hidden { _ in
+                self?.completeEditButton.isEnabled = true
+            }
+        }
     }
 }
 

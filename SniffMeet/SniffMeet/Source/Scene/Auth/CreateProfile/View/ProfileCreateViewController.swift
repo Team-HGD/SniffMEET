@@ -92,19 +92,26 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
             .sink { [weak self] isDuplicated in
                 guard let text = self?.nicknameTextField.text else { return }
                 let isValidLength = Constants.nameLengthConstraints.contains(text.count)
-                if !isValidLength {
-                    self?.warningLabel.text = Context.lengthWarning
-                    self?.warningLabel.isHidden = false
-                } else if isDuplicated {
-                    self?.warningLabel.text = Context.duplicationWarning
-                    self?.warningLabel.isHidden = false
-                } else {
-                    self?.warningLabel.isHidden = true
-                }
+                self?.setWarningLabelMessage(
+                    isValidLength: isValidLength,
+                    isDuplicated: isDuplicated
+                )
                 self?.submitButton.isEnabled = !isDuplicated && isValidLength
                 
             }
             .store(in: &cancellables)
+    }
+    
+    private func setWarningLabelMessage(isValidLength: Bool, isDuplicated: Bool) {
+        if !isValidLength {
+            warningLabel.text = Context.lengthWarning
+            warningLabel.isHidden = false
+        } else if isDuplicated {
+            warningLabel.text = Context.duplicationWarning
+            warningLabel.isHidden = false
+        } else {
+            warningLabel.isHidden = true
+        }
     }
 }
 

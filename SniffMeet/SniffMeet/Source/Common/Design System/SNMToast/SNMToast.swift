@@ -10,8 +10,7 @@ import UIKit
 protocol SNMToast: UIView {
     var animationType: any SNMAnimationType { get }
     func configureConstraints(rootView: UIView, toastView: any SNMToast)
-    /// - Note: 해당 메서드를 실행하기 전에
-    /// [configureConstraints(rootView:toastView:)](configureConstraints(rootView:toastView:))가 호출되어야 합니다.
+    /// - Attention: Dim을 사용하는 경우(isDim이 true인 경우) 뷰를 빠져나갈 때 명시적으로 hidden 메서드를 반드시 호출해야 합니다.
     func show(
         in view: UIView?,
         completion: ((Bool) -> Void)?,

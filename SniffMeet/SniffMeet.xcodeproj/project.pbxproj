@@ -428,6 +428,8 @@
 		FD243D042D62547D00971162 /* SNMImageToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD243D022D62547C00971162 /* SNMImageToastView.swift */; };
 		FD2921302D62ACE1009D0762 /* SNMAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29212F2D62ACDD009D0762 /* SNMAnimationType.swift */; };
 		FD2921312D62ACE1009D0762 /* SNMAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29212F2D62ACDD009D0762 /* SNMAnimationType.swift */; };
+		FD2921332D632333009D0762 /* DimPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2921322D632330009D0762 /* DimPresentable.swift */; };
+		FD2921342D632333009D0762 /* DimPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2921322D632330009D0762 /* DimPresentable.swift */; };
 		FD331A4D2CF235A100F39426 /* SNMLineTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A4C2CF2359D00F39426 /* SNMLineTabBar.swift */; };
 		FD331A502CF235C400F39426 /* WalkLogPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A4F2CF235B900F39426 /* WalkLogPageViewController.swift */; };
 		FD331A522CF23BD000F39426 /* WalkLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A512CF23BCE00F39426 /* WalkLog.swift */; };
@@ -750,6 +752,7 @@
 		FD243CFF2D62547300971162 /* SNMImageTextToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMImageTextToastView.swift; sourceTree = "<group>"; };
 		FD243D022D62547C00971162 /* SNMImageToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMImageToastView.swift; sourceTree = "<group>"; };
 		FD29212F2D62ACDD009D0762 /* SNMAnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMAnimationType.swift; sourceTree = "<group>"; };
+		FD2921322D632330009D0762 /* DimPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimPresentable.swift; sourceTree = "<group>"; };
 		FD331A4C2CF2359D00F39426 /* SNMLineTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMLineTabBar.swift; sourceTree = "<group>"; };
 		FD331A4F2CF235B900F39426 /* WalkLogPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLogPageViewController.swift; sourceTree = "<group>"; };
 		FD331A512CF23BCE00F39426 /* WalkLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLog.swift; sourceTree = "<group>"; };
@@ -781,8 +784,6 @@
 		FD69B1BA2CE3BCDC009D71DC /* SNMPersistenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMPersistenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD69B1CA2CE3E9B4009D71DC /* UserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
 		FD69B1CC2CE3E9B8009D71DC /* KeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
-		FD6C73E32D5BC26A00E7AB14 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		FD6C73E42D5BC27C00E7AB14 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		FD85EBE92D5F3D750017443E /* DeleteNotificationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteNotificationUseCase.swift; sourceTree = "<group>"; };
 		FD880B592CECE8F90093BEB9 /* SNMLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMLogger.swift; sourceTree = "<group>"; };
 		FD880B5F2CF432780093BEB9 /* SaveProfileImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfileImageUseCase.swift; sourceTree = "<group>"; };
@@ -1378,6 +1379,7 @@
 		FD243CF82D621FBA00971162 /* SNMToast */ = {
 			isa = PBXGroup;
 			children = (
+				FD2921322D632330009D0762 /* DimPresentable.swift */,
 				FD29212F2D62ACDD009D0762 /* SNMAnimationType.swift */,
 				FD243CFC2D62332000971162 /* SNMToastAnimation.swift */,
 				A2AFC9482D016BFF0062B34E /* SNMToast.swift */,
@@ -2651,6 +2653,7 @@
 				32BD48742D3FF02C0078DA9C /* BaseView.swift in Sources */,
 				32BD48E42D40855D0078DA9C /* MateListPresenterSpy.swift in Sources */,
 				32BD48752D3FF02C0078DA9C /* BaseViewController.swift in Sources */,
+				FD2921332D632333009D0762 /* DimPresentable.swift in Sources */,
 				32BD48762D3FF02C0078DA9C /* Environment.swift in Sources */,
 				32BD48772D3FF02C0078DA9C /* SNMLogger.swift in Sources */,
 				32BD48782D3FF02C0078DA9C /* Extension + UIApplication.swift in Sources */,
@@ -3020,6 +3023,7 @@
 				FD331A562CF23C5300F39426 /* WalkLogListViewController.swift in Sources */,
 				320047AA2CFB1C6200D08B6D /* RequestNotiListUseCase.swift in Sources */,
 				320044672CE6125100D08B6D /* DataManager.swift in Sources */,
+				FD2921342D632333009D0762 /* DimPresentable.swift in Sources */,
 				3200449C2CEDA87800D08B6D /* RespondWalkRequestUseCase.swift in Sources */,
 				A2FE77242D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */,
 				FDEAEA7A2CE3148D005890FA /* BaseView.swift in Sources */,

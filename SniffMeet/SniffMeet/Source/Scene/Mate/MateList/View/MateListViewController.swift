@@ -18,6 +18,11 @@ final class MateListViewController: BaseViewController, MateListViewable {
     private var cancellables: Set<AnyCancellable> = []
     private let tableView: UITableView = UITableView()
     private let addMateButton = AddMateButton(title: "새 메이트를 연결하세요")
+    private let snmImageTextToast: SNMImageTextToastView = SNMImageTextToastView(
+        animationType: SNMToastAnimation.slideDown,
+        image: UIImage(systemName: "paperplane.fill"),
+        text: "전송 완료!"
+    )
 
     override func viewWillAppear(_ animated: Bool) {
         presenter?.viewWillAppear()
@@ -101,11 +106,7 @@ final class MateListViewController: BaseViewController, MateListViewable {
     }
     
     @objc private func showSentAlert() {
-        showSNMTextAndImageToast(
-            image: UIImage(systemName: "paperplane.fill"),
-            text: "전송 완료!",
-            animationType: .slideDown
-        )
+        snmImageTextToast.show(in: view)
     }
 
     private func setTableView() {

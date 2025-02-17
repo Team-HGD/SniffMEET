@@ -54,6 +54,9 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
         configuration.filter = .images
         return PHPickerViewController(configuration: configuration)
     }()
+    private let snmProgressToast: SNMProgressView = SNMProgressView(
+        animationType: SNMToastAnimation.showAtCenter
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +88,8 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
                     nickname: nickname,
                     image: self?.profileImageView.image
                 )
-                self?.showSNMProgressToast()
+                self?.submitButton.isEnabled = false
+                self?.snmProgressToast.show(in: self?.view)
             }
             .store(in: &cancellables)
     }

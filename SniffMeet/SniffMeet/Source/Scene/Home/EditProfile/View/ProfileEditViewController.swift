@@ -84,7 +84,9 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
         configuration.filter = .images
         return PHPickerViewController(configuration: configuration)
     }()
-
+    private let snmProgressToast: SNMProgressView = SNMProgressView(
+        animationType: SNMToastAnimation.showAtCenter
+    )
     private var selectedKeywordButtons: [KeywordButton] = []
 
     override func viewDidLoad() {
@@ -232,7 +234,8 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
     private func bindCompleteEditButtonAction() {
         completeEditButton.publisher(event: .touchUpInside)
             .sink { [weak self] in
-                self?.showSNMProgressToast()
+                self?.completeEditButton.isEnabled = false
+                self?.snmProgressToast.show(in: self?.view)
                 self?.presenter?.didTapCompleteButton(
                     name: self?.nameTextField.text,
                     age: self?.ageTextField.text,

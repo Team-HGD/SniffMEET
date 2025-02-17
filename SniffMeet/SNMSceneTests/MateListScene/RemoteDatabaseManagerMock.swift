@@ -10,7 +10,8 @@ final class RemoteDBManagerMock: RemoteDBManageable {
     var data: Data?
     var hasInserted: Bool = false
     var hasUpdated: Bool = false
-    
+    var hasDeleted: Bool = false
+
     init(data: Data?) {
         self.data = data
     }
@@ -37,6 +38,13 @@ final class RemoteDBManagerMock: RemoteDBManageable {
         )
     }
     
+    func deleteData() async throws -> any RemoteDBRequestBuildable {
+        hasDeleted = true
+        return RemoteDBRequestBuilderMock(
+            requestType: .delete
+        )
+    }
+
     func rpc() throws -> RemoteDBRequestBuildable {
         return RemoteDBRequestBuilderMock(
             requestType: .rpc,

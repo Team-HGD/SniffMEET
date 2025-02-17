@@ -89,6 +89,7 @@ final class ProfileEditInteractor: ProfileEditInteractable {
                 presenter?.didSaveUserInfo()
             } catch {
                 SNMLogger.error("데이터 갱신 안됨: \(error)")
+                presenter?.didFailToSaveUserInfo()
             }
         }
     }

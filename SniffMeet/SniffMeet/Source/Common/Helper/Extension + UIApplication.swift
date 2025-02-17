@@ -7,18 +7,26 @@
 import UIKit
 
 extension UIApplication {
-  static var screenSize: CGSize {
-    guard let windowScene = shared.connectedScenes.first as? UIWindowScene else {
-      return UIScreen.main.bounds.size
+    static var screenSize: CGSize {
+        guard let windowScene = shared.connectedScenes.first as? UIWindowScene else {
+            return UIScreen.main.bounds.size
+        }
+        return windowScene.screen.bounds.size
     }
-    return windowScene.screen.bounds.size
-  }
-  
-  static var screenHeight: CGFloat {
-    return screenSize.height
-  }
-  
-  static var screenWidth: CGFloat {
-    return screenSize.width
-  }
+
+    static var screenHeight: CGFloat {
+        return screenSize.height
+    }
+
+    static var screenWidth: CGFloat {
+        return screenSize.width
+    }
+    
+    var keyWindow: UIWindow? {
+        connectedScenes
+            .filter({ $0.activationState == .foregroundActive })
+            .compactMap({ $0 as? UIWindowScene })
+            .flatMap { $0.windows }
+            .first(where: \.isKeyWindow)
+    }
 }

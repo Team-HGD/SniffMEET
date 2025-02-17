@@ -75,12 +75,14 @@ extension ProfileCreatePresenter: DogInfoInteractorOutput {
     func didSaveUserInfo() {
         // TODO: submit button enable
         guard let view else { return }
+        view.didSuccessCreateProfile()
         router?.presentMainScreen(from: view)
     }
     
     func didFailToSaveUserInfo(error: any Error) {
         // TODO: -  alert 올리는데 어떻게 올릴지 정하기
         // TODO: submit button enable
+        view?.didFailToCreateProfile()
     }
     
     func notifyNicknameDuplication(_ isDuplicated: Bool) {

@@ -40,4 +40,8 @@ enum Environment {
         static let reportlist = "report_list"
         static let checkDuplicateNicknameFunction = "rpc/is_duplicate_nickname"
     }
+
+    enum URLString {
+        static let helpPage = "https://check-it.notion.site/198f6d0576c280f1abeee0feeb5cb78e?pvs=4"
+    }
 }

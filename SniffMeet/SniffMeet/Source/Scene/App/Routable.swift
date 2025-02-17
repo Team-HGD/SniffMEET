@@ -4,7 +4,7 @@
 //
 //  Created by sole on 11/19/24.
 //
-
+import SafariServices
 import UIKit
 
 protocol Routable {
@@ -14,6 +14,7 @@ protocol Routable {
     func dismiss(from: UIViewController, animated: Bool)
     func pushNoBottomBar(from: UIViewController, to: UIViewController, animated: Bool)
     func fullScreen(from: UIViewController, with: UIViewController, animated: Bool)
+    func presentSafari(from: UIViewController, animated: Bool, url: URL)
 }
 
 extension Routable {
@@ -41,5 +42,11 @@ extension Routable {
     func fullScreen(from: UIViewController, with: UIViewController, animated: Bool) {
         with.modalPresentationStyle = .overFullScreen
         from.present(with, animated: animated)
+    }
+
+    func presentSafari(from: UIViewController, animated: Bool, url: URL) {
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.modalPresentationStyle = .formSheet
+        from.present(safariVC, animated: animated, completion: nil)
     }
 }

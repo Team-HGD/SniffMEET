@@ -11,6 +11,8 @@ import UIKit
 
 protocol ProfileEditViewable: AnyObject {
     var presenter: (any ProfileEditPresentable)? { get set }
+    func didSuccessEditProfile()
+    func didFailEditProfile()
 }
 
 final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
@@ -84,7 +86,9 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
         configuration.filter = .images
         return PHPickerViewController(configuration: configuration)
     }()
-
+    private let snmProgressToast: SNMProgressView = SNMProgressView(
+        animationType: SNMToastAnimation.showAtCenter
+    )
     private var selectedKeywordButtons: [KeywordButton] = []
 
     override func viewDidLoad() {
@@ -232,7 +236,8 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
     private func bindCompleteEditButtonAction() {
         completeEditButton.publisher(event: .touchUpInside)
             .sink { [weak self] in
-                self?.showSNMProgressToast()
+                self?.completeEditButton.isEnabled = false
+                self?.snmProgressToast.show(in: self?.view, isDim: true)
                 self?.presenter?.didTapCompleteButton(
                     name: self?.nameTextField.text,
                     age: self?.ageTextField.text,
@@ -261,6 +266,18 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
                 self?.completeEditButton.isEnabled = isEnabled
             }
             .store(in: &cancellables)
+    }
+    func didSuccessEditProfile() {
+        Task { @MainActor [weak self] in
+            self?.snmProgressToast.hidden(duration: 0)
+        }
+    }
+    func didFailEditProfile() {
+        Task { @MainActor [weak self] in
+            self?.snmProgressToast.hidden { _ in
+                self?.completeEditButton.isEnabled = true
+            }
+        }
     }
 }
 

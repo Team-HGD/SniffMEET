@@ -11,6 +11,8 @@ import UIKit
 
 protocol ProfileCreateViewable: AnyObject {
     var presenter: ProfileCreatePresentable? { get set }
+    func didFailToCreateProfile()
+    func didSuccessCreateProfile()
 }
 
 final class ProfileCreateViewController: BaseViewController, ProfileCreateViewable {
@@ -55,6 +57,9 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
         configuration.filter = .images
         return PHPickerViewController(configuration: configuration)
     }()
+    private let snmProgressToast: SNMProgressView = SNMProgressView(
+        animationType: SNMToastAnimation.showAtCenter
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +89,8 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
                     nickname: nickname,
                     image: self?.profileImageView.image
                 )
-                self?.showSNMProgressToast()
+                self?.submitButton.isEnabled = false
+                self?.snmProgressToast.show(in: self?.view, isDim: true)
             }
             .store(in: &cancellables)
         presenter?.output.isDuplicated
@@ -111,6 +117,19 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
             warningLabel.isHidden = false
         } else {
             warningLabel.isHidden = true
+        }
+    }
+
+    func didSuccessCreateProfile() {
+        Task { @MainActor [weak self] in
+            self?.snmProgressToast.hidden(duration: 0)
+        }
+    }
+    func didFailToCreateProfile() {
+        Task { @MainActor [weak self] in
+            self?.snmProgressToast.hidden { _ in
+                self?.submitButton.isEnabled = true
+            }
         }
     }
 }

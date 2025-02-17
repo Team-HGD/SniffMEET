@@ -1,5 +1,5 @@
 //
-//  toast.swift
+//  SNMToast.swift
 //  SniffMeet
 //
 //  Created by Kelly Chui on 12/5/24.

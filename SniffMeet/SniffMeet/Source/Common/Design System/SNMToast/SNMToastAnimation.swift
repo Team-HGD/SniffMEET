@@ -1,5 +1,5 @@
 //
-//  SNMAnimationType.swift
+//  SNMToastAnimation.swift
 //  SniffMeet
 //
 //  Created by sole on 2/16/25.

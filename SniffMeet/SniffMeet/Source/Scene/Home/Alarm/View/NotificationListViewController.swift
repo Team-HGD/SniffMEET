@@ -10,6 +10,8 @@ import UIKit
 
 protocol NotificationListViewable: AnyObject {
     var presenter: (any NotificationListPresentable)? { get set }
+    func didStartDeleteNotifications()
+    func didEndDeleteNotifications()
 }
 
 final class NotificationListViewController: BaseViewController, NotificationListViewable {
@@ -76,11 +78,24 @@ final class NotificationListViewController: BaseViewController, NotificationList
             .store(in: &cancellables)
     }
 
-    @objc func didTapDismissButton() {
+    @objc private func didTapDismissButton() {
         presenter?.didTapDismissButton()
     }
-    @objc func didTapTrashcanButton() {
-        // TODO: 모든 알림 삭제 필요
+    @objc private func didTapTrashcanButton() {
+        presenter?.didTapTrashcanButton()
+    }
+
+    func didStartDeleteNotifications() {
+        Task { @MainActor [weak self] in
+            // TODO: Toast 머지후 수정 필요
+            self?.showSNMProgressToast()
+        }
+    }
+    func didEndDeleteNotifications() {
+        Task { @MainActor [weak self] in
+            // TODO: Toast 머지후 수정 필요
+            // self?.progressView.hidden()
+        }
     }
 }
 
@@ -119,7 +134,7 @@ extension NotificationListViewController: UITableViewDataSource {
         cell.configure(
             section: selectedData.category.label,
             description: selectedData.senderName + selectedData.category.description,
-            dateString: "\(selectedData.createdAt?.hoursDifferenceFromNow() ?? 14)시간 전"
+            dateString: "\(selectedData.createdAt?.differenceFromNow() ?? "")"
         )
         return cell
     }

@@ -44,8 +44,9 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
     private var warningLabel: UILabel = {
         let label = UILabel()
         label.textColor = SNMColor.warningRed
-        label.text = Context.warning
+        label.text = Context.lengthWarning
         label.font = UIFont.systemFont(ofSize: 12)
+        label.isHidden = true
         return label
     }()
     private var nicknameTextField: InputTextField = InputTextField(placeholder: Context.placeholder)
@@ -80,11 +81,9 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
                 self?.present(picker, animated: true, completion: nil)
             }
             .store(in: &cancellables)
- 
         submitButton.publisher(event: .touchUpInside)
             .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
             .sink { [weak self] _ in
-                print("이벤트 발생")
                 guard let nickname = self?.nicknameTextField.text else { return }
                 self?.presenter?.didTapSubmitButton(
                     nickname: nickname,
@@ -94,6 +93,31 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
                 self?.snmProgressToast.show(in: self?.view, isDim: true)
             }
             .store(in: &cancellables)
+        presenter?.output.isDuplicated
+            .receive(on: RunLoop.main)
+            .sink { [weak self] isDuplicated in
+                guard let text = self?.nicknameTextField.text else { return }
+                let isValidLength = Constants.nameLengthConstraints.contains(text.count)
+                self?.setWarningLabelMessage(
+                    isValidLength: isValidLength,
+                    isDuplicated: isDuplicated
+                )
+                self?.submitButton.isEnabled = !isDuplicated && isValidLength
+                
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func setWarningLabelMessage(isValidLength: Bool, isDuplicated: Bool) {
+        if !isValidLength {
+            warningLabel.text = Context.lengthWarning
+            warningLabel.isHidden = false
+        } else if isDuplicated {
+            warningLabel.text = Context.duplicationWarning
+            warningLabel.isHidden = false
+        } else {
+            warningLabel.isHidden = true
+        }
     }
 
     func didSuccessCreateProfile() {
@@ -111,22 +135,6 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
 }
 
 private extension ProfileCreateViewController {
-    enum Context {
-        static let submitBtnTitle: String = "등록 완료"
-        static let placeholder: String = "닉네임을 입력해주세요."
-        static let warning: String = "닉네임은 최대 8글자까지 입력할 수 있습니다."
-        static let mainTitle: String = "마지막으로,\n반려견 사진과 닉네임을 등록해주세요."
-        static let horizontalPadding: CGFloat = 24
-        static let imageViewSize: CGFloat = 140
-        static let addPhotoButtonSize: CGFloat = 44
-    }
-    enum TextFieldError: Error {
-        case none               // 에러가 없는 경우
-        case empty              // 아무것도 입력되지 않은 경우
-        case exceededMaxLength  // 최대 글자 수를 초과한 경우
-        case invalidFormat      // 포맷이 잘못된 경우 (예: 이메일 형식 등)
-        case restrictedCharacter // 허용되지 않은 문자 포함
-    }
     func setSubviewsLayout() {
         [titleLabel,
          profileImageView,
@@ -141,30 +149,30 @@ private extension ProfileCreateViewController {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                constant: Context.horizontalPadding),
+                                                constant: Layout.horizontalPadding),
             profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImageView.widthAnchor.constraint(equalToConstant: Context.imageViewSize),
-            profileImageView.heightAnchor.constraint(equalToConstant: Context.imageViewSize),
+            profileImageView.widthAnchor.constraint(equalToConstant: Layout.imageViewSize),
+            profileImageView.heightAnchor.constraint(equalToConstant: Layout.imageViewSize),
             profileImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 80),
-            addPhotoButton.widthAnchor.constraint(equalToConstant: Context.addPhotoButtonSize),
-            addPhotoButton.heightAnchor.constraint(equalToConstant: Context.addPhotoButtonSize),
+            addPhotoButton.widthAnchor.constraint(equalToConstant: Layout.addPhotoButtonSize),
+            addPhotoButton.heightAnchor.constraint(equalToConstant: Layout.addPhotoButtonSize),
             addPhotoButton.trailingAnchor.constraint(equalTo: profileImageView.trailingAnchor,
                                                      constant: 10),
             addPhotoButton.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor),
             nicknameTextField.topAnchor.constraint(equalTo: profileImageView.bottomAnchor,
                                                    constant: 60),
             nicknameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                       constant: Context.horizontalPadding),
+                                                       constant: Layout.horizontalPadding),
             nicknameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                        constant: -Context.horizontalPadding),
+                                                        constant: -Layout.horizontalPadding),
             warningLabel.topAnchor.constraint(equalTo: nicknameTextField.bottomAnchor,
                                               constant: 16),
             warningLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,
                                                   constant: 26),
             submitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                  constant: Context.horizontalPadding),
+                                                  constant: Layout.horizontalPadding),
             submitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                   constant: -Context.horizontalPadding),
+                                                   constant: -Layout.horizontalPadding),
             submitButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32)
         ])
     }
@@ -190,20 +198,47 @@ extension ProfileCreateViewController: PHPickerViewControllerDelegate {
     }
 }
 
-extension ProfileCreateViewController: UITextFieldDelegate {
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        guard let textCount = textField.text?.count else { return }
-        submitButton.isEnabled = (textCount > 1 && textCount < 9 )
-    }
+// MARK: - ProfileCreateViewController+UITextFieldDelegate
 
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
+extension ProfileCreateViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        submitButton.isEnabled = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        presenter?.didtextFieldEndEditing(text: text)
+    }
+    
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String
+    ) -> Bool {
         guard let text = textField.text else { return false }
         let newLength = text.count + string.count - range.length
-        let inputTextValid = newLength <= 15
-
+        let inputTextValid = newLength <= Constants.maxNameLength
         return inputTextValid
     }
+}
 
+// MARK: - ProfileCreateViewController+Constants
+
+extension ProfileCreateViewController {
+    enum Constants {
+        static let nameLengthConstraints = 2...8
+        static let maxNameLength = 15
+    }
+    enum Context {
+        static let submitBtnTitle: String = "등록 완료"
+        static let placeholder: String = "닉네임을 입력해주세요."
+        static let lengthWarning: String = "닉네임은 최소 2글자, 최대 8글자까지 입력할 수 있습니다."
+        static let duplicationWarning: String = "중복된 닉네임입니다."
+        static let mainTitle: String = "마지막으로,\n반려견 사진과 닉네임을 등록해주세요."
+    }
+    enum Layout {
+        static let horizontalPadding: CGFloat = 24
+        static let imageViewSize: CGFloat = 140
+        static let addPhotoButtonSize: CGFloat = 44
+    }
 }

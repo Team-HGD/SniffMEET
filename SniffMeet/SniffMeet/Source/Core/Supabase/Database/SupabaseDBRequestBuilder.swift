@@ -13,6 +13,7 @@ enum SupabaseDBTask {
     case update
     case delete
     case rpc
+    case anonRPC
 }
 
 protocol RemoteDBRequestBuildable {
@@ -24,13 +25,13 @@ protocol RemoteDBRequestBuildable {
 
 final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {
     private let networkProvider: any NetworkProvider
-    private let accessToken: String // 만료부터 30초 미리 갱신하기 때문에 중간에 바뀔 일이 없습니다.
+    private let accessToken: String? // 만료부터 30초 미리 갱신하기 때문에 중간에 바뀔 일이 없습니다.
     private var task: SupabaseDBTask
     private var table: String?
     private var data: Data?
     private var query: [String: String]?
     
-    init(networkProvider: any NetworkProvider, accessToken: String, task: SupabaseDBTask) {
+    init(networkProvider: any NetworkProvider, accessToken: String?, task: SupabaseDBTask) {
         self.networkProvider = networkProvider
         self.accessToken = accessToken
         self.task = task
@@ -71,7 +72,6 @@ final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {
             )
         case .update:
             guard let data = self.data,
-                  let query = self.query,
                   let table = self.table else { throw SupabaseDBError.updateDataFailed }
             return SupabaseDBRequest.updateData(
                 table: table,
@@ -87,9 +87,8 @@ final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {
                 accessToken: accessToken,
                 query: query
             )
-        case .rpc:
+        case .rpc, .anonRPC:
             guard let data = self.data,
-                  let query = self.query,
                   let table = self.table else { throw SupabaseDBError.rpcFailed }
             return SupabaseDBRequest.rpc(
                 table: table,

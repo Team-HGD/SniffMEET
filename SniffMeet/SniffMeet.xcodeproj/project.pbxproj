@@ -418,6 +418,16 @@
 		FD119F502CED87E500BE22BD /* SelectLocationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD119F4F2CED87DD00BE22BD /* SelectLocationRouter.swift */; };
 		FD119F522CED881300BE22BD /* SelectLocationModuleBuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD119F512CED880A00BE22BD /* SelectLocationModuleBuildable.swift */; };
 		FD159A7D2D35166D00B425D9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B612CF433AC0093BEB9 /* Environment.swift */; };
+		FD243CFA2D621FC600971162 /* SNMProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD243CF92D621FC200971162 /* SNMProgressView.swift */; };
+		FD243CFB2D621FC600971162 /* SNMProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD243CF92D621FC200971162 /* SNMProgressView.swift */; };
+		FD243CFD2D62332500971162 /* SNMToastAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD243CFC2D62332000971162 /* SNMToastAnimation.swift */; };
+		FD243CFE2D62332500971162 /* SNMToastAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD243CFC2D62332000971162 /* SNMToastAnimation.swift */; };
+		FD243D002D62547400971162 /* SNMImageTextToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD243CFF2D62547300971162 /* SNMImageTextToastView.swift */; };
+		FD243D012D62547400971162 /* SNMImageTextToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD243CFF2D62547300971162 /* SNMImageTextToastView.swift */; };
+		FD243D032D62547D00971162 /* SNMImageToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD243D022D62547C00971162 /* SNMImageToastView.swift */; };
+		FD243D042D62547D00971162 /* SNMImageToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD243D022D62547C00971162 /* SNMImageToastView.swift */; };
+		FD2921302D62ACE1009D0762 /* SNMAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29212F2D62ACDD009D0762 /* SNMAnimationType.swift */; };
+		FD2921312D62ACE1009D0762 /* SNMAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29212F2D62ACDD009D0762 /* SNMAnimationType.swift */; };
 		FD331A4D2CF235A100F39426 /* SNMLineTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A4C2CF2359D00F39426 /* SNMLineTabBar.swift */; };
 		FD331A502CF235C400F39426 /* WalkLogPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A4F2CF235B900F39426 /* WalkLogPageViewController.swift */; };
 		FD331A522CF23BD000F39426 /* WalkLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A512CF23BCE00F39426 /* WalkLog.swift */; };
@@ -733,6 +743,11 @@
 		FD119F4F2CED87DD00BE22BD /* SelectLocationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationRouter.swift; sourceTree = "<group>"; };
 		FD119F512CED880A00BE22BD /* SelectLocationModuleBuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationModuleBuildable.swift; sourceTree = "<group>"; };
 		FD159A7C2D35104500B425D9 /* SNMTestplan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SNMTestplan.xctestplan; sourceTree = "<group>"; };
+		FD243CF92D621FC200971162 /* SNMProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMProgressView.swift; sourceTree = "<group>"; };
+		FD243CFC2D62332000971162 /* SNMToastAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMToastAnimation.swift; sourceTree = "<group>"; };
+		FD243CFF2D62547300971162 /* SNMImageTextToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMImageTextToastView.swift; sourceTree = "<group>"; };
+		FD243D022D62547C00971162 /* SNMImageToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMImageToastView.swift; sourceTree = "<group>"; };
+		FD29212F2D62ACDD009D0762 /* SNMAnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMAnimationType.swift; sourceTree = "<group>"; };
 		FD331A4C2CF2359D00F39426 /* SNMLineTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMLineTabBar.swift; sourceTree = "<group>"; };
 		FD331A4F2CF235B900F39426 /* WalkLogPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLogPageViewController.swift; sourceTree = "<group>"; };
 		FD331A512CF23BCE00F39426 /* WalkLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLog.swift; sourceTree = "<group>"; };
@@ -1352,6 +1367,19 @@
 				FDE14A4C2CE8CEDD001F7A9D /* Mock */,
 			);
 			path = SNMNetwork;
+			sourceTree = "<group>";
+		};
+		FD243CF82D621FBA00971162 /* SNMToast */ = {
+			isa = PBXGroup;
+			children = (
+				FD29212F2D62ACDD009D0762 /* SNMAnimationType.swift */,
+				FD243CFC2D62332000971162 /* SNMToastAnimation.swift */,
+				A2AFC9482D016BFF0062B34E /* SNMToast.swift */,
+				FD243CF92D621FC200971162 /* SNMProgressView.swift */,
+				FD243D022D62547C00971162 /* SNMImageToastView.swift */,
+				FD243CFF2D62547300971162 /* SNMImageTextToastView.swift */,
+			);
+			path = SNMToast;
 			sourceTree = "<group>";
 		};
 		FD331A4E2CF235B600F39426 /* View */ = {
@@ -2224,7 +2252,7 @@
 				FDBFA9B02CE1FDED00AA9220 /* LayoutConstant.swift */,
 				FDBFA9A02CE1E51000AA9220 /* SNMColor.swift */,
 				FDBFA99E2CE1E50900AA9220 /* SNMFont.swift */,
-				A2AFC9482D016BFF0062B34E /* SNMToast.swift */,
+				FD243CF82D621FBA00971162 /* SNMToast */,
 			);
 			path = "Design System";
 			sourceTree = "<group>";
@@ -2539,6 +2567,7 @@
 				32BD48ED2D40B4BA0078DA9C /* PushNotificationRequest.swift in Sources */,
 				32BD48EE2D40B4BA0078DA9C /* PushNotificationConfig.swift in Sources */,
 				32BD48EC2D40B4880078DA9C /* Assets.xcassets in Sources */,
+				FD243CFD2D62332500971162 /* SNMToastAnimation.swift in Sources */,
 				32BD48EB2D40B4790078DA9C /* SNMColor.swift in Sources */,
 				32BD48EA2D40AEBC0078DA9C /* RemoteDatabaseManagerMock.swift in Sources */,
 				99E79F5C2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */,
@@ -2582,6 +2611,7 @@
 				32BD48592D3FF02C0078DA9C /* RequestMateListUseCase.swift in Sources */,
 				99E79F9F2D54D45600E48552 /* ReportPickerInteractor.swift in Sources */,
 				32BD485A2D3FF02C0078DA9C /* RequestProfileImageUseCase.swift in Sources */,
+				FD243D032D62547D00971162 /* SNMImageToastView.swift in Sources */,
 				32BD485B2D3FF02C0078DA9C /* LoadUserInfoUseCase.swift in Sources */,
 				32BD485C2D3FF02C0078DA9C /* RespondWalkRequestUseCase.swift in Sources */,
 				32BD485D2D3FF02C0078DA9C /* RespondMateRequestUseCase.swift in Sources */,
@@ -2605,6 +2635,7 @@
 				32BD486D2D3FF02C0078DA9C /* MockURLProtocol.swift in Sources */,
 				32BD486E2D3FF02C0078DA9C /* MockRequest.swift in Sources */,
 				32BD486F2D3FF02C0078DA9C /* DataStoragable.swift in Sources */,
+				FD243CFA2D621FC600971162 /* SNMProgressView.swift in Sources */,
 				32BD48702D3FF02C0078DA9C /* CacheManager.swift in Sources */,
 				32BD48712D3FF02C0078DA9C /* SNMFileManager.swift in Sources */,
 				32BD48722D3FF02C0078DA9C /* UserDefaultsManager.swift in Sources */,
@@ -2677,7 +2708,9 @@
 				32BD48AB2D3FF02C0078DA9C /* NotificationListPresenter.swift in Sources */,
 				32BD48AC2D3FF02C0078DA9C /* NotificationListRouter.swift in Sources */,
 				32BD48AD2D3FF02C0078DA9C /* ProcessedWalkViewController.swift in Sources */,
+				FD243D012D62547400971162 /* SNMImageTextToastView.swift in Sources */,
 				32BD48AE2D3FF02C0078DA9C /* RespondMapViewController.swift in Sources */,
+				FD2921312D62ACE1009D0762 /* SNMAnimationType.swift in Sources */,
 				32BD48AF2D3FF02C0078DA9C /* RespondWalkViewController.swift in Sources */,
 				32BD48B02D3FF02C0078DA9C /* ProcessedWalkInteractor.swift in Sources */,
 				32BD48B12D3FF02C0078DA9C /* RespondWalkInteractor.swift in Sources */,
@@ -2836,6 +2869,7 @@
 				32081B2D2D5C84EC00D19235 /* OnBoardingPresenter.swift in Sources */,
 				32081B2E2D5C84EC00D19235 /* OnBoardingRouter.swift in Sources */,
 				32081B2F2D5C84EC00D19235 /* OnBoardingPageViewController.swift in Sources */,
+				FD243CFB2D621FC600971162 /* SNMProgressView.swift in Sources */,
 				32081B302D5C84EC00D19235 /* OnBoardingViewController.swift in Sources */,
 				320045362CF4353900D08B6D /* SNMFileManager.swift in Sources */,
 				320044582CE5B04C00D08B6D /* ProfileCreateRouter.swift in Sources */,
@@ -2885,6 +2919,7 @@
 				3284D3502D2F941C000ABC04 /* DataStoragable.swift in Sources */,
 				A2F825D12CDF4BA6000C5419 /* HomeViewController.swift in Sources */,
 				A24CD92B2D362E8F00492339 /* NearByProfileDropUseCase.swift in Sources */,
+				FD243CFE2D62332500971162 /* SNMToastAnimation.swift in Sources */,
 				A2BA1BA92CF34A6A0080575A /* RequestMateListUseCase.swift in Sources */,
 				FD5134232CEC2BDE002E76F3 /* Routable.swift in Sources */,
 				FD0634282CE596BD003C9D6B /* SNMRequestConvertible.swift in Sources */,
@@ -2921,6 +2956,7 @@
 				FD119F4C2CED87B000BE22BD /* SelectLocationInteractor.swift in Sources */,
 				FD880B622CF433AF0093BEB9 /* Environment.swift in Sources */,
 				320043922CDF3D7F00D08B6D /* InputTextField.swift in Sources */,
+				FD2921302D62ACE1009D0762 /* SNMAnimationType.swift in Sources */,
 				FD119F482CED872C00BE22BD /* RequestLocationAuthUseCase.swift in Sources */,
 				320047DE2CFE9E0400D08B6D /* Extension + UIApplication.swift in Sources */,
 				A2BA1BAC2CF34A860080575A /* RequestProfileImageUseCase.swift in Sources */,
@@ -2952,6 +2988,7 @@
 				320047B92CFD367300D08B6D /* PushNotificationConfig.swift in Sources */,
 				FDBFA99F2CE1E50C00AA9220 /* SNMFont.swift in Sources */,
 				FD119F4E2CED87C200BE22BD /* SelectLocationPresenter.swift in Sources */,
+				FD243D042D62547D00971162 /* SNMImageToastView.swift in Sources */,
 				99E79FAC2D556E8600E48552 /* ReportDTO.swift in Sources */,
 				FD5134192CEB7ADE002E76F3 /* HomeRouter.swift in Sources */,
 				FD51341D2CEB7AF0002E76F3 /* HomeInteractor.swift in Sources */,
@@ -2965,6 +3002,7 @@
 				A2FE77732D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
 				99E79F962D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
 				3200438B2CDF3BEF00D08B6D /* ProfileCreateViewController.swift in Sources */,
+				FD243D002D62547400971162 /* SNMImageTextToastView.swift in Sources */,
 				A2BD4A012CF7AD4300AC72A7 /* RequestMateInfoUseCase.swift in Sources */,
 				FD119F502CED87E500BE22BD /* SelectLocationRouter.swift in Sources */,
 				FD880B602CF4327F0093BEB9 /* SaveProfileImageUseCase.swift in Sources */,

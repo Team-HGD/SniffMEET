@@ -7,7 +7,8 @@
 
 import UIKit
 
-final class SNMProgressView: BaseView, SNMToast {
+final class SNMProgressView: BaseView, SNMToast, DimPresentable {
+    var dimView: UIView?
     let animationType: any SNMAnimationType
     private let backgroundView: UIVisualEffectView
     private let activityIndicatorView = UIActivityIndicatorView()
@@ -30,16 +31,14 @@ final class SNMProgressView: BaseView, SNMToast {
     }
     override func configureConstraints() {
         NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: 120),
-            heightAnchor.constraint(greaterThanOrEqualToConstant: 120),
             backgroundView.centerXAnchor.constraint(equalTo: centerXAnchor),
             backgroundView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            backgroundView.widthAnchor.constraint(equalTo: widthAnchor),
-            backgroundView.heightAnchor.constraint(equalTo: heightAnchor),
-            activityIndicatorView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            activityIndicatorView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            activityIndicatorView.topAnchor.constraint(equalTo: topAnchor),
-            activityIndicatorView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            backgroundView.widthAnchor.constraint(equalToConstant: 120),
+            backgroundView.heightAnchor.constraint(equalToConstant: 120),
+            activityIndicatorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            activityIndicatorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            activityIndicatorView.topAnchor.constraint(equalTo: topAnchor, constant: 30),
+            activityIndicatorView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30)
         ])
     }
     override func configureAttributes() {

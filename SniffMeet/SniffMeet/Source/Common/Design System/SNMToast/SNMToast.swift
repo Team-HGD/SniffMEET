@@ -14,7 +14,8 @@ protocol SNMToast: UIView {
     /// [configureConstraints(rootView:toastView:)](configureConstraints(rootView:toastView:))가 호출되어야 합니다.
     func show(
         in view: UIView?,
-        completion: ((Bool) -> Void)?
+        completion: ((Bool) -> Void)?,
+        isDim: Bool
     )
     func hidden(
         duration: TimeInterval?,
@@ -24,20 +25,25 @@ protocol SNMToast: UIView {
     )
 }
 
+// MARK: - SNMToast Default 
+
 extension SNMToast {
     func configureConstraints(rootView: UIView, toastView: any SNMToast) {
         translatesAutoresizingMaskIntoConstraints = false
         rootView.addSubview(self)
-
         let constraints = animationType.location.constraints(
             rootView: rootView,
             toastView: self
         )
         NSLayoutConstraint.activate(constraints)
     }
-    func show(in rootView: UIView?, completion: ((Bool) -> Void)? = nil) {
+    func show(in rootView: UIView?, completion: ((Bool) -> Void)? = nil, isDim: Bool = false) {
         guard let rootView else { return }
-        configureConstraints(rootView: rootView, toastView: self)
+        if isDim, let dimPresentableToast = self as? DimPresentable {
+            dimPresentableToast.configureConstraints(toastView: self)
+        } else {
+            configureConstraints(rootView: rootView, toastView: self)
+        }
 
         UIView.animate(
             withDuration: animationType.duration,
@@ -47,6 +53,9 @@ extension SNMToast {
                 guard let self else { return }
                 self.alpha = 1
                 self.transform = animationType.beforeTransform
+                if let dimPresentableToast = self as? DimPresentable {
+                    dimPresentableToast.present()
+                }
             },
             completion: { [weak self] isFinished in
                 guard let self else { return }
@@ -66,13 +75,19 @@ extension SNMToast {
             delay: delay ?? animationType.delay,
             options: options ?? animationType.options,
             animations: { [weak self] in
-                guard let self = self else { return }
+                guard let self else { return }
                 self.alpha = 0
                 self.transform = animationType.afterTransform
+                if let dimPresentableToast = self as? DimPresentable {
+                    dimPresentableToast.dimView?.alpha = 0
+                }
             },
             completion: { [weak self] isFinished in
                 guard let self else { return }
                 self.removeFromSuperview()
+                if let dimPresentableToast = self as? DimPresentable {
+                    dimPresentableToast.dismiss()
+                }
                 completion?(isFinished)
             }
         )

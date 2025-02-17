@@ -81,9 +81,6 @@
 		32081B902D61809900D19235 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32081B8F2D61809900D19235 /* Release.xcconfig */; };
 		32081B912D61809900D19235 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32081B8F2D61809900D19235 /* Release.xcconfig */; };
 		32081B922D61809900D19235 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32081B8F2D61809900D19235 /* Release.xcconfig */; };
-		32081B942D6180A000D19235 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32081B932D6180A000D19235 /* Debug.xcconfig */; };
-		32081B952D6180A000D19235 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32081B932D6180A000D19235 /* Debug.xcconfig */; };
-		32081B962D6180A000D19235 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32081B932D6180A000D19235 /* Debug.xcconfig */; };
 		32081C052D618D0000D19235 /* ProfileDropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081C022D618D0000D19235 /* ProfileDropViewController.swift */; };
 		32081C062D618D0000D19235 /* ProfileDropInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081BFB2D618D0000D19235 /* ProfileDropInteractor.swift */; };
 		32081C072D618D0000D19235 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32081C012D618D0000D19235 /* ConnectionState.swift */; };
@@ -282,6 +279,9 @@
 		32BD48F82D40B5450078DA9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3A033D2CD8CF460047B7ED /* SceneDelegate.swift */; };
 		32BD48F92D40B5B90078DA9C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		32BD48FB2D40B5E50078DA9C /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 32BD48FA2D40B5E50078DA9C /* OrderedCollections */; };
+		32C5394D2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
+		32C5394E2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
+		32C5394F2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
 		9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */; };
 		9937361D2CF80D6600E3DD58 /* RequestUserInfoRemoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */; };
 		993736422CFCACB100E3DD58 /* UpdateUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */; };
@@ -619,7 +619,6 @@
 		32081B272D5C84EC00D19235 /* OnBoardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPageViewController.swift; sourceTree = "<group>"; };
 		32081B282D5C84EC00D19235 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		32081B8F2D61809900D19235 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		32081B932D6180A000D19235 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		32081BFB2D618D0000D19235 /* ProfileDropInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropInteractor.swift; sourceTree = "<group>"; };
 		32081BFD2D618D0000D19235 /* ProfileDropPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropPresenter.swift; sourceTree = "<group>"; };
 		32081BFF2D618D0000D19235 /* ProfileDropRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDropRouter.swift; sourceTree = "<group>"; };
@@ -632,6 +631,7 @@
 		32BD48E32D4085540078DA9C /* MateListPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateListPresenterSpy.swift; sourceTree = "<group>"; };
 		32BD48E52D408C3A0078DA9C /* UseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseMock.swift; sourceTree = "<group>"; };
 		32BD48E92D40AEB50078DA9C /* RemoteDatabaseManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDatabaseManagerMock.swift; sourceTree = "<group>"; };
+		32C5394C2D63245500CD89DF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPage.swift; sourceTree = "<group>"; };
 		9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserInfoRemoteUseCase.swift; sourceTree = "<group>"; };
 		993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoUseCase.swift; sourceTree = "<group>"; };
@@ -766,8 +766,6 @@
 		FD69B1BA2CE3BCDC009D71DC /* SNMPersistenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMPersistenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD69B1CA2CE3E9B4009D71DC /* UserDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsTests.swift; sourceTree = "<group>"; };
 		FD69B1CC2CE3E9B8009D71DC /* KeychainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
-		FD6C73E32D5BC26A00E7AB14 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		FD6C73E42D5BC27C00E7AB14 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		FD85EBE92D5F3D750017443E /* DeleteNotificationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteNotificationUseCase.swift; sourceTree = "<group>"; };
 		FD880B592CECE8F90093BEB9 /* SNMLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMLogger.swift; sourceTree = "<group>"; };
 		FD880B5F2CF432780093BEB9 /* SaveProfileImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProfileImageUseCase.swift; sourceTree = "<group>"; };
@@ -1496,7 +1494,7 @@
 				99A5A1B22CFFE544002F1D2D /* ProfileDrop.gif */,
 				FD3A033C2CD8CF460047B7ED /* LaunchScreen.storyboard */,
 				32081B8F2D61809900D19235 /* Release.xcconfig */,
-				32081B932D6180A000D19235 /* Debug.xcconfig */,
+				32C5394C2D63245500CD89DF /* Debug.xcconfig */,
 				FD3A033A2CD8CF460047B7ED /* Info.plist */,
 				FD3A03392CD8CF460047B7ED /* Assets.xcassets */,
 			);
@@ -2475,7 +2473,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32081B962D6180A000D19235 /* Debug.xcconfig in Resources */,
+				32C5394F2D63245500CD89DF /* Debug.xcconfig in Resources */,
 				32081B922D61809900D19235 /* Release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2500,7 +2498,7 @@
 			files = (
 				A288A63D2CDC595000D11C34 /* (null) in Resources */,
 				99A5A1B32CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
-				32081B942D6180A000D19235 /* Debug.xcconfig in Resources */,
+				32C5394E2D63245500CD89DF /* Debug.xcconfig in Resources */,
 				FD3A033F2CD8CF460047B7ED /* Assets.xcassets in Resources */,
 				FD3A03412CD8CF460047B7ED /* LaunchScreen.storyboard in Resources */,
 				32081B902D61809900D19235 /* Release.xcconfig in Resources */,
@@ -2511,7 +2509,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32081B952D6180A000D19235 /* Debug.xcconfig in Resources */,
+				32C5394D2D63245500CD89DF /* Debug.xcconfig in Resources */,
 				3200453B2CF442D500D08B6D /* Assets.xcassets in Resources */,
 				99A5A1B42CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
 				32081B912D61809900D19235 /* Release.xcconfig in Resources */,
@@ -3108,6 +3106,7 @@
 /* Begin XCBuildConfiguration section */
 		32BD482E2D3FEC9D0078DA9C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C5394C2D63245500CD89DF /* Debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3148,6 +3147,7 @@
 		};
 		A24B1F2B2D3C32960012B860 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C5394C2D63245500CD89DF /* Debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3190,6 +3190,7 @@
 		};
 		FD331A6C2CF33C6700F39426 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C5394C2D63245500CD89DF /* Debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3236,6 +3237,7 @@
 		};
 		FD3A03342CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C5394C2D63245500CD89DF /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3329,7 +3331,7 @@
 		};
 		FD3A03362CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
+			baseConfigurationReference = 32C5394C2D63245500CD89DF /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3450,6 +3452,7 @@
 		};
 		FD69B1C12CE3BCDC009D71DC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C5394C2D63245500CD89DF /* Debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3492,6 +3495,7 @@
 		};
 		FDCD02C22CE9172600B627D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C5394C2D63245500CD89DF /* Debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

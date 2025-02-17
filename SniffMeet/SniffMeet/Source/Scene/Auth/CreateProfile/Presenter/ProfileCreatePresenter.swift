@@ -63,6 +63,7 @@ extension ProfileCreatePresenter: DogInfoInteractorOutput {
     func didSaveUserInfo() {
         // TODO: submit button enable
         guard let view else { return }
+        view.didSuccessCreateProfile()
         router?.presentMainScreen(from: view)
     }
     

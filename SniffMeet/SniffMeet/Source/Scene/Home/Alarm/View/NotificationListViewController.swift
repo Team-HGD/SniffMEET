@@ -90,7 +90,7 @@ final class NotificationListViewController: BaseViewController, NotificationList
 
     func didStartDeleteNotifications() {
         Task { @MainActor [weak self] in
-            self?.snmProgressView.show(in: self?.view)
+            self?.snmProgressView.show(in: self?.view, isDim: true)
         }
     }
     func didEndDeleteNotifications() {

@@ -55,7 +55,7 @@ final class ProfileEditPresenter: ProfileEditPresentable {
                 didFetchUserInfo(userInfo: userInfo)
             }
         } catch {
-            didFailToSaveUserInfo()
+            // TODO: have to fill
         }
     }
 
@@ -104,6 +104,7 @@ final class ProfileEditPresenter: ProfileEditPresentable {
 protocol ProfileEditInteractorOutput: AnyObject {
     func didFetchUserInfo(userInfo: UserInfo)
     func didSaveUserInfo()
+    func didFailToSaveUserInfo()
 }
 
 extension ProfileEditPresenter: ProfileEditInteractorOutput {
@@ -112,6 +113,7 @@ extension ProfileEditPresenter: ProfileEditInteractorOutput {
     }
     func didSaveUserInfo() {
         guard let view else { return }
+        view.didSuccessEditProfile()
         router?.presentMainScreen(from: view)
     }
     func didFailToSaveUserInfo() {

@@ -11,6 +11,7 @@ import UIKit
 
 protocol ProfileEditViewable: AnyObject {
     var presenter: (any ProfileEditPresentable)? { get set }
+    func didSuccessEditProfile()
     func didFailEditProfile()
 }
 
@@ -236,7 +237,7 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
         completeEditButton.publisher(event: .touchUpInside)
             .sink { [weak self] in
                 self?.completeEditButton.isEnabled = false
-                self?.snmProgressToast.show(in: self?.view)
+                self?.snmProgressToast.show(in: self?.view, isDim: true)
                 self?.presenter?.didTapCompleteButton(
                     name: self?.nameTextField.text,
                     age: self?.ageTextField.text,
@@ -266,7 +267,11 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
             }
             .store(in: &cancellables)
     }
-
+    func didSuccessEditProfile() {
+        Task { @MainActor [weak self] in
+            self?.snmProgressToast.hidden(duration: 0)
+        }
+    }
     func didFailEditProfile() {
         Task { @MainActor [weak self] in
             self?.snmProgressToast.hidden { _ in

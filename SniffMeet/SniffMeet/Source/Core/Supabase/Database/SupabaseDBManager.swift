@@ -12,6 +12,7 @@ protocol RemoteDBManageable {
     func fetchData() async throws -> RemoteDBRequestBuildable
     func insertData() async throws -> RemoteDBRequestBuildable
     func updateData() async throws -> RemoteDBRequestBuildable
+    func deleteData() async throws -> RemoteDBRequestBuildable
     func rpc() async throws -> RemoteDBRequestBuildable
 }
 
@@ -55,7 +56,17 @@ final class SupabaseDBManager: RemoteDBManageable {
             task: .update
         )
     }
-    
+
+    func deleteData() async throws -> RemoteDBRequestBuildable {
+        let accessToken = try sessionManager.accessToken.get()
+        try await sessionManager.checkSession()
+        return SupabaseDBRequestBuilder(
+            networkProvider: networkProvider,
+            accessToken: accessToken,
+            task: .delete
+        )
+    }
+
     func rpc() async throws -> RemoteDBRequestBuildable {
         let accessToken = try sessionManager.accessToken.get()
         try await sessionManager.checkSession()

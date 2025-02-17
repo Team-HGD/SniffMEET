@@ -17,6 +17,7 @@ protocol NotificationListPresentable: AnyObject {
     func didTapNotificationCell(index: Int)
     func didDeleteNotificationCell(index: Int)
     func didTapTrashcanButton()
+    func didTapDeleteConfirmButton()
     func didTapDismissButton()
     func didScrollToBottom()
 }
@@ -69,8 +70,16 @@ final class NotificationListPresenter: NotificationListPresentable {
         output.notificationList.send(notiList)
     }
     func didTapTrashcanButton() {
+        guard let view else { return }
+        router?.presentDeleteAllAlert(from: view, animated: true)
+    }
+    func didTapDeleteConfirmButton() {
         let notifications = output.notificationList.value.map{ $0.id }
         Task { [weak self] in
+            self?.view?.didStartDeleteNotifications()
+            defer {
+                self?.view?.didEndDeleteNotifications()
+            }
             do {
                 try await self?.interactor?.deleteNotifications(notifications: notifications)
             } catch {

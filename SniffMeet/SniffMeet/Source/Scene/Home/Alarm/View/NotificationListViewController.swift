@@ -10,6 +10,8 @@ import UIKit
 
 protocol NotificationListViewable: AnyObject {
     var presenter: (any NotificationListPresentable)? { get set }
+    func didStartDeleteNotifications()
+    func didEndDeleteNotifications()
 }
 
 final class NotificationListViewController: BaseViewController, NotificationListViewable {
@@ -81,6 +83,19 @@ final class NotificationListViewController: BaseViewController, NotificationList
     }
     @objc private func didTapTrashcanButton() {
         presenter?.didTapTrashcanButton()
+    }
+
+    func didStartDeleteNotifications() {
+        Task { @MainActor [weak self] in
+            // TODO: Toast 머지후 수정 필요
+            self?.showSNMProgressToast()
+        }
+    }
+    func didEndDeleteNotifications() {
+        Task { @MainActor [weak self] in
+            // TODO: Toast 머지후 수정 필요
+            // self?.progressView.hidden()
+        }
     }
 }
 

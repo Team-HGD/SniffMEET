@@ -10,49 +10,55 @@ import Foundation
 protocol ProfileDropInteractable: AnyObject {
     var presenter: (any ProfileDropInteractorOutput)? { get set }
 
-    func tryProfileDrop()
+    func tryNearByProfileDrop()
+    func tryTargetedProfileDrop()
     func quitProfileDrop()
     func checkNISupport()
 }
 
 final class ProfileDropInteractor: ProfileDropInteractable {
     weak var presenter: (any ProfileDropInteractorOutput)?
-    private var tryProfileDropUseCase: any NearByProfileDropUseCase
+    private var nearByProfileDropUseCase: any NearByProfileDropUseCase
+    private var targetedProfileDropUseCase: any TargetedProfileDropUseCase
     private var quitProfileDropUseCase: any QuitProfileDropUseCase
     private var cancellables: Set<AnyCancellable> = []
     private let niDeviceChecker: NIDeviceCheckerProtocol
 
     init(
         presenter: ProfileDropInteractorOutput? = nil,
-        tryProfileDropUseCase: any NearByProfileDropUseCase,
+        nearByProfileDropUseCase: any NearByProfileDropUseCase,
+        targetedProfileDropUseCase: any TargetedProfileDropUseCase,
         quitProfileDropUseCase: any QuitProfileDropUseCase,
         niDeviceChecker: NIDeviceCheckerProtocol
     ) {
         self.presenter = presenter
-        self.tryProfileDropUseCase = tryProfileDropUseCase
+        self.nearByProfileDropUseCase = nearByProfileDropUseCase
+        self.targetedProfileDropUseCase = targetedProfileDropUseCase
         self.quitProfileDropUseCase = quitProfileDropUseCase
         self.niDeviceChecker = niDeviceChecker
 
         bind()
     }
 
-    func tryProfileDrop() {
-        if tryProfileDropUseCase.isTransitioned {
+    func tryNearByProfileDrop() {
+        if nearByProfileDropUseCase.isTransitioned {
             guard let mpcManager = MPCManager(dataManager: LocalDataManager())
             else { return }
             let niManager = NIManager()
-            tryProfileDropUseCase.reset(mpcManager: mpcManager, nimanager: niManager)
+            nearByProfileDropUseCase.reset(mpcManager: mpcManager, nimanager: niManager)
             quitProfileDropUseCase.reset(niManager: niManager)
         }
-        tryProfileDropUseCase.execute()
+        nearByProfileDropUseCase.execute()
     }
+    func tryTargetedProfileDrop() { }
+
 
     func quitProfileDrop() {
         quitProfileDropUseCase.execute()
     }
 
     func bind() {
-        tryProfileDropUseCase.isNIConnected
+        nearByProfileDropUseCase.isNIConnected
             .receive(on: RunLoop.main)
             .sink { [weak self] isPaired in
                 if isPaired {
@@ -63,13 +69,13 @@ final class ProfileDropInteractor: ProfileDropInteractable {
             }
             .store(in: &cancellables)
 
-        tryProfileDropUseCase.profilePublisher
+        nearByProfileDropUseCase.profilePublisher
             .receive(on: RunLoop.main)
             .sink {[weak self] (profile) in
                 guard let profile else { return }
-                if self?.tryProfileDropUseCase.isTransitioned == false {
+                if self?.nearByProfileDropUseCase.isTransitioned == false {
                     self?.presenter?.receiveProfileData(profile)
-                    self?.tryProfileDropUseCase.isTransitioned = true
+                    self?.nearByProfileDropUseCase.isTransitioned = true
                 }
             }
             .store(in: &cancellables)

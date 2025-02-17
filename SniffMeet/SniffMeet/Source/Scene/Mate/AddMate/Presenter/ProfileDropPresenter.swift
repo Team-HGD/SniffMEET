@@ -13,7 +13,8 @@ protocol ProfileDropPresentable: AnyObject {
     var output: any ProfileDropPresenterOutput { get }
 
     func viewDidLoad()
-    func startProfileDrop()
+    func startNearByProfileDrop()
+    func startTargetedProfileDrop()
     func quitProfileDrop()
     func didTapHelp()
 }
@@ -53,8 +54,11 @@ final class ProfileDropPresenter: ProfileDropPresentable {
     func viewDidLoad() {
         checkNISupport()
     }
-    func startProfileDrop() {
-        interactor?.tryProfileDrop()
+    func startNearByProfileDrop() {
+        interactor?.tryNearByProfileDrop()
+    }
+    func startTargetedProfileDrop() {
+        interactor?.tryNearByProfileDrop()
     }
     func quitProfileDrop() {
         interactor?.quitProfileDrop()

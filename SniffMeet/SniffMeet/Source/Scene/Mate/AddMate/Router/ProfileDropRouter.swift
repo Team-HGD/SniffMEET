@@ -51,20 +51,26 @@ extension ProfileDropRouter: ProfileDropBuildable {
             return UIViewController()
         }
         let niManager = NIManager()
-        let tryProfileDropUseCase: NearByProfileDropUseCase =
+        let nearByProfileDropUseCase: NearByProfileDropUseCase =
         NearByProfileDropUseCaseImpl(
             dataManager: LocalDataManager(),
             niManager: niManager,
             mpcManager: mpcManager)
+        let targetedProfileDropUseCase: TargetedProfileDropUseCase =
+        TargetedProfileDropUseCaseImpl(
+            dataManager: LocalDataManager(),
+            mpcManager: mpcManager)
         let quitProfileDropUseCase: QuitProfileDropUseCase =
         QuitProfileDropUseCaseImpl(niManager: niManager)
         let niDeviceChecker: NIDeviceCheckerProtocol = NIDeviceChecker()
+        
 
         let view: ProfileDropViewable & UIViewController = ProfileDropViewController()
         let router: ProfileDropRoutable & ProfileDropBuildable = ProfileDropRouter()
         let presenter: ProfileDropPresentable & ProfileDropInteractorOutput = ProfileDropPresenter()
         let interactor: ProfileDropInteractable = ProfileDropInteractor(
-            tryProfileDropUseCase: tryProfileDropUseCase,
+            nearByProfileDropUseCase: nearByProfileDropUseCase,
+            targetedProfileDropUseCase: targetedProfileDropUseCase,
             quitProfileDropUseCase: quitProfileDropUseCase,
             niDeviceChecker: niDeviceChecker)
 

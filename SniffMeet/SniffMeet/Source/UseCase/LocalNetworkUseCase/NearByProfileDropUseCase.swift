@@ -11,7 +11,7 @@ import NearbyInteraction
 
 protocol NearByProfileDropUseCase {
     var profilePublisher: PassthroughSubject<DogDTO?, Never>  { get set }
-    var isNIConnected: PassthroughSubject<Bool, Never> { get set }
+    var isConnected: PassthroughSubject<ConnectionState, Never> { get set }
     var transmissionFlag: Set<String> { get set }
     var isTransitioned: Bool { get set }
     var triedBefore: Bool { get set }
@@ -23,7 +23,7 @@ protocol NearByProfileDropUseCase {
 
 final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
     var profilePublisher: PassthroughSubject<DogDTO?, Never> = PassthroughSubject()
-    var isNIConnected: PassthroughSubject<Bool, Never> = PassthroughSubject()
+    var isConnected: PassthroughSubject<ConnectionState, Never> = PassthroughSubject()
     var cancellable: AnyCancellable? = nil
 
     var transmissionFlag: Set<String>
@@ -84,6 +84,15 @@ final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
     func execute() {
         triedBefore = true
         mpcManager.isAvailableToBeConnected.send(true)
+        
+        cancellable = Timer.publish(every: Context.connectionTimeLimit, on: .current, in: .common)
+            .autoconnect()
+            .sink { _ in
+                Task { [weak self] in
+                    self?.isConnected.send(.cannotFindPeer)
+                    self?.cancellable?.cancel()
+                }
+            }
     }
     
     func loadProfileData() {
@@ -118,7 +127,7 @@ final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
             .autoconnect()
             .sink { _ in
                 Task { [weak self] in // 30초가 지나고 프로필 드랍이 진행되지 않으면 연결 실패 처리
-                    self?.isNIConnected.send(false)
+                    self?.isConnected.send(.failure)
                     self?.cancellable?.cancel()
                 }
             }
@@ -149,9 +158,10 @@ extension NearByProfileDropUseCaseImpl: MCSessionDelegate {
                     SNMLogger.error(error.localizedDescription)
                 }
             }
+            cancellable?.cancel()
             setTimer()
         case .notConnected:
-            isNIConnected.send(false)
+            isConnected.send(.failure)
             deleteTimer()
         default:
             break
@@ -167,7 +177,8 @@ extension NearByProfileDropUseCaseImpl: MCSessionDelegate {
                 let receivedData = try self?.decoder.decode(MPCProfileDropDTO.self, from: data)
                 if let token = receivedData?.token,
                    let niConnected = self?.niManager.handleReceivedDiscoveryToken(token) {
-                    self?.isNIConnected.send(niConnected)
+                    let connectionsState: ConnectionState = niConnected ? .successNISession : .failure
+                    self?.isConnected.send(connectionsState)
                 } else if let profile = receivedData?.profile,
                           let receivedFlagData = self?.receivedFlagData { // 프로필 데이터
                     self?.profilePublisher.send(profile)

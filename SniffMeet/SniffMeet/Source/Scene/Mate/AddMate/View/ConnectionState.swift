@@ -10,6 +10,7 @@ enum ConnectionState {
     case successNISession
     case successMPCSession
     case failure
+    case cannotFindPeer
 
     var description: String {
         switch self {
@@ -20,7 +21,9 @@ enum ConnectionState {
         case .successMPCSession:
             return "연결 성공, 친구가 프로필을 보내고 있어요."
         case .failure:
-            return "연결 실패, 다시 시도하세요"
+            return "연결 실패, 다시 시도해보세요!"
+        case .cannotFindPeer:
+            return "주위 산책 친구를 찾을 수 없어요. 다시 시도해보세요!"
         }
     }
 }

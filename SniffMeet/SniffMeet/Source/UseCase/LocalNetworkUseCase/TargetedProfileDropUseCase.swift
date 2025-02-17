@@ -9,7 +9,7 @@ import Foundation
 import MultipeerConnectivity
 
 protocol TargetedProfileDropUseCase {
-    var profilePublisher: CurrentValueSubject<DogDTO?, Never>  { get set }
+    var profilePublisher: PassthroughSubject<DogDTO?, Never>  { get set }
     var isConnected: PassthroughSubject<ConnectionState, Never> { get set }
     var transmissionFlag: Set<String> { get set }
     var isTransitioned: Bool { get set }
@@ -22,7 +22,7 @@ protocol TargetedProfileDropUseCase {
 }
 
 final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase {
-    var profilePublisher: CurrentValueSubject<DogDTO?, Never> = CurrentValueSubject(nil)
+    var profilePublisher: PassthroughSubject<DogDTO?, Never> = PassthroughSubject()
     var isConnected: PassthroughSubject<ConnectionState, Never> = PassthroughSubject()
     private var cancellable: AnyCancellable? = nil
 
@@ -53,7 +53,6 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
     }
     
     func reset(mpcManager: MPCManager) {
-        profilePublisher.value = nil
         transmissionFlag = []
         isTransitioned = false
         triedBefore = false
@@ -78,6 +77,15 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
     func execute()  {
         triedBefore = true
         mpcManager.isAvailableToBeConnected.send(true)
+        
+        cancellable = Timer.publish(every: Context.connectionTimeLimit, on: .current, in: .common)
+            .autoconnect()
+            .sink { _ in
+                Task { [weak self] in
+                    self?.isConnected.send(.cannotFindPeer)
+                    self?.cancellable?.cancel()
+                }
+            }
     }
     
     func loadProfileData() {
@@ -124,6 +132,7 @@ extension TargetedProfileDropUseCaseImpl: MCSessionDelegate {
                 await self?.mpcManager.connectedPeerManager.connect(peer: peerID)
                 self?.isConnected.send(.successMPCSession)
             }
+            cancellable?.cancel()
             cancellable = Timer.publish(every: Context.profileSendDuration, on: .current, in: .common)
                 .autoconnect()
                 .sink { _ in
@@ -204,5 +213,6 @@ extension TargetedProfileDropUseCaseImpl {
         static let received: String = "received"
         static let peerReceived: String = "나 받았어"
         static let profileSendDuration: Double = 2.0
+        static let connectionTimeLimit: Double = 30.0
     }
 }

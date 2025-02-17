@@ -63,52 +63,41 @@ final class ProfileDropInteractor: ProfileDropInteractable {
     }
 
     func bind() {
-        nearByProfileDropUseCase.isNIConnected
-            .receive(on: RunLoop.main)
-            .sink { [weak self] isPaired in
-                if isPaired {
-                    self?.presenter?.didConnectNISession()
-                } else {
-                    guard self?.nearByProfileDropUseCase.isTimeOut() == true else { return }
-                    self?.presenter?.failToConnectNISession()
-                }
-            }
-            .store(in: &cancellables)
-
-        nearByProfileDropUseCase.profilePublisher
-            .receive(on: RunLoop.main)
-            .sink {[weak self] (profile) in
-                guard let profile else { return }
-                if self?.nearByProfileDropUseCase.isTransitioned == false {
-                    self?.presenter?.receiveProfileData(profile)
-                    self?.nearByProfileDropUseCase.isTransitioned = true
-                }
-            }
-            .store(in: &cancellables)
-        
-        targetedProfileDropUseCase.profilePublisher
-            .receive(on: RunLoop.main)
-            .sink {[weak self] (profile) in
-                guard let profile else { return }
-                if self?.targetedProfileDropUseCase.isTransitioned == false {
-                    self?.presenter?.receiveProfileData(profile)
-                    self?.nearByProfileDropUseCase.isTransitioned = true
-                }
-            }
-            .store(in: &cancellables)
-        
-        targetedProfileDropUseCase.isConnected
-            .receive(on: RunLoop.main)
+        [nearByProfileDropUseCase.isConnected, targetedProfileDropUseCase.isConnected].forEach {
+            $0.receive(on: RunLoop.main)
             .sink {[weak self] (state) in
-                self?.presenter?.showConnectionState(to: state)
+                self?.handleConnectionState(state: state)
             }
             .store(in: &cancellables)
+        }
+        
+        [nearByProfileDropUseCase.profilePublisher, targetedProfileDropUseCase.profilePublisher].forEach {
+            $0.receive(on: RunLoop.main)
+                .sink {[weak self] (profile) in
+                    guard let profile else { return }
+                    if self?.targetedProfileDropUseCase.isTransitioned == false {
+                        self?.presenter?.receiveProfileData(profile)
+                        self?.nearByProfileDropUseCase.isTransitioned = true
+                    }
+                }
+                .store(in: &cancellables)
+        }
     }
 
     func checkNISupport() {
         let isSupported = niDeviceChecker.isNISupported()
         if isSupported == false {
             presenter?.updateDeviceInfo()
+        }
+    }
+    
+    func handleConnectionState(state: ConnectionState) {
+        presenter?.showConnectionState(to: state)
+        switch state {
+        case .cannotFindPeer, .failure:
+            quitProfileDrop()
+        default:
+            break
         }
     }
 }

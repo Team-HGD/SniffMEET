@@ -12,6 +12,7 @@ protocol ProfileDropInteractable: AnyObject {
 
     func tryNearByProfileDrop()
     func tryTargetedProfileDrop()
+    func mcBrowserViewController() -> AnyObject
     func quitProfileDrop()
     func checkNISupport()
 }
@@ -52,6 +53,9 @@ final class ProfileDropInteractor: ProfileDropInteractable {
     }
     func tryTargetedProfileDrop() { }
 
+    func mcBrowserViewController() -> AnyObject {
+        targetedProfileDropUseCase.mcBrowserViewController()
+    }
 
     func quitProfileDrop() {
         quitProfileDropUseCase.execute()

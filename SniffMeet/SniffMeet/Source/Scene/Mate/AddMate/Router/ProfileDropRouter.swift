@@ -9,6 +9,7 @@ import UIKit
 
 protocol ProfileDropRoutable: AnyObject, Routable {
     var presenter: (any ProfileDropPresentable)? { get set }
+    func presentMCBrowserView (from profileDropView: any ProfileDropViewable, to mcBrowserView: AnyObject)
     func dismissView(view: any ProfileDropViewable)
     func showMateRequestView(profileDropView: any ProfileDropViewable, data: DogDTO)
     func showHelpView(profileDropView: any ProfileDropViewable)
@@ -21,6 +22,13 @@ protocol ProfileDropBuildable {
 final class ProfileDropRouter: ProfileDropRoutable {
     weak var presenter: (any ProfileDropPresentable)?
 
+    func presentMCBrowserView (from profileDropView: any ProfileDropViewable, to mcBrowserView: AnyObject) {
+        guard let profileDropView = profileDropView as? UIViewController,
+              let mcBrowserViewController = mcBrowserView as? UIViewController
+        else { return }
+        present(from: profileDropView, with: mcBrowserViewController, animated: true)
+    }
+    
     func dismissView(view: any ProfileDropViewable) {
         if let view = view as? UIViewController {
             Task { @MainActor in

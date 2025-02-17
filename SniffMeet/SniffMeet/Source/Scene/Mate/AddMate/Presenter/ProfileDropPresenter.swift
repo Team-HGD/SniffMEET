@@ -15,6 +15,7 @@ protocol ProfileDropPresentable: AnyObject {
     func viewDidLoad()
     func startNearByProfileDrop()
     func startTargetedProfileDrop()
+    func showBrowserView()
     func quitProfileDrop()
     func didTapHelp()
 }
@@ -59,6 +60,12 @@ final class ProfileDropPresenter: ProfileDropPresentable {
     }
     func startTargetedProfileDrop() {
         interactor?.tryNearByProfileDrop()
+    }
+    func showBrowserView() {
+        if let view = self.view,
+           let browserViewController = interactor?.mcBrowserViewController() as? AnyObject {
+            router?.presentMCBrowserView(from: view, to: browserViewController)
+        }
     }
     func quitProfileDrop() {
         interactor?.quitProfileDrop()

@@ -17,6 +17,7 @@ protocol TargetedProfileDropUseCase {
     func execute()
     func loadProfileData()
     func reset(mpcManager: MPCManager)
+    func mcBrowserViewController() -> MCBrowserViewController
 }
 
 final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase {
@@ -101,6 +102,9 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
         } catch {
             SNMLogger.error("loadData error : \(error)")
         }
+    }
+    func mcBrowserViewController() -> MCBrowserViewController {
+        mpcManager.serviceBrowser
     }
 }
 // MARK: - MCSessionDelegate

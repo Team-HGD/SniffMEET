@@ -10,6 +10,7 @@ import MultipeerConnectivity
 
 protocol TargetedProfileDropUseCase {
     var profilePublisher: CurrentValueSubject<DogDTO?, Never>  { get set }
+    var isConnected: PassthroughSubject<ConnectionState, Never> { get set }
     var transmissionFlag: Set<String> { get set }
     var isTransitioned: Bool { get set }
     var triedBefore: Bool { get set }
@@ -22,6 +23,9 @@ protocol TargetedProfileDropUseCase {
 
 final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase {
     var profilePublisher: CurrentValueSubject<DogDTO?, Never> = CurrentValueSubject(nil)
+    var isConnected: PassthroughSubject<ConnectionState, Never> = PassthroughSubject()
+    private var cancellable: AnyCancellable? = nil
+
     var transmissionFlag: Set<String>
     var isTransitioned: Bool = false
     var triedBefore: Bool = false
@@ -118,12 +122,25 @@ extension TargetedProfileDropUseCaseImpl: MCSessionDelegate {
             Task { [weak self] in
                 SNMLogger.log("successfully connected to MPCSession: \(session.connectedPeers) session \(session)")
                 await self?.mpcManager.connectedPeerManager.connect(peer: peerID)
-                
-                guard let profileData = self?.profileData else { return }
-                if self?.transmissionFlag.contains(Context.peerReceived) == false {
-                    await self?.mpcManager.send(data: profileData)
-                }
+                self?.isConnected.send(.successMPCSession)
             }
+            cancellable = Timer.publish(every: Context.profileSendDuration, on: .current, in: .common)
+                .autoconnect()
+                .sink { _ in
+                    Task { [weak self] in
+                        // connectedPeer가 없거나 수신플래그를 받으면 타이머 종료
+                        guard await self?.mpcManager.connectedPeerManager.connectedPeer != nil
+                                && self?.transmissionFlag.contains(Context.peerReceived) != true else { self?.cancellable?.cancel(); return }
+                        
+                        guard let profileData = self?.profileData else { return }
+                        await self?.mpcManager.send(data: profileData)
+                    }
+                }
+        case .connecting:
+            isConnected.send(.connecting)
+        case .notConnected:
+            cancellable?.cancel()
+            isConnected.send(.failure)
         default:
             break
         }
@@ -186,5 +203,6 @@ extension TargetedProfileDropUseCaseImpl {
     private enum Context {
         static let received: String = "received"
         static let peerReceived: String = "나 받았어"
+        static let profileSendDuration: Double = 2.0
     }
 }

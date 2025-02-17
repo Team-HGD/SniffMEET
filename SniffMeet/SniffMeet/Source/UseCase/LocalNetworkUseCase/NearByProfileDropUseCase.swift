@@ -19,10 +19,12 @@ protocol NearByProfileDropUseCase {
     func execute()
     func loadProfileData()
     func reset(mpcManager: MPCManager, nimanager: NIManager)
+    func isTimeOut() -> Bool
 }
 
 final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
     var profilePublisher: CurrentValueSubject<DogDTO?, Never> = CurrentValueSubject(nil)
+    var startDate: Date?
     var isNIConnected: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
     var transmissionFlag: Set<String>
     var isTransitioned: Bool = false
@@ -81,9 +83,10 @@ final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
         }
     }
     
-    func execute()  {
+    func execute() {
         triedBefore = true
         mpcManager.isAvailableToBeConnected.send(true)
+        startDate = Date()
     }
     
     func loadProfileData() {
@@ -111,6 +114,10 @@ final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
         } catch {
             SNMLogger.error("loadData error : \(error)")
         }
+    }
+    func isTimeOut() -> Bool{
+        guard let startDate else { return false }
+        return startDate.secondsDifferenceFromNow() >= 60
     }
 }
 // MARK: - MCSessionDelegate

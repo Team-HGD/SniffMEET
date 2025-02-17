@@ -69,6 +69,7 @@ final class ProfileDropInteractor: ProfileDropInteractable {
                 if isPaired {
                     self?.presenter?.didConnectNISession()
                 } else {
+                    guard self?.nearByProfileDropUseCase.isTimeOut() == true else { return }
                     self?.presenter?.failToConnectNISession()
                 }
             }

@@ -51,8 +51,9 @@ final class ProfileDropInteractor: ProfileDropInteractable {
         }
         nearByProfileDropUseCase.execute()
     }
-    func tryTargetedProfileDrop() { }
-
+    func tryTargetedProfileDrop() {
+        targetedProfileDropUseCase.execute()
+    }
     func mcBrowserViewController() -> AnyObject {
         targetedProfileDropUseCase.mcBrowserViewController()
     }
@@ -83,6 +84,18 @@ final class ProfileDropInteractor: ProfileDropInteractable {
                 }
             }
             .store(in: &cancellables)
+        
+        targetedProfileDropUseCase.profilePublisher
+            .receive(on: RunLoop.main)
+            .sink {[weak self] (profile) in
+                guard let profile else { return }
+                if self?.targetedProfileDropUseCase.isTransitioned == false {
+                    self?.presenter?.receiveProfileData(profile)
+                    self?.nearByProfileDropUseCase.isTransitioned = true
+                }
+            }
+            .store(in: &cancellables)
+        
     }
 
     func checkNISupport() {

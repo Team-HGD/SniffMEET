@@ -174,7 +174,18 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
                       scheduler: RunLoop.main,
                       latest: false)
             .sink { [weak self] _ in
-                // TODO: - 수동 연결 버튼 이벤트 구현
+                guard let self else { return }
+                let connectionState = self.connectionStateLabel.isHidden
+                self.updateUI(for: connectionState)
+                peerSelectionButton.isHidden = false
+                if connectionState {
+                    self.presenter?.startTargetedProfileDrop()
+                } else {
+                    self.presenter?.quitProfileDrop()
+                }
+            }
+            .store(in: &cancellables)
+        
         peerSelectionButton.publisher(event: .touchUpInside)
             .throttle(for: .seconds(EventConstant.throttleInterval),
                       scheduler: RunLoop.main,

@@ -3138,6 +3138,7 @@
 /* Begin XCBuildConfiguration section */
 		32BD482E2D3FEC9D0078DA9C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -3186,6 +3187,7 @@
 		};
 		A24B1F2B2D3C32960012B860 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -3236,6 +3238,7 @@
 		};
 		FD331A6C2CF33C6700F39426 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -3290,6 +3293,7 @@
 		};
 		FD3A03342CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3337,6 +3341,7 @@
 		};
 		FD3A03352CD8CDE60047B7ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32081B8F2D61809900D19235 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3504,6 +3509,7 @@
 		};
 		FD69B1C12CE3BCDC009D71DC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -3554,6 +3560,7 @@
 		};
 		FDCD02C22CE9172600B627D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;

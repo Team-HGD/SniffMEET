@@ -10,7 +10,6 @@ protocol ProfileDropPresentable: AnyObject {
     var view: (any ProfileDropViewable)? { get set }
     var interactor: (any ProfileDropInteractable)? { get set }
     var router: (any ProfileDropRoutable)? { get set }
-    var output: any ProfileDropPresenterOutput { get }
 
     func viewDidLoad()
     func startNearByProfileDrop()
@@ -24,32 +23,24 @@ protocol ProfileDropInteractorOutput: AnyObject {
     func didCloseTheView()
     func didConnectNISession()
     func failToConnectNISession()
+    func showConnectionState(to state: ConnectionState)
     func receiveProfileData(_ data: DogDTO)
     func updateDeviceInfo()
-}
-
-protocol ProfileDropPresenterOutput {
-}
-
-struct DefaultProfileDropPresenterOutput: ProfileDropPresenterOutput {
 }
 
 final class ProfileDropPresenter: ProfileDropPresentable {
     weak var view: (any ProfileDropViewable)?
     var interactor: (any ProfileDropInteractable)?
     var router: (any ProfileDropRoutable)?
-    var output: any ProfileDropPresenterOutput
 
     init(
         view: ProfileDropViewable? = nil,
         interactor: ProfileDropInteractable? = nil,
-        router: ProfileDropRoutable? = nil,
-        output: ProfileDropPresenterOutput = DefaultProfileDropPresenterOutput()
+        router: ProfileDropRoutable? = nil
     ) {
         self.view = view
         self.interactor = interactor
         self.router = router
-        self.output = output
     }
 
     func viewDidLoad() {
@@ -83,7 +74,10 @@ extension ProfileDropPresenter: ProfileDropInteractorOutput {
     func didCloseTheView() {
     }
     func didConnectNISession() {
-        view?.changeState(to: .success)
+        view?.changeState(to: .successNISession)
+    }
+    func showConnectionState(to state: ConnectionState) {
+        view?.changeState(to: state)
     }
     func failToConnectNISession() {
         view?.changeState(to: .failure)

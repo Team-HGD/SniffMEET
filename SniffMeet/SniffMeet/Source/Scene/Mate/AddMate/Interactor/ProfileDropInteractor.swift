@@ -97,6 +97,12 @@ final class ProfileDropInteractor: ProfileDropInteractable {
             }
             .store(in: &cancellables)
         
+        targetedProfileDropUseCase.isConnected
+            .receive(on: RunLoop.main)
+            .sink {[weak self] (state) in
+                self?.presenter?.showConnectionState(to: state)
+            }
+            .store(in: &cancellables)
     }
 
     func checkNISupport() {

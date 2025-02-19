@@ -8,8 +8,13 @@ import Combine
 import MapKit
 import UIKit
 
+protocol TrackWalkViewable: AnyObject {
+    var presenter: TrackWalkPresentable? { get set }
+}
 
-final class TrackWalkViewController: BaseViewController {
+final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
+    var presenter: (any TrackWalkPresentable)?
+    
     private let mapView: MKMapView = {
         let mapView: MKMapView = MKMapView()
         mapView.showsUserLocation = true

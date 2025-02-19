@@ -182,7 +182,7 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
 }
 
 extension TrackWalkViewController {
-    func updateRouteLine(with location: WalkLocation) {
+    func updateRouteLine(with location: WalkRoute) {
         let lineDraw = MKPolyline(coordinates: location.points, count: location.count)
         mapView.addOverlay(lineDraw)
     }

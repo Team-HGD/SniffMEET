@@ -50,6 +50,8 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
     }()
     private var autoProfileDropButton = PrimaryButton(title: Context.autoConnect)
     private var manualProfileDropButton = PrimaryButton(title: Context.manualConnect)
+    private var peerSelectionButton = PrimaryButton(title: Context.peerSelection)
+
     private var manualButtonExpanded: NSLayoutConstraint!
     private var helpLabel: UILabel = {
         let label = UILabel()
@@ -81,6 +83,7 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
         }
         connectionStateLabel.isHidden = true
         helpLabel.addGestureRecognizer(tapGesture)
+        peerSelectionButton.isHidden = true
     }
     override func configureHierachy() {
         [contentLabel,
@@ -89,7 +92,9 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
          connectionStateLabel,
          autoProfileDropButton,
          manualProfileDropButton,
-         helpLabel].forEach {
+         helpLabel,
+         peerSelectionButton
+        ].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -133,6 +138,15 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
             manualProfileDropButton.trailingAnchor.constraint(
                 equalTo: view.trailingAnchor,
                 constant: -LayoutConstant.horizontalPadding),
+            peerSelectionButton.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: LayoutConstant.horizontalPadding),
+            peerSelectionButton.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -LayoutConstant.horizontalPadding),
+            peerSelectionButton.bottomAnchor.constraint(
+                equalTo: manualProfileDropButton.topAnchor,
+                constant: -LayoutConstant.smallVerticalPadding),
             helpLabel.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor,
                 constant: -LayoutConstant.largeVerticalPadding),
@@ -149,7 +163,7 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
                 let connectionState = self.connectionStateLabel.isHidden
                 self.updateUI(for: connectionState)
                 if connectionState {
-                    self.presenter?.startProfileDrop()
+                    self.presenter?.startNearByProfileDrop()
                 } else {
                     self.presenter?.quitProfileDrop()
                 }
@@ -160,7 +174,25 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
                       scheduler: RunLoop.main,
                       latest: false)
             .sink { [weak self] _ in
-                // TODO: - 수동 연결 버튼 이벤트 구현
+                guard let self else { return }
+                let connectionState = self.connectionStateLabel.isHidden
+                self.updateUI(for: connectionState)
+                peerSelectionButton.isHidden = false
+                if connectionState {
+                    self.presenter?.startTargetedProfileDrop()
+                } else {
+                    self.presenter?.quitProfileDrop()
+                }
+            }
+            .store(in: &cancellables)
+        
+        peerSelectionButton.publisher(event: .touchUpInside)
+            .throttle(for: .seconds(EventConstant.throttleInterval),
+                      scheduler: RunLoop.main,
+                      latest: false)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                presenter?.showBrowserView()
             }
             .store(in: &cancellables)
         tapGesture.publisher(for: \.state)
@@ -201,6 +233,7 @@ private extension ProfileDropViewController {
         static let autoConnect: String = "자동 연결"
         static let manualConnect: String = "수동 연결"
         static let cancelConnect: String = "연결 취소"
+        static let peerSelection: String = "프로필 공유할 유저 선택"
         static let title: String = "프로필 드랍"
         static let contentLabel: String = "자동 연결을 이용해\n원하는 메이트의 핸드폰과\n아래의 동작을 수행해 간편하게\n프로필을 주고 받을 수 있습니다."
         static let descriptionLabel: String = "만약 상대 기기가 수동 연결만 지원한다면,\n함께 수동 연결을 시도하세요."

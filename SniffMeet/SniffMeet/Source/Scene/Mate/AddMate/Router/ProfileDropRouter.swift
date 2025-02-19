@@ -9,6 +9,7 @@ import UIKit
 
 protocol ProfileDropRoutable: AnyObject, Routable {
     var presenter: (any ProfileDropPresentable)? { get set }
+    func presentMCBrowserView (from profileDropView: any ProfileDropViewable, to mcBrowserView: AnyObject)
     func dismissView(view: any ProfileDropViewable)
     func showMateRequestView(profileDropView: any ProfileDropViewable, data: DogDTO)
     func showHelpView(profileDropView: any ProfileDropViewable)
@@ -21,6 +22,13 @@ protocol ProfileDropBuildable {
 final class ProfileDropRouter: ProfileDropRoutable {
     weak var presenter: (any ProfileDropPresentable)?
 
+    func presentMCBrowserView (from profileDropView: any ProfileDropViewable, to mcBrowserView: AnyObject) {
+        guard let profileDropView = profileDropView as? UIViewController,
+              let mcBrowserViewController = mcBrowserView as? UIViewController
+        else { return }
+        present(from: profileDropView, with: mcBrowserViewController, animated: true)
+    }
+    
     func dismissView(view: any ProfileDropViewable) {
         if let view = view as? UIViewController {
             Task { @MainActor in
@@ -51,20 +59,26 @@ extension ProfileDropRouter: ProfileDropBuildable {
             return UIViewController()
         }
         let niManager = NIManager()
-        let tryProfileDropUseCase: NearByProfileDropUseCase =
+        let nearByProfileDropUseCase: NearByProfileDropUseCase =
         NearByProfileDropUseCaseImpl(
             dataManager: LocalDataManager(),
             niManager: niManager,
             mpcManager: mpcManager)
+        let targetedProfileDropUseCase: TargetedProfileDropUseCase =
+        TargetedProfileDropUseCaseImpl(
+            dataManager: LocalDataManager(),
+            mpcManager: mpcManager)
         let quitProfileDropUseCase: QuitProfileDropUseCase =
         QuitProfileDropUseCaseImpl(niManager: niManager)
         let niDeviceChecker: NIDeviceCheckerProtocol = NIDeviceChecker()
+        
 
         let view: ProfileDropViewable & UIViewController = ProfileDropViewController()
         let router: ProfileDropRoutable & ProfileDropBuildable = ProfileDropRouter()
         let presenter: ProfileDropPresentable & ProfileDropInteractorOutput = ProfileDropPresenter()
         let interactor: ProfileDropInteractable = ProfileDropInteractor(
-            tryProfileDropUseCase: tryProfileDropUseCase,
+            nearByProfileDropUseCase: nearByProfileDropUseCase,
+            targetedProfileDropUseCase: targetedProfileDropUseCase,
             quitProfileDropUseCase: quitProfileDropUseCase,
             niDeviceChecker: niDeviceChecker)
 

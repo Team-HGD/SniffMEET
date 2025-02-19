@@ -10,8 +10,8 @@ import MultipeerConnectivity
 import NearbyInteraction
 
 protocol NearByProfileDropUseCase {
-    var profilePublisher: CurrentValueSubject<DogDTO?, Never>  { get set }
-    var isNIConnected: CurrentValueSubject<Bool, Never> { get set }
+    var profilePublisher: PassthroughSubject<DogDTO?, Never>  { get set }
+    var isConnected: PassthroughSubject<ConnectionState, Never> { get set }
     var transmissionFlag: Set<String> { get set }
     var isTransitioned: Bool { get set }
     var triedBefore: Bool { get set }
@@ -22,8 +22,10 @@ protocol NearByProfileDropUseCase {
 }
 
 final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
-    var profilePublisher: CurrentValueSubject<DogDTO?, Never> = CurrentValueSubject(nil)
-    var isNIConnected: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
+    var profilePublisher: PassthroughSubject<DogDTO?, Never> = PassthroughSubject()
+    var isConnected: PassthroughSubject<ConnectionState, Never> = PassthroughSubject()
+    var cancellable: AnyCancellable? = nil
+
     var transmissionFlag: Set<String>
     var isTransitioned: Bool = false
     var triedBefore: Bool = false
@@ -55,8 +57,6 @@ final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
     }
     
     func reset(mpcManager: MPCManager, nimanager: NIManager) {
-        isNIConnected.value = false
-        profilePublisher.value = nil
         transmissionFlag = []
         isTransitioned = false
         triedBefore = false
@@ -81,9 +81,18 @@ final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
         }
     }
     
-    func execute()  {
+    func execute() {
         triedBefore = true
         mpcManager.isAvailableToBeConnected.send(true)
+        
+        cancellable = Timer.publish(every: Context.connectionTimeLimit, on: .current, in: .common)
+            .autoconnect()
+            .sink { _ in
+                Task { [weak self] in
+                    self?.isConnected.send(.cannotFindPeer)
+                    self?.cancellable?.cancel()
+                }
+            }
     }
     
     func loadProfileData() {
@@ -112,6 +121,21 @@ final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
             SNMLogger.error("loadData error : \(error)")
         }
     }
+    
+    func setTimer() {
+        cancellable = Timer.publish(every: Context.connectionTimeLimit, on: .current, in: .common)
+            .autoconnect()
+            .sink { _ in
+                Task { [weak self] in // 30초가 지나고 프로필 드랍이 진행되지 않으면 연결 실패 처리
+                    self?.isConnected.send(.failure)
+                    self?.cancellable?.cancel()
+                }
+            }
+    }
+    
+    func deleteTimer() {
+        cancellable?.cancel()
+    }
 }
 // MARK: - MCSessionDelegate
 extension NearByProfileDropUseCaseImpl: MCSessionDelegate {
@@ -127,16 +151,18 @@ extension NearByProfileDropUseCaseImpl: MCSessionDelegate {
                     await mpcManager.connectedPeerManager.connect(peer: peerID)
                     guard let token = niManager.discoveryToken() else { return }
                     let data = try encoder.encode(
-                        MPCProfileDropDTO(
-                            token: token,
-                            profile: nil,
-                            transitionMessage: nil)
+                        MPCProfileDropDTO(token: token, profile: nil, transitionMessage: nil)
                     )
                     await mpcManager.send(data: data)
                 } catch {
                     SNMLogger.error(error.localizedDescription)
                 }
             }
+            cancellable?.cancel()
+            setTimer()
+        case .notConnected:
+            isConnected.send(.failure)
+            deleteTimer()
         default:
             break
         }
@@ -151,7 +177,8 @@ extension NearByProfileDropUseCaseImpl: MCSessionDelegate {
                 let receivedData = try self?.decoder.decode(MPCProfileDropDTO.self, from: data)
                 if let token = receivedData?.token,
                    let niConnected = self?.niManager.handleReceivedDiscoveryToken(token) {
-                    self?.isNIConnected.send(niConnected)
+                    let connectionsState: ConnectionState = niConnected ? .successNISession : .failure
+                    self?.isConnected.send(connectionsState)
                 } else if let profile = receivedData?.profile,
                           let receivedFlagData = self?.receivedFlagData { // 프로필 데이터
                     self?.profilePublisher.send(profile)
@@ -166,6 +193,7 @@ extension NearByProfileDropUseCaseImpl: MCSessionDelegate {
                 && self?.isTransitioned == true {
                 self?.niManager.endSession()
                 self?.mpcManager.isAvailableToBeConnected.send(false)
+                self?.deleteTimer()
             }
         }
     }
@@ -238,6 +266,7 @@ extension NearByProfileDropUseCaseImpl {
         static let maxDistance: Float = 0.15
         static let minDirection: simd_float3 = simd_float3(-0.6, -0.3, -1.0)
         static let maxDirection: simd_float3 = simd_float3(1.2, 0.6, -2.0)
+        static let connectionTimeLimit: Double = 30.0
         static let received: String = "received"
         static let peerReceived: String = "나 받았어"
     }

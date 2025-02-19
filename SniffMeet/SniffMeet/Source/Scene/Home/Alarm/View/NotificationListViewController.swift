@@ -18,6 +18,9 @@ final class NotificationListViewController: BaseViewController, NotificationList
     var presenter: (any NotificationListPresentable)?
     var cancellables: Set<AnyCancellable> = []
     private let notificationTableView: UITableView = UITableView()
+    private let snmProgressView: SNMProgressView = SNMProgressView(
+        animationType: SNMToastAnimation.showAtCenter
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,14 +90,12 @@ final class NotificationListViewController: BaseViewController, NotificationList
 
     func didStartDeleteNotifications() {
         Task { @MainActor [weak self] in
-            // TODO: Toast 머지후 수정 필요
-            self?.showSNMProgressToast()
+            self?.snmProgressView.show(in: self?.view, isDim: true)
         }
     }
     func didEndDeleteNotifications() {
         Task { @MainActor [weak self] in
-            // TODO: Toast 머지후 수정 필요
-            // self?.progressView.hidden()
+            self?.snmProgressView.hidden()
         }
     }
 }

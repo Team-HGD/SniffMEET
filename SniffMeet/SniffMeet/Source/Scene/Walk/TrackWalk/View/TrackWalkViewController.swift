@@ -10,10 +10,15 @@ import UIKit
 
 protocol TrackWalkViewable: AnyObject {
     var presenter: TrackWalkPresentable? { get set }
+    
+    func updateRouteLine(with location: WalkRoute)
+    func updateWalkRecord()
 }
 
 final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
     var presenter: (any TrackWalkPresentable)?
+    private var cancellables: Set<AnyCancellable> = []
+    private var isStarted: Bool = false
     
     private let mapView: MKMapView = {
         let mapView: MKMapView = MKMapView()
@@ -152,11 +157,54 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
             distanceValueLabel.bottomAnchor.constraint(equalTo: distanceView.bottomAnchor)
         ])
     }
-    override func bind() {}
+    
+    override func bind() {
+        trackingButton.publisher(event: .touchUpInside)
+            .sink { [weak self] _ in
+                guard self?.isStarted == true else {
+                    self?.isStarted = true
+                    self?.presenter?.startTracking()
+                    return
+                }
+                self?.isStarted = false
+                self?.trackingButton.isEnabled = false
+                Task {
+                    do {
+                        try await Task.sleep(nanoseconds: 3000000000)
+                    } catch {
+                        SNMLogger.error("TrackWalkViewController: \(error.localizedDescription)")
+                    }
+                    self?.presenter?.endTracking()
+                }
+            }
+            .store(in: &cancellables)
+    }
+}
+
+extension TrackWalkViewController {
+    func updateRouteLine(with location: WalkLocation) {
+        let lineDraw = MKPolyline(coordinates: location.points, count: location.count)
+        mapView.addOverlay(lineDraw)
+    }
+    func updateWalkRecord() {
+        
+    }
 }
 
 extension TrackWalkViewController: MKMapViewDelegate {
-    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        guard let polyLine = overlay as? MKPolyline
+        else {
+            SNMLogger.log("맵에 경로를 그릴 수 없습니다.")
+            return MKOverlayRenderer()
+        }
+        let renderer = MKPolylineRenderer(polyline: polyLine)
+        renderer.strokeColor = .systemOrange
+        renderer.lineWidth = 3.0
+        renderer.alpha = 1.0
+        
+        return renderer
+    }
 }
 
 private extension TrackWalkViewController {

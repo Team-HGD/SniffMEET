@@ -41,6 +41,7 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
     private let trackingButton = UIButton()
     private let firstHorizontalSeparator = UIView()
     private let verticalSeparator = UIView()
+    private var routeMapImageView: UIImageView = UIImageView()
 
     override func viewWillAppear(_ animated: Bool) {
         trackingButton.layoutIfNeeded()
@@ -74,9 +75,11 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
         trackingButton.setTitleColor(.white, for: .normal)
         trackingButton.backgroundColor = SNMColor.mainNavy
         trackingButton.titleLabel?.font = .systemFont(ofSize: 19, weight: .semibold)
+        
+        routeMapImageView.isHidden = true
     }
     override func configureHierachy() {
-        [mapView, bottomView].forEach{
+        [mapView, routeMapImageView, bottomView].forEach{
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -103,6 +106,11 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mapView.topAnchor.constraint(equalTo: view.topAnchor),
             mapView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
+            
+            routeMapImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            routeMapImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            routeMapImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            routeMapImageView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
             
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -166,15 +174,8 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
                     self?.presenter?.startTracking()
                     return
                 }
-                self?.isStarted = false
-                self?.trackingButton.isEnabled = false
-                Task {
-                    do {
-                        try await Task.sleep(nanoseconds: 3000000000)
-                    } catch {
-                        SNMLogger.error("TrackWalkViewController: \(error.localizedDescription)")
-                    }
-                    self?.presenter?.endTracking()
+                Task { @MainActor in
+                    await self?.stopRecordWalk()
                 }
             }
             .store(in: &cancellables)
@@ -186,8 +187,38 @@ extension TrackWalkViewController {
         let lineDraw = MKPolyline(coordinates: location.points, count: location.count)
         mapView.addOverlay(lineDraw)
     }
+    // TODO: -  1초 마다 업데이트하기
     func updateWalkRecord() {
         
+    }
+    
+    func showRouteResult(with mapImage: UIImage) {
+        mapView.isHidden = true
+        routeMapImageView.image = mapImage
+        routeMapImageView.isHidden = false
+    }
+    
+    func stopRecordWalk() async {
+        isStarted = false
+        trackingButton.isEnabled = false
+        guard let mapImage = screenshot(at: mapView) else {
+            presenter?.endTracking()
+            return
+        }
+        showRouteResult(with: mapImage)
+        do {
+            try await Task.sleep(nanoseconds: 3000000000)
+        } catch {
+            SNMLogger.error("TrackWalkViewController: \(error.localizedDescription)")
+        }
+        presenter?.endTracking()
+    }
+    
+    func screenshot(at view: UIView) -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: view.bounds.size)
+        return renderer.image { context in
+            view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        }
     }
 }
 

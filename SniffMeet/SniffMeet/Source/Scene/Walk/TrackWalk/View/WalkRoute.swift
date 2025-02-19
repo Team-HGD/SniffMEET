@@ -14,4 +14,3 @@ struct WalkRoute {
     private(set) var points: [CLLocationCoordinate2D] = []
     var count: Int { points.count }
 }
-

@@ -31,6 +31,11 @@ final class TrackWalkViewController: BaseViewController {
     private let trackingButton = UIButton()
     private let firstHorizontalSeparator = UIView()
     private let verticalSeparator = UIView()
+
+    override func viewWillAppear(_ animated: Bool) {
+        trackingButton.layoutIfNeeded()
+        trackingButton.makeViewCircular()
+    }
     
     override func configureAttributes() {
         [timeTitleLabel, velocityTitleLabel, distanceTitleLabel].forEach {
@@ -58,8 +63,7 @@ final class TrackWalkViewController: BaseViewController {
         trackingButton.setTitle(Context.trackButtonStartTitle, for: .normal)
         trackingButton.setTitleColor(.white, for: .normal)
         trackingButton.backgroundColor = SNMColor.mainNavy
-        trackingButton.layer.masksToBounds = true
-        trackingButton.makeViewCircular()
+        trackingButton.titleLabel?.font = .systemFont(ofSize: 19, weight: .semibold)
     }
     override func configureHierachy() {
         [mapView, bottomView].forEach{

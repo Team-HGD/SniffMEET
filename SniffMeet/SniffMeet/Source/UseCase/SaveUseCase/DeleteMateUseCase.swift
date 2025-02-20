@@ -61,12 +61,12 @@ final class DeleteMateUseCaseImpl: DeleteMateUseCase {
                     receiverID: mateID.uuidString
                 )
             )
-        } catch let error as SupabaseDBError where error == .fetchDataFailed || error == .updateDataFailed{
-            throw SNMError(level: .user, error: error)
-        } catch let error as SupabaseAuthError {
-            throw SNMError(level: .user, error: error)
+        } catch let error as SupabaseSessionError {
+            throw SNMError(level: .notExistSession, error: error)
+        } catch let error as SupabaseDBError {
+            throw SNMError(level: .retryable, error: error)
         } catch {
-            throw SNMError(level: .developer, error: error)
+            throw SNMError(level: .logOnly, error: error)
         }
     }
 }

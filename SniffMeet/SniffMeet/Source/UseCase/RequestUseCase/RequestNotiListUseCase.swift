@@ -38,14 +38,14 @@ struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
             let walkDTOList = try decoder.decode([WalkNotiDTO].self, from: data)
             
             return walkDTOList.map { $0.toEntity() }
-        } catch let error as SupabaseDBError where error == .noMoreData {
-            throw SNMError(level: .user, error: error)
-        } catch let error as SupabaseAuthError {
-            throw SNMError(level: .user, error: error)
         } catch let error as SupabaseSessionError {
-            throw SNMError(level: .user, error: error)
+            throw SNMError(level: .notExistSession, error: error)
+        } catch let error as SupabaseDBError where error == .noMoreData {
+            throw SNMError(level: .notifyUser, error: error)
+        } catch let error as SupabaseDBError {
+            throw SNMError(level: .retryable, error: error)
         } catch {
-            throw SNMError(level: .developer, error: error)
+            throw SNMError(level: .logOnly, error: error)
         }
     }
 }

@@ -508,6 +508,10 @@
 		FDC5D9C12D5C7E0400380533 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C02D5C7E0400380533 /* FirebaseAnalyticsWithoutAdIdSupport */; settings = {ATTRIBUTES = (Required, ); }; };
 		FDC5D9C32D5C7E0400380533 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C22D5C7E0400380533 /* FirebaseCore */; settings = {ATTRIBUTES = (Required, ); }; };
 		FDC5D9C52D5C7E0400380533 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C42D5C7E0400380533 /* FirebaseCrashlytics */; settings = {ATTRIBUTES = (Required, ); }; };
+		FDC8A02D2D66FA190097F00A /* SNMErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC8A02C2D66FA040097F00A /* SNMErrorHandler.swift */; };
+		FDC8A02E2D66FA190097F00A /* SNMErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC8A02C2D66FA040097F00A /* SNMErrorHandler.swift */; };
+		FDC8A02F2D66FA190097F00A /* SNMErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC8A02C2D66FA040097F00A /* SNMErrorHandler.swift */; };
+		FDC8A0302D66FA190097F00A /* SNMErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC8A02C2D66FA040097F00A /* SNMErrorHandler.swift */; };
 		FDCD02C52CE917A400B627D8 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE14A4D2CE8D13E001F7A9D /* HTTPStatusCode.swift */; };
 		FDCD02C62CE917A400B627D8 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0634292CE596C2003C9D6B /* NetworkProvider.swift */; };
 		FDCD02C72CE917A400B627D8 /* SNMRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE14A512CE8D331001F7A9D /* SNMRequestType.swift */; };
@@ -802,6 +806,7 @@
 		FDBFA9A02CE1E51000AA9220 /* SNMColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMColor.swift; sourceTree = "<group>"; };
 		FDBFA9B02CE1FDED00AA9220 /* LayoutConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstant.swift; sourceTree = "<group>"; };
 		FDC5D9B92D5BD5D900380533 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FDC8A02C2D66FA040097F00A /* SNMErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMErrorHandler.swift; sourceTree = "<group>"; };
 		FDCD02BE2CE9172600B627D8 /* SNMNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDCD02CD2CE917D400B627D8 /* MockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRequest.swift; sourceTree = "<group>"; };
 		FDCD02D02CE917E200B627D8 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
@@ -2294,6 +2299,7 @@
 		FDE768882CF7811900B5DE88 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				FDC8A02C2D66FA040097F00A /* SNMErrorHandler.swift */,
 				FD01D8F62D40AC8000AD4940 /* TaskSerialQueue.swift */,
 				FD880B592CECE8F90093BEB9 /* SNMLogger.swift */,
 			);
@@ -2580,6 +2586,7 @@
 				32BD48EE2D40B4BA0078DA9C /* PushNotificationConfig.swift in Sources */,
 				32BD48EC2D40B4880078DA9C /* Assets.xcassets in Sources */,
 				FD243CFD2D62332500971162 /* SNMToastAnimation.swift in Sources */,
+				FDC8A02E2D66FA190097F00A /* SNMErrorHandler.swift in Sources */,
 				32BD48EB2D40B4790078DA9C /* SNMColor.swift in Sources */,
 				32BD48EA2D40AEBC0078DA9C /* RemoteDatabaseManagerMock.swift in Sources */,
 				99E79F5C2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */,
@@ -2815,6 +2822,7 @@
 				FD331A8C2CF33E7100F39426 /* KeychainManager.swift in Sources */,
 				A2FE77742D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
 				FD331A7D2CF33D0500F39426 /* SupabaseStorageRequest.swift in Sources */,
+				FDC8A02D2D66FA190097F00A /* SNMErrorHandler.swift in Sources */,
 				FD331A7E2CF33D0500F39426 /* SupabaseConfig.swift in Sources */,
 				FD331A802CF33D0500F39426 /* SupabaseAuthManager.swift in Sources */,
 				FD331A8E2CF33F6700F39426 /* SupabaseStorageManager.swift in Sources */,
@@ -2856,6 +2864,7 @@
 				FDE7689F2CF7858F00B5DE88 /* Extension + UIViewController.swift in Sources */,
 				A24B1F322D3C33660012B860 /* CGImageCoder.swift in Sources */,
 				A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */,
+				FDC8A02F2D66FA190097F00A /* SNMErrorHandler.swift in Sources */,
 				A2C844D12CDBE1E5007F2970 /* (null) in Sources */,
 				A2BD49F62CF72B4000AC72A7 /* WalkNotiDTO.swift in Sources */,
 				3200444E2CE595EA00D08B6D /* ProfileCreatePresenter.swift in Sources */,
@@ -3090,6 +3099,7 @@
 				3284D34E2D2F941C000ABC04 /* DataStoragable.swift in Sources */,
 				FD69B1CD2CE3E9BB009D71DC /* KeychainTests.swift in Sources */,
 				32A7563E2D00398100965F0A /* CacheManager.swift in Sources */,
+				FDC8A0302D66FA190097F00A /* SNMErrorHandler.swift in Sources */,
 				99A5E1BB2D30322C003B00A8 /* SNMLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3156,7 +3166,6 @@
 /* Begin XCBuildConfiguration section */
 		32BD482E2D3FEC9D0078DA9C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -3205,7 +3214,6 @@
 		};
 		A24B1F2B2D3C32960012B860 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -3256,7 +3264,6 @@
 		};
 		FD331A6C2CF33C6700F39426 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -3311,7 +3318,6 @@
 		};
 		FD3A03342CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3527,7 +3533,6 @@
 		};
 		FD69B1C12CE3BCDC009D71DC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -3578,7 +3583,6 @@
 		};
 		FDCD02C22CE9172600B627D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32081B932D6180A000D19235 /* Debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;

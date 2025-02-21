@@ -15,7 +15,7 @@ protocol TrackWalkViewable: AnyObject {
     func updateWalkRecord()
 }
 
-final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
+final class TrackWalkViewController: BaseViewController {
     var presenter: (any TrackWalkPresentable)?
     private var cancellables: Set<AnyCancellable> = []
     private var isStarted: Bool = false
@@ -208,7 +208,7 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
     }
 }
 
-extension TrackWalkViewController {
+extension TrackWalkViewController: TrackWalkViewable {
     func updateRouteLine(with location: WalkRoute) {
         let lineDraw = MKPolyline(coordinates: location.points, count: location.count)
         mapView.addOverlay(lineDraw)
@@ -217,7 +217,9 @@ extension TrackWalkViewController {
     func updateWalkRecord() {
         
     }
-    
+}
+
+private extension TrackWalkViewController {
     func showRouteResult(with mapImage: UIImage) {
         mapView.isHidden = true
         routeMapImageView.image = mapImage

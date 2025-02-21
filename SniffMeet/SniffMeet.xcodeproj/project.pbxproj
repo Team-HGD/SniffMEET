@@ -945,6 +945,7 @@
 				320044972CED81EF00D08B6D /* WalkNoti.swift */,
 				A23A3B722CF4683F00A58705 /* Mate.swift */,
 				320044522CE59A8100D08B6D /* UserInfo.swift */,
+				32C539642D65CB2300CD89DF /* WalkRoute.swift */,
 				A2BD49F92CF770F900AC72A7 /* DogTraits */,
 			);
 			path = Entity;
@@ -1232,7 +1233,6 @@
 		32C539572D64161700CD89DF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				32C539642D65CB2300CD89DF /* WalkRoute.swift */,
 				32C539542D6415FF00CD89DF /* TrackWalkViewController.swift */,
 			);
 			path = View;

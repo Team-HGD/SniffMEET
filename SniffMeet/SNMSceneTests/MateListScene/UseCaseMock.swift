@@ -34,8 +34,9 @@ struct RequestProfileImageUseCaseMock: RequestProfileImageUseCase {
 }
 
 final class NearByProfileDropUseCaseMock: NearByProfileDropUseCase {
-    var profilePublisher: CurrentValueSubject<DogDTO?, Never> = CurrentValueSubject(nil)
-    var isNIConnected: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
+    var isConnected: PassthroughSubject<ConnectionState, Never> = PassthroughSubject()
+    
+    var profilePublisher: PassthroughSubject<DogDTO?, Never> = PassthroughSubject()
     var transmissionFlag: Set<String> = []
     var isTransitioned: Bool = false
     var triedBefore: Bool = false

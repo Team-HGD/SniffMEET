@@ -16,12 +16,12 @@ final class AppRouter: NSObject, Routable {
     }
 
     func displayInitialScreen() {
-        Task { @MainActor in
+        Task {
             do {
                 try await SupabaseSessionManager.shared.restoreSession()
-                displayTabBar()
+                await MainActor.run { displayHomeView() }
             } catch {
-                displayOnBoardingView()
+                await MainActor.run { displayOnboardingView() }
             }
         }
     }
@@ -31,34 +31,36 @@ final class AppRouter: NSObject, Routable {
             mate: UINavigationController(rootViewController: MateListRouter.createMateListModule())
         )
         window?.rootViewController = TabBarModuleBuilder.build(usingSubmodules: submodules)
+    func displayHomeView() {
+        let tabBarController = TabBarModuleBuilder.build()
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
-    private func displayOnBoardingView() {
-        let navigationController =
-        UINavigationController(rootViewController: OnBoardingRouter.createModule())
+    func displayOnboardingView() {
+        let navigationController = UINavigationController(
+            rootViewController: OnBoardingRouter.createModule()
+        )
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     func displayProfileSetupView() {
-        let navigationController =
-        UINavigationController(rootViewController: ProfileInputRouter.createProfileInputModule())
+        let navigationController = UINavigationController(
+            rootViewController: ProfileInputRouter.createProfileInputModule()
+        )
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
-    func moveToHomeScreen() {
-        let submodules = (
-            home: UINavigationController(rootViewController:  HomeModuleBuilder.build()),
-            //            walk: UINavigationController(rootViewController: WalkLogPageViewController()),
-            mate: UINavigationController(rootViewController: MateListRouter.createMateListModule())
-        )
-        window?.rootViewController = TabBarModuleBuilder.build(usingSubmodules: submodules)
-    }
+}
+
+// MARK: - AppRouterNotificationHandlers
+
+extension AppRouter {
     /// 뷰에 진입한 후 산책 요청 화면을 present 합니다.
     func initializeViewAndPresentRespondView(walkNoti: WalkNoti) {
         Task { @MainActor in
             do {
                 try await SupabaseSessionManager.shared.restoreSession()
-                displayTabBar()
+                displayHomeView()
                 presentRespondWalkView(walkNoti: walkNoti)
             } catch {
                 displayProfileSetupView()
@@ -70,7 +72,7 @@ final class AppRouter: NSObject, Routable {
         Task { @MainActor in
             do {
                 try await SupabaseSessionManager.shared.restoreSession()
-                displayTabBar()
+                displayHomeView()
                 presentProcessedWalkView(walkNoti: walkNoti)
             } catch {
                 displayProfileSetupView()
@@ -95,6 +97,8 @@ final class AppRouter: NSObject, Routable {
         }
     }
 }
+
+
 
 // MARK: - AppRouter+UIViewControllerTransitioningDelegate
 

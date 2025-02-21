@@ -8,7 +8,12 @@
 import UIKit
 
 enum TabBarModuleBuilder {
-    static func build(usingSubmodules submodules: MainTabs) -> UITabBarController {
+    static func build() -> UITabBarController {
+        let submodules = (
+            home: UINavigationController(rootViewController: HomeModuleBuilder.build()),
+            walk: UINavigationController(rootViewController: WalkLogPageViewController()),
+            mate: UINavigationController(rootViewController: MateListRouter.createMateListModule())
+        )
         let homeTabBarItem = UITabBarItem(
             title: "Home",
             image: UIImage(systemName: "house.fill"),

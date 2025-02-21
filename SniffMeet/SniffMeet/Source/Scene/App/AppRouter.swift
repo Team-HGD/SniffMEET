@@ -25,12 +25,6 @@ final class AppRouter: NSObject, Routable {
             }
         }
     }
-    private func displayTabBar() {
-        let submodules = (
-            home: UINavigationController(rootViewController: HomeModuleBuilder.build()),
-            mate: UINavigationController(rootViewController: MateListRouter.createMateListModule())
-        )
-        window?.rootViewController = TabBarModuleBuilder.build(usingSubmodules: submodules)
     func displayHomeView() {
         let tabBarController = TabBarModuleBuilder.build()
         window?.rootViewController = tabBarController

@@ -34,8 +34,8 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
     private let distanceView = UIView()
     private let timeTitleLabel = UILabel()
     private let timeValueLabel = UILabel()
-    private let velocityTitleLabel = UILabel()
-    private let velocityValueLabel = UILabel()
+    private let numberOfStepsTitleLabel = UILabel()
+    private let numberOfStepsValueLabel = UILabel()
     private let distanceTitleLabel = UILabel()
     private let distanceValueLabel = UILabel()
     private let trackingButton = UIButton()
@@ -49,12 +49,12 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
     }
     
     override func configureAttributes() {
-        [timeTitleLabel, velocityTitleLabel, distanceTitleLabel].forEach {
+        [timeTitleLabel, numberOfStepsTitleLabel, distanceTitleLabel].forEach {
             $0.textColor = SNMColor.subGray3
             $0.font = SNMFont.callout
             $0.contentMode = .center
         }
-        [timeValueLabel, velocityValueLabel, distanceValueLabel].forEach {
+        [timeValueLabel, numberOfStepsValueLabel, distanceValueLabel].forEach {
             $0.textColor = SNMColor.subGray3
             $0.font = UIFont.systemFont(ofSize: 25, weight: .medium)
             $0.contentMode = .center
@@ -66,8 +66,8 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
         bottomView.backgroundColor = .systemBackground
         timeTitleLabel.text = Context.timeTitle
         timeValueLabel.text = Context.defaultTime
-        velocityTitleLabel.text = Context.velocityTitle
-        velocityValueLabel.text = Context.defaultVelocity
+        numberOfStepsTitleLabel.text = Context.velocityTitle
+        numberOfStepsValueLabel.text = Context.defaultVelocity
         distanceTitleLabel.text = Context.distanceTitle
         distanceValueLabel.text = Context.defaultDistance
         
@@ -87,7 +87,7 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
             bottomView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        [velocityTitleLabel, velocityValueLabel].forEach {
+        [numberOfStepsTitleLabel, numberOfStepsValueLabel].forEach {
             velocityView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -118,49 +118,75 @@ final class TrackWalkViewController: BaseViewController, TrackWalkViewable {
             bottomView.heightAnchor.constraint(equalToConstant: 330)
         ])
         NSLayoutConstraint.activate([
-            timeTitleLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: LayoutConstant.regularVerticalPadding),
+            timeTitleLabel.topAnchor.constraint(
+                equalTo: bottomView.topAnchor,
+                constant: LayoutConstant.regularVerticalPadding),
             timeTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            timeValueLabel.topAnchor.constraint(equalTo: timeTitleLabel.bottomAnchor, constant: LayoutConstant.smallVerticalPadding),
+            timeValueLabel.topAnchor.constraint(
+                equalTo: timeTitleLabel.bottomAnchor,
+                constant: LayoutConstant.smallVerticalPadding),
             timeValueLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-            firstHorizontalSeparator.topAnchor.constraint(equalTo: timeValueLabel.bottomAnchor, constant: LayoutConstant.smallVerticalPadding),
+            firstHorizontalSeparator.topAnchor.constraint(
+                equalTo: timeValueLabel.bottomAnchor,
+                constant: LayoutConstant.smallVerticalPadding),
             firstHorizontalSeparator.heightAnchor.constraint(equalToConstant: 1),
-            firstHorizontalSeparator.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: LayoutConstant.largestVerticalPadding),
-            firstHorizontalSeparator.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -LayoutConstant.largestVerticalPadding),
+            firstHorizontalSeparator.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: LayoutConstant.largestVerticalPadding),
+            firstHorizontalSeparator.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -LayoutConstant.largestVerticalPadding),
             
             verticalSeparator.widthAnchor.constraint(equalToConstant: 1),
             verticalSeparator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             verticalSeparator.heightAnchor.constraint(equalToConstant: 63),
-            verticalSeparator.topAnchor.constraint(equalTo: firstHorizontalSeparator.bottomAnchor, constant: Context.regularVerticalPadding),
+            verticalSeparator.topAnchor.constraint(
+                equalTo: firstHorizontalSeparator.bottomAnchor,
+                constant: Context.regularVerticalPadding),
             
-            velocityView.topAnchor.constraint(equalTo: firstHorizontalSeparator.bottomAnchor, constant: Context.regularVerticalPadding),
-            velocityView.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: LayoutConstant.largestVerticalPadding),
+            velocityView.topAnchor.constraint(
+                equalTo: firstHorizontalSeparator.bottomAnchor,
+                constant: Context.regularVerticalPadding),
+            velocityView.leadingAnchor.constraint(
+                equalTo: bottomView.leadingAnchor,
+                constant: LayoutConstant.largestVerticalPadding),
             velocityView.trailingAnchor.constraint(equalTo: verticalSeparator.leadingAnchor),
             velocityView.heightAnchor.constraint(equalToConstant: 63),
 
-            distanceView.topAnchor.constraint(equalTo: firstHorizontalSeparator.bottomAnchor, constant: Context.regularVerticalPadding),
+            distanceView.topAnchor.constraint(
+                equalTo: firstHorizontalSeparator.bottomAnchor,
+                constant: Context.regularVerticalPadding),
             distanceView.leadingAnchor.constraint(equalTo: verticalSeparator.trailingAnchor),
-            distanceView.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -LayoutConstant.largestVerticalPadding),
+            distanceView.trailingAnchor.constraint(
+                equalTo: bottomView.trailingAnchor,
+                constant: -LayoutConstant.largestVerticalPadding),
             distanceView.heightAnchor.constraint(equalToConstant: 63),
             
             trackingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             trackingButton.widthAnchor.constraint(equalToConstant: 70),
             trackingButton.heightAnchor.constraint(equalToConstant: 70),
-            trackingButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -LayoutConstant.xlargeVerticalPadding)
+            trackingButton.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -LayoutConstant.xlargeVerticalPadding)
         ])
         NSLayoutConstraint.activate([
-            velocityTitleLabel.topAnchor.constraint(equalTo: velocityView.topAnchor),
-            velocityTitleLabel.centerXAnchor.constraint(equalTo: velocityView.centerXAnchor),
+            numberOfStepsTitleLabel.topAnchor.constraint(equalTo: velocityView.topAnchor),
+            numberOfStepsTitleLabel.centerXAnchor.constraint(equalTo: velocityView.centerXAnchor),
 
-            velocityValueLabel.topAnchor.constraint(equalTo: velocityTitleLabel.bottomAnchor, constant: LayoutConstant.edgePadding),
-            velocityValueLabel.centerXAnchor.constraint(equalTo: velocityView.centerXAnchor),
-            velocityValueLabel.bottomAnchor.constraint(equalTo: velocityView.bottomAnchor)
+            numberOfStepsValueLabel.topAnchor.constraint(
+                equalTo: numberOfStepsTitleLabel.bottomAnchor,
+                constant: LayoutConstant.edgePadding),
+            numberOfStepsValueLabel.centerXAnchor.constraint(equalTo: velocityView.centerXAnchor),
+            numberOfStepsValueLabel.bottomAnchor.constraint(equalTo: velocityView.bottomAnchor)
         ])
         NSLayoutConstraint.activate([
             distanceTitleLabel.topAnchor.constraint(equalTo: distanceView.topAnchor),
             distanceTitleLabel.centerXAnchor.constraint(equalTo: distanceView.centerXAnchor),
 
-            distanceValueLabel.topAnchor.constraint(equalTo: distanceTitleLabel.bottomAnchor, constant: LayoutConstant.edgePadding),
+            distanceValueLabel.topAnchor.constraint(
+                equalTo: distanceTitleLabel.bottomAnchor,
+                constant: LayoutConstant.edgePadding),
             distanceValueLabel.centerXAnchor.constraint(equalTo: distanceView.centerXAnchor),
             distanceValueLabel.bottomAnchor.constraint(equalTo: distanceView.bottomAnchor)
         ])
@@ -243,10 +269,10 @@ private extension TrackWalkViewController {
         static let trackButtonStartTitle = "시작"
         static let trackButtonStopTitle = "종료"
         static let timeTitle = "시간"
-        static let velocityTitle = "평균 속도"
+        static let velocityTitle = "걸음수"
         static let distanceTitle = "거리"
         static let defaultTime = "00:00:00"
-        static let defaultVelocity = "0.00"
+        static let defaultVelocity = "0"
         static let defaultDistance = "0.00"
         static let regularVerticalPadding: CGFloat = 20
     }

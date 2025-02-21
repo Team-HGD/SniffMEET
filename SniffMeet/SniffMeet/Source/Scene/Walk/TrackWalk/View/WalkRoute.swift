@@ -1,5 +1,5 @@
 //
-//  WalkLocation.swift
+//  WalkRoute.swift
 //  SniffMeet
 //
 //  Created by 윤지성 on 2/19/25.

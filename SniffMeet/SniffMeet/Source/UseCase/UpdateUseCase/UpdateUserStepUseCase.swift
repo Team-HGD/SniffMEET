@@ -25,6 +25,7 @@ final class UpdateUserStepUseCaseImpl: UpdateUserStepUseCase {
 
         pedometerIsUpdating = true
         pedometer.startUpdates(from: Date()) { data, error in
+        //TODO: - 에러 구체화 필요
             guard error == nil, let data = data else { return }
             update(data.numberOfSteps.intValue)
         }

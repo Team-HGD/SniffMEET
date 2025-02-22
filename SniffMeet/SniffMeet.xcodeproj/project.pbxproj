@@ -279,6 +279,16 @@
 		32BD48F82D40B5450078DA9C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3A033D2CD8CF460047B7ED /* SceneDelegate.swift */; };
 		32BD48F92D40B5B90078DA9C /* (null) in Sources */ = {isa = PBXBuildFile; };
 		32BD48FB2D40B5E50078DA9C /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 32BD48FA2D40B5E50078DA9C /* OrderedCollections */; };
+		32C539552D64161100CD89DF /* TrackWalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539542D6415FF00CD89DF /* TrackWalkViewController.swift */; };
+		32C539562D64161100CD89DF /* TrackWalkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539542D6415FF00CD89DF /* TrackWalkViewController.swift */; };
+		32C5395C2D64165800CD89DF /* TrackWalkViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C5395B2D64165800CD89DF /* TrackWalkViewPresenter.swift */; };
+		32C5395D2D64165800CD89DF /* TrackWalkViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C5395B2D64165800CD89DF /* TrackWalkViewPresenter.swift */; };
+		32C5395F2D64165900CD89DF /* TrackWalkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C5395E2D64165900CD89DF /* TrackWalkInteractor.swift */; };
+		32C539602D64165900CD89DF /* TrackWalkInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C5395E2D64165900CD89DF /* TrackWalkInteractor.swift */; };
+		32C539622D64165A00CD89DF /* TrackWalkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539612D64165A00CD89DF /* TrackWalkRouter.swift */; };
+		32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539612D64165A00CD89DF /* TrackWalkRouter.swift */; };
+		32C539652D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
+		32C539662D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
 		32C5394D2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
 		32C5394E2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
 		32C5394F2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
@@ -645,6 +655,11 @@
 		32BD48E32D4085540078DA9C /* MateListPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateListPresenterSpy.swift; sourceTree = "<group>"; };
 		32BD48E52D408C3A0078DA9C /* UseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseMock.swift; sourceTree = "<group>"; };
 		32BD48E92D40AEB50078DA9C /* RemoteDatabaseManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDatabaseManagerMock.swift; sourceTree = "<group>"; };
+		32C539542D6415FF00CD89DF /* TrackWalkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkViewController.swift; sourceTree = "<group>"; };
+		32C5395B2D64165800CD89DF /* TrackWalkViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkViewPresenter.swift; sourceTree = "<group>"; };
+		32C5395E2D64165900CD89DF /* TrackWalkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkInteractor.swift; sourceTree = "<group>"; };
+		32C539612D64165A00CD89DF /* TrackWalkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkRouter.swift; sourceTree = "<group>"; };
+		32C539642D65CB2300CD89DF /* WalkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkRoute.swift; sourceTree = "<group>"; };
 		32C5394C2D63245500CD89DF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPage.swift; sourceTree = "<group>"; };
 		9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserInfoRemoteUseCase.swift; sourceTree = "<group>"; };
@@ -930,6 +945,7 @@
 				320044972CED81EF00D08B6D /* WalkNoti.swift */,
 				A23A3B722CF4683F00A58705 /* Mate.swift */,
 				320044522CE59A8100D08B6D /* UserInfo.swift */,
+				32C539642D65CB2300CD89DF /* WalkRoute.swift */,
 				A2BD49F92CF770F900AC72A7 /* DogTraits */,
 			);
 			path = Entity;
@@ -1201,6 +1217,49 @@
 				32BD48E32D4085540078DA9C /* MateListPresenterSpy.swift */,
 			);
 			path = MateListScene;
+			sourceTree = "<group>";
+		};
+		32C539532D6415C400CD89DF /* TrackWalk */ = {
+			isa = PBXGroup;
+			children = (
+				32C5395A2D64163600CD89DF /* Router */,
+				32C539592D64162F00CD89DF /* Interactor */,
+				32C539582D64162300CD89DF /* Presenter */,
+				32C539572D64161700CD89DF /* View */,
+			);
+			path = TrackWalk;
+			sourceTree = "<group>";
+		};
+		32C539572D64161700CD89DF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				32C539542D6415FF00CD89DF /* TrackWalkViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		32C539582D64162300CD89DF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				32C5395B2D64165800CD89DF /* TrackWalkViewPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		32C539592D64162F00CD89DF /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				32C5395E2D64165900CD89DF /* TrackWalkInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		32C5395A2D64163600CD89DF /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				32C539612D64165A00CD89DF /* TrackWalkRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		995D94602CE598E1005A47BF /* NI */ = {
@@ -1621,7 +1680,7 @@
 				3200448A2CEC872D00D08B6D /* RespondWalk */,
 				FDA491932CDA7C6200A36FB0 /* RequestWalk */,
 				FDA4914B2CDA65E200A36FB0 /* WalkLog */,
-				FDA4914A2CDA077100A36FB0 /* RecordWalk */,
+				32C539532D6415C400CD89DF /* TrackWalk */,
 			);
 			path = Walk;
 			sourceTree = "<group>";
@@ -1643,41 +1702,6 @@
 				320044662CE6124900D08B6D /* DataManager.swift */,
 			);
 			path = Auth;
-			sourceTree = "<group>";
-		};
-		FDA491402CDA06FC00A36FB0 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		FDA491412CDA070200A36FB0 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entity;
-			sourceTree = "<group>";
-		};
-		FDA491422CDA070900A36FB0 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		FDA491432CDA070F00A36FB0 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		FDA491442CDA071500A36FB0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		FDA491452CDA073200A36FB0 /* Router */ = {
@@ -1711,16 +1735,6 @@
 				A2BA1B912CF1E8C60080575A /* MateListViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		FDA4914A2CDA077100A36FB0 /* RecordWalk */ = {
-			isa = PBXGroup;
-			children = (
-				FDA491612CDA7A6200A36FB0 /* AddRecordResult */,
-				FDA491602CDA7A4500A36FB0 /* Map */,
-				FDA4915A2CDA74C600A36FB0 /* Camera */,
-			);
-			path = RecordWalk;
 			sourceTree = "<group>";
 		};
 		FDA4914B2CDA65E200A36FB0 /* WalkLog */ = {
@@ -1837,18 +1851,6 @@
 			path = WalkReport;
 			sourceTree = "<group>";
 		};
-		FDA4915A2CDA74C600A36FB0 /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				FDA491442CDA071500A36FB0 /* View */,
-				FDA491432CDA070F00A36FB0 /* Interactor */,
-				FDA491422CDA070900A36FB0 /* Presenter */,
-				FDA491412CDA070200A36FB0 /* Entity */,
-				FDA491402CDA06FC00A36FB0 /* Router */,
-			);
-			path = Camera;
-			sourceTree = "<group>";
-		};
 		FDA4915E2CDA790300A36FB0 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -1866,30 +1868,6 @@
 				FDA491672CDA7BEB00A36FB0 /* Router */,
 			);
 			path = CreateProfile;
-			sourceTree = "<group>";
-		};
-		FDA491602CDA7A4500A36FB0 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				FDA4917D2CDA7C2400A36FB0 /* View */,
-				FDA4917E2CDA7C2400A36FB0 /* Interactor */,
-				FDA4917F2CDA7C2400A36FB0 /* Presenter */,
-				FDA491802CDA7C2400A36FB0 /* Entity */,
-				FDA491812CDA7C2400A36FB0 /* Router */,
-			);
-			path = Map;
-			sourceTree = "<group>";
-		};
-		FDA491612CDA7A6200A36FB0 /* AddRecordResult */ = {
-			isa = PBXGroup;
-			children = (
-				FDA491782CDA7C1C00A36FB0 /* View */,
-				FDA491792CDA7C1C00A36FB0 /* Interactor */,
-				FDA4917A2CDA7C1C00A36FB0 /* Presenter */,
-				FDA4917B2CDA7C1C00A36FB0 /* Entity */,
-				FDA4917C2CDA7C1C00A36FB0 /* Router */,
-			);
-			path = AddRecordResult;
 			sourceTree = "<group>";
 		};
 		FDA491622CDA7A8D00A36FB0 /* RequestMate */ = {
@@ -2009,76 +1987,6 @@
 			sourceTree = "<group>";
 		};
 		FDA491772CDA7C1800A36FB0 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		FDA491782CDA7C1C00A36FB0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		FDA491792CDA7C1C00A36FB0 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		FDA4917A2CDA7C1C00A36FB0 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		FDA4917B2CDA7C1C00A36FB0 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entity;
-			sourceTree = "<group>";
-		};
-		FDA4917C2CDA7C1C00A36FB0 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		FDA4917D2CDA7C2400A36FB0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		FDA4917E2CDA7C2400A36FB0 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		FDA4917F2CDA7C2400A36FB0 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		FDA491802CDA7C2400A36FB0 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entity;
-			sourceTree = "<group>";
-		};
-		FDA491812CDA7C2400A36FB0 /* Router */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -2573,6 +2481,7 @@
 				32192B272D41E8FD00C876BA /* ImageSampler.swift in Sources */,
 				32BD48F92D40B5B90078DA9C /* (null) in Sources */,
 				32BD48F82D40B5450078DA9C /* SceneDelegate.swift in Sources */,
+				32C5395D2D64165800CD89DF /* TrackWalkViewPresenter.swift in Sources */,
 				32BD48F02D40B51E0078DA9C /* AppDelegate.swift in Sources */,
 				32BD48F12D40B51E0078DA9C /* AppRouter.swift in Sources */,
 				32BD48EF2D40B5130078DA9C /* SessionViewController.swift in Sources */,
@@ -2582,6 +2491,7 @@
 				FD243CFD2D62332500971162 /* SNMToastAnimation.swift in Sources */,
 				32BD48EB2D40B4790078DA9C /* SNMColor.swift in Sources */,
 				32BD48EA2D40AEBC0078DA9C /* RemoteDatabaseManagerMock.swift in Sources */,
+				32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */,
 				99E79F5C2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */,
 				32BD48382D3FF02C0078DA9C /* WalkRequestDTO.swift in Sources */,
 				32BD48392D3FF02C0078DA9C /* WalkAPSDTO.swift in Sources */,
@@ -2709,6 +2619,7 @@
 				32BD489D2D3FF02C0078DA9C /* ProfileEditInteractor.swift in Sources */,
 				32BD489E2D3FF02C0078DA9C /* ProfileEditPresenter.swift in Sources */,
 				32BD489F2D3FF02C0078DA9C /* ProfileEditRoutable.swift in Sources */,
+				32C539602D64165900CD89DF /* TrackWalkInteractor.swift in Sources */,
 				32BD48A02D3FF02C0078DA9C /* ProfileEditViewController.swift in Sources */,
 				32BD48A12D3FF02C0078DA9C /* HomeModuleBuilder.swift in Sources */,
 				32BD48A22D3FF02C0078DA9C /* HomeViewController.swift in Sources */,
@@ -2742,6 +2653,7 @@
 				32BD48BB2D3FF02C0078DA9C /* CardPresentationController.swift in Sources */,
 				32BD48BC2D3FF02C0078DA9C /* RequestWalkViewController.swift in Sources */,
 				32BD48BD2D3FF02C0078DA9C /* SelectLocationInteractor.swift in Sources */,
+				32C539662D65CB2800CD89DF /* WalkRoute.swift in Sources */,
 				32BD48BE2D3FF02C0078DA9C /* RequestWalkInteractor.swift in Sources */,
 				32BD48BF2D3FF02C0078DA9C /* SelectLocationPresenter.swift in Sources */,
 				32BD48C02D3FF02C0078DA9C /* RequestWalkPresenter.swift in Sources */,
@@ -2785,6 +2697,7 @@
 				32BD48D92D3FF02C0078DA9C /* SupabaseSession.swift in Sources */,
 				32BD48DA2D3FF02C0078DA9C /* SupabaseUser.swift in Sources */,
 				32BD48DB2D3FF02C0078DA9C /* SupabaseSessionResponse.swift in Sources */,
+				32C539552D64161100CD89DF /* TrackWalkViewController.swift in Sources */,
 				32BD48DC2D3FF02C0078DA9C /* SupabaseUserResponse.swift in Sources */,
 				32BD48DD2D3FF02C0078DA9C /* SupabaseRefreshResponse.swift in Sources */,
 				32BD48DE2D3FF02C0078DA9C /* SupabaseTokenRequest.swift in Sources */,
@@ -2856,6 +2769,7 @@
 				FDE7689F2CF7858F00B5DE88 /* Extension + UIViewController.swift in Sources */,
 				A24B1F322D3C33660012B860 /* CGImageCoder.swift in Sources */,
 				A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */,
+				32C539622D64165A00CD89DF /* TrackWalkRouter.swift in Sources */,
 				A2C844D12CDBE1E5007F2970 /* (null) in Sources */,
 				A2BD49F62CF72B4000AC72A7 /* WalkNotiDTO.swift in Sources */,
 				3200444E2CE595EA00D08B6D /* ProfileCreatePresenter.swift in Sources */,
@@ -2926,6 +2840,7 @@
 				FD9468D52CFD590700417DC1 /* ProfileEditPresenter.swift in Sources */,
 				FD9468D62CFD590700417DC1 /* ProfileEditInteractor.swift in Sources */,
 				FD9468D72CFD590700417DC1 /* ProfileEditRoutable.swift in Sources */,
+				32C5395C2D64165800CD89DF /* TrackWalkViewPresenter.swift in Sources */,
 				993736422CFCACB100E3DD58 /* UpdateUserInfoUseCase.swift in Sources */,
 				320047B62CFCB8D000D08B6D /* EventConstant.swift in Sources */,
 				3200441C2CE48C5C00D08B6D /* MPCAdvertiser.swift in Sources */,
@@ -2954,6 +2869,7 @@
 				FD69B1B32CE3BC76009D71DC /* KeychainManager.swift in Sources */,
 				FD1152732CFB3A8A008955C4 /* RespondMapRouter.swift in Sources */,
 				320043782CDCA49100D08B6D /* (null) in Sources */,
+				32C539652D65CB2800CD89DF /* WalkRoute.swift in Sources */,
 				FDDDB9382D004233000D4528 /* ProcessedWalkPresenter.swift in Sources */,
 				A24082612CEB244C009109A0 /* SupabaseConfig.swift in Sources */,
 				99E79FA62D556C6400E48552 /* RequestReportUseCase.swift in Sources */,
@@ -3005,6 +2921,7 @@
 				320047B92CFD367300D08B6D /* PushNotificationConfig.swift in Sources */,
 				FDBFA99F2CE1E50C00AA9220 /* SNMFont.swift in Sources */,
 				FD119F4E2CED87C200BE22BD /* SelectLocationPresenter.swift in Sources */,
+				32C539562D64161100CD89DF /* TrackWalkViewController.swift in Sources */,
 				FD243D042D62547D00971162 /* SNMImageToastView.swift in Sources */,
 				99E79FAC2D556E8600E48552 /* ReportDTO.swift in Sources */,
 				FD5134192CEB7ADE002E76F3 /* HomeRouter.swift in Sources */,
@@ -3016,6 +2933,7 @@
 				3200453D2CF5A60E00D08B6D /* Extension + Date.swift in Sources */,
 				320044562CE59DF500D08B6D /* ProfileInputRouter.swift in Sources */,
 				A2C844D72CDBEF8B007F2970 /* (null) in Sources */,
+				32C5395F2D64165900CD89DF /* TrackWalkInteractor.swift in Sources */,
 				A2FE77732D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
 				99E79F962D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
 				3200438B2CDF3BEF00D08B6D /* ProfileCreateViewController.swift in Sources */,

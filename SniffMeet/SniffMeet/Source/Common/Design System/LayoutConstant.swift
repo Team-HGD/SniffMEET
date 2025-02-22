@@ -24,6 +24,8 @@ enum LayoutConstant {
     static let largeVerticalPadding: CGFloat = 30
     /// 32
     static let xlargeVerticalPadding: CGFloat = 32
+    
+    static let largestVerticalPadding: CGFloat = 40
     /// 16
     static let smallHorizontalPadding: CGFloat = 16
     /// 8

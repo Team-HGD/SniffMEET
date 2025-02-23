@@ -1229,6 +1229,8 @@
 				FD119F492CED875800BE22BD /* UpdateUserLocationUseCase.swift */,
 			);
 			path = UpdateUseCase;
+			sourceTree = "<group>";
+		};
 		32C539532D6415C400CD89DF /* TrackWalk */ = {
 			isa = PBXGroup;
 			children = (

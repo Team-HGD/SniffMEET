@@ -16,18 +16,14 @@ protocol TrackWalkPresentable: AnyObject {
 }
 protocol TrackWalkInteractorOutput: AnyObject {
     func updateWalkRecord(_ record: WalkRecord)
+    func updateLocation(with walkLocation: WalkRoute)
 }
 
 final class TrackWalkViewPresenter: TrackWalkPresentable {
     weak var view: (any TrackWalkViewable)?
     var interactor: (any TrackWalkInteractable)?
     var router: (any TrackWalkRoutable)?
-    
-    func updateLocation(with walkLocation: WalkRoute) {
-        Task { @MainActor [weak self]  in
-            self?.view?.updateRouteLine(with: walkLocation)
-        }
-    }
+
     func startTracking() {
         interactor?.startTracking()
     }
@@ -40,5 +36,10 @@ final class TrackWalkViewPresenter: TrackWalkPresentable {
 extension TrackWalkViewPresenter: TrackWalkInteractorOutput {
     func updateWalkRecord(_ record: WalkRecord) {
         view?.updateWalkRecord(record: record)
+    }
+    func updateLocation(with walkLocation: WalkRoute) {
+        Task { @MainActor [weak self]  in
+            self?.view?.updateRouteLine(with: walkLocation)
+        }
     }
 }

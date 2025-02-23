@@ -23,6 +23,7 @@ final class TrackWalkViewController: BaseViewController {
     private let mapView: MKMapView = {
         let mapView: MKMapView = MKMapView()
         mapView.showsUserLocation = true
+        mapView.setUserTrackingMode(.follow, animated: true)
         mapView.cameraZoomRange = .init(
             minCenterCoordinateDistance: 1000,
             maxCenterCoordinateDistance: 5000
@@ -43,6 +44,11 @@ final class TrackWalkViewController: BaseViewController {
     private let verticalSeparator = UIView()
     private var routeMapImageView: UIImageView = UIImageView()
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.mapView.delegate = self
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         trackingButton.layoutIfNeeded()
         trackingButton.makeViewCircular()

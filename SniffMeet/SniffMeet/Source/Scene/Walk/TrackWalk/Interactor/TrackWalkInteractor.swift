@@ -88,9 +88,11 @@ final class TrackWalkInteractor: TrackWalkInteractable {
 
         if locations.count > 1 {
             let lastLocation = self.locations[locations.count - 2]
+            let coordinate = location.coordinate
             let distance = location.distance(from: lastLocation)
             totalDistance += distance
-            // TODO: - WalkRoute에 경로 coordinate 추가
+            walkRoute.append(coordinate)
+            presenter?.updateLocation(with: walkRoute)
         }
         SNMLogger.log("이동 거리: \(totalDistance) meters")
     }

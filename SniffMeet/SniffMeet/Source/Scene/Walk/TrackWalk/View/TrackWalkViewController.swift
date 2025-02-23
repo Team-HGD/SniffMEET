@@ -12,7 +12,7 @@ protocol TrackWalkViewable: AnyObject {
     var presenter: TrackWalkPresentable? { get set }
     
     func updateRouteLine(with location: WalkRoute)
-    func updateWalkRecord()
+    func updateWalkRecord(record: WalkRecord)
 }
 
 final class TrackWalkViewController: BaseViewController {
@@ -213,9 +213,11 @@ extension TrackWalkViewController: TrackWalkViewable {
         let lineDraw = MKPolyline(coordinates: location.points, count: location.count)
         mapView.addOverlay(lineDraw)
     }
-    // TODO: -  1초 마다 업데이트하기
-    func updateWalkRecord() {
-        
+
+    func updateWalkRecord(record: WalkRecord) {
+        timeValueLabel.text = record.formattedTime.description
+        distanceValueLabel.text = record.distance.description
+        numberOfStepsValueLabel.text = record.stepCount.description
     }
 }
 

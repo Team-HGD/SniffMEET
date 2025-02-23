@@ -10,12 +10,12 @@ protocol TrackWalkPresentable: AnyObject {
     var view: (any TrackWalkViewable)? { get set }
     var interactor: (any TrackWalkInteractable)? { get set }
     var router: (any TrackWalkRoutable)? { get set }
-    
-    func updateLocation(with walkLocation: WalkRoute)
+
     func startTracking()
     func endTracking()
 }
 protocol TrackWalkInteractorOutput: AnyObject {
+    func updateWalkRecord(_ record: WalkRecord)
 }
 
 final class TrackWalkViewPresenter: TrackWalkPresentable {
@@ -29,7 +29,7 @@ final class TrackWalkViewPresenter: TrackWalkPresentable {
         }
     }
     func startTracking() {
-        
+        interactor?.startTracking()
     }
     func endTracking() {
         // TODO: -  인터랙터에 저장 요청하는 로직
@@ -38,5 +38,7 @@ final class TrackWalkViewPresenter: TrackWalkPresentable {
 }
 
 extension TrackWalkViewPresenter: TrackWalkInteractorOutput {
-    
+    func updateWalkRecord(_ record: WalkRecord) {
+        view?.updateWalkRecord(record: record)
+    }
 }

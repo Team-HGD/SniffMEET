@@ -21,7 +21,7 @@ enum TabBarModuleBuilder {
         )
         let walkTabBarItem = UITabBarItem(
             title: "walk",
-            image: UIImage(systemName: "dog.fill"),
+            image: UIImage(named: "custom.dog.fill") ,
             tag: 1
         )
         let mateTabBarItem = UITabBarItem(

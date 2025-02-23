@@ -9,7 +9,8 @@ import Foundation
 import MultipeerConnectivity
 
 protocol TargetedProfileDropUseCase {
-    var profilePublisher: CurrentValueSubject<DogDTO?, Never>  { get set }
+    var profilePublisher: PassthroughSubject<DogDTO?, Never>  { get set }
+    var isConnected: PassthroughSubject<ConnectionState, Never> { get set }
     var transmissionFlag: Set<String> { get set }
     var isTransitioned: Bool { get set }
     var triedBefore: Bool { get set }
@@ -17,10 +18,14 @@ protocol TargetedProfileDropUseCase {
     func execute()
     func loadProfileData()
     func reset(mpcManager: MPCManager)
+    func mcBrowserViewController() -> MCBrowserViewController
 }
 
 final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase {
-    var profilePublisher: CurrentValueSubject<DogDTO?, Never> = CurrentValueSubject(nil)
+    var profilePublisher: PassthroughSubject<DogDTO?, Never> = PassthroughSubject()
+    var isConnected: PassthroughSubject<ConnectionState, Never> = PassthroughSubject()
+    private var cancellable: AnyCancellable? = nil
+
     var transmissionFlag: Set<String>
     var isTransitioned: Bool = false
     var triedBefore: Bool = false
@@ -48,7 +53,6 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
     }
     
     func reset(mpcManager: MPCManager) {
-        profilePublisher.value = nil
         transmissionFlag = []
         isTransitioned = false
         triedBefore = false
@@ -73,6 +77,15 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
     func execute()  {
         triedBefore = true
         mpcManager.isAvailableToBeConnected.send(true)
+        
+        cancellable = Timer.publish(every: Context.connectionTimeLimit, on: .current, in: .common)
+            .autoconnect()
+            .sink { _ in
+                Task { [weak self] in
+                    self?.isConnected.send(.cannotFindPeer)
+                    self?.cancellable?.cancel()
+                }
+            }
     }
     
     func loadProfileData() {
@@ -102,6 +115,9 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
             SNMLogger.error("loadData error : \(error)")
         }
     }
+    func mcBrowserViewController() -> MCBrowserViewController {
+        mpcManager.serviceBrowser
+    }
 }
 // MARK: - MCSessionDelegate
 extension TargetedProfileDropUseCaseImpl: MCSessionDelegate {
@@ -114,12 +130,26 @@ extension TargetedProfileDropUseCaseImpl: MCSessionDelegate {
             Task { [weak self] in
                 SNMLogger.log("successfully connected to MPCSession: \(session.connectedPeers) session \(session)")
                 await self?.mpcManager.connectedPeerManager.connect(peer: peerID)
-                
-                guard let profileData = self?.profileData else { return }
-                if self?.transmissionFlag.contains(Context.peerReceived) == false {
-                    await self?.mpcManager.send(data: profileData)
-                }
+                self?.isConnected.send(.successMPCSession)
             }
+            cancellable?.cancel()
+            cancellable = Timer.publish(every: Context.profileSendDuration, on: .current, in: .common)
+                .autoconnect()
+                .sink { _ in
+                    Task { [weak self] in
+                        // connectedPeer가 없거나 수신플래그를 받으면 타이머 종료
+                        guard await self?.mpcManager.connectedPeerManager.connectedPeer != nil
+                                && self?.transmissionFlag.contains(Context.peerReceived) != true else { self?.cancellable?.cancel(); return }
+                        
+                        guard let profileData = self?.profileData else { return }
+                        await self?.mpcManager.send(data: profileData)
+                    }
+                }
+        case .connecting:
+            isConnected.send(.connecting)
+        case .notConnected:
+            cancellable?.cancel()
+            isConnected.send(.failure)
         default:
             break
         }
@@ -182,5 +212,7 @@ extension TargetedProfileDropUseCaseImpl {
     private enum Context {
         static let received: String = "received"
         static let peerReceived: String = "나 받았어"
+        static let profileSendDuration: Double = 2.0
+        static let connectionTimeLimit: Double = 30.0
     }
 }

@@ -10,41 +10,52 @@ import Foundation
 protocol ProfileDropInteractable: AnyObject {
     var presenter: (any ProfileDropInteractorOutput)? { get set }
 
-    func tryProfileDrop()
+    func tryNearByProfileDrop()
+    func tryTargetedProfileDrop()
+    func mcBrowserViewController() -> AnyObject
     func quitProfileDrop()
     func checkNISupport()
 }
 
 final class ProfileDropInteractor: ProfileDropInteractable {
     weak var presenter: (any ProfileDropInteractorOutput)?
-    private var tryProfileDropUseCase: any NearByProfileDropUseCase
+    private var nearByProfileDropUseCase: any NearByProfileDropUseCase
+    private var targetedProfileDropUseCase: any TargetedProfileDropUseCase
     private var quitProfileDropUseCase: any QuitProfileDropUseCase
     private var cancellables: Set<AnyCancellable> = []
     private let niDeviceChecker: NIDeviceCheckerProtocol
 
     init(
         presenter: ProfileDropInteractorOutput? = nil,
-        tryProfileDropUseCase: any NearByProfileDropUseCase,
+        nearByProfileDropUseCase: any NearByProfileDropUseCase,
+        targetedProfileDropUseCase: any TargetedProfileDropUseCase,
         quitProfileDropUseCase: any QuitProfileDropUseCase,
         niDeviceChecker: NIDeviceCheckerProtocol
     ) {
         self.presenter = presenter
-        self.tryProfileDropUseCase = tryProfileDropUseCase
+        self.nearByProfileDropUseCase = nearByProfileDropUseCase
+        self.targetedProfileDropUseCase = targetedProfileDropUseCase
         self.quitProfileDropUseCase = quitProfileDropUseCase
         self.niDeviceChecker = niDeviceChecker
 
         bind()
     }
 
-    func tryProfileDrop() {
-        if tryProfileDropUseCase.isTransitioned {
+    func tryNearByProfileDrop() {
+        if nearByProfileDropUseCase.isTransitioned {
             guard let mpcManager = MPCManager(dataManager: LocalDataManager())
             else { return }
             let niManager = NIManager()
-            tryProfileDropUseCase.reset(mpcManager: mpcManager, nimanager: niManager)
+            nearByProfileDropUseCase.reset(mpcManager: mpcManager, nimanager: niManager)
             quitProfileDropUseCase.reset(niManager: niManager)
         }
-        tryProfileDropUseCase.execute()
+        nearByProfileDropUseCase.execute()
+    }
+    func tryTargetedProfileDrop() {
+        targetedProfileDropUseCase.execute()
+    }
+    func mcBrowserViewController() -> AnyObject {
+        targetedProfileDropUseCase.mcBrowserViewController()
     }
 
     func quitProfileDrop() {
@@ -52,33 +63,41 @@ final class ProfileDropInteractor: ProfileDropInteractable {
     }
 
     func bind() {
-        tryProfileDropUseCase.isNIConnected
-            .receive(on: RunLoop.main)
-            .sink { [weak self] isPaired in
-                if isPaired {
-                    self?.presenter?.didConnectNISession()
-                } else {
-                    self?.presenter?.failToConnectNISession()
-                }
+        [nearByProfileDropUseCase.isConnected, targetedProfileDropUseCase.isConnected].forEach {
+            $0.receive(on: RunLoop.main)
+            .sink {[weak self] (state) in
+                self?.handleConnectionState(state: state)
             }
             .store(in: &cancellables)
-
-        tryProfileDropUseCase.profilePublisher
-            .receive(on: RunLoop.main)
-            .sink {[weak self] (profile) in
-                guard let profile else { return }
-                if self?.tryProfileDropUseCase.isTransitioned == false {
-                    self?.presenter?.receiveProfileData(profile)
-                    self?.tryProfileDropUseCase.isTransitioned = true
+        }
+        
+        [nearByProfileDropUseCase.profilePublisher, targetedProfileDropUseCase.profilePublisher].forEach {
+            $0.receive(on: RunLoop.main)
+                .sink {[weak self] (profile) in
+                    guard let profile else { return }
+                    if self?.targetedProfileDropUseCase.isTransitioned == false {
+                        self?.presenter?.receiveProfileData(profile)
+                        self?.nearByProfileDropUseCase.isTransitioned = true
+                    }
                 }
-            }
-            .store(in: &cancellables)
+                .store(in: &cancellables)
+        }
     }
 
     func checkNISupport() {
         let isSupported = niDeviceChecker.isNISupported()
         if isSupported == false {
             presenter?.updateDeviceInfo()
+        }
+    }
+    
+    func handleConnectionState(state: ConnectionState) {
+        presenter?.showConnectionState(to: state)
+        switch state {
+        case .cannotFindPeer, .failure:
+            quitProfileDrop()
+        default:
+            break
         }
     }
 }

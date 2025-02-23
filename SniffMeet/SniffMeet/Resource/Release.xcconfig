@@ -1,0 +1,13 @@
+//
+//  Release.xcconfig
+//  SniffMeet
+//
+//  Created by sole on 2/12/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+SERVER_URL = https:/\/rxhekgrmsszvsosfhnlf.supabase.co
+PUBLIC_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4aGVrZ3Jtc3N6dnNvc2ZobmxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEzODcwNzgsImV4cCI6MjA0Njk2MzA3OH0.2T34byn9-G2MbLbfrD6VRX7e5FIb0pk-ev9GilnjYus
+NOTIFICATION_SERVER = https:/\/sniffmeet-notification.fly.dev

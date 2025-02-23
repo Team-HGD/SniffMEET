@@ -286,9 +286,12 @@
 		32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539612D64165A00CD89DF /* TrackWalkRouter.swift */; };
 		32C539652D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
 		32C539662D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
-		32C5394D2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
-		32C5394E2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
-		32C5394F2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
+		32C539F22D6B6F4500CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539F12D6B6F4500CD89DF /* Release.xcconfig */; };
+		32C539F32D6B6F4500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539F02D6B6F4500CD89DF /* Debug.xcconfig */; };
+		32C539F42D6B6F4500CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539F12D6B6F4500CD89DF /* Release.xcconfig */; };
+		32C539F52D6B6F4500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539F02D6B6F4500CD89DF /* Debug.xcconfig */; };
+		32C539F62D6B6F4500CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539F12D6B6F4500CD89DF /* Release.xcconfig */; };
+		32C539F72D6B6F4500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539F02D6B6F4500CD89DF /* Debug.xcconfig */; };
 		9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */; };
 		9937361D2CF80D6600E3DD58 /* RequestUserInfoRemoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */; };
 		993736422CFCACB100E3DD58 /* UpdateUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */; };
@@ -660,7 +663,8 @@
 		32C5395E2D64165900CD89DF /* TrackWalkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkInteractor.swift; sourceTree = "<group>"; };
 		32C539612D64165A00CD89DF /* TrackWalkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkRouter.swift; sourceTree = "<group>"; };
 		32C539642D65CB2300CD89DF /* WalkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkRoute.swift; sourceTree = "<group>"; };
-		32C5394C2D63245500CD89DF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		32C539F02D6B6F4500CD89DF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		32C539F12D6B6F4500CD89DF /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPage.swift; sourceTree = "<group>"; };
 		9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserInfoRemoteUseCase.swift; sourceTree = "<group>"; };
 		993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoUseCase.swift; sourceTree = "<group>"; };
@@ -1221,16 +1225,6 @@
 			path = MateListScene;
 			sourceTree = "<group>";
 		};
-		99525EBF2D6591FE00B6E17E /* UpdateUseCase */ = {
-			isa = PBXGroup;
-			children = (
-				99525EB92D6563E000B6E17E /* UpdateTimeUseCase.swift */,
-				99525EBC2D65692700B6E17E /* UpdateUserStepUseCase.swift */,
-				FD119F492CED875800BE22BD /* UpdateUserLocationUseCase.swift */,
-			);
-			path = UpdateUseCase;
-			sourceTree = "<group>";
-		};
 		32C539532D6415C400CD89DF /* TrackWalk */ = {
 			isa = PBXGroup;
 			children = (
@@ -1272,6 +1266,16 @@
 				32C539612D64165A00CD89DF /* TrackWalkRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		99525EBF2D6591FE00B6E17E /* UpdateUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				99525EB92D6563E000B6E17E /* UpdateTimeUseCase.swift */,
+				99525EBC2D65692700B6E17E /* UpdateUserStepUseCase.swift */,
+				FD119F492CED875800BE22BD /* UpdateUserLocationUseCase.swift */,
+			);
+			path = UpdateUseCase;
 			sourceTree = "<group>";
 		};
 		995D94602CE598E1005A47BF /* NI */ = {
@@ -1602,6 +1606,8 @@
 				FD3A033C2CD8CF460047B7ED /* LaunchScreen.storyboard */,
 				FD3A033A2CD8CF460047B7ED /* Info.plist */,
 				FD3A03392CD8CF460047B7ED /* Assets.xcassets */,
+				32C539F02D6B6F4500CD89DF /* Debug.xcconfig */,
+				32C539F12D6B6F4500CD89DF /* Release.xcconfig */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -2427,6 +2433,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32C539F62D6B6F4500CD89DF /* Release.xcconfig in Resources */,
+				32C539F72D6B6F4500CD89DF /* Debug.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2450,6 +2458,8 @@
 			files = (
 				A288A63D2CDC595000D11C34 /* (null) in Resources */,
 				99A5A1B32CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
+				32C539F42D6B6F4500CD89DF /* Release.xcconfig in Resources */,
+				32C539F52D6B6F4500CD89DF /* Debug.xcconfig in Resources */,
 				FD3A033F2CD8CF460047B7ED /* Assets.xcassets in Resources */,
 				FD3A03412CD8CF460047B7ED /* LaunchScreen.storyboard in Resources */,
 			);
@@ -2459,6 +2469,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32C539F22D6B6F4500CD89DF /* Release.xcconfig in Resources */,
+				32C539F32D6B6F4500CD89DF /* Debug.xcconfig in Resources */,
 				3200453B2CF442D500D08B6D /* Assets.xcassets in Resources */,
 				99A5A1B42CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
 			);
@@ -3234,6 +3246,7 @@
 		};
 		FD3A03342CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C539F02D6B6F4500CD89DF /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3281,6 +3294,7 @@
 		};
 		FD3A03352CD8CDE60047B7ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C539F12D6B6F4500CD89DF /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3327,6 +3341,7 @@
 		};
 		FD3A03362CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C539F02D6B6F4500CD89DF /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3390,6 +3405,7 @@
 		};
 		FD3A03372CD8CDE60047B7ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C539F12D6B6F4500CD89DF /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

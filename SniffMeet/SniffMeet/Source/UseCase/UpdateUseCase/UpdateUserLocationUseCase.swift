@@ -4,17 +4,23 @@
 //
 //  Created by sole on 11/19/24.
 //
-
+import Combine
 import CoreLocation
 
 protocol UpdateUserLocationUseCase {
-    func startUpdateLocation(updateHandler: @escaping (CLLocation) -> Void)
-    func stopUpdateLocation()
+    var locationPublisher: AnyPublisher<CLLocation, Never> { get }
+
+    func execute()
+    func cancel()
 }
 
 final class UpdateUserLocationUseCaseImpl: NSObject, UpdateUserLocationUseCase {
     private let locationManager: CLLocationManager
-    private var updateHandler: ((CLLocation) -> Void)?
+    private var locationSubject = PassthroughSubject<CLLocation, Never>()
+
+    var locationPublisher: AnyPublisher<CLLocation, Never> {
+        locationSubject.eraseToAnyPublisher()
+    }
 
     init(locationManager: CLLocationManager) {
         self.locationManager = locationManager
@@ -28,20 +34,18 @@ final class UpdateUserLocationUseCaseImpl: NSObject, UpdateUserLocationUseCase {
         locationManager.requestWhenInUseAuthorization()
     }
 
-    func startUpdateLocation(updateHandler: @escaping (CLLocation) -> Void) {
-        self.updateHandler = updateHandler
+    func execute() {
         locationManager.startUpdatingLocation()
     }
 
-    func stopUpdateLocation() {
-        updateHandler = nil
+    func cancel() {
         locationManager.stopUpdatingLocation()
     }
 }
 
 extension UpdateUserLocationUseCaseImpl: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last, let handler = updateHandler else { return }
-        handler(location)
+        guard let location = locations.last else { return }
+        locationSubject.send(location)
     }
 }

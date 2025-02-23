@@ -4,32 +4,43 @@
 //
 //  Created by 배현진 on 2/18/25.
 //
+import Combine
 import Foundation
 
 protocol UpdateTimeUseCase {
-    func startTimer(update: @escaping (TimeInterval) -> Void)
-    func stopTimer()
+    var elapsedTimePublisher: AnyPublisher<TimeInterval, Never> { get }
+
+    func execute()
+    func cancel()
 }
 
 final class UpdateTimeUseCaseImpl: UpdateTimeUseCase {
     private var timer: Timer?
     private var startTime: Date?
+    private var elapsedTimeSubject = PassthroughSubject<TimeInterval, Never>()
 
-    func startTimer(update: @escaping (TimeInterval) -> Void) {
+    var elapsedTimePublisher: AnyPublisher<TimeInterval, Never> {
+        elapsedTimeSubject.eraseToAnyPublisher()
+    }
+
+    func execute() {
         startTime = Date()
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+        timer = Timer.scheduledTimer(
+            withTimeInterval: 1.0,
+            repeats: true
+        ) { [weak self] _ in
             guard let startTime = self?.startTime else { return }
             let elapsedTime = Date().timeIntervalSince(startTime)
-            update(elapsedTime)
+            self?.elapsedTimeSubject.send(elapsedTime)
         }
     }
 
-    func stopTimer() {
+    func cancel() {
         timer?.invalidate()
         timer = nil
     }
 
     deinit {
-        stopTimer()
+        cancel()
     }
 }

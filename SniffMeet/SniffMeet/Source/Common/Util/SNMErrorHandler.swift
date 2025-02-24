@@ -34,7 +34,6 @@ struct SNMErrorHandler: ErrorHandler {
         case .fatal, .notifyUser, .retryable, .logOnly:
             customErrorHandler.handle(error)
         }
-
 #if !DEBUG
             SNMLogger.firebaseLog(
                 file: error.context.file,
@@ -48,6 +47,12 @@ struct SNMErrorHandler: ErrorHandler {
             error.errorDescription ?? error.localizedDescription
         )
     }
+    /// SNMError가 아닌 에러는 자동으로 logOnly로 매핑합니다. 에러가 발생한 Context를 기록합니다.
+    func handle(error: any Error, file: String = #file, function: String = #function) {
+        let snmError = SNMError(level: .logOnly, error: error, file: file, function: function)
+        self.handle(snmError)
+    }
+
     mutating func configure(handler: @escaping (SNMError.Level) -> Void) {
         var newCustomErrorHandler = CustomErrorHandler()
         let wrappedHandler: (any Error) -> Void = { error in

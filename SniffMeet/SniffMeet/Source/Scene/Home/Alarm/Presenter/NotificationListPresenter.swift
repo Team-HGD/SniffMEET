@@ -68,12 +68,8 @@ final class NotificationListPresenter: NotificationListPresentable {
                 try await self.interactor?.deleteNotifcation(
                     notificationID: deleteNoti.id
                 )
-            } catch let error as SNMError {
-                fetchErrorHandler.handle(error)
             } catch {
-                fetchErrorHandler.handle(
-                    SNMError(level: .logOnly, error: error)
-                )
+                fetchErrorHandler.handle(error: error)
             }
         }
         notiList.remove(at: index)
@@ -93,12 +89,8 @@ final class NotificationListPresenter: NotificationListPresentable {
 
             do {
                 try await self?.interactor?.deleteNotifications(notifications: notifications)
-            } catch let error as SNMError {
-                self?.deleteErrorHandler.handle(error)
             } catch {
-                self?.deleteErrorHandler.handle(
-                    SNMError(level: .logOnly, error: error)
-                )
+                self?.deleteErrorHandler.handle(error: error)
             }
         }
         output.notificationList.send([])
@@ -113,6 +105,7 @@ final class NotificationListPresenter: NotificationListPresentable {
         currentPage += 1
         fetchNotificationList()
     }
+
     private func fetchNotificationList() {
         Task { [weak self] in
             guard let self else { return }
@@ -122,12 +115,8 @@ final class NotificationListPresenter: NotificationListPresentable {
                     pageSize: self.pageSize
                 ) else { return }
                 self.didFetchNotificationList(with: notiList)
-            } catch let error as SNMError {
-                fetchErrorHandler.handle(error)
             } catch {
-                fetchErrorHandler.handle(
-                    SNMError(level: .logOnly, error: error)
-                )
+                fetchErrorHandler.handle(error: error)
             }
         }
     }

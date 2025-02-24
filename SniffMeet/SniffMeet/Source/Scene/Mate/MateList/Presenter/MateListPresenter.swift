@@ -98,7 +98,7 @@ final class MateListPresenter: MateListPresentable {
                 ) else { return }
                 self.didFetchMateList(mateList: mateList)
             } catch {
-                fetchErrorHandler.handle(error)
+                fetchErrorHandler.handle(error: error)
             }
         }
     }

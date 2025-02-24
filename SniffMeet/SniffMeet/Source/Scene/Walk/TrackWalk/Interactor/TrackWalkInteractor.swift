@@ -17,9 +17,9 @@ protocol TrackWalkInteractable: AnyObject {
 
 final class TrackWalkInteractor: TrackWalkInteractable {
     weak var presenter: (any TrackWalkInteractorOutput)?
-    private let updateTimeUseCase: UpdateTimeUseCase
-    private let updateUserStepUseCase: UpdateUserStepUseCase
-    private let updateUserLocationUseCase: UpdateUserLocationUseCase
+    private let updateTimeUseCase: any UpdateTimeUseCase
+    private let updateUserStepUseCase: any UpdateUserStepUseCase
+    private let updateUserLocationUseCase: any UpdateUserLocationUseCase
 
     private var startDate: Date?
     private var endDate: Date?
@@ -31,9 +31,9 @@ final class TrackWalkInteractor: TrackWalkInteractable {
     private var cancellables = Set<AnyCancellable>()
 
     init(
-        updateTimeUseCase: UpdateTimeUseCase,
-        updateUserStepUseCase: UpdateUserStepUseCase,
-        updateUserLocationUseCase: UpdateUserLocationUseCase
+        updateTimeUseCase: any UpdateTimeUseCase,
+        updateUserStepUseCase: any UpdateUserStepUseCase,
+        updateUserLocationUseCase: any UpdateUserLocationUseCase
     ){
         self.updateTimeUseCase = updateTimeUseCase
         self.updateUserStepUseCase = updateUserStepUseCase

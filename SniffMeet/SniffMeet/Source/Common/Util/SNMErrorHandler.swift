@@ -73,26 +73,6 @@ struct CustomErrorHandler: ErrorHandler {
 }
 
 struct SupabaseSessionErrorHandler: ErrorHandler {
-    private var sceneDelegate: SceneDelegate? {
-        UIApplication.shared.keyWindow?.windowScene?.delegate as? SceneDelegate
-    }
-    private let sessionExpiredAlert: UIAlertController
-
-    init(
-        sessionExpiredAlert: UIAlertController = UIAlertController(
-            title: "세션 만료",
-            message: "세션이 만료되었습니다. 다시 로그인 해주세요.",
-            preferredStyle: .alert
-        )
-    ) {
-        self.sessionExpiredAlert = sessionExpiredAlert
-        self.sessionExpiredAlert.addAction(
-            UIAlertAction(title: "확인", style: .default) { [self] _ in
-                sceneDelegate?.appRouter?.displayProfileSetupView()
-            }
-        )
-    }
-
     func handle(_ error: any Error) {
         guard let error = error as? SupabaseSessionError else {
             SNMLogger.error(error.localizedDescription)
@@ -100,16 +80,10 @@ struct SupabaseSessionErrorHandler: ErrorHandler {
         }
         switch error {
         case .sessionNotExist:
-            Task { @MainActor in
-                guard let topMostViewController = UIViewController.topMostViewController,
-                      type(of: topMostViewController) != UIAlertController.self else {
-                    return
-                }
-                UIViewController.topMostViewController?.present(
-                    sessionExpiredAlert,
-                    animated: true
-                )
-            }
+            NotificationCenter.default.post(
+                name: Environment.NotificationCenterName.sessionExpired,
+                object: self
+            )
         case .loadSessionFailed, .refreshSessionFailed, .saveSessionFailed:
             break
         }

@@ -43,3 +43,21 @@ extension SNMLogger {
         poster.emitEvent(name, id: id)
     }
 }
+
+#if !DEBUG
+import FirebaseAnalytics
+
+extension SNMLogger {
+    static func firebaseLog(
+        file: String = #file,
+        function: String = #function,
+        _ message: String...
+    ) {
+        Analytics.logEvent("SNMLogger", parameters: [
+            "file": "\(file)",
+            "function": "\(function)",
+            "message": message.joined(separator: " ")
+        ])
+    }
+}
+#endif

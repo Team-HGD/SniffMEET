@@ -32,17 +32,24 @@ final class NotificationListPresenter: NotificationListPresentable {
     private var isReachedBottom: Bool = false
     private var currentPage: Int = 0
     private let pageSize: Int = 20
+    private var fetchErrorHandler: SNMErrorHandler
+    private var deleteErrorHandler: SNMErrorHandler
 
     init(
         view: (any NotificationListViewable)? = nil,
         interactor: (any NotificationListInteractable)? = nil,
         router: (any NotificationListRoutable)? = nil,
-        output: any NotificationListPresenterOutput
+        output: any NotificationListPresenterOutput,
+        fetchErrorHandler: SNMErrorHandler = SNMErrorHandler(),
+        deleteErrorHandler: SNMErrorHandler = SNMErrorHandler()
     ) {
         self.view = view
         self.interactor = interactor
         self.router = router
         self.output = output
+        self.fetchErrorHandler = fetchErrorHandler
+        self.deleteErrorHandler = deleteErrorHandler
+        configureErrorHandlers()
     }
 
     func viewDidLoad() {
@@ -62,8 +69,7 @@ final class NotificationListPresenter: NotificationListPresentable {
                     notificationID: deleteNoti.id
                 )
             } catch {
-                // TODO: Error Map 필요
-                SNMLogger.error(error.localizedDescription)
+                fetchErrorHandler.handle(error: error)
             }
         }
         notiList.remove(at: index)
@@ -80,11 +86,11 @@ final class NotificationListPresenter: NotificationListPresentable {
             defer {
                 self?.view?.didEndDeleteNotifications()
             }
+
             do {
                 try await self?.interactor?.deleteNotifications(notifications: notifications)
             } catch {
-                // TODO: Error Map 필요
-                SNMLogger.error(error.localizedDescription)
+                self?.deleteErrorHandler.handle(error: error)
             }
         }
         output.notificationList.send([])
@@ -99,6 +105,7 @@ final class NotificationListPresenter: NotificationListPresentable {
         currentPage += 1
         fetchNotificationList()
     }
+
     private func fetchNotificationList() {
         Task { [weak self] in
             guard let self else { return }
@@ -108,18 +115,8 @@ final class NotificationListPresenter: NotificationListPresentable {
                     pageSize: self.pageSize
                 ) else { return }
                 self.didFetchNotificationList(with: notiList)
-            } catch let snmError as SNMError where snmError.level == .user {
-                switch snmError.error {
-                case let error as SupabaseDBError where error == .noMoreData:
-                    self.didReachEndOfNotificationList()
-                case let error as SupabaseSessionError where error == .sessionNotExist:
-                    SNMLogger.error("세션이 존재하지 않습니다.")
-                    // TODO: 로그인 화면으로 이동
-                default:
-                    SNMLogger.error(snmError.localizedDescription)
-                }
-            } catch let snmError as SNMError where snmError.level == .developer {
-                SNMLogger.error(snmError.localizedDescription)
+            } catch {
+                fetchErrorHandler.handle(error: error)
             }
         }
     }
@@ -129,6 +126,16 @@ final class NotificationListPresenter: NotificationListPresentable {
     }
     private func didReachEndOfNotificationList() {
         isReachedBottom = true
+    }
+    private func configureErrorHandlers() {
+        fetchErrorHandler.configure { [weak self] level in
+            switch level {
+            case .notifyUser:
+                self?.didReachEndOfNotificationList()
+            default:
+                break
+            }
+        }
     }
 }
 

@@ -5,14 +5,17 @@
 //  Created by Kelly Chui on 11/12/24.
 //
 
+import Combine
 import UIKit
 
 final class AppRouter: NSObject, Routable {
     private var window: UIWindow?
+    private var sessionExpiredCancellable: AnyCancellable?
 
     init(window: UIWindow?) {
         self.window = window
         super.init()
+        bind()
     }
 
     func displayInitialScreen() {
@@ -92,6 +95,30 @@ final class AppRouter: NSObject, Routable {
         viewController.transitioningDelegate = self
         if let rootViewController = UIViewController.topMostViewController {
             present(from: rootViewController, with: viewController, animated: true)
+        }
+    }
+    private func presentSessionExpiredAlert() {
+        let alertController = UIAlertController(
+            title: "세션이 만료되었습니다.",
+            message: "다시 로그인해주세요.",
+            preferredStyle: .alert
+        )
+        let confirmAction: UIAlertAction = .init(title: "확인", style: .default) { [weak self] _ in
+            self?.displayProfileSetupView()
+        }
+        alertController.addAction(confirmAction)
+        if let rootViewController = UIViewController.topMostViewController as? UIAlertController {
+            rootViewController.dismiss(animated: true)
+        }
+        UIViewController.topMostViewController?.present(alertController, animated: true)
+    }
+    private func bind() {
+        sessionExpiredCancellable = NotificationCenter.default.publisher(
+            for: Environment.NotificationCenterName.sessionExpired
+        )
+        .receive(on: RunLoop.main)
+        .sink { [weak self] _ in
+            self?.presentSessionExpiredAlert()
         }
     }
 }

@@ -5,6 +5,8 @@
 //  Created by sole on 11/25/24.
 //
 
+import Foundation
+
 enum Environment {
     enum UserDefaultsKey {
         static let profileImage: String = "profileImage"
@@ -43,5 +45,9 @@ enum Environment {
 
     enum URLString {
         static let helpPage = "https://check-it.notion.site/198f6d0576c280f1abeee0feeb5cb78e?pvs=4"
+    }
+
+    enum NotificationCenterName {
+        static let sessionExpired = Notification.Name("sessionExpired")
     }
 }

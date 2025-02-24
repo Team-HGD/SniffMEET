@@ -40,14 +40,12 @@ struct RemoteSaveDeviceTokenUseCaseImpl: RemoteSaveDeviceTokenUseCase {
                 .setData(deviceTokenData)
                 .setQuery(.equal("id", id))
                 .request()
-        } catch let error as SupabaseAuthError {
-            throw SNMError(level: .user, error: error)
         } catch let error as SupabaseSessionError {
-            throw SNMError(level: .user, error: error)
+            throw SNMError(level: .notExistSession, error: error)
         } catch let error as SupabaseDBError {
-            throw SNMError(level: .user, error: error)
+            throw SNMError(level: .retryable, error: error)
         } catch {
-            throw SNMError(level: .developer, error: error)
+            throw SNMError(level: .logOnly, error: error)
         }
     }
 }

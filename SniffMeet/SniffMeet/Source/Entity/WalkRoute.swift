@@ -13,4 +13,8 @@ struct WalkRoute {
     
     private(set) var points: [CLLocationCoordinate2D] = []
     var count: Int { points.count }
+    
+    mutating func append(_ coordinate: CLLocationCoordinate2D) {
+        points.append(coordinate)
+    }
 }

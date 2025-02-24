@@ -4,6 +4,7 @@
 //
 //  Created by 윤지성 on 2/18/25.
 //
+import CoreLocation
 import UIKit
 
 protocol TrackWalkRoutable: AnyObject, Routable {
@@ -28,9 +29,16 @@ protocol TrackWalkModuleBuildable {
 
 extension TrackWalkRouter: TrackWalkModuleBuildable {
     static func create() -> UIViewController {
+        let updateTimeUseCase: UpdateTimeUseCase = UpdateTimeUseCaseImpl()
+        let updateUserStepUseCase: UpdateUserStepUseCase = UpdateUserStepUseCaseImpl()
+        let updateUserLocationUseCase: UpdateUserLocationUseCase = UpdateUserLocationUseCaseImpl(
+            locationManager: CLLocationManager())
         let view: TrackWalkViewable & UIViewController = TrackWalkViewController()
         let presenter: TrackWalkPresentable & TrackWalkInteractorOutput = TrackWalkViewPresenter()
-        let interactor: TrackWalkInteractable = TrackWalkInteractor()
+        let interactor: TrackWalkInteractable = TrackWalkInteractor(
+            updateTimeUseCase: updateTimeUseCase,
+            updateUserStepUseCase: updateUserStepUseCase,
+            updateUserLocationUseCase: updateUserLocationUseCase)
         let router: TrackWalkRoutable & TrackWalkModuleBuildable = TrackWalkRouter()
         
         view.presenter = presenter

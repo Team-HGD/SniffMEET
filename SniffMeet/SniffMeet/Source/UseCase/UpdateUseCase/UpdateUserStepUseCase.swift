@@ -4,34 +4,42 @@
 //
 //  Created by 배현진 on 2/18/25.
 //
+import Combine
 import CoreMotion
 
 protocol UpdateUserStepUseCase {
-    func startUpdateStepCount(update: @escaping (Int) -> Void)
-    func stopUpdateStepCount()
+    var stepCountPublisher: AnyPublisher<Int, Never> { get }
+
+    func execute()
+    func cancel()
 }
 
 final class UpdateUserStepUseCaseImpl: UpdateUserStepUseCase {
     private let pedometer = CMPedometer()
     private var pedometerIsUpdating: Bool = false
+    private let stepCountSubject = PassthroughSubject<Int, Never>()
 
-    func startUpdateStepCount(update: @escaping (Int) -> Void) {
+    var stepCountPublisher: AnyPublisher<Int, Never> {
+        stepCountSubject.eraseToAnyPublisher()
+    }
+
+    func execute() {
         if pedometerIsUpdating {
-            stopUpdateStepCount()
+            cancel()
             pedometerIsUpdating = false
         }
 
         guard CMPedometer.isStepCountingAvailable() else { return }
 
         pedometerIsUpdating = true
-        pedometer.startUpdates(from: Date()) { data, error in
+        pedometer.startUpdates(from: Date()) { [weak self] data, error in
         //TODO: - 에러 구체화 필요
             guard error == nil, let data = data else { return }
-            update(data.numberOfSteps.intValue)
+            self?.stepCountSubject.send(data.numberOfSteps.intValue)
         }
     }
 
-    func stopUpdateStepCount() {
+    func cancel() {
         pedometer.stopUpdates()
     }
 }

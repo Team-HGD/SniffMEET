@@ -1,5 +1,5 @@
 //
-//  RequestCheckDuplicateNicknameUseCase.swift
+//  CheckNicknameUseCase.swift
 //  SniffMeet
 //
 //  Created by Kelly Chui on 2/13/25.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol CheckNicknameDuplicationUseCase {
+protocol CheckNicknameUseCase {
     func execute(nickname: String) async throws -> Bool
 }
 
-final class CheckNicknameDuplicationUseCaseImpl: CheckNicknameDuplicationUseCase {
+final class CheckNicknameUseCaseImpl: CheckNicknameUseCase {
     private let remoteDBManager: any RemoteDBManageable
     private let decoder: JSONDecoder
     

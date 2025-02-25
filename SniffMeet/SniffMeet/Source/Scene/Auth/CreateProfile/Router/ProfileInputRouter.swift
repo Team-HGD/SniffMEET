@@ -6,18 +6,19 @@
 //
 import UIKit
 
-protocol ProfileInputRoutable {
-    func presentPostCreateScreen(from view: ProfileInputViewable, with dogDetail: DogInfo)
+protocol ProfileCreateRoutable {
+    func presentPostCreateScreen(from view: any ProfileCreateViewable, with dogDetail: DogInfo)
 }
 
-protocol ProfileInputBuildable {
-    static func createProfileInputModule() -> UIViewController
+protocol ProfileCreateBuildable {
+    static func createProfileCreateModule() -> UIViewController
 }
 
-final class ProfileInputRouter: ProfileInputRoutable {
-    func presentPostCreateScreen(from view: ProfileInputViewable, with dogDetail: DogInfo) {
-        let profileCreateViewController =
-        ProfileCreateRouter.createProfileCreateModule(dogDetailInfo: dogDetail)
+final class ProfileCreateRouter: ProfileCreateRoutable {
+    func presentPostCreateScreen(from view: any ProfileCreateViewable, with dogDetail: DogInfo) {
+        let profileCreateViewController = ProfileSetRouter.createProfileSetModule(
+            dogDetailInfo: dogDetail
+        )
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(
                 profileCreateViewController,
@@ -27,11 +28,11 @@ final class ProfileInputRouter: ProfileInputRoutable {
     }
 }
 
-extension ProfileInputRouter: ProfileInputBuildable {
-    static func createProfileInputModule() -> UIViewController {
-        let view: ProfileInputViewable & UIViewController = ProfileInputViewController()
-        var presenter: ProfileInputPresentable = ProfileInputPresenter()
-        let router: ProfileInputRoutable & ProfileInputBuildable = ProfileInputRouter()
+extension ProfileCreateRouter: ProfileCreateBuildable {
+    static func createProfileCreateModule() -> UIViewController {
+        let view: any ProfileCreateViewable & UIViewController = ProfileCreateViewController()
+        var presenter: any ProfileCreatePresentable = ProfileCreatePresenter()
+        let router: any ProfileCreateRoutable & ProfileCreateBuildable = ProfileCreateRouter()
         
         view.presenter = presenter
         presenter.view = view

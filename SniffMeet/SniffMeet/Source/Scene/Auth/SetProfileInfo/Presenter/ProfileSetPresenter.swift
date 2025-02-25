@@ -9,12 +9,12 @@ import Combine
 import Foundation
 import UIKit
 
-protocol ProfileCreatePresentable : AnyObject{
+protocol ProfileSetPresentable : AnyObject {
     var dogInfo: DogInfo { get set }
-    var view: ProfileCreateViewable? { get set }
-    var interactor: ProfileCreateInteractable? { get set }
-    var router: ProfileCreateRoutable? { get set }
-    var output: any ProfileCreatePresenterOutput { get }
+    var view: (any ProfileSetViewable)? { get set }
+    var interactor: (any ProfileSetInteractable)? { get set }
+    var router: (any ProfileSetRoutable)? { get set }
+    var output: any ProfileSetPresenterOutput { get }
     
     func didTapSubmitButton(nickname: String, image: UIImage?)
     func didtextFieldEndEditing(text: String)
@@ -26,19 +26,18 @@ protocol DogInfoInteractorOutput: AnyObject {
     func notifyNicknameDuplication(_ isDuplicated: Bool)
 }
 
-
-final class ProfileCreatePresenter: ProfileCreatePresentable {
-    weak var view: (any ProfileCreateViewable)?
-    var interactor: (any ProfileCreateInteractable)?
-    var router: (any ProfileCreateRoutable)?
-    let output: any ProfileCreatePresenterOutput
+final class ProfileSetPresenter: ProfileSetPresentable {
+    weak var view: (any ProfileSetViewable)?
+    var interactor: (any ProfileSetInteractable)?
+    var router: (any ProfileSetRoutable)?
+    let output: any ProfileSetPresenterOutput
     var dogInfo: DogInfo
     
     init(dogInfo: DogInfo,
-         view: (any ProfileCreateViewable)? = nil,
-         interactor: (any ProfileCreateInteractable)? = nil,
-         router: (any ProfileCreateRoutable)? = nil,
-         output: any ProfileCreatePresenterOutput = DefaultProfileCreatePresenterOutput()
+         view: (any ProfileSetViewable)? = nil,
+         interactor: (any ProfileSetInteractable)? = nil,
+         router: (any ProfileSetRoutable)? = nil,
+         output: any ProfileSetPresenterOutput = DefaultProfileSetPresenterOutput()
     ) {
         self.dogInfo = dogInfo
         self.view = view
@@ -71,7 +70,7 @@ final class ProfileCreatePresenter: ProfileCreatePresentable {
     }
 }
 
-extension ProfileCreatePresenter: DogInfoInteractorOutput {
+extension ProfileSetPresenter: DogInfoInteractorOutput {
     func didSaveUserInfo() {
         // TODO: submit button enable
         guard let view else { return }
@@ -91,10 +90,10 @@ extension ProfileCreatePresenter: DogInfoInteractorOutput {
 }
 
 // MARK: - MateListPresenterOutput
-protocol ProfileCreatePresenterOutput {
+protocol ProfileSetPresenterOutput {
     var isDuplicated: PassthroughSubject<Bool, Never> { get }
 }
 
-struct DefaultProfileCreatePresenterOutput: ProfileCreatePresenterOutput {
+struct DefaultProfileSetPresenterOutput: ProfileSetPresenterOutput {
     var isDuplicated = PassthroughSubject<Bool, Never>()
 }

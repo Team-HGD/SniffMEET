@@ -50,24 +50,8 @@ extension WalkLogListViewController: UITableViewDataSource {
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        // FIXME: 실제 데이터로 변경 필요
-        WalkLogCell(
-            dogInfo: .init(
-            id: UUID(uuidString: "") ?? DogProfileDTO.example.id,
-            name: "후추추",
-            keywords: [],
-            profileImage: nil
-            ),
-            walkLog: .init(
-                step: 100,
-                distance: 1002.2,
-                startDate: .now,
-                endDate: .now,
-                image: nil
-            ),
-            style: .default,
-            reuseIdentifier: WalkLogCell.identifier
-        )
+        let cell = WalkLogCell(style: .default, reuseIdentifier: WalkLogCell.identifier)
+        return cell
     }
 }
 

@@ -7,7 +7,12 @@
 
 import UIKit
 
-final class WalkLogListViewController: BaseViewController {
+protocol WalkLogListViewable: AnyObject {
+    var presenter: (any WalkLogListPresentable)? { get }
+}
+
+final class WalkLogListViewController: BaseViewController, WalkLogListViewable {
+    var presenter: (any WalkLogListPresentable)?
     private let walkLogTableView: UITableView = UITableView()
 
     override func configureAttributes() {

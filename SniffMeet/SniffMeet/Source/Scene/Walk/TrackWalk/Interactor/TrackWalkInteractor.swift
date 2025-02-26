@@ -12,7 +12,8 @@ protocol TrackWalkInteractable: AnyObject {
     var presenter: TrackWalkInteractorOutput? { get set }
 
     func startTracking()
-    func stopTracking() -> WalkLog?
+    func stopTracking(snapshotImageData: Data?) -> WalkLog?
+    func saveWalkLog(walkLog: WalkLog) throws
 }
 
 final class TrackWalkInteractor: TrackWalkInteractable {
@@ -20,6 +21,7 @@ final class TrackWalkInteractor: TrackWalkInteractable {
     private let updateTimeUseCase: any UpdateTimeUseCase
     private let updateUserStepUseCase: any UpdateUserStepUseCase
     private let updateUserLocationUseCase: any UpdateUserLocationUseCase
+    private let saveWalkLogUsecase: any SaveWalkLogUseCase
 
     private var startDate: Date?
     private var endDate: Date?
@@ -33,11 +35,13 @@ final class TrackWalkInteractor: TrackWalkInteractable {
     init(
         updateTimeUseCase: any UpdateTimeUseCase,
         updateUserStepUseCase: any UpdateUserStepUseCase,
-        updateUserLocationUseCase: any UpdateUserLocationUseCase
+        updateUserLocationUseCase: any UpdateUserLocationUseCase,
+        saveWalkLogUsecase: any SaveWalkLogUseCase
     ){
         self.updateTimeUseCase = updateTimeUseCase
         self.updateUserStepUseCase = updateUserStepUseCase
         self.updateUserLocationUseCase = updateUserLocationUseCase
+        self.saveWalkLogUsecase = saveWalkLogUsecase
     }
 
     func startTracking() {
@@ -97,7 +101,7 @@ final class TrackWalkInteractor: TrackWalkInteractable {
         SNMLogger.log("이동 거리: \(totalDistance) meters")
     }
 
-    func stopTracking() -> WalkLog? {
+    func stopTracking(snapshotImageData: Data?) -> WalkLog? {
         endDate = Date()
         updateTimeUseCase.cancel()
         updateUserStepUseCase.cancel()
@@ -110,7 +114,11 @@ final class TrackWalkInteractor: TrackWalkInteractable {
             distance: totalDistance,
             startDate: startDate,
             endDate: endDate,
-            image: nil
+            image: snapshotImageData
         )
+    }
+
+    func saveWalkLog(walkLog: WalkLog) throws {
+        try saveWalkLogUsecase.execute(walkLog: walkLog)
     }
 }

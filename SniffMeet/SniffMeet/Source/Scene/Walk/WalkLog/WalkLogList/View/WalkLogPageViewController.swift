@@ -17,7 +17,7 @@ final class WalkLogPageViewController: BaseViewController {
         navigationOrientation: .horizontal
     )
     // TODO: 실제 ViewController로 대체 필요
-    private var dataSource: [UIViewController] = [
+    private var subViewControllers: [UIViewController] = [
         WalkLogListRouter.buildWalkLogListModule(),
         HomeViewController()
     ]
@@ -29,7 +29,7 @@ final class WalkLogPageViewController: BaseViewController {
         pageViewController.delegate = self
         pageViewController.dataSource = self
         pageViewController.setViewControllers(
-            [dataSource[currentIndex]],
+            [subViewControllers[currentIndex]],
             direction: .forward,
             animated: true
         )
@@ -47,7 +47,7 @@ final class WalkLogPageViewController: BaseViewController {
         NSLayoutConstraint.activate([
             lineTabBar.topAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 8
+                constant: LayoutConstant.xsmallVerticalPadding
             ),
             lineTabBar.heightAnchor.constraint(
                 equalToConstant: lineTabBar.intrinsicContentSize.height
@@ -77,11 +77,11 @@ final class WalkLogPageViewController: BaseViewController {
 
     private func updatePageViewController(index: Int) {
         guard currentIndex != index,
-              index < dataSource.count else { return }
+              index < subViewControllers.count else { return }
         let direction: UIPageViewController.NavigationDirection = currentIndex < index ?
             .forward : .reverse
         pageViewController.setViewControllers(
-            [dataSource[index]],
+            [subViewControllers[index]],
             direction: direction,
             animated: true
         )
@@ -108,8 +108,8 @@ extension WalkLogPageViewController: UIPageViewControllerDelegate {
      ) {
        guard
         let viewController = pageViewController.viewControllers?.first,
-        let viewIndex = dataSource.firstIndex(of: viewController) else { return }
-         lineTabBar.selectTab(index: viewIndex)
+        let viewIndex = subViewControllers.firstIndex(of: viewController) else { return }
+        lineTabBar.selectTab(index: viewIndex)
      }
 }
 
@@ -118,16 +118,16 @@ extension WalkLogPageViewController: UIPageViewControllerDataSource {
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
     ) -> UIViewController? {
-        guard let index = dataSource.firstIndex(of: viewController),
+        guard let index = subViewControllers.firstIndex(of: viewController),
               index - 1 > -1 else { return nil }
-        return dataSource[index - 1]
+        return subViewControllers[index - 1]
     }
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerAfter viewController: UIViewController
     ) -> UIViewController? {
-        guard let index = dataSource.firstIndex(of: viewController),
-              index + 1 < dataSource.count else { return nil }
-        return dataSource[index + 1]
+        guard let index = subViewControllers.firstIndex(of: viewController),
+              index + 1 < subViewControllers.count else { return nil }
+        return subViewControllers[index + 1]
     }
 }

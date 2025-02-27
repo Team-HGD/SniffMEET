@@ -4,7 +4,7 @@
 //
 //  Created by 배현진 on 2/25/25.
 //
-
+import Combine
 import UIKit
 
 protocol SigninViewable: AnyObject {
@@ -13,6 +13,9 @@ protocol SigninViewable: AnyObject {
 
 final class SigninViewController: BaseViewController, SigninViewable {
     var presenter: (any SigninPresentable)?
+    private let signUpTapGesture = UITapGestureRecognizer()
+    private let findPWTapGesture = UITapGestureRecognizer()
+    private var cancellables: Set<AnyCancellable> = []
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = Context.title
@@ -28,6 +31,7 @@ final class SigninViewController: BaseViewController, SigninViewable {
         label.text = Context.signupButtonTitle
         label.textColor = SNMColor.mainNavy
         label.font = SNMFont.body
+        label.isUserInteractionEnabled = true
         return label
     }()
     private var findPWLabel: UILabel = {
@@ -35,6 +39,7 @@ final class SigninViewController: BaseViewController, SigninViewable {
         label.text = Context.findPWButtonTitle
         label.textColor = SNMColor.mainNavy
         label.font = SNMFont.body
+        label.isUserInteractionEnabled = true
         return label
     }()
 
@@ -45,6 +50,9 @@ final class SigninViewController: BaseViewController, SigninViewable {
 
     override func configureAttributes() {
         hideKeyboardWhenTappedAround()
+        pwTextField.isSecureTextEntry = true
+        signUpLabel.addGestureRecognizer(signUpTapGesture)
+        findPWLabel.addGestureRecognizer(findPWTapGesture)
     }
 
     override func configureHierachy() {
@@ -104,6 +112,24 @@ final class SigninViewController: BaseViewController, SigninViewable {
     }
 
     override func bind() {
+        signInButton.publisher(event: .touchUpInside)
+            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
+            .sink { [weak self] _ in
+            // TODO: - 로그인 버튼 클릭시
+            }
+            .store(in: &cancellables)
+        signUpTapGesture.publisher(for: \.state)
+            .filter { $0 == .ended }
+            .sink { [weak self] _ in
+            // TODO: - 회원가입 클릭시
+            }
+            .store(in: &cancellables)
+        findPWTapGesture.publisher(for: \.state)
+            .filter { $0 == .ended }
+            .sink { [weak self] _ in
+            // TODO: - 비밀번호 찾기 클릭시
+            }
+            .store(in: &cancellables)
     }
 }
 

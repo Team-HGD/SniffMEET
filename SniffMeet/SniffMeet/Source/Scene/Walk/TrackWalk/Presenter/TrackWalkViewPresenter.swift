@@ -13,6 +13,7 @@ protocol TrackWalkPresentable: AnyObject {
 
     func startTracking()
     func endTracking()
+    func didTapDismissButton()
 }
 protocol TrackWalkInteractorOutput: AnyObject {
     func updateWalkRecord(_ record: WalkRecord)
@@ -30,6 +31,10 @@ final class TrackWalkViewPresenter: TrackWalkPresentable {
     func endTracking() {
         // TODO: -  인터랙터에 저장 요청하는 로직
         
+    }
+    func didTapDismissButton() {
+        guard let view else { return }
+        router?.pop(from: view)
     }
 }
 

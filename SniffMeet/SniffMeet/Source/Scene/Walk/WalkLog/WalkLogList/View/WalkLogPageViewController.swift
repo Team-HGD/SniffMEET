@@ -18,7 +18,7 @@ final class WalkLogPageViewController: BaseViewController {
     )
     // TODO: 실제 ViewController로 대체 필요
     private var dataSource: [UIViewController] = [
-        WalkLogListViewController(),
+        WalkLogListRouter.buildWalkLogListModule(),
         HomeViewController()
     ]
 

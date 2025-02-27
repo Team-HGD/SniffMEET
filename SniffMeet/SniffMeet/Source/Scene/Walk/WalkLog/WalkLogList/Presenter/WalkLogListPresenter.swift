@@ -15,6 +15,7 @@ protocol WalkLogListPresentable: AnyObject {
     var output: (any WalkLogListPresenterOutput) { get }
 
     func viewDidLoad()
+    func didTapAddWalkLogButton()
 }
 
 final class WalkLogListPresenter: WalkLogListPresentable {
@@ -49,6 +50,10 @@ final class WalkLogListPresenter: WalkLogListPresentable {
         } catch {
             SNMLogger.log(error.localizedDescription)
         }
+    }
+    func didTapAddWalkLogButton() {
+        guard let view else { return }
+        router?.showTrackWalkView(view: view)
     }
 }
 

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol WalkLogListRoutable: AnyObject, Routable {
-
+    func showTrackWalkView(view: any WalkLogListViewable)
 }
 
 protocol WalkLogListModuleBuildable {
@@ -16,7 +16,10 @@ protocol WalkLogListModuleBuildable {
 }
 
 final class WalkLogListRouter: WalkLogListRoutable {
-
+    func showTrackWalkView(view: any WalkLogListViewable) {
+        guard let view = view as? UIViewController else { return }
+        push(from: view, to: TrackWalkRouter.create(), animated: true)
+    }
 }
 
 extension WalkLogListRouter: WalkLogListModuleBuildable {

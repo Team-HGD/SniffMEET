@@ -5,6 +5,7 @@
 //  Created by sole on 11/24/24.
 //
 
+import Combine
 import UIKit
 
 protocol WalkLogListViewable: AnyObject {
@@ -13,7 +14,9 @@ protocol WalkLogListViewable: AnyObject {
 
 final class WalkLogListViewController: BaseViewController, WalkLogListViewable {
     var presenter: (any WalkLogListPresentable)?
+    private var cancellabels: Set<AnyCancellable> = []
     private let walkLogTableView: UITableView = UITableView()
+    private let addWalkLogButton: UIButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +28,22 @@ final class WalkLogListViewController: BaseViewController, WalkLogListViewable {
         walkLogTableView.delegate = self
         walkLogTableView.separatorInset = .zero
         walkLogTableView.allowsSelection = false
+
+        let plusImage = UIImage(
+            systemName: "plus",
+            withConfiguration: UIImage.SymbolConfiguration(pointSize: LayoutConstant.iconSize)
+        )
+        addWalkLogButton.setImage(plusImage, for: .normal)
+        addWalkLogButton.tintColor = .white
+        addWalkLogButton.backgroundColor = SNMColor.mainBrown
+        addWalkLogButton.layer.cornerRadius = Layout.addButtonSize / 2
+        addWalkLogButton.layer.shadowColor = UIColor.black.cgColor
+        addWalkLogButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        addWalkLogButton.layer.shadowOpacity = 0.25
     }
     override func configureHierachy() {
-        [walkLogTableView].forEach {
+        [walkLogTableView,
+         addWalkLogButton].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
@@ -37,19 +53,43 @@ final class WalkLogListViewController: BaseViewController, WalkLogListViewable {
             walkLogTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             walkLogTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             walkLogTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            walkLogTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            walkLogTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+
+            addWalkLogButton.widthAnchor.constraint(equalToConstant: Layout.addButtonSize),
+            addWalkLogButton.heightAnchor.constraint(equalToConstant: Layout.addButtonSize),
+            addWalkLogButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: -LayoutConstant.regularVerticalPadding
+            ),
+            addWalkLogButton.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: -LayoutConstant.regularVerticalPadding
+            ),
         ])
     }
+    override func bind() {
+        addWalkLogButton.publisher(event: .touchUpInside)
+            .sink { [weak self] _ in
+                self?.presenter?.didTapAddWalkLogButton()
+            }
+            .store(in: &cancellabels)
+    }
+}
 
-    private func distanceLabelString(_ meters: Double) -> String {
+private extension WalkLogListViewController {
+    enum Layout {
+        static let addButtonSize: CGFloat = 66
+    }
+
+    func distanceLabelString(_ meters: Double) -> String {
         String(format: "%.2f km", meters / 1000)
     }
-    private func dateLabelString(_ date: Date) -> String {
+    func dateLabelString(_ date: Date) -> String {
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy년 MM월 dd일"
         return dateFormatter.string(from: date)
     }
-    private func durationLabelString(_ timeInterval: TimeInterval) -> String {
+    func durationLabelString(_ timeInterval: TimeInterval) -> String {
         let totalSeconds = Int(timeInterval)
         let hours = totalSeconds / (60 * 60)
         let minutes = (totalSeconds / 60) % 60

@@ -23,7 +23,15 @@ extension WalkLogListRouter: WalkLogListModuleBuildable {
     static func buildWalkLogListModule() -> UIViewController {
         let view = WalkLogListViewController()
         let presenter = WalkLogListPresenter()
-        let interactor = WalkLogListInteractor()
+        let interactor = WalkLogListInteractor(
+            loadUserInfoUsecase: LoadUserInfoUseCaseImpl(
+                dataLoadable: LocalDataManager(),
+                imageManageable: SNMFileManager(fileType: .image)
+            ),
+            requestWalkLogListUsecase: RequestWalkLogListUseCaseImpl(
+                fileManager: SNMFileManager(fileType: .data)
+            )
+        )
         let router = WalkLogListRouter()
 
         view.presenter = presenter

@@ -5,11 +5,13 @@
 //  Created by sole on 11/18/24.
 //
 
+import Foundation
+
 protocol LoadUserInfoUseCase {
-    func execute() throws -> UserInfo
+    func execute() throws -> (ProfileInfo, Data?)
 }
 
-struct LoadUserInfoUseCaseImpl: LoadUserInfoUseCase {
+struct LoadUserProfileUseCaseImpl: LoadUserInfoUseCase {
     private let dataLoadable: (any DataLoadable)
     private let imageManageable: (any FileManagable)
 
@@ -18,10 +20,14 @@ struct LoadUserInfoUseCaseImpl: LoadUserInfoUseCase {
         self.imageManageable = imageManageable
     }
 
-    func execute() throws -> UserInfo {
-        var userInfo = try dataLoadable.loadData(forKey: Environment.UserDefaultsKey.dogInfo,
-                                                 type: UserInfo.self)
-        userInfo.profileImage = try imageManageable.get(forKey: Environment.FileManagerKey.profileImage)
-        return userInfo
+    func execute() throws -> (ProfileInfo, Data?) {
+        let userInfo = try dataLoadable.loadData(
+            forKey: Environment.UserDefaultsKey.dogInfo,
+            type: ProfileInfo.self
+        )
+        let profileImage = try? imageManageable.get(
+            forKey: Environment.FileManagerKey.profileImage
+        )
+        return (userInfo, profileImage)
     }
 }

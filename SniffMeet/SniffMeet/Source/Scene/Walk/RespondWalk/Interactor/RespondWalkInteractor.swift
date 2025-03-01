@@ -15,7 +15,7 @@ protocol RespondWalkInteractable: AnyObject {
     var convertLocationToTextUseCase: ConvertLocationToTextUseCase { get }
     var requestProfileImageUseCase: RequestProfileImageUseCase { get }
     var loadUserUseCase: LoadUserInfoUseCase { get }
-
+    
     func fetchSenderInfo(userId: UUID)
     func respondWalkRequest(isAccepted: Bool, receivedNoti: WalkNoti)
     func calculateTimeLimit(requestTime: Date)
@@ -31,7 +31,7 @@ final class RespondWalkInteractor: RespondWalkInteractable {
     var convertLocationToTextUseCase: ConvertLocationToTextUseCase
     var requestProfileImageUseCase: RequestProfileImageUseCase
     let loadUserUseCase: LoadUserInfoUseCase
-
+    
     init(presenter: (any RespondWalkInteractorOutput)? = nil,
          requestUserInfoUseCase: RequestMateInfoUseCase,
          respondUseCase: RespondWalkRequestUseCase,
@@ -79,16 +79,19 @@ final class RespondWalkInteractor: RespondWalkInteractable {
                     return
                 }
                 let userID = try SupabaseSessionManager.shared.userID.get()
-                let userInfo = try loadUserUseCase.execute()
-                let walkNoti = WalkNotiDTO(id: UUID(),
-                                           createdAt: date,
-                                           message: receivedNoti.message,
-                                           latitude: receivedNoti.latitude,
-                                           longtitude: receivedNoti.longtitude,
-                                           senderId: userID,
-                                           receiverId: receivedNoti.senderId,
-                                           senderName: userInfo.name,
-                                           category: walkNotiCategory)
+                // FIXME: 이미지 불러오는 과정이 포함됨
+                let (userInfo, _) = try loadUserUseCase.execute()
+                let walkNoti = WalkNotiDTO(
+                    id: UUID(),
+                    createdAt: date,
+                    message: receivedNoti.message,
+                    latitude: receivedNoti.latitude,
+                    longtitude: receivedNoti.longtitude,
+                    senderId: userID,
+                    receiverId: receivedNoti.senderId,
+                    senderName: userInfo.name,
+                    category: walkNotiCategory
+                )
                 try await respondWalkRequestUseCase.execute(requestID: receivedNoti.id, walkNoti: walkNoti)
             }
             catch {

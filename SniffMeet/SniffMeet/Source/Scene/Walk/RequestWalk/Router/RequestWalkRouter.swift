@@ -53,7 +53,7 @@ extension RequestWalkRouter: RequestWalkBuildable {
             ),
             cacheManager: CacheManager.shared
         )
-        let loadInfoUseCase: LoadUserInfoUseCase = LoadUserInfoUseCaseImpl(
+        let loadInfoUseCase: LoadUserInfoUseCase = LoadUserProfileUseCaseImpl(
             dataLoadable: LocalDataManager(),
             imageManageable: SNMFileManager(fileType: .image)
         )

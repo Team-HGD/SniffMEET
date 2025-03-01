@@ -58,8 +58,8 @@ final class ProcessedWalkViewController: BaseViewController, ProcessedWalkViewab
     }
     override func configureAttributes() {
         profileView.configure(
-            name: UserInfo.example.name,
-            keywords: UserInfo.example.keywords.map { $0.rawValue }
+            name: ProfileInfo.example.name,
+            keywords: ProfileInfo.example.keywords.map { $0.rawValue }
         )
         titleLabel.text = (presenter?.noti.category == .walkAccepted) ?
         Context.acceptedRequestTitle : Context.declinedRequestTitle

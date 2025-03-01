@@ -37,11 +37,19 @@ final class SignUpViewController: BaseViewController, SignUpViewable {
         super.viewDidLoad()
         view.backgroundColor = SNMColor.white
         signUpButton.isEnabled = false
+        idVerifyButton.isEnabled = false
     }
 
     override func configureAttributes() {
         hideKeyboardWhenTappedAround()
         configureNavigationControllerAttributes()
+        configureDelegateForSubviews()
+    }
+
+    private func configureDelegateForSubviews() {
+        idTextField.delegate = self
+        pwTextField.delegate = self
+        pwCheckTextField.delegate = self
     }
 
     private func configureNavigationControllerAttributes() {
@@ -124,9 +132,44 @@ private extension SignUpViewController {
         static let idPlaceholder: String = "이메일을 입력해주세요."
         static let pwPlaceholder: String = "비밀번호를 입력해주세요."
         static let pwCheckPlaceholder: String = "비밀번호를 다시 입력해주세요."
-        static let pwInfoText: String = "영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요."
+        static let pwInfoText: String = "영문, 숫자를 포함한 8자 이상 15자 이하의 비밀번호를 입력해주세요."
         static let idVerifyButtonTitle: String = "인증"
         static let signUpButtonTitle: String = "다음"
         static let warningPadding: CGFloat = 26
+    }
+}
+
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        updateSignUpButtonState()
+        updateVerifyButtonState()
+    }
+
+    func updateSignUpButtonState() {
+        let isIdFilled = !(idTextField.text?.isEmpty ?? true)
+        let isPwFilled = !(pwTextField.text?.isEmpty ?? true)
+        let isPwCheckFilled = !(pwCheckTextField.text?.isEmpty ?? true)
+        let isIDValid = isValidEmail(idTextField.text ?? "")
+        let isPwValid = isValidPassword(pwTextField.text ?? "")
+        let isPwCheckValid = (pwTextField.text == pwCheckTextField.text)
+
+        signUpButton.isEnabled = isIdFilled && isPwFilled && isPwCheckFilled &&
+        isIDValid && isPwValid && isPwCheckValid
+    }
+
+    func updateVerifyButtonState() {
+        idVerifyButton.isEnabled = isValidEmail(idTextField.text ?? "")
+    }
+
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return predicate.evaluate(with: email)
+    }
+
+    private func isValidPassword(_ password: String) -> Bool {
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,15}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        return predicate.evaluate(with: password)
     }
 }

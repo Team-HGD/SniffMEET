@@ -12,7 +12,7 @@
 		320043762CDCA18E00D08B6D /* (null) in Sources */ = {isa = PBXBuildFile; };
 		320043782CDCA49100D08B6D /* (null) in Sources */ = {isa = PBXBuildFile; };
 		3200437C2CDCA6F300D08B6D /* (null) in Sources */ = {isa = PBXBuildFile; };
-		3200438B2CDF3BEF00D08B6D /* ProfileCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200438A2CDF3BE900D08B6D /* ProfileCreateViewController.swift */; };
+		3200438B2CDF3BEF00D08B6D /* ProfileSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200438A2CDF3BE900D08B6D /* ProfileSetViewController.swift */; };
 		320043912CDF3D7F00D08B6D /* KeywordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200438E2CDF3D7F00D08B6D /* KeywordButton.swift */; };
 		320043922CDF3D7F00D08B6D /* InputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200438D2CDF3D7F00D08B6D /* InputTextField.swift */; };
 		320043932CDF3D7F00D08B6D /* KeywordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200438F2CDF3D7F00D08B6D /* KeywordView.swift */; };
@@ -23,10 +23,10 @@
 		3200441C2CE48C5C00D08B6D /* MPCAdvertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200441B2CE48C5600D08B6D /* MPCAdvertiser.swift */; };
 		3200441E2CE48D3500D08B6D /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200441D2CE48D1F00D08B6D /* MPCManager.swift */; };
 		3200444E2CE595EA00D08B6D /* ProfileSetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200444D2CE595DE00D08B6D /* ProfileSetPresenter.swift */; };
-		320044502CE595F700D08B6D /* ProfileInputPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200444F2CE595F000D08B6D /* ProfileInputPresenter.swift */; };
-		320044532CE59A8A00D08B6D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044522CE59A8100D08B6D /* UserInfo.swift */; };
-		320044562CE59DF500D08B6D /* ProfileInputRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044552CE59D5D00D08B6D /* ProfileInputRouter.swift */; };
-		320044582CE5B04C00D08B6D /* ProfileCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044572CE5B04300D08B6D /* ProfileCreateRouter.swift */; };
+		320044502CE595F700D08B6D /* ProfileCreatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200444F2CE595F000D08B6D /* ProfileCreatePresenter.swift */; };
+		320044532CE59A8A00D08B6D /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044522CE59A8100D08B6D /* ProfileInfo.swift */; };
+		320044562CE59DF500D08B6D /* ProfileCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044552CE59D5D00D08B6D /* ProfileCreateRouter.swift */; };
+		320044582CE5B04C00D08B6D /* ProfileSetRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044572CE5B04300D08B6D /* ProfileSetRouter.swift */; };
 		3200445A2CE5B3AA00D08B6D /* ProfileCreateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044592CE5B39A00D08B6D /* ProfileCreateInteractor.swift */; };
 		3200445E2CE5CA1B00D08B6D /* SaveUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200445D2CE5CA1A00D08B6D /* SaveUserInfoUseCase.swift */; };
 		320044672CE6125100D08B6D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044662CE6124900D08B6D /* DataManager.swift */; };
@@ -112,13 +112,12 @@
 		32BD48432D3FF02C0078DA9C /* WalkLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD331A512CF23BCE00F39426 /* WalkLog.swift */; };
 		32BD48442D3FF02C0078DA9C /* WalkNoti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044972CED81EF00D08B6D /* WalkNoti.swift */; };
 		32BD48452D3FF02C0078DA9C /* Mate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23A3B722CF4683F00A58705 /* Mate.swift */; };
-		32BD48462D3FF02C0078DA9C /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044522CE59A8100D08B6D /* UserInfo.swift */; };
+		32BD48462D3FF02C0078DA9C /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044522CE59A8100D08B6D /* ProfileInfo.swift */; };
 		32BD48472D3FF02C0078DA9C /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BD49FE2CF7712800AC72A7 /* Keyword.swift */; };
 		32BD48482D3FF02C0078DA9C /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BD49FC2CF7712000AC72A7 /* Size.swift */; };
 		32BD48492D3FF02C0078DA9C /* Sex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BD49FA2CF7711A00AC72A7 /* Sex.swift */; };
 		32BD484A2D3FF02C0078DA9C /* UpdateUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */; };
 		32BD484B2D3FF02C0078DA9C /* SaveFirstLaunchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1152762CFBA083008955C4 /* SaveFirstLaunchUseCase.swift */; };
-		32BD484C2D3FF02C0078DA9C /* CreateAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */; };
 		32BD484D2D3FF02C0078DA9C /* SaveProfileImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B5F2CF432780093BEB9 /* SaveProfileImageUseCase.swift */; };
 		32BD484E2D3FF02C0078DA9C /* SaveUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200445D2CE5CA1A00D08B6D /* SaveUserInfoUseCase.swift */; };
 		32BD484F2D3FF02C0078DA9C /* RemoteSaveDeviceTokenUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE768972CF7836B00B5DE88 /* RemoteSaveDeviceTokenUseCase.swift */; };
@@ -188,12 +187,12 @@
 		32BD48942D3FF02C0078DA9C /* TabBarModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C328852CE245AC00D255AB /* TabBarModuleBuilder.swift */; };
 		32BD48952D3FF02C0078DA9C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21435F62CE20D2500564A4D /* TabBarController.swift */; };
 		32BD48962D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FA4E782CE0FBBF00553C2E /* ProfileCreateViewController.swift */; };
-		32BD48972D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200438A2CDF3BE900D08B6D /* ProfileCreateViewController.swift */; };
+		32BD48972D3FF02C0078DA9C /* ProfileSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200438A2CDF3BE900D08B6D /* ProfileSetViewController.swift */; };
 		32BD48982D3FF02C0078DA9C /* ProfileCreateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044592CE5B39A00D08B6D /* ProfileCreateInteractor.swift */; };
-		32BD48992D3FF02C0078DA9C /* ProfileInputPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200444F2CE595F000D08B6D /* ProfileInputPresenter.swift */; };
+		32BD48992D3FF02C0078DA9C /* ProfileCreatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200444F2CE595F000D08B6D /* ProfileCreatePresenter.swift */; };
 		32BD489A2D3FF02C0078DA9C /* ProfileSetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3200444D2CE595DE00D08B6D /* ProfileSetPresenter.swift */; };
-		32BD489B2D3FF02C0078DA9C /* ProfileInputRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044552CE59D5D00D08B6D /* ProfileInputRouter.swift */; };
-		32BD489C2D3FF02C0078DA9C /* ProfileCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044572CE5B04300D08B6D /* ProfileCreateRouter.swift */; };
+		32BD489B2D3FF02C0078DA9C /* ProfileCreateRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044552CE59D5D00D08B6D /* ProfileCreateRouter.swift */; };
+		32BD489C2D3FF02C0078DA9C /* ProfileSetRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320044572CE5B04300D08B6D /* ProfileSetRouter.swift */; };
 		32BD489D2D3FF02C0078DA9C /* ProfileEditInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9468CB2CFD590700417DC1 /* ProfileEditInteractor.swift */; };
 		32BD489E2D3FF02C0078DA9C /* ProfileEditPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9468CD2CFD590700417DC1 /* ProfileEditPresenter.swift */; };
 		32BD489F2D3FF02C0078DA9C /* ProfileEditRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9468CF2CFD590700417DC1 /* ProfileEditRoutable.swift */; };
@@ -360,7 +359,6 @@
 		A25BE4522CEBB5A900886763 /* SupabaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4512CEBB5A900886763 /* SupabaseSession.swift */; };
 		A25BE4562CEBB63A00886763 /* SupabaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4552CEBB63A00886763 /* SupabaseUser.swift */; };
 		A25BE4582CEBB95C00886763 /* SupabaseRefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */; };
-		A266A2602CF5CF4A002C2B3A /* CreateAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */; };
 		A26BA0092D6DC84C000E5648 /* ProfileSetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26BA0082D6DC84C000E5648 /* ProfileSetInteractor.swift */; };
 		A26BA00A2D6DC84C000E5648 /* ProfileSetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26BA0082D6DC84C000E5648 /* ProfileSetInteractor.swift */; };
 		A26DCA082D5E3F2900D8D75A /* CheckNicknameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26DCA072D5E3F2900D8D75A /* CheckNicknameUseCase.swift */; };
@@ -584,7 +582,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3200438A2CDF3BE900D08B6D /* ProfileCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCreateViewController.swift; sourceTree = "<group>"; };
+		3200438A2CDF3BE900D08B6D /* ProfileSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetViewController.swift; sourceTree = "<group>"; };
 		3200438C2CDF3D7F00D08B6D /* Extension + Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Navigation.swift"; sourceTree = "<group>"; };
 		3200438D2CDF3D7F00D08B6D /* InputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextField.swift; sourceTree = "<group>"; };
 		3200438E2CDF3D7F00D08B6D /* KeywordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordButton.swift; sourceTree = "<group>"; };
@@ -595,10 +593,10 @@
 		3200441B2CE48C5600D08B6D /* MPCAdvertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCAdvertiser.swift; sourceTree = "<group>"; };
 		3200441D2CE48D1F00D08B6D /* MPCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
 		3200444D2CE595DE00D08B6D /* ProfileSetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetPresenter.swift; sourceTree = "<group>"; };
-		3200444F2CE595F000D08B6D /* ProfileInputPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputPresenter.swift; sourceTree = "<group>"; };
-		320044522CE59A8100D08B6D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		320044552CE59D5D00D08B6D /* ProfileInputRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInputRouter.swift; sourceTree = "<group>"; };
-		320044572CE5B04300D08B6D /* ProfileCreateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCreateRouter.swift; sourceTree = "<group>"; };
+		3200444F2CE595F000D08B6D /* ProfileCreatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCreatePresenter.swift; sourceTree = "<group>"; };
+		320044522CE59A8100D08B6D /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
+		320044552CE59D5D00D08B6D /* ProfileCreateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCreateRouter.swift; sourceTree = "<group>"; };
+		320044572CE5B04300D08B6D /* ProfileSetRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetRouter.swift; sourceTree = "<group>"; };
 		320044592CE5B39A00D08B6D /* ProfileCreateInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCreateInteractor.swift; sourceTree = "<group>"; };
 		3200445D2CE5CA1A00D08B6D /* SaveUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUserInfoUseCase.swift; sourceTree = "<group>"; };
 		320044662CE6124900D08B6D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -709,7 +707,6 @@
 		A25BE4512CEBB5A900886763 /* SupabaseSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSession.swift; sourceTree = "<group>"; };
 		A25BE4552CEBB63A00886763 /* SupabaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseUser.swift; sourceTree = "<group>"; };
 		A25BE4572CEBB95C00886763 /* SupabaseRefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseRefreshResponse.swift; sourceTree = "<group>"; };
-		A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountUseCase.swift; sourceTree = "<group>"; };
 		A26BA0082D6DC84C000E5648 /* ProfileSetInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetInteractor.swift; sourceTree = "<group>"; };
 		A26DCA072D5E3F2900D8D75A /* CheckNicknameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNicknameUseCase.swift; sourceTree = "<group>"; };
 		A28D4F572CFED0CB00A79543 /* AddMateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateButton.swift; sourceTree = "<group>"; };
@@ -946,7 +943,7 @@
 				FD331A512CF23BCE00F39426 /* WalkLog.swift */,
 				320044972CED81EF00D08B6D /* WalkNoti.swift */,
 				A23A3B722CF4683F00A58705 /* Mate.swift */,
-				320044522CE59A8100D08B6D /* UserInfo.swift */,
+				320044522CE59A8100D08B6D /* ProfileInfo.swift */,
 				32C539642D65CB2300CD89DF /* WalkRoute.swift */,
 				A2BD49F92CF770F900AC72A7 /* DogTraits */,
 			);
@@ -1038,11 +1035,10 @@
 			children = (
 				FD85EBE92D5F3D750017443E /* DeleteNotificationUseCase.swift */,
 				99E79F5A2D5392AF00E48552 /* DeleteMateUseCase.swift */,
-				993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */,
 				FD1152762CFBA083008955C4 /* SaveFirstLaunchUseCase.swift */,
-				A266A25F2CF5CF4A002C2B3A /* CreateAccountUseCase.swift */,
 				FD880B5F2CF432780093BEB9 /* SaveProfileImageUseCase.swift */,
 				3200445D2CE5CA1A00D08B6D /* SaveUserInfoUseCase.swift */,
+				993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */,
 				FDE768972CF7836B00B5DE88 /* RemoteSaveDeviceTokenUseCase.swift */,
 				FDE768952CF7830F00B5DE88 /* RegisterDeviceTokenUseCase.swift */,
 			);
@@ -1439,7 +1435,7 @@
 		A2D9E0772D6CD00700290EB5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3200438A2CDF3BE900D08B6D /* ProfileCreateViewController.swift */,
+				3200438A2CDF3BE900D08B6D /* ProfileSetViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1455,7 +1451,7 @@
 		A2D9E0792D6CD01100290EB5 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				320044572CE5B04300D08B6D /* ProfileCreateRouter.swift */,
+				320044572CE5B04300D08B6D /* ProfileSetRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1629,10 +1625,10 @@
 		FD9468D32CFD590700417DC1 /* EditProfile */ = {
 			isa = PBXGroup;
 			children = (
+				FD9468D22CFD590700417DC1 /* View */,
 				FD9468CC2CFD590700417DC1 /* Interactor */,
 				FD9468CE2CFD590700417DC1 /* Presenter */,
 				FD9468D02CFD590700417DC1 /* Router */,
-				FD9468D22CFD590700417DC1 /* View */,
 			);
 			path = EditProfile;
 			sourceTree = "<group>";
@@ -1945,7 +1941,7 @@
 		FDA491642CDA7BD600A36FB0 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				3200444F2CE595F000D08B6D /* ProfileInputPresenter.swift */,
+				3200444F2CE595F000D08B6D /* ProfileCreatePresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -1961,7 +1957,7 @@
 		FDA491672CDA7BEB00A36FB0 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				320044552CE59D5D00D08B6D /* ProfileInputRouter.swift */,
+				320044552CE59D5D00D08B6D /* ProfileCreateRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -2554,14 +2550,13 @@
 				32BD48442D3FF02C0078DA9C /* WalkNoti.swift in Sources */,
 				32BD48452D3FF02C0078DA9C /* Mate.swift in Sources */,
 				32081A6A2D547F9F00D19235 /* MPCSessionConcurrencyTest.swift in Sources */,
-				32BD48462D3FF02C0078DA9C /* UserInfo.swift in Sources */,
+				32BD48462D3FF02C0078DA9C /* ProfileInfo.swift in Sources */,
 				32BD48472D3FF02C0078DA9C /* Keyword.swift in Sources */,
 				32BD48482D3FF02C0078DA9C /* Size.swift in Sources */,
 				32BD48492D3FF02C0078DA9C /* Sex.swift in Sources */,
 				32BD484A2D3FF02C0078DA9C /* UpdateUserInfoUseCase.swift in Sources */,
 				32BD484B2D3FF02C0078DA9C /* SaveFirstLaunchUseCase.swift in Sources */,
 				FD85EBEB2D5F3D7E0017443E /* DeleteNotificationUseCase.swift in Sources */,
-				32BD484C2D3FF02C0078DA9C /* CreateAccountUseCase.swift in Sources */,
 				99E7A0642D5DB75A00E48552 /* Extension + GIFImageView.swift in Sources */,
 				32BD484D2D3FF02C0078DA9C /* SaveProfileImageUseCase.swift in Sources */,
 				32BD484E2D3FF02C0078DA9C /* SaveUserInfoUseCase.swift in Sources */,
@@ -2657,12 +2652,12 @@
 				99E79F972D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
 				32BD48952D3FF02C0078DA9C /* TabBarController.swift in Sources */,
 				32BD48962D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */,
-				32BD48972D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */,
+				32BD48972D3FF02C0078DA9C /* ProfileSetViewController.swift in Sources */,
 				32BD48982D3FF02C0078DA9C /* ProfileCreateInteractor.swift in Sources */,
-				32BD48992D3FF02C0078DA9C /* ProfileInputPresenter.swift in Sources */,
+				32BD48992D3FF02C0078DA9C /* ProfileCreatePresenter.swift in Sources */,
 				32BD489A2D3FF02C0078DA9C /* ProfileSetPresenter.swift in Sources */,
-				32BD489B2D3FF02C0078DA9C /* ProfileInputRouter.swift in Sources */,
-				32BD489C2D3FF02C0078DA9C /* ProfileCreateRouter.swift in Sources */,
+				32BD489B2D3FF02C0078DA9C /* ProfileCreateRouter.swift in Sources */,
+				32BD489C2D3FF02C0078DA9C /* ProfileSetRouter.swift in Sources */,
 				32BD489D2D3FF02C0078DA9C /* ProfileEditInteractor.swift in Sources */,
 				32BD489E2D3FF02C0078DA9C /* ProfileEditPresenter.swift in Sources */,
 				32BD489F2D3FF02C0078DA9C /* ProfileEditRoutable.swift in Sources */,
@@ -2849,7 +2844,7 @@
 				FD243CFB2D621FC600971162 /* SNMProgressView.swift in Sources */,
 				32081B302D5C84EC00D19235 /* OnBoardingViewController.swift in Sources */,
 				320045362CF4353900D08B6D /* SNMFileManager.swift in Sources */,
-				320044582CE5B04C00D08B6D /* ProfileCreateRouter.swift in Sources */,
+				320044582CE5B04C00D08B6D /* ProfileSetRouter.swift in Sources */,
 				A25BE4582CEBB95C00886763 /* SupabaseRefreshResponse.swift in Sources */,
 				FDEAEA7C2CE314A7005890FA /* BaseViewController.swift in Sources */,
 				FDE768A12CF7873600B5DE88 /* RequestNotificationAuthUseCase.swift in Sources */,
@@ -2912,7 +2907,7 @@
 				FD1152792CFC3B29008955C4 /* SaveDeviceTokenDTO.swift in Sources */,
 				FD0634262CE596B5003C9D6B /* Endpoint.swift in Sources */,
 				320044872CEC85CB00D08B6D /* ProfileView.swift in Sources */,
-				320044502CE595F700D08B6D /* ProfileInputPresenter.swift in Sources */,
+				320044502CE595F700D08B6D /* ProfileCreatePresenter.swift in Sources */,
 				A26DCA082D5E3F2900D8D75A /* CheckNicknameUseCase.swift in Sources */,
 				FDE14A522CE8D338001F7A9D /* SNMRequestType.swift in Sources */,
 				FD85EBEA2D5F3D7E0017443E /* DeleteNotificationUseCase.swift in Sources */,
@@ -2977,16 +2972,16 @@
 				FD5134192CEB7ADE002E76F3 /* HomeRouter.swift in Sources */,
 				FD51341D2CEB7AF0002E76F3 /* HomeInteractor.swift in Sources */,
 				3200453F2CF5A8B800D08B6D /* CalculateTimeLimitUseCase.swift in Sources */,
-				320044532CE59A8A00D08B6D /* UserInfo.swift in Sources */,
+				320044532CE59A8A00D08B6D /* ProfileInfo.swift in Sources */,
 				99E79FA32D55627F00E48552 /* Extension + UITextViewDelegate.swift in Sources */,
 				A24082642CEB2470009109A0 /* SupabaseAuthManager.swift in Sources */,
 				3200453D2CF5A60E00D08B6D /* Extension + Date.swift in Sources */,
-				320044562CE59DF500D08B6D /* ProfileInputRouter.swift in Sources */,
+				320044562CE59DF500D08B6D /* ProfileCreateRouter.swift in Sources */,
 				A2C844D72CDBEF8B007F2970 /* (null) in Sources */,
 				32C5395F2D64165900CD89DF /* TrackWalkInteractor.swift in Sources */,
 				A2FE77732D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
 				99E79F962D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
-				3200438B2CDF3BEF00D08B6D /* ProfileCreateViewController.swift in Sources */,
+				3200438B2CDF3BEF00D08B6D /* ProfileSetViewController.swift in Sources */,
 				FD243D002D62547400971162 /* SNMImageTextToastView.swift in Sources */,
 				A2BD4A012CF7AD4300AC72A7 /* RequestMateInfoUseCase.swift in Sources */,
 				FD119F502CED87E500BE22BD /* SelectLocationRouter.swift in Sources */,
@@ -3022,7 +3017,6 @@
 				FD69B1B52CE3BC7E009D71DC /* UserDefaultsManager.swift in Sources */,
 				A220400B2CF6B89800D1E8CB /* UserInfoDTO.swift in Sources */,
 				320043722CDC9E5F00D08B6D /* (null) in Sources */,
-				A266A2602CF5CF4A002C2B3A /* CreateAccountUseCase.swift in Sources */,
 				FDE14A4E2CE8D144001F7A9D /* HTTPStatusCode.swift in Sources */,
 				3200441E2CE48D3500D08B6D /* MPCManager.swift in Sources */,
 				FDE768902CF7827D00B5DE88 /* AnyDecodable.swift in Sources */,

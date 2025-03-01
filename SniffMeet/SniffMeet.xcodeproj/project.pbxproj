@@ -403,7 +403,6 @@
 		A2FE77762D55448800239F05 /* RemoteDBRequestBuilderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77752D55448800239F05 /* RemoteDBRequestBuilderMock.swift */; };
 		FD01D8F52D40AC5300AD4940 /* Extension + UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01D8F42D40AC4100AD4940 /* Extension + UITableViewCell.swift */; };
 		FD01D8F72D40AC8600AD4940 /* TaskSerialQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01D8F62D40AC8000AD4940 /* TaskSerialQueue.swift */; };
-		FD01D8F82D40AC8600AD4940 /* TaskSerialQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01D8F62D40AC8000AD4940 /* TaskSerialQueue.swift */; };
 		FD01D8FA2D40ACAF00AD4940 /* Extension + Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01D8F92D40ACAB00AD4940 /* Extension + Array.swift */; };
 		FD0634262CE596B5003C9D6B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0634252CE596B2003C9D6B /* Endpoint.swift */; };
 		FD0634282CE596BD003C9D6B /* SNMRequestConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0634272CE596BA003C9D6B /* SNMRequestConvertible.swift */; };
@@ -516,6 +515,8 @@
 		FDC5D9C12D5C7E0400380533 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C02D5C7E0400380533 /* FirebaseAnalyticsWithoutAdIdSupport */; settings = {ATTRIBUTES = (Required, ); }; };
 		FDC5D9C32D5C7E0400380533 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C22D5C7E0400380533 /* FirebaseCore */; settings = {ATTRIBUTES = (Required, ); }; };
 		FDC5D9C52D5C7E0400380533 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = FDC5D9C42D5C7E0400380533 /* FirebaseCrashlytics */; settings = {ATTRIBUTES = (Required, ); }; };
+		FDC8A02E2D66FA190097F00A /* SNMErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC8A02C2D66FA040097F00A /* SNMErrorHandler.swift */; };
+		FDC8A02F2D66FA190097F00A /* SNMErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC8A02C2D66FA040097F00A /* SNMErrorHandler.swift */; };
 		FDCD02C52CE917A400B627D8 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE14A4D2CE8D13E001F7A9D /* HTTPStatusCode.swift */; };
 		FDCD02C62CE917A400B627D8 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0634292CE596C2003C9D6B /* NetworkProvider.swift */; };
 		FDCD02C72CE917A400B627D8 /* SNMRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE14A512CE8D331001F7A9D /* SNMRequestType.swift */; };
@@ -795,6 +796,8 @@
 		FD51341C2CEB7AEC002E76F3 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		FD51341E2CEB7AF6002E76F3 /* LoadUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserInfoUseCase.swift; sourceTree = "<group>"; };
 		FD5134222CEC2BDB002E76F3 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
+		FD5946652D6CF0BC006FF9C3 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		FD5946662D6CF0CB006FF9C3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		FD69B1B22CE3BC68009D71DC /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		FD69B1B42CE3BC79009D71DC /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		FD69B1BA2CE3BCDC009D71DC /* SNMPersistenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMPersistenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -815,6 +818,7 @@
 		FDBFA9A02CE1E51000AA9220 /* SNMColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMColor.swift; sourceTree = "<group>"; };
 		FDBFA9B02CE1FDED00AA9220 /* LayoutConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstant.swift; sourceTree = "<group>"; };
 		FDC5D9B92D5BD5D900380533 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FDC8A02C2D66FA040097F00A /* SNMErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMErrorHandler.swift; sourceTree = "<group>"; };
 		FDCD02BE2CE9172600B627D8 /* SNMNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDCD02CD2CE917D400B627D8 /* MockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRequest.swift; sourceTree = "<group>"; };
 		FDCD02D02CE917E200B627D8 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
@@ -1542,6 +1546,8 @@
 				32BD48322D3FECAE0078DA9C /* SNMSceneTests */,
 				A24B1F352D3C338B0012B860 /* SNMUtilityTests */,
 				FD3A03212CD8CDE50047B7ED /* Products */,
+				FD5946652D6CF0BC006FF9C3 /* Debug.xcconfig */,
+				FD5946662D6CF0CB006FF9C3 /* Release.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2248,6 +2254,7 @@
 		FDE768882CF7811900B5DE88 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				FDC8A02C2D66FA040097F00A /* SNMErrorHandler.swift */,
 				FD01D8F62D40AC8000AD4940 /* TaskSerialQueue.swift */,
 				FD880B592CECE8F90093BEB9 /* SNMLogger.swift */,
 			);
@@ -2529,6 +2536,7 @@
 				32BD48EE2D40B4BA0078DA9C /* PushNotificationConfig.swift in Sources */,
 				32BD48EC2D40B4880078DA9C /* Assets.xcassets in Sources */,
 				FD243CFD2D62332500971162 /* SNMToastAnimation.swift in Sources */,
+				FDC8A02E2D66FA190097F00A /* SNMErrorHandler.swift in Sources */,
 				32BD48EB2D40B4790078DA9C /* SNMColor.swift in Sources */,
 				32BD48EA2D40AEBC0078DA9C /* RemoteDatabaseManagerMock.swift in Sources */,
 				32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */,
@@ -2811,6 +2819,7 @@
 				FDE7689F2CF7858F00B5DE88 /* Extension + UIViewController.swift in Sources */,
 				A24B1F322D3C33660012B860 /* CGImageCoder.swift in Sources */,
 				A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */,
+				FDC8A02F2D66FA190097F00A /* SNMErrorHandler.swift in Sources */,
 				32C539622D64165A00CD89DF /* TrackWalkRouter.swift in Sources */,
 				A2C844D12CDBE1E5007F2970 /* (null) in Sources */,
 				A2BD49F62CF72B4000AC72A7 /* WalkNotiDTO.swift in Sources */,
@@ -3047,7 +3056,6 @@
 				99A5E1B92D302D65003B00A8 /* ImageCacheable.swift in Sources */,
 				320045352CF4353900D08B6D /* SNMFileManager.swift in Sources */,
 				3200453A2CF43F3800D08B6D /* FileManagerTest.swift in Sources */,
-				FD01D8F82D40AC8600AD4940 /* TaskSerialQueue.swift in Sources */,
 				FD69B1C42CE3BCE4009D71DC /* KeychainManager.swift in Sources */,
 				3284D34E2D2F941C000ABC04 /* DataStoragable.swift in Sources */,
 				FD69B1CD2CE3E9BB009D71DC /* KeychainTests.swift in Sources */,
@@ -3363,6 +3371,7 @@
 		};
 		FD3A03362CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD5946652D6CF0BC006FF9C3 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3426,6 +3435,7 @@
 		};
 		FD3A03372CD8CDE60047B7ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD5946662D6CF0CB006FF9C3 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

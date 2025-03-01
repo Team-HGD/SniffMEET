@@ -40,12 +40,14 @@ struct RequestMateListUseCaseImpl: RequestMateListUseCase {
                      keywords: $0.keywords,
                      profileImageURLString: $0.profileImageURL)
             }
+        } catch let error as SupabaseSessionError {
+            throw SNMError(level: .notExistSession, error: error)
         } catch let error as SupabaseDBError where error == .noMoreData {
-            throw SNMError(level: .user, error: error)
-        } catch let error as SupabaseAuthError {
-            throw SNMError(level: .user, error: error)
+            throw SNMError(level: .notifyUser, error: error)
+        } catch let error as SupabaseDBError {
+            throw SNMError(level: .retryable, error: error)
         } catch {
-            throw SNMError(level: .developer, error: error)
+            throw SNMError(level: .logOnly, error: error)
         }
     }
 }

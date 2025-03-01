@@ -30,9 +30,9 @@ final class CheckNicknameUseCaseImpl: CheckNicknameUseCase {
             let isDuplicate = try decoder.decode(Bool.self, from: response)
             return isDuplicate
         } catch let error as SupabaseDBError {
-            throw SNMError(level: .user, error: error)
+            throw SNMError(level: .retryable, error: error)
         } catch {
-            throw SNMError(level: .developer, error: error)
+            throw SNMError(level: .logOnly, error: error)
         }
     }
 }

@@ -5,60 +5,59 @@
 //  Created by Kelly Chui on 11/12/24.
 //
 
+import Combine
 import UIKit
 
 final class AppRouter: NSObject, Routable {
     private var window: UIWindow?
+    private var sessionExpiredCancellable: AnyCancellable?
 
     init(window: UIWindow?) {
         self.window = window
         super.init()
+        bind()
     }
 
     func displayInitialScreen() {
-        Task { @MainActor in
+        Task {
             do {
                 try await SupabaseSessionManager.shared.restoreSession()
-                displayTabBar()
+                await MainActor.run { displayHomeView() }
             } catch {
-                displayOnBoardingView()
+                await MainActor.run { displayOnboardingView() }
             }
         }
     }
-    private func displayTabBar() {
-        let submodules = (
-            home: UINavigationController(rootViewController: HomeModuleBuilder.build()),
-            mate: UINavigationController(rootViewController: MateListRouter.createMateListModule())
-        )
-        window?.rootViewController = TabBarModuleBuilder.build(usingSubmodules: submodules)
+    func displayHomeView() {
+        let tabBarController = TabBarModuleBuilder.build()
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
-    private func displayOnBoardingView() {
-        let navigationController =
-        UINavigationController(rootViewController: OnBoardingRouter.createModule())
+    func displayOnboardingView() {
+        let navigationController = UINavigationController(
+            rootViewController: OnBoardingRouter.createModule()
+        )
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     func displayProfileSetupView() {
-        let navigationController =
-        UINavigationController(rootViewController: ProfileCreateRouter.createProfileCreateModule())
+        let navigationController = UINavigationController(
+            rootViewController: ProfileCreateRouter.createProfileCreateModule()
+        )
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
-    func moveToHomeScreen() {
-        let submodules = (
-            home: UINavigationController(rootViewController:  HomeModuleBuilder.build()),
-            //            walk: UINavigationController(rootViewController: WalkLogPageViewController()),
-            mate: UINavigationController(rootViewController: MateListRouter.createMateListModule())
-        )
-        window?.rootViewController = TabBarModuleBuilder.build(usingSubmodules: submodules)
-    }
+}
+
+// MARK: - AppRouterNotificationHandlers
+
+extension AppRouter {
     /// 뷰에 진입한 후 산책 요청 화면을 present 합니다.
     func initializeViewAndPresentRespondView(walkNoti: WalkNoti) {
         Task { @MainActor in
             do {
                 try await SupabaseSessionManager.shared.restoreSession()
-                displayTabBar()
+                displayHomeView()
                 presentRespondWalkView(walkNoti: walkNoti)
             } catch {
                 displayProfileSetupView()
@@ -70,7 +69,7 @@ final class AppRouter: NSObject, Routable {
         Task { @MainActor in
             do {
                 try await SupabaseSessionManager.shared.restoreSession()
-                displayTabBar()
+                displayHomeView()
                 presentProcessedWalkView(walkNoti: walkNoti)
             } catch {
                 displayProfileSetupView()
@@ -94,7 +93,33 @@ final class AppRouter: NSObject, Routable {
             present(from: rootViewController, with: viewController, animated: true)
         }
     }
+    private func presentSessionExpiredAlert() {
+        let alertController = UIAlertController(
+            title: "세션이 만료되었습니다.",
+            message: "다시 로그인해주세요.",
+            preferredStyle: .alert
+        )
+        let confirmAction: UIAlertAction = .init(title: "확인", style: .default) { [weak self] _ in
+            self?.displayProfileSetupView()
+        }
+        alertController.addAction(confirmAction)
+        if let rootViewController = UIViewController.topMostViewController as? UIAlertController {
+            rootViewController.dismiss(animated: true)
+        }
+        UIViewController.topMostViewController?.present(alertController, animated: true)
+    }
+    private func bind() {
+        sessionExpiredCancellable = NotificationCenter.default.publisher(
+            for: Environment.NotificationCenterName.sessionExpired
+        )
+        .receive(on: RunLoop.main)
+        .sink { [weak self] _ in
+            self?.presentSessionExpiredAlert()
+        }
+    }
 }
+
+
 
 // MARK: - AppRouter+UIViewControllerTransitioningDelegate
 

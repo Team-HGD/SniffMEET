@@ -12,7 +12,7 @@ protocol TrackWalkViewable: AnyObject {
     var presenter: TrackWalkPresentable? { get set }
     
     func updateRouteLine(with location: WalkRoute)
-    func updateWalkRecord()
+    func updateWalkRecord(record: WalkRecord)
 }
 
 final class TrackWalkViewController: BaseViewController {
@@ -23,6 +23,7 @@ final class TrackWalkViewController: BaseViewController {
     private let mapView: MKMapView = {
         let mapView: MKMapView = MKMapView()
         mapView.showsUserLocation = true
+        mapView.setUserTrackingMode(.follow, animated: true)
         mapView.cameraZoomRange = .init(
             minCenterCoordinateDistance: 1000,
             maxCenterCoordinateDistance: 5000
@@ -43,6 +44,11 @@ final class TrackWalkViewController: BaseViewController {
     private let verticalSeparator = UIView()
     private var routeMapImageView: UIImageView = UIImageView()
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.mapView.delegate = self
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         trackingButton.layoutIfNeeded()
         trackingButton.makeViewCircular()
@@ -213,9 +219,11 @@ extension TrackWalkViewController: TrackWalkViewable {
         let lineDraw = MKPolyline(coordinates: location.points, count: location.count)
         mapView.addOverlay(lineDraw)
     }
-    // TODO: -  1초 마다 업데이트하기
-    func updateWalkRecord() {
-        
+
+    func updateWalkRecord(record: WalkRecord) {
+        timeValueLabel.text = record.formattedTime.description
+        distanceValueLabel.text = record.distance.description
+        numberOfStepsValueLabel.text = record.stepCount.description
     }
 }
 

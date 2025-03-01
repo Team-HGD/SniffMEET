@@ -5,9 +5,11 @@
 //  Created by sole on 11/18/24.
 //
 
+import Foundation
+
 protocol HomeInteractable: AnyObject {
     var presenter: (any HomePresentable)? { get }
-    func loadInfo() throws -> UserInfo
+    func loadInfo() throws -> (ProfileInfo, Data?)
     func saveDeviceToken()
 }
 
@@ -35,8 +37,13 @@ final class HomeInteractor: HomeInteractable {
         self.remoteSaveDeviceTokenUseCase = remoteSaveDeviceTokenUseCase
     }
 
-    func loadInfo() throws -> UserInfo {
-        try loadUserInfoUseCase.execute()
+    func loadInfo() -> (ProfileInfo, Data?) {
+        do {
+            return try loadUserInfoUseCase.execute()
+        } catch {
+            // FIXME: 에러 핸들링 필요
+            return (ProfileInfo.example, nil)
+        }
     }
     func saveDeviceToken() {
         guard checkFirstLaunchUseCase.execute() else { return }

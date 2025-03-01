@@ -8,58 +8,122 @@
 import Foundation
 
 protocol SaveProfileImageUseCase {
-    /// fileName을 반환합니다.
     func execute(imageData: Data) async throws -> String
 }
 
 struct SaveProfileImageUseCaseImpl: SaveProfileImageUseCase {
     private let remoteImageManager: any RemoteImageManageable
     private let userDefaultsManager: any UserDefaultsManagable
+    private let fileManager: any FileManagable
     private let imageSampler: any ImageSampleable
+    
     init(
         remoteImageManager: any RemoteImageManageable,
         userDefaultsManager: any UserDefaultsManagable,
+        fileManager: any FileManagable,
         imageSampler: any ImageSampleable
     ) {
         self.remoteImageManager = remoteImageManager
         self.userDefaultsManager = userDefaultsManager
+        self.fileManager = fileManager
         self.imageSampler = imageSampler
     }
 
     func execute(imageData: Data) async throws -> String {
         let fileName: String = UUID().uuidString
         let thumbnailName: String = "thumbnail_\(fileName)"
-        async let downsampledData = imageSampler.downscaleImage(
-            from: imageData,
-            targetSize: Constants.profileTargetSize,
-            croppingTo: nil
-        )
-        async let thumbnailData = imageSampler.downscaleImage(
-            from: imageData,
-            targetSize: Constants.thumbnailSize,
-            croppingTo: Constants.thumbnailSize
-        )
-        let downsampledImageData = try await downsampledData
-        let thumbnailImageData = try await thumbnailData
-        
-        async let uploadDownsampled: () = remoteImageManager.upload(
-            imageData: downsampledImageData,
-            fileName: fileName,
-            mimeType: .image
-        )
-        async let uploadThumbnail: () = remoteImageManager.upload(
-            imageData: thumbnailImageData,
-            fileName: thumbnailName,
-            mimeType: .image
-        )
-        
-        try await uploadDownsampled
-        try await uploadThumbnail
+        do {
+            let (profileImageData, thumbnailImageData) = try await downsampleImages(imageData: imageData)
+            try saveToLocal(fileName: fileName, imageData: profileImageData)
+            try await saveToRemote(
+                profileImageData: profileImageData,
+                thumbnailImageData: thumbnailImageData,
+                fileName: fileName,
+                thumbnailName: thumbnailName
+            )
+        } catch let error as ImageSamplingError {
+            throw SNMError(level: .user, error: error)
+        } catch let error as FileManagerError {
+            throw SNMError(level: .user, error: error)
+        } catch {
+            do {
+                try fileManager.delete(forKey: fileName)
+                try fileManager.delete(forKey: thumbnailName)
+                try userDefaultsManager.delete(forKey: fileName)
+            } catch {
+                throw SNMError(level: .user, error: error)
+            }
+            throw SNMError(level: .user, error: error)
+        }
+        return fileName
+    }
+    private func downsampleImages(imageData: Data) async throws -> (Data, Data) {
+        enum ImageType { case profile, thumbnail }
+        return try await withThrowingTaskGroup(of: (imageType: ImageType, data: Data).self) { group in
+            var profileImageData: Data?
+            var thumbnailImageData: Data?
+            group.addTask {
+                let data = try await imageSampler.downscaleImage(
+                    from: imageData,
+                    targetSize: Constants.profileTargetSize,
+                    croppingTo: nil
+                )
+                return (ImageType.profile, data)
+            }
+            group.addTask {
+                let data = try await imageSampler.downscaleImage(
+                    from: imageData,
+                    targetSize: Constants.thumbnailSize,
+                    croppingTo: Constants.thumbnailSize
+                )
+                return (ImageType.thumbnail, data)
+            }
+            for try await result in group {
+                switch result.imageType {
+                case .profile: profileImageData = result.data
+                case .thumbnail: thumbnailImageData = result.data
+                }
+            }
+            guard let downsampled = profileImageData,
+                  let thumbnail = thumbnailImageData else {
+                throw ImageSamplingError.downsamplingFailed
+            }
+            return (downsampled, thumbnail)
+        }
+    }
+    private func saveToLocal(fileName: String, imageData: Data) throws {
         try userDefaultsManager.set(
             value: fileName,
             forKey: Environment.UserDefaultsKey.profileImage
         )
-        return fileName
+        try fileManager.set(
+            value: imageData,
+            forKey: Environment.FileManagerKey.profileImage
+        )
+    }
+    private func saveToRemote(
+        profileImageData: Data,
+        thumbnailImageData: Data,
+        fileName: String,
+        thumbnailName: String
+    ) async throws {
+        try await withThrowingTaskGroup(of: Void.self) { group in
+            group.addTask {
+                try await self.remoteImageManager.upload(
+                    imageData: profileImageData,
+                    fileName: fileName,
+                    mimeType: .image
+                )
+            }
+            group.addTask {
+                try await self.remoteImageManager.upload(
+                    imageData: thumbnailImageData,
+                    fileName: thumbnailName,
+                    mimeType: .image
+                )
+            }
+            try await group.waitForAll()
+        }
     }
 }
 

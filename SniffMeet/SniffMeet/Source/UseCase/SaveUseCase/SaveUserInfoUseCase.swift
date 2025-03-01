@@ -7,31 +7,71 @@
 import Foundation
 
 protocol SaveUserInfoUseCase {
-    func execute(dog: UserInfo) throws
+    func execute(userInfo: ProfileInfo) async throws
 }
 
 struct SaveUserInfoUseCaseImpl: SaveUserInfoUseCase {
-    let localDataManager: DataStorable
-    let imageManager: any FileManagable
+    private let localDataManager: any UserDefaultsManagable
+    private let remoteDBManager: any RemoteDBManageable
+    private let sessionManager: any SessionManageable
+    private let encoder: JSONEncoder
     
-    func execute(dog: UserInfo) throws {
-        let dogInfo = UserInfo(
-            name: dog.name, age: dog.age, sex: dog.sex, sexUponIntake: dog.sexUponIntake,
-            size: dog.size, keywords: dog.keywords, nickname: dog.nickname)
-        try localDataManager.storeData(data: dogInfo, key: Environment.UserDefaultsKey.dogInfo)
-        guard let imageData = dog.profileImage else { return }
+    init(
+        localDataManager: any UserDefaultsManagable,
+        remoteDBManager: any RemoteDBManageable,
+        sessionManager: any SessionManageable,
+        encoder: JSONEncoder
+    ) {
+        self.remoteDBManager = remoteDBManager
+        self.localDataManager = localDataManager
+        self.sessionManager = sessionManager
+        self.encoder = encoder
+    }
+    
+    func execute(userInfo: ProfileInfo) async throws {
         do {
-            try imageManager.set(value: imageData,
-                                      forKey: Environment.FileManagerKey.profileImage)
-        } catch {
-            SNMLogger.error("프로필 이미지 저장 실패: \(error.localizedDescription)")
+            try saveToLocal(userInfo: userInfo)
+            let userID = try sessionManager.userID.get()
+            let dto = UserInfoDTO(
+                id: userID,
+                dogName: userInfo.name,
+                age: userInfo.age,
+                sex: userInfo.sex,
+                sexUponIntake: userInfo.sexUponIntake,
+                size: userInfo.size,
+                keywords: userInfo.keywords,
+                nickname: userInfo.nickname,
+                profileImageURL: nil
+            )
+            try await saveToRemote(dto: dto)
+        } catch let error as UserDefaultsError {
+            throw SNMError(level: .user, error: error)
+        } catch let error as SupabaseSessionError {
+            try localDataManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
+            throw SNMError(level: .user, error: error)
+        } catch let error as SupabaseDBError {
+            try localDataManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
+            throw SNMError(level: .user, error: error)
         }
-        try localDataManager.storeData(
-            data: [
-                UUID(uuidString: "f27c02f6-0110-4291-b866-a1ead0742755") ?? .init(),
-                UUID(uuidString: "b79bc6b9-b776-4f5b-8f6c-48ba498b6e3a") ?? .init(),
-                UUID(uuidString: "bda7ec28-1407-4871-93ea-c7835986726a") ?? .init(),
-                UUID(uuidString: "a96ee934-03b9-43f3-b29b-53c3ba945363") ?? .init()
-            ] , key: Environment.UserDefaultsKey.mateList)
+    }
+    private func saveToLocal(userInfo: ProfileInfo) throws {
+        try localDataManager.set(value: userInfo, forKey: Environment.UserDefaultsKey.dogInfo)
+    }
+    private func saveToRemote(dto: UserInfoDTO) async throws {
+        let userData = try encoder.encode(dto)
+        try await remoteDBManager.insertData()
+            .setTable(Environment.SupabaseTableName.userInfo)
+            .setData(userData)
+            .request()
+        let mateListData = try encoder.encode(MateListInsertDTO(id: dto.id, mates: nil))
+        try await remoteDBManager.insertData()
+            .setTable(Environment.SupabaseTableName.matelist)
+            .setData(mateListData)
+            .request()
+        let notiListData = try encoder.encode(WalkNotiListInsertDTO(id: dto.id))
+        try await remoteDBManager.insertData()
+            .setTable(Environment.SupabaseTableName.notificationList)
+            .setData(notiListData)
+            .request()
     }
 }

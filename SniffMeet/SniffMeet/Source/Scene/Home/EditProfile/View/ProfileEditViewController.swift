@@ -171,8 +171,7 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
         bindKeywordButtonAction()
         bindAddPhotoButtonAction()
         bindCompleteEditButtonAction()
-
-        presenter?.output.userInfo
+        presenter?.output.profileInfo
             .receive(on: RunLoop.main)
             .sink { [weak self] userInfo in
                 SNMLogger.info("Edit userInfo: \(userInfo)")
@@ -197,8 +196,12 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
                         button.isSelected = false
                     }
                 }
-
-                if let profileImageData = userInfo.profileImage,
+            }
+            .store(in: &cancellables)
+        presenter?.output.profileImage
+            .receive(on: RunLoop.main)
+            .sink { [weak self] profileImageData in
+                if let profileImageData,
                    let uiImage = UIImage(data: profileImageData) {
                     self?.profileImageView.image = uiImage
                 }
@@ -235,21 +238,13 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
 
     private func bindCompleteEditButtonAction() {
         completeEditButton.publisher(event: .touchUpInside)
-            .sink { [weak self] in
+            .sink { [weak self] _ in
                 self?.completeEditButton.isEnabled = false
                 self?.snmProgressToast.show(in: self?.view, isDim: true)
-                self?.presenter?.didTapCompleteButton(
-                    name: self?.nameTextField.text,
-                    age: self?.ageTextField.text,
-                    keywords: self?.selectedKeywordButtons
-                        .compactMap { $0.titleLabel?.text },
-                    size: self?.sizeSegmentedControl.selectedSegmentIndex,
-                    profileImage: self?.profileImageView.image
-                )
+                self?.handleCompleteButtonAction()
             }
             .store(in: &cancellables)
     }
-
     private func setupBinding() {
         let namePublisher = nameTextField
             .publisher(for: \.text)
@@ -266,6 +261,21 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
                 self?.completeEditButton.isEnabled = isEnabled
             }
             .store(in: &cancellables)
+    }
+    private func handleCompleteButtonAction() {
+        let keywords: [Keyword] = keywordButtons.filter { button in
+            button.isSelected
+        }.compactMap { selectedButton in
+            guard let keywordText = selectedButton.titleLabel?.text else { return nil }
+            return Keyword(rawValue: keywordText)
+        }
+        presenter?.didTapCompleteButton(
+            nameText: nameTextField.text,
+            ageText: ageTextField.text,
+            sizeText: Context.sizeArr[sizeSegmentedControl.selectedSegmentIndex],
+            keywords: keywords,
+            profileImage: profileImageView.image
+        )
     }
     func didSuccessEditProfile() {
         Task { @MainActor [weak self] in

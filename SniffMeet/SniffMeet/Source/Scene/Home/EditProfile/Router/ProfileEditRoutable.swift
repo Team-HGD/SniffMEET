@@ -12,7 +12,7 @@ protocol ProfileEditRoutable: Routable {
 }
 
 protocol ProfileEditBuildable {
-    static func createProfileEditModule(userInfo: UserInfo) -> UIViewController
+    static func createProfileEditModule(userInfo: ProfileInfo) -> UIViewController
 }
 
 final class ProfileEditRouter: ProfileEditRoutable {
@@ -24,12 +24,9 @@ final class ProfileEditRouter: ProfileEditRoutable {
 }
 
 extension ProfileEditRouter: ProfileEditBuildable {
-    static func createProfileEditModule(userInfo: UserInfo) -> UIViewController {
-        let saveUserInfoUseCase: SaveUserInfoUseCase = SaveUserInfoUseCaseImpl(
-            localDataManager: LocalDataManager(),
-            imageManager: SNMFileManager(fileType: .image)
-        )
-        let updateUserInfoRemoteUseCase: UpdateUserInfoUseCase = UpdateUserInfoUseCaseImpl(
+    static func createProfileEditModule(userInfo: ProfileInfo) -> UIViewController {
+        let updateUserInfoUseCase: UpdateUserInfoUseCase = UpdateUserInfoUseCaseImpl(
+            localDBManager: UserDefaultsManager.shared,
             remoteDBManager: SupabaseDBManager.shared,
             sessionManager: SupabaseSessionManager.shared
         )
@@ -39,15 +36,15 @@ extension ProfileEditRouter: ProfileEditBuildable {
                 sessionManager: SupabaseSessionManager.shared
             ),
             userDefaultsManager: UserDefaultsManager.shared,
+            fileManager: SNMFileManager(fileType: .image),
             imageSampler: ImageSampler()
         )
         let view: ProfileEditViewable & UIViewController = ProfileEditViewController()
         let router: ProfileEditRoutable & ProfileEditBuildable = ProfileEditRouter()
         let interactor: ProfileEditInteractable = ProfileEditInteractor(
-            saveUserInfoUseCase: saveUserInfoUseCase,
-            updateUserInfoRemoteUseCase: updateUserInfoRemoteUseCase,
+            updateUserInfoUseCase: updateUserInfoUseCase,
             saveProfileImageUseCase: saveProfileImageUseCase,
-            loadUserInfoUseCase: LoadUserInfoUseCaseImpl(
+            loadUserInfoUseCase: LoadUserProfileUseCaseImpl(
                 dataLoadable: LocalDataManager(),
                 imageManageable: SNMFileManager(fileType: .image)
             )

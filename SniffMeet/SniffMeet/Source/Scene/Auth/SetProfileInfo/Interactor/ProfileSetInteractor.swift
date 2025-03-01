@@ -9,104 +9,37 @@ import UIKit
 
 protocol ProfileSetInteractable: AnyObject {
     var presenter: (any DogInfoInteractorOutput)? { get set }
-    var saveUserInfoUseCase: any SaveUserInfoUseCase { get set }
-    var saveProfileImageUseCase: any SaveProfileImageUseCase { get }
     
-    func signInWithProfileData(dogInfo: UserInfo, imageData: Data?)
-    func convertImageToJPGData(image: UIImage?) -> Data?
+    func saveProfile(imageData: Data?, withNickname nickname: String)
     func isNicknameTaken(_ nickname: String)
 }
 
 final class ProfileSetInteractor: ProfileSetInteractable {
     weak var presenter: (any DogInfoInteractorOutput)?
-    var saveUserInfoUseCase: any SaveUserInfoUseCase
-    var saveProfileImageUseCase: any SaveProfileImageUseCase
-    var saveUserInfoRemoteUseCase: any CreateAccountUseCase
-    var signInUseCase: any SignInUseCase
-    var checkNicknameUseCase: any CheckNicknameUseCase
+    private let saveProfileImageUseCase: any SaveProfileImageUseCase
+    private let updateUserInfoUseCase: any UpdateUserInfoUseCase
+    private let checkNicknameUseCase: any CheckNicknameUseCase
     
     init(
         presenter: (any DogInfoInteractorOutput)? = nil,
-        saveUserInfoUseCase: any SaveUserInfoUseCase,
         saveProfileImageUseCase: any SaveProfileImageUseCase,
-        saveUserInfoRemoteUseCase: any CreateAccountUseCase,
-        signInUseCase: any SignInUseCase,
+        updateUserInfoUseCase: any UpdateUserInfoUseCase,
         checkNicknameUseCase: any CheckNicknameUseCase
     ) {
         self.presenter = presenter
-        self.saveUserInfoUseCase = saveUserInfoUseCase
         self.saveProfileImageUseCase = saveProfileImageUseCase
-        self.saveUserInfoRemoteUseCase = saveUserInfoRemoteUseCase
-        self.signInUseCase = signInUseCase
+        self.updateUserInfoUseCase = updateUserInfoUseCase
         self.checkNicknameUseCase = checkNicknameUseCase
     }
     
-    func signInWithProfileData(dogInfo: UserInfo, imageData: Data?) {
+    func saveProfile(imageData: Data?, withNickname nickname: String) {
+        guard let imageData else { return }
         Task {
-            do {
-                try await signInUseCase.execute()
-                let fileName = try await saveUserInfoAndProfileImage(dogInfo: dogInfo, imageData: imageData)
-                try await saveUserInfoToRemote(dogInfo: dogInfo, profileImageFileName: fileName)
-                presenter?.didSaveUserInfo()
-            } catch {
-                presenter?.didFailToSaveUserInfo(error: error)
-            }
+            let profileImageName = try await saveProfileImageUseCase.execute(imageData: imageData)
+            try await updateUserInfoUseCase.execute(
+                with: ["nickname": nickname, "profile_image_url": profileImageName]
+            )
         }
-    }
-    
-    private func saveUserInfoAndProfileImage(dogInfo: UserInfo, imageData: Data?) async throws -> String? {
-        return try await withThrowingTaskGroup(of: String?.self) { [weak self] group in
-            group.addTask {
-                try self?.saveUserInfoUseCase.execute(
-                    dog: UserInfo(
-                        name: dogInfo.name,
-                        age: dogInfo.age,
-                        sex: dogInfo.sex,
-                        sexUponIntake: dogInfo.sexUponIntake,
-                        size: dogInfo.size,
-                        keywords: dogInfo.keywords,
-                        nickname: dogInfo.nickname,
-                        profileImage: imageData
-                    )
-                )
-                return nil
-            }
-            if let imageData {
-                group.addTask {
-                    return try await self?.saveProfileImageUseCase.execute(imageData: imageData)
-                }
-            }
-            var savedFileName: String? = nil
-            for try await result in group {
-                if let name = result {
-                    savedFileName = name
-                }
-            }
-            return savedFileName
-        }
-    }
-    
-    private func saveUserInfoToRemote(dogInfo: UserInfo, profileImageFileName: String?) async throws {
-        guard let userID = try? SupabaseSessionManager.shared.userID.get() else {
-            throw SupabaseSessionError.sessionNotExist
-        }
-        let userInfoDTO = UserInfoDTO(
-            id: userID,
-            dogName: dogInfo.name,
-            age: dogInfo.age,
-            sex: dogInfo.sex,
-            sexUponIntake: dogInfo.sexUponIntake,
-            size: dogInfo.size,
-            keywords: dogInfo.keywords,
-            nickname: dogInfo.nickname,
-            profileImageURL: profileImageFileName
-        )
-        await saveUserInfoRemoteUseCase.execute(info: userInfoDTO)
-    }
-    
-    func convertImageToJPGData(image: UIImage?) -> Data? {
-        guard let image else { return nil }
-        return image.jpegData(compressionQuality: 0.8)
     }
     
     func isNicknameTaken(_ nickname: String) {

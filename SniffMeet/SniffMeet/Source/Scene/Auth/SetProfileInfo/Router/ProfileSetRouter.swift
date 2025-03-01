@@ -11,7 +11,7 @@ protocol ProfileSetRoutable {
 }
 
 protocol ProfileSetBuildable {
-    static func createProfileSetModule(dogDetailInfo: DogInfo) -> UIViewController
+    static func createProfileSetModule() -> UIViewController
 }
 
 final class ProfileSetRouter: ProfileSetRoutable {
@@ -29,44 +29,35 @@ final class ProfileSetRouter: ProfileSetRoutable {
 }
 
 extension ProfileSetRouter: ProfileSetBuildable {
-    static func createProfileSetModule(dogDetailInfo: DogInfo) -> UIViewController {
+    static func createProfileSetModule() -> UIViewController {
         let networkProvider = SNMNetworkProvider()
-        let saveUserInfoUseCase: any SaveUserInfoUseCase = SaveUserInfoUseCaseImpl(
-            localDataManager: LocalDataManager(),
-            imageManager: SNMFileManager(fileType: .image)
-        )
         let saveProfileImageUseCase: any SaveProfileImageUseCase = SaveProfileImageUseCaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: networkProvider,
                 sessionManager: SupabaseSessionManager.shared
             ),
             userDefaultsManager: UserDefaultsManager.shared,
+            fileManager: SNMFileManager(fileType: .image),
             imageSampler: ImageSampler()
         )
-        let createAccountUseCase: any CreateAccountUseCase = CreateAccountUseCaseImpl(
+        let checkNicknameUseCase: any CheckNicknameUseCase = CheckNicknameUseCaseImpl(
             remoteDBManager: SupabaseDBManager.shared
         )
-        let signInUseCase: any SignInUseCase = SignInUseCaseImpl(
-            authManager: SupabaseAuthManager(
-                networkProvider: networkProvider,
-                sessionManager: SupabaseSessionManager.shared,
-                decoder: JSONDecoder()
-            )
+        let updateUserInfoUseCase: any UpdateUserInfoUseCase = UpdateUserInfoUseCaseImpl(
+            localDBManager: UserDefaultsManager.shared,
+            remoteDBManager: SupabaseDBManager.shared,
+            sessionManager: SupabaseSessionManager.shared
         )
-        let checkNicknameUseCase: any CheckNicknameUseCase = CheckNicknameUseCaseImpl(remoteDBManager: SupabaseDBManager.shared)
         
         let view: any ProfileSetViewable & UIViewController = ProfileSetViewController()
-        let presenter: any ProfileSetPresentable & DogInfoInteractorOutput = ProfileSetPresenter(
-            dogInfo: dogDetailInfo
-        )
+        let presenter: any ProfileSetPresentable & DogInfoInteractorOutput = ProfileSetPresenter()
         let interactor: any ProfileSetInteractable = ProfileSetInteractor(
-            saveUserInfoUseCase: saveUserInfoUseCase,
             saveProfileImageUseCase: saveProfileImageUseCase,
-            saveUserInfoRemoteUseCase: createAccountUseCase,
-            signInUseCase: signInUseCase,
+            updateUserInfoUseCase: updateUserInfoUseCase,
             checkNicknameUseCase: checkNicknameUseCase
         )
         let router: any ProfileSetRoutable & ProfileSetBuildable = ProfileSetRouter()
+        
         view.presenter = presenter
         presenter.view = view
         presenter.router = router

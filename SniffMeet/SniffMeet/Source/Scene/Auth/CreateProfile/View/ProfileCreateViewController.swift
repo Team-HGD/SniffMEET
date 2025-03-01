@@ -10,13 +10,18 @@ import UIKit
 
 protocol ProfileCreateViewable: AnyObject {
     var presenter: ProfileCreatePresentable? { get set }
+    func didFailToCreateProfile()
+    func didSuccessCreateProfile()
 }
 
 final class ProfileCreateViewController: BaseViewController, ProfileCreateViewable {
     typealias KeywordButtonsTuple = (selected: [KeywordButton], unselected: [KeywordButton])
     var presenter: (any ProfileCreatePresentable)?
+    private let snmProgressToast: SNMProgressView = SNMProgressView(
+        animationType: SNMToastAnimation.showAtCenter
+    )
     private var cancellables = Set<AnyCancellable>()
-
+    
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private var titleLabel: UILabel = {
@@ -178,31 +183,8 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
         nextButton.publisher(event: .touchUpInside)
             .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
             .sink { [weak self] _ in
-                guard let selectedSexIdx = self?.sexSegmentedControl.selectedSegmentIndex,
-                      let selectedSexUponIntakeIdx = self?.sexSegmentedControl.selectedSegmentIndex,
-                      let selectedSizeIdx = self?.sizeSegmentedControl.selectedSegmentIndex
-                else {
-                    SNMLogger.error("ProfileInputViewController: SelectedIdx Error")
-                    return
-                }
-
-                let sexUponIntake: Bool = selectedSexUponIntakeIdx > 0 ? false : true
-                guard let name = self?.nameTextField.text,
-                      let ageText = self?.ageTextField.text,
-                      let age = UInt8(ageText),
-                      let sex = Sex(rawValue: Context.sexArr[selectedSexIdx]),
-                      let size = Size(rawValue: Context.sizeArr[selectedSizeIdx])
-                else { return }
-                
-                guard let keywordButtons = self?.keywordButtons else { return }
-                let keywords: [Keyword] = keywordButtons.filter{ $0.isSelected }.compactMap{
-                    guard let text = $0.titleLabel?.text else { return nil }
-                    return Keyword(rawValue: text)
-                }
-                
-                let dogInfo = DogInfo(name: name, age: age, sex: sex, sexUponIntake: sexUponIntake,
-                                            size: size,keywords: keywords)
-                self?.presenter?.moveToProfileCreateView(with: dogInfo)
+                self?.handleNextButtonAction()
+                self?.snmProgressToast.show(in: self?.view, isDim: true)
             }.store(in: &cancellables)
         keywordStackView.subviews.forEach{
             guard let button = $0 as? KeywordButton else {
@@ -223,6 +205,34 @@ final class ProfileCreateViewController: BaseViewController, ProfileCreateViewab
                 }
                 self?.updateNextButtonState(keywordBtnSelected: !selectedKeywordButtons.isEmpty)
             }.store(in: &cancellables)
+        }
+    }
+    private func handleNextButtonAction() {
+        let keywords: [Keyword] = keywordButtons.filter { button in
+            button.isSelected
+        }.compactMap { selectedButton in
+            guard let keywordText = selectedButton.titleLabel?.text else { return nil }
+            return Keyword(rawValue: keywordText)
+        }
+        presenter?.didTabSubmitButton(
+            nameText: nameTextField.text,
+            ageText: ageTextField.text,
+            sexText: Context.sexArr[sexSegmentedControl.selectedSegmentIndex],
+            sexUponIntake: sexSegmentedControl.selectedSegmentIndex > 0 ? false : true,
+            sizeText: Context.sizeArr[sizeSegmentedControl.selectedSegmentIndex],
+            keywords: keywords
+        )
+    }
+    func didSuccessCreateProfile() {
+        Task { @MainActor [weak self] in
+            self?.snmProgressToast.hidden(duration: 0)
+        }
+    }
+    func didFailToCreateProfile() {
+        Task { @MainActor [weak self] in
+            self?.snmProgressToast.hidden { _ in
+                self?.nextButton.isEnabled = true
+            }
         }
     }
 }

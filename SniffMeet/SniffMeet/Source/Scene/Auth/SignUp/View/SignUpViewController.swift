@@ -21,10 +21,10 @@ final class SignUpViewController: BaseViewController, SignUpViewable {
         stack.alignment = .fill
         return stack
     }()
-    private var emailTextField: InputTextField = InputTextField(placeholder: Context.emailPlaceholder)
-    private var pwTextField: InputTextField = InputTextField(placeholder: Context.pwPlaceholder)
-    private var pwCheckTextField: InputTextField = InputTextField(placeholder: Context.pwCheckPlaceholder)
-    private var warningLabel: UILabel = {
+    private let emailTextField: InputTextField = InputTextField(placeholder: Context.emailPlaceholder)
+    private let pwTextField: InputTextField = InputTextField(placeholder: Context.pwPlaceholder)
+    private let pwCheckTextField: InputTextField = InputTextField(placeholder: Context.pwCheckPlaceholder)
+    private let warningLabel: UILabel = {
         let label = UILabel()
         label.textColor = SNMColor.mainNavy
         label.text = Context.pwInfoText
@@ -45,6 +45,8 @@ final class SignUpViewController: BaseViewController, SignUpViewable {
         hideKeyboardWhenTappedAround()
         configureNavigationControllerAttributes()
         configureDelegateForSubviews()
+        pwTextField.isSecureTextEntry = true
+        pwCheckTextField.isSecureTextEntry = true
     }
 
     private func configureDelegateForSubviews() {
@@ -79,7 +81,7 @@ final class SignUpViewController: BaseViewController, SignUpViewable {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: 30),
+                constant: LayoutConstant.largeVerticalPadding),
             stackView.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
                 constant: LayoutConstant.horizontalPadding),
@@ -158,7 +160,7 @@ extension SignUpViewController: UITextFieldDelegate {
         updateVerifyButtonState()
     }
 
-    func updateSignUpButtonState() {
+    private func updateSignUpButtonState() {
         let isEmailFilled = !(emailTextField.text?.isEmpty ?? true)
         let isPwFilled = !(pwTextField.text?.isEmpty ?? true)
         let isPwCheckFilled = !(pwCheckTextField.text?.isEmpty ?? true)
@@ -170,7 +172,7 @@ extension SignUpViewController: UITextFieldDelegate {
         isEmailValid && isPwValid && isPwCheckValid
     }
 
-    func updateVerifyButtonState() {
+    private func updateVerifyButtonState() {
         emailVerifyButton.isEnabled = isValidEmail(emailTextField.text ?? "")
     }
 

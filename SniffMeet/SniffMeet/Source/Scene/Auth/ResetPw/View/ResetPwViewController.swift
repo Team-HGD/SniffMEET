@@ -4,7 +4,7 @@
 //
 //  Created by 배현진 on 3/2/25.
 //
-
+import Combine
 import UIKit
 
 protocol ResetPwViewable: AnyObject {
@@ -13,6 +13,7 @@ protocol ResetPwViewable: AnyObject {
 
 final class ResetPwViewController: BaseViewController, ResetPwViewable {
     var presenter: (any ResetPwPresentable)?
+    private var cancellables: Set<AnyCancellable> = []
     private let pwTextField: InputTextField = InputTextField(placeholder: Context.pwPlaceholder)
     private let pwCheckTextField: InputTextField = InputTextField(placeholder: Context.pwCheckPlaceholder)
     private let infoLabel: UILabel = {
@@ -33,6 +34,8 @@ final class ResetPwViewController: BaseViewController, ResetPwViewable {
     override func configureAttributes() {
         hideKeyboardWhenTappedAround()
         configureNavigationControllerAttributes()
+        pwTextField.delegate = self
+        pwCheckTextField.delegate = self
     }
 
     private func configureNavigationControllerAttributes() {
@@ -90,16 +93,41 @@ final class ResetPwViewController: BaseViewController, ResetPwViewable {
     }
 
     override func bind() {
+        resetPwButton.publisher(event: .touchUpInside)
+            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
+            .sink { [weak self] _ in
+            // TODO: - 비밀번호 변경 버튼 클릭시
+            }
+            .store(in: &cancellables)
     }
 }
 
 private extension ResetPwViewController {
     enum Context {
-        static let title: String = " 비밀번호 변경"
+        static let title: String = "비밀번호 변경"
         static let pwPlaceholder: String = "비밀번호를 입력해주세요."
         static let pwCheckPlaceholder: String = "비밀번호를 다시 입력해주세요."
         static let infoText: String = "영문, 숫자를 포함한 8자 이상 15자 이하로 입력해주세요."
         static let resetPwButtonTitle: String = "변경하기"
         static let infoPadding: CGFloat = 26
+    }
+}
+
+extension ResetPwViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        updateResetPwButtonState()
+    }
+
+    private func updateResetPwButtonState() {
+        let isPwValid = isValidPassword(pwTextField.text ?? "")
+        let isPwCheckValid = (pwTextField.text == pwCheckTextField.text)
+
+        resetPwButton.isEnabled = isPwValid && isPwCheckValid
+    }
+
+    private func isValidPassword(_ password: String) -> Bool {
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,15}$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        return predicate.evaluate(with: password)
     }
 }

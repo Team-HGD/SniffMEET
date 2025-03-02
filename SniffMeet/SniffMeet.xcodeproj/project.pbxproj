@@ -286,9 +286,6 @@
 		32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539612D64165A00CD89DF /* TrackWalkRouter.swift */; };
 		32C539652D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
 		32C539662D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
-		32C5394D2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
-		32C5394E2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
-		32C5394F2D63245500CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C5394C2D63245500CD89DF /* Debug.xcconfig */; };
 		9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */; };
 		9937361D2CF80D6600E3DD58 /* RequestUserInfoRemoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */; };
 		993736422CFCACB100E3DD58 /* UpdateUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */; };
@@ -296,6 +293,22 @@
 		99525EBB2D6563E800B6E17E /* UpdateTimeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525EB92D6563E000B6E17E /* UpdateTimeUseCase.swift */; };
 		99525EBD2D65694F00B6E17E /* UpdateUserStepUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525EBC2D65692700B6E17E /* UpdateUserStepUseCase.swift */; };
 		99525EBE2D65694F00B6E17E /* UpdateUserStepUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525EBC2D65692700B6E17E /* UpdateUserStepUseCase.swift */; };
+		99525F2C2D7466FE00B6E17E /* ResetPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F2B2D7466F700B6E17E /* ResetPwViewController.swift */; };
+		99525F2D2D7466FE00B6E17E /* ResetPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F2B2D7466F700B6E17E /* ResetPwViewController.swift */; };
+		99525F2F2D74678F00B6E17E /* ResetPwInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F2E2D74678600B6E17E /* ResetPwInteractor.swift */; };
+		99525F302D74678F00B6E17E /* ResetPwInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F2E2D74678600B6E17E /* ResetPwInteractor.swift */; };
+		99525F322D74685D00B6E17E /* ResetPwPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F312D74685700B6E17E /* ResetPwPresenter.swift */; };
+		99525F332D74685D00B6E17E /* ResetPwPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F312D74685700B6E17E /* ResetPwPresenter.swift */; };
+		99525F352D74687C00B6E17E /* ResetPwRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F342D74687600B6E17E /* ResetPwRouter.swift */; };
+		99525F362D74687C00B6E17E /* ResetPwRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F342D74687600B6E17E /* ResetPwRouter.swift */; };
+		99525F382D746A6600B6E17E /* ResetPwEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F372D746A1D00B6E17E /* ResetPwEmailViewController.swift */; };
+		99525F392D746A6600B6E17E /* ResetPwEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F372D746A1D00B6E17E /* ResetPwEmailViewController.swift */; };
+		99525F3B2D746AC000B6E17E /* ResetPwEmailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F3A2D746AB700B6E17E /* ResetPwEmailInteractor.swift */; };
+		99525F3C2D746AC000B6E17E /* ResetPwEmailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F3A2D746AB700B6E17E /* ResetPwEmailInteractor.swift */; };
+		99525F3E2D746ADF00B6E17E /* ResetPwEmailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F3D2D746AD900B6E17E /* ResetPwEmailPresenter.swift */; };
+		99525F3F2D746ADF00B6E17E /* ResetPwEmailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F3D2D746AD900B6E17E /* ResetPwEmailPresenter.swift */; };
+		99525F412D746B0B00B6E17E /* ResetPwEmailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F402D746B0500B6E17E /* ResetPwEmailRouter.swift */; };
+		99525F422D746B0B00B6E17E /* ResetPwEmailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F402D746B0500B6E17E /* ResetPwEmailRouter.swift */; };
 		995D94262CE32ECE005A47BF /* Extension + Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995D94252CE32EC1005A47BF /* Extension + Keyboard.swift */; };
 		995D94622CE598FD005A47BF /* NIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995D94612CE598F0005A47BF /* NIManager.swift */; };
 		995D94A82CECEF91005A47BF /* RequestMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995D94A72CECEF91005A47BF /* RequestMateViewController.swift */; };
@@ -661,12 +674,19 @@
 		32C5395E2D64165900CD89DF /* TrackWalkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkInteractor.swift; sourceTree = "<group>"; };
 		32C539612D64165A00CD89DF /* TrackWalkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkRouter.swift; sourceTree = "<group>"; };
 		32C539642D65CB2300CD89DF /* WalkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkRoute.swift; sourceTree = "<group>"; };
-		32C5394C2D63245500CD89DF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPage.swift; sourceTree = "<group>"; };
 		9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserInfoRemoteUseCase.swift; sourceTree = "<group>"; };
 		993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoUseCase.swift; sourceTree = "<group>"; };
 		99525EB92D6563E000B6E17E /* UpdateTimeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTimeUseCase.swift; sourceTree = "<group>"; };
 		99525EBC2D65692700B6E17E /* UpdateUserStepUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserStepUseCase.swift; sourceTree = "<group>"; };
+		99525F2B2D7466F700B6E17E /* ResetPwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwViewController.swift; sourceTree = "<group>"; };
+		99525F2E2D74678600B6E17E /* ResetPwInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwInteractor.swift; sourceTree = "<group>"; };
+		99525F312D74685700B6E17E /* ResetPwPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwPresenter.swift; sourceTree = "<group>"; };
+		99525F342D74687600B6E17E /* ResetPwRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwRouter.swift; sourceTree = "<group>"; };
+		99525F372D746A1D00B6E17E /* ResetPwEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwEmailViewController.swift; sourceTree = "<group>"; };
+		99525F3A2D746AB700B6E17E /* ResetPwEmailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwEmailInteractor.swift; sourceTree = "<group>"; };
+		99525F3D2D746AD900B6E17E /* ResetPwEmailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwEmailPresenter.swift; sourceTree = "<group>"; };
+		99525F402D746B0500B6E17E /* ResetPwEmailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPwEmailRouter.swift; sourceTree = "<group>"; };
 		995D94252CE32EC1005A47BF /* Extension + Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Keyboard.swift"; sourceTree = "<group>"; };
 		995D94612CE598F0005A47BF /* NIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIManager.swift; sourceTree = "<group>"; };
 		995D94A72CECEF91005A47BF /* RequestMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMateViewController.swift; sourceTree = "<group>"; };
@@ -1225,16 +1245,6 @@
 			path = MateListScene;
 			sourceTree = "<group>";
 		};
-		99525EBF2D6591FE00B6E17E /* UpdateUseCase */ = {
-			isa = PBXGroup;
-			children = (
-				99525EB92D6563E000B6E17E /* UpdateTimeUseCase.swift */,
-				99525EBC2D65692700B6E17E /* UpdateUserStepUseCase.swift */,
-				FD119F492CED875800BE22BD /* UpdateUserLocationUseCase.swift */,
-			);
-			path = UpdateUseCase;
-			sourceTree = "<group>";
-		};
 		32C539532D6415C400CD89DF /* TrackWalk */ = {
 			isa = PBXGroup;
 			children = (
@@ -1286,6 +1296,53 @@
 				FD119F492CED875800BE22BD /* UpdateUserLocationUseCase.swift */,
 			);
 			path = UpdateUseCase;
+			sourceTree = "<group>";
+		};
+		99525F262D7466C400B6E17E /* ResetPw */ = {
+			isa = PBXGroup;
+			children = (
+				99525F2A2D7466F100B6E17E /* Router */,
+				99525F292D7466EB00B6E17E /* Presenter */,
+				99525F282D7466E500B6E17E /* Interactor */,
+				99525F272D7466D700B6E17E /* View */,
+			);
+			path = ResetPw;
+			sourceTree = "<group>";
+		};
+		99525F272D7466D700B6E17E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99525F372D746A1D00B6E17E /* ResetPwEmailViewController.swift */,
+				99525F2B2D7466F700B6E17E /* ResetPwViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		99525F282D7466E500B6E17E /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				99525F3A2D746AB700B6E17E /* ResetPwEmailInteractor.swift */,
+				99525F2E2D74678600B6E17E /* ResetPwInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		99525F292D7466EB00B6E17E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				99525F3D2D746AD900B6E17E /* ResetPwEmailPresenter.swift */,
+				99525F312D74685700B6E17E /* ResetPwPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		99525F2A2D7466F100B6E17E /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				99525F402D746B0500B6E17E /* ResetPwEmailRouter.swift */,
+				99525F342D74687600B6E17E /* ResetPwRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		995D94602CE598E1005A47BF /* NI */ = {
@@ -1880,6 +1937,7 @@
 		FDA4915E2CDA790300A36FB0 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				99525F262D7466C400B6E17E /* ResetPw */,
 				FDA4915F2CDA791300A36FB0 /* CreateProfile */,
 			);
 			path = Auth;
@@ -2512,6 +2570,7 @@
 				FD243CFD2D62332500971162 /* SNMToastAnimation.swift in Sources */,
 				FDC8A02E2D66FA190097F00A /* SNMErrorHandler.swift in Sources */,
 				32BD48EB2D40B4790078DA9C /* SNMColor.swift in Sources */,
+				99525F2D2D7466FE00B6E17E /* ResetPwViewController.swift in Sources */,
 				32BD48EA2D40AEBC0078DA9C /* RemoteDatabaseManagerMock.swift in Sources */,
 				32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */,
 				99E79F5C2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */,
@@ -2546,6 +2605,7 @@
 				32BD484F2D3FF02C0078DA9C /* RemoteSaveDeviceTokenUseCase.swift in Sources */,
 				99E7A0212D5C58D200E48552 /* NIDeviceChecker.swift in Sources */,
 				99525EBD2D65694F00B6E17E /* UpdateUserStepUseCase.swift in Sources */,
+				99525F3C2D746AC000B6E17E /* ResetPwEmailInteractor.swift in Sources */,
 				32BD48502D3FF02C0078DA9C /* RegisterDeviceTokenUseCase.swift in Sources */,
 				32BD48512D3FF02C0078DA9C /* CheckFirstLaunchUseCase.swift in Sources */,
 				32BD48522D3FF02C0078DA9C /* RequestNotiListUseCase.swift in Sources */,
@@ -2576,6 +2636,7 @@
 				32BD48672D3FF02C0078DA9C /* SNMRequestConvertible.swift in Sources */,
 				32BD48682D3FF02C0078DA9C /* Endpoint.swift in Sources */,
 				32BD48692D3FF02C0078DA9C /* SNMNetworkResponse.swift in Sources */,
+				99525F332D74685D00B6E17E /* ResetPwPresenter.swift in Sources */,
 				32BD486A2D3FF02C0078DA9C /* Data + append.swift in Sources */,
 				32BD486B2D3FF02C0078DA9C /* URLRequest + append.swift in Sources */,
 				32BD486C2D3FF02C0078DA9C /* AnyEncodable.swift in Sources */,
@@ -2596,6 +2657,7 @@
 				32BD48772D3FF02C0078DA9C /* SNMLogger.swift in Sources */,
 				32BD48782D3FF02C0078DA9C /* Extension + UIApplication.swift in Sources */,
 				32BD48792D3FF02C0078DA9C /* (null) in Sources */,
+				99525F422D746B0B00B6E17E /* ResetPwEmailRouter.swift in Sources */,
 				32BD487A2D3FF02C0078DA9C /* Extension + UIViewController.swift in Sources */,
 				32081B312D5C84EC00D19235 /* OnBoardingPageViewController.swift in Sources */,
 				32081B322D5C84EC00D19235 /* OnBoardingPresenter.swift in Sources */,
@@ -2625,11 +2687,13 @@
 				99E79FA52D556C6400E48552 /* RequestReportUseCase.swift in Sources */,
 				32BD48892D3FF02C0078DA9C /* PaddingLabel.swift in Sources */,
 				99E79F8E2D543F4900E48552 /* ReportPickerViewController.swift in Sources */,
+				99525F3F2D746ADF00B6E17E /* ResetPwEmailPresenter.swift in Sources */,
 				32BD488A2D3FF02C0078DA9C /* LayoutConstant.swift in Sources */,
 				32BD488C2D3FF02C0078DA9C /* SNMFont.swift in Sources */,
 				32BD488D2D3FF02C0078DA9C /* SNMToast.swift in Sources */,
 				32BD48912D3FF02C0078DA9C /* Routable.swift in Sources */,
 				32BD48932D3FF02C0078DA9C /* SNMError.swift in Sources */,
+				99525F362D74687C00B6E17E /* ResetPwRouter.swift in Sources */,
 				32BD48942D3FF02C0078DA9C /* TabBarModuleBuilder.swift in Sources */,
 				99E79F972D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
 				32BD48952D3FF02C0078DA9C /* TabBarController.swift in Sources */,
@@ -2637,6 +2701,7 @@
 				32BD48972D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */,
 				32BD48982D3FF02C0078DA9C /* ProfileCreateInteractor.swift in Sources */,
 				32BD48992D3FF02C0078DA9C /* ProfileInputPresenter.swift in Sources */,
+				99525F302D74678F00B6E17E /* ResetPwInteractor.swift in Sources */,
 				32BD489A2D3FF02C0078DA9C /* ProfileCreatePresenter.swift in Sources */,
 				32BD489B2D3FF02C0078DA9C /* ProfileInputRouter.swift in Sources */,
 				32BD489C2D3FF02C0078DA9C /* ProfileCreateRouter.swift in Sources */,
@@ -2699,6 +2764,7 @@
 				32081C0E2D618D0000D19235 /* ProfileDropRouter.swift in Sources */,
 				32081A6C2D547FB700D19235 /* MockMPCSession.swift in Sources */,
 				32BD48C92D3FF02C0078DA9C /* MateListInteractor.swift in Sources */,
+				99525F392D746A6600B6E17E /* ResetPwEmailViewController.swift in Sources */,
 				32BD48CA2D3FF02C0078DA9C /* MateListPresenter.swift in Sources */,
 				32BD48CB2D3FF02C0078DA9C /* MateListRouter.swift in Sources */,
 				32BD48CC2D3FF02C0078DA9C /* RequestMateViewController.swift in Sources */,
@@ -2787,6 +2853,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99A5E1A92D300CE9003B00A8 /* (null) in Sources */,
+				99525F382D746A6600B6E17E /* ResetPwEmailViewController.swift in Sources */,
 				A202A1152CEDD50700B98203 /* SupabaseDBManager.swift in Sources */,
 				995D94622CE598FD005A47BF /* NIManager.swift in Sources */,
 				FDBFA9A12CE1E51500AA9220 /* SNMColor.swift in Sources */,
@@ -2795,6 +2862,7 @@
 				A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */,
 				FDC8A02F2D66FA190097F00A /* SNMErrorHandler.swift in Sources */,
 				32C539622D64165A00CD89DF /* TrackWalkRouter.swift in Sources */,
+				99525F3B2D746AC000B6E17E /* ResetPwEmailInteractor.swift in Sources */,
 				A2C844D12CDBE1E5007F2970 /* (null) in Sources */,
 				A2BD49F62CF72B4000AC72A7 /* WalkNotiDTO.swift in Sources */,
 				3200444E2CE595EA00D08B6D /* ProfileCreatePresenter.swift in Sources */,
@@ -2815,6 +2883,7 @@
 				FDE768982CF7836C00B5DE88 /* RemoteSaveDeviceTokenUseCase.swift in Sources */,
 				A2FE772F2D5378B400239F05 /* SupabaseQueryParameter.swift in Sources */,
 				FD119F462CED868D00BE22BD /* ConvertLocationToTextUseCase.swift in Sources */,
+				99525F2F2D74678F00B6E17E /* ResetPwInteractor.swift in Sources */,
 				99E79F942D54881300E48552 /* ReportMatePresenter.swift in Sources */,
 				A20E71522CEC5FE900272B25 /* SupabaseUserResponse.swift in Sources */,
 				9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */,
@@ -2869,6 +2938,7 @@
 				32C5395C2D64165800CD89DF /* TrackWalkViewPresenter.swift in Sources */,
 				993736422CFCACB100E3DD58 /* UpdateUserInfoUseCase.swift in Sources */,
 				320047B62CFCB8D000D08B6D /* EventConstant.swift in Sources */,
+				99525F412D746B0B00B6E17E /* ResetPwEmailRouter.swift in Sources */,
 				3200441C2CE48C5C00D08B6D /* MPCAdvertiser.swift in Sources */,
 				FD880B5A2CECE8FC0093BEB9 /* SNMLogger.swift in Sources */,
 				A2B58F522D2FA0DC00C15B12 /* SNMError.swift in Sources */,
@@ -2907,6 +2977,7 @@
 				320044962CED80DA00D08B6D /* RespondWalkRouter.swift in Sources */,
 				32081AD32D5B5D8A00D19235 /* TargetedProfileDropUseCase.swift in Sources */,
 				A24CD93F2D364F0400492339 /* QuitProfileDropUseCase.swift in Sources */,
+				99525F3E2D746ADF00B6E17E /* ResetPwEmailPresenter.swift in Sources */,
 				99E79F5B2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */,
 				FDE768942CF782E900B5DE88 /* WalkAPSDTO.swift in Sources */,
 				99E79F912D544A4700E48552 /* ReportMateRouter.swift in Sources */,
@@ -2950,6 +3021,7 @@
 				FD119F4E2CED87C200BE22BD /* SelectLocationPresenter.swift in Sources */,
 				32C539562D64161100CD89DF /* TrackWalkViewController.swift in Sources */,
 				FD243D042D62547D00971162 /* SNMImageToastView.swift in Sources */,
+				99525F352D74687C00B6E17E /* ResetPwRouter.swift in Sources */,
 				99E79FAC2D556E8600E48552 /* ReportDTO.swift in Sources */,
 				FD5134192CEB7ADE002E76F3 /* HomeRouter.swift in Sources */,
 				FD51341D2CEB7AF0002E76F3 /* HomeInteractor.swift in Sources */,
@@ -2967,6 +3039,7 @@
 				FD243D002D62547400971162 /* SNMImageTextToastView.swift in Sources */,
 				A2BD4A012CF7AD4300AC72A7 /* RequestMateInfoUseCase.swift in Sources */,
 				FD119F502CED87E500BE22BD /* SelectLocationRouter.swift in Sources */,
+				99525F322D74685D00B6E17E /* ResetPwPresenter.swift in Sources */,
 				FD880B602CF4327F0093BEB9 /* SaveProfileImageUseCase.swift in Sources */,
 				A24B1F2F2D3C33500012B860 /* ImageSampler.swift in Sources */,
 				320047652CF6B86D00D08B6D /* RespondMateRequestUseCase.swift in Sources */,
@@ -2981,6 +3054,7 @@
 				FDA04AA52CE91DBF002605AC /* MultipartFormData.swift in Sources */,
 				FD119F522CED881300BE22BD /* SelectLocationModuleBuildable.swift in Sources */,
 				FD331A522CF23BD000F39426 /* WalkLog.swift in Sources */,
+				99525F2C2D7466FE00B6E17E /* ResetPwViewController.swift in Sources */,
 				FD11527B2CFC900F008955C4 /* NotificationListPresenter.swift in Sources */,
 				A2C328862CE245AC00D255AB /* TabBarModuleBuilder.swift in Sources */,
 				320044732CEB47B100D08B6D /* RequestWalkInteractor.swift in Sources */,

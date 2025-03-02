@@ -34,6 +34,8 @@ final class ResetPwViewController: BaseViewController, ResetPwViewable {
     override func configureAttributes() {
         hideKeyboardWhenTappedAround()
         configureNavigationControllerAttributes()
+        pwTextField.isSecureTextEntry = true
+        pwCheckTextField.isSecureTextEntry = true
         pwTextField.delegate = self
         pwCheckTextField.delegate = self
     }

@@ -4,7 +4,7 @@
 //
 //  Created by 배현진 on 2/26/25.
 //
-
+import Combine
 import UIKit
 
 protocol SignUpViewable: AnyObject {
@@ -13,6 +13,7 @@ protocol SignUpViewable: AnyObject {
 
 final class SignUpViewController: BaseViewController, SignUpViewable {
     var presenter: (any SignUpPresentable)?
+    private var cancellables: Set<AnyCancellable> = []
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -20,7 +21,7 @@ final class SignUpViewController: BaseViewController, SignUpViewable {
         stack.alignment = .fill
         return stack
     }()
-    private var idTextField: InputTextField = InputTextField(placeholder: Context.idPlaceholder)
+    private var emailTextField: InputTextField = InputTextField(placeholder: Context.emailPlaceholder)
     private var pwTextField: InputTextField = InputTextField(placeholder: Context.pwPlaceholder)
     private var pwCheckTextField: InputTextField = InputTextField(placeholder: Context.pwCheckPlaceholder)
     private var warningLabel: UILabel = {
@@ -30,14 +31,14 @@ final class SignUpViewController: BaseViewController, SignUpViewable {
         label.font = SNMFont.caption
         return label
     }()
-    private var idVerifyButton = PrimaryButton(title: Context.idVerifyButtonTitle)
+    private var emailVerifyButton = PrimaryButton(title: Context.emailVerifyButtonTitle)
     private var signUpButton = PrimaryButton(title: Context.signUpButtonTitle)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = SNMColor.white
         signUpButton.isEnabled = false
-        idVerifyButton.isEnabled = false
+        emailVerifyButton.isEnabled = false
     }
 
     override func configureAttributes() {
@@ -47,7 +48,7 @@ final class SignUpViewController: BaseViewController, SignUpViewable {
     }
 
     private func configureDelegateForSubviews() {
-        idTextField.delegate = self
+        emailTextField.delegate = self
         pwTextField.delegate = self
         pwCheckTextField.delegate = self
     }
@@ -58,8 +59,8 @@ final class SignUpViewController: BaseViewController, SignUpViewable {
     }
 
     override func configureHierachy() {
-        [idTextField,
-         idVerifyButton].forEach {
+        [emailTextField,
+         emailVerifyButton].forEach {
             stackView.addArrangedSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -123,17 +124,29 @@ final class SignUpViewController: BaseViewController, SignUpViewable {
     }
 
     override func bind() {
+        emailVerifyButton.publisher(event: .touchUpInside)
+            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
+            .sink { [weak self] _ in
+            // TODO: - 이메일 인증 버튼 클릭시
+            }
+            .store(in: &cancellables)
+        signUpButton.publisher(event: .touchUpInside)
+            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
+            .sink { [weak self] _ in
+            // TODO: - 회원가입 버튼 클릭시
+            }
+            .store(in: &cancellables)
     }
 }
 
 private extension SignUpViewController {
     enum Context {
         static let title: String = " 회원가입"
-        static let idPlaceholder: String = "이메일을 입력해주세요."
+        static let emailPlaceholder: String = "이메일을 입력해주세요."
         static let pwPlaceholder: String = "비밀번호를 입력해주세요."
         static let pwCheckPlaceholder: String = "비밀번호를 다시 입력해주세요."
         static let pwInfoText: String = "영문, 숫자를 포함한 8자 이상 15자 이하의 비밀번호를 입력해주세요."
-        static let idVerifyButtonTitle: String = "인증"
+        static let emailVerifyButtonTitle: String = "인증"
         static let signUpButtonTitle: String = "다음"
         static let warningPadding: CGFloat = 26
     }
@@ -146,19 +159,19 @@ extension SignUpViewController: UITextFieldDelegate {
     }
 
     func updateSignUpButtonState() {
-        let isIdFilled = !(idTextField.text?.isEmpty ?? true)
+        let isEmailFilled = !(emailTextField.text?.isEmpty ?? true)
         let isPwFilled = !(pwTextField.text?.isEmpty ?? true)
         let isPwCheckFilled = !(pwCheckTextField.text?.isEmpty ?? true)
-        let isIDValid = isValidEmail(idTextField.text ?? "")
+        let isEmailValid = isValidEmail(emailTextField.text ?? "")
         let isPwValid = isValidPassword(pwTextField.text ?? "")
         let isPwCheckValid = (pwTextField.text == pwCheckTextField.text)
 
-        signUpButton.isEnabled = isIdFilled && isPwFilled && isPwCheckFilled &&
-        isIDValid && isPwValid && isPwCheckValid
+        signUpButton.isEnabled = isEmailFilled && isPwFilled && isPwCheckFilled &&
+        isEmailValid && isPwValid && isPwCheckValid
     }
 
     func updateVerifyButtonState() {
-        idVerifyButton.isEnabled = isValidEmail(idTextField.text ?? "")
+        emailVerifyButton.isEnabled = isValidEmail(emailTextField.text ?? "")
     }
 
     private func isValidEmail(_ email: String) -> Bool {

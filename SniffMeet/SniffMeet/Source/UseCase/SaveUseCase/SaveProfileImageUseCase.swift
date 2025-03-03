@@ -43,18 +43,20 @@ struct SaveProfileImageUseCaseImpl: SaveProfileImageUseCase {
                 thumbnailName: thumbnailName
             )
         } catch let error as ImageSamplingError {
-            throw SNMError(level: .user, error: error)
+            throw SNMError(level: .notifyUser, error: error)
         } catch let error as FileManagerError {
-            throw SNMError(level: .user, error: error)
-        } catch {
+            throw SNMError(level: .retryable, error: error)
+        } catch let error as SupabaseSessionError {
+            throw SNMError(level: .notExistSession, error: error)
+        } catch let error as SupabaseStorageError {
             do {
                 try fileManager.delete(forKey: fileName)
                 try fileManager.delete(forKey: thumbnailName)
                 try localDataManager.delete(forKey: fileName)
             } catch {
-                throw SNMError(level: .user, error: error)
+                throw SNMError(level: .retryable, error: error)
             }
-            throw SNMError(level: .user, error: error)
+            throw SNMError(level: .retryable, error: error)
         }
         return fileName
     }

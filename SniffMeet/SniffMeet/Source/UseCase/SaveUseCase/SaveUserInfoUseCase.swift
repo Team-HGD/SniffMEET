@@ -45,13 +45,13 @@ struct SaveUserInfoUseCaseImpl: SaveUserInfoUseCase {
             )
             try await saveToRemote(dto: dto)
         } catch let error as UserDefaultsError {
-            throw SNMError(level: .user, error: error)
+            throw SNMError(level: .logOnly, error: error)
         } catch let error as SupabaseSessionError {
             try localDataManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
-            throw SNMError(level: .user, error: error)
+            throw SNMError(level: .notExistSession, error: error)
         } catch let error as SupabaseDBError {
             try localDataManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
-            throw SNMError(level: .user, error: error)
+            throw SNMError(level: .retryable, error: error)
         }
     }
     private func saveToLocal(userInfo: ProfileInfo) throws {

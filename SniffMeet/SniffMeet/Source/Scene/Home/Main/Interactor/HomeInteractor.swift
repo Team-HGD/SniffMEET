@@ -16,6 +16,7 @@ protocol HomeInteractable: AnyObject {
 final class HomeInteractor: HomeInteractable {
     weak var presenter: (any HomePresentable)?
     private let loadUserInfoUseCase: any LoadUserInfoUseCase
+    private let loadUserProfileImageUseCase: any LoadUserProfileImageUseCase
     private let checkFirstLaunchUseCase: any CheckFirstLaunchUseCase
     private let saveFirstLaunchUseCase: any SaveFirstLaunchUseCase
     private let requestNotificationAuthUseCase: any RequestNotificationAuthUseCase
@@ -24,6 +25,7 @@ final class HomeInteractor: HomeInteractable {
     init(
         presenter: (any HomePresentable)? = nil,
         loadUserInfoUseCase: any LoadUserInfoUseCase,
+        loadUserProfileImageUseCase: any LoadUserProfileImageUseCase,
         checkFirstLaunchUseCase: any CheckFirstLaunchUseCase,
         saveFirstLaunchUseCase: any SaveFirstLaunchUseCase,
         requestNotificationAuthUseCase: any RequestNotificationAuthUseCase,
@@ -31,6 +33,7 @@ final class HomeInteractor: HomeInteractable {
     ) {
         self.presenter = presenter
         self.loadUserInfoUseCase = loadUserInfoUseCase
+        self.loadUserProfileImageUseCase = loadUserProfileImageUseCase
         self.checkFirstLaunchUseCase = checkFirstLaunchUseCase
         self.saveFirstLaunchUseCase = saveFirstLaunchUseCase
         self.requestNotificationAuthUseCase = requestNotificationAuthUseCase
@@ -39,7 +42,9 @@ final class HomeInteractor: HomeInteractable {
 
     func loadInfo() -> (ProfileInfo, Data?) {
         do {
-            return try loadUserInfoUseCase.execute()
+            let userInfo = try loadUserInfoUseCase.execute()
+            let profileImage = try loadUserProfileImageUseCase.execute()
+            return (userInfo, profileImage)
         } catch {
             // FIXME: 에러 핸들링 필요
             return (ProfileInfo.example, nil)

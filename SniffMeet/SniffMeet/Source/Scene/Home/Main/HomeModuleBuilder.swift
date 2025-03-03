@@ -12,8 +12,10 @@ enum HomeModuleBuilder {
         let view = HomeViewController()
         let router = HomeRouter()
         let interactor = HomeInteractor(
-            loadUserInfoUseCase: LoadUserProfileUseCaseImpl(
-                dataLoadable: LocalDataManager(),
+            loadUserInfoUseCase: LoadUserInfoUseCaseImpl(
+                dataLoadable: LocalDataManager()
+            ),
+            loadUserProfileImageUseCase: LoadUserProfileImageImpl(
                 imageManageable: SNMFileManager(fileType: .image)
             ),
             checkFirstLaunchUseCase: CheckFirstLaunchUseCaseImpl(

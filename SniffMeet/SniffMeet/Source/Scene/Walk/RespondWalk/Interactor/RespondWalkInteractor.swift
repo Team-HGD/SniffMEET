@@ -79,8 +79,7 @@ final class RespondWalkInteractor: RespondWalkInteractable {
                     return
                 }
                 let userID = try SupabaseSessionManager.shared.userID.get()
-                // FIXME: 이미지 불러오는 과정이 포함됨
-                let (userInfo, _) = try loadUserUseCase.execute()
+                let userInfo = try loadUserUseCase.execute()
                 let walkNoti = WalkNotiDTO(
                     id: UUID(),
                     createdAt: date,

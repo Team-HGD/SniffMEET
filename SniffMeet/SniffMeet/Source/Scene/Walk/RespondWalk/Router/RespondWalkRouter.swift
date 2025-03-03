@@ -48,10 +48,7 @@ extension RespondWalkRouter: RespondWalkBuildable {
             ),
             cacheManager: CacheManager.shared
         )
-        let loadUserUseCase = LoadUserProfileUseCaseImpl(
-            dataLoadable: LocalDataManager(),
-            imageManageable: SNMFileManager(fileType: .image)
-        )
+        let loadUserUseCase = LoadUserInfoUseCaseImpl(dataLoadable: LocalDataManager())
 
         let view: RespondWalkViewable & UIViewController = RespondWalkViewController()
         let presenter: RespondWalkPresentable & RespondWalkInteractorOutput =

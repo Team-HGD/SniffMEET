@@ -8,26 +8,21 @@
 import Foundation
 
 protocol LoadUserInfoUseCase {
-    func execute() throws -> (ProfileInfo, Data?)
+    func execute() throws -> ProfileInfo
 }
 
-struct LoadUserProfileUseCaseImpl: LoadUserInfoUseCase {
-    private let dataLoadable: (any DataLoadable)
-    private let imageManageable: (any FileManagable)
+struct LoadUserInfoUseCaseImpl: LoadUserInfoUseCase {
+    private let dataLoadable: any DataLoadable
 
-    init(dataLoadable: any DataLoadable, imageManageable: any FileManagable) {
+    init(dataLoadable: any DataLoadable) {
         self.dataLoadable = dataLoadable
-        self.imageManageable = imageManageable
     }
 
-    func execute() throws -> (ProfileInfo, Data?) {
-        let userInfo = try dataLoadable.loadData(
+    func execute() throws -> ProfileInfo {
+        let profileInfo = try dataLoadable.loadData(
             forKey: Environment.UserDefaultsKey.dogInfo,
             type: ProfileInfo.self
         )
-        let profileImage = try? imageManageable.get(
-            forKey: Environment.FileManagerKey.profileImage
-        )
-        return (userInfo, profileImage)
+        return profileInfo
     }
 }

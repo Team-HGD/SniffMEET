@@ -44,8 +44,8 @@ extension ProfileEditRouter: ProfileEditBuildable {
         let interactor: ProfileEditInteractable = ProfileEditInteractor(
             updateUserInfoUseCase: updateUserInfoUseCase,
             saveProfileImageUseCase: saveProfileImageUseCase,
-            loadUserInfoUseCase: LoadUserProfileUseCaseImpl(
-                dataLoadable: LocalDataManager(),
+            loadUserInfoUseCase: LoadUserInfoUseCaseImpl(dataLoadable: LocalDataManager()),
+            loadUserProfileImageUseCase: LoadUserProfileImageImpl(
                 imageManageable: SNMFileManager(fileType: .image)
             )
         )

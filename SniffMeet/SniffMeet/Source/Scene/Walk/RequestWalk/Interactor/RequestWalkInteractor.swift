@@ -41,8 +41,7 @@ final class RequestWalkInteractor: RequestWalkInteractable {
     func sendWalkRequest(message: String, latitude: Double, longtitude: Double, location: String) {
         Task {
             do {
-                // FIXME: 이미지를 불러오게 됨
-                let (myInfo, _) = try loadUserInfoUseCase.execute()
+                let myInfo = try loadUserInfoUseCase.execute()
                 let id = try SupabaseSessionManager.shared.userID.get()
                 let walkNoti = WalkNotiDTO(
                     id: UUID(),

@@ -27,22 +27,26 @@ final class ProfileEditInteractor: ProfileEditInteractable {
     var updateUserInfoUseCase: any UpdateUserInfoUseCase
     var saveProfileImageUseCase: any SaveProfileImageUseCase
     private let loadUserInfoUseCase: any LoadUserInfoUseCase
+    private let loadUserProfileImageUseCase: any LoadUserProfileImageUseCase
     
     init(
         presenter: (any ProfileEditInteractorOutput)? = nil,
         updateUserInfoUseCase: any UpdateUserInfoUseCase,
         saveProfileImageUseCase: any SaveProfileImageUseCase,
-        loadUserInfoUseCase: any LoadUserInfoUseCase
+        loadUserInfoUseCase: any LoadUserInfoUseCase,
+        loadUserProfileImageUseCase: any LoadUserProfileImageUseCase
     ) {
         self.presenter = presenter
         self.updateUserInfoUseCase = updateUserInfoUseCase
         self.saveProfileImageUseCase = saveProfileImageUseCase
         self.loadUserInfoUseCase = loadUserInfoUseCase
+        self.loadUserProfileImageUseCase = loadUserProfileImageUseCase
     }
     
     func requestProfile() -> (ProfileInfo, Data?) {
         do {
-            let (profileInfo, profileImage) = try loadUserInfoUseCase.execute()
+            let profileInfo = try loadUserInfoUseCase.execute()
+            let profileImage = try loadUserProfileImageUseCase.execute()
             return (profileInfo, profileImage)
         } catch {
             // FIXME: 에러 핸들링 필요

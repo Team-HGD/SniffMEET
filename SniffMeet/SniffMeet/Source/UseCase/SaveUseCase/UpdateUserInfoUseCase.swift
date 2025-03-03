@@ -12,16 +12,16 @@ protocol UpdateUserInfoUseCase {
 }
 
 struct UpdateUserInfoUseCaseImpl: UpdateUserInfoUseCase {
-    private let localDBManager: any UserDefaultsManagable
+    private let localDataManager: any UserDefaultsManagable
     private let remoteDBManager: any RemoteDBManageable
     private let sessionManager: any SessionManageable
     
     init(
-        localDBManager: any UserDefaultsManagable,
+        localDataManager: any UserDefaultsManagable,
         remoteDBManager: any RemoteDBManageable,
         sessionManager: any SessionManageable
     ) {
-        self.localDBManager = localDBManager
+        self.localDataManager = localDataManager
         self.remoteDBManager = remoteDBManager
         self.sessionManager = sessionManager
     }
@@ -31,18 +31,18 @@ struct UpdateUserInfoUseCaseImpl: UpdateUserInfoUseCase {
             try updateToLocal(with: updatedProperty)
             try await updateToRemote(with: updatedProperty)
         } catch let error as UserDefaultsError {
-            throw SNMError(level: .user, error: error)
+            throw SNMError(level: .retryable, error: error)
         } catch let error as SupabaseSessionError {
-            try localDBManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
-            throw SNMError(level: .user, error: error)
+            try localDataManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
+            throw SNMError(level: .notExistSession, error: error)
         } catch let error as SupabaseDBError {
-            try localDBManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
-            throw SNMError(level: .user, error: error)
+            try localDataManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
+            throw SNMError(level: .retryable, error: error)
         }
     }
     
     private func updateToLocal(with updatedProperty: [String: Any]) throws {
-        let oldProfileInfo = try localDBManager.get(
+        let oldProfileInfo = try localDataManager.get(
             forKey: Environment.UserDefaultsKey.dogInfo,
             type: ProfileInfo.self
         )
@@ -60,7 +60,7 @@ struct UpdateUserInfoUseCaseImpl: UpdateUserInfoUseCase {
             nickname: updatedProperty["nickname"] as? String ?? oldProfileInfo.nickname,
             profileImageName: oldProfileInfo.profileImageName
         )
-        try localDBManager.set(value: newProfileInfo, forKey: Environment.UserDefaultsKey.dogInfo)
+        try localDataManager.set(value: newProfileInfo, forKey: Environment.UserDefaultsKey.dogInfo)
     }
     private func updateToRemote(with updatedProperty: [String: Any]) async throws {
         let userID = try sessionManager.userID.get()

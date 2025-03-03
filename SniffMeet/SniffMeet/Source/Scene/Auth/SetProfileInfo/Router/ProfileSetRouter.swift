@@ -44,7 +44,7 @@ extension ProfileSetRouter: ProfileSetBuildable {
             remoteDBManager: SupabaseDBManager.shared
         )
         let updateUserInfoUseCase: any UpdateUserInfoUseCase = UpdateUserInfoUseCaseImpl(
-            localDBManager: UserDefaultsManager.shared,
+            localDataManager: UserDefaultsManager.shared,
             remoteDBManager: SupabaseDBManager.shared,
             sessionManager: SupabaseSessionManager.shared
         )

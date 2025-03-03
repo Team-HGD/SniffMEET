@@ -26,7 +26,7 @@ final class ProfileEditRouter: ProfileEditRoutable {
 extension ProfileEditRouter: ProfileEditBuildable {
     static func createProfileEditModule(userInfo: ProfileInfo) -> UIViewController {
         let updateUserInfoUseCase: UpdateUserInfoUseCase = UpdateUserInfoUseCaseImpl(
-            localDBManager: UserDefaultsManager.shared,
+            localDataManager: UserDefaultsManager.shared,
             remoteDBManager: SupabaseDBManager.shared,
             sessionManager: SupabaseSessionManager.shared
         )

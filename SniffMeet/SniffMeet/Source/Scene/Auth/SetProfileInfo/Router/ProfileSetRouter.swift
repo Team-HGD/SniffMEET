@@ -21,7 +21,7 @@ final class ProfileSetRouter: ProfileSetRoutable {
                 .first(where: { $0.activationState == .foregroundActive })?
                 .delegate as? SceneDelegate {
                 if let router = sceneDelegate.appRouter {
-                    router.moveToHomeScreen()
+                    router.displayHomeView()
                 }
             }
         }

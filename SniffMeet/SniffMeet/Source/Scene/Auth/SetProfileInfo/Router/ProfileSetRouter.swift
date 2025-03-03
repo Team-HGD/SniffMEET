@@ -36,8 +36,8 @@ extension ProfileSetRouter: ProfileSetBuildable {
                 networkProvider: networkProvider,
                 sessionManager: SupabaseSessionManager.shared
             ),
-            userDefaultsManager: UserDefaultsManager.shared,
             fileManager: SNMFileManager(fileType: .image),
+            localDataManager: UserDefaultsManager.shared,
             imageSampler: ImageSampler()
         )
         let checkNicknameUseCase: any CheckNicknameUseCase = CheckNicknameUseCaseImpl(

@@ -13,22 +13,23 @@ protocol SaveProfileImageUseCase {
 
 struct SaveProfileImageUseCaseImpl: SaveProfileImageUseCase {
     private let remoteImageManager: any RemoteImageManageable
-    private let userDefaultsManager: any UserDefaultsManagable
     private let fileManager: any FileManagable
+    // TODO: DataStorable의 delete 기능 확장이 필요합니다.
+    private let localDataManager: any UserDefaultsManagable
     private let imageSampler: any ImageSampleable
     
     init(
         remoteImageManager: any RemoteImageManageable,
-        userDefaultsManager: any UserDefaultsManagable,
         fileManager: any FileManagable,
+        localDataManager: any UserDefaultsManagable,
         imageSampler: any ImageSampleable
     ) {
         self.remoteImageManager = remoteImageManager
-        self.userDefaultsManager = userDefaultsManager
+        self.localDataManager = localDataManager
         self.fileManager = fileManager
         self.imageSampler = imageSampler
     }
-
+    
     func execute(imageData: Data) async throws -> String {
         let fileName: String = UUID().uuidString
         let thumbnailName: String = "thumbnail_\(fileName)"
@@ -49,7 +50,7 @@ struct SaveProfileImageUseCaseImpl: SaveProfileImageUseCase {
             do {
                 try fileManager.delete(forKey: fileName)
                 try fileManager.delete(forKey: thumbnailName)
-                try userDefaultsManager.delete(forKey: fileName)
+                try localDataManager.delete(forKey: fileName)
             } catch {
                 throw SNMError(level: .user, error: error)
             }
@@ -92,7 +93,7 @@ struct SaveProfileImageUseCaseImpl: SaveProfileImageUseCase {
         }
     }
     private func saveToLocal(fileName: String, imageData: Data) throws {
-        try userDefaultsManager.set(
+        try localDataManager.set(
             value: fileName,
             forKey: Environment.UserDefaultsKey.profileImage
         )

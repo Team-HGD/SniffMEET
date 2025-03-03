@@ -35,8 +35,8 @@ extension ProfileEditRouter: ProfileEditBuildable {
                 networkProvider: SNMNetworkProvider(),
                 sessionManager: SupabaseSessionManager.shared
             ),
-            userDefaultsManager: UserDefaultsManager.shared,
             fileManager: SNMFileManager(fileType: .image),
+            localDataManager: UserDefaultsManager.shared,
             imageSampler: ImageSampler()
         )
         let view: ProfileEditViewable & UIViewController = ProfileEditViewController()

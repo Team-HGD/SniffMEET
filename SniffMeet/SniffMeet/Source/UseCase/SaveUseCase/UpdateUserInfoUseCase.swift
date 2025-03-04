@@ -27,25 +27,29 @@ struct UpdateUserInfoUseCaseImpl: UpdateUserInfoUseCase {
     }
     
     func execute(with updatedProperty: [String: Any]) async throws {
+        guard let oldProfileInfo = try? localDataManager.get(
+            forKey: Environment.UserDefaultsKey.dogInfo,
+            type: ProfileInfo.self
+        ) else {
+            throw SNMError(level: .notExistSession, error: UserDefaultsError.notFound)
+        }
         do {
-            try updateToLocal(with: updatedProperty)
+            try updateToLocal(with: updatedProperty, from: oldProfileInfo)
             try await updateToRemote(with: updatedProperty)
         } catch let error as UserDefaultsError {
             throw SNMError(level: .retryable, error: error)
         } catch let error as SupabaseSessionError {
-            try localDataManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
+            try localDataManager.set(value: oldProfileInfo, forKey: Environment.UserDefaultsKey.dogInfo)
             throw SNMError(level: .notExistSession, error: error)
         } catch let error as SupabaseDBError {
-            try localDataManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
+            try localDataManager.set(value: oldProfileInfo, forKey: Environment.UserDefaultsKey.dogInfo)
             throw SNMError(level: .retryable, error: error)
         }
     }
-    
-    private func updateToLocal(with updatedProperty: [String: Any]) throws {
-        let oldProfileInfo = try localDataManager.get(
-            forKey: Environment.UserDefaultsKey.dogInfo,
-            type: ProfileInfo.self
-        )
+    private func updateToLocal(
+        with updatedProperty: [String: Any],
+        from oldProfileInfo: ProfileInfo
+    ) throws {
         let newProfileInfo = ProfileInfo(
             name: updatedProperty["name"] as? String ?? oldProfileInfo.name,
             age: updatedProperty["age"] as? UInt8 ?? oldProfileInfo.age,

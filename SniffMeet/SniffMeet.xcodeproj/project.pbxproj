@@ -345,15 +345,8 @@
 		A220400B2CF6B89800D1E8CB /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */; };
 		A22179702D75CFE200309CA2 /* LoadUserProfileImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A221796F2D75CFE200309CA2 /* LoadUserProfileImageUseCase.swift */; };
 		A22179712D75CFE200309CA2 /* LoadUserProfileImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A221796F2D75CFE200309CA2 /* LoadUserProfileImageUseCase.swift */; };
-		A22179782D75D3F600309CA2 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A22179752D75D3F600309CA2 /* Debug.xcconfig */; };
-		A22179792D75D3F600309CA2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A22179762D75D3F600309CA2 /* GoogleService-Info.plist */; };
-		A221797A2D75D3F600309CA2 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A22179772D75D3F600309CA2 /* Release.xcconfig */; };
-		A221797B2D75D3F600309CA2 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A22179752D75D3F600309CA2 /* Debug.xcconfig */; };
-		A221797C2D75D3F600309CA2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A22179762D75D3F600309CA2 /* GoogleService-Info.plist */; };
-		A221797D2D75D3F600309CA2 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A22179772D75D3F600309CA2 /* Release.xcconfig */; };
-		A221797E2D75D3F600309CA2 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A22179752D75D3F600309CA2 /* Debug.xcconfig */; };
-		A221797F2D75D3F600309CA2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A22179762D75D3F600309CA2 /* GoogleService-Info.plist */; };
-		A22179802D75D3F600309CA2 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A22179772D75D3F600309CA2 /* Release.xcconfig */; };
+		A22179832D7707CE00309CA2 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A22179812D7707CE00309CA2 /* Debug.xcconfig */; };
+		A22179842D7707CE00309CA2 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A22179822D7707CE00309CA2 /* Release.xcconfig */; };
 		A23A3B732CF4683F00A58705 /* Mate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23A3B722CF4683F00A58705 /* Mate.swift */; };
 		A24082612CEB244C009109A0 /* SupabaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082602CEB244C009109A0 /* SupabaseConfig.swift */; };
 		A24082642CEB2470009109A0 /* SupabaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */; };
@@ -704,9 +697,8 @@
 		A21435F62CE20D2500564A4D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		A221796F2D75CFE200309CA2 /* LoadUserProfileImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserProfileImageUseCase.swift; sourceTree = "<group>"; };
-		A22179752D75D3F600309CA2 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		A22179762D75D3F600309CA2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A22179772D75D3F600309CA2 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		A22179812D7707CE00309CA2 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		A22179822D7707CE00309CA2 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		A23A3B722CF4683F00A58705 /* Mate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mate.swift; sourceTree = "<group>"; };
 		A24082602CEB244C009109A0 /* SupabaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseConfig.swift; sourceTree = "<group>"; };
 		A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAuthManager.swift; sourceTree = "<group>"; };
@@ -811,8 +803,6 @@
 		FD51341C2CEB7AEC002E76F3 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		FD51341E2CEB7AF6002E76F3 /* LoadUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserInfoUseCase.swift; sourceTree = "<group>"; };
 		FD5134222CEC2BDB002E76F3 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
-		FD5946652D6CF0BC006FF9C3 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		FD5946662D6CF0CB006FF9C3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		FD69B1B22CE3BC68009D71DC /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		FD69B1B42CE3BC79009D71DC /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		FD69B1BA2CE3BCDC009D71DC /* SNMPersistenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMPersistenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1562,8 +1552,8 @@
 				32BD48322D3FECAE0078DA9C /* SNMSceneTests */,
 				A24B1F352D3C338B0012B860 /* SNMUtilityTests */,
 				FD3A03212CD8CDE50047B7ED /* Products */,
-				FD5946652D6CF0BC006FF9C3 /* Debug.xcconfig */,
-				FD5946662D6CF0CB006FF9C3 /* Release.xcconfig */,
+				A22179812D7707CE00309CA2 /* Debug.xcconfig */,
+				A22179822D7707CE00309CA2 /* Release.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1658,9 +1648,6 @@
 		FDA4912A2CD9FE3500A36FB0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				A22179752D75D3F600309CA2 /* Debug.xcconfig */,
-				A22179772D75D3F600309CA2 /* Release.xcconfig */,
-				A22179762D75D3F600309CA2 /* GoogleService-Info.plist */,
 				99A5A1B22CFFE544002F1D2D /* ProfileDrop.gif */,
 				FD3A033C2CD8CF460047B7ED /* LaunchScreen.storyboard */,
 				FD3A033A2CD8CF460047B7ED /* Info.plist */,
@@ -2489,9 +2476,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A22179782D75D3F600309CA2 /* Debug.xcconfig in Resources */,
-				A22179792D75D3F600309CA2 /* GoogleService-Info.plist in Resources */,
-				A221797A2D75D3F600309CA2 /* Release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2513,9 +2497,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A221797B2D75D3F600309CA2 /* Debug.xcconfig in Resources */,
-				A221797C2D75D3F600309CA2 /* GoogleService-Info.plist in Resources */,
-				A221797D2D75D3F600309CA2 /* Release.xcconfig in Resources */,
+				A22179832D7707CE00309CA2 /* Debug.xcconfig in Resources */,
+				A22179842D7707CE00309CA2 /* Release.xcconfig in Resources */,
 				A288A63D2CDC595000D11C34 /* (null) in Resources */,
 				99A5A1B32CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
 				FD3A033F2CD8CF460047B7ED /* Assets.xcassets in Resources */,
@@ -2528,9 +2511,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3200453B2CF442D500D08B6D /* Assets.xcassets in Resources */,
-				A221797E2D75D3F600309CA2 /* Debug.xcconfig in Resources */,
-				A221797F2D75D3F600309CA2 /* GoogleService-Info.plist in Resources */,
-				A22179802D75D3F600309CA2 /* Release.xcconfig in Resources */,
 				99A5A1B42CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3401,7 +3381,6 @@
 		};
 		FD3A03362CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A22179752D75D3F600309CA2 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3465,7 +3444,6 @@
 		};
 		FD3A03372CD8CDE60047B7ED /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A22179772D75D3F600309CA2 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

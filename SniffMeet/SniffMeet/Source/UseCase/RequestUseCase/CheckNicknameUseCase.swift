@@ -23,7 +23,7 @@ final class CheckNicknameUseCaseImpl: CheckNicknameUseCase {
     func execute(nickname: String) async throws -> Bool {
         do {
             let body = try JSONSerialization.data(withJSONObject: ["input_name": nickname])
-            let response = try await remoteDBManager.anonRPC()
+            let response = try await remoteDBManager.rpc()
                 .setTable(Environment.SupabaseTableName.checkDuplicateNicknameFunction)
                 .setData(body)
                 .request()

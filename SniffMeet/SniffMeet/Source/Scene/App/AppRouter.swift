@@ -129,6 +129,17 @@ extension AppRouter {
         .sink { [weak self] _ in
             self?.presentSessionExpiredAlert()
         }
+        .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(
+            for: Environment.NotificationCenterName.profileDropFailed
+        )
+        .receive(on: RunLoop.main)
+        .sink { [weak self] notification in
+            guard let alertContent  = notification.object as? NotificationAlert else { return }
+            self?.presentAlert(from: alertContent)
+        }
+        .store(in: &cancellables)
     }
 }
 

@@ -11,7 +11,7 @@ enum TabBarModuleBuilder {
     static func build() -> UITabBarController {
         let submodules = (
             home: UINavigationController(rootViewController: HomeModuleBuilder.build()),
-            walk: UINavigationController(rootViewController: WalkLogPageViewController()),
+            walk: UINavigationController(rootViewController: WalkLogListRouter.buildWalkLogListModule()),
             mate: UINavigationController(rootViewController: MateListRouter.createMateListModule())
         )
         let homeTabBarItem = UITabBarItem(

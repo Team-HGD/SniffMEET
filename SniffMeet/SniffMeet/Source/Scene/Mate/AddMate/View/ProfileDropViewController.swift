@@ -74,6 +74,7 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
         super.viewDidLoad()
         presenter?.viewDidLoad()
     }
+
     override func configureAttributes() {
         configureNavigationControllerAttributes()
         if let gifImageView = GIFImageView(named: Context.profileDropImg) {
@@ -217,6 +218,16 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
     }
     func changeState(to connectionState: ConnectionState) {
         connectionStateLabel.text = connectionState.description
+        switch connectionState {
+        case .failure, .cannotFindPeer, .finished:
+            Task {[weak self] in
+                try await Task.sleep(nanoseconds: 50000000)
+                self?.presenter?.didCloseTheView()
+            }
+            // TODO: -  현진 추가
+        default:
+            break
+        }
     }
     func changeNotSupportedNI() {
         autoProfileDropButton.isHidden = true
@@ -237,7 +248,7 @@ private extension ProfileDropViewController {
         static let title: String = "프로필 드랍"
         static let contentLabel: String = "자동 연결을 이용해\n원하는 메이트의 핸드폰과\n아래의 동작을 수행해 간편하게\n프로필을 주고 받을 수 있습니다."
         static let descriptionLabel: String = "만약 상대 기기가 수동 연결만 지원한다면,\n함께 수동 연결을 시도하세요."
-        static let connectionLabel: String = "연결 상태 표시"
+        static let connectionLabel: String = "연결 버튼을 눌러보세요! \n 자세한 설명이 필요하다면 하단 텍스트를 터치하세요."
         static let notNIContentLabel: String = "수동 연결을 이용해\n원하는 메이트를 직접 선택해\n프로필을 주고 받을 수 있습니다."
         static let notNIDescriptionLabel: String = "수동 연결만 지원하는 경우,\n상대 기기도 함께 수동 연결해야 합니다."
         static let help: String = "기능 관련 자세한 설명을 원하는 경우"

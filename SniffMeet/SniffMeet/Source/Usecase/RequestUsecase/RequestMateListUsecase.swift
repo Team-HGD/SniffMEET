@@ -30,7 +30,7 @@ struct RequestMateListUsecaseImpl: RequestMateListUsecase {
         do {
             let tableName = Environment.SupabaseTableName.matelistFunction
             let userID = try SupabaseSessionManager.shared.userID.get()
-            let requestData = try jsonEncoder.encode(MateListRequestDTO(userId: userID))
+            let requestData = try jsonEncoder.encode(MateListRequestDTO(userID: userID))
             let data = try await remoteDBManager.rpc()
                 .setTable(tableName)
                 .setData(requestData)

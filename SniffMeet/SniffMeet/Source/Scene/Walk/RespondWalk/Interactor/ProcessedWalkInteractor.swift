@@ -9,7 +9,7 @@ import Foundation
 
 protocol ProcessedWalkInteractable: AnyObject {
     var presenter: (any ProcessedWalkInteractorOutput)? { get set }
-    func fetchSenderInfo(userId: UUID)
+    func fetchSenderInfo(userID: UUID)
     func fetchProfileImage(urlString: String)
     func convertLocationToText(latitude: Double, longtitude: Double)
 }
@@ -32,11 +32,11 @@ final class ProcessedWalkInteractor: ProcessedWalkInteractable {
         self.requestProfileImageUsecase = requestProfileImageUsecase
     }
 
-    func fetchSenderInfo(userId: UUID) {
+    func fetchSenderInfo(userID: UUID) {
         Task {
             do {
                 guard let senderInfo = try await requestUserInfoUsecase.execute(
-                    mateID: userId
+                    mateID: userID
                 ) else {
                     presenter?.didFailToFetchWalkRequest(
                         error: SupabaseAuthError.userNotFound

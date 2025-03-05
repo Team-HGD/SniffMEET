@@ -16,7 +16,7 @@ protocol RespondWalkInteractable: AnyObject {
     var requestProfileImageUsecase: RequestProfileImageUsecase { get }
     var loadUserUsecase: LoadUserInfoUsecase { get }
     
-    func fetchSenderInfo(userId: UUID)
+    func fetchSenderInfo(userID: UUID)
     func respondWalkRequest(isAccepted: Bool, receivedNoti: WalkNoti)
     func calculateTimeLimit(requestTime: Date)
     func convertLocationToText(latitude: Double, longtitude: Double) async
@@ -50,11 +50,11 @@ final class RespondWalkInteractor: RespondWalkInteractable {
         self.loadUserUsecase = loadUserUsecase
     }
     
-    func fetchSenderInfo(userId: UUID) {
+    func fetchSenderInfo(userID: UUID) {
         Task {
             do {
                 guard let senderInfo = try await requestUserInfoUsecase.execute(
-                    mateID: userId
+                    mateID: userID
                 ) else {
                     presenter?.didFailToFetchWalkRequest(
                         error: SupabaseAuthError.userNotFound

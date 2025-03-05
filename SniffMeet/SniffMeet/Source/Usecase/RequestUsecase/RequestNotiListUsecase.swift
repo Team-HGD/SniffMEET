@@ -33,7 +33,7 @@ struct RequestNotiListUsecaseImpl: RequestNotiListUsecase {
 
         do {
             let userID = try sessionManager.userID.get()
-            let requestData = try jsonEncoder.encode(WalkNotiListRequestDTO(userId: userID))
+            let requestData = try jsonEncoder.encode(WalkNotiListRequestDTO(userID: userID))
             let data = try await remoteManager.rpc()
                 .setTable(tableName)
                 .setData(requestData)

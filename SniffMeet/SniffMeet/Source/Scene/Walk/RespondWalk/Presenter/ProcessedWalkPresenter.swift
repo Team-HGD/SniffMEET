@@ -50,7 +50,7 @@ final class ProcessedWalkPresenter: ProcessedWalkPresentable {
     }
 
     func viewDidLoad() {
-        interactor?.fetchSenderInfo(userId: noti.senderId)
+        interactor?.fetchSenderInfo(userID: noti.senderId)
         interactor?.convertLocationToText(
             latitude: noti.latitude,
             longtitude: noti.longtitude

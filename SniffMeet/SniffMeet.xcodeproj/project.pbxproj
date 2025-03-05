@@ -290,9 +290,6 @@
 		32C539FD2D7804DC00CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539FC2D7804DC00CD89DF /* Release.xcconfig */; };
 		32C539FE2D7804DC00CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539FC2D7804DC00CD89DF /* Release.xcconfig */; };
 		32C539FF2D7804DC00CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539FC2D7804DC00CD89DF /* Release.xcconfig */; };
-		32C53A012D78324D00CD89DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32C53A002D78324D00CD89DF /* GoogleService-Info.plist */; };
-		32C53A022D78324D00CD89DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32C53A002D78324D00CD89DF /* GoogleService-Info.plist */; };
-		32C53A032D78324D00CD89DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32C53A002D78324D00CD89DF /* GoogleService-Info.plist */; };
 		9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */; };
 		9937361D2CF80D6600E3DD58 /* RequestUserInfoRemoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */; };
 		993736422CFCACB100E3DD58 /* UpdateUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */; };
@@ -672,7 +669,6 @@
 		32C539642D65CB2300CD89DF /* WalkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkRoute.swift; sourceTree = "<group>"; };
 		32C539F82D7804A700CD89DF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		32C539FC2D7804DC00CD89DF /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		32C53A002D78324D00CD89DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPage.swift; sourceTree = "<group>"; };
 		9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserInfoRemoteUseCase.swift; sourceTree = "<group>"; };
 		993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoUseCase.swift; sourceTree = "<group>"; };
@@ -1627,7 +1623,6 @@
 			children = (
 				32C539FC2D7804DC00CD89DF /* Release.xcconfig */,
 				32C539F82D7804A700CD89DF /* Debug.xcconfig */,
-				32C53A002D78324D00CD89DF /* GoogleService-Info.plist */,
 				99A5A1B22CFFE544002F1D2D /* ProfileDrop.gif */,
 				FD3A033C2CD8CF460047B7ED /* LaunchScreen.storyboard */,
 				FD3A033A2CD8CF460047B7ED /* Info.plist */,
@@ -2460,7 +2455,6 @@
 			files = (
 				32C539FF2D7804DC00CD89DF /* Release.xcconfig in Resources */,
 				32C539FB2D7804A700CD89DF /* Debug.xcconfig in Resources */,
-				32C53A032D78324D00CD89DF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2488,7 +2482,6 @@
 				FD3A033F2CD8CF460047B7ED /* Assets.xcassets in Resources */,
 				32C539FA2D7804A700CD89DF /* Debug.xcconfig in Resources */,
 				FD3A03412CD8CF460047B7ED /* LaunchScreen.storyboard in Resources */,
-				32C53A022D78324D00CD89DF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2498,7 +2491,6 @@
 			files = (
 				32C539FE2D7804DC00CD89DF /* Release.xcconfig in Resources */,
 				3200453B2CF442D500D08B6D /* Assets.xcassets in Resources */,
-				32C53A012D78324D00CD89DF /* GoogleService-Info.plist in Resources */,
 				99A5A1B42CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
 				32C539F92D7804A700CD89DF /* Debug.xcconfig in Resources */,
 			);

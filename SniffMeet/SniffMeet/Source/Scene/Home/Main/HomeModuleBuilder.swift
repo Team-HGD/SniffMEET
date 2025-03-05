@@ -26,7 +26,6 @@ enum HomeModuleBuilder {
             ),
             requestNotificationAuthUseCase: RequestNotificationAuthUseCaseImpl(),
             remoteSaveDeviceTokenUseCase: RemoteSaveDeviceTokenUseCaseImpl(
-                jsonEncoder: JSONEncoder(),
                 keychainManager: KeychainManager.shared,
                 remoteDBManager: SupabaseDBManager.shared,
                 sessionManager: SupabaseSessionManager.shared

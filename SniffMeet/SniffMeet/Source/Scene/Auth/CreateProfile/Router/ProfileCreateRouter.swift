@@ -38,8 +38,7 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
             saveUserInfoUseCase: SaveUserInfoUseCaseImpl(
                 localDataManager: UserDefaultsManager.shared,
                 remoteDBManager: SupabaseDBManager.shared,
-                sessionManager: SupabaseSessionManager.shared,
-                encoder: JSONEncoder()
+                sessionManager: SupabaseSessionManager.shared
             ),
             saveProfileImageUseCase: SaveProfileImageUseCaseImpl(
                 remoteImageManager: SupabaseStorageManager(
@@ -53,8 +52,7 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
             signInUseCase: SignInUseCaseImpl(
                 authManager: SupabaseAuthManager(
                     networkProvider: networkProvider,
-                    sessionManager: SupabaseSessionManager.shared,
-                    decoder: JSONDecoder()
+                    sessionManager: SupabaseSessionManager.shared
                 )
             )
         )

@@ -12,12 +12,12 @@ protocol RequestWalkLogListUseCase {
 }
 
 struct RequestWalkLogListUseCaseImpl: RequestWalkLogListUseCase {
-    private let jsonDecoder: JSONDecoder
     private let fileManager: any FileManagable
+    private let jsonDecoder: JSONDecoder
 
     init(
-        jsonDecoder: JSONDecoder = JSONDecoder(),
-        fileManager: any FileManagable
+        fileManager: any FileManagable,
+        jsonDecoder: JSONDecoder = JSONDecoder()
     ) {
         self.jsonDecoder = jsonDecoder
         self.fileManager = fileManager

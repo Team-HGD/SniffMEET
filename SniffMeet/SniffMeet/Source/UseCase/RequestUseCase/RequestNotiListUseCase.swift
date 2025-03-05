@@ -13,14 +13,19 @@ protocol RequestNotiListUseCase {
 struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
     private let remoteManager: any RemoteDBManageable
     private let sessionManager: any SessionManageable
-    let encoder: JSONEncoder
-    let decoder: JSONDecoder
+    let jsonEncoder: JSONEncoder
+    let jsonDecoder: JSONDecoder
     
-    init(remoteManager: any RemoteDBManageable, sessionManager: any SessionManageable) {
+    init(
+        remoteManager: any RemoteDBManageable,
+        sessionManager: any SessionManageable,
+        jsonDecoder: JSONDecoder = JSONDecoder(),
+        jsonEncoder: JSONEncoder = JSONEncoder()
+    ) {
         self.remoteManager = remoteManager
         self.sessionManager = sessionManager
-        decoder = JSONDecoder()
-        encoder = JSONEncoder()
+        self.jsonDecoder = jsonDecoder
+        self.jsonEncoder = jsonEncoder
     }
     
     func execute(page: Int = 0, pageSize: Int = 100) async throws -> [WalkNoti] {
@@ -28,14 +33,14 @@ struct RequestNotiListUseCaseImpl: RequestNotiListUseCase {
 
         do {
             let userID = try sessionManager.userID.get()
-            let requestData = try encoder.encode(WalkNotiListRequestDTO(userId: userID))
+            let requestData = try jsonEncoder.encode(WalkNotiListRequestDTO(userId: userID))
             let data = try await remoteManager.rpc()
                 .setTable(tableName)
                 .setData(requestData)
                 .setQuery(.custom("limit", pageSize))
                 .setQuery(.custom("offset", pageSize * page))
                 .request()
-            let walkDTOList = try decoder.decode([WalkNotiDTO].self, from: data)
+            let walkDTOList = try jsonDecoder.decode([WalkNotiDTO].self, from: data)
             
             return walkDTOList.map { $0.toEntity() }
         } catch let error as SupabaseSessionError {

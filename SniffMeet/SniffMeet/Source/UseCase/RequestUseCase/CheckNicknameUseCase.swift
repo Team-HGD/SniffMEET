@@ -13,11 +13,11 @@ protocol CheckNicknameUseCase {
 
 final class CheckNicknameUseCaseImpl: CheckNicknameUseCase {
     private let remoteDBManager: any RemoteDBManageable
-    private let decoder: JSONDecoder
+    private let jsonDecoder: JSONDecoder
     
-    init(remoteDBManager: any RemoteDBManageable) {
+    init(remoteDBManager: any RemoteDBManageable, jsonDecoder: JSONDecoder = JSONDecoder()) {
         self.remoteDBManager = remoteDBManager
-        decoder = JSONDecoder()
+        self.jsonDecoder = jsonDecoder
     }
     
     func execute(nickname: String) async throws -> Bool {
@@ -27,7 +27,7 @@ final class CheckNicknameUseCaseImpl: CheckNicknameUseCase {
                 .setTable(Environment.SupabaseTableName.checkDuplicateNicknameFunction)
                 .setData(body)
                 .request()
-            let isDuplicate = try decoder.decode(Bool.self, from: response)
+            let isDuplicate = try jsonDecoder.decode(Bool.self, from: response)
             return isDuplicate
         } catch let error as SupabaseDBError {
             throw SNMError(level: .retryable, error: error)

@@ -22,8 +22,8 @@ final class UserDefaultsManager: UserDefaultsManagable {
 
     init(
         userDefaults: UserDefaults = .standard,
-        jsonEncoder: JSONEncoder,
-        jsonDecoder: JSONDecoder
+        jsonEncoder: JSONEncoder = JSONEncoder(),
+        jsonDecoder: JSONDecoder = JSONDecoder()
     ) {
         self.userDefaults = userDefaults
         self.jsonEncoder = jsonEncoder
@@ -66,9 +66,7 @@ final class UserDefaultsManager: UserDefaultsManagable {
 extension UserDefaultsManager {
     /// UserDefaultsManager 싱글톤 인스턴스입니다. 내부적으로 UserDefaults.standard를 사용합니다.
     static let shared: UserDefaultsManager = UserDefaultsManager(
-        userDefaults: .standard,
-        jsonEncoder: JSONEncoder(),
-        jsonDecoder: JSONDecoder()
+        userDefaults: .standard
     )
 }
 

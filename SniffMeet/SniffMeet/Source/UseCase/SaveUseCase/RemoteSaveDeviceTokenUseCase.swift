@@ -12,21 +12,21 @@ protocol RemoteSaveDeviceTokenUseCase {
 }
 
 struct RemoteSaveDeviceTokenUseCaseImpl: RemoteSaveDeviceTokenUseCase {
-    private let jsonEncoder: JSONEncoder
     private let keychainManager: any TokenManagable
     private let remoteDBManager: any RemoteDBManageable
     private let sessionManager: any SessionManageable
+    private let jsonEncoder: JSONEncoder
 
     init(
-        jsonEncoder: JSONEncoder,
         keychainManager: any TokenManagable,
         remoteDBManager: any RemoteDBManageable,
-        sessionManager: any SessionManageable
+        sessionManager: any SessionManageable,
+        jsonEncoder: JSONEncoder = JSONEncoder()
     ) {
-        self.jsonEncoder = jsonEncoder
-        self.keychainManager = keychainManager
         self.remoteDBManager = remoteDBManager
         self.sessionManager = sessionManager
+        self.keychainManager = keychainManager
+        self.jsonEncoder = jsonEncoder
     }
 
     func execute() async throws {

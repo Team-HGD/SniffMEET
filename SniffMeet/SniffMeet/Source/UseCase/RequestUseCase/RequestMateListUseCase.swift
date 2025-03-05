@@ -13,27 +13,31 @@ protocol RequestMateListUseCase {
 
 struct RequestMateListUseCaseImpl: RequestMateListUseCase {
     private let remoteDBManager: any RemoteDBManageable
-    let decoder: JSONDecoder
-    let encoder: JSONEncoder
+    let jsonEncoder: JSONEncoder
+    let jsonDecoder: JSONDecoder
     
-    init(remoteDBManager: any RemoteDBManageable) {
+    init(
+        remoteDBManager: any RemoteDBManageable,
+        jsonEncoder: JSONEncoder = JSONEncoder(),
+        jsonDecoder: JSONDecoder = JSONDecoder()
+    ) {
         self.remoteDBManager = remoteDBManager
-        decoder = JSONDecoder()
-        encoder = JSONEncoder()
+        self.jsonEncoder = jsonEncoder
+        self.jsonDecoder = jsonDecoder
     }
     
     func execute(page: Int, pageSize: Int) async throws -> [Mate] {
         do {
             let tableName = Environment.SupabaseTableName.matelistFunction
             let userID = try SupabaseSessionManager.shared.userID.get()
-            let requestData = try encoder.encode(MateListRequestDTO(userId: userID))
+            let requestData = try jsonEncoder.encode(MateListRequestDTO(userId: userID))
             let data = try await remoteDBManager.rpc()
                 .setTable(tableName)
                 .setData(requestData)
                 .setQuery(.custom("limit", pageSize))
                 .setQuery(.custom("offset", pageSize * page))
                 .request()
-            let mateDTOList = try decoder.decode([UserInfoDTO].self, from: data)
+            let mateDTOList = try jsonDecoder.decode([UserInfoDTO].self, from: data)
             return mateDTOList.map {
                 Mate(name: $0.dogName,
                      userID: $0.id,

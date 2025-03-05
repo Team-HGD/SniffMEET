@@ -14,7 +14,7 @@ protocol ConvertToWalkAPSUseCase {
 struct ConvertToWalkAPSUseCaseImpl: ConvertToWalkAPSUseCase {
     private let jsonDecoder: JSONDecoder
 
-    init(jsonDecoder: JSONDecoder = AnyDecodable.defaultDecoder) {
+    init(jsonDecoder: JSONDecoder = JSONDecoder()) {
         self.jsonDecoder = jsonDecoder
     }
 

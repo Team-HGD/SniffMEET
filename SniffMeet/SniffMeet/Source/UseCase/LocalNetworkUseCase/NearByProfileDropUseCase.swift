@@ -33,20 +33,26 @@ final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
     let dataManager: DataLoadable
     private var niManager: NIManager
     private var mpcManager: MPCManager
-    let encoder: JSONEncoder
-    let decoder: JSONDecoder
+    let jsonEncoder: JSONEncoder
+    let jsonDecoder: JSONDecoder
     private var profileData: Data? = nil
     private var receivedFlagData: Data? = nil
 
     private var recentInvalidMPCSession: MCSession?
     private var recentInvalidNISession: NISession?
 
-    init(dataManager: DataLoadable, niManager: NIManager, mpcManager: MPCManager) {
+    init(
+        dataManager: DataLoadable,
+        niManager: NIManager,
+        mpcManager: MPCManager,
+        jsonEncoder: JSONEncoder = JSONEncoder(),
+        jsonDecoder: JSONDecoder = JSONDecoder()
+    ) {
         self.dataManager = dataManager
         self.niManager = niManager
         self.mpcManager = mpcManager
-        self.encoder = JSONEncoder()
-        self.decoder = JSONDecoder()
+        self.jsonEncoder = jsonEncoder
+        self.jsonDecoder = jsonDecoder
         transmissionFlag = []
 
         super.init()
@@ -72,7 +78,7 @@ final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
     
     func encodeFlagData() {
         do {
-            receivedFlagData = try encoder.encode(MPCProfileDropDTO(
+            receivedFlagData = try jsonEncoder.encode(MPCProfileDropDTO(
                 token: nil,
                 profile: nil,
                 transitionMessage: Context.peerReceived))
@@ -116,7 +122,7 @@ final class NearByProfileDropUseCaseImpl: NSObject, NearByProfileDropUseCase {
                 profile: dogProfile,
                 transitionMessage: nil
             )
-            profileData = try encoder.encode(profileDropDTO)
+            profileData = try jsonEncoder.encode(profileDropDTO)
         } catch {
             SNMLogger.error("loadData error : \(error)")
         }
@@ -150,7 +156,7 @@ extension NearByProfileDropUseCaseImpl: MCSessionDelegate {
                     SNMLogger.log("successfully connected to MPCSession: \(session.connectedPeers) session \(session)")
                     await mpcManager.connectedPeerManager.connect(peer: peerID)
                     guard let token = niManager.discoveryToken() else { return }
-                    let data = try encoder.encode(
+                    let data = try jsonEncoder.encode(
                         MPCProfileDropDTO(token: token, profile: nil, transitionMessage: nil)
                     )
                     await mpcManager.send(data: data)
@@ -174,7 +180,7 @@ extension NearByProfileDropUseCaseImpl: MCSessionDelegate {
 
         Task { [weak self] in
             do {
-                let receivedData = try self?.decoder.decode(MPCProfileDropDTO.self, from: data)
+                let receivedData = try self?.jsonDecoder.decode(MPCProfileDropDTO.self, from: data)
                 if let token = receivedData?.token,
                    let niConnected = self?.niManager.handleReceivedDiscoveryToken(token) {
                     let connectionsState: ConnectionState = niConnected ? .successNISession : .failure

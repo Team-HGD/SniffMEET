@@ -14,10 +14,15 @@ protocol RequestUserInfoRemoteUseCase {
 struct RequestUserInfoRemoteUseCaseImpl: RequestUserInfoRemoteUseCase {
     private let remoteDBManager: any RemoteDBManageable
     private let sessionManager: any SessionManageable
+    private let jsonDecoder: JSONDecoder
     
-    init(remoteDBManager: any RemoteDBManageable, sessionManager: any SessionManageable) {
+    init(remoteDBManager: any RemoteDBManageable,
+         sessionManager: any SessionManageable,
+         jsonDecoder: JSONDecoder = JSONDecoder()
+    ) {
         self.remoteDBManager = remoteDBManager
         self.sessionManager = sessionManager
+        self.jsonDecoder = jsonDecoder
     }
     
     func execute() async throws -> [UserInfoDTO] {
@@ -26,8 +31,7 @@ struct RequestUserInfoRemoteUseCaseImpl: RequestUserInfoRemoteUseCase {
             .setTable(Environment.SupabaseTableName.userInfo)
             .setQuery(.equal("id", userID))
             .request()
-        let decoder = JSONDecoder()
-        let info = try decoder.decode([UserInfoDTO].self, from: data)
+        let info = try jsonDecoder.decode([UserInfoDTO].self, from: data)
         return info
     }
 }

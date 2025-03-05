@@ -30,19 +30,24 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
     var isTransitioned: Bool = false
     var triedBefore: Bool = false
 
-    let dataManager: DataLoadable
+    private let dataManager: DataLoadable
     private var mpcManager: MPCManager
-    let encoder: JSONEncoder
-    let decoder: JSONDecoder
+    private let jsonEncoder: JSONEncoder
+    private let jsonDecoder: JSONDecoder
     private var profileData: Data? = nil
     private var receivedFlagData: Data? = nil
     private var recentInvalidMPCSession: MCSession?
 
-    init(dataManager: DataLoadable, mpcManager: MPCManager) {
+    init(
+        dataManager: DataLoadable,
+        mpcManager: MPCManager,
+        jsonEncoder: JSONEncoder = JSONEncoder(),
+        jsonDecoder: JSONDecoder = JSONDecoder()
+    ) {
         self.dataManager = dataManager
         self.mpcManager = mpcManager
-        self.encoder = JSONEncoder()
-        self.decoder = JSONDecoder()
+        self.jsonEncoder = jsonEncoder
+        self.jsonDecoder = jsonDecoder
         transmissionFlag = []
 
         super.init()
@@ -65,7 +70,7 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
     
     func encodeFlagData() {
         do {
-            receivedFlagData = try encoder.encode(MPCProfileDropDTO(
+            receivedFlagData = try jsonEncoder.encode(MPCProfileDropDTO(
                 token: nil,
                 profile: nil,
                 transitionMessage: Context.peerReceived))
@@ -110,7 +115,7 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
                 profile: dogProfile,
                 transitionMessage: nil
             )
-            profileData = try encoder.encode(profileDropDTO)
+            profileData = try jsonEncoder.encode(profileDropDTO)
         } catch {
             SNMLogger.error("loadData error : \(error)")
         }
@@ -161,7 +166,7 @@ extension TargetedProfileDropUseCaseImpl: MCSessionDelegate {
 
         Task { [weak self] in
             do {
-                let receivedData = try self?.decoder.decode(MPCProfileDropDTO.self, from: data)
+                let receivedData = try self?.jsonDecoder.decode(MPCProfileDropDTO.self, from: data)
                 
                 if let profile = receivedData?.profile,
                    let receivedFlagData = self?.receivedFlagData { // 프로필 데이터

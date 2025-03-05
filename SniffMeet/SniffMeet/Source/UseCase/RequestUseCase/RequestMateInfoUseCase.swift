@@ -14,9 +14,14 @@ protocol RequestMateInfoUseCase {
 
 struct RequestMateInfoUsecaseImpl: RequestMateInfoUseCase {
     private let remoteDBManager: any RemoteDBManageable
+    private let jsonDecoder: JSONDecoder
     
-    init(remoteDBManager: any RemoteDBManageable) {
+    init(
+        remoteDBManager: any RemoteDBManageable,
+        jsonDecoder: JSONDecoder = JSONDecoder()
+    ) {
         self.remoteDBManager = remoteDBManager
+        self.jsonDecoder = jsonDecoder
     }
     
     func execute(mateID: UUID) async throws -> UserInfoDTO? {
@@ -24,7 +29,7 @@ struct RequestMateInfoUsecaseImpl: RequestMateInfoUseCase {
             .setTable(Environment.SupabaseTableName.userInfo)
             .setQuery(.equal("id", mateID.uuidString))
             .request()
-        let mateInfo = try JSONDecoder().decode([UserInfoDTO].self, from: mateInfoData)
+        let mateInfo = try jsonDecoder.decode([UserInfoDTO].self, from: mateInfoData)
         return mateInfo.first
     }
 }

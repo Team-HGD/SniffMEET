@@ -14,18 +14,18 @@ struct SaveUserInfoUseCaseImpl: SaveUserInfoUseCase {
     private let localDataManager: any UserDefaultsManagable
     private let remoteDBManager: any RemoteDBManageable
     private let sessionManager: any SessionManageable
-    private let encoder: JSONEncoder
+    private let jsonEncoder: JSONEncoder
     
     init(
         localDataManager: any UserDefaultsManagable,
         remoteDBManager: any RemoteDBManageable,
         sessionManager: any SessionManageable,
-        encoder: JSONEncoder
+        jsonEncoder: JSONEncoder = JSONEncoder()
     ) {
         self.remoteDBManager = remoteDBManager
         self.localDataManager = localDataManager
         self.sessionManager = sessionManager
-        self.encoder = encoder
+        self.jsonEncoder = jsonEncoder
     }
     
     func execute(userInfo: ProfileInfo) async throws {
@@ -58,17 +58,17 @@ struct SaveUserInfoUseCaseImpl: SaveUserInfoUseCase {
         try localDataManager.set(value: userInfo, forKey: Environment.UserDefaultsKey.dogInfo)
     }
     private func saveToRemote(dto: UserInfoDTO) async throws {
-        let userData = try encoder.encode(dto)
+        let userData = try jsonEncoder.encode(dto)
         try await remoteDBManager.insertData()
             .setTable(Environment.SupabaseTableName.userInfo)
             .setData(userData)
             .request()
-        let mateListData = try encoder.encode(MateListInsertDTO(id: dto.id, mates: nil))
+        let mateListData = try jsonEncoder.encode(MateListInsertDTO(id: dto.id, mates: nil))
         try await remoteDBManager.insertData()
             .setTable(Environment.SupabaseTableName.matelist)
             .setData(mateListData)
             .request()
-        let notiListData = try encoder.encode(WalkNotiListInsertDTO(id: dto.id))
+        let notiListData = try jsonEncoder.encode(WalkNotiListInsertDTO(id: dto.id))
         try await remoteDBManager.insertData()
             .setTable(Environment.SupabaseTableName.notificationList)
             .setData(notiListData)

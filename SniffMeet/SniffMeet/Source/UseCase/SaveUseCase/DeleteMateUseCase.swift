@@ -15,17 +15,21 @@ final class DeleteMateUseCaseImpl: DeleteMateUseCase {
     private let networkProvider: any NetworkProvider
     private let remoteDBManager: any RemoteDBManageable
     private let sessionManager: any SessionManageable
-    private let encoder = JSONEncoder()
-    private let decoder = JSONDecoder()
+    private let jsonEncoder: JSONEncoder
+    private let jsonDecoder: JSONDecoder
 
     init(
         networkProvider: any NetworkProvider,
         remoteDBManager: any RemoteDBManageable,
-        sessionManager: any SessionManageable
+        sessionManager: any SessionManageable,
+        jsonEncoder: JSONEncoder = JSONEncoder(),
+        jsonDecoder: JSONDecoder = JSONDecoder()
     ) {
         self.networkProvider = networkProvider
         self.remoteDBManager = remoteDBManager
         self.sessionManager = sessionManager
+        self.jsonEncoder = jsonEncoder
+        self.jsonDecoder = jsonDecoder
     }
 
     func execute(mate: Mate) async throws {
@@ -39,7 +43,7 @@ final class DeleteMateUseCaseImpl: DeleteMateUseCase {
                 .setQuery(.equal("id", userID))
                 .request()
 
-            let mateListDTO = try decoder.decode([MateListDTO].self, from: userMateListData)
+            let mateListDTO = try jsonDecoder.decode([MateListDTO].self, from: userMateListData)
             guard let mateList = mateListDTO.first else {
                 throw SupabaseDBError.fetchDataFailed
             }
@@ -48,7 +52,7 @@ final class DeleteMateUseCaseImpl: DeleteMateUseCase {
             matesToUUID.removeAll { $0 == mateID }
             SNMLogger.log("mates: \(matesToUUID)")
 
-            let updatedData = try encoder.encode(MateListInsertDTO(id: userID, mates: matesToUUID))
+            let updatedData = try jsonEncoder.encode(MateListInsertDTO(id: userID, mates: matesToUUID))
             try await remoteDBManager.updateData()
                 .setTable(tableName)
                 .setData(updatedData)

@@ -32,7 +32,7 @@ struct SaveWalkLogUseCaseImpl: SaveWalkLogUseCase {
                 forKey: "\(Environment.FileManagerKey.walkLog)/\(timestamp)"
             )
         } catch {
-            throw SNMError(level: .logOnly, error: error)
+            throw SNMError(level: .notifyUser, error: error)
         }
     }
 }

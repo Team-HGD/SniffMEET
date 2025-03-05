@@ -54,11 +54,28 @@ final class TrackWalkViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         trackingButton.layoutIfNeeded()
         trackingButton.makeViewCircular()
     }
-    
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.backgroundColor = .white
+    }
+
     override func configureAttributes() {
+        tabBarController?.tabBar.isHidden = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.left"),
+            style: .plain,
+            target: self,
+            action: #selector(didTapDismissButton)
+        )
+        navigationItem.leftBarButtonItem?.tintColor = SNMColor.mainNavy
+        navigationItem.title = Context.navigationTitle
+
         [timeTitleLabel, numberOfStepsTitleLabel, distanceTitleLabel].forEach {
             $0.textColor = SNMColor.subGray3
             $0.font = SNMFont.callout
@@ -215,6 +232,9 @@ final class TrackWalkViewController: BaseViewController {
             .store(in: &cancellables)
     }
 
+    @objc private func didTapDismissButton() {
+        presenter?.didTapDismissButton()
+    }
     private func updateRecordButton() {
         trackingButton.setTitle(isStarted ? "중지" : "시작", for: .normal)
         trackingButton.backgroundColor = isStarted ? SNMColor.warningRed : SNMColor.mainNavy
@@ -278,6 +298,7 @@ extension TrackWalkViewController: MKMapViewDelegate {
 
 private extension TrackWalkViewController {
     enum Context {
+        static let navigationTitle = "산책하기"
         static let trackButtonStartTitle = "시작"
         static let trackButtonStopTitle = "종료"
         static let timeTitle = "시간"

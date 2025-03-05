@@ -77,6 +77,7 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
         super.viewDidLoad()
         presenter?.viewDidLoad()
     }
+
     override func configureAttributes() {
         configureNavigationControllerAttributes()
         if let gifImageView = GIFImageView(named: Context.profileDropImg) {
@@ -269,6 +270,25 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
     }
     func changeState(to connectionState: ConnectionState) {
         connectionStateLabel.text = connectionState.description
+        switch connectionState {
+        case .finished:
+            Task {[weak self] in
+                try await Task.sleep(nanoseconds: Context.minimumDuration)
+                self?.presenter?.didCloseTheView()
+            }
+        case .cannotFindPeer:
+            Task {[weak self] in
+                try await Task.sleep(nanoseconds: Context.minimumDuration)
+                self?.presenter?.didCloseTheView(with: Context.cannotFindPeerAlert)
+            }
+        case .failure:
+            Task {[weak self] in
+                try await Task.sleep(nanoseconds: Context.minimumDuration)
+                self?.presenter?.didCloseTheView(with:  Context.failureAlert)
+            }
+        default:
+            break
+        }
     }
     func changeNotSupportedNI() {
         autoProfileDropButton.isHidden = true
@@ -289,7 +309,7 @@ private extension ProfileDropViewController {
         static let title: String = "프로필 드랍"
         static let contentLabel: String = "자동 연결을 이용해\n원하는 메이트의 핸드폰과\n아래의 동작을 수행해 간편하게\n프로필을 주고 받을 수 있습니다."
         static let descriptionLabel: String = "만약 상대 기기가 수동 연결만 지원한다면,\n함께 수동 연결을 시도하세요."
-        static let connectionLabel: String = "연결 상태 표시"
+        static let connectionLabel: String = "연결 버튼을 눌러보세요! \n 자세한 설명이 필요하다면 하단 텍스트를 터치하세요."
         static let notNIContentLabel: String = "수동 연결을 이용해\n원하는 메이트를 직접 선택해\n프로필을 주고 받을 수 있습니다."
         static let notNIDescriptionLabel: String = "수동 연결만 지원하는 경우,\n상대 기기도 함께 수동 연결해야 합니다."
         static let help: String = "기능 관련 자세한 설명을 원하는 경우"
@@ -299,5 +319,14 @@ private extension ProfileDropViewController {
         static let spacing2: Int = 200
         static let hugging: Float = 251
         static let smallHugging: Float = 249
+        static let minimumDuration: UInt64 = 500000000
+        static let cannotFindPeerAlert = NotificationAlert(
+            title: "주변 메이트를 찾지 못했어요.",
+            message: "블루투스를 연결을 확인하고 프로필 드랍을 다시 시도해주세요. ",
+            defaultActionString: "확인")
+        static let failureAlert = NotificationAlert(
+            title: "프로필 드랍을 실패했어요.",
+            message: "블루투스를 연결을 확인하고 프로필 드랍을 다시 시도해주세요. ",
+            defaultActionString: "확인")
     }
 }

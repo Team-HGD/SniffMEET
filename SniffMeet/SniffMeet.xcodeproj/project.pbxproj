@@ -284,6 +284,14 @@
 		32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539612D64165A00CD89DF /* TrackWalkRouter.swift */; };
 		32C539652D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
 		32C539662D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
+		32C539F92D7804A700CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539F82D7804A700CD89DF /* Debug.xcconfig */; };
+		32C539FA2D7804A700CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539F82D7804A700CD89DF /* Debug.xcconfig */; };
+		32C539FB2D7804A700CD89DF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539F82D7804A700CD89DF /* Debug.xcconfig */; };
+		32C539FD2D7804DC00CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539FC2D7804DC00CD89DF /* Release.xcconfig */; };
+		32C539FE2D7804DC00CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539FC2D7804DC00CD89DF /* Release.xcconfig */; };
+		32C539FF2D7804DC00CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539FC2D7804DC00CD89DF /* Release.xcconfig */; };
+		32C53A0B2D78624400CD89DF /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C53A0A2D78624400CD89DF /* AlertContent.swift */; };
+		32C53A0C2D78624400CD89DF /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C53A0A2D78624400CD89DF /* AlertContent.swift */; };
 		9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */; };
 		9937361D2CF80D6600E3DD58 /* RequestUserInfoRemoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */; };
 		993736422CFCACB100E3DD58 /* UpdateUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */; };
@@ -669,6 +677,9 @@
 		32C5395E2D64165900CD89DF /* TrackWalkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkInteractor.swift; sourceTree = "<group>"; };
 		32C539612D64165A00CD89DF /* TrackWalkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkRouter.swift; sourceTree = "<group>"; };
 		32C539642D65CB2300CD89DF /* WalkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkRoute.swift; sourceTree = "<group>"; };
+		32C539F82D7804A700CD89DF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		32C539FC2D7804DC00CD89DF /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		32C53A0A2D78624400CD89DF /* AlertContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContent.swift; sourceTree = "<group>"; };
 		9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPage.swift; sourceTree = "<group>"; };
 		9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserInfoRemoteUseCase.swift; sourceTree = "<group>"; };
 		993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoUseCase.swift; sourceTree = "<group>"; };
@@ -814,8 +825,6 @@
 		FD51341C2CEB7AEC002E76F3 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		FD51341E2CEB7AF6002E76F3 /* LoadUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserInfoUseCase.swift; sourceTree = "<group>"; };
 		FD5134222CEC2BDB002E76F3 /* Routable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routable.swift; sourceTree = "<group>"; };
-		FD5946652D6CF0BC006FF9C3 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		FD5946662D6CF0CB006FF9C3 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		FD69B1B22CE3BC68009D71DC /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		FD69B1B42CE3BC79009D71DC /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		FD69B1BA2CE3BCDC009D71DC /* SNMPersistenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SNMPersistenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -968,6 +977,7 @@
 				320044522CE59A8100D08B6D /* UserInfo.swift */,
 				32C539642D65CB2300CD89DF /* WalkRoute.swift */,
 				A2BD49F92CF770F900AC72A7 /* DogTraits */,
+				32C53A0A2D78624400CD89DF /* AlertContent.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1533,8 +1543,6 @@
 				32BD48322D3FECAE0078DA9C /* SNMSceneTests */,
 				A24B1F352D3C338B0012B860 /* SNMUtilityTests */,
 				FD3A03212CD8CDE50047B7ED /* Products */,
-				FD5946652D6CF0BC006FF9C3 /* Debug.xcconfig */,
-				FD5946662D6CF0CB006FF9C3 /* Release.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1629,6 +1637,8 @@
 		FDA4912A2CD9FE3500A36FB0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				32C539FC2D7804DC00CD89DF /* Release.xcconfig */,
+				32C539F82D7804A700CD89DF /* Debug.xcconfig */,
 				99A5A1B22CFFE544002F1D2D /* ProfileDrop.gif */,
 				FD3A033C2CD8CF460047B7ED /* LaunchScreen.storyboard */,
 				FD3A033A2CD8CF460047B7ED /* Info.plist */,
@@ -2455,6 +2465,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32C539FF2D7804DC00CD89DF /* Release.xcconfig in Resources */,
+				32C539FB2D7804A700CD89DF /* Debug.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2478,7 +2490,9 @@
 			files = (
 				A288A63D2CDC595000D11C34 /* (null) in Resources */,
 				99A5A1B32CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
+				32C539FD2D7804DC00CD89DF /* Release.xcconfig in Resources */,
 				FD3A033F2CD8CF460047B7ED /* Assets.xcassets in Resources */,
+				32C539FA2D7804A700CD89DF /* Debug.xcconfig in Resources */,
 				FD3A03412CD8CF460047B7ED /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2487,8 +2501,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32C539FE2D7804DC00CD89DF /* Release.xcconfig in Resources */,
 				3200453B2CF442D500D08B6D /* Assets.xcassets in Resources */,
 				99A5A1B42CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
+				32C539F92D7804A700CD89DF /* Debug.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2649,6 +2665,7 @@
 				32BD48962D3FF02C0078DA9C /* ProfileInputViewController.swift in Sources */,
 				32BD48972D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */,
 				32BD48982D3FF02C0078DA9C /* ProfileCreateInteractor.swift in Sources */,
+				32C53A0B2D78624400CD89DF /* AlertContent.swift in Sources */,
 				32BD48992D3FF02C0078DA9C /* ProfileInputPresenter.swift in Sources */,
 				FD259F342D6F10D1007B182D /* WalkLogUsecaseTests.swift in Sources */,
 				32BD489A2D3FF02C0078DA9C /* ProfileCreatePresenter.swift in Sources */,
@@ -2967,6 +2984,7 @@
 				A2AFC9492D016BFF0062B34E /* SNMToast.swift in Sources */,
 				320047B92CFD367300D08B6D /* PushNotificationConfig.swift in Sources */,
 				FDBFA99F2CE1E50C00AA9220 /* SNMFont.swift in Sources */,
+				32C53A0C2D78624400CD89DF /* AlertContent.swift in Sources */,
 				FD119F4E2CED87C200BE22BD /* SelectLocationPresenter.swift in Sources */,
 				32C539562D64161100CD89DF /* TrackWalkViewController.swift in Sources */,
 				FD259F462D6FD2E8007B182D /* WalkLogListInteractor.swift in Sources */,
@@ -3321,6 +3339,7 @@
 		};
 		FD3A03352CD8CDE60047B7ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C539FC2D7804DC00CD89DF /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3367,7 +3386,7 @@
 		};
 		FD3A03362CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD5946652D6CF0BC006FF9C3 /* Debug.xcconfig */;
+			baseConfigurationReference = 32C539F82D7804A700CD89DF /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3431,7 +3450,7 @@
 		};
 		FD3A03372CD8CDE60047B7ED /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD5946662D6CF0CB006FF9C3 /* Release.xcconfig */;
+			baseConfigurationReference = 32C539FC2D7804DC00CD89DF /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3477,6 +3496,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -3596,7 +3616,7 @@
 				32BD482F2D3FEC9D0078DA9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		A24B1F2D2D3C32960012B860 /* Build configuration list for PBXNativeTarget "SNMUtilityTests" */ = {
 			isa = XCConfigurationList;
@@ -3605,7 +3625,7 @@
 				A24B1F2C2D3C32960012B860 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD331A6B2CF33C6700F39426 /* Build configuration list for PBXNativeTarget "SupabaseTests" */ = {
 			isa = XCConfigurationList;
@@ -3614,7 +3634,7 @@
 				FD331A6D2CF33C6700F39426 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD3A031B2CD8CDE50047B7ED /* Build configuration list for PBXProject "SniffMeet" */ = {
 			isa = XCConfigurationList;
@@ -3623,7 +3643,7 @@
 				FD3A03372CD8CDE60047B7ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD3A03332CD8CDE60047B7ED /* Build configuration list for PBXNativeTarget "SniffMeet" */ = {
 			isa = XCConfigurationList;
@@ -3632,7 +3652,7 @@
 				FD3A03352CD8CDE60047B7ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD69B1C02CE3BCDC009D71DC /* Build configuration list for PBXNativeTarget "SNMPersistenceTests" */ = {
 			isa = XCConfigurationList;
@@ -3641,7 +3661,7 @@
 				FD69B1C22CE3BCDC009D71DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FDCD02C42CE9172600B627D8 /* Build configuration list for PBXNativeTarget "SNMNetworkTests" */ = {
 			isa = XCConfigurationList;
@@ -3650,7 +3670,7 @@
 				FDCD02C32CE9172600B627D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

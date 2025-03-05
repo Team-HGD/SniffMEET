@@ -50,5 +50,6 @@ enum Environment {
 
     enum NotificationCenterName {
         static let sessionExpired = Notification.Name("sessionExpired")
+        static let profileDropFailed = Notification.Name("profileDropFailed")
     }
 }

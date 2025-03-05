@@ -17,15 +17,16 @@ protocol ProfileDropPresentable: AnyObject {
     func showBrowserView()
     func quitProfileDrop()
     func didTapHelp()
+    func didCloseTheView()
 }
 
 protocol ProfileDropInteractorOutput: AnyObject {
-    func didCloseTheView()
     func didConnectNISession()
     func failToConnectNISession()
     func showConnectionState(to state: ConnectionState)
     func receiveProfileData(_ data: DogDTO)
     func updateDeviceInfo()
+    func closeBrowserView()
 }
 
 final class ProfileDropPresenter: ProfileDropPresentable {
@@ -52,10 +53,20 @@ final class ProfileDropPresenter: ProfileDropPresentable {
     func startTargetedProfileDrop() {
         interactor?.tryNearByProfileDrop()
     }
+    func didCloseTheView() {
+        guard let view else { return }
+        router?.dismissView(view: view)
+    }
     func showBrowserView() {
         if let view = self.view,
            let browserViewController = interactor?.mcBrowserViewController() as? AnyObject {
             router?.presentMCBrowserView(from: view, to: browserViewController)
+        }
+    }
+    func closeBrowserView() {
+        if let view = self.view,
+           let browserViewController = interactor?.mcBrowserViewController() as? AnyObject {
+            router?.dismissMCBrowserView(view: browserViewController)
         }
     }
     func quitProfileDrop() {
@@ -71,8 +82,6 @@ final class ProfileDropPresenter: ProfileDropPresentable {
 }
 
 extension ProfileDropPresenter: ProfileDropInteractorOutput {
-    func didCloseTheView() {
-    }
     func didConnectNISession() {
         view?.changeState(to: .successNISession)
     }

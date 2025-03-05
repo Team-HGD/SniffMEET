@@ -155,13 +155,11 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
     }
     override func bind() {
         autoProfileDropButton.publisher(event: .touchUpInside)
-            .throttle(for: .seconds(EventConstant.throttleInterval),
-                      scheduler: RunLoop.main,
-                      latest: false)
+            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else { return }
                 let connectionState = self.connectionStateLabel.isHidden
-                self.updateUI(for: connectionState)
+                self.updateUI(for: connectionState, with: "auto")
                 if connectionState {
                     self.presenter?.startNearByProfileDrop()
                 } else {
@@ -170,14 +168,11 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
             }
             .store(in: &cancellables)
         manualProfileDropButton.publisher(event: .touchUpInside)
-            .throttle(for: .seconds(EventConstant.throttleInterval),
-                      scheduler: RunLoop.main,
-                      latest: false)
+            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else { return }
                 let connectionState = self.connectionStateLabel.isHidden
-                self.updateUI(for: connectionState)
-                peerSelectionButton.isHidden = false
+                self.updateUI(for: connectionState, with: "manual")
                 if connectionState {
                     self.presenter?.startTargetedProfileDrop()
                 } else {
@@ -187,9 +182,7 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
             .store(in: &cancellables)
         
         peerSelectionButton.publisher(event: .touchUpInside)
-            .throttle(for: .seconds(EventConstant.throttleInterval),
-                      scheduler: RunLoop.main,
-                      latest: false)
+            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else { return }
                 presenter?.showBrowserView()
@@ -202,18 +195,29 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
             }
             .store(in: &cancellables)
     }
-    private func updateUI(for state: Bool) {
+    private func updateUI(for state: Bool, with connectionWay: String) {
         connectionStateLabel.isHidden = !state
         contentLabel.isHidden = state
         descriptionLabel.isHidden = state
         contentImageView.isHidden = state
-        autoProfileDropButton.configuration?.background.backgroundColor = state ? SNMColor.mainBrown : SNMColor.mainNavy
-        autoProfileDropButton.configuration?.attributedTitle = AttributedString(
-            state ? Context.cancelConnect : Context.autoConnect,
-            attributes: AttributeContainer(
-                [.font: UIFont.systemFont(ofSize: 16.0, weight: .bold)]
+        if connectionWay == "auto" {
+            autoProfileDropButton.configuration?.background.backgroundColor = state ? SNMColor.mainBrown : SNMColor.mainNavy
+            autoProfileDropButton.configuration?.attributedTitle = AttributedString(
+                state ? Context.cancelConnect : Context.autoConnect,
+                attributes: AttributeContainer(
+                    [.font: UIFont.systemFont(ofSize: 16.0, weight: .bold)]
+                )
             )
-        )
+        } else {
+            manualProfileDropButton.configuration?.background.backgroundColor = state ? SNMColor.mainBrown : SNMColor.mainNavy
+            manualProfileDropButton.configuration?.attributedTitle = AttributedString(
+                state ? Context.cancelConnect : Context.manualConnect,
+                attributes: AttributeContainer(
+                    [.font: UIFont.systemFont(ofSize: 16.0, weight: .bold)]
+                )
+            )
+            peerSelectionButton.isHidden = !state
+        }
     }
     func changeState(to connectionState: ConnectionState) {
         connectionStateLabel.text = connectionState.description

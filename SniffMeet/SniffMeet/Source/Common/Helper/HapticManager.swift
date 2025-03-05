@@ -12,15 +12,15 @@ public class HapticManager {
     public static let instance = HapticManager()
 
     private var engine: CHHapticEngine?
-    private let notificationCenerator = UINotificationFeedbackGenerator()
+    private let notificationGenerator = UINotificationFeedbackGenerator()
 
     private init() {
-        notificationCenerator.prepare()
+        notificationGenerator.prepare()
         resetEngine()
     }
 
     public func notification(type: UINotificationFeedbackGenerator.FeedbackType) {
-        notificationCenerator.notificationOccurred(type)
+        notificationGenerator.notificationOccurred(type)
     }
 
     public func impact(style: UIImpactFeedbackGenerator.FeedbackStyle) {

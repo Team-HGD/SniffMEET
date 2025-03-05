@@ -10,7 +10,7 @@ import UIKit
 
 final class AppRouter: NSObject, Routable {
     private var window: UIWindow?
-    private var sessionExpiredCancellable: AnyCancellable?
+    private var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
 
     init(window: UIWindow?) {
         self.window = window
@@ -108,8 +108,21 @@ extension AppRouter {
         }
         UIViewController.topMostViewController?.present(alertController, animated: true)
     }
+    private func presentAlert(from alertContent: NotificationAlert) {
+        let alertController = UIAlertController(
+            title: alertContent.title,
+            message: alertContent.message,
+            preferredStyle: .alert
+        )
+        let confirmAction: UIAlertAction = .init(title: alertContent.defaultActionString, style: .default)
+        alertController.addAction(confirmAction)
+        if let rootViewController = UIViewController.topMostViewController as? UIAlertController {
+            rootViewController.dismiss(animated: true)
+        }
+        UIViewController.topMostViewController?.present(alertController, animated: true)
+    }
     private func bind() {
-        sessionExpiredCancellable = NotificationCenter.default.publisher(
+        NotificationCenter.default.publisher(
             for: Environment.NotificationCenterName.sessionExpired
         )
         .receive(on: RunLoop.main)
@@ -118,8 +131,6 @@ extension AppRouter {
         }
     }
 }
-
-
 
 // MARK: - AppRouter+UIViewControllerTransitioningDelegate
 

@@ -12,6 +12,7 @@ protocol ProfileDropRoutable: AnyObject, Routable {
     func presentMCBrowserView (from profileDropView: any ProfileDropViewable, to mcBrowserView: AnyObject)
     func dismissMCBrowserView (view: AnyObject)
     func dismissView(view: any ProfileDropViewable)
+    func dismissView(view: any ProfileDropViewable, with alert: NotificationAlert)
     func showMateRequestView(profileDropView: any ProfileDropViewable, data: DogDTO)
     func showHelpView(profileDropView: any ProfileDropViewable)
 }

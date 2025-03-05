@@ -1,5 +1,5 @@
 //
-//  UseCase.swift
+//  Usecase.swift
 //  SniffMeet
 //
 //  Created by 윤지성 on 1/22/25.
@@ -8,7 +8,7 @@ import Combine
 import Foundation
 import UIKit
 
-struct RequestMateListUseCaseMock: RequestMateListUseCase {
+struct RequestMateListUsecaseMock: RequestMateListUsecase {
     var remoteDBManager: any RemoteDBManageable
     var mateList: [UserInfoDTO]
     
@@ -27,13 +27,13 @@ struct RequestMateListUseCaseMock: RequestMateListUseCase {
     }
 }
 
-struct RequestProfileImageUseCaseMock: RequestProfileImageUseCase {
+struct RequestProfileImageUsecaseMock: RequestProfileImageUsecase {
     func execute(fileName: String) async -> Data? {
         UIImage.checkmark.pngData()
     }
 }
 
-final class NearByProfileDropUseCaseMock: NearByProfileDropUseCase {
+final class NearByProfileDropUsecaseMock: NearByProfileDropUsecase {
     var isConnected: PassthroughSubject<ConnectionState, Never> = PassthroughSubject()
     
     var profilePublisher: PassthroughSubject<DogDTO?, Never> = PassthroughSubject()
@@ -55,7 +55,7 @@ final class NearByProfileDropUseCaseMock: NearByProfileDropUseCase {
     }
 }
 
-struct QuitProfileDropUseCaseMock: QuitProfileDropUseCase {
+struct QuitProfileDropUsecaseMock: QuitProfileDropUsecase {
     func execute() {
     }
     
@@ -63,7 +63,7 @@ struct QuitProfileDropUseCaseMock: QuitProfileDropUseCase {
     }
 }
 
-struct DeleteMateUseCaseMock: DeleteMateUseCase {
+struct DeleteMateUsecaseMock: DeleteMateUsecase {
     func execute(mate: Mate) async throws {
     }
 }

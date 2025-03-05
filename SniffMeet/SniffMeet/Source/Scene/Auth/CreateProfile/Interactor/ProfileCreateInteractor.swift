@@ -9,35 +9,35 @@ import UIKit
 
 protocol ProfileCreateInteractable: AnyObject {
     var presenter: (any ProfileCreateInteractorOutput)? { get set }
-    var saveUserInfoUseCase: any SaveUserInfoUseCase { get set }
-    var saveProfileImageUseCase: any SaveProfileImageUseCase { get }
+    var saveUserInfoUsecase: any SaveUserInfoUsecase { get set }
+    var saveProfileImageUsecase: any SaveProfileImageUsecase { get }
     
     func signUp(with userInfo: ProfileInfo)
 }
 
 final class ProfileCreateInteractor: ProfileCreateInteractable {
     weak var presenter: (any ProfileCreateInteractorOutput)?
-    var saveUserInfoUseCase: any SaveUserInfoUseCase
-    var saveProfileImageUseCase: any SaveProfileImageUseCase
-    var signInUseCase: any SignInUseCase
+    var saveUserInfoUsecase: any SaveUserInfoUsecase
+    var saveProfileImageUsecase: any SaveProfileImageUsecase
+    var signInUsecase: any SignInUsecase
     
     init(
         presenter: (any ProfileCreateInteractorOutput)? = nil,
-        saveUserInfoUseCase: any SaveUserInfoUseCase,
-        saveProfileImageUseCase: any SaveProfileImageUseCase,
-        signInUseCase: any SignInUseCase
+        saveUserInfoUsecase: any SaveUserInfoUsecase,
+        saveProfileImageUsecase: any SaveProfileImageUsecase,
+        signInUsecase: any SignInUsecase
     ) {
         self.presenter = presenter
-        self.saveUserInfoUseCase = saveUserInfoUseCase
-        self.saveProfileImageUseCase = saveProfileImageUseCase
-        self.signInUseCase = signInUseCase
+        self.saveUserInfoUsecase = saveUserInfoUsecase
+        self.saveProfileImageUsecase = saveProfileImageUsecase
+        self.signInUsecase = signInUsecase
     }
     
     func signUp(with userInfo: ProfileInfo) {
         Task {
             do {
-                try await signInUseCase.execute()
-                try await saveUserInfoUseCase.execute(userInfo: userInfo)
+                try await signInUsecase.execute()
+                try await saveUserInfoUsecase.execute(userInfo: userInfo)
                 presenter?.didSaveUserInfo()
             } catch {
                 presenter?.didFailToSaveUserInfo(error: error)

@@ -16,24 +16,24 @@ protocol NotificationListInteractable: AnyObject {
 
 final class NotificationListInteractor: NotificationListInteractable {
     weak var presenter: (any NotificationListPresentable)?
-    private let requestNotiListUseCase: any RequestNotiListUseCase
-    private let deleteNotificationUseCase: any DeleteNotificationUseCase
+    private let requestNotiListUsecase: any RequestNotiListUsecase
+    private let deleteNotificationUsecase: any DeleteNotificationUsecase
 
     init(
         presenter: (any NotificationListPresentable)? = nil,
-        requestNotiListUseCase: any RequestNotiListUseCase,
-        deleteNotificationUseCase: any DeleteNotificationUseCase
+        requestNotiListUsecase: any RequestNotiListUsecase,
+        deleteNotificationUsecase: any DeleteNotificationUsecase
     ) {
         self.presenter = presenter
-        self.requestNotiListUseCase = requestNotiListUseCase
-        self.deleteNotificationUseCase = deleteNotificationUseCase
+        self.requestNotiListUsecase = requestNotiListUsecase
+        self.deleteNotificationUsecase = deleteNotificationUsecase
     }
 
     func fetchNotificationList(page: Int, pageSize: Int) async throws -> [WalkNoti] {
-        try await requestNotiListUseCase.execute(page: page, pageSize: pageSize)
+        try await requestNotiListUsecase.execute(page: page, pageSize: pageSize)
     }
     func deleteNotifcation(notificationID: UUID) async throws {
-        try await deleteNotificationUseCase.execute(notificationID: notificationID.uuidString)
+        try await deleteNotificationUsecase.execute(notificationID: notificationID.uuidString)
     }
     func deleteNotifications(notifications: [UUID]) async throws {
         try await withThrowingTaskGroup(of: Void.self) { [weak self] group in

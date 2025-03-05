@@ -19,51 +19,51 @@ protocol ProfileDropInteractable: AnyObject {
 
 final class ProfileDropInteractor: ProfileDropInteractable {
     weak var presenter: (any ProfileDropInteractorOutput)?
-    private var nearByProfileDropUseCase: any NearByProfileDropUseCase
-    private var targetedProfileDropUseCase: any TargetedProfileDropUseCase
-    private var quitProfileDropUseCase: any QuitProfileDropUseCase
+    private var nearByProfileDropUsecase: any NearByProfileDropUsecase
+    private var targetedProfileDropUsecase: any TargetedProfileDropUsecase
+    private var quitProfileDropUsecase: any QuitProfileDropUsecase
     private var cancellables: Set<AnyCancellable> = []
     private let niDeviceChecker: NIDeviceCheckerProtocol
 
     init(
         presenter: ProfileDropInteractorOutput? = nil,
-        nearByProfileDropUseCase: any NearByProfileDropUseCase,
-        targetedProfileDropUseCase: any TargetedProfileDropUseCase,
-        quitProfileDropUseCase: any QuitProfileDropUseCase,
+        nearByProfileDropUsecase: any NearByProfileDropUsecase,
+        targetedProfileDropUsecase: any TargetedProfileDropUsecase,
+        quitProfileDropUsecase: any QuitProfileDropUsecase,
         niDeviceChecker: NIDeviceCheckerProtocol
     ) {
         self.presenter = presenter
-        self.nearByProfileDropUseCase = nearByProfileDropUseCase
-        self.targetedProfileDropUseCase = targetedProfileDropUseCase
-        self.quitProfileDropUseCase = quitProfileDropUseCase
+        self.nearByProfileDropUsecase = nearByProfileDropUsecase
+        self.targetedProfileDropUsecase = targetedProfileDropUsecase
+        self.quitProfileDropUsecase = quitProfileDropUsecase
         self.niDeviceChecker = niDeviceChecker
 
         bind()
     }
 
     func tryNearByProfileDrop() {
-        if nearByProfileDropUseCase.isTransitioned {
+        if nearByProfileDropUsecase.isTransitioned {
             guard let mpcManager = MPCManager(dataManager: LocalDataManager())
             else { return }
             let niManager = NIManager()
-            nearByProfileDropUseCase.reset(mpcManager: mpcManager, nimanager: niManager)
-            quitProfileDropUseCase.reset(niManager: niManager)
+            nearByProfileDropUsecase.reset(mpcManager: mpcManager, nimanager: niManager)
+            quitProfileDropUsecase.reset(niManager: niManager)
         }
-        nearByProfileDropUseCase.execute()
+        nearByProfileDropUsecase.execute()
     }
     func tryTargetedProfileDrop() {
-        targetedProfileDropUseCase.execute()
+        targetedProfileDropUsecase.execute()
     }
     func mcBrowserViewController() -> AnyObject {
-        targetedProfileDropUseCase.mcBrowserViewController()
+        targetedProfileDropUsecase.mcBrowserViewController()
     }
 
     func quitProfileDrop() {
-        quitProfileDropUseCase.execute()
+        quitProfileDropUsecase.execute()
     }
 
     func bind() {
-        [nearByProfileDropUseCase.isConnected, targetedProfileDropUseCase.isConnected].forEach {
+        [nearByProfileDropUsecase.isConnected, targetedProfileDropUsecase.isConnected].forEach {
             $0.receive(on: RunLoop.main)
             .sink {[weak self] (state) in
                 self?.handleConnectionState(state: state)
@@ -71,13 +71,13 @@ final class ProfileDropInteractor: ProfileDropInteractable {
             .store(in: &cancellables)
         }
         
-        [nearByProfileDropUseCase.profilePublisher, targetedProfileDropUseCase.profilePublisher].forEach {
+        [nearByProfileDropUsecase.profilePublisher, targetedProfileDropUsecase.profilePublisher].forEach {
             $0.receive(on: RunLoop.main)
                 .sink {[weak self] (profile) in
                     guard let profile else { return }
-                    if self?.targetedProfileDropUseCase.isTransitioned == false {
+                    if self?.targetedProfileDropUsecase.isTransitioned == false {
                         self?.presenter?.receiveProfileData(profile)
-                        self?.nearByProfileDropUseCase.isTransitioned = true
+                        self?.nearByProfileDropUsecase.isTransitioned = true
                     }
                 }
                 .store(in: &cancellables)

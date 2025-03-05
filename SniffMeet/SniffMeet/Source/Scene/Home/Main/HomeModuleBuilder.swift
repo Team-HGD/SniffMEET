@@ -12,20 +12,20 @@ enum HomeModuleBuilder {
         let view = HomeViewController()
         let router = HomeRouter()
         let interactor = HomeInteractor(
-            loadUserInfoUseCase: LoadUserInfoUseCaseImpl(
+            loadUserInfoUsecase: LoadUserInfoUsecaseImpl(
                 dataLoadable: LocalDataManager()
             ),
-            loadUserProfileImageUseCase: LoadUserProfileImageImpl(
+            loadUserProfileImageUsecase: LoadUserProfileImageImpl(
                 imageManageable: SNMFileManager(fileType: .image)
             ),
-            checkFirstLaunchUseCase: CheckFirstLaunchUseCaseImpl(
+            checkFirstLaunchUsecase: CheckFirstLaunchUsecaseImpl(
                 userDefaultsManager: UserDefaultsManager.shared
             ),
-            saveFirstLaunchUseCase: SaveFirstLaunchUseCaseImpl(
+            saveFirstLaunchUsecase: SaveFirstLaunchUsecaseImpl(
                 userDefaultsManager: UserDefaultsManager.shared
             ),
-            requestNotificationAuthUseCase: RequestNotificationAuthUseCaseImpl(),
-            remoteSaveDeviceTokenUseCase: RemoteSaveDeviceTokenUseCaseImpl(
+            requestNotificationAuthUsecase: RequestNotificationAuthUsecaseImpl(),
+            remoteSaveDeviceTokenUsecase: RemoteSaveDeviceTokenUsecaseImpl(
                 keychainManager: KeychainManager.shared,
                 remoteDBManager: SupabaseDBManager.shared,
                 sessionManager: SupabaseSessionManager.shared

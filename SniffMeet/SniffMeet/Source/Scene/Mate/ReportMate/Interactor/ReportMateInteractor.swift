@@ -15,19 +15,19 @@ protocol ReportMateInteractable: AnyObject {
 final class ReportMateInteractor: ReportMateInteractable {
     private var mate: Mate
     weak var presenter: ReportMateInteractorOutput?
-    private let requestProfileImageUseCase: any RequestProfileImageUseCase
-    private let requestReportUseCase: any RequestReportUseCase
+    private let requestProfileImageUsecase: any RequestProfileImageUsecase
+    private let requestReportUsecase: any RequestReportUsecase
 
     init(
         mate: Mate,
         presenter: ReportMateInteractorOutput? = nil,
-        requestProfileImageUseCase: any RequestProfileImageUseCase,
-        requestReportUseCase: any RequestReportUseCase
+        requestProfileImageUsecase: any RequestProfileImageUsecase,
+        requestReportUsecase: any RequestReportUsecase
     ) {
         self.mate = mate
         self.presenter = presenter
-        self.requestProfileImageUseCase = requestProfileImageUseCase
-        self.requestReportUseCase = requestReportUseCase
+        self.requestProfileImageUsecase = requestProfileImageUsecase
+        self.requestReportUsecase = requestReportUsecase
     }
 
     func fetchMateInfo() {
@@ -36,7 +36,7 @@ final class ReportMateInteractor: ReportMateInteractable {
     func requestProfileImage(imageName: String?) {
         Task {
             let fileName = mate.profileImageURLString ?? ""
-            guard let imageData = await requestProfileImageUseCase.execute(fileName: fileName) else { return }
+            guard let imageData = await requestProfileImageUsecase.execute(fileName: fileName) else { return }
             presenter?.didFetchProfileImage(data: imageData)
         }
     }
@@ -48,10 +48,10 @@ final class ReportMateInteractor: ReportMateInteractable {
                             message: message)
         Task {
             do {
-                try await requestReportUseCase.execute(report: report)
+                try await requestReportUsecase.execute(report: report)
                 presenter?.didCloseTheView()
             } catch {
-                SNMLogger.error("RequesrReportUseCase Error: \(error.localizedDescription)")
+                SNMLogger.error("RequesrReportUsecase Error: \(error.localizedDescription)")
             }
         }
     }

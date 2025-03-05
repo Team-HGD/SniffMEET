@@ -16,26 +16,26 @@ protocol ProcessedWalkInteractable: AnyObject {
 
 final class ProcessedWalkInteractor: ProcessedWalkInteractable {
     weak var presenter: (any ProcessedWalkInteractorOutput)?
-    private let convertLocationToTextUseCase: any ConvertLocationToTextUseCase
-    private let requestUserInfoUseCase: RequestMateInfoUseCase
-    private let requestProfileImageUseCase: RequestProfileImageUseCase
+    private let convertLocationToTextUsecase: any ConvertLocationToTextUsecase
+    private let requestUserInfoUsecase: RequestMateInfoUsecase
+    private let requestProfileImageUsecase: RequestProfileImageUsecase
 
     init(
         presenter: (any ProcessedWalkInteractorOutput)? = nil,
-        convertLocationToTextUseCase: any ConvertLocationToTextUseCase,
-        requestUserInfoUseCase: any RequestMateInfoUseCase,
-        requestProfileImageUseCase: any RequestProfileImageUseCase
+        convertLocationToTextUsecase: any ConvertLocationToTextUsecase,
+        requestUserInfoUsecase: any RequestMateInfoUsecase,
+        requestProfileImageUsecase: any RequestProfileImageUsecase
     ) {
         self.presenter = presenter
-        self.convertLocationToTextUseCase = convertLocationToTextUseCase
-        self.requestUserInfoUseCase = requestUserInfoUseCase
-        self.requestProfileImageUseCase = requestProfileImageUseCase
+        self.convertLocationToTextUsecase = convertLocationToTextUsecase
+        self.requestUserInfoUsecase = requestUserInfoUsecase
+        self.requestProfileImageUsecase = requestProfileImageUsecase
     }
 
     func fetchSenderInfo(userId: UUID) {
         Task {
             do {
-                guard let senderInfo = try await requestUserInfoUseCase.execute(
+                guard let senderInfo = try await requestUserInfoUsecase.execute(
                     mateID: userId
                 ) else {
                     presenter?.didFailToFetchWalkRequest(
@@ -53,13 +53,13 @@ final class ProcessedWalkInteractor: ProcessedWalkInteractable {
     }
     func fetchProfileImage(urlString: String) {
         Task { [weak self] in
-            let imageData = try await self?.requestProfileImageUseCase.execute(fileName: urlString)
+            let imageData = try await self?.requestProfileImageUsecase.execute(fileName: urlString)
             self?.presenter?.didFetchProfileImage(with: imageData)
         }
     }
     func convertLocationToText(latitude: Double, longtitude: Double) {
         Task {
-            let locationText: String? = await convertLocationToTextUseCase.execute(
+            let locationText: String? = await convertLocationToTextUsecase.execute(
                 latitude: latitude, longtitude: longtitude
             )
             presenter?.didConvertLocationToText(with: locationText)

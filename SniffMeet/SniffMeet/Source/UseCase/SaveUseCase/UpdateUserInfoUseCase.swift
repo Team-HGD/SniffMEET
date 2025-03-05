@@ -61,7 +61,7 @@ struct UpdateUserInfoUseCaseImpl: UpdateUserInfoUseCase {
             keywords: (updatedProperty["keywords"] as? [String])?.compactMap { keywordString in
                 Keyword(rawValue: keywordString)
             } ?? oldProfileInfo.keywords,
-            nickname: updatedProperty["nickname"] as? String ?? oldProfileInfo.nickname,
+            nickname: oldProfileInfo.nickname,
             profileImageName: oldProfileInfo.profileImageName
         )
         try localDataManager.set(value: newProfileInfo, forKey: Environment.UserDefaultsKey.dogInfo)

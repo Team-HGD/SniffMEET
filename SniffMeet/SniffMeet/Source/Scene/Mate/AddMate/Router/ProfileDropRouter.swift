@@ -12,6 +12,7 @@ protocol ProfileDropRoutable: AnyObject, Routable {
     func presentMCBrowserView (from profileDropView: any ProfileDropViewable, to mcBrowserView: AnyObject)
     func dismissMCBrowserView (view: AnyObject)
     func dismissView(view: any ProfileDropViewable)
+    func dismissView(view: any ProfileDropViewable, with alert: NotificationAlert)
     func showMateRequestView(profileDropView: any ProfileDropViewable, data: DogDTO)
     func showHelpView(profileDropView: any ProfileDropViewable)
 }
@@ -43,7 +44,18 @@ final class ProfileDropRouter: ProfileDropRoutable {
             }
         }
     }
-
+    func dismissView(view: any ProfileDropViewable, with alert: NotificationAlert) {
+        guard  let view = view as? UIViewController else { return }
+        
+        Task { @MainActor in
+            view.navigationController?.popViewController(animated: true, completion: {
+                NotificationCenter.default.post(
+                    name: Environment.NotificationCenterName.sessionExpired,
+                    object: alert
+                )
+            })
+        }
+    }
     func showMateRequestView(profileDropView: any ProfileDropViewable, data: DogDTO) {
         guard let profileDropView = profileDropView as? UIViewController else { return }
         let requestMateViewController = RequestMateRouter.createRequestMateModule(profile: data)

@@ -18,6 +18,7 @@ protocol ProfileDropPresentable: AnyObject {
     func quitProfileDrop()
     func didTapHelp()
     func didCloseTheView()
+    func didCloseTheView(with alert: NotificationAlert)
 }
 
 protocol ProfileDropInteractorOutput: AnyObject {
@@ -78,6 +79,10 @@ final class ProfileDropPresenter: ProfileDropPresentable {
     }
     private func checkNISupport() {
         interactor?.checkNISupport()
+    }
+    func didCloseTheView(with alert: NotificationAlert) {
+        guard let view else { return }
+        router?.dismissView(view: view, with: alert)
     }
 }
 

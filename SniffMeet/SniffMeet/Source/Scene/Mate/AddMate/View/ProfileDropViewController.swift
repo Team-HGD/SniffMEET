@@ -219,12 +219,21 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
     func changeState(to connectionState: ConnectionState) {
         connectionStateLabel.text = connectionState.description
         switch connectionState {
-        case .failure, .cannotFindPeer, .finished:
+        case .finished:
             Task {[weak self] in
-                try await Task.sleep(nanoseconds: 50000000)
+                try await Task.sleep(nanoseconds: Context.minimumDuration)
                 self?.presenter?.didCloseTheView()
             }
-            // TODO: -  현진 추가
+        case .cannotFindPeer:
+            Task {[weak self] in
+                try await Task.sleep(nanoseconds: Context.minimumDuration)
+                self?.presenter?.didCloseTheView(with: Context.cannotFindPeerAlert)
+            }
+        case .failure:
+            Task {[weak self] in
+                try await Task.sleep(nanoseconds: Context.minimumDuration)
+                self?.presenter?.didCloseTheView(with:  Context.failureAlert)
+            }
         default:
             break
         }
@@ -256,5 +265,14 @@ private extension ProfileDropViewController {
         static let placeholderImg: String = "ImagePlaceholder"
         static let spacing: Int = 100
         static let spacing2: Int = 200
+        static let minimumDuration: UInt64 = 500000000
+        static let cannotFindPeerAlert = NotificationAlert(
+            title: "주변 메이트를 찾지 못했어요.",
+            message: "블루투스를 연결을 확인하고 프로필 드랍을 다시 시도해주세요. ",
+            defaultActionString: "확인")
+        static let failureAlert = NotificationAlert(
+            title: "프로필 드랍을 실패했어요.",
+            message: "블루투스를 연결을 확인하고 프로필 드랍을 다시 시도해주세요. ",
+            defaultActionString: "확인")
     }
 }

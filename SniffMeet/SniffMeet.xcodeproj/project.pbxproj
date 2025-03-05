@@ -290,6 +290,8 @@
 		32C539FD2D7804DC00CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539FC2D7804DC00CD89DF /* Release.xcconfig */; };
 		32C539FE2D7804DC00CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539FC2D7804DC00CD89DF /* Release.xcconfig */; };
 		32C539FF2D7804DC00CD89DF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 32C539FC2D7804DC00CD89DF /* Release.xcconfig */; };
+		32C53A0B2D78624400CD89DF /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C53A0A2D78624400CD89DF /* AlertContent.swift */; };
+		32C53A0C2D78624400CD89DF /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C53A0A2D78624400CD89DF /* AlertContent.swift */; };
 		9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */; };
 		9937361D2CF80D6600E3DD58 /* RequestUserInfoRemoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */; };
 		993736422CFCACB100E3DD58 /* UpdateUserInfoUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */; };
@@ -675,6 +677,7 @@
 		32C539642D65CB2300CD89DF /* WalkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkRoute.swift; sourceTree = "<group>"; };
 		32C539F82D7804A700CD89DF /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		32C539FC2D7804DC00CD89DF /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		32C53A0A2D78624400CD89DF /* AlertContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContent.swift; sourceTree = "<group>"; };
 		9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPage.swift; sourceTree = "<group>"; };
 		9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserInfoRemoteUseCase.swift; sourceTree = "<group>"; };
 		993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoUseCase.swift; sourceTree = "<group>"; };
@@ -971,6 +974,7 @@
 				320044522CE59A8100D08B6D /* UserInfo.swift */,
 				32C539642D65CB2300CD89DF /* WalkRoute.swift */,
 				A2BD49F92CF770F900AC72A7 /* DogTraits */,
+				32C53A0A2D78624400CD89DF /* AlertContent.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2657,6 +2661,7 @@
 				32BD48962D3FF02C0078DA9C /* ProfileInputViewController.swift in Sources */,
 				32BD48972D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */,
 				32BD48982D3FF02C0078DA9C /* ProfileCreateInteractor.swift in Sources */,
+				32C53A0B2D78624400CD89DF /* AlertContent.swift in Sources */,
 				32BD48992D3FF02C0078DA9C /* ProfileInputPresenter.swift in Sources */,
 				FD259F342D6F10D1007B182D /* WalkLogUsecaseTests.swift in Sources */,
 				32BD489A2D3FF02C0078DA9C /* ProfileCreatePresenter.swift in Sources */,
@@ -2973,6 +2978,7 @@
 				A2AFC9492D016BFF0062B34E /* SNMToast.swift in Sources */,
 				320047B92CFD367300D08B6D /* PushNotificationConfig.swift in Sources */,
 				FDBFA99F2CE1E50C00AA9220 /* SNMFont.swift in Sources */,
+				32C53A0C2D78624400CD89DF /* AlertContent.swift in Sources */,
 				FD119F4E2CED87C200BE22BD /* SelectLocationPresenter.swift in Sources */,
 				32C539562D64161100CD89DF /* TrackWalkViewController.swift in Sources */,
 				FD259F462D6FD2E8007B182D /* WalkLogListInteractor.swift in Sources */,

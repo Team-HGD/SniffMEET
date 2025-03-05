@@ -442,6 +442,12 @@
 		FD259F2F2D6F0AFA007B182D /* RequestWalkLogListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD259F2E2D6F0AFA007B182D /* RequestWalkLogListUseCase.swift */; };
 		FD259F302D6F0AFA007B182D /* RequestWalkLogListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD259F2E2D6F0AFA007B182D /* RequestWalkLogListUseCase.swift */; };
 		FD259F342D6F10D1007B182D /* WalkLogUsecaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD259F322D6F10D1007B182D /* WalkLogUsecaseTests.swift */; };
+		FD259F422D6FD2D0007B182D /* WalkLogListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD259F412D6FD2C9007B182D /* WalkLogListPresenter.swift */; };
+		FD259F432D6FD2D0007B182D /* WalkLogListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD259F412D6FD2C9007B182D /* WalkLogListPresenter.swift */; };
+		FD259F452D6FD2E8007B182D /* WalkLogListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD259F442D6FD2E1007B182D /* WalkLogListInteractor.swift */; };
+		FD259F462D6FD2E8007B182D /* WalkLogListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD259F442D6FD2E1007B182D /* WalkLogListInteractor.swift */; };
+		FD259F482D6FD2FC007B182D /* WalkLogListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD259F472D6FD2F7007B182D /* WalkLogListRouter.swift */; };
+		FD259F492D6FD2FC007B182D /* WalkLogListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD259F472D6FD2F7007B182D /* WalkLogListRouter.swift */; };
 		FD2921302D62ACE1009D0762 /* SNMAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29212F2D62ACDD009D0762 /* SNMAnimationType.swift */; };
 		FD2921312D62ACE1009D0762 /* SNMAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD29212F2D62ACDD009D0762 /* SNMAnimationType.swift */; };
 		FD2921332D632333009D0762 /* DimPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2921322D632330009D0762 /* DimPresentable.swift */; };
@@ -781,6 +787,9 @@
 		FD259F2B2D6F0AE7007B182D /* SaveWalkLogUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveWalkLogUseCase.swift; sourceTree = "<group>"; };
 		FD259F2E2D6F0AFA007B182D /* RequestWalkLogListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestWalkLogListUseCase.swift; sourceTree = "<group>"; };
 		FD259F322D6F10D1007B182D /* WalkLogUsecaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WalkLogUsecaseTests.swift; path = SNMSceneTests/WalkLogScene/WalkLogUsecaseTests.swift; sourceTree = SOURCE_ROOT; };
+		FD259F412D6FD2C9007B182D /* WalkLogListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLogListPresenter.swift; sourceTree = "<group>"; };
+		FD259F442D6FD2E1007B182D /* WalkLogListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLogListInteractor.swift; sourceTree = "<group>"; };
+		FD259F472D6FD2F7007B182D /* WalkLogListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkLogListRouter.swift; sourceTree = "<group>"; };
 		FD29212F2D62ACDD009D0762 /* SNMAnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMAnimationType.swift; sourceTree = "<group>"; };
 		FD2921322D632330009D0762 /* DimPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimPresentable.swift; sourceTree = "<group>"; };
 		FD331A4C2CF2359D00F39426 /* SNMLineTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMLineTabBar.swift; sourceTree = "<group>"; };
@@ -1826,6 +1835,7 @@
 		FDA4914D2CDA65EE00A36FB0 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				FD259F442D6FD2E1007B182D /* WalkLogListInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1833,20 +1843,15 @@
 		FDA4914E2CDA65F400A36FB0 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				FD259F412D6FD2C9007B182D /* WalkLogListPresenter.swift */,
 			);
 			path = Presenter;
-			sourceTree = "<group>";
-		};
-		FDA4914F2CDA65F900A36FB0 /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entity;
 			sourceTree = "<group>";
 		};
 		FDA491502CDA65FF00A36FB0 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				FD259F472D6FD2F7007B182D /* WalkLogListRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1910,7 +1915,6 @@
 				FD331A4E2CF235B600F39426 /* View */,
 				FDA4914D2CDA65EE00A36FB0 /* Interactor */,
 				FDA4914E2CDA65F400A36FB0 /* Presenter */,
-				FDA4914F2CDA65F900A36FB0 /* Entity */,
 				FDA491502CDA65FF00A36FB0 /* Router */,
 			);
 			path = WalkLogList;
@@ -2558,6 +2562,7 @@
 				32BD48EF2D40B5130078DA9C /* SessionViewController.swift in Sources */,
 				32BD48ED2D40B4BA0078DA9C /* PushNotificationRequest.swift in Sources */,
 				32BD48EE2D40B4BA0078DA9C /* PushNotificationConfig.swift in Sources */,
+				FD259F482D6FD2FC007B182D /* WalkLogListRouter.swift in Sources */,
 				FD259F2F2D6F0AFA007B182D /* RequestWalkLogListUseCase.swift in Sources */,
 				32BD48EC2D40B4880078DA9C /* Assets.xcassets in Sources */,
 				FD243CFD2D62332500971162 /* SNMToastAnimation.swift in Sources */,
@@ -2632,6 +2637,7 @@
 				32BD486C2D3FF02C0078DA9C /* AnyEncodable.swift in Sources */,
 				32BD486D2D3FF02C0078DA9C /* MockURLProtocol.swift in Sources */,
 				32BD486E2D3FF02C0078DA9C /* MockRequest.swift in Sources */,
+				FD259F452D6FD2E8007B182D /* WalkLogListInteractor.swift in Sources */,
 				32BD486F2D3FF02C0078DA9C /* DataStoragable.swift in Sources */,
 				FD243CFA2D621FC600971162 /* SNMProgressView.swift in Sources */,
 				32BD48702D3FF02C0078DA9C /* CacheManager.swift in Sources */,
@@ -2652,6 +2658,7 @@
 				32081B332D5C84EC00D19235 /* OnBoardingInteractor.swift in Sources */,
 				32081B342D5C84EC00D19235 /* OnBoardingRouter.swift in Sources */,
 				32081B352D5C84EC00D19235 /* OnBoardingViewController.swift in Sources */,
+				FD259F422D6FD2D0007B182D /* WalkLogListPresenter.swift in Sources */,
 				32BD487B2D3FF02C0078DA9C /* AnyJSONSerializable.swift in Sources */,
 				32BD487C2D3FF02C0078DA9C /* AnyDecodable.swift in Sources */,
 				32BD487D2D3FF02C0078DA9C /* Extension + Date.swift in Sources */,
@@ -2909,6 +2916,7 @@
 				A26BA0092D6DC84C000E5648 /* ProfileSetInteractor.swift in Sources */,
 				FD01D8FA2D40ACAF00AD4940 /* Extension + Array.swift in Sources */,
 				FD5134172CEB738D002E76F3 /* UIControl + Publisher.swift in Sources */,
+				FD259F432D6FD2D0007B182D /* WalkLogListPresenter.swift in Sources */,
 				320047BE2CFDE37300D08B6D /* WalkRequestDTO.swift in Sources */,
 				320044852CEC836400D08B6D /* PaddingLabel.swift in Sources */,
 				A2BD49FF2CF7712800AC72A7 /* Keyword.swift in Sources */,
@@ -3006,8 +3014,10 @@
 				FDBFA99F2CE1E50C00AA9220 /* SNMFont.swift in Sources */,
 				FD119F4E2CED87C200BE22BD /* SelectLocationPresenter.swift in Sources */,
 				32C539562D64161100CD89DF /* TrackWalkViewController.swift in Sources */,
+				FD259F462D6FD2E8007B182D /* WalkLogListInteractor.swift in Sources */,
 				FD243D042D62547D00971162 /* SNMImageToastView.swift in Sources */,
 				99E79FAC2D556E8600E48552 /* ReportDTO.swift in Sources */,
+				FD259F492D6FD2FC007B182D /* WalkLogListRouter.swift in Sources */,
 				FD5134192CEB7ADE002E76F3 /* HomeRouter.swift in Sources */,
 				FD51341D2CEB7AF0002E76F3 /* HomeInteractor.swift in Sources */,
 				3200453F2CF5A8B800D08B6D /* CalculateTimeLimitUseCase.swift in Sources */,

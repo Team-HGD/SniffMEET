@@ -25,6 +25,7 @@ enum Environment {
     
     enum FileManagerKey {
         static let profileImage: String = "profile"
+        static let walkLog: String = "walkLog"
     }
 
     enum LocalNetworkKey {

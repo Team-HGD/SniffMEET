@@ -13,13 +13,17 @@ protocol TrackWalkViewable: AnyObject {
     
     func updateRouteLine(with location: WalkRoute)
     func updateWalkRecord(record: WalkRecord)
+    func showRouteResult(with mapImageData: Data?) async throws
 }
 
 final class TrackWalkViewController: BaseViewController {
     var presenter: (any TrackWalkPresentable)?
     private var cancellables: Set<AnyCancellable> = []
-    private var isStarted: Bool = false
-    
+    private var isStarted: Bool = false {
+        didSet {
+            updateRecordButton()
+        }
+    }
     private let mapView: MKMapView = {
         let mapView: MKMapView = MKMapView()
         mapView.showsUserLocation = true
@@ -206,11 +210,14 @@ final class TrackWalkViewController: BaseViewController {
                     self?.presenter?.startTracking()
                     return
                 }
-                Task { @MainActor in
-                    await self?.stopRecordWalk()
-                }
+                self?.stopRecordWalk()
             }
             .store(in: &cancellables)
+    }
+
+    private func updateRecordButton() {
+        trackingButton.setTitle(isStarted ? "중지" : "시작", for: .normal)
+        trackingButton.backgroundColor = isStarted ? SNMColor.warningRed : SNMColor.mainNavy
     }
 }
 
@@ -225,34 +232,29 @@ extension TrackWalkViewController: TrackWalkViewable {
         distanceValueLabel.text = record.distance.description
         numberOfStepsValueLabel.text = record.stepCount.description
     }
+
+    func showRouteResult(with mapImageData: Data?) async throws {
+        mapView.isHidden = true
+        trackingButton.isHidden = true
+        if let mapImageData {
+            routeMapImageView.image = UIImage(data: mapImageData)
+        }
+        routeMapImageView.isHidden = false
+        try await Task.sleep(nanoseconds: 3_000_000_000)
+    }
 }
 
 private extension TrackWalkViewController {
-    func showRouteResult(with mapImage: UIImage) {
-        mapView.isHidden = true
-        routeMapImageView.image = mapImage
-        routeMapImageView.isHidden = false
-    }
-    
-    func stopRecordWalk() async {
+    func stopRecordWalk() {
         isStarted = false
         trackingButton.isEnabled = false
-        guard let mapImage = screenshot(at: mapView) else {
-            presenter?.endTracking()
-            return
-        }
-        showRouteResult(with: mapImage)
-        do {
-            try await Task.sleep(nanoseconds: 3000000000)
-        } catch {
-            SNMLogger.error("TrackWalkViewController: \(error.localizedDescription)")
-        }
-        presenter?.endTracking()
+        let mapImageData = screenshot(at: mapView)
+        presenter?.endTracking(snapshotImageData: mapImageData)
     }
     
-    func screenshot(at view: UIView) -> UIImage? {
+    func screenshot(at view: UIView) -> Data? {
         let renderer = UIGraphicsImageRenderer(size: view.bounds.size)
-        return renderer.image { context in
+        return renderer.pngData { imageData in
             view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
         }
     }

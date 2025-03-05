@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WalkLog {
+struct WalkLog: Codable, Equatable {
     let step: Int
     let distance: Double
     let startDate: Date

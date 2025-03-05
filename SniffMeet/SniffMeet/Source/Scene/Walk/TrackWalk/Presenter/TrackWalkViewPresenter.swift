@@ -12,7 +12,7 @@ protocol TrackWalkPresentable: AnyObject {
     var router: (any TrackWalkRoutable)? { get set }
 
     func startTracking()
-    func endTracking()
+    func endTracking(snapshotImageData: Data?)
 }
 protocol TrackWalkInteractorOutput: AnyObject {
     func updateWalkRecord(_ record: WalkRecord)
@@ -23,13 +23,50 @@ final class TrackWalkViewPresenter: TrackWalkPresentable {
     weak var view: (any TrackWalkViewable)?
     var interactor: (any TrackWalkInteractable)?
     var router: (any TrackWalkRoutable)?
+    private var endTrackingErrorHandler: SNMErrorHandler
+
+    init(
+        view: (any TrackWalkViewable)? = nil,
+        interactor: (any TrackWalkInteractable)? = nil,
+        router: (any TrackWalkRoutable)? = nil,
+        endTrackingErrorHandler: SNMErrorHandler = SNMErrorHandler()
+    ) {
+        self.view = view
+        self.interactor = interactor
+        self.router = router
+        self.endTrackingErrorHandler = endTrackingErrorHandler
+        configureErrorHandlers()
+    }
 
     func startTracking() {
         interactor?.startTracking()
     }
-    func endTracking() {
-        // TODO: -  인터랙터에 저장 요청하는 로직
-        
+    func endTracking(snapshotImageData: Data?) {
+        Task { @MainActor [weak self] in
+            guard let walkLog = self?.interactor?.stopTracking(
+                snapshotImageData: snapshotImageData
+            ) else { return }
+
+            do {
+                try self?.interactor?.saveWalkLog(walkLog: walkLog)
+                try await self?.view?.showRouteResult(with: snapshotImageData)
+                guard let view = self?.view else { return }
+                self?.router?.pop(from: view)
+            } catch {
+                self?.endTrackingErrorHandler.handle(error: error)
+            }
+        }
+    }
+    private func configureErrorHandlers() {
+        endTrackingErrorHandler.configure { [weak self] level in
+            switch level {
+            case .notifyUser:
+                guard let view = self?.view else { break }
+                self?.router?.presentFailedToSaveTrackingAlert(from: view)
+            default:
+                break
+            }
+        }
     }
 }
 

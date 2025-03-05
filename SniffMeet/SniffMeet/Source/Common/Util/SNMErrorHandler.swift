@@ -49,7 +49,8 @@ struct SNMErrorHandler: ErrorHandler {
     }
     /// SNMError가 아닌 에러는 자동으로 logOnly로 매핑합니다. 에러가 발생한 Context를 기록합니다.
     func handle(error: any Error, file: String = #file, function: String = #function) {
-        let snmError = SNMError(level: .logOnly, error: error, file: file, function: function)
+        let snmError = error is SNMError ? error :
+        SNMError(level: .logOnly, error: error, file: file, function: function)
         self.handle(snmError)
     }
 

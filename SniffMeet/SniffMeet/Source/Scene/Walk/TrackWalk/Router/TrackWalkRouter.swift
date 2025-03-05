@@ -11,14 +11,29 @@ protocol TrackWalkRoutable: AnyObject, Routable {
     var presenter: (any TrackWalkPresentable)? { get set }
     
     func pop(from view: TrackWalkViewable)
+    func presentFailedToSaveTrackingAlert(from view: any TrackWalkViewable)
 }
 
 final class TrackWalkRouter: TrackWalkRoutable {
     weak var presenter: (any TrackWalkPresentable)?
     
-    func pop(from view: TrackWalkViewable) {
+    func pop(from view: any TrackWalkViewable) {
+        guard let view = view as? UIViewController else { return }
         Task { @MainActor in
-            pop(from: view as! UIViewController, animated: true)
+            pop(from: view, animated: true)
+        }
+    }
+    func presentFailedToSaveTrackingAlert(from view: any TrackWalkViewable) {
+        guard let view = view as? UIViewController else { return }
+        let failedAlertViewController = UIAlertController(
+            title: "산책 기록 저장 실패",
+            message: "산책 기록을 저장하는데 실패했습니다. 다시 시도해주세요.",
+            preferredStyle: .alert
+        )
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        failedAlertViewController.addAction(confirmAction)
+        Task { @MainActor [weak self] in
+            self?.present(from: view, with: failedAlertViewController, animated: true)
         }
     }
 }
@@ -38,7 +53,9 @@ extension TrackWalkRouter: TrackWalkModuleBuildable {
         let interactor: TrackWalkInteractable = TrackWalkInteractor(
             updateTimeUseCase: updateTimeUseCase,
             updateUserStepUseCase: updateUserStepUseCase,
-            updateUserLocationUseCase: updateUserLocationUseCase)
+            updateUserLocationUseCase: updateUserLocationUseCase,
+            saveWalkLogUsecase: SaveWalkLogUseCaseImpl(fileManager: SNMFileManager(fileType: .data))
+        )
         let router: TrackWalkRoutable & TrackWalkModuleBuildable = TrackWalkRouter()
         
         view.presenter = presenter

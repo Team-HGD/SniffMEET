@@ -62,6 +62,7 @@ final class ProfileDropRouter: ProfileDropRoutable {
         let transitionDelegate = ProfileDropTransitionDelegate()
         requestMateViewController.modalPresentationStyle = .fullScreen
         requestMateViewController.transitioningDelegate = transitionDelegate
+        HapticManager.instance.playHaptic(type: .shortsHaptic)
         present(from: profileDropView, with: requestMateViewController, animated: true)
     }
     func showHelpView(profileDropView: any ProfileDropViewable) {

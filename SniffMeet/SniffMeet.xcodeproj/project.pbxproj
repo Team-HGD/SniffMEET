@@ -299,6 +299,8 @@
 		99525EBB2D6563E800B6E17E /* UpdateTimeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525EB92D6563E000B6E17E /* UpdateTimeUseCase.swift */; };
 		99525EBD2D65694F00B6E17E /* UpdateUserStepUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525EBC2D65692700B6E17E /* UpdateUserStepUseCase.swift */; };
 		99525EBE2D65694F00B6E17E /* UpdateUserStepUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525EBC2D65692700B6E17E /* UpdateUserStepUseCase.swift */; };
+		99525F472D7867AC00B6E17E /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F462D7867A700B6E17E /* HapticManager.swift */; };
+		99525F482D7867AC00B6E17E /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F462D7867A700B6E17E /* HapticManager.swift */; };
 		995D94262CE32ECE005A47BF /* Extension + Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995D94252CE32EC1005A47BF /* Extension + Keyboard.swift */; };
 		995D94622CE598FD005A47BF /* NIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995D94612CE598F0005A47BF /* NIManager.swift */; };
 		995D94A82CECEF91005A47BF /* RequestMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995D94A72CECEF91005A47BF /* RequestMateViewController.swift */; };
@@ -683,6 +685,7 @@
 		993736412CFCACA800E3DD58 /* UpdateUserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoUseCase.swift; sourceTree = "<group>"; };
 		99525EB92D6563E000B6E17E /* UpdateTimeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTimeUseCase.swift; sourceTree = "<group>"; };
 		99525EBC2D65692700B6E17E /* UpdateUserStepUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserStepUseCase.swift; sourceTree = "<group>"; };
+		99525F462D7867A700B6E17E /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		995D94252CE32EC1005A47BF /* Extension + Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Keyboard.swift"; sourceTree = "<group>"; };
 		995D94612CE598F0005A47BF /* NIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIManager.swift; sourceTree = "<group>"; };
 		995D94A72CECEF91005A47BF /* RequestMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMateViewController.swift; sourceTree = "<group>"; };
@@ -1217,7 +1220,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		32081C042D618D0000D19235 /* AddMate */ = {
+		32081C042D618D0000D19235 /* ProfileDrop */ = {
 			isa = PBXGroup;
 			children = (
 				32081BFC2D618D0000D19235 /* Interactor */,
@@ -1225,7 +1228,7 @@
 				32081C002D618D0000D19235 /* Router */,
 				32081C032D618D0000D19235 /* View */,
 			);
-			path = AddMate;
+			path = ProfileDrop;
 			sourceTree = "<group>";
 		};
 		32BD48322D3FECAE0078DA9C /* SNMSceneTests */ = {
@@ -1736,7 +1739,7 @@
 		FDA4913E2CDA05F900A36FB0 /* Mate */ = {
 			isa = PBXGroup;
 			children = (
-				32081C042D618D0000D19235 /* AddMate */,
+				32081C042D618D0000D19235 /* ProfileDrop */,
 				FDA491552CDA69AB00A36FB0 /* MateList */,
 				FDA491622CDA7A8D00A36FB0 /* RequestMate */,
 				FDA491562CDA6ABC00A36FB0 /* ReportMate */,
@@ -2223,6 +2226,7 @@
 		FDE768872CF7811400B5DE88 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				99525F462D7867A700B6E17E /* HapticManager.swift */,
 				99E7A0622D5DB74600E48552 /* Extension + GIFImageView.swift */,
 				99E79FA12D55627100E48552 /* Extension + UITextViewDelegate.swift */,
 				FD01D8F92D40ACAB00AD4940 /* Extension + Array.swift */,
@@ -2713,6 +2717,7 @@
 				32BD48C22D3FF02C0078DA9C /* RequestWalkRouter.swift in Sources */,
 				32BD48C32D3FF02C0078DA9C /* SelectLocationRouter.swift in Sources */,
 				32BD48C42D3FF02C0078DA9C /* WalkLogCell.swift in Sources */,
+				99525F482D7867AC00B6E17E /* HapticManager.swift in Sources */,
 				32BD48C52D3FF02C0078DA9C /* WalkLogListViewController.swift in Sources */,
 				32BD48C62D3FF02C0078DA9C /* WalkLogPageViewController.swift in Sources */,
 				A2FE77282D521FB200239F05 /* SupabaseSessionManager.swift in Sources */,
@@ -2830,6 +2835,7 @@
 				99525EBE2D65694F00B6E17E /* UpdateUserStepUseCase.swift in Sources */,
 				FD331A8F2CF33F6700F39426 /* SupabaseStorageManager.swift in Sources */,
 				FD3A03422CD8CF460047B7ED /* AppDelegate.swift in Sources */,
+				99525F472D7867AC00B6E17E /* HapticManager.swift in Sources */,
 				995D94A82CECEF91005A47BF /* RequestMateViewController.swift in Sources */,
 				A2FE77292D521FB200239F05 /* SupabaseSessionManager.swift in Sources */,
 				A2BA1B962CF2606B0080575A /* MateListInteractor.swift in Sources */,

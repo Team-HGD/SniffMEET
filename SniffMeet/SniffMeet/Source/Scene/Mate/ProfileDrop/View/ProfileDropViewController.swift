@@ -53,6 +53,9 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
     private var peerSelectionButton = PrimaryButton(title: Context.peerSelection)
 
     private var manualButtonExpanded: NSLayoutConstraint!
+    private var autoProfileButtonConstraint: NSLayoutConstraint!
+    private var manualProfileButtonConstraint: NSLayoutConstraint!
+
     private var helpLabel: UILabel = {
         let label = UILabel()
         label.text = Context.help
@@ -114,6 +117,12 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
             constant: LayoutConstant.horizontalPadding
         )
         manualButtonExpanded.isActive = false
+        autoProfileDropButton.setContentHuggingPriority(
+            .init(rawValue: Context.smallHugging),
+            for: .horizontal)
+        manualProfileDropButton.setContentHuggingPriority(
+            .init(rawValue: Context.hugging),
+            for: .horizontal)
 
         NSLayoutConstraint.activate([
             contentLabel.topAnchor.constraint(
@@ -154,15 +163,23 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
             helpLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
+
+    private func setButtonConstraint() {
+        autoProfileButtonConstraint = autoProfileDropButton.trailingAnchor.constraint(
+            equalTo: manualProfileDropButton.leadingAnchor,
+            constant: -LayoutConstant.horizontalPadding)
+        manualProfileButtonConstraint = manualProfileDropButton.leadingAnchor.constraint(
+            equalTo: autoProfileDropButton.trailingAnchor,
+            constant: LayoutConstant.horizontalPadding)
+    }
+
     override func bind() {
         autoProfileDropButton.publisher(event: .touchUpInside)
-            .throttle(for: .seconds(EventConstant.throttleInterval),
-                      scheduler: RunLoop.main,
-                      latest: false)
+            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else { return }
                 let connectionState = self.connectionStateLabel.isHidden
-                self.updateUI(for: connectionState)
+                self.updateUI(for: connectionState, with: true)
                 if connectionState {
                     self.presenter?.startNearByProfileDrop()
                 } else {
@@ -171,14 +188,11 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
             }
             .store(in: &cancellables)
         manualProfileDropButton.publisher(event: .touchUpInside)
-            .throttle(for: .seconds(EventConstant.throttleInterval),
-                      scheduler: RunLoop.main,
-                      latest: false)
+            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else { return }
                 let connectionState = self.connectionStateLabel.isHidden
-                self.updateUI(for: connectionState)
-                peerSelectionButton.isHidden = false
+                self.updateUI(for: connectionState, with: false)
                 if connectionState {
                     self.presenter?.startTargetedProfileDrop()
                 } else {
@@ -188,9 +202,7 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
             .store(in: &cancellables)
         
         peerSelectionButton.publisher(event: .touchUpInside)
-            .throttle(for: .seconds(EventConstant.throttleInterval),
-                      scheduler: RunLoop.main,
-                      latest: false)
+            .debounce(for: .seconds(EventConstant.debounceInterval), scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 guard let self else { return }
                 presenter?.showBrowserView()
@@ -203,11 +215,18 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
             }
             .store(in: &cancellables)
     }
-    private func updateUI(for state: Bool) {
+    private func updateUI(for state: Bool, with isAuto: Bool) {
         connectionStateLabel.isHidden = !state
         contentLabel.isHidden = state
         descriptionLabel.isHidden = state
         contentImageView.isHidden = state
+        if isAuto {
+            setAutoProfileDropButtonState(for: state)
+        } else {
+            setManualProfileDropButtonState(for: state)
+        }
+    }
+    private func setAutoProfileDropButtonState(for state: Bool) {
         autoProfileDropButton.configuration?.background.backgroundColor = state ? SNMColor.mainBrown : SNMColor.mainNavy
         autoProfileDropButton.configuration?.attributedTitle = AttributedString(
             state ? Context.cancelConnect : Context.autoConnect,
@@ -215,6 +234,39 @@ final class ProfileDropViewController: BaseViewController, ProfileDropViewable {
                 [.font: UIFont.systemFont(ofSize: 16.0, weight: .bold)]
             )
         )
+        if state {
+            autoProfileButtonConstraint = autoProfileDropButton.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -LayoutConstant.horizontalPadding
+            )
+            autoProfileButtonConstraint.isActive = true
+        } else {
+            autoProfileButtonConstraint.isActive = false
+            setButtonConstraint()
+        }
+        manualProfileDropButton.isHidden = state
+    }
+    private func setManualProfileDropButtonState(for state: Bool) {
+        manualProfileDropButton.configuration?.background.backgroundColor = state ? SNMColor.mainBrown : SNMColor.mainNavy
+        manualProfileDropButton.configuration?.attributedTitle = AttributedString(
+            state ? Context.cancelConnect : Context.manualConnect,
+            attributes: AttributeContainer(
+                [.font: UIFont.systemFont(ofSize: 16.0, weight: .bold)]
+            )
+        )
+        if state {
+            manualProfileButtonConstraint = manualProfileDropButton.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: LayoutConstant.horizontalPadding
+            )
+            manualProfileButtonConstraint.isActive = true
+        } else {
+            manualProfileButtonConstraint.isActive = false
+            setButtonConstraint()
+        }
+
+        peerSelectionButton.isHidden = !state
+        autoProfileDropButton.isHidden = state
     }
     func changeState(to connectionState: ConnectionState) {
         connectionStateLabel.text = connectionState.description
@@ -265,6 +317,8 @@ private extension ProfileDropViewController {
         static let placeholderImg: String = "ImagePlaceholder"
         static let spacing: Int = 100
         static let spacing2: Int = 200
+        static let hugging: Float = 251
+        static let smallHugging: Float = 249
         static let minimumDuration: UInt64 = 500000000
         static let cannotFindPeerAlert = NotificationAlert(
             title: "주변 메이트를 찾지 못했어요.",

@@ -25,11 +25,7 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
     var profilePublisher: PassthroughSubject<DogDTO?, Never> = PassthroughSubject()
     var isConnected: PassthroughSubject<ConnectionState, Never> = PassthroughSubject()
     private var timeLimitCancellable: AnyCancellable? = nil
-    private var sendProfileCancellable: AnyCancellable? = nil {
-        willSet {
-            print("sendProfileCancellable: \(newValue)")
-        }
-    }
+    private var sendProfileCancellable: AnyCancellable? = nil 
     var transmissionFlag: Set<String>
     var isTransitioned: Bool = false
     var triedBefore: Bool = false

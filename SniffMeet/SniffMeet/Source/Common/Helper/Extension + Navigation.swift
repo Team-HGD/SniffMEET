@@ -7,7 +7,6 @@
 import UIKit
 
 extension UINavigationItem {
-    
     func setupConfiguration(title: String) {
         self.title = title
         
@@ -30,5 +29,19 @@ extension UINavigationBar {
     func configureBackButton(color: UIColor, title: String ) {
         tintColor = color
         topItem?.title = title
+    }
+}
+
+extension UINavigationController {
+    func popViewController(animated: Bool, completion: @escaping () -> Void) {
+        popViewController(animated: animated)
+        
+        if animated, let coordinator = transitionCoordinator {
+            coordinator.animate(alongsideTransition: nil) { _ in
+                completion()
+            }
+        } else {
+            completion()
+        }
     }
 }

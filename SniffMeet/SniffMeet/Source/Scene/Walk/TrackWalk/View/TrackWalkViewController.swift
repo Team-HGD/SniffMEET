@@ -57,6 +57,7 @@ final class TrackWalkViewController: BaseViewController {
         super.viewWillAppear(animated)
         trackingButton.layoutIfNeeded()
         trackingButton.makeViewCircular()
+        navigationItem.largeTitleDisplayMode = .never
     }
 
     override func viewWillDisappear(_ animated: Bool) {

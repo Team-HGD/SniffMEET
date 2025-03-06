@@ -22,8 +22,17 @@ final class WalkLogListViewController: BaseViewController, WalkLogListViewable {
         super.viewDidLoad()
         presenter?.viewDidLoad()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureAttributes()
+        presenter?.viewWillAppear()
+        walkLogTableView.reloadData()
+    }
 
     override func configureAttributes() {
+        navigationItem.title = "Logs"
+        navigationController?.navigationBar.prefersLargeTitles = true
+
         walkLogTableView.dataSource = self
         walkLogTableView.delegate = self
         walkLogTableView.separatorInset = .zero

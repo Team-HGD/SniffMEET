@@ -24,8 +24,8 @@ protocol TargetedProfileDropUseCase {
 final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase {
     var profilePublisher: PassthroughSubject<DogDTO?, Never> = PassthroughSubject()
     var isConnected: PassthroughSubject<ConnectionState, Never> = PassthroughSubject()
-    private var cancellable: AnyCancellable? = nil
-
+    private var timeLimitCancellable: AnyCancellable? = nil
+    private var sendProfileCancellable: AnyCancellable? = nil 
     var transmissionFlag: Set<String>
     var isTransitioned: Bool = false
     var triedBefore: Bool = false
@@ -75,15 +75,16 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
     }
     
     func execute()  {
+        timeLimitCancellable?.cancel()
         triedBefore = true
         mpcManager.isAvailableToBeConnected.send(true)
         
-        cancellable = Timer.publish(every: Context.connectionTimeLimit, on: .current, in: .common)
+        timeLimitCancellable = Timer.publish(every: Context.connectionTimeLimit, on: .current, in: .common)
             .autoconnect()
             .sink { _ in
                 Task { [weak self] in
                     self?.isConnected.send(.cannotFindPeer)
-                    self?.cancellable?.cancel()
+                    self?.timeLimitCancellable?.cancel()
                 }
             }
     }
@@ -118,6 +119,43 @@ final class TargetedProfileDropUseCaseImpl: NSObject, TargetedProfileDropUseCase
     func mcBrowserViewController() -> MCBrowserViewController {
         mpcManager.serviceBrowser
     }
+    func bindTimer() {
+        timeLimitCancellable?.cancel()
+        
+        sendProfileCancellable = Timer.publish(every: Context.minimumDuration, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                Task { [weak self] in
+                    // connectedPeer가 없거나 수신플래그를 받으면 타이머 종료
+                    self?.checkProfileDropEnd()
+                    guard let profileData = self?.profileData else { return }
+                    await self?.mpcManager.send(data: profileData)
+                }
+            }
+        timeLimitCancellable = Timer.publish(every: Context.connectionTimeLimit, on: .main, in: .common).autoconnect()
+            .sink { _ in
+                Task { [weak self] in
+                    // connectedPeer가 없거나 수신플래그를 받으면 타이머 종료
+                    self?.isConnected.send(.failure)
+                    self?.timeLimitCancellable?.cancel()
+                }
+            }
+    }
+    func checkProfileDropEnd() {
+        Task { [weak self] in
+            guard await self?.mpcManager.connectedPeerManager.connectedPeer != nil &&
+                    self?.transmissionFlag.contains(Context.peerReceived) != true else {
+                self?.sendProfileCancellable?.cancel()
+                return
+            }
+        }
+        if transmissionFlag.contains(Context.peerReceived) == true
+            && isTransitioned == true {
+            mpcManager.isAvailableToBeConnected.send(false)
+            isConnected.send(.finished)
+            mpcManager.session.disconnect()
+        }
+    }
 }
 // MARK: - MCSessionDelegate
 extension TargetedProfileDropUseCaseImpl: MCSessionDelegate {
@@ -131,25 +169,19 @@ extension TargetedProfileDropUseCaseImpl: MCSessionDelegate {
                 SNMLogger.log("successfully connected to MPCSession: \(session.connectedPeers) session \(session)")
                 await self?.mpcManager.connectedPeerManager.connect(peer: peerID)
                 self?.isConnected.send(.successMPCSession)
+                
+                guard let profileData = self?.profileData else { return }
+                await self?.mpcManager.send(data: profileData)
             }
-            cancellable?.cancel()
-            cancellable = Timer.publish(every: Context.profileSendDuration, on: .current, in: .common)
-                .autoconnect()
-                .sink { _ in
-                    Task { [weak self] in
-                        // connectedPeer가 없거나 수신플래그를 받으면 타이머 종료
-                        guard await self?.mpcManager.connectedPeerManager.connectedPeer != nil
-                                && self?.transmissionFlag.contains(Context.peerReceived) != true else { self?.cancellable?.cancel(); return }
-                        
-                        guard let profileData = self?.profileData else { return }
-                        await self?.mpcManager.send(data: profileData)
-                    }
-                }
+            bindTimer()
         case .connecting:
             isConnected.send(.connecting)
         case .notConnected:
-            cancellable?.cancel()
+            sendProfileCancellable?.cancel()
             isConnected.send(.failure)
+            Task { [weak self] in
+                await self?.mpcManager.connectedPeerManager.disconnect()
+            }
         default:
             break
         }
@@ -173,12 +205,8 @@ extension TargetedProfileDropUseCaseImpl: MCSessionDelegate {
             } catch {
                 SNMLogger.error("Failed to decode received data: \(error)")
             }
-            if self?.transmissionFlag.contains(Context.peerReceived) == true
-                && self?.isTransitioned == true {
-                self?.mpcManager.isAvailableToBeConnected.send(false)
-                session.disconnect()
-            }
         }
+        checkProfileDropEnd()
     }
 
     func session(
@@ -212,7 +240,7 @@ extension TargetedProfileDropUseCaseImpl {
     private enum Context {
         static let received: String = "received"
         static let peerReceived: String = "나 받았어"
-        static let profileSendDuration: Double = 2.0
+        static let minimumDuration: Double = 1.0
         static let connectionTimeLimit: Double = 30.0
     }
 }

@@ -15,6 +15,7 @@ protocol WalkLogListPresentable: AnyObject {
     var output: (any WalkLogListPresenterOutput) { get }
 
     func viewDidLoad()
+    func viewWillAppear()
     func didTapAddWalkLogButton()
 }
 
@@ -41,6 +42,16 @@ final class WalkLogListPresenter: WalkLogListPresentable {
     }
 
     func viewDidLoad() {
+        requestWalkLogList()
+    }
+    func viewWillAppear() {
+        requestWalkLogList()
+    }
+    func didTapAddWalkLogButton() {
+        guard let view else { return }
+        router?.showTrackWalkView(view: view)
+    }
+    private func requestWalkLogList() {
         do {
             let (name, profileImageData) = try interactor?.fetchUserInfo() ?? ("", nil)
             output.name = name
@@ -50,10 +61,6 @@ final class WalkLogListPresenter: WalkLogListPresentable {
         } catch {
             SNMLogger.log(error.localizedDescription)
         }
-    }
-    func didTapAddWalkLogButton() {
-        guard let view else { return }
-        router?.showTrackWalkView(view: view)
     }
 }
 

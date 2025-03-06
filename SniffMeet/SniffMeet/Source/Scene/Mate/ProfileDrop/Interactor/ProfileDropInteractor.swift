@@ -67,6 +67,9 @@ final class ProfileDropInteractor: ProfileDropInteractable {
             $0.receive(on: RunLoop.main)
             .sink {[weak self] (state) in
                 self?.handleConnectionState(state: state)
+                Task { @MainActor [weak self] in
+                    self?.presenter?.closeBrowserView()
+                }
             }
             .store(in: &cancellables)
         }

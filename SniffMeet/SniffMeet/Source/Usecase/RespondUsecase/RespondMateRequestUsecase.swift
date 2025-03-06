@@ -44,12 +44,12 @@ struct RespondMateRequestUsecaseImpl: RespondMateRequestUsecase {
             mateList.append(mateId)
             mateList = Array(Set(mateList))
             let mateListData = try encoder.encode(MateListDTO(mates: mateList))
-            try await remoteDBManager.insertData()
+            try await remoteDBManager.updateData()
                 .setTable(Environment.SupabaseTableName.matelist)
                 .setData(mateListData)
                 .setQuery(.equal("id", userID))
                 .request()
-            
+        
             try localDataManager.storeData(data:mateList, key: Environment.UserDefaultsKey.mateList)
         } catch {
             SNMLogger.error("AcceptMateRequestUsecaseError: \(error.localizedDescription)")

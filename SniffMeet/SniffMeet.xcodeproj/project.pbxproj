@@ -283,6 +283,8 @@
 		32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539612D64165A00CD89DF /* TrackWalkRouter.swift */; };
 		32C539652D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
 		32C539662D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
+		32C53A0B2D78624400CD89DF /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C53A0A2D78624400CD89DF /* AlertContent.swift */; };
+		32C53A0C2D78624400CD89DF /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C53A0A2D78624400CD89DF /* AlertContent.swift */; };
 		9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */; };
 		9937361D2CF80D6600E3DD58 /* RequestUserInfoRemoteUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUsecase.swift */; };
 		993736422CFCACB100E3DD58 /* UpdateUserInfoUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993736412CFCACA800E3DD58 /* UpdateUserInfoUsecase.swift */; };
@@ -290,6 +292,8 @@
 		99525EBB2D6563E800B6E17E /* UpdateTimeUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525EB92D6563E000B6E17E /* UpdateTimeUsecase.swift */; };
 		99525EBD2D65694F00B6E17E /* UpdateUserStepUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525EBC2D65692700B6E17E /* UpdateUserStepUsecase.swift */; };
 		99525EBE2D65694F00B6E17E /* UpdateUserStepUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525EBC2D65692700B6E17E /* UpdateUserStepUsecase.swift */; };
+		99525F472D7867AC00B6E17E /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F462D7867A700B6E17E /* HapticManager.swift */; };
+		99525F482D7867AC00B6E17E /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F462D7867A700B6E17E /* HapticManager.swift */; };
 		995D94262CE32ECE005A47BF /* Extension + Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995D94252CE32EC1005A47BF /* Extension + Keyboard.swift */; };
 		995D94622CE598FD005A47BF /* NIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995D94612CE598F0005A47BF /* NIManager.swift */; };
 		995D94A82CECEF91005A47BF /* RequestMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995D94A72CECEF91005A47BF /* RequestMateViewController.swift */; };
@@ -343,8 +347,6 @@
 		A220400B2CF6B89800D1E8CB /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */; };
 		A22179702D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A221796F2D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift */; };
 		A22179712D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A221796F2D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift */; };
-		A22179832D7707CE00309CA2 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A22179812D7707CE00309CA2 /* Debug.xcconfig */; };
-		A22179842D7707CE00309CA2 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A22179822D7707CE00309CA2 /* Release.xcconfig */; };
 		A23A3B732CF4683F00A58705 /* Mate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23A3B722CF4683F00A58705 /* Mate.swift */; };
 		A24082612CEB244C009109A0 /* SupabaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082602CEB244C009109A0 /* SupabaseConfig.swift */; };
 		A24082642CEB2470009109A0 /* SupabaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */; };
@@ -386,6 +388,12 @@
 		A2C328922CE3BEA000D255AB /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C328912CE3BEA000D255AB /* AppRouter.swift */; };
 		A2C844D12CDBE1E5007F2970 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A2C844D72CDBEF8B007F2970 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A2CF8D1C2D79B71F00FAB817 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1B2D79B71F00FAB817 /* Release.xcconfig */; };
+		A2CF8D1D2D79B71F00FAB817 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */; };
+		A2CF8D1E2D79B71F00FAB817 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1B2D79B71F00FAB817 /* Release.xcconfig */; };
+		A2CF8D1F2D79B71F00FAB817 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */; };
+		A2CF8D202D79B71F00FAB817 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1B2D79B71F00FAB817 /* Release.xcconfig */; };
+		A2CF8D212D79B71F00FAB817 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */; };
 		A2F825D12CDF4BA6000C5419 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F825D02CDF4BA6000C5419 /* HomeViewController.swift */; };
 		A2F825DD2CDFBEB4000C5419 /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F825DC2CDFBEB4000C5419 /* ProfileCardView.swift */; };
 		A2FE77232D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77222D5211C700239F05 /* SupabaseSessionRequest.swift */; };
@@ -671,11 +679,13 @@
 		32C5395E2D64165900CD89DF /* TrackWalkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkInteractor.swift; sourceTree = "<group>"; };
 		32C539612D64165A00CD89DF /* TrackWalkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkRouter.swift; sourceTree = "<group>"; };
 		32C539642D65CB2300CD89DF /* WalkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkRoute.swift; sourceTree = "<group>"; };
+		32C53A0A2D78624400CD89DF /* AlertContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContent.swift; sourceTree = "<group>"; };
 		9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPage.swift; sourceTree = "<group>"; };
 		9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserInfoRemoteUsecase.swift; sourceTree = "<group>"; };
 		993736412CFCACA800E3DD58 /* UpdateUserInfoUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserInfoUsecase.swift; sourceTree = "<group>"; };
 		99525EB92D6563E000B6E17E /* UpdateTimeUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTimeUsecase.swift; sourceTree = "<group>"; };
 		99525EBC2D65692700B6E17E /* UpdateUserStepUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserStepUsecase.swift; sourceTree = "<group>"; };
+		99525F462D7867A700B6E17E /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		995D94252CE32EC1005A47BF /* Extension + Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Keyboard.swift"; sourceTree = "<group>"; };
 		995D94612CE598F0005A47BF /* NIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIManager.swift; sourceTree = "<group>"; };
 		995D94A72CECEF91005A47BF /* RequestMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMateViewController.swift; sourceTree = "<group>"; };
@@ -706,8 +716,6 @@
 		A21435F62CE20D2500564A4D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		A221796F2D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserProfileImageUsecase.swift; sourceTree = "<group>"; };
-		A22179812D7707CE00309CA2 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		A22179822D7707CE00309CA2 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		A23A3B722CF4683F00A58705 /* Mate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mate.swift; sourceTree = "<group>"; };
 		A24082602CEB244C009109A0 /* SupabaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseConfig.swift; sourceTree = "<group>"; };
 		A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAuthManager.swift; sourceTree = "<group>"; };
@@ -744,6 +752,8 @@
 		A2C328852CE245AC00D255AB /* TabBarModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModuleBuilder.swift; sourceTree = "<group>"; };
 		A2C328872CE2481900D255AB /* HomeModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModuleBuilder.swift; sourceTree = "<group>"; };
 		A2C328912CE3BEA000D255AB /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		A2CF8D1B2D79B71F00FAB817 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		A2F825D02CDF4BA6000C5419 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A2F825DC2CDFBEB4000C5419 /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
 		A2FE77222D5211C700239F05 /* SupabaseSessionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSessionRequest.swift; sourceTree = "<group>"; };
@@ -970,6 +980,7 @@
 				320044522CE59A8100D08B6D /* ProfileInfo.swift */,
 				32C539642D65CB2300CD89DF /* WalkRoute.swift */,
 				A2BD49F92CF770F900AC72A7 /* DogTraits */,
+				32C53A0A2D78624400CD89DF /* AlertContent.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1212,7 +1223,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		32081C042D618D0000D19235 /* AddMate */ = {
+		32081C042D618D0000D19235 /* ProfileDrop */ = {
 			isa = PBXGroup;
 			children = (
 				32081BFC2D618D0000D19235 /* Interactor */,
@@ -1220,7 +1231,7 @@
 				32081C002D618D0000D19235 /* Router */,
 				32081C032D618D0000D19235 /* View */,
 			);
-			path = AddMate;
+			path = ProfileDrop;
 			sourceTree = "<group>";
 		};
 		32BD48322D3FECAE0078DA9C /* SNMSceneTests */ = {
@@ -1570,6 +1581,8 @@
 		FD3A03172CD8CDE50047B7ED = {
 			isa = PBXGroup;
 			children = (
+				A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */,
+				A2CF8D1B2D79B71F00FAB817 /* Release.xcconfig */,
 				FD011EF12D3520240071327A /* TestPlan */,
 				FD3A033E2CD8CF460047B7ED /* SniffMeet */,
 				FD69B1C62CE3BCED009D71DC /* SNMPersistenceTests */,
@@ -1578,8 +1591,6 @@
 				32BD48322D3FECAE0078DA9C /* SNMSceneTests */,
 				A24B1F352D3C338B0012B860 /* SNMUtilityTests */,
 				FD3A03212CD8CDE50047B7ED /* Products */,
-				A22179812D7707CE00309CA2 /* Debug.xcconfig */,
-				A22179822D7707CE00309CA2 /* Release.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1774,7 +1785,7 @@
 		FDA4913E2CDA05F900A36FB0 /* Mate */ = {
 			isa = PBXGroup;
 			children = (
-				32081C042D618D0000D19235 /* AddMate */,
+				32081C042D618D0000D19235 /* ProfileDrop */,
 				FDA491552CDA69AB00A36FB0 /* MateList */,
 				FDA491622CDA7A8D00A36FB0 /* RequestMate */,
 				FDA491562CDA6ABC00A36FB0 /* ReportMate */,
@@ -2259,6 +2270,7 @@
 		FDE768872CF7811400B5DE88 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				99525F462D7867A700B6E17E /* HapticManager.swift */,
 				99E7A0622D5DB74600E48552 /* Extension + GIFImageView.swift */,
 				99E79FA12D55627100E48552 /* Extension + UITextViewDelegate.swift */,
 				FD01D8F92D40ACAB00AD4940 /* Extension + Array.swift */,
@@ -2497,6 +2509,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2CF8D1E2D79B71F00FAB817 /* Release.xcconfig in Resources */,
+				A2CF8D1F2D79B71F00FAB817 /* Debug.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2518,8 +2532,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A22179832D7707CE00309CA2 /* Debug.xcconfig in Resources */,
-				A22179842D7707CE00309CA2 /* Release.xcconfig in Resources */,
+				A2CF8D1C2D79B71F00FAB817 /* Release.xcconfig in Resources */,
+				A2CF8D1D2D79B71F00FAB817 /* Debug.xcconfig in Resources */,
 				A288A63D2CDC595000D11C34 /* (null) in Resources */,
 				99A5A1B32CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
 				FD3A033F2CD8CF460047B7ED /* Assets.xcassets in Resources */,
@@ -2532,6 +2546,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3200453B2CF442D500D08B6D /* Assets.xcassets in Resources */,
+				A2CF8D202D79B71F00FAB817 /* Release.xcconfig in Resources */,
+				A2CF8D212D79B71F00FAB817 /* Debug.xcconfig in Resources */,
 				99A5A1B42CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2697,6 +2713,7 @@
 				32BD489A2D3FF02C0078DA9C /* ProfileSetPresenter.swift in Sources */,
 				32BD489B2D3FF02C0078DA9C /* ProfileCreateRouter.swift in Sources */,
 				32BD489C2D3FF02C0078DA9C /* ProfileSetRouter.swift in Sources */,
+				32C53A0B2D78624400CD89DF /* AlertContent.swift in Sources */,
 				FD259F342D6F10D1007B182D /* WalkLogUsecaseTests.swift in Sources */,
 				32BD489D2D3FF02C0078DA9C /* ProfileEditInteractor.swift in Sources */,
 				32BD489E2D3FF02C0078DA9C /* ProfileEditPresenter.swift in Sources */,
@@ -2745,6 +2762,7 @@
 				32BD48C22D3FF02C0078DA9C /* RequestWalkRouter.swift in Sources */,
 				32BD48C32D3FF02C0078DA9C /* SelectLocationRouter.swift in Sources */,
 				32BD48C42D3FF02C0078DA9C /* WalkLogCell.swift in Sources */,
+				99525F482D7867AC00B6E17E /* HapticManager.swift in Sources */,
 				32BD48C52D3FF02C0078DA9C /* WalkLogListViewController.swift in Sources */,
 				32BD48C62D3FF02C0078DA9C /* WalkLogPageViewController.swift in Sources */,
 				A2FE77282D521FB200239F05 /* SupabaseSessionManager.swift in Sources */,
@@ -2862,6 +2880,7 @@
 				99525EBE2D65694F00B6E17E /* UpdateUserStepUsecase.swift in Sources */,
 				FD331A8F2CF33F6700F39426 /* SupabaseStorageManager.swift in Sources */,
 				FD3A03422CD8CF460047B7ED /* AppDelegate.swift in Sources */,
+				99525F472D7867AC00B6E17E /* HapticManager.swift in Sources */,
 				995D94A82CECEF91005A47BF /* RequestMateViewController.swift in Sources */,
 				A2FE77292D521FB200239F05 /* SupabaseSessionManager.swift in Sources */,
 				A2BA1B962CF2606B0080575A /* MateListInteractor.swift in Sources */,
@@ -3012,6 +3031,7 @@
 				A2AFC9492D016BFF0062B34E /* SNMToast.swift in Sources */,
 				320047B92CFD367300D08B6D /* PushNotificationConfig.swift in Sources */,
 				FDBFA99F2CE1E50C00AA9220 /* SNMFont.swift in Sources */,
+				32C53A0C2D78624400CD89DF /* AlertContent.swift in Sources */,
 				FD119F4E2CED87C200BE22BD /* SelectLocationPresenter.swift in Sources */,
 				32C539562D64161100CD89DF /* TrackWalkViewController.swift in Sources */,
 				FD259F462D6FD2E8007B182D /* WalkLogListInteractor.swift in Sources */,
@@ -3411,7 +3431,7 @@
 		};
 		FD3A03362CD8CDE60047B7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A22179812D7707CE00309CA2 /* Debug.xcconfig */;
+			baseConfigurationReference = A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3475,7 +3495,7 @@
 		};
 		FD3A03372CD8CDE60047B7ED /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A22179822D7707CE00309CA2 /* Release.xcconfig */;
+			baseConfigurationReference = A2CF8D1B2D79B71F00FAB817 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -3521,6 +3541,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -3640,7 +3661,7 @@
 				32BD482F2D3FEC9D0078DA9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		A24B1F2D2D3C32960012B860 /* Build configuration list for PBXNativeTarget "SNMUtilityTests" */ = {
 			isa = XCConfigurationList;
@@ -3649,7 +3670,7 @@
 				A24B1F2C2D3C32960012B860 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD331A6B2CF33C6700F39426 /* Build configuration list for PBXNativeTarget "SupabaseTests" */ = {
 			isa = XCConfigurationList;
@@ -3658,7 +3679,7 @@
 				FD331A6D2CF33C6700F39426 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD3A031B2CD8CDE50047B7ED /* Build configuration list for PBXProject "SniffMeet" */ = {
 			isa = XCConfigurationList;
@@ -3667,7 +3688,7 @@
 				FD3A03372CD8CDE60047B7ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD3A03332CD8CDE60047B7ED /* Build configuration list for PBXNativeTarget "SniffMeet" */ = {
 			isa = XCConfigurationList;
@@ -3676,7 +3697,7 @@
 				FD3A03352CD8CDE60047B7ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FD69B1C02CE3BCDC009D71DC /* Build configuration list for PBXNativeTarget "SNMPersistenceTests" */ = {
 			isa = XCConfigurationList;
@@ -3685,7 +3706,7 @@
 				FD69B1C22CE3BCDC009D71DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		FDCD02C42CE9172600B627D8 /* Build configuration list for PBXNativeTarget "SNMNetworkTests" */ = {
 			isa = XCConfigurationList;
@@ -3694,7 +3715,7 @@
 				FDCD02C32CE9172600B627D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

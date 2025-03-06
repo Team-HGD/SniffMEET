@@ -10,7 +10,9 @@ import UIKit
 protocol ProfileDropRoutable: AnyObject, Routable {
     var presenter: (any ProfileDropPresentable)? { get set }
     func presentMCBrowserView (from profileDropView: any ProfileDropViewable, to mcBrowserView: AnyObject)
+    func dismissMCBrowserView (view: AnyObject)
     func dismissView(view: any ProfileDropViewable)
+    func dismissView(view: any ProfileDropViewable, with alert: NotificationAlert)
     func showMateRequestView(profileDropView: any ProfileDropViewable, data: DogDTO)
     func showHelpView(profileDropView: any ProfileDropViewable)
 }
@@ -29,20 +31,38 @@ final class ProfileDropRouter: ProfileDropRoutable {
         present(from: profileDropView, with: mcBrowserViewController, animated: true)
     }
     
+    func dismissMCBrowserView (view: AnyObject) {
+        guard let mcBrowserViewController = view as? UIViewController
+        else { return }
+        dismiss(from: mcBrowserViewController, animated: true)
+    }
+    
     func dismissView(view: any ProfileDropViewable) {
         if let view = view as? UIViewController {
             Task { @MainActor in
-                dismiss(from: view, animated: true)
+                pop(from: view, animated: true)
             }
         }
     }
-
+    func dismissView(view: any ProfileDropViewable, with alert: NotificationAlert) {
+        guard  let view = view as? UIViewController else { return }
+        
+        Task { @MainActor in
+            view.navigationController?.popViewController(animated: true, completion: {
+                NotificationCenter.default.post(
+                    name: Environment.NotificationCenterName.sessionExpired,
+                    object: alert
+                )
+            })
+        }
+    }
     func showMateRequestView(profileDropView: any ProfileDropViewable, data: DogDTO) {
         guard let profileDropView = profileDropView as? UIViewController else { return }
         let requestMateViewController = RequestMateRouter.createRequestMateModule(profile: data)
         let transitionDelegate = ProfileDropTransitionDelegate()
         requestMateViewController.modalPresentationStyle = .fullScreen
         requestMateViewController.transitioningDelegate = transitionDelegate
+        HapticManager.instance.playHaptic(type: .shortsHaptic)
         present(from: profileDropView, with: requestMateViewController, animated: true)
     }
     func showHelpView(profileDropView: any ProfileDropViewable) {

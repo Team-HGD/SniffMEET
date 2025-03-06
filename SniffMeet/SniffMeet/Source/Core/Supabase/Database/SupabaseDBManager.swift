@@ -19,12 +19,12 @@ protocol RemoteDBManageable {
 final class SupabaseDBManager: RemoteDBManageable {
     private let sessionManager: any SessionManageable
     private let networkProvider: any NetworkProvider
-    private let decoder: JSONDecoder
+    private let jsonDecoder: JSONDecoder
     
     private init() {
         self.sessionManager = SupabaseSessionManager.shared
         self.networkProvider = SNMNetworkProvider()
-        self.decoder = JSONDecoder()
+        self.jsonDecoder = JSONDecoder()
     }
     
     func fetchData() async throws -> RemoteDBRequestBuildable {

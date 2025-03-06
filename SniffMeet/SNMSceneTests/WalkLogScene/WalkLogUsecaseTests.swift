@@ -9,8 +9,8 @@ import XCTest
 
 final class WalkLogUsecaseTests: XCTestCase {
     private var fileManager: SNMFileManager!
-    private var saveWalkLogUsecase: (any SaveWalkLogUseCase)!
-    private var requestWalkLogListUsecase: (any RequestWalkLogListUseCase)!
+    private var saveWalkLogUsecase: (any SaveWalkLogUsecase)!
+    private var requestWalkLogListUsecase: (any RequestWalkLogListUsecase)!
     private var testWalkLogs: [WalkLog] = [
         WalkLog(
             step: 100,
@@ -37,11 +37,11 @@ final class WalkLogUsecaseTests: XCTestCase {
 
     override func setUp() {
         fileManager = SNMFileManager(fileType: .data)
-        saveWalkLogUsecase = SaveWalkLogUseCaseImpl(
+        saveWalkLogUsecase = SaveWalkLogUsecaseImpl(
             jsonEncoder: JSONEncoder(),
             fileManager: fileManager
         )
-        requestWalkLogListUsecase = RequestWalkLogListUseCaseImpl(fileManager: fileManager)
+        requestWalkLogListUsecase = RequestWalkLogListUsecaseImpl(fileManager: fileManager)
     }
 
     override func tearDown() {

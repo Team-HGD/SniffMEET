@@ -25,12 +25,12 @@ final class ProfileEditRouter: ProfileEditRoutable {
 
 extension ProfileEditRouter: ProfileEditBuildable {
     static func createProfileEditModule(userInfo: ProfileInfo) -> UIViewController {
-        let updateUserInfoUseCase: UpdateUserInfoUseCase = UpdateUserInfoUseCaseImpl(
+        let updateUserInfoUsecase: UpdateUserInfoUsecase = UpdateUserInfoUsecaseImpl(
             localDataManager: UserDefaultsManager.shared,
             remoteDBManager: SupabaseDBManager.shared,
             sessionManager: SupabaseSessionManager.shared
         )
-        let saveProfileImageUseCase: SaveProfileImageUseCase = SaveProfileImageUseCaseImpl(
+        let saveProfileImageUsecase: SaveProfileImageUsecase = SaveProfileImageUsecaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: SNMNetworkProvider(),
                 sessionManager: SupabaseSessionManager.shared
@@ -42,10 +42,10 @@ extension ProfileEditRouter: ProfileEditBuildable {
         let view: ProfileEditViewable & UIViewController = ProfileEditViewController()
         let router: ProfileEditRoutable & ProfileEditBuildable = ProfileEditRouter()
         let interactor: ProfileEditInteractable = ProfileEditInteractor(
-            updateUserInfoUseCase: updateUserInfoUseCase,
-            saveProfileImageUseCase: saveProfileImageUseCase,
-            loadUserInfoUseCase: LoadUserInfoUseCaseImpl(dataLoadable: LocalDataManager()),
-            loadUserProfileImageUseCase: LoadUserProfileImageImpl(
+            updateUserInfoUsecase: updateUserInfoUsecase,
+            saveProfileImageUsecase: saveProfileImageUsecase,
+            loadUserInfoUsecase: LoadUserInfoUsecaseImpl(dataLoadable: LocalDataManager()),
+            loadUserProfileImageUsecase: LoadUserProfileImageImpl(
                 imageManageable: SNMFileManager(fileType: .image)
             )
         )

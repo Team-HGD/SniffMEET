@@ -16,15 +16,15 @@ protocol WalkLogListInteractable: AnyObject {
 
 final class WalkLogListInteractor: WalkLogListInteractable {
     weak var presenter: (any WalkLogListPresentable)?
-    private let loadUserInfoUsecase: any LoadUserInfoUseCase
-    private let loadUserProfileImageUsecase: any LoadUserProfileImageUseCase
-    private let requestWalkLogListUsecase: any RequestWalkLogListUseCase
+    private let loadUserInfoUsecase: any LoadUserInfoUsecase
+    private let loadUserProfileImageUsecase: any LoadUserProfileImageUsecase
+    private let requestWalkLogListUsecase: any RequestWalkLogListUsecase
 
     init(
         presenter: (any WalkLogListPresentable)? = nil,
-        loadUserInfoUsecase: any LoadUserInfoUseCase,
-        loadUserProfileImageUsecase: any LoadUserProfileImageUseCase,
-        requestWalkLogListUsecase: any RequestWalkLogListUseCase
+        loadUserInfoUsecase: any LoadUserInfoUsecase,
+        loadUserProfileImageUsecase: any LoadUserProfileImageUsecase,
+        requestWalkLogListUsecase: any RequestWalkLogListUsecase
     ) {
         self.presenter = presenter
         self.loadUserInfoUsecase = loadUserInfoUsecase

@@ -17,31 +17,31 @@ protocol RequestWalkInteractable: AnyObject {
 final class RequestWalkInteractor: RequestWalkInteractable {
     private(set) var mate: Mate
     weak var presenter: RequestWalkInteractorOutput?
-    private let requestWalkUseCase: any RequestWalkUseCase
-    // private let requestMateInfoUseCase: any RequestMateInfoUseCase
-    private let requestProfileImageUseCase: any RequestProfileImageUseCase
-    private let loadUserInfoUseCase: any LoadUserInfoUseCase
+    private let requestWalkUsecase: any RequestWalkUsecase
+    // private let requestMateInfoUsecase: any RequestMateInfoUsecase
+    private let requestProfileImageUsecase: any RequestProfileImageUsecase
+    private let loadUserInfoUsecase: any LoadUserInfoUsecase
     
     init(
         mate: Mate,
         presenter: RequestWalkInteractorOutput? = nil,
-        requestWalkUseCase: any RequestWalkUseCase,
-        // requestMateInfoUseCase: any RequestMateInfoUseCase,
-        requestProfileImageUseCase: any RequestProfileImageUseCase,
-        loadUserInfoUseCase: any LoadUserInfoUseCase
+        requestWalkUsecase: any RequestWalkUsecase,
+        // requestMateInfoUsecase: any RequestMateInfoUsecase,
+        requestProfileImageUsecase: any RequestProfileImageUsecase,
+        loadUserInfoUsecase: any LoadUserInfoUsecase
     ) {
         self.mate = mate
         self.presenter = presenter
-        self.requestWalkUseCase = requestWalkUseCase
-        // self.requestMateInfoUseCase = requestMateInfoUseCase
-        self.requestProfileImageUseCase = requestProfileImageUseCase
-        self.loadUserInfoUseCase = loadUserInfoUseCase
+        self.requestWalkUsecase = requestWalkUsecase
+        // self.requestMateInfoUsecase = requestMateInfoUsecase
+        self.requestProfileImageUsecase = requestProfileImageUsecase
+        self.loadUserInfoUsecase = loadUserInfoUsecase
     }
     
     func sendWalkRequest(message: String, latitude: Double, longtitude: Double, location: String) {
         Task {
             do {
-                let myInfo = try loadUserInfoUseCase.execute()
+                let myInfo = try loadUserInfoUsecase.execute()
                 let id = try SupabaseSessionManager.shared.userID.get()
                 let walkNoti = WalkNotiDTO(
                     id: UUID(),
@@ -54,7 +54,7 @@ final class RequestWalkInteractor: RequestWalkInteractable {
                     senderName: myInfo.name,
                     category: .walkRequest
                 )
-                try await requestWalkUseCase.execute(walkNoti: walkNoti)
+                try await requestWalkUsecase.execute(walkNoti: walkNoti)
             } catch {
                 // TODO: 이 부분은 Mapper를 통해 정리할 수 있을 것 같습니다.
                 SNMLogger.error("RequestWalkInteractor: \(error.localizedDescription)")
@@ -70,7 +70,7 @@ final class RequestWalkInteractor: RequestWalkInteractable {
     func requestProfileImage(imageName: String?) {
         Task { @MainActor in
             let fileName = mate.profileImageURLString ?? ""
-            let imageData = await requestProfileImageUseCase.execute(fileName: fileName)
+            let imageData = await requestProfileImageUsecase.execute(fileName: fileName)
             presenter?.didFetchProfileImage(imageData: imageData)
         }
     }

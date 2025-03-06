@@ -9,8 +9,8 @@ import Foundation
 
 protocol ProfileEditInteractable: AnyObject {
     var presenter: (any ProfileEditInteractorOutput)? { get set }
-    var updateUserInfoUseCase: any UpdateUserInfoUseCase { get set }
-    var saveProfileImageUseCase: any SaveProfileImageUseCase { get set }
+    var updateUserInfoUsecase: any UpdateUserInfoUsecase { get set }
+    var saveProfileImageUsecase: any SaveProfileImageUsecase { get set }
     
     func requestProfile() -> (ProfileInfo, Data?)
     func editUserInfo(
@@ -24,29 +24,29 @@ protocol ProfileEditInteractable: AnyObject {
 
 final class ProfileEditInteractor: ProfileEditInteractable {
     weak var presenter: (any ProfileEditInteractorOutput)?
-    var updateUserInfoUseCase: any UpdateUserInfoUseCase
-    var saveProfileImageUseCase: any SaveProfileImageUseCase
-    private let loadUserInfoUseCase: any LoadUserInfoUseCase
-    private let loadUserProfileImageUseCase: any LoadUserProfileImageUseCase
+    var updateUserInfoUsecase: any UpdateUserInfoUsecase
+    var saveProfileImageUsecase: any SaveProfileImageUsecase
+    private let loadUserInfoUsecase: any LoadUserInfoUsecase
+    private let loadUserProfileImageUsecase: any LoadUserProfileImageUsecase
     
     init(
         presenter: (any ProfileEditInteractorOutput)? = nil,
-        updateUserInfoUseCase: any UpdateUserInfoUseCase,
-        saveProfileImageUseCase: any SaveProfileImageUseCase,
-        loadUserInfoUseCase: any LoadUserInfoUseCase,
-        loadUserProfileImageUseCase: any LoadUserProfileImageUseCase
+        updateUserInfoUsecase: any UpdateUserInfoUsecase,
+        saveProfileImageUsecase: any SaveProfileImageUsecase,
+        loadUserInfoUsecase: any LoadUserInfoUsecase,
+        loadUserProfileImageUsecase: any LoadUserProfileImageUsecase
     ) {
         self.presenter = presenter
-        self.updateUserInfoUseCase = updateUserInfoUseCase
-        self.saveProfileImageUseCase = saveProfileImageUseCase
-        self.loadUserInfoUseCase = loadUserInfoUseCase
-        self.loadUserProfileImageUseCase = loadUserProfileImageUseCase
+        self.updateUserInfoUsecase = updateUserInfoUsecase
+        self.saveProfileImageUsecase = saveProfileImageUsecase
+        self.loadUserInfoUsecase = loadUserInfoUsecase
+        self.loadUserProfileImageUsecase = loadUserProfileImageUsecase
     }
     
     func requestProfile() -> (ProfileInfo, Data?) {
         do {
-            let profileInfo = try loadUserInfoUseCase.execute()
-            let profileImage = try loadUserProfileImageUseCase.execute()
+            let profileInfo = try loadUserInfoUsecase.execute()
+            let profileImage = try loadUserProfileImageUsecase.execute()
             return (profileInfo, profileImage)
         } catch {
             // FIXME: 에러 핸들링 필요
@@ -80,7 +80,7 @@ final class ProfileEditInteractor: ProfileEditInteractable {
         }
     }
     private func saveProfile(imageData: Data) async throws {
-        let _ = try await saveProfileImageUseCase.execute(imageData: imageData)
+        let _ = try await saveProfileImageUsecase.execute(imageData: imageData)
     }
     private func updateUserInfo(
         name: String,
@@ -89,7 +89,7 @@ final class ProfileEditInteractor: ProfileEditInteractable {
         keywords: [String]
     ) async throws {
         do {
-            try await updateUserInfoUseCase.execute(
+            try await updateUserInfoUsecase.execute(
                 with: [
                     "name": name,
                     "age": age,

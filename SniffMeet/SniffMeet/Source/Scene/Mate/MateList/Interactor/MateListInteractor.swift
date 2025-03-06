@@ -18,25 +18,25 @@ protocol MateListInteractable: AnyObject {
 
 final class MateListInteractor: MateListInteractable {
     weak var presenter: (any MateListInteractorOutput)?
-    private let requestMateListUseCase: any RequestMateListUseCase
-    private let requestProfileImageUseCase: any RequestProfileImageUseCase
-    private var deleteMateUseCase: any DeleteMateUseCase
+    private let requestMateListUsecase: any RequestMateListUsecase
+    private let requestProfileImageUsecase: any RequestProfileImageUsecase
+    private var deleteMateUsecase: any DeleteMateUsecase
     private var cancellables: Set<AnyCancellable> = []
     
     init(
         presenter: (any MateListInteractorOutput)? = nil,
-        requestMateListUseCase: any RequestMateListUseCase,
-        requestProfileImageUseCase: any RequestProfileImageUseCase,
-        deleteMateUseCase: any DeleteMateUseCase
+        requestMateListUsecase: any RequestMateListUsecase,
+        requestProfileImageUsecase: any RequestProfileImageUsecase,
+        deleteMateUsecase: any DeleteMateUsecase
     ) {
         self.presenter = presenter
-        self.requestMateListUseCase = requestMateListUseCase
-        self.requestProfileImageUseCase = requestProfileImageUseCase
-        self.deleteMateUseCase = deleteMateUseCase
+        self.requestMateListUsecase = requestMateListUsecase
+        self.requestProfileImageUsecase = requestProfileImageUsecase
+        self.deleteMateUsecase = deleteMateUsecase
     }
 
     func requestMateList(page: Int, pageSize: Int) async throws -> [Mate] {
-        let mateList = try await requestMateListUseCase.execute(
+        let mateList = try await requestMateListUsecase.execute(
             page: page,
             pageSize: pageSize
         )
@@ -50,7 +50,7 @@ final class MateListInteractor: MateListInteractable {
             for mate in mates {
                 guard let profileImageURLString = mate.profileImageURLString else { continue }
                 group.addTask {
-                    let imageData = await self?.requestProfileImageUseCase.execute(
+                    let imageData = await self?.requestProfileImageUsecase.execute(
                         fileName: "thumbnail_\(profileImageURLString)"
                     )
                     return (mate.userID, imageData)
@@ -65,7 +65,7 @@ final class MateListInteractor: MateListInteractable {
     }
 
     func deleteMate(mate: Mate) async throws {
-        try await deleteMateUseCase.execute(mate: mate)
+        try await deleteMateUsecase.execute(mate: mate)
         presenter?.didDeleteMate(mate)
     }
     

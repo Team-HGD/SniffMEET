@@ -31,7 +31,7 @@ final class ProfileSetRouter: ProfileSetRoutable {
 extension ProfileSetRouter: ProfileSetBuildable {
     static func createProfileSetModule() -> UIViewController {
         let networkProvider = SNMNetworkProvider()
-        let saveProfileImageUseCase: any SaveProfileImageUseCase = SaveProfileImageUseCaseImpl(
+        let saveProfileImageUsecase: any SaveProfileImageUsecase = SaveProfileImageUsecaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: networkProvider,
                 sessionManager: SupabaseSessionManager.shared
@@ -40,10 +40,10 @@ extension ProfileSetRouter: ProfileSetBuildable {
             localDataManager: UserDefaultsManager.shared,
             imageSampler: ImageSampler()
         )
-        let checkNicknameUseCase: any CheckNicknameUseCase = CheckNicknameUseCaseImpl(
+        let checkNicknameUsecase: any CheckNicknameUsecase = CheckNicknameUsecaseImpl(
             remoteDBManager: SupabaseDBManager.shared
         )
-        let updateUserInfoUseCase: any UpdateUserInfoUseCase = UpdateUserInfoUseCaseImpl(
+        let updateUserInfoUsecase: any UpdateUserInfoUsecase = UpdateUserInfoUsecaseImpl(
             localDataManager: UserDefaultsManager.shared,
             remoteDBManager: SupabaseDBManager.shared,
             sessionManager: SupabaseSessionManager.shared
@@ -52,9 +52,9 @@ extension ProfileSetRouter: ProfileSetBuildable {
         let view: any ProfileSetViewable & UIViewController = ProfileSetViewController()
         let presenter: any ProfileSetPresentable & DogInfoInteractorOutput = ProfileSetPresenter()
         let interactor: any ProfileSetInteractable = ProfileSetInteractor(
-            saveProfileImageUseCase: saveProfileImageUseCase,
-            updateUserInfoUseCase: updateUserInfoUseCase,
-            checkNicknameUseCase: checkNicknameUseCase
+            saveProfileImageUsecase: saveProfileImageUsecase,
+            updateUserInfoUsecase: updateUserInfoUsecase,
+            checkNicknameUsecase: checkNicknameUsecase
         )
         let router: any ProfileSetRoutable & ProfileSetBuildable = ProfileSetRouter()
         

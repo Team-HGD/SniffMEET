@@ -16,27 +16,27 @@ protocol ProfileSetInteractable: AnyObject {
 
 final class ProfileSetInteractor: ProfileSetInteractable {
     weak var presenter: (any DogInfoInteractorOutput)?
-    private let saveProfileImageUseCase: any SaveProfileImageUseCase
-    private let updateUserInfoUseCase: any UpdateUserInfoUseCase
-    private let checkNicknameUseCase: any CheckNicknameUseCase
+    private let saveProfileImageUsecase: any SaveProfileImageUsecase
+    private let updateUserInfoUsecase: any UpdateUserInfoUsecase
+    private let checkNicknameUsecase: any CheckNicknameUsecase
     
     init(
         presenter: (any DogInfoInteractorOutput)? = nil,
-        saveProfileImageUseCase: any SaveProfileImageUseCase,
-        updateUserInfoUseCase: any UpdateUserInfoUseCase,
-        checkNicknameUseCase: any CheckNicknameUseCase
+        saveProfileImageUsecase: any SaveProfileImageUsecase,
+        updateUserInfoUsecase: any UpdateUserInfoUsecase,
+        checkNicknameUsecase: any CheckNicknameUsecase
     ) {
         self.presenter = presenter
-        self.saveProfileImageUseCase = saveProfileImageUseCase
-        self.updateUserInfoUseCase = updateUserInfoUseCase
-        self.checkNicknameUseCase = checkNicknameUseCase
+        self.saveProfileImageUsecase = saveProfileImageUsecase
+        self.updateUserInfoUsecase = updateUserInfoUsecase
+        self.checkNicknameUsecase = checkNicknameUsecase
     }
     
     func saveProfile(imageData: Data?, withNickname nickname: String) {
         guard let imageData else { return }
         Task {
-            let profileImageName = try await saveProfileImageUseCase.execute(imageData: imageData)
-            try await updateUserInfoUseCase.execute(
+            let profileImageName = try await saveProfileImageUsecase.execute(imageData: imageData)
+            try await updateUserInfoUsecase.execute(
                 with: ["nickname": nickname, "profile_image_url": profileImageName]
             )
         }
@@ -44,7 +44,7 @@ final class ProfileSetInteractor: ProfileSetInteractable {
     
     func isNicknameTaken(_ nickname: String) {
         Task {
-            let isDuplicated = try await checkNicknameUseCase.execute(
+            let isDuplicated = try await checkNicknameUsecase.execute(
                 nickname: nickname
             )
             presenter?.notifyNicknameDuplication(isDuplicated)

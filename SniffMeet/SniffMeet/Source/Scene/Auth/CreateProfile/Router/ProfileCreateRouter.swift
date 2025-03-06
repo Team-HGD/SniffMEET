@@ -35,13 +35,12 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
         let presenter: any ProfileCreatePresentable & ProfileCreateInteractorOutput = ProfileCreatePresenter()
         let router: any ProfileCreateRoutable & ProfileCreateBuildable = ProfileCreateRouter()
         let interactor: any ProfileCreateInteractable = ProfileCreateInteractor(
-            saveUserInfoUseCase: SaveUserInfoUseCaseImpl(
+            saveUserInfoUsecase: SaveUserInfoUsecaseImpl(
                 localDataManager: UserDefaultsManager.shared,
                 remoteDBManager: SupabaseDBManager.shared,
-                sessionManager: SupabaseSessionManager.shared,
-                encoder: JSONEncoder()
+                sessionManager: SupabaseSessionManager.shared
             ),
-            saveProfileImageUseCase: SaveProfileImageUseCaseImpl(
+            saveProfileImageUsecase: SaveProfileImageUsecaseImpl(
                 remoteImageManager: SupabaseStorageManager(
                     networkProvider: networkProvider,
                     sessionManager: SupabaseSessionManager.shared
@@ -50,11 +49,10 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
                 localDataManager: UserDefaultsManager.shared,
                 imageSampler: ImageSampler()
             ),
-            signInUseCase: SignInUseCaseImpl(
+            signInUsecase: SignInUsecaseImpl(
                 authManager: SupabaseAuthManager(
                     networkProvider: networkProvider,
-                    sessionManager: SupabaseSessionManager.shared,
-                    decoder: JSONDecoder()
+                    sessionManager: SupabaseSessionManager.shared
                 )
             )
         )

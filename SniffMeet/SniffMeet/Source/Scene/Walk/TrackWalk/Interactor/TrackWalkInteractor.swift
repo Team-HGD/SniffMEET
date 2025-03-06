@@ -18,10 +18,10 @@ protocol TrackWalkInteractable: AnyObject {
 
 final class TrackWalkInteractor: TrackWalkInteractable {
     weak var presenter: (any TrackWalkInteractorOutput)?
-    private let updateTimeUseCase: any UpdateTimeUseCase
-    private let updateUserStepUseCase: any UpdateUserStepUseCase
-    private let updateUserLocationUseCase: any UpdateUserLocationUseCase
-    private let saveWalkLogUsecase: any SaveWalkLogUseCase
+    private let updateTimeUsecase: any UpdateTimeUsecase
+    private let updateUserStepUsecase: any UpdateUserStepUsecase
+    private let updateUserLocationUsecase: any UpdateUserLocationUsecase
+    private let saveWalkLogUsecase: any SaveWalkLogUsecase
 
     private var startDate: Date?
     private var endDate: Date?
@@ -33,29 +33,29 @@ final class TrackWalkInteractor: TrackWalkInteractable {
     private var cancellables = Set<AnyCancellable>()
 
     init(
-        updateTimeUseCase: any UpdateTimeUseCase,
-        updateUserStepUseCase: any UpdateUserStepUseCase,
-        updateUserLocationUseCase: any UpdateUserLocationUseCase,
-        saveWalkLogUsecase: any SaveWalkLogUseCase
+        updateTimeUsecase: any UpdateTimeUsecase,
+        updateUserStepUsecase: any UpdateUserStepUsecase,
+        updateUserLocationUsecase: any UpdateUserLocationUsecase,
+        saveWalkLogUsecase: any SaveWalkLogUsecase
     ){
-        self.updateTimeUseCase = updateTimeUseCase
-        self.updateUserStepUseCase = updateUserStepUseCase
-        self.updateUserLocationUseCase = updateUserLocationUseCase
+        self.updateTimeUsecase = updateTimeUsecase
+        self.updateUserStepUsecase = updateUserStepUsecase
+        self.updateUserLocationUsecase = updateUserLocationUsecase
         self.saveWalkLogUsecase = saveWalkLogUsecase
     }
 
     func startTracking() {
         startDate = Date()
 
-        updateTimeUseCase.execute()
-        updateUserStepUseCase.execute()
-        updateUserLocationUseCase.execute()
+        updateTimeUsecase.execute()
+        updateUserStepUsecase.execute()
+        updateUserLocationUsecase.execute()
 
         binding()
     }
 
     private func binding() {
-        updateTimeUseCase.elapsedTimePublisher
+        updateTimeUsecase.elapsedTimePublisher
             .sink { [weak self] elapsedTime in
                 guard let self = self else { return }
                 self.time = elapsedTime
@@ -63,14 +63,14 @@ final class TrackWalkInteractor: TrackWalkInteractable {
                 SNMLogger.log("경과 시간: \(self.time) seconds")
             }
             .store(in: &cancellables)
-        updateUserStepUseCase.stepCountPublisher
+        updateUserStepUsecase.stepCountPublisher
             .sink { [weak self] step in
                 guard let self = self else { return }
                 self.stepCount = step
                 SNMLogger.log("걸음 수: \(self.stepCount) steps")
             }
             .store(in: &cancellables)
-        updateUserLocationUseCase.locationPublisher
+        updateUserLocationUsecase.locationPublisher
             .sink { [weak self] location in
                 guard let self = self else { return }
                 self.calculateDistance(location)
@@ -103,9 +103,9 @@ final class TrackWalkInteractor: TrackWalkInteractable {
 
     func stopTracking(snapshotImageData: Data?) -> WalkLog? {
         endDate = Date()
-        updateTimeUseCase.cancel()
-        updateUserStepUseCase.cancel()
-        updateUserLocationUseCase.cancel()
+        updateTimeUsecase.cancel()
+        updateUserStepUsecase.cancel()
+        updateUserLocationUsecase.cancel()
 
         guard let startDate = startDate, let endDate = endDate else { return nil }
 

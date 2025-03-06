@@ -17,9 +17,9 @@ struct WalkNotiListInsertDTO: Encodable {
 
 /// 노티 리스트를 요청할 때, body에 보내야하는 DTO
 struct WalkNotiListRequestDTO: Encodable {
-    let userId: UUID
+    let userID: UUID
     
     enum CodingKeys: String, CodingKey {
-        case userId = "p_id"
+        case userID = "p_id"
     }
 }

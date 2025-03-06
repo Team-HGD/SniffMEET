@@ -18,7 +18,7 @@ protocol SessionManageable {
 
 final class SupabaseSessionManager: SessionManageable {
     private let networkProvider: SNMNetworkProvider
-    private let decoder: JSONDecoder
+    private let jsonDecoder: JSONDecoder
     private var session: SupabaseSession?
     var userID: Result<UUID, SupabaseSessionError> {
         guard let userID = session?.user?.userID else {
@@ -35,7 +35,7 @@ final class SupabaseSessionManager: SessionManageable {
     
     private init() {
         networkProvider = SNMNetworkProvider()
-        decoder = JSONDecoder()
+        jsonDecoder = JSONDecoder()
     }
     
     func restoreSession() async throws {
@@ -83,7 +83,7 @@ final class SupabaseSessionManager: SessionManageable {
             let response = try await networkProvider.request(
                 with: SupabaseSessionRequest.refreshToken(refreshToken: refreshToken)
             )
-            let sessionResponse = try decoder.decode(
+            let sessionResponse = try jsonDecoder.decode(
                 SupabaseSessionResponse.self,
                 from: response.data
             )

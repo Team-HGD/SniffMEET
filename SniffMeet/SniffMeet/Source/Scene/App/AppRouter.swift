@@ -42,7 +42,7 @@ final class AppRouter: NSObject, Routable {
     }
     func displayProfileSetupView() {
         let navigationController = UINavigationController(
-            rootViewController: ProfileInputRouter.createProfileInputModule()
+            rootViewController: ProfileCreateRouter.createProfileCreateModule()
         )
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

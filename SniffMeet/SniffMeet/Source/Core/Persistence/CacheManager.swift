@@ -14,8 +14,8 @@ protocol ImageCacheable {
 }
 
 actor DiskCacheManager {
-    private let encoder = JSONEncoder()
-    private let decoder = JSONDecoder()
+    private let jsonEncoder = JSONEncoder()
+    private let jsonDecoder = JSONDecoder()
     private var fileUsageHistory: OrderedSet<String> = []
     private let cacheLimit: Int = 50
     private let cacheDirectoryPath: URL
@@ -30,7 +30,7 @@ actor DiskCacheManager {
     }
 
     func saveToDisk(urlString: String, cacheableImage: CacheableImage) async throws {
-        let data = try encoder.encode(cacheableImage)
+        let data = try jsonEncoder.encode(cacheableImage)
 
         if !FileManager.default.fileExists(atPath: cacheDirectoryPath.path) {
             try FileManager
@@ -51,7 +51,7 @@ actor DiskCacheManager {
 
         let data = try Data(contentsOf: filePath)
         await updateDiskUsageOrder(urlString: urlString)
-        return try decoder.decode(CacheableImage.self, from: data)
+        return try jsonDecoder.decode(CacheableImage.self, from: data)
     }
 
     private func updateDiskUsageOrder(urlString: String) async {

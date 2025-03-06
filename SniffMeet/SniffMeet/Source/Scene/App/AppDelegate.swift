@@ -12,7 +12,7 @@ import UIKit
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
-    private let convertToWalkAPS: any ConvertToWalkAPSUseCase = ConvertToWalkAPSUseCaseImpl()
+    private let convertToWalkAPS: any ConvertToWalkAPSUsecase = ConvertToWalkAPSUsecaseImpl()
     private var isFirstLaunch: Bool = true
     
     func application(
@@ -30,11 +30,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
-        let registerDeviceTokenUseCase = RegisterDeviceTokenUseCaseImpl(
+        let registerDeviceTokenUsecase = RegisterDeviceTokenUsecaseImpl(
             keychainManager: KeychainManager.shared
         )
         do {
-            try registerDeviceTokenUseCase.execute(deviceToken: deviceToken)
+            try registerDeviceTokenUsecase.execute(deviceToken: deviceToken)
         } catch {
             SNMLogger.error("device token register \(error.localizedDescription)")
         }

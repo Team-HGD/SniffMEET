@@ -16,7 +16,7 @@ protocol HomePresentable: AnyObject {
 
     func viewDidLoad()
     func notificationBarButtonDidTap()
-    func didTapEditButton(userInfo: UserInfo)
+    func didTapEditButton(userInfo: ProfileInfo)
     func didTapRequestWalkButton()
 }
 
@@ -31,7 +31,8 @@ final class HomePresenter: HomePresentable {
         router: (any HomeRoutable)? = nil,
         interactor: (any HomeInteractable)? = nil,
         output: HomePresenterOutput = DefaultHomePresenterOutput(
-            dogInfo: CurrentValueSubject<UserInfo, Never>(UserInfo.example)
+            profileInfo: CurrentValueSubject<ProfileInfo, Never>(ProfileInfo.example),
+            profileImage: CurrentValueSubject<Data?, Never>(nil)
         )
     ) {
         self.view = view
@@ -43,13 +44,14 @@ final class HomePresenter: HomePresentable {
     func viewDidLoad() {
         interactor?.saveDeviceToken()
         do {
-            if let dog = try interactor?.loadInfo() {
-                output.dogInfo.send(dog)
+            if let (info, imageData) = try interactor?.loadInfo() {
+                output.profileInfo.send(info)
+                output.profileImage.send(imageData)
             }
         } catch {
             SNMLogger.error("이미지 실패?: \(error.localizedDescription)")
-            let placeHolderInfo: UserInfo = UserInfo.example
-            output.dogInfo.send(placeHolderInfo)
+            let placeHolderInfo: ProfileInfo = ProfileInfo.example
+            output.profileInfo.send(placeHolderInfo)
         }
     }
 
@@ -58,7 +60,7 @@ final class HomePresenter: HomePresentable {
         router?.showNotificationView(homeView: view)
     }
 
-    func didTapEditButton(userInfo: UserInfo) {
+    func didTapEditButton(userInfo: ProfileInfo) {
         guard let view else { return }
         router?.showProfileEditView(homeView: view, userInfo: userInfo)
     }
@@ -72,9 +74,11 @@ final class HomePresenter: HomePresentable {
 // MARK: - HomePresenterOutput
 
 protocol HomePresenterOutput {
-    var dogInfo: CurrentValueSubject<UserInfo, Never> { get }
+    var profileInfo: CurrentValueSubject<ProfileInfo, Never> { get }
+    var profileImage: CurrentValueSubject<Data?, Never> { get }
 }
 
 struct DefaultHomePresenterOutput: HomePresenterOutput {
-    var dogInfo: CurrentValueSubject<UserInfo, Never>
+    var profileInfo: CurrentValueSubject<ProfileInfo, Never>
+    var profileImage: CurrentValueSubject<Data?, Never>
 }

@@ -27,11 +27,13 @@ extension WalkLogListRouter: WalkLogListModuleBuildable {
         let view = WalkLogListViewController()
         let presenter = WalkLogListPresenter()
         let interactor = WalkLogListInteractor(
-            loadUserInfoUsecase: LoadUserInfoUseCaseImpl(
-                dataLoadable: LocalDataManager(),
+            loadUserInfoUsecase: LoadUserInfoUsecaseImpl(
+                dataLoadable: LocalDataManager()
+            ),
+            loadUserProfileImageUsecase: LoadUserProfileImageImpl(
                 imageManageable: SNMFileManager(fileType: .image)
             ),
-            requestWalkLogListUsecase: RequestWalkLogListUseCaseImpl(
+            requestWalkLogListUsecase: RequestWalkLogListUsecaseImpl(
                 fileManager: SNMFileManager(fileType: .data)
             )
         )

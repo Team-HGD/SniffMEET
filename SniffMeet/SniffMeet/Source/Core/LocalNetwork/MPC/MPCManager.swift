@@ -47,7 +47,7 @@ final class MPCManager: NSObject {
     convenience init?(dataManager: DataLoadable) {
         guard let dog = try? dataManager.loadData(
             forKey: Environment.UserDefaultsKey.dogInfo,
-            type: UserInfo.self
+            type: ProfileInfo.self
         ) else { return nil }
         let myName: String = "\(dog.name)의 \(dog.nickname)"
         let peerID = MCPeerID(displayName: myName)

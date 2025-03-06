@@ -57,16 +57,16 @@ final class MateListRouter: MateListRoutable {
 extension MateListRouter: MateListBuildable {
     static func createMateListModule() -> UIViewController {
         let networkProvider: SNMNetworkProvider = SNMNetworkProvider()
-        let requestMateListUseCase: RequestMateListUseCase = RequestMateListUseCaseImpl(
+        let requestMateListUsecase: RequestMateListUsecase = RequestMateListUsecaseImpl(
             remoteDBManager: SupabaseDBManager.shared)
-        let requestProfileImageUseCase: RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
+        let requestProfileImageUsecase: RequestProfileImageUsecase = RequestProfileImageUsecaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: networkProvider,
                 sessionManager: SupabaseSessionManager.shared
             ),
             cacheManager: CacheManager.shared
         )
-        let deleteMateUseCase: DeleteMateUseCase = DeleteMateUseCaseImpl(
+        let deleteMateUsecase: DeleteMateUsecase = DeleteMateUsecaseImpl(
             networkProvider: networkProvider,
             remoteDBManager: SupabaseDBManager.shared,
             sessionManager: SupabaseSessionManager.shared
@@ -75,9 +75,9 @@ extension MateListRouter: MateListBuildable {
         let view: MateListViewable & UIViewController = MateListViewController()
         let presenter: MateListPresentable & MateListInteractorOutput = MateListPresenter()
         let interactor: MateListInteractable = MateListInteractor(
-            requestMateListUseCase: requestMateListUseCase,
-            requestProfileImageUseCase: requestProfileImageUseCase,
-            deleteMateUseCase: deleteMateUseCase
+            requestMateListUsecase: requestMateListUsecase,
+            requestProfileImageUsecase: requestProfileImageUsecase,
+            deleteMateUsecase: deleteMateUsecase
         )
 
         let router: MateListRoutable & MateListBuildable = MateListRouter()

@@ -44,17 +44,17 @@ protocol TrackWalkModuleBuildable {
 
 extension TrackWalkRouter: TrackWalkModuleBuildable {
     static func create() -> UIViewController {
-        let updateTimeUseCase: UpdateTimeUseCase = UpdateTimeUseCaseImpl()
-        let updateUserStepUseCase: UpdateUserStepUseCase = UpdateUserStepUseCaseImpl()
-        let updateUserLocationUseCase: UpdateUserLocationUseCase = UpdateUserLocationUseCaseImpl(
+        let updateTimeUsecase: UpdateTimeUsecase = UpdateTimeUsecaseImpl()
+        let updateUserStepUsecase: UpdateUserStepUsecase = UpdateUserStepUsecaseImpl()
+        let updateUserLocationUsecase: UpdateUserLocationUsecase = UpdateUserLocationUsecaseImpl(
             locationManager: CLLocationManager())
         let view: TrackWalkViewable & UIViewController = TrackWalkViewController()
         let presenter: TrackWalkPresentable & TrackWalkInteractorOutput = TrackWalkViewPresenter()
         let interactor: TrackWalkInteractable = TrackWalkInteractor(
-            updateTimeUseCase: updateTimeUseCase,
-            updateUserStepUseCase: updateUserStepUseCase,
-            updateUserLocationUseCase: updateUserLocationUseCase,
-            saveWalkLogUsecase: SaveWalkLogUseCaseImpl(fileManager: SNMFileManager(fileType: .data))
+            updateTimeUsecase: updateTimeUsecase,
+            updateUserStepUsecase: updateUserStepUsecase,
+            updateUserLocationUsecase: updateUserLocationUsecase,
+            saveWalkLogUsecase: SaveWalkLogUsecaseImpl(fileManager: SNMFileManager(fileType: .data))
         )
         let router: TrackWalkRoutable & TrackWalkModuleBuildable = TrackWalkRouter()
         

@@ -13,6 +13,7 @@ protocol TrackWalkPresentable: AnyObject {
 
     func startTracking()
     func endTracking(snapshotImageData: Data?)
+    func didTapDismissButton()
 }
 protocol TrackWalkInteractorOutput: AnyObject {
     func updateWalkRecord(_ record: WalkRecord)
@@ -67,6 +68,10 @@ final class TrackWalkViewPresenter: TrackWalkPresentable {
                 break
             }
         }
+    }
+    func didTapDismissButton() {
+        guard let view else { return }
+        router?.pop(from: view)
     }
 }
 

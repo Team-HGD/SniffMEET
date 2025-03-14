@@ -323,6 +323,8 @@
 		99A5E1BB2D30322C003B00A8 /* SNMLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B592CECE8F90093BEB9 /* SNMLogger.swift */; };
 		99A9C0532D394AD100E669C8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 99A9C0522D394AD100E669C8 /* OrderedCollections */; };
 		99A9C0572D3DE5D300E669C8 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 99A9C0562D3DE5D300E669C8 /* OrderedCollections */; };
+		99E795BE2D8411CA001C9B18 /* RegexValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E795BD2D8411B2001C9B18 /* RegexValidation.swift */; };
+		99E795BF2D8411CA001C9B18 /* RegexValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E795BD2D8411B2001C9B18 /* RegexValidation.swift */; };
 		99E79F5B2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F5A2D5392AF00E48552 /* DeleteMateUseCase.swift */; };
 		99E79F5C2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F5A2D5392AF00E48552 /* DeleteMateUseCase.swift */; };
 		99E79F8A2D5436B700E48552 /* ReportMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E79F892D5436B700E48552 /* ReportMateViewController.swift */; };
@@ -695,6 +697,7 @@
 		995D94AD2CED0093005A47BF /* RequestMateRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMateRouter.swift; sourceTree = "<group>"; };
 		995D94D12CEDF031005A47BF /* MPCProfileDropDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCProfileDropDTO.swift; sourceTree = "<group>"; };
 		99A5A1B22CFFE544002F1D2D /* ProfileDrop.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ProfileDrop.gif; sourceTree = "<group>"; };
+		99E795BD2D8411B2001C9B18 /* RegexValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexValidation.swift; sourceTree = "<group>"; };
 		99E79F5A2D5392AF00E48552 /* DeleteMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMateUseCase.swift; sourceTree = "<group>"; };
 		99E79F892D5436B700E48552 /* ReportMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMateViewController.swift; sourceTree = "<group>"; };
 		99E79F8C2D543F4900E48552 /* ReportPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPickerViewController.swift; sourceTree = "<group>"; };
@@ -2264,6 +2267,7 @@
 		FDE768872CF7811400B5DE88 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				99E795BD2D8411B2001C9B18 /* RegexValidation.swift */,
 				99E7A0622D5DB74600E48552 /* Extension + GIFImageView.swift */,
 				99E79FA12D55627100E48552 /* Extension + UITextViewDelegate.swift */,
 				FD01D8F92D40ACAB00AD4940 /* Extension + Array.swift */,
@@ -2742,6 +2746,7 @@
 				32BD48BB2D3FF02C0078DA9C /* CardPresentationController.swift in Sources */,
 				32BD48BC2D3FF02C0078DA9C /* RequestWalkViewController.swift in Sources */,
 				32BD48BD2D3FF02C0078DA9C /* SelectLocationInteractor.swift in Sources */,
+				99E795BF2D8411CA001C9B18 /* RegexValidation.swift in Sources */,
 				32C539662D65CB2800CD89DF /* WalkRoute.swift in Sources */,
 				32BD48BE2D3FF02C0078DA9C /* RequestWalkInteractor.swift in Sources */,
 				32BD48BF2D3FF02C0078DA9C /* SelectLocationPresenter.swift in Sources */,
@@ -3014,6 +3019,7 @@
 				320043942CDF3D7F00D08B6D /* PrimaryButton.swift in Sources */,
 				FDE7689A2CF783EB00B5DE88 /* ConvertToWalkAPSUseCase.swift in Sources */,
 				FDCD02D12CE917E600B627D8 /* MockURLProtocol.swift in Sources */,
+				99E795BE2D8411CA001C9B18 /* RegexValidation.swift in Sources */,
 				320043952CDF3D7F00D08B6D /* Extension + Navigation.swift in Sources */,
 				A2AFC9492D016BFF0062B34E /* SNMToast.swift in Sources */,
 				320047B92CFD367300D08B6D /* PushNotificationConfig.swift in Sources */,

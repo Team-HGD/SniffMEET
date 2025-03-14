@@ -13,7 +13,7 @@ struct AnyJSONSerializable {
 
     init?(
         value: Any,
-        jsonDecoder: JSONDecoder = AnyDecodable.defaultDecoder
+        jsonDecoder: JSONDecoder = JSONDecoder()
     ) {
         guard JSONSerialization.isValidJSONObject(value) else { return nil }
         self.value = value

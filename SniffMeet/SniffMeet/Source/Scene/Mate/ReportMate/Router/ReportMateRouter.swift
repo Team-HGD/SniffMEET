@@ -53,14 +53,14 @@ final class ReportMateRouter: ReportMateRoutable {
 
 extension ReportMateRouter: ReportMateBuildable {
     static func createReportMateModule(profile: Mate) -> UIViewController {
-        let requestProfileImageUseCase:
-        RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
+        let requestProfileImageUsecase:
+        RequestProfileImageUsecase = RequestProfileImageUsecaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: SNMNetworkProvider(),
                 sessionManager: SupabaseSessionManager.shared),
             cacheManager: CacheManager.shared
         )
-        let requestReportUseCase: RequestReportUseCase = RequestReportUseCaseImpl(
+        let requestReportUsecase: RequestReportUsecase = RequestReportUsecaseImpl(
             remoteDBManager: SupabaseDBManager.shared
         )
         let view: ReportMateViewable & UIViewController = ReportMateViewController()
@@ -68,8 +68,8 @@ extension ReportMateRouter: ReportMateBuildable {
         let presenter: ReportMatePresentable & ReportMateInteractorOutput = ReportMatePresenter()
         let interactor: ReportMateInteractable = ReportMateInteractor(
             mate: profile,
-            requestProfileImageUseCase: requestProfileImageUseCase,
-            requestReportUseCase: requestReportUseCase
+            requestProfileImageUsecase: requestProfileImageUsecase,
+            requestReportUsecase: requestReportUsecase
         )
 
         view.presenter = presenter

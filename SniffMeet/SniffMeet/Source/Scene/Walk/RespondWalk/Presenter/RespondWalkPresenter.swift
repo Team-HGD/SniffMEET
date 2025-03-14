@@ -56,7 +56,7 @@ final class RespondWalkPresenter: RespondWalkPresentable {
     }
     
     func viewDidLoad() {
-        interactor?.fetchSenderInfo(userId: noti.senderId)
+        interactor?.fetchSenderInfo(userID: noti.senderId)
         guard let createdAt = noti.createdAt else { return }
         interactor?.calculateTimeLimit(requestTime: createdAt)
         Task {

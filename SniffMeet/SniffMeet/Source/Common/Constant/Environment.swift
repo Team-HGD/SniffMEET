@@ -5,6 +5,8 @@
 //  Created by sole on 11/25/24.
 //
 
+import Foundation
+
 enum Environment {
     enum UserDefaultsKey {
         static let profileImage: String = "profileImage"
@@ -23,6 +25,7 @@ enum Environment {
     
     enum FileManagerKey {
         static let profileImage: String = "profile"
+        static let walkLog: String = "walkLog"
     }
 
     enum LocalNetworkKey {
@@ -38,5 +41,15 @@ enum Environment {
         static let notificationListFunction = "rpc/notification_list"
         static let walkRequest = "walk_request"
         static let reportlist = "report_list"
+        static let checkDuplicateNicknameFunction = "rpc/is_duplicate_nickname"
+    }
+
+    enum URLString {
+        static let helpPage = "https://check-it.notion.site/198f6d0576c280f1abeee0feeb5cb78e?pvs=4"
+    }
+
+    enum NotificationCenterName {
+        static let sessionExpired = Notification.Name("sessionExpired")
+        static let profileDropFailed = Notification.Name("profileDropFailed")
     }
 }

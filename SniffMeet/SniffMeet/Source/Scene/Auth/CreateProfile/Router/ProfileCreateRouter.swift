@@ -1,5 +1,5 @@
 //
-//  ProfileCreateRouter.swift
+//  Untitled.swift
 //  SniffMeet
 //
 //  Created by 윤지성 on 11/14/24.
@@ -7,65 +7,55 @@
 import UIKit
 
 protocol ProfileCreateRoutable {
-    func presentMainScreen(from view: ProfileCreateViewable)
+    func presentProfileSetView(from view: any ProfileCreateViewable)
 }
 
 protocol ProfileCreateBuildable {
-    static func createProfileCreateModule(dogDetailInfo: DogInfo) -> UIViewController
+    static func createProfileCreateModule() -> UIViewController
 }
 
 final class ProfileCreateRouter: ProfileCreateRoutable {
-    func presentMainScreen(from view: any ProfileCreateViewable) {
+    func presentProfileSetView(from view: any ProfileCreateViewable) {
         Task { @MainActor in
-            if let sceneDelegate = UIApplication.shared.connectedScenes
-                .first(where: { $0.activationState == .foregroundActive })?
-                .delegate as? SceneDelegate {
-                if let router = sceneDelegate.appRouter {
-                    router.moveToHomeScreen()
-                }
+            let profileCreateViewController = ProfileSetRouter.createProfileSetModule()
+            if let sourceView = view as? UIViewController {
+                sourceView.navigationController?.pushViewController(
+                    profileCreateViewController,
+                    animated: true
+                )
             }
         }
     }
 }
 
 extension ProfileCreateRouter: ProfileCreateBuildable {
-    static func createProfileCreateModule(dogDetailInfo: DogInfo) -> UIViewController {
-        let networkProvider = SNMNetworkProvider()
-        let saveUserInfoUseCase: SaveUserInfoUseCase = SaveUserInfoUseCaseImpl(
-            localDataManager: LocalDataManager(),
-            imageManager: SNMFileManager(fileType: .image)
-        )
-        let saveProfileImageUseCase: SaveProfileImageUseCase = SaveProfileImageUseCaseImpl(
-            remoteImageManager: SupabaseStorageManager(
-                networkProvider: networkProvider,
+    static func createProfileCreateModule() -> UIViewController {
+        let networkProvider: any NetworkProvider = SNMNetworkProvider()
+        let view: any ProfileCreateViewable & UIViewController = ProfileCreateViewController()
+        let presenter: any ProfileCreatePresentable & ProfileCreateInteractorOutput = ProfileCreatePresenter()
+        let router: any ProfileCreateRoutable & ProfileCreateBuildable = ProfileCreateRouter()
+        let interactor: any ProfileCreateInteractable = ProfileCreateInteractor(
+            saveUserInfoUsecase: SaveUserInfoUsecaseImpl(
+                localDataManager: UserDefaultsManager.shared,
+                remoteDBManager: SupabaseDBManager.shared,
                 sessionManager: SupabaseSessionManager.shared
             ),
-            userDefaultsManager: UserDefaultsManager.shared,
-            imageSampler: ImageSampler()
-        )
-        let createAccountUseCase: CreateAccountUseCase = CreateAccountUseCaseImpl(
-            remoteDBManager: SupabaseDBManager.shared
-        )
-        let signInUseCase: SignInUseCase = SignInUseCaseImpl(
-            authManager: SupabaseAuthManager(
-                networkProvider: networkProvider,
-                sessionManager: SupabaseSessionManager.shared,
-                decoder: JSONDecoder()
+            saveProfileImageUsecase: SaveProfileImageUsecaseImpl(
+                remoteImageManager: SupabaseStorageManager(
+                    networkProvider: networkProvider,
+                    sessionManager: SupabaseSessionManager.shared
+                ),
+                fileManager: SNMFileManager(fileType: .image),
+                localDataManager: UserDefaultsManager.shared,
+                imageSampler: ImageSampler()
+            ),
+            signInUsecase: SignInUsecaseImpl(
+                authManager: SupabaseAuthManager(
+                    networkProvider: networkProvider,
+                    sessionManager: SupabaseSessionManager.shared
+                )
             )
         )
-        
-        let view: ProfileCreateViewable & UIViewController = ProfileCreateViewController()
-        let presenter: ProfileCreatePresentable & DogInfoInteractorOutput
-        = ProfileCreatePresenter(dogInfo: dogDetailInfo)
-        let interactor: ProfileCreateInteractable =
-        ProfileCreateInteractor(
-            saveUserInfoUseCase: saveUserInfoUseCase,
-            saveProfileImageUseCase: saveProfileImageUseCase,
-            saveUserInfoRemoteUseCase: createAccountUseCase,
-            signInUseCase: signInUseCase
-        )
-        let router: ProfileCreateRoutable & ProfileCreateBuildable = ProfileCreateRouter()
-        
         view.presenter = presenter
         presenter.view = view
         presenter.router = router
@@ -74,5 +64,4 @@ extension ProfileCreateRouter: ProfileCreateBuildable {
         
         return view
     }
-    
 }

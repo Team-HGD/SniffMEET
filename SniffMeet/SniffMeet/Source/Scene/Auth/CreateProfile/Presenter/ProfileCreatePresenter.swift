@@ -1,73 +1,94 @@
 //
-//  ProfileSetupPresenter.swift
+//  ProfileInputPresenter.swift
 //  SniffMeet
 //
 //  Created by 윤지성 on 11/14/24.
 //
-import Foundation
-import UIKit
 
-protocol ProfileCreatePresentable : AnyObject{
-    var dogInfo: DogInfo { get set }
-    var view: ProfileCreateViewable? { get set }
-    var interactor: ProfileCreateInteractable? { get set }
-    var router: ProfileCreateRoutable? { get set }
-    
-    func didTapSubmitButton(nickname: String, image: UIImage?)
+import Foundation
+
+protocol ProfileCreatePresentable: AnyObject {
+    var view: (any ProfileCreateViewable)? { get set }
+    var router: (any ProfileCreateRoutable)? { get set }
+    var interactor: (any ProfileCreateInteractable)? { get set }
+    func didTabSubmitButton(
+        nameText: String?,
+        ageText: String?,
+        sexText: String,
+        sexUponIntake: Bool,
+        sizeText: String,
+        keywords: [Keyword]
+    )
 }
 
-protocol DogInfoInteractorOutput: AnyObject {
+protocol ProfileCreateInteractorOutput: AnyObject {
     func didSaveUserInfo()
     func didFailToSaveUserInfo(error: Error)
 }
 
-
 final class ProfileCreatePresenter: ProfileCreatePresentable {
-    var dogInfo: DogInfo
-    weak var view: ProfileCreateViewable?
-    var interactor: ProfileCreateInteractable?
-    var router: ProfileCreateRoutable?
+    weak var view: (any ProfileCreateViewable)?
+    var interactor: (any ProfileCreateInteractable)?
+    var router: (any ProfileCreateRoutable)?
+    let output: any ProfileCreatePresenterOutput
     
-    init(dogInfo: DogInfo,
-         view: ProfileCreateViewable? = nil,
-         interactor: ProfileCreateInteractable? = nil,
-         router: ProfileCreateRoutable? = nil)
-    {
-        self.dogInfo = dogInfo
+    init(view: (any ProfileCreateViewable)? = nil,
+         interactor: (any ProfileCreateInteractable)? = nil,
+         router: (any ProfileCreateRoutable)? = nil,
+         output: any ProfileCreatePresenterOutput = DefaultProfileCreatePresenterOutput()
+    ) {
         self.view = view
         self.interactor = interactor
         self.router = router
+        self.output = output
     }
-
-    func didTapSubmitButton(nickname: String, image: UIImage?) {
-        let jpgData = interactor?.convertImageToJPGData(image: image)
-        let userInfo = UserInfo(
-            name: dogInfo.name,
-            age: dogInfo.age,
-            sex: dogInfo.sex,
-            sexUponIntake: dogInfo.sexUponIntake,
-            size: dogInfo.size,
-            keywords: dogInfo.keywords,
-            nickname: nickname,
-            profileImage: nil
+    
+    func didTabSubmitButton(
+        nameText: String?,
+        ageText: String?,
+        sexText: String,
+        sexUponIntake: Bool,
+        sizeText: String,
+        keywords: [Keyword]
+    ) {
+        guard let name = nameText,
+              let ageText,
+              let age = UInt8(ageText),
+              let sex = Sex(rawValue: sexText),
+              let size = Size(rawValue: sizeText) else {
+            // TODO: 로컬 머지 이후 에러 핸들링
+            return
+        }
+        let userInfo = ProfileInfo(
+            name: name,
+            age: age,
+            sex: sex,
+            sexUponIntake: sexUponIntake,
+            size: size,
+            keywords: keywords,
+            nickname: UUID().uuidString
         )
-        // TODO: SubmitButton disable 필요
-        interactor?.signInWithProfileData(
-            dogInfo: userInfo,
-            imageData: jpgData
-        )
+        interactor?.signUp(with: userInfo)
     }
 }
 
-extension ProfileCreatePresenter: DogInfoInteractorOutput {
+extension ProfileCreatePresenter: ProfileCreateInteractorOutput {
     func didSaveUserInfo() {
-        // TODO: submit button enable
         guard let view else { return }
-        router?.presentMainScreen(from: view)
+        view.didSuccessCreateProfile()
+        router?.presentProfileSetView(from: view)
     }
     
     func didFailToSaveUserInfo(error: any Error) {
-        // TODO: -  alert 올리는데 어떻게 올릴지 정하기
-        // TODO: submit button enable
+        view?.didFailToCreateProfile()
     }
+}
+
+// MARK: - ProfileCreatePresenterOutput
+protocol ProfileCreatePresenterOutput {
+    
+}
+
+struct DefaultProfileCreatePresenterOutput: ProfileCreatePresenterOutput {
+    
 }

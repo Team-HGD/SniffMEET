@@ -10,12 +10,17 @@ import UIKit
 
 protocol NotificationListViewable: AnyObject {
     var presenter: (any NotificationListPresentable)? { get set }
+    func didStartDeleteNotifications()
+    func didEndDeleteNotifications()
 }
 
 final class NotificationListViewController: BaseViewController, NotificationListViewable {
     var presenter: (any NotificationListPresentable)?
     var cancellables: Set<AnyCancellable> = []
     private let notificationTableView: UITableView = UITableView()
+    private let snmProgressView: SNMProgressView = SNMProgressView(
+        animationType: SNMToastAnimation.showAtCenter
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,11 +81,22 @@ final class NotificationListViewController: BaseViewController, NotificationList
             .store(in: &cancellables)
     }
 
-    @objc func didTapDismissButton() {
+    @objc private func didTapDismissButton() {
         presenter?.didTapDismissButton()
     }
-    @objc func didTapTrashcanButton() {
-        // TODO: 모든 알림 삭제 필요
+    @objc private func didTapTrashcanButton() {
+        presenter?.didTapTrashcanButton()
+    }
+
+    func didStartDeleteNotifications() {
+        Task { @MainActor [weak self] in
+            self?.snmProgressView.show(in: self?.view, isDim: true)
+        }
+    }
+    func didEndDeleteNotifications() {
+        Task { @MainActor [weak self] in
+            self?.snmProgressView.hidden()
+        }
     }
 }
 
@@ -119,7 +135,7 @@ extension NotificationListViewController: UITableViewDataSource {
         cell.configure(
             section: selectedData.category.label,
             description: selectedData.senderName + selectedData.category.description,
-            dateString: "\(selectedData.createdAt?.hoursDifferenceFromNow() ?? 14)시간 전"
+            dateString: "\(selectedData.createdAt?.differenceFromNow() ?? "")"
         )
         return cell
     }

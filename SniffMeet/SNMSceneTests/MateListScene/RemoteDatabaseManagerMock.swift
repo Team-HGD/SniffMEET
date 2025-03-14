@@ -10,18 +10,19 @@ final class RemoteDBManagerMock: RemoteDBManageable {
     var data: Data?
     var hasInserted: Bool = false
     var hasUpdated: Bool = false
-    
+    var hasDeleted: Bool = false
+
     init(data: Data?) {
         self.data = data
     }
     
-    func fetchData() throws -> RemoteDBRequestBuildable {
+    func fetchData() throws -> any RemoteDBRequestBuildable {
         return RemoteDBRequestBuilderMock(
             requestType: .fetch
         )
     }
     
-    func insertData() throws -> RemoteDBRequestBuildable {
+    func insertData() throws -> any RemoteDBRequestBuildable {
         hasInserted = true
         return RemoteDBRequestBuilderMock(
             requestType: .insert,
@@ -29,7 +30,7 @@ final class RemoteDBManagerMock: RemoteDBManageable {
         )
     }
     
-    func updateData() throws -> RemoteDBRequestBuildable {
+    func updateData() throws -> any RemoteDBRequestBuildable {
         hasUpdated = true
         return RemoteDBRequestBuilderMock(
             requestType: .update,
@@ -37,7 +38,14 @@ final class RemoteDBManagerMock: RemoteDBManageable {
         )
     }
     
-    func rpc() throws -> RemoteDBRequestBuildable {
+    func deleteData() async throws -> any RemoteDBRequestBuildable {
+        hasDeleted = true
+        return RemoteDBRequestBuilderMock(
+            requestType: .delete
+        )
+    }
+
+    func rpc() throws -> any RemoteDBRequestBuildable {
         return RemoteDBRequestBuilderMock(
             requestType: .rpc,
             data: data

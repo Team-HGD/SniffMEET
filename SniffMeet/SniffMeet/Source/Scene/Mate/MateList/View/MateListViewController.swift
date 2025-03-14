@@ -9,7 +9,6 @@ import UIKit
 
 protocol MateListViewable: AnyObject {
     var presenter: (any MateListPresentable)? { get set }
-    func changeMPCButtonState(to buttonState: AddMateButton.ButtonState)
 }
 
 final class MateListViewController: BaseViewController, MateListViewable {
@@ -19,9 +18,15 @@ final class MateListViewController: BaseViewController, MateListViewable {
     private var cancellables: Set<AnyCancellable> = []
     private let tableView: UITableView = UITableView()
     private let addMateButton = AddMateButton(title: "새 메이트를 연결하세요")
+    private let snmImageTextToast: SNMImageTextToastView = SNMImageTextToastView(
+        animationType: SNMToastAnimation.slideDown,
+        image: UIImage(systemName: "paperplane.fill"),
+        text: "전송 완료!"
+    )
 
     override func viewWillAppear(_ animated: Bool) {
         presenter?.viewWillAppear()
+        setNavigationTitle()
         super.viewWillAppear(animated)
     }
 
@@ -36,9 +41,6 @@ final class MateListViewController: BaseViewController, MateListViewable {
     }
 
     override func configureAttributes() {
-        navigationItem.title = Context.title
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
         setTableView()
     }
 
@@ -93,22 +95,16 @@ final class MateListViewController: BaseViewController, MateListViewable {
             }
             .store(in: &cancellables)
         addMateButton.publisher(event: .touchUpInside)
-            .throttle(for: .seconds(EventConstant.throttleInterval),
-                      scheduler: RunLoop.main,
-                      latest: false)
+            .debounce(for: .seconds(EventConstant.debounceInterval),
+                      scheduler: RunLoop.main)
             .sink { [weak self] _ in
-                self?.addMateButton.buttonState = .connecting
-                self?.presenter?.startProfileDrop()
+                self?.presenter?.didTapAddMateButton()
             }
             .store(in: &cancellables)
     }
     
     @objc private func showSentAlert() {
-        showSNMTextAndImageToast(
-            image: UIImage(systemName: "paperplane.fill"),
-            text: "전송 완료!",
-            animationType: .slideDown
-        )
+        snmImageTextToast.show(in: view)
     }
 
     private func setTableView() {
@@ -118,9 +114,12 @@ final class MateListViewController: BaseViewController, MateListViewable {
         tableView.separatorStyle = .none
     }
     
-    func changeMPCButtonState(to buttonState: AddMateButton.ButtonState) {
-        addMateButton.buttonState = buttonState
+    private func setNavigationTitle() {
+        navigationItem.title = Context.title
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
     }
+    
 }
 
 // MARK: - MateListViewController+UITableViewDelegate & UITableViewDataSource
@@ -228,3 +227,4 @@ extension MateListViewController: UIViewControllerTransitioningDelegate {
         CardPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }
+

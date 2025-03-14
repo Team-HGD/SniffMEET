@@ -11,8 +11,8 @@ protocol MateListRoutable: Routable {
     var presenter: (any MateListPresentable)? { get }
     func presentWalkRequestView(mateListView: any MateListViewable, mate: Mate)
     func showAlert(mateListView: any MateListViewable, title: String, message: String)
-    func showMateRequestView(mateListView: any MateListViewable, data: DogDTO)
     func showReportMateView(mateListView: any MateListViewable, data: Mate)
+    func showProfileDropView(mateListView: any MateListViewable)
 }
 
 protocol MateListBuildable {
@@ -42,45 +42,31 @@ final class MateListRouter: MateListRoutable {
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         mateListView.present(alertVC, animated: true, completion: nil)
     }
-    func showMateRequestView(mateListView: any MateListViewable, data: DogDTO) {
-        guard let mateListView = mateListView as? UIViewController else { return }
-        let requestMateViewController = RequestMateRouter.createRequestMateModule(profile: data)
-        let transitionDelegate = ProfileDropTransitionDelegate()
-        requestMateViewController.modalPresentationStyle = .fullScreen
-        requestMateViewController.transitioningDelegate = transitionDelegate
-        present(from: mateListView, with: requestMateViewController, animated: true)
-    }
     func showReportMateView(mateListView: any MateListViewable, data: Mate) {
         guard let mateListView = mateListView as? UIViewController else { return }
         let reportMateViewController = ReportMateRouter.createReportMateModule(profile: data)
         pushNoBottomBar(from: mateListView, to: reportMateViewController, animated: true)
+    }
+    func showProfileDropView(mateListView: any MateListViewable) {
+        guard let mateListView = mateListView as? UIViewController else { return }
+        let profileDropViewController = ProfileDropRouter.createProfileDropModule()
+        pushNoBottomBar(from: mateListView, to: profileDropViewController, animated: true)
     }
 }
 
 extension MateListRouter: MateListBuildable {
     static func createMateListModule() -> UIViewController {
         let networkProvider: SNMNetworkProvider = SNMNetworkProvider()
-        let requestMateListUseCase: RequestMateListUseCase = RequestMateListUseCaseImpl(
+        let requestMateListUsecase: RequestMateListUsecase = RequestMateListUsecaseImpl(
             remoteDBManager: SupabaseDBManager.shared)
-        let requestProfileImageUseCase: RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
+        let requestProfileImageUsecase: RequestProfileImageUsecase = RequestProfileImageUsecaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: networkProvider,
                 sessionManager: SupabaseSessionManager.shared
             ),
             cacheManager: CacheManager.shared
         )
-
-        guard let mpcManager = MPCManager(dataManager: LocalDataManager()) else {
-            return UIViewController()
-        }
-        let niManager = NIManager()
-        let tryProfileDropUseCase: TryProfileDropUseCase =
-        TryProfileDropUseCaseImpl(
-            dataManager: LocalDataManager(),
-            niManager: niManager,
-            mpcManager: mpcManager)
-        let quitProfileDropUseCase: QuitProfileDropUseCase = QuitProfileDropUseCaseImpl(niManager: niManager)
-        let deleteMateUseCase: DeleteMateUseCase = DeleteMateUseCaseImpl(
+        let deleteMateUsecase: DeleteMateUsecase = DeleteMateUsecaseImpl(
             networkProvider: networkProvider,
             remoteDBManager: SupabaseDBManager.shared,
             sessionManager: SupabaseSessionManager.shared
@@ -89,11 +75,9 @@ extension MateListRouter: MateListBuildable {
         let view: MateListViewable & UIViewController = MateListViewController()
         let presenter: MateListPresentable & MateListInteractorOutput = MateListPresenter()
         let interactor: MateListInteractable = MateListInteractor(
-            requestMateListUseCase: requestMateListUseCase,
-            requestProfileImageUseCase: requestProfileImageUseCase,
-            tryProfileDropUseCase: tryProfileDropUseCase,
-            quitProfileDropUseCase: quitProfileDropUseCase,
-            deleteMateUseCase: deleteMateUseCase
+            requestMateListUsecase: requestMateListUsecase,
+            requestProfileImageUsecase: requestProfileImageUsecase,
+            deleteMateUsecase: deleteMateUsecase
         )
 
         let router: MateListRoutable & MateListBuildable = MateListRouter()

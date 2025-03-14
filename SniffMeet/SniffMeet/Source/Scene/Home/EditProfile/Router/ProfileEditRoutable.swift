@@ -12,7 +12,7 @@ protocol ProfileEditRoutable: Routable {
 }
 
 protocol ProfileEditBuildable {
-    static func createProfileEditModule(userInfo: UserInfo) -> UIViewController
+    static func createProfileEditModule(userInfo: ProfileInfo) -> UIViewController
 }
 
 final class ProfileEditRouter: ProfileEditRoutable {
@@ -24,31 +24,28 @@ final class ProfileEditRouter: ProfileEditRoutable {
 }
 
 extension ProfileEditRouter: ProfileEditBuildable {
-    static func createProfileEditModule(userInfo: UserInfo) -> UIViewController {
-        let saveUserInfoUseCase: SaveUserInfoUseCase = SaveUserInfoUseCaseImpl(
-            localDataManager: LocalDataManager(),
-            imageManager: SNMFileManager(fileType: .image)
-        )
-        let updateUserInfoRemoteUseCase: UpdateUserInfoUseCase = UpdateUserInfoUseCaseImpl(
+    static func createProfileEditModule(userInfo: ProfileInfo) -> UIViewController {
+        let updateUserInfoUsecase: UpdateUserInfoUsecase = UpdateUserInfoUsecaseImpl(
+            localDataManager: UserDefaultsManager.shared,
             remoteDBManager: SupabaseDBManager.shared,
             sessionManager: SupabaseSessionManager.shared
         )
-        let saveProfileImageUseCase: SaveProfileImageUseCase = SaveProfileImageUseCaseImpl(
+        let saveProfileImageUsecase: SaveProfileImageUsecase = SaveProfileImageUsecaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: SNMNetworkProvider(),
                 sessionManager: SupabaseSessionManager.shared
             ),
-            userDefaultsManager: UserDefaultsManager.shared,
+            fileManager: SNMFileManager(fileType: .image),
+            localDataManager: UserDefaultsManager.shared,
             imageSampler: ImageSampler()
         )
         let view: ProfileEditViewable & UIViewController = ProfileEditViewController()
         let router: ProfileEditRoutable & ProfileEditBuildable = ProfileEditRouter()
         let interactor: ProfileEditInteractable = ProfileEditInteractor(
-            saveUserInfoUseCase: saveUserInfoUseCase,
-            updateUserInfoRemoteUseCase: updateUserInfoRemoteUseCase,
-            saveProfileImageUseCase: saveProfileImageUseCase,
-            loadUserInfoUseCase: LoadUserInfoUseCaseImpl(
-                dataLoadable: LocalDataManager(),
+            updateUserInfoUsecase: updateUserInfoUsecase,
+            saveProfileImageUsecase: saveProfileImageUsecase,
+            loadUserInfoUsecase: LoadUserInfoUsecaseImpl(dataLoadable: LocalDataManager()),
+            loadUserProfileImageUsecase: LoadUserProfileImageImpl(
                 imageManageable: SNMFileManager(fileType: .image)
             )
         )

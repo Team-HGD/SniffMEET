@@ -8,10 +8,11 @@
 import Foundation
 
 enum SupabaseDBRequest {
-    case fetchData(table: String, accessToken: String, query: [String: String])
-    case insertData(table: String, accessToken: String, data: Data)
-    case updateData(table: String, accessToken: String, data: Data, query: [String: String])
-    case rpc(table: String, accessToken: String, data: Data, query: [String: String])
+    case fetchData(table: String, accessToken: String?, query: [String: String]?)
+    case insertData(table: String, accessToken: String?, data: Data)
+    case updateData(table: String, accessToken: String?, data: Data, query: [String: String]?)
+    case deleteData(table: String, accessToken: String?, query: [String: String])
+    case rpc(table: String, accessToken: String?, data: Data, query: [String: String]?)
 }
 
 extension SupabaseDBRequest: SNMRequestConvertible {
@@ -38,7 +39,14 @@ extension SupabaseDBRequest: SNMRequestConvertible {
                 method: .patch,
                 query: query
             )
-            
+        case .deleteData(let table, _ , let query):
+            return Endpoint(
+                baseURL: SupabaseConfig.baseURL,
+                path: "rest/v1/\(table)",
+                method: .delete,
+                query: query
+            )
+
         case .rpc(let table,  _, _, let query):
             return Endpoint(
                 baseURL: SupabaseConfig.baseURL,
@@ -50,7 +58,7 @@ extension SupabaseDBRequest: SNMRequestConvertible {
     }
     var requestType: SNMRequestType {
         switch self {
-        case .fetchData(_, let accessToken, _):
+        case .fetchData(_, let accessToken, _), .deleteData(_, let accessToken, _):
             return .header(with: createAuthHeader(accessToken: accessToken))
         case .insertData(_, let accessToken, let data),
              .updateData(_, let accessToken, let data, _):
@@ -70,11 +78,14 @@ extension SupabaseDBRequest: SNMRequestConvertible {
 // MARK: - SupabaseDBRequest+HelperMethods
 
 extension SupabaseDBRequest {
-    func createAuthHeader(accessToken: String) -> [String: String] {
-        return [
+    func createAuthHeader(accessToken: String?) -> [String: String] {
+        var header: [String: String] = [
             "Content-Type": "application/json",
             "apikey": SupabaseConfig.apiKey,
-            "Authorization": "Bearer \(accessToken)"
         ]
+        if let accessToken = accessToken {
+            header["Authorization"] = "Bearer \(accessToken)"
+        }
+        return header
     }
 }

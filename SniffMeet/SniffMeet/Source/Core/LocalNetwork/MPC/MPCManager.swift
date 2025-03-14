@@ -10,7 +10,7 @@ import MultipeerConnectivity
 import NearbyInteraction
 import os
 
-fileprivate extension String {
+private extension String {
     static var serviceName = "SniffMeet"
 }
 
@@ -18,11 +18,13 @@ final class MPCManager: NSObject {
     var advertiser: MPCAdvertiser
     var browser: MPCBrowser
     var session: MCSession
+    var serviceBrowser : MCBrowserViewController
 
     private var cancellables = Set<AnyCancellable>()
     var availablePeers = Set<MCPeerID>()
     var connectedPeerManager: ConnectedPeerManagable
     var isAvailableToBeConnected = CurrentValueSubject<Bool, Never>(false)
+    var inviteAutomatically: Bool = true
     
     init(
         advertiser: MPCAdvertiser,
@@ -34,7 +36,9 @@ final class MPCManager: NSObject {
         self.browser = browser
         self.session = session
         self.connectedPeerManager = connectedPeerManager
+        serviceBrowser = MCBrowserViewController(serviceType: String.serviceName, session: session)
         super.init()
+        serviceBrowser.delegate = self
 
         self.browser.browser.delegate = self
         self.advertiser.advertiser.delegate = self
@@ -43,7 +47,7 @@ final class MPCManager: NSObject {
     convenience init?(dataManager: DataLoadable) {
         guard let dog = try? dataManager.loadData(
             forKey: Environment.UserDefaultsKey.dogInfo,
-            type: UserInfo.self
+            type: ProfileInfo.self
         ) else { return nil }
         let myName: String = "\(dog.name)의 \(dog.nickname)"
         let peerID = MCPeerID(displayName: myName)
@@ -121,6 +125,7 @@ extension MPCManager: MCNearbyServiceBrowserDelegate {
         SNMLogger.info("ServiceBrowser found peer: \(peerID)")
         guard !self.availablePeers.contains(peerID) else { return }
         self.availablePeers.insert(peerID)
+        guard inviteAutomatically else { return }
         self.browser.invite(peerID: peerID)
         Task { [weak self] in
             try await Task.sleep(nanoseconds: 100_000_000)
@@ -158,5 +163,15 @@ extension MPCManager {
         } catch {
             SNMLogger.error("Fail to send data through mpcSession: \(error.localizedDescription)")
         }
+    }
+}
+
+extension MPCManager: MCBrowserViewControllerDelegate {
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        serviceBrowser.dismiss(animated: true, completion: nil)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        serviceBrowser.dismiss(animated: true, completion: nil)
     }
 }

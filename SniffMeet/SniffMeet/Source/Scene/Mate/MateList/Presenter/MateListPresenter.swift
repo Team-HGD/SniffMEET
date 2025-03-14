@@ -16,19 +16,14 @@ protocol MateListPresentable: AnyObject {
     
     func viewWillAppear()
     func didTabMateListCell(mate: Mate)
+    func didTapAddMateButton()
     func didSwipeToDelete(mate: Mate)
     func didSwipeToReport(mate: Mate)
-    func showAlertConnected()
-    func showAlertDisconnected()
     func didScrollToBottom()
-    func startProfileDrop()
 }
 
 protocol MateListInteractorOutput: AnyObject {
-    func receiveProfileData(_ data: DogDTO)
     func didDeleteMate(_ mate: Mate)
-    func didConnectNISession()
-    func failToConnectNISession()
 }
 
 final class MateListPresenter: MateListPresentable {
@@ -43,6 +38,7 @@ final class MateListPresenter: MateListPresentable {
     private let pageSize: Int = 20
 
     private let queue: TaskSerialQueue = TaskSerialQueue()
+    private var fetchErrorHandler: SNMErrorHandler = SNMErrorHandler()
 
     init(
         view: (any MateListViewable)? = nil,
@@ -51,6 +47,7 @@ final class MateListPresenter: MateListPresentable {
     {
         self.view = view
         self.output = output
+        configureErrorHandlers()
     }
 
     func viewWillAppear() {
@@ -62,6 +59,11 @@ final class MateListPresenter: MateListPresentable {
     func didTabMateListCell(mate: Mate) {
         guard let view else { return }
         router?.presentWalkRequestView(mateListView: view, mate: mate)
+    }
+
+    func didTapAddMateButton() {
+        guard let view else { return }
+        router?.showProfileDropView(mateListView: view)
     }
 
     func didSwipeToDelete(mate: Mate) {
@@ -77,36 +79,6 @@ final class MateListPresenter: MateListPresentable {
     func didSwipeToReport(mate: Mate) {
         guard let view else { return }
         router?.showReportMateView(mateListView: view, data: mate)
-    }
-    
-    func showAlertConnected() {
-        guard let view else { return }
-        router?.showAlert(
-            mateListView: view,
-            title: "Connected",
-            message: "성공적으로 연결되었습니다.\n핸드폰끼리 카메라 방향으로 가까이하여 프로필을 교환해보세요."
-        )
-    }
-
-    func showAlertDisconnected() {
-        guard let view else { return }
-        router?.showAlert(
-            mateListView: view,
-            title: "Disconnected",
-            message: "메이트 찾기 실패하였습니다.\n 와이파이와 블루투스가 켜져있는 상태인지 확인해주세요."
-        )
-    }
-
-    func receiveProfileData(_ data: DogDTO) {
-        guard let view else { return }
-        router?.showMateRequestView(mateListView: view, data: data)
-    }
-
-    func startProfileDrop() {
-        interactor?.tryProfileDrop()
-    }
-    func quitProfileDrop() {
-        interactor?.quitProfileDrop()
     }
 
     func didScrollToBottom() {
@@ -125,18 +97,8 @@ final class MateListPresenter: MateListPresentable {
                     pageSize: self.pageSize
                 ) else { return }
                 self.didFetchMateList(mateList: mateList)
-            } catch let snmError as SNMError where snmError.level == .user {
-                switch snmError.error {
-                case let error as SupabaseDBError where error == .noMoreData:
-                    self.didReachEndOfMateList()
-                case let error as SupabaseSessionError where error == .sessionNotExist:
-                    SNMLogger.error("세션이 존재하지 않습니다.")
-                    // TODO: 로그인 화면으로 이동
-                default:
-                    SNMLogger.error(snmError.localizedDescription)
-                }
-            } catch let snmError as SNMError where snmError.level == .developer {
-                SNMLogger.error(snmError.localizedDescription)
+            } catch {
+                fetchErrorHandler.handle(error: error)
             }
         }
     }
@@ -171,20 +133,22 @@ final class MateListPresenter: MateListPresentable {
     private func didReachEndOfMateList() {
         isReachedBottom = true
     }
+
+    private func configureErrorHandlers() {
+        fetchErrorHandler.configure { [weak self] level in
+            switch level {
+            case .notifyUser:
+                self?.didReachEndOfMateList()
+            default:
+                break
+            }
+        }
+    }
 }
 
 extension MateListPresenter: MateListInteractorOutput {
     func didDeleteMate(_ mate: Mate) {
         output.mates.value.removeAll { $0.userID == mate.userID }
-    }
-    
-    func didConnectNISession() {
-        //showAlertConnected()
-        view?.changeMPCButtonState(to: .success)
-    }
-
-    func failToConnectNISession() {
-        view?.changeMPCButtonState(to: .normal)
     }
 }
 

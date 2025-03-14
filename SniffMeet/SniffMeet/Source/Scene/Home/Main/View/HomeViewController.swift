@@ -26,6 +26,7 @@ final class HomeViewController: BaseViewController, HomeViewable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.viewDidLoad()
+        configureAttributes()
         navigationItem.title = Context.title
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
@@ -83,12 +84,17 @@ final class HomeViewController: BaseViewController, HomeViewable {
     }
 
     override func bind() {
-        presenter?.output.dogInfo
+        presenter?.output.profileInfo
             .receive(on: RunLoop.main)
             .sink { [weak self] dogInfo in
                 self?.profileCardView.setName(name: dogInfo.name)
                 self?.profileCardView.setKeywords(from: dogInfo.keywords.map{ $0.rawValue })
-                if let profileImageData = dogInfo.profileImage,
+            }
+            .store(in: &cancellables)
+        presenter?.output.profileImage
+            .receive(on: RunLoop.main)
+            .sink { [weak self] profileImageData in
+                if let profileImageData,
                    let uiImage = UIImage(data: profileImageData) {
                     self?.profileCardView.setProfileImage(profileImage: uiImage)
                 }
@@ -98,7 +104,7 @@ final class HomeViewController: BaseViewController, HomeViewable {
             .receive(on: RunLoop.main)
             .sink { [weak self] bool in
                 if bool {
-                    guard let userInfo = self?.presenter?.output.dogInfo.value else { return }
+                    guard let userInfo = self?.presenter?.output.profileInfo.value else { return }
                     self?.presenter?.didTapEditButton(userInfo: userInfo)
                 }
             }

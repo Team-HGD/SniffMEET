@@ -283,6 +283,14 @@
 		32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539612D64165A00CD89DF /* TrackWalkRouter.swift */; };
 		32C539652D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
 		32C539662D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
+		99525F072D6E7FAD00B6E17E /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F062D6E7FAD00B6E17E /* SigninViewController.swift */; };
+		99525F082D6E7FAD00B6E17E /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F062D6E7FAD00B6E17E /* SigninViewController.swift */; };
+		99525F0D2D6E806B00B6E17E /* SigninInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F0C2D6E805D00B6E17E /* SigninInteractor.swift */; };
+		99525F0E2D6E806B00B6E17E /* SigninInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F0C2D6E805D00B6E17E /* SigninInteractor.swift */; };
+		99525F102D6E80C300B6E17E /* SigninPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F0F2D6E80BC00B6E17E /* SigninPresenter.swift */; };
+		99525F112D6E80C300B6E17E /* SigninPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F0F2D6E80BC00B6E17E /* SigninPresenter.swift */; };
+		99525F132D6E80FB00B6E17E /* SigninRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F122D6E80F700B6E17E /* SigninRouter.swift */; };
+		99525F142D6E80FB00B6E17E /* SigninRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F122D6E80F700B6E17E /* SigninRouter.swift */; };
 		32C53A0B2D78624400CD89DF /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C53A0A2D78624400CD89DF /* AlertContent.swift */; };
 		32C53A0C2D78624400CD89DF /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C53A0A2D78624400CD89DF /* AlertContent.swift */; };
 		9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */; };
@@ -679,6 +687,10 @@
 		32C5395E2D64165900CD89DF /* TrackWalkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkInteractor.swift; sourceTree = "<group>"; };
 		32C539612D64165A00CD89DF /* TrackWalkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkRouter.swift; sourceTree = "<group>"; };
 		32C539642D65CB2300CD89DF /* WalkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkRoute.swift; sourceTree = "<group>"; };
+    99525F062D6E7FAD00B6E17E /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
+		99525F0C2D6E805D00B6E17E /* SigninInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninInteractor.swift; sourceTree = "<group>"; };
+		99525F0F2D6E80BC00B6E17E /* SigninPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninPresenter.swift; sourceTree = "<group>"; };
+		99525F122D6E80F700B6E17E /* SigninRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninRouter.swift; sourceTree = "<group>"; };
 		32C53A0A2D78624400CD89DF /* AlertContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContent.swift; sourceTree = "<group>"; };
 		9919104E2CFF5526008F86D6 /* OnBoardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingPage.swift; sourceTree = "<group>"; };
 		9937361C2CF80D5200E3DD58 /* RequestUserInfoRemoteUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserInfoRemoteUsecase.swift; sourceTree = "<group>"; };
@@ -1306,6 +1318,49 @@
 				FD119F492CED875800BE22BD /* UpdateUserLocationUsecase.swift */,
 			);
 			path = UpdateUsecase;
+			sourceTree = "<group>";
+		};
+		99525F042D6E7F7900B6E17E /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				99525F052D6E7F8B00B6E17E /* View */,
+				99525F092D6E801A00B6E17E /* Interactor */,
+				99525F0A2D6E802400B6E17E /* Presenter */,
+				99525F0B2D6E802D00B6E17E /* Router */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		99525F052D6E7F8B00B6E17E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99525F062D6E7FAD00B6E17E /* SigninViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		99525F092D6E801A00B6E17E /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				99525F0C2D6E805D00B6E17E /* SigninInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		99525F0A2D6E802400B6E17E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				99525F0F2D6E80BC00B6E17E /* SigninPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		99525F0B2D6E802D00B6E17E /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				99525F122D6E80F700B6E17E /* SigninRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		995D94602CE598E1005A47BF /* NI */ = {
@@ -1946,6 +2001,7 @@
 		FDA4915E2CDA790300A36FB0 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				99525F042D6E7F7900B6E17E /* SignIn */,
 				FDA4915F2CDA791300A36FB0 /* CreateProfile */,
 				A2D9E0762D6C2BFB00290EB5 /* SetProfileInfo */,
 			);
@@ -2736,6 +2792,7 @@
 				FD243D012D62547400971162 /* SNMImageTextToastView.swift in Sources */,
 				32BD48AE2D3FF02C0078DA9C /* RespondMapViewController.swift in Sources */,
 				FD2921312D62ACE1009D0762 /* SNMAnimationType.swift in Sources */,
+				99525F142D6E80FB00B6E17E /* SigninRouter.swift in Sources */,
 				A22179712D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */,
 				32BD48AF2D3FF02C0078DA9C /* RespondWalkViewController.swift in Sources */,
 				32BD48B02D3FF02C0078DA9C /* ProcessedWalkInteractor.swift in Sources */,
@@ -2793,9 +2850,12 @@
 				FD259F2C2D6F0AE7007B182D /* SaveWalkLogUsecase.swift in Sources */,
 				32BD48D62D3FF02C0078DA9C /* SupabaseAuthManager.swift in Sources */,
 				99E79F992D548D9A00E48552 /* ReportMateInteractor.swift in Sources */,
+				99525F0E2D6E806B00B6E17E /* SigninInteractor.swift in Sources */,
+				99525F112D6E80C300B6E17E /* SigninPresenter.swift in Sources */,
 				99E79FA82D556E1900E48552 /* Report.swift in Sources */,
 				32BD48D82D3FF02C0078DA9C /* SupabaseAuthRequest.swift in Sources */,
 				A2FE77762D55448800239F05 /* RemoteDBRequestBuilderMock.swift in Sources */,
+				99525F072D6E7FAD00B6E17E /* SigninViewController.swift in Sources */,
 				32BD48D92D3FF02C0078DA9C /* SupabaseSession.swift in Sources */,
 				32BD48DA2D3FF02C0078DA9C /* SupabaseUser.swift in Sources */,
 				32BD48DB2D3FF02C0078DA9C /* SupabaseSessionResponse.swift in Sources */,
@@ -2958,6 +3018,8 @@
 				3284D3502D2F941C000ABC04 /* DataStoragable.swift in Sources */,
 				99525EBA2D6563E800B6E17E /* UpdateTimeUsecase.swift in Sources */,
 				A2F825D12CDF4BA6000C5419 /* HomeViewController.swift in Sources */,
+				A24CD92B2D362E8F00492339 /* NearByProfileDropUseCase.swift in Sources */,
+				99525F132D6E80FB00B6E17E /* SigninRouter.swift in Sources */,
 				A24CD92B2D362E8F00492339 /* NearByProfileDropUsecase.swift in Sources */,
 				FD243CFE2D62332500971162 /* SNMToastAnimation.swift in Sources */,
 				A2BA1BA92CF34A6A0080575A /* RequestMateListUsecase.swift in Sources */,
@@ -2994,6 +3056,7 @@
 				FDE768942CF782E900B5DE88 /* WalkAPSDTO.swift in Sources */,
 				99E79F912D544A4700E48552 /* ReportMateRouter.swift in Sources */,
 				320043912CDF3D7F00D08B6D /* KeywordButton.swift in Sources */,
+				99525F082D6E7FAD00B6E17E /* SigninViewController.swift in Sources */,
 				FD01D8F52D40AC5300AD4940 /* Extension + UITableViewCell.swift in Sources */,
 				FD11526F2CFB33B6008955C4 /* RespondMapViewController.swift in Sources */,
 				FD119F4C2CED87B000BE22BD /* SelectLocationInteractor.swift in Sources */,
@@ -3016,6 +3079,8 @@
 				995D94AE2CED00A4005A47BF /* RequestMateRouter.swift in Sources */,
 				320047832CF70CA300D08B6D /* PresentAnimator.swift in Sources */,
 				FD06342C2CE5984D003C9D6B /* SNMNetworkResponse.swift in Sources */,
+				3200445E2CE5CA1B00D08B6D /* SaveUserInfoUseCase.swift in Sources */,
+				99525F102D6E80C300B6E17E /* SigninPresenter.swift in Sources */,
 				3200445E2CE5CA1B00D08B6D /* SaveUserInfoUsecase.swift in Sources */,
 				995D94AA2CECF8DD005A47BF /* RequestMateInteractor.swift in Sources */,
 				320522BE2D0181A800F1677C /* ImageCacheable.swift in Sources */,
@@ -3094,6 +3159,7 @@
 				FDE768962CF7831000B5DE88 /* RegisterDeviceTokenUsecase.swift in Sources */,
 				A23A3B732CF4683F00A58705 /* Mate.swift in Sources */,
 				99E79FA92D556E1900E48552 /* Report.swift in Sources */,
+				99525F0D2D6E806B00B6E17E /* SigninInteractor.swift in Sources */,
 				FD1152752CFB9F44008955C4 /* CheckFirstLaunchUsecase.swift in Sources */,
 				3200441A2CE48A3D00D08B6D /* MPCBroswer.swift in Sources */,
 				A25BE4562CEBB63A00886763 /* SupabaseUser.swift in Sources */,

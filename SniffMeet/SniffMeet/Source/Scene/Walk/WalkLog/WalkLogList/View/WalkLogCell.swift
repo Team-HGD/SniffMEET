@@ -12,7 +12,7 @@ final class WalkLogCell: UITableViewCell {
 
     private let profileStackView: UIStackView = UIStackView()
     private let nickNameLabel: UILabel = UILabel()
-    private let dateAndLocationLabel: UILabel = UILabel()
+    private let dateLabel: UILabel = UILabel()
 
     private let walkLogStackView: UIStackView = UIStackView()
 
@@ -24,21 +24,17 @@ final class WalkLogCell: UITableViewCell {
     private let stepTitleLabel: UILabel = UILabel()
     private let stepLabel: UILabel = UILabel()
 
-    private let timeStackView: UIStackView = UIStackView()
-    private let timeTitleLabel: UILabel = UILabel()
-    private let timeLabel: UILabel = UILabel()
+    private let durationStackView: UIStackView = UIStackView()
+    private let durationTitleLabel: UILabel = UILabel()
+    private let durationLabel: UILabel = UILabel()
 
     private let walkLogImageView: UIImageView = UIImageView(frame: .zero)
 
-    init(
-        dogInfo: DogProfileDTO,
-        walkLog: WalkLog,
+    override init(
         style: UITableViewCell.CellStyle,
         reuseIdentifier: String?
     ) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureCell(dogInfo: dogInfo)
-        configureCell(walkLog: walkLog)
         configureAttributes()
         configureHierarchy()
         configureConstraints()
@@ -52,19 +48,19 @@ final class WalkLogCell: UITableViewCell {
     private func configureAttributes() {
         profileImageView.backgroundColor = SNMColor.subGray1
         profileImageView.image = UIImage(resource: .imagePlaceholder)
-        profileImageView.layer.cornerRadius = Context.profileImageSize / 2
-        profileImageView.clipsToBounds = true
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.cornerRadius = Layout.profileImageSize / 2
 
         nickNameLabel.font = SNMFont.headline
 
-        dateAndLocationLabel.font = SNMFont.caption2
-        dateAndLocationLabel.textColor = SNMColor.text2
+        dateLabel.font = SNMFont.caption2
+        dateLabel.textColor = SNMColor.text2
 
         walkLogStackView.spacing = 30
         profileStackView.axis = .vertical
         distanceStackView.axis = .vertical
         stepStackView.axis = .vertical
-        timeStackView.axis = .vertical
+        durationStackView.axis = .vertical
 
         distanceTitleLabel.text = Context.distanceLabelTitle
         distanceTitleLabel.textAlignment = .center
@@ -80,18 +76,18 @@ final class WalkLogCell: UITableViewCell {
         stepLabel.font = SNMFont.caption2
         stepLabel.textAlignment = .center
 
-        timeTitleLabel.text = Context.timeLabelTitle
-        timeTitleLabel.textAlignment = .center
-        timeTitleLabel.textColor = SNMColor.text2
-        timeTitleLabel.font = SNMFont.caption2
-        timeLabel.font = SNMFont.caption2
-        timeLabel.textAlignment = .center
+        durationTitleLabel.text = Context.timeLabelTitle
+        durationTitleLabel.textAlignment = .center
+        durationTitleLabel.textColor = SNMColor.text2
+        durationTitleLabel.font = SNMFont.caption2
+        durationLabel.font = SNMFont.caption2
+        durationLabel.textAlignment = .center
 
         walkLogImageView.image = UIImage(resource: .imagePlaceholder)
     }
     private func configureHierarchy() {
         [nickNameLabel,
-         dateAndLocationLabel].forEach {
+         dateLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             profileStackView.addArrangedSubview($0)
         }
@@ -105,14 +101,14 @@ final class WalkLogCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             stepStackView.addArrangedSubview($0)
         }
-        [timeTitleLabel,
-         timeLabel].forEach {
+        [durationTitleLabel,
+         durationLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            timeStackView.addArrangedSubview($0)
+            durationStackView.addArrangedSubview($0)
         }
         [distanceStackView,
          stepStackView,
-         timeStackView].forEach {
+         durationStackView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             walkLogStackView.addArrangedSubview($0)
         }
@@ -128,10 +124,10 @@ final class WalkLogCell: UITableViewCell {
     private func configureConstraints() {
         NSLayoutConstraint.activate([
             profileImageView.widthAnchor.constraint(
-                equalToConstant: Context.profileImageSize
+                equalToConstant: Layout.profileImageSize
             ),
             profileImageView.heightAnchor.constraint(
-                equalToConstant: Context.profileImageSize
+                equalToConstant: Layout.profileImageSize
             ),
             profileImageView.topAnchor.constraint(
                 equalTo: contentView.topAnchor,
@@ -155,7 +151,7 @@ final class WalkLogCell: UITableViewCell {
             stepStackView.heightAnchor.constraint(
                 equalToConstant: SNMFont.caption.lineHeight * 2
             ),
-            timeStackView.heightAnchor.constraint(
+            durationStackView.heightAnchor.constraint(
                 equalToConstant: SNMFont.caption.lineHeight * 2
             ),
 
@@ -177,20 +173,26 @@ final class WalkLogCell: UITableViewCell {
             ),
             walkLogImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             walkLogImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            walkLogImageView.heightAnchor.constraint(equalToConstant: 246)
+            walkLogImageView.heightAnchor.constraint(equalToConstant: Layout.profileImageViewHeight)
         ])
     }
-    func configureCell(walkLog: WalkLog) {
-        distanceLabel.text = "\(walkLog.distance)"
-        timeLabel.text = "\(walkLog.duration)"
-        stepLabel.text = "\(100)"
-        dateAndLocationLabel.text = "부천시 100213213"
+
+    func configureWalkLogSection(
+        date: String,
+        distance: String,
+        step: String,
+        duration: String,
+        image: UIImage?
+    ) {
+        dateLabel.text = date
+        distanceLabel.text = distance
+        stepLabel.text = step
+        durationLabel.text = duration
+        walkLogImageView.image = image ?? .imagePlaceholder
     }
-    func configureCell(dogInfo: DogProfileDTO) {
-        if let profileImage = dogInfo.profileImage {
-            profileImageView.image = UIImage(data: profileImage)
-        }
-        nickNameLabel.text = dogInfo.name
+    func configureProfileSection(profileImage: UIImage?, name: String) {
+        profileImageView.image = profileImage ?? .imagePlaceholder
+        nickNameLabel.text = name
     }
 }
 
@@ -198,13 +200,17 @@ extension WalkLogCell {
     static let identifier: String = String(describing: WalkLogCell.self)
 }
 
-// MARK: - WalkLogCell+Context
+// MARK: - WalkLogCell+Constant
 
 private extension WalkLogCell {
     enum Context {
         static let distanceLabelTitle: String = "거리"
         static let stepLabelTitle: String = "걸음 수"
         static let timeLabelTitle: String = "시간"
+    }
+
+    enum Layout {
         static let profileImageSize: CGFloat = 58
+        static let profileImageViewHeight: CGFloat = 246
     }
 }

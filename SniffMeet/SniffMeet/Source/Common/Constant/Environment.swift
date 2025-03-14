@@ -25,6 +25,7 @@ enum Environment {
     
     enum FileManagerKey {
         static let profileImage: String = "profile"
+        static let walkLog: String = "walkLog"
     }
 
     enum LocalNetworkKey {
@@ -49,5 +50,6 @@ enum Environment {
 
     enum NotificationCenterName {
         static let sessionExpired = Notification.Name("sessionExpired")
+        static let profileDropFailed = Notification.Name("profileDropFailed")
     }
 }

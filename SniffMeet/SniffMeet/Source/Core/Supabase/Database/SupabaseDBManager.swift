@@ -14,18 +14,17 @@ protocol RemoteDBManageable {
     func updateData() async throws -> RemoteDBRequestBuildable
     func deleteData() async throws -> RemoteDBRequestBuildable
     func rpc() async throws -> RemoteDBRequestBuildable
-    func anonRPC() async throws -> RemoteDBRequestBuildable
 }
 
 final class SupabaseDBManager: RemoteDBManageable {
     private let sessionManager: any SessionManageable
     private let networkProvider: any NetworkProvider
-    private let decoder: JSONDecoder
+    private let jsonDecoder: JSONDecoder
     
     private init() {
         self.sessionManager = SupabaseSessionManager.shared
         self.networkProvider = SNMNetworkProvider()
-        self.decoder = JSONDecoder()
+        self.jsonDecoder = JSONDecoder()
     }
     
     func fetchData() async throws -> RemoteDBRequestBuildable {
@@ -74,14 +73,6 @@ final class SupabaseDBManager: RemoteDBManageable {
         return SupabaseDBRequestBuilder(
             networkProvider: networkProvider,
             accessToken: accessToken,
-            task: .rpc
-        )
-    }
-    
-    func anonRPC() async throws -> RemoteDBRequestBuildable {
-        return SupabaseDBRequestBuilder(
-            networkProvider: networkProvider,
-            accessToken: nil,
             task: .rpc
         )
     }

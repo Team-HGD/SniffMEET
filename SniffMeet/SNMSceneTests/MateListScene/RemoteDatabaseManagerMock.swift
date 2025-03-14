@@ -51,11 +51,4 @@ final class RemoteDBManagerMock: RemoteDBManageable {
             data: data
         )
     }
-    
-    func anonRPC() async throws -> any RemoteDBRequestBuildable {
-        return RemoteDBRequestBuilderMock(
-            requestType: .rpc,
-            data: data
-        )
-    }
 }

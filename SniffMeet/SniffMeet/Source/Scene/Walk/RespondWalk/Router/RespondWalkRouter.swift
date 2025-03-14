@@ -32,38 +32,35 @@ final class RespondWalkRouter: RespondWalkRoutable {
 
 extension RespondWalkRouter: RespondWalkBuildable {
     static func createRespondtWalkModule(walkNoti: WalkNoti) -> UIViewController {
-        let requestUserInfoUseCase: RequestMateInfoUseCase = RequestMateInfoUsecaseImpl(
+        let requestUserInfoUsecase: RequestMateInfoUsecase = RequestMateInfoUsecaseImpl(
             remoteDBManager: SupabaseDBManager.shared
         )
-        let respondUseCase: RespondWalkRequestUseCase = RespondWalkRequestUseCaseImpl(
+        let respondUsecase: RespondWalkRequestUsecase = RespondWalkRequestUsecaseImpl(
             remoteDBManager: SupabaseDBManager.shared
         )
-        let calculateTimeUseCase: CalculateTimeLimitUseCase = CalculateTimeLimitUseCaseImpl()
-        let convertLocationToTextUseCase: ConvertLocationToTextUseCase =
-        ConvertLocationToTextUseCaseImpl()
-        let requestProfileImageUseCase: RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
+        let calculateTimeUsecase: CalculateTimeLimitUsecase = CalculateTimeLimitUsecaseImpl()
+        let convertLocationToTextUsecase: ConvertLocationToTextUsecase =
+        ConvertLocationToTextUsecaseImpl()
+        let requestProfileImageUsecase: RequestProfileImageUsecase = RequestProfileImageUsecaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: SNMNetworkProvider(),
                 sessionManager: SupabaseSessionManager.shared
             ),
             cacheManager: CacheManager.shared
         )
-        let loadUserUseCase = LoadUserInfoUseCaseImpl(
-            dataLoadable: LocalDataManager(),
-            imageManageable: SNMFileManager(fileType: .image)
-        )
+        let loadUserUsecase = LoadUserInfoUsecaseImpl(dataLoadable: LocalDataManager())
 
         let view: RespondWalkViewable & UIViewController = RespondWalkViewController()
         let presenter: RespondWalkPresentable & RespondWalkInteractorOutput =
         RespondWalkPresenter(noti: walkNoti)
         let interactor: RespondWalkInteractable =
         RespondWalkInteractor(
-            requestUserInfoUseCase: requestUserInfoUseCase,
-            respondUseCase: respondUseCase,
-            calculateTimeLimitUseCase: calculateTimeUseCase,
-            convertLocationToTextUseCase: convertLocationToTextUseCase,
-            requestProfileImageUseCase: requestProfileImageUseCase,
-            loadUserUseCase: loadUserUseCase
+            requestUserInfoUsecase: requestUserInfoUsecase,
+            respondUsecase: respondUsecase,
+            calculateTimeLimitUsecase: calculateTimeUsecase,
+            convertLocationToTextUsecase: convertLocationToTextUsecase,
+            requestProfileImageUsecase: requestProfileImageUsecase,
+            loadUserUsecase: loadUserUsecase
         )
 
         let router: RespondWalkRoutable & RespondWalkBuildable = RespondWalkRouter()

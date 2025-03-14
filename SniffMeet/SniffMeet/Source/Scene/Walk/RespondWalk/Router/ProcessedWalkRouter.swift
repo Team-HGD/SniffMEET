@@ -37,11 +37,11 @@ extension ProcessedWalkModuleBuildable {
         let view = ProcessedWalkViewController()
         let presenter = ProcessedWalkPresenter(noti: noti)
         let interactor = ProcessedWalkInteractor(
-            convertLocationToTextUseCase: ConvertLocationToTextUseCaseImpl(),
-            requestUserInfoUseCase: RequestMateInfoUsecaseImpl(
+            convertLocationToTextUsecase: ConvertLocationToTextUsecaseImpl(),
+            requestUserInfoUsecase: RequestMateInfoUsecaseImpl(
                 remoteDBManager: SupabaseDBManager.shared
             ),
-            requestProfileImageUseCase: RequestProfileImageUseCaseImpl(
+            requestProfileImageUsecase: RequestProfileImageUsecaseImpl(
                 remoteImageManager: SupabaseStorageManager(
                     networkProvider: SNMNetworkProvider(),
                     sessionManager: SupabaseSessionManager.shared

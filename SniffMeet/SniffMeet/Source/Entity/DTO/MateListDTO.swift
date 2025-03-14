@@ -21,9 +21,9 @@ struct MateListDTO: Codable {
 }
 
 struct MateListRequestDTO: Encodable {
-    let userId: UUID
+    let userID: UUID
     
     enum CodingKeys: String, CodingKey {
-        case userId = "user_id"
+        case userID = "user_id"
     }
 }

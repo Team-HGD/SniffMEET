@@ -43,27 +43,26 @@ final class RequestWalkRouter: RequestWalkRoutable {
 extension RequestWalkRouter: RequestWalkBuildable {
     /// 서버에 요청할 반려견 mateID를 함께 전달
     static func createRequestWalkModule(mate: Mate) -> UIViewController {
-        let requestWalkUseCase: RequestWalkUseCase =
-        RequestWalkUseCaseImpl(remoteDBManager: SupabaseDBManager.shared)
-        let requestProfileImageUseCase:
-        RequestProfileImageUseCase = RequestProfileImageUseCaseImpl(
+        let requestWalkUsecase: RequestWalkUsecase =
+        RequestWalkUsecaseImpl(remoteDBManager: SupabaseDBManager.shared)
+        let requestProfileImageUsecase:
+        RequestProfileImageUsecase = RequestProfileImageUsecaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: SNMNetworkProvider(),
                 sessionManager: SupabaseSessionManager.shared
             ),
             cacheManager: CacheManager.shared
         )
-        let loadInfoUseCase: LoadUserInfoUseCase = LoadUserInfoUseCaseImpl(
-            dataLoadable: LocalDataManager(),
-            imageManageable: SNMFileManager(fileType: .image)
+        let loadInfoUsecase: LoadUserInfoUsecase = LoadUserInfoUsecaseImpl(
+            dataLoadable: LocalDataManager()
         )
         let view: RequestWalkViewable & UIViewController = RequestWalkViewController()
         let presenter: RequestWalkPresentable & RequestWalkInteractorOutput = RequestWalkPresenter()
         let interactor: RequestWalkInteractable = RequestWalkInteractor(
             mate: mate,
-            requestWalkUseCase: requestWalkUseCase,
-            requestProfileImageUseCase: requestProfileImageUseCase,
-            loadUserInfoUseCase: loadInfoUseCase
+            requestWalkUsecase: requestWalkUsecase,
+            requestProfileImageUsecase: requestProfileImageUsecase,
+            loadUserInfoUsecase: loadInfoUsecase
         )
         let router: RequestWalkRoutable & RequestWalkBuildable = RequestWalkRouter()
         

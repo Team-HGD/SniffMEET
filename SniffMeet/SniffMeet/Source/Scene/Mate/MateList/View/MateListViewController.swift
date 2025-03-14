@@ -26,6 +26,7 @@ final class MateListViewController: BaseViewController, MateListViewable {
 
     override func viewWillAppear(_ animated: Bool) {
         presenter?.viewWillAppear()
+        setNavigationTitle()
         super.viewWillAppear(animated)
     }
 
@@ -40,9 +41,6 @@ final class MateListViewController: BaseViewController, MateListViewable {
     }
 
     override func configureAttributes() {
-        navigationItem.title = Context.title
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .always
         setTableView()
     }
 
@@ -114,6 +112,12 @@ final class MateListViewController: BaseViewController, MateListViewable {
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifier.mateCellID)
         tableView.separatorStyle = .none
+    }
+    
+    private func setNavigationTitle() {
+        navigationItem.title = Context.title
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
     }
     
 }
@@ -223,3 +227,4 @@ extension MateListViewController: UIViewControllerTransitioningDelegate {
         CardPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }
+

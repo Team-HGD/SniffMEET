@@ -15,16 +15,16 @@ protocol AuthManageable {
 final class SupabaseAuthManager: AuthManageable {
     private let networkProvider: any NetworkProvider
     private let sessionManager: any SessionManageable
-    private let decoder: JSONDecoder
+    private let jsonDecoder: JSONDecoder
     
     init(
         networkProvider: any NetworkProvider,
         sessionManager: any SessionManageable,
-        decoder: JSONDecoder
+        jsonDecoder: JSONDecoder = JSONDecoder()
     ) {
         self.networkProvider = networkProvider
         self.sessionManager = sessionManager
-        self.decoder = decoder
+        self.jsonDecoder = jsonDecoder
     }
     
     func signInAnonymously() async throws {
@@ -32,7 +32,7 @@ final class SupabaseAuthManager: AuthManageable {
             let response = try await networkProvider.request(
                 with: SupabaseAuthRequest.signInAnonymously
             )
-            let sessionResponse = try decoder.decode(
+            let sessionResponse = try jsonDecoder.decode(
                 SupabaseSessionResponse.self,
                 from: response.data
             )

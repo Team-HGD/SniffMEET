@@ -30,13 +30,13 @@ final class RequestMateRouter: RequestMateRoutable {
 
 extension RequestMateRouter: RequestMateBuildable {
     static func createRequestMateModule(profile: DogDTO) -> UIViewController {
-        let respondMateRequestUseCase: RespondMateRequestUseCase = RespondMateRequestUseCaseImpl(
+        let respondMateRequestUsecase: RespondMateRequestUsecase = RespondMateRequestUsecaseImpl(
             localDataManager: LocalDataManager(),
             remoteDataManger: SupabaseDBManager.shared,
             sessionManager: SupabaseSessionManager.shared
         )
-        let requestProfileImageUseCase: RequestProfileImageUseCase =
-        RequestProfileImageUseCaseImpl(
+        let requestProfileImageUsecase: RequestProfileImageUsecase =
+        RequestProfileImageUsecaseImpl(
             remoteImageManager: SupabaseStorageManager(
                 networkProvider: SNMNetworkProvider(),
                 sessionManager: SupabaseSessionManager.shared
@@ -45,8 +45,8 @@ extension RequestMateRouter: RequestMateBuildable {
         let view = RequestMateViewController(dogDTO: profile)
         let presenter: RequestMatePresentable & RequestMateInteractorOutput = RequestMatePresenter()
         let interactor = RequestMateInteractor(
-            respondMateRequestUseCase: respondMateRequestUseCase,
-            requestProfileImageUsecase: requestProfileImageUseCase)
+            respondMateRequestUsecase: respondMateRequestUsecase,
+            requestProfileImageUsecase: requestProfileImageUsecase)
         let router: RequestMateRoutable & RequestMateBuildable = RequestMateRouter()
 
         view.presenter = presenter

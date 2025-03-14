@@ -13,7 +13,6 @@ enum SupabaseDBTask {
     case update
     case delete
     case rpc
-    case anonRPC
 }
 
 protocol RemoteDBRequestBuildable {
@@ -87,7 +86,7 @@ final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {
                 accessToken: accessToken,
                 query: query
             )
-        case .rpc, .anonRPC:
+        case .rpc:
             guard let data = self.data,
                   let table = self.table else { throw SupabaseDBError.rpcFailed }
             return SupabaseDBRequest.rpc(

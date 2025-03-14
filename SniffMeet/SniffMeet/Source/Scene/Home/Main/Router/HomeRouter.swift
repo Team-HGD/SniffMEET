@@ -8,14 +8,14 @@
 import UIKit 
 
 protocol HomeRoutable: Routable {
-    func showProfileEditView(homeView: any HomeViewable, userInfo: UserInfo)
+    func showProfileEditView(homeView: any HomeViewable, userInfo: ProfileInfo)
     func showNotificationView(homeView: any HomeViewable)
     func showAlert(homeView: any HomeViewable, title: String, message: String)
     func transitionToMateListView(homeView: any HomeViewable)
 }
 
 final class HomeRouter: NSObject, HomeRoutable {
-    func showProfileEditView(homeView: any HomeViewable, userInfo: UserInfo) {
+    func showProfileEditView(homeView: any HomeViewable, userInfo: ProfileInfo) {
         guard let homeView = homeView as? UIViewController else { return }
         let profileCreateViewController =
         ProfileEditRouter.createProfileEditModule(userInfo: userInfo)

@@ -20,6 +20,9 @@ enum FileType {
 
 protocol FileManagable: DataStorageManagable where StoredType == Data {
     var fileType: FileType { get } // managing할 파일의 타입을 지정합니다.
+    /// 파일 확장자가 포함되지 않은 directoryPath만을 입력으로 받습니다.
+    func getAll(directoryPath: String) throws -> [StoredType]
+    func deleteAll(directoryPath: String) throws
 }
 
 protocol TokenManagable: DataStorageManagable where StoredType == String {}

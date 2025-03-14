@@ -283,6 +283,14 @@
 		32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539612D64165A00CD89DF /* TrackWalkRouter.swift */; };
 		32C539652D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
 		32C539662D65CB2800CD89DF /* WalkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C539642D65CB2300CD89DF /* WalkRoute.swift */; };
+		99525F1B2D70736E00B6E17E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F1A2D70736100B6E17E /* SignUpViewController.swift */; };
+		99525F1C2D70736E00B6E17E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F1A2D70736100B6E17E /* SignUpViewController.swift */; };
+		99525F1E2D70743A00B6E17E /* SignUpInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F1D2D70743300B6E17E /* SignUpInteractor.swift */; };
+		99525F1F2D70743A00B6E17E /* SignUpInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F1D2D70743300B6E17E /* SignUpInteractor.swift */; };
+		99525F212D70747100B6E17E /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F202D70746C00B6E17E /* SignUpPresenter.swift */; };
+		99525F222D70747100B6E17E /* SignUpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F202D70746C00B6E17E /* SignUpPresenter.swift */; };
+		99525F242D7074C500B6E17E /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F232D7074C200B6E17E /* SignUpRouter.swift */; };
+		99525F252D7074C500B6E17E /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F232D7074C200B6E17E /* SignUpRouter.swift */; };
 		99525F072D6E7FAD00B6E17E /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F062D6E7FAD00B6E17E /* SigninViewController.swift */; };
 		99525F082D6E7FAD00B6E17E /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F062D6E7FAD00B6E17E /* SigninViewController.swift */; };
 		99525F0D2D6E806B00B6E17E /* SigninInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99525F0C2D6E805D00B6E17E /* SigninInteractor.swift */; };
@@ -687,6 +695,10 @@
 		32C5395E2D64165900CD89DF /* TrackWalkInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkInteractor.swift; sourceTree = "<group>"; };
 		32C539612D64165A00CD89DF /* TrackWalkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackWalkRouter.swift; sourceTree = "<group>"; };
 		32C539642D65CB2300CD89DF /* WalkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkRoute.swift; sourceTree = "<group>"; };
+		99525F1A2D70736100B6E17E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		99525F1D2D70743300B6E17E /* SignUpInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInteractor.swift; sourceTree = "<group>"; };
+		99525F202D70746C00B6E17E /* SignUpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPresenter.swift; sourceTree = "<group>"; };
+		99525F232D7074C200B6E17E /* SignUpRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRouter.swift; sourceTree = "<group>"; };
     99525F062D6E7FAD00B6E17E /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		99525F0C2D6E805D00B6E17E /* SigninInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninInteractor.swift; sourceTree = "<group>"; };
 		99525F0F2D6E80BC00B6E17E /* SigninPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninPresenter.swift; sourceTree = "<group>"; };
@@ -1363,6 +1375,49 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		99525F152D7072EB00B6E17E /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				99525F192D70731100B6E17E /* Router */,
+				99525F182D70730B00B6E17E /* Presenter */,
+				99525F172D70730500B6E17E /* Interactor */,
+				99525F162D7072F800B6E17E /* View */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		99525F162D7072F800B6E17E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99525F1A2D70736100B6E17E /* SignUpViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		99525F172D70730500B6E17E /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				99525F1D2D70743300B6E17E /* SignUpInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		99525F182D70730B00B6E17E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				99525F202D70746C00B6E17E /* SignUpPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		99525F192D70731100B6E17E /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				99525F232D7074C200B6E17E /* SignUpRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		995D94602CE598E1005A47BF /* NI */ = {
 			isa = PBXGroup;
 			children = (
@@ -2001,6 +2056,7 @@
 		FDA4915E2CDA790300A36FB0 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				99525F152D7072EB00B6E17E /* SignUp */,
 				99525F042D6E7F7900B6E17E /* SignIn */,
 				FDA4915F2CDA791300A36FB0 /* CreateProfile */,
 				A2D9E0762D6C2BFB00290EB5 /* SetProfileInfo */,
@@ -2650,6 +2706,7 @@
 				32BD483C2D3FF02C0078DA9C /* MateListDTO.swift in Sources */,
 				32BD483D2D3FF02C0078DA9C /* MPCProfileDropDTO.swift in Sources */,
 				32BD483E2D3FF02C0078DA9C /* WalkNotiDTO.swift in Sources */,
+				99525F1B2D70736E00B6E17E /* SignUpViewController.swift in Sources */,
 				32BD483F2D3FF02C0078DA9C /* DogProfileDTO.swift in Sources */,
 				32081AD22D5B5D8A00D19235 /* TargetedProfileDropUsecase.swift in Sources */,
 				32BD48402D3FF02C0078DA9C /* UserInfoDTO.swift in Sources */,
@@ -2687,14 +2744,15 @@
 				32BD485A2D3FF02C0078DA9C /* RequestProfileImageUsecase.swift in Sources */,
 				A26BA00A2D6DC84C000E5648 /* ProfileSetInteractor.swift in Sources */,
 				FD243D032D62547D00971162 /* SNMImageToastView.swift in Sources */,
-				32BD485B2D3FF02C0078DA9C /* LoadUserInfoUsecase.swift in Sources */,
-				32BD485C2D3FF02C0078DA9C /* RespondWalkRequestUsecase.swift in Sources */,
-				32BD485D2D3FF02C0078DA9C /* RespondMateRequestUsecase.swift in Sources */,
-				32BD485E2D3FF02C0078DA9C /* ConvertToWalkAPSUsecase.swift in Sources */,
-				32BD485F2D3FF02C0078DA9C /* CalculateTimeLimitUsecase.swift in Sources */,
-				32BD48602D3FF02C0078DA9C /* ConvertLocationToTextUsecase.swift in Sources */,
-				32BD48612D3FF02C0078DA9C /* NearByProfileDropUsecase.swift in Sources */,
-				32BD48622D3FF02C0078DA9C /* QuitProfileDropUsecase.swift in Sources */,
+				32BD485B2D3FF02C0078DA9C /* LoadUserInfoUseCase.swift in Sources */,
+				32BD485C2D3FF02C0078DA9C /* RespondWalkRequestUseCase.swift in Sources */,
+				32BD485D2D3FF02C0078DA9C /* RespondMateRequestUseCase.swift in Sources */,
+				32BD485E2D3FF02C0078DA9C /* ConvertToWalkAPSUseCase.swift in Sources */,
+				32BD485F2D3FF02C0078DA9C /* CalculateTimeLimitUseCase.swift in Sources */,
+				32BD48602D3FF02C0078DA9C /* ConvertLocationToTextUseCase.swift in Sources */,
+				32BD48612D3FF02C0078DA9C /* NearByProfileDropUseCase.swift in Sources */,
+				99525F222D70747100B6E17E /* SignUpPresenter.swift in Sources */,
+				32BD48622D3FF02C0078DA9C /* QuitProfileDropUseCase.swift in Sources */,
 				32BD48632D3FF02C0078DA9C /* MultipartFormData.swift in Sources */,
 				A2FE772C2D52224700239F05 /* SignInAnonUsecase.swift in Sources */,
 				32BD48642D3FF02C0078DA9C /* HTTPStatusCode.swift in Sources */,
@@ -2762,12 +2820,17 @@
 				32BD48942D3FF02C0078DA9C /* TabBarModuleBuilder.swift in Sources */,
 				99E79F972D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
 				32BD48952D3FF02C0078DA9C /* TabBarController.swift in Sources */,
-				32BD48962D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */,
-				32BD48972D3FF02C0078DA9C /* ProfileSetViewController.swift in Sources */,
+				32BD48962D3FF02C0078DA9C /* ProfileInputViewController.swift in Sources */,
+				32BD48972D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */,
+				99525F252D7074C500B6E17E /* SignUpRouter.swift in Sources */,
 				32BD48982D3FF02C0078DA9C /* ProfileCreateInteractor.swift in Sources */,
-				32BD48992D3FF02C0078DA9C /* ProfileCreatePresenter.swift in Sources */,
+				99525F1F2D70743A00B6E17E /* SignUpInteractor.swift in Sources */,
+				32BD48992D3FF02C0078DA9C /* ProfileInputPresenter.swift in Sources */,
+				32BD489A2D3FF02C0078DA9C /* ProfileCreatePresenter.swift in Sources */,
+				32BD489B2D3FF02C0078DA9C /* ProfileInputRouter.swift in Sources */,
+				32BD489C2D3FF02C0078DA9C /* ProfileCreateRouter.swift in Sources */,
+				32BD48972D3FF02C0078DA9C /* ProfileSetViewController.swift in Sources */,
 				32BD489A2D3FF02C0078DA9C /* ProfileSetPresenter.swift in Sources */,
-				32BD489B2D3FF02C0078DA9C /* ProfileCreateRouter.swift in Sources */,
 				32BD489C2D3FF02C0078DA9C /* ProfileSetRouter.swift in Sources */,
 				32C53A0B2D78624400CD89DF /* AlertContent.swift in Sources */,
 				FD259F342D6F10D1007B182D /* WalkLogUsecaseTests.swift in Sources */,
@@ -2979,6 +3042,7 @@
 				A21435F72CE20D2500564A4D /* TabBarController.swift in Sources */,
 				A2FE772B2D52224700239F05 /* SignInAnonUsecase.swift in Sources */,
 				320043762CDCA18E00D08B6D /* (null) in Sources */,
+				99525F1E2D70743A00B6E17E /* SignUpInteractor.swift in Sources */,
 				995D94D22CEDF037005A47BF /* MPCProfileDropDTO.swift in Sources */,
 				32A7563C2D00398100965F0A /* CacheManager.swift in Sources */,
 				FD11527D2CFC901A008955C4 /* NotificationListRouter.swift in Sources */,
@@ -2990,7 +3054,8 @@
 				FDCD02CF2CE917D800B627D8 /* MockRequest.swift in Sources */,
 				A2BD49FD2CF7712000AC72A7 /* Size.swift in Sources */,
 				A2F825DD2CDFBEB4000C5419 /* ProfileCardView.swift in Sources */,
-				FD51341F2CEB7AFE002E76F3 /* LoadUserInfoUsecase.swift in Sources */,
+				99525F242D7074C500B6E17E /* SignUpRouter.swift in Sources */,
+				FD51341F2CEB7AFE002E76F3 /* LoadUserInfoUseCase.swift in Sources */,
 				FD331A582CF23CEC00F39426 /* WalkLogCell.swift in Sources */,
 				A26BA0092D6DC84C000E5648 /* ProfileSetInteractor.swift in Sources */,
 				FD01D8FA2D40ACAF00AD4940 /* Extension + Array.swift in Sources */,
@@ -3026,6 +3091,7 @@
 				FD5134232CEC2BDE002E76F3 /* Routable.swift in Sources */,
 				FD0634282CE596BD003C9D6B /* SNMRequestConvertible.swift in Sources */,
 				A2BA1B9A2CF260A50080575A /* MateListRouter.swift in Sources */,
+				99525F1C2D70736E00B6E17E /* SignUpViewController.swift in Sources */,
 				320043972CDF493C00D08B6D /* Extension + UIView.swift in Sources */,
 				FD119F4A2CED875F00BE22BD /* UpdateUserLocationUsecase.swift in Sources */,
 				FD1152772CFBA089008955C4 /* SaveFirstLaunchUsecase.swift in Sources */,
@@ -3074,6 +3140,7 @@
 				320043932CDF3D7F00D08B6D /* KeywordView.swift in Sources */,
 				320044772CEB4E1E00D08B6D /* RequestWalkUsecase.swift in Sources */,
 				320044982CED81F400D08B6D /* WalkNoti.swift in Sources */,
+				99525F212D70747100B6E17E /* SignUpPresenter.swift in Sources */,
 				FDE14A502CE8D2FB001F7A9D /* URLRequest + append.swift in Sources */,
 				A2BA1B982CF260780080575A /* MateListPresenter.swift in Sources */,
 				995D94AE2CED00A4005A47BF /* RequestMateRouter.swift in Sources */,

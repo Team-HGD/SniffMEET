@@ -91,11 +91,11 @@ extension NotificationListModuleBuildable {
             )
         )
         let interactor = NotificationListInteractor(
-            requestNotiListUseCase: RequestNotiListUseCaseImpl(
+            requestNotiListUsecase: RequestNotiListUsecaseImpl(
                 remoteManager: SupabaseDBManager.shared,
                 sessionManager: SupabaseSessionManager.shared
             ),
-            deleteNotificationUseCase: DeleteNotificationUseCaseImpl(
+            deleteNotificationUsecase: DeleteNotificationUsecaseImpl(
                 remoteDataManager: SupabaseDBManager.shared
             )
         )

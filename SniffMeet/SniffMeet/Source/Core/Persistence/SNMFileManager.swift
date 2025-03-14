@@ -8,33 +8,39 @@ import Foundation
 
 struct SNMFileManager: FileManagable {
     var fileType: FileType
-    
+
     private var fileManager: FileManager { FileManager.default }
     private var documentsDir: URL? {
         fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
     }
     private func fullURL(for fileName: String) -> URL? {
-        guard fileType == .data else {
-            return documentsDir?.appendingPathComponent(fileName)
+        switch fileType {
+        case .data:
+            documentsDir?.appendingPathComponent(fileName, conformingTo: .data)
+        case .image:
+            documentsDir?.appendingPathComponent(fileName, conformingTo: .jpeg)
         }
-        return documentsDir?.appendingPathComponent(fileName, conformingTo: .jpeg)
-       }
-    
-    func fileExists(forKey path: String) -> Bool {
-        guard let fileURL = fullURL(for: path) else { return false }
+    }
+    private func fullDirectoryURL(for path: String) -> URL? {
+        documentsDir?.appendingPathComponent(path)
+    }
+
+    func fileExists(forKey path: String, isDirectory: Bool = false) -> Bool {
+        guard let fileURL = isDirectory ?
+                fullDirectoryURL(for: path) : fullURL(for: path) else { return false }
         if #available(iOS 16.0, *) {
             return fileManager.fileExists(atPath: fileURL.path())
         } else {
             return fileManager.fileExists(atPath: fileURL.path)
         }
     }
-    
+
     /// key 값은 Environment.FileManagerKey를 이용하시면 됩니다.
     func get(forKey: String) throws -> Data {
         guard let fileURL = fullURL(for: forKey) else {
             throw FileManagerError.directoryNotFound
         }
-        
+
         guard fileManager.fileExists(atPath: fileURL.path) else {
             throw FileManagerError.fileNotFound
         }
@@ -45,14 +51,60 @@ struct SNMFileManager: FileManagable {
         guard let fileURL = fullURL(for: forKey) else {
             throw FileManagerError.directoryNotFound
         }
-        try data.write(to: fileURL)
+        try createDirectoryIfNeeded(url: fileURL)
+        do {
+            try data.write(to: fileURL)
+        } catch {
+            throw FileManagerError.writeError
+        }
     }
-    
+
+    private func createDirectoryIfNeeded(url: URL) throws {
+        var directoryURL: URL = url
+        directoryURL.deleteLastPathComponent()
+        try fileManager.createDirectory(
+            atPath: directoryURL.path,
+            withIntermediateDirectories: true
+        )
+    }
+
     func delete(forKey: String) throws {
         guard let fileURL = fullURL(for: forKey) else {
             throw FileManagerError.directoryNotFound
         }
-        try fileManager.removeItem(at: fileURL)
+        do {
+            try fileManager.removeItem(at: fileURL)
+        } catch {
+            throw FileManagerError.deleteError
+        }
+    }
+    
+    func getAll(directoryPath: String) throws -> [Data] {
+        guard let fileURL = fullDirectoryURL(for: directoryPath) else {
+            throw FileManagerError.directoryNotFound
+        }
+        guard fileURL.pathExtension.isEmpty else {
+            throw FileManagerError.invalidPath
+        }
+        let contentsURLs = try fileManager.contentsOfDirectory(
+            at: fileURL,
+            includingPropertiesForKeys: nil
+        )
+        return contentsURLs.compactMap { try? Data(contentsOf: $0) }
+    }
+
+    func deleteAll(directoryPath: String) throws {
+        guard let fileURL = fullDirectoryURL(for: directoryPath) else {
+            throw FileManagerError.directoryNotFound
+        }
+        guard fileURL.pathExtension.isEmpty else {
+            throw FileManagerError.invalidPath
+        }
+        do {
+            try fileManager.removeItem(at: fileURL)
+        } catch {
+            throw FileManagerError.deleteError
+        }
     }
 }
 
@@ -64,6 +116,7 @@ enum FileManagerError: LocalizedError {
     case noDeleteObject
     case writeError
     case deleteError
+    case invalidPath
 
     var errorDescription: String? {
         switch self {
@@ -74,6 +127,7 @@ enum FileManagerError: LocalizedError {
         case .noDeleteObject: "삭제할 대상을 찾을 수 없습니다."
         case .writeError: "파일 쓰기 에러"
         case .deleteError: "파일 삭제 에러"
+        case .invalidPath: "유효하지 않은 경로"
         }
     }
 }

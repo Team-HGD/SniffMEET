@@ -14,25 +14,25 @@ protocol SelectLocationInteractable: AnyObject {
 
 final class SelectLocationInteractor: SelectLocationInteractable {
     weak var presenter: (any SelectLocationInteractorOutput)?
-    private let convertLocationToTextUseCase: any ConvertLocationToTextUseCase
-    private let requestLocationAuthUseCase: any RequestLocationAuthUseCase
+    private let convertLocationToTextUsecase: any ConvertLocationToTextUsecase
+    private let requestLocationAuthUsecase: any RequestLocationAuthUsecase
 
     init(
         presenter: (any SelectLocationInteractorOutput)? = nil,
-        convertLocationToTextUseCase: any ConvertLocationToTextUseCase,
-        requestLocationAuthUseCase: any RequestLocationAuthUseCase
+        convertLocationToTextUsecase: any ConvertLocationToTextUsecase,
+        requestLocationAuthUsecase: any RequestLocationAuthUsecase
     ) {
         self.presenter = presenter
-        self.convertLocationToTextUseCase = convertLocationToTextUseCase
-        self.requestLocationAuthUseCase = requestLocationAuthUseCase
+        self.convertLocationToTextUsecase = convertLocationToTextUsecase
+        self.requestLocationAuthUsecase = requestLocationAuthUsecase
     }
 
     func requestUserLocationAuth() {
-        requestLocationAuthUseCase.execute()
+        requestLocationAuthUsecase.execute()
     }
     func convertLocationToText(latitude: Double, longtitude: Double) {
         Task {
-            let locationText: String? = await convertLocationToTextUseCase.execute(
+            let locationText: String? = await convertLocationToTextUsecase.execute(
                 latitude: latitude, longtitude: longtitude
             )
             presenter?.didConvertLocationToText(with: locationText)

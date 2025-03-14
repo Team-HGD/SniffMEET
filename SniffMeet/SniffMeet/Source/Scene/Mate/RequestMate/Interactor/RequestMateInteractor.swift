@@ -16,16 +16,16 @@ protocol RequestMateInteractable: AnyObject {
 
 final class RequestMateInteractor: RequestMateInteractable {
     weak var presenter: (any RequestMateInteractorOutput)?
-    private let respondMateRequestUseCase: RespondMateRequestUseCase
-    private let requestProfileImageUsecase: RequestProfileImageUseCase
+    private let respondMateRequestUsecase: RespondMateRequestUsecase
+    private let requestProfileImageUsecase: RequestProfileImageUsecase
 
     init(
         presenter: (any RequestMateInteractorOutput)? = nil,
-        respondMateRequestUseCase: RespondMateRequestUseCase,
-        requestProfileImageUsecase: RequestProfileImageUseCase
+        respondMateRequestUsecase: RespondMateRequestUsecase,
+        requestProfileImageUsecase: RequestProfileImageUsecase
     ) {
         self.presenter = presenter
-        self.respondMateRequestUseCase = respondMateRequestUseCase
+        self.respondMateRequestUsecase = respondMateRequestUsecase
         self.requestProfileImageUsecase = requestProfileImageUsecase
     }
 
@@ -34,6 +34,6 @@ final class RequestMateInteractor: RequestMateInteractable {
         presenter?.showProfileImage(imageData: imageData)
     }
     func saveMateInfo(id: UUID) async {
-        await respondMateRequestUseCase.execute(mateId: id, isAccepted: true)
+        await respondMateRequestUsecase.execute(mateId: id, isAccepted: true)
     }
 }

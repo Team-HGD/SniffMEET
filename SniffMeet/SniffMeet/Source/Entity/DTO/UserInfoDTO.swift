@@ -27,8 +27,8 @@ struct UserInfoDTO: Codable {
         case sexUponIntake = "sex_upon_intake"
         case profileImageURL = "profile_image_url"
     }
-    func toEntity() -> UserInfo {
-        UserInfo(name: dogName,
+    func toEntity() -> ProfileInfo {
+        ProfileInfo(name: dogName,
                  age: age,
                  sex: sex,
                  sexUponIntake: sexUponIntake,

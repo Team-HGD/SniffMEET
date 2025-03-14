@@ -90,19 +90,17 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
         animationType: SNMToastAnimation.showAtCenter
     )
     private var selectedKeywordButtons: [KeywordButton] = []
-
+    
     override func viewDidLoad() {
         setupBinding()
         super.viewDidLoad()
         presenter?.viewDidLoad()
     }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         profileImageView.makeViewCircular()
         addPhotoButton.makeViewCircular()
     }
-
     override func configureHierachy() {
         [profileImageView, addPhotoButton].forEach { subview in
             profileImageContainerView.addSubview(subview)
@@ -125,7 +123,6 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
         view.addSubview(scrollView)
         scrollView.addSubview(contentsStackView)
     }
-
     override func configureConstraints() {
         disableAutoresizingMaskForSubviews()
         configureScrollViewConstraints()
@@ -133,7 +130,6 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
         configureProfileImageContainerViewConstraints()
         configureKeywordStackViewConstraints()
     }
-
     override func configureAttributes() {
         hideKeyboardWhenTappedAround()
         configureNavigationControllerAttributes()
@@ -142,37 +138,31 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
         configureKeywordStackViewAttributes()
         ageTextField.keyboardType = .numberPad
     }
-
     private func configureDelegateForSubviews() {
         picker.delegate = self
         nameTextField.delegate = self
         ageTextField.delegate = self
     }
-
     private func configureNavigationControllerAttributes() {
         navigationController?.navigationBar.configureBackButton()
         navigationItem.title = Context.title
         navigationItem.largeTitleDisplayMode = .never
     }
-
     private func configureContentsStackViewAttributes() {
         contentsStackView.axis = .vertical
         contentsStackView.alignment = .fill
         contentsStackView.distribution = .fill
     }
-
     private func configureKeywordStackViewAttributes() {
         keywordStackView.axis = .horizontal
         keywordStackView.alignment = .fill
         keywordStackView.distribution = .fillProportionally
     }
-
     override func bind() {
         bindKeywordButtonAction()
         bindAddPhotoButtonAction()
         bindCompleteEditButtonAction()
-
-        presenter?.output.userInfo
+        presenter?.output.profileInfo
             .receive(on: RunLoop.main)
             .sink { [weak self] userInfo in
                 SNMLogger.info("Edit userInfo: \(userInfo)")
@@ -197,15 +187,18 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
                         button.isSelected = false
                     }
                 }
-
-                if let profileImageData = userInfo.profileImage,
+            }
+            .store(in: &cancellables)
+        presenter?.output.profileImage
+            .receive(on: RunLoop.main)
+            .sink { [weak self] profileImageData in
+                if let profileImageData,
                    let uiImage = UIImage(data: profileImageData) {
                     self?.profileImageView.image = uiImage
                 }
             }
             .store(in: &cancellables)
     }
-
     private func bindKeywordButtonAction() {
         keywordButtons.forEach { keywordButton in
             keywordButton.publisher(event: .touchUpInside)
@@ -223,7 +216,6 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
                 .store(in: &cancellables)
         }
     }
-
     private func bindAddPhotoButtonAction() {
         addPhotoButton.publisher(event: .touchUpInside)
             .sink { [weak self] in
@@ -232,24 +224,15 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
             }
             .store(in: &cancellables)
     }
-
     private func bindCompleteEditButtonAction() {
         completeEditButton.publisher(event: .touchUpInside)
-            .sink { [weak self] in
+            .sink { [weak self] _ in
                 self?.completeEditButton.isEnabled = false
                 self?.snmProgressToast.show(in: self?.view, isDim: true)
-                self?.presenter?.didTapCompleteButton(
-                    name: self?.nameTextField.text,
-                    age: self?.ageTextField.text,
-                    keywords: self?.selectedKeywordButtons
-                        .compactMap { $0.titleLabel?.text },
-                    size: self?.sizeSegmentedControl.selectedSegmentIndex,
-                    profileImage: self?.profileImageView.image
-                )
+                self?.handleCompleteButtonAction()
             }
             .store(in: &cancellables)
     }
-
     private func setupBinding() {
         let namePublisher = nameTextField
             .publisher(for: \.text)
@@ -266,6 +249,21 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
                 self?.completeEditButton.isEnabled = isEnabled
             }
             .store(in: &cancellables)
+    }
+    private func handleCompleteButtonAction() {
+        let keywords: [Keyword] = keywordButtons.filter { button in
+            button.isSelected
+        }.compactMap { selectedButton in
+            guard let keywordText = selectedButton.titleLabel?.text else { return nil }
+            return Keyword(rawValue: keywordText)
+        }
+        presenter?.didTapCompleteButton(
+            nameText: nameTextField.text,
+            ageText: ageTextField.text,
+            sizeText: Context.sizeArr[sizeSegmentedControl.selectedSegmentIndex],
+            keywords: keywords,
+            profileImage: profileImageView.image
+        )
     }
     func didSuccessEditProfile() {
         Task { @MainActor [weak self] in
@@ -288,10 +286,10 @@ extension ProfileEditViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool
+    func textField(
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
+        replacementString string: String) -> Bool
     {
         if textField == nameTextField, let text = textField.text {
             let newLength = text.count + string.count - range.length
@@ -306,12 +304,11 @@ extension ProfileEditViewController: UITextFieldDelegate {
         }
         return true
     }
-  
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let rect = textField.convert(textField.bounds, to: scrollView)
         let offset = (scrollView.frame.height - rect.height) / 2
         let targetPoint = CGPoint(x: 0, y: rect.origin.y - offset)
-
+        
         scrollView.setContentOffset(targetPoint, animated: true)
     }
 }
@@ -350,7 +347,6 @@ extension ProfileEditViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentsStackView.translatesAutoresizingMaskIntoConstraints = false
     }
-
     private func configureScrollViewConstraints() {
         view.keyboardLayoutGuide.followsUndockedKeyboard = true
         NSLayoutConstraint.activate([
@@ -360,7 +356,6 @@ extension ProfileEditViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor)
         ])
     }
-
     private func configureContentsStackViewConstraints() {
         let layoutGuide = scrollView.contentLayoutGuide
         NSLayoutConstraint.activate([
@@ -388,7 +383,6 @@ extension ProfileEditViewController {
         contentsStackView.setCustomSpacing(30, after: sizeSegmentedControl)
         contentsStackView.setCustomSpacing(30, after: keywordStackView)
     }
-
     private func configureProfileImageContainerViewConstraints() {
         NSLayoutConstraint.activate([
             profileImageContainerView.heightAnchor.constraint(equalToConstant: 100),
@@ -406,7 +400,6 @@ extension ProfileEditViewController {
             addPhotoButton.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor)
         ])
     }
-
     private func configureKeywordStackViewConstraints() {
         keywordStackView.spacing = Context.smallVerticalPadding
     }

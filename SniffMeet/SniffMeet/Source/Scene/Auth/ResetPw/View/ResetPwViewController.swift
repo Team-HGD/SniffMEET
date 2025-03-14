@@ -128,8 +128,6 @@ extension ResetPwViewController: UITextFieldDelegate {
     }
 
     private func isValidPassword(_ password: String) -> Bool {
-        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,15}$"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        return predicate.evaluate(with: password)
+        RegexValidation.isValidPassword(password)
     }
 }

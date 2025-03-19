@@ -115,7 +115,7 @@ final class NearByProfileDropUsecaseImpl: NSObject, NearByProfileDropUsecase {
             let dogProfile = DogDTO(id: userID,
                 name: dog.name,
                 keywords: dog.keywords,
-                profileImage: imageURL
+                profileImageName: imageURL
             )
             let profileDropDTO = MPCProfileDropDTO(
                 token: nil,

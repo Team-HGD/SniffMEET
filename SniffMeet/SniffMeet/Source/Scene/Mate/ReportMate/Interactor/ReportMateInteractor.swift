@@ -35,7 +35,7 @@ final class ReportMateInteractor: ReportMateInteractable {
     }
     func requestProfileImage(imageName: String?) {
         Task {
-            let fileName = mate.profileImageURLString ?? ""
+            let fileName = mate.profileImageName ?? ""
             guard let imageData = await requestProfileImageUsecase.execute(fileName: fileName) else { return }
             presenter?.didFetchProfileImage(data: imageData)
         }

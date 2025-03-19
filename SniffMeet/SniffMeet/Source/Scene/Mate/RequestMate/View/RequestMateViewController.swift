@@ -31,7 +31,7 @@ final class RequestMateViewController: BaseViewController, RequestMateViewable {
 
     init(dogDTO: DogDTO) {
         profile = DogProfileDTO(dogDTO: dogDTO)
-        imageURL = dogDTO.profileImage
+        imageURL = dogDTO.profileImageName
         super.init()
     }
 
@@ -43,7 +43,7 @@ final class RequestMateViewController: BaseViewController, RequestMateViewable {
     }
 
     override func configureAttributes() {
-        configureProfileImage(imageData: profile.profileImage)
+        configureProfileImage(imageData: profile.profileImageData)
         nameLabel.text = profile.name
         nameLabel.textColor = SNMColor.white
         nameLabel.font = SNMFont.title1

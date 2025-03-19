@@ -69,7 +69,7 @@ final class RequestWalkInteractor: RequestWalkInteractable {
     
     func requestProfileImage(imageName: String?) {
         Task { @MainActor in
-            let fileName = mate.profileImageURLString ?? ""
+            let fileName = mate.profileImageName ?? ""
             let imageData = await requestProfileImageUsecase.execute(fileName: fileName)
             presenter?.didFetchProfileImage(imageData: imageData)
         }

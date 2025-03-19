@@ -75,7 +75,7 @@ final class ReportMatePresenter: ReportMatePresentable {
 extension ReportMatePresenter: ReportMateInteractorOutput {
     func didFetchMateInfo(mateInfo: Mate?) {
         output.mateInfo.send(mateInfo)
-        if let profileImageName = mateInfo?.profileImageURLString {
+        if let profileImageName = mateInfo?.profileImageName {
             interactor?.requestProfileImage(imageName: profileImageName)
         }
     }

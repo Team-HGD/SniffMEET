@@ -19,10 +19,12 @@ struct RequestMateListUsecaseMock: RequestMateListUsecase {
     
     func execute(page: Int, pageSize: Int) async throws -> [Mate] {
         mateList.map{
-            Mate(name: $0.dogName,
-                 userID: $0.id,
-                 keywords: $0.keywords,
-                 profileImageURLString: $0.profileImageURL)
+            Mate(
+                name: $0.dogName,
+                userID: $0.id,
+                keywords: $0.keywords,
+                profileImageName: $0.profileImageName
+            )
         }
     }
 }

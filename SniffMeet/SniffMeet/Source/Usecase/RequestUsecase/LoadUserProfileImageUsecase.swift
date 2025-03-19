@@ -19,9 +19,9 @@ struct LoadUserProfileImageImpl: LoadUserProfileImageUsecase {
     }
 
     func execute() throws -> Data? {
-        let profileImage = try? imageManageable.get(
+        let profileImageData = try? imageManageable.get(
             forKey: Environment.FileManagerKey.profileImage
         )
-        return profileImage
+        return profileImageData
     }
 }

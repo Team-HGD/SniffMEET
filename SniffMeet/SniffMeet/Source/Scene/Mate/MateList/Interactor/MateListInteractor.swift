@@ -48,10 +48,10 @@ final class MateListInteractor: MateListInteractable {
 
         await withTaskGroup(of: (UUID, Data?).self) { [weak self] group in
             for mate in mates {
-                guard let profileImageURLString = mate.profileImageURLString else { continue }
+                guard let profileImageName = mate.profileImageName else { continue }
                 group.addTask {
                     let imageData = await self?.requestProfileImageUsecase.execute(
-                        fileName: "thumbnail_\(profileImageURLString)"
+                        fileName: "thumbnail_\(profileImageName)"
                     )
                     return (mate.userID, imageData)
                 }

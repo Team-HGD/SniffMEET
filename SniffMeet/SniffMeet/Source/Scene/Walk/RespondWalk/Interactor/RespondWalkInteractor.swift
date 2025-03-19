@@ -20,7 +20,7 @@ protocol RespondWalkInteractable: AnyObject {
     func respondWalkRequest(isAccepted: Bool, receivedNoti: WalkNoti)
     func calculateTimeLimit(requestTime: Date)
     func convertLocationToText(latitude: Double, longtitude: Double) async
-    func fetchProfileImage(urlString: String)
+    func fetchProfileImage(named imageName: String)
 }
 
 final class RespondWalkInteractor: RespondWalkInteractable {
@@ -62,8 +62,8 @@ final class RespondWalkInteractor: RespondWalkInteractable {
                     return
                 }
                 presenter?.didFetchUserInfo(senderInfo: senderInfo)
-                guard let profileImageURL = senderInfo.profileImageURL else { return }
-                fetchProfileImage(urlString: profileImageURL)
+                guard let profileImageName = senderInfo.profileImageName else { return }
+                fetchProfileImage(named: profileImageName)
             } catch {
                 presenter?.didFailToFetchWalkRequest(error: error)
             }
@@ -111,9 +111,9 @@ final class RespondWalkInteractor: RespondWalkInteractable {
             presenter?.didConvertLocationToText(with: locationText)
         }
     }
-    func fetchProfileImage(urlString: String) {
+    func fetchProfileImage(named imageName: String) {
         Task { [weak self] in
-            let imageData = try await self?.requestProfileImageUsecase.execute(fileName: urlString)
+            let imageData = await self?.requestProfileImageUsecase.execute(fileName: imageName)
             self?.presenter?.didFetchProfileImage(with: imageData)
         }
     }

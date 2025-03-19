@@ -10,6 +10,8 @@ import Foundation
 enum SupabaseStorageRequest {
     case upload(
         accessToken: String,
+        // TODO: 쿼리 구성 개선 작업시 수정
+        // imageData: Data,
         image: Data,
         fileName: String,
         mimeType: MimeType

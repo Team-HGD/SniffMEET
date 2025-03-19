@@ -133,7 +133,7 @@ extension WalkLogListViewController: UITableViewDataSource {
             step: "\(walkLogs[indexPath.row].step) 걸음",
             duration: durationLabelString(walkLogs[indexPath.row].duration),
             image: UIImage(
-                data: walkLogs[indexPath.row].image ?? Data()
+                data: walkLogs[indexPath.row].imageData ?? Data()
             )
         )
         cell.configureProfileSection(

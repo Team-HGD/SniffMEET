@@ -41,7 +41,7 @@ struct SaveUserInfoUsecaseImpl: SaveUserInfoUsecase {
                 size: userInfo.size,
                 keywords: userInfo.keywords,
                 nickname: userInfo.nickname,
-                profileImageURL: nil
+                profileImageName: nil
             )
             try await saveToRemote(dto: dto)
         } catch let error as UserDefaultsError {

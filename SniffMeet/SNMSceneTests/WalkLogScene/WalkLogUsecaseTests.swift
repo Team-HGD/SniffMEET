@@ -17,21 +17,21 @@ final class WalkLogUsecaseTests: XCTestCase {
             distance: 200,
             startDate: Date(),
             endDate: Date().addingTimeInterval(300),
-            image: nil
+            imageData: nil
         ),
         WalkLog(
             step: 100,
             distance: 200,
             startDate: Date(),
             endDate: Date().addingTimeInterval(100),
-            image: nil
+            imageData: nil
         ),
         WalkLog(
             step: 100,
             distance: 200,
             startDate: Date(),
             endDate: Date().addingTimeInterval(200),
-            image: nil
+            imageData: nil
         )
     ]
 
@@ -56,7 +56,7 @@ final class WalkLogUsecaseTests: XCTestCase {
             distance: 0,
             startDate: Date(),
             endDate: endDate,
-            image: nil
+            imageData: nil
         )
         // Act
         try saveWalkLogUsecase.execute(walkLog: walkLog)
@@ -75,7 +75,7 @@ final class WalkLogUsecaseTests: XCTestCase {
             distance: 0,
             startDate: Date(),
             endDate: endDate,
-            image: nil
+            imageData: nil
         )
         // Act
         try saveWalkLogUsecase.execute(walkLog: walkLog)

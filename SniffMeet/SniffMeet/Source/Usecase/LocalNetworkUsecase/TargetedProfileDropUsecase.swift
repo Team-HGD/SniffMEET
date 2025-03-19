@@ -101,15 +101,16 @@ final class TargetedProfileDropUsecaseImpl: NSObject, TargetedProfileDropUsecase
                 type: ProfileInfo.self
             )
             guard let userID = try? SupabaseSessionManager.shared.userID.get() else { return }
-            let imageURL = try? dataManager.loadData(
+            let imageName = try? dataManager.loadData(
                 forKey: Environment.UserDefaultsKey.profileImageName,
                 type: String.self
             )
 
-            let dogProfile = DogDTO(id: userID,
+            let dogProfile = DogDTO(
+                id: userID,
                 name: dog.name,
                 keywords: dog.keywords,
-                profileImageName: imageURL
+                profileImageName: imageName
             )
             let profileDropDTO = MPCProfileDropDTO(
                 token: nil,

@@ -26,19 +26,19 @@ final class RequestMateViewController: BaseViewController, RequestMateViewable {
     private var acceptButton = PrimaryButton(title: Context.acceptTitle)
     private var keywords: [Keyword] = []
     private var profile: DogProfileDTO
-    private let imageURL: String?
+    private let imageName: String?
     private var cancellables = Set<AnyCancellable>()
 
     init(dogDTO: DogDTO) {
         profile = DogProfileDTO(dogDTO: dogDTO)
-        imageURL = dogDTO.profileImageName
+        imageName = dogDTO.profileImageName
         super.init()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let imageURL {
-            presenter?.viewDidLoad(fileName: imageURL)
+        if let imageName {
+            presenter?.viewDidLoad(fileName: imageName)
         }
     }
 

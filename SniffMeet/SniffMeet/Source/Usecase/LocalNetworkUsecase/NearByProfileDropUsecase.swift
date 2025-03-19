@@ -107,15 +107,16 @@ final class NearByProfileDropUsecaseImpl: NSObject, NearByProfileDropUsecase {
                 forKey: Environment.UserDefaultsKey.profileInfo,
                 type: ProfileInfo.self)
             let userID = try SupabaseSessionManager.shared.userID.get()
-            let imageURL = try? dataManager.loadData(
+            let imageName = try? dataManager.loadData(
                 forKey: Environment.UserDefaultsKey.profileImageName,
                 type: String.self
             )
 
-            let dogProfile = DogDTO(id: userID,
+            let dogProfile = DogDTO(
+                id: userID,
                 name: dog.name,
                 keywords: dog.keywords,
-                profileImageName: imageURL
+                profileImageName: imageName
             )
             let profileDropDTO = MPCProfileDropDTO(
                 token: nil,

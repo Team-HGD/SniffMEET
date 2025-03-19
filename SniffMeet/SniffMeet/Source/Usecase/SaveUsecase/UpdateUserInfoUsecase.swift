@@ -28,7 +28,7 @@ struct UpdateUserInfoUsecaseImpl: UpdateUserInfoUsecase {
     
     func execute(with updatedProperty: [String: Any]) async throws {
         guard let oldProfileInfo = try? localDataManager.get(
-            forKey: Environment.UserDefaultsKey.dogInfo,
+            forKey: Environment.UserDefaultsKey.profileInfo,
             type: ProfileInfo.self
         ) else {
             throw SNMError(level: .notExistSession, error: UserDefaultsError.notFound)
@@ -39,10 +39,10 @@ struct UpdateUserInfoUsecaseImpl: UpdateUserInfoUsecase {
         } catch let error as UserDefaultsError {
             throw SNMError(level: .retryable, error: error)
         } catch let error as SupabaseSessionError {
-            try localDataManager.set(value: oldProfileInfo, forKey: Environment.UserDefaultsKey.dogInfo)
+            try localDataManager.set(value: oldProfileInfo, forKey: Environment.UserDefaultsKey.profileInfo)
             throw SNMError(level: .notExistSession, error: error)
         } catch let error as SupabaseDBError {
-            try localDataManager.set(value: oldProfileInfo, forKey: Environment.UserDefaultsKey.dogInfo)
+            try localDataManager.set(value: oldProfileInfo, forKey: Environment.UserDefaultsKey.profileInfo)
             throw SNMError(level: .retryable, error: error)
         }
     }
@@ -64,7 +64,7 @@ struct UpdateUserInfoUsecaseImpl: UpdateUserInfoUsecase {
             nickname: oldProfileInfo.nickname,
             profileImageName: oldProfileInfo.profileImageName
         )
-        try localDataManager.set(value: newProfileInfo, forKey: Environment.UserDefaultsKey.dogInfo)
+        try localDataManager.set(value: newProfileInfo, forKey: Environment.UserDefaultsKey.profileInfo)
     }
     private func updateToRemote(with updatedProperty: [String: Any]) async throws {
         let userID = try sessionManager.userID.get()

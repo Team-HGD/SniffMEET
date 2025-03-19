@@ -20,7 +20,7 @@ struct LoadUserInfoUsecaseImpl: LoadUserInfoUsecase {
 
     func execute() throws -> ProfileInfo {
         let profileInfo = try dataLoadable.loadData(
-            forKey: Environment.UserDefaultsKey.dogInfo,
+            forKey: Environment.UserDefaultsKey.profileInfo,
             type: ProfileInfo.self
         )
         return profileInfo

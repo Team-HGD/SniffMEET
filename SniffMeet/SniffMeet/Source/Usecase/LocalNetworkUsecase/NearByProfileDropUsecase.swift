@@ -104,11 +104,11 @@ final class NearByProfileDropUsecaseImpl: NSObject, NearByProfileDropUsecase {
     func loadProfileData() {
         do {
             let dog = try dataManager.loadData(
-                forKey: Environment.UserDefaultsKey.dogInfo,
+                forKey: Environment.UserDefaultsKey.profileInfo,
                 type: ProfileInfo.self)
             let userID = try SupabaseSessionManager.shared.userID.get()
             let imageURL = try? dataManager.loadData(
-                forKey: Environment.UserDefaultsKey.profileImage,
+                forKey: Environment.UserDefaultsKey.profileImageName,
                 type: String.self
             )
 

@@ -9,8 +9,8 @@ import Foundation
 
 enum Environment {
     enum UserDefaultsKey {
-        static let profileImage: String = "profileImage"
-        static let dogInfo: String = "dogInfo"
+        static let profileImageName: String = "profileImage"
+        static let profileInfo: String = "dogInfo"
         static let sessionUserInfo: String = "sessionUserInfo"
         static let expiresAt: String = "expiresAt"
         static let mateList: String = "mateList"

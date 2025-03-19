@@ -46,7 +46,7 @@ final class MPCManager: NSObject {
     }
     convenience init?(dataManager: DataLoadable) {
         guard let dog = try? dataManager.loadData(
-            forKey: Environment.UserDefaultsKey.dogInfo,
+            forKey: Environment.UserDefaultsKey.profileInfo,
             type: ProfileInfo.self
         ) else { return nil }
         let myName: String = "\(dog.name)의 \(dog.nickname)"

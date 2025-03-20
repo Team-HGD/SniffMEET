@@ -16,6 +16,7 @@ protocol HomePresentable: AnyObject {
 
     func viewDidLoad()
     func notificationBarButtonDidTap()
+    func preferencesBarButtonDidTap()
     func didTapEditButton(userInfo: ProfileInfo)
     func didTapRequestWalkButton()
 }
@@ -58,6 +59,11 @@ final class HomePresenter: HomePresentable {
     func notificationBarButtonDidTap() {
         guard let view else { return }
         router?.showNotificationView(homeView: view)
+    }
+    
+    func preferencesBarButtonDidTap() {
+        guard let view else { return }
+        router?.showPreferencesView(homeView: view)
     }
 
     func didTapEditButton(userInfo: ProfileInfo) {

@@ -10,6 +10,7 @@ import UIKit
 protocol HomeRoutable: Routable {
     func showProfileEditView(homeView: any HomeViewable, userInfo: ProfileInfo)
     func showNotificationView(homeView: any HomeViewable)
+    func showPreferencesView(homeView: any HomeViewable)
     func showAlert(homeView: any HomeViewable, title: String, message: String)
     func transitionToMateListView(homeView: any HomeViewable)
 }
@@ -25,6 +26,11 @@ final class HomeRouter: NSObject, HomeRoutable {
         guard let homeView = homeView as? UIViewController else { return }
         let notificationViewController = NotificationListRouter.createNotificationListModule()
         push(from: homeView, to: notificationViewController, animated: true)
+    }
+    func showPreferencesView(homeView: any HomeViewable) {
+        guard let homeView = homeView as? UIViewController else { return }
+        let preferencesViewController = PreferencesRouter.create()
+        push(from: homeView, to: preferencesViewController, animated: true)
     }
     func showAlert(homeView: any HomeViewable, title: String, message: String) {
         guard let homeView = homeView as? UIViewController else { return }

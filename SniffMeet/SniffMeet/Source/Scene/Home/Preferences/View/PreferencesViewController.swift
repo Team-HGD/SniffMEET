@@ -19,6 +19,13 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
     }
 
     override func configureAttributes() {
+        configureNavigationControllerAttributes()
+    }
+    
+    private func configureNavigationControllerAttributes() {
+        navigationController?.navigationBar.configureBackButton()
+        navigationItem.title = Context.title
+        navigationItem.largeTitleDisplayMode = .never
     }
 
     override func configureHierachy() {
@@ -33,5 +40,6 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
 
 private extension PreferencesViewController {
     enum Context {
+        static let title: String = "설정"
     }
 }

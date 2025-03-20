@@ -40,7 +40,14 @@ final class HomeViewController: BaseViewController, HomeViewable {
             target: self,
             action: #selector(notificationBarButtonDidTap)
         )
-        navigationItem.rightBarButtonItem = notificationBarButtonItem
+        let preferencesBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "gearshape")?
+                .withTintColor(.tertiaryLabel, renderingMode: .alwaysOriginal),
+            style: .plain,
+            target: self,
+            action: #selector(preferencesBarButtonDidTap)
+        )
+        navigationItem.rightBarButtonItems = [preferencesBarButtonItem, notificationBarButtonItem]
     }
 
     override func configureHierachy() {
@@ -121,6 +128,10 @@ final class HomeViewController: BaseViewController, HomeViewable {
 
     @objc func notificationBarButtonDidTap() {
         presenter?.notificationBarButtonDidTap()
+    }
+    
+    @objc func preferencesBarButtonDidTap() {
+        presenter?.preferencesBarButtonDidTap()
     }
 }
 

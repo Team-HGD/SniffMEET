@@ -9,6 +9,11 @@ import UIKit
 
 protocol PreferencesRoutable: AnyObject, Routable {
     var presenter: (any PreferencesPresentable)? { get set }
+    
+    func showPersonalInfoView()
+    func showNotificationSettingView()
+    func showTermsOfUseView()
+    func logoutView()
 }
 
 protocol PreferencesModuleBuildable {
@@ -18,6 +23,17 @@ protocol PreferencesModuleBuildable {
 final class PreferencesRouter: PreferencesRoutable {
     weak var presenter: (any PreferencesPresentable)?
 
+    func showPersonalInfoView() {
+    }
+    
+    func showNotificationSettingView() {
+    }
+    
+    func showTermsOfUseView() {
+    }
+    
+    func logoutView() {
+    }
 }
 
 extension PreferencesRouter: PreferencesModuleBuildable {

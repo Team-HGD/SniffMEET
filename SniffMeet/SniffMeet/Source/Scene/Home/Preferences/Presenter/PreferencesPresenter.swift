@@ -9,6 +9,9 @@ protocol PreferencesPresentable: AnyObject {
     var view: (any PreferencesViewable)? { get set }
     var interactor: (any PreferencesInteractable)? { get set }
     var router: (any PreferencesRoutable)? { get set }
+    
+    func getSettingsOptions() -> [PreferencesOption]
+    func didSelectPreferenceOption(_ type: PreferencesType)
 }
 
 protocol PreferencesInteractorOutput: AnyObject {
@@ -18,6 +21,31 @@ final class PreferencesPresenter: PreferencesPresentable {
     weak var view: (any PreferencesViewable)?
     var interactor: (any PreferencesInteractable)?
     var router: (any PreferencesRoutable)?
+    
+    private var preferencesOptions: [PreferencesOption] = []
+    
+    func getSettingsOptions() -> [PreferencesOption] {
+        preferencesOptions = [
+            PreferencesOption(title: "개인정보 수정", type: .personalInfo),
+            PreferencesOption(title: "알림 설정", type: .notificationSetting),
+            PreferencesOption(title: "개인정보 이용 약관", type: .termsOfUse),
+            PreferencesOption(title: "로그아웃", type: .logout)
+        ]
+        return preferencesOptions
+    }
+    
+    func didSelectPreferenceOption(_ type: PreferencesType) {
+        switch type {
+        case .personalInfo:
+            router?.showPersonalInfoView()
+        case .notificationSetting:
+            router?.showNotificationSettingView()
+        case .termsOfUse:
+            router?.showTermsOfUseView()
+        case .logout:
+            router?.logoutView()
+        }
+    }
 }
 
 extension PreferencesPresenter: PreferencesInteractorOutput {

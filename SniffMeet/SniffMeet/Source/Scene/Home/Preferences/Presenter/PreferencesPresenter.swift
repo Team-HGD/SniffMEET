@@ -35,15 +35,17 @@ final class PreferencesPresenter: PreferencesPresentable {
     }
     
     func didSelectPreferenceOption(_ type: PreferencesType) {
+        guard let view else { return }
         switch type {
         case .personalInfo:
-            router?.showPersonalInfoView()
+            router?.showPersonalInfoView(view: view)
         case .notificationSetting:
             router?.showNotificationSettingView()
         case .termsOfUse:
             router?.showTermsOfUseView()
         case .logout:
-            router?.logoutView()
+        // TODO: - 로그아웃 동작 연결
+            SNMLogger.log("로그아웃")
         }
     }
 }

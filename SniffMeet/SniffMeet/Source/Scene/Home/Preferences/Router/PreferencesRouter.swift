@@ -10,10 +10,9 @@ import UIKit
 protocol PreferencesRoutable: AnyObject, Routable {
     var presenter: (any PreferencesPresentable)? { get set }
     
-    func showPersonalInfoView()
+    func showPersonalInfoView(view: any PreferencesViewable)
     func showNotificationSettingView()
     func showTermsOfUseView()
-    func logoutView()
 }
 
 protocol PreferencesModuleBuildable {
@@ -23,16 +22,15 @@ protocol PreferencesModuleBuildable {
 final class PreferencesRouter: PreferencesRoutable {
     weak var presenter: (any PreferencesPresentable)?
 
-    func showPersonalInfoView() {
+    func showPersonalInfoView(view: any PreferencesViewable) {
+        guard let view = view as? UIViewController else { return }
+        let personalInfoView = PersonalInfoRouter.create()
+        push(from: view, to: personalInfoView, animated: true)
     }
-    
     func showNotificationSettingView() {
     }
     
     func showTermsOfUseView() {
-    }
-    
-    func logoutView() {
     }
 }
 

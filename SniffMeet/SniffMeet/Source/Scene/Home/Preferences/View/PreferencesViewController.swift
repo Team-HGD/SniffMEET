@@ -15,6 +15,14 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
     var presenter: (any PreferencesPresentable)?
     var settingsOptions: [PreferencesOption] = []
     private var tableView: UITableView = UITableView()
+    private var versionInfoLabel: UILabel = {
+        let label = UILabel()
+        label.text = Context.versionInfo
+        label.textColor = SNMColor.subGray2
+        label.font = SNMFont.caption
+        label.textAlignment = .right
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +31,7 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
     override func configureAttributes() {
         configureNavigationControllerAttributes()
         setTableView()
+        setVersionInfo()
     }
     
     private func configureNavigationControllerAttributes() {
@@ -32,8 +41,11 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
     }
 
     override func configureHierachy() {
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        [tableView,
+         versionInfoLabel].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
 
     override func configureConstraints() {
@@ -41,7 +53,16 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Context.marginTableViewToView)
+            tableView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor,
+                constant: -Context.marginTableViewToView),
+            versionInfoLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            versionInfoLabel.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: LayoutConstant.horizontalPadding),
+            versionInfoLabel.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor,
+                constant: -LayoutConstant.horizontalPadding)
         ])
     }
 
@@ -49,12 +70,18 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
     }
     
     private func setTableView() {
+        settingsOptions = presenter?.getSettingsOptions() ?? []
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Context.preferenceCellID)
         tableView.separatorStyle = .none
-        settingsOptions = presenter?.getSettingsOptions() ?? []
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Context.preferenceCellID)
         tableView.reloadData()
+    }
+    
+    private func setVersionInfo() {
+        guard let dictionary = Bundle.main.infoDictionary,
+        let version = dictionary["CFBundleShortVersionString"] as? String else { return }
+        versionInfoLabel.text = Context.versionInfo + version
     }
 }
 

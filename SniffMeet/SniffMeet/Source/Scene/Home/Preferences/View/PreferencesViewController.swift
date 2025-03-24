@@ -13,8 +13,8 @@ protocol PreferencesViewable: AnyObject {
 
 final class PreferencesViewController: BaseViewController, PreferencesViewable {
     var presenter: (any PreferencesPresentable)?
-    var settingsOptions: [PreferencesOption] = []
-    private var tableView: UITableView = UITableView()
+    var preferencesOptions: [PreferencesOption] = []
+    private var preferencesTableView: UITableView = UITableView()
     private var versionInfoLabel: UILabel = {
         let label = UILabel()
         label.text = Context.versionInfo
@@ -41,7 +41,7 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
     }
 
     override func configureHierachy() {
-        [tableView,
+        [preferencesTableView,
          versionInfoLabel].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -50,13 +50,13 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
 
     override func configureConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(
+            preferencesTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            preferencesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            preferencesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            preferencesTableView.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor,
                 constant: -Context.marginTableViewToView),
-            versionInfoLabel.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            versionInfoLabel.topAnchor.constraint(equalTo: preferencesTableView.bottomAnchor),
             versionInfoLabel.leadingAnchor.constraint(
                 equalTo: view.leadingAnchor,
                 constant: LayoutConstant.horizontalPadding),
@@ -70,12 +70,12 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
     }
     
     private func setTableView() {
-        settingsOptions = presenter?.getSettingsOptions() ?? []
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Context.preferenceCellID)
-        tableView.reloadData()
+        preferencesOptions = presenter?.getOptions() ?? []
+        preferencesTableView.delegate = self
+        preferencesTableView.dataSource = self
+        preferencesTableView.separatorStyle = .none
+        preferencesTableView.register(UITableViewCell.self, forCellReuseIdentifier: Context.preferenceCellID)
+        preferencesTableView.reloadData()
     }
     
     private func setVersionInfo() {
@@ -87,7 +87,7 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
 
 extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingsOptions.count
+        return preferencesOptions.count
     }
     
     func tableView(
@@ -97,7 +97,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(
             withIdentifier: Context.preferenceCellID,
             for: indexPath)
-        let option = settingsOptions[indexPath.row]
+        let option = preferencesOptions[indexPath.row]
         cell.textLabel?.text = option.title
         return cell
     }
@@ -113,8 +113,8 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        let option = settingsOptions[indexPath.row]
-        presenter?.didSelectPreferenceOption(option.type)
+        let option = preferencesOptions[indexPath.row]
+        presenter?.didSelectOption(option.type)
     }
     
 }

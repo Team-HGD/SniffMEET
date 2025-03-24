@@ -13,7 +13,7 @@ protocol PersonalInfoViewable: AnyObject {
 
 final class PersonalInfoViewController: BaseViewController, PersonalInfoViewable {
     var presenter: (any PersonalInfoPresentable)?
-    var personalInfoptions: [PersonalInfoOption] = []
+    var personalInfoOptions: [PersonalInfoOption] = []
     private var personalInfoTableView: UITableView = UITableView()
 
     override func viewDidLoad() {
@@ -51,7 +51,7 @@ final class PersonalInfoViewController: BaseViewController, PersonalInfoViewable
     }
     
     private func setTableView() {
-        personalInfoptions = presenter?.getOptions() ?? []
+        personalInfoOptions = presenter?.getOptions() ?? []
         personalInfoTableView.delegate = self
         personalInfoTableView.dataSource = self
         personalInfoTableView.separatorStyle = .none
@@ -62,7 +62,7 @@ final class PersonalInfoViewController: BaseViewController, PersonalInfoViewable
 
 extension PersonalInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return personalInfoptions.count
+        return personalInfoOptions.count
     }
     
     func tableView(
@@ -72,7 +72,7 @@ extension PersonalInfoViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(
             withIdentifier: Context.personalInfoCellID,
             for: indexPath)
-        let option = personalInfoptions[indexPath.row]
+        let option = personalInfoOptions[indexPath.row]
         cell.textLabel?.text = option.title
         return cell
     }
@@ -88,7 +88,7 @@ extension PersonalInfoViewController: UITableViewDelegate, UITableViewDataSource
         _ tableView: UITableView,
         didSelectRowAt indexPath: IndexPath
     ) {
-        let option = personalInfoptions[indexPath.row]
+        let option = personalInfoOptions[indexPath.row]
         presenter?.didSelectOption(option.type)
     }
     

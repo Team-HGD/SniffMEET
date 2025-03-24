@@ -18,11 +18,11 @@ final class PersonalInfoViewController: BaseViewController, PersonalInfoViewable
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func configureAttributes() {
-        configureNavigationControllerAttributes()
         setTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        configureNavigationControllerAttributes()
     }
     
     private func configureNavigationControllerAttributes() {

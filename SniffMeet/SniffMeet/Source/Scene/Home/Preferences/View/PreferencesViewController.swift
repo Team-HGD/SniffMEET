@@ -27,9 +27,12 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        configureNavigationControllerAttributes()
+    }
 
     override func configureAttributes() {
-        configureNavigationControllerAttributes()
         setTableView()
         setVersionInfo()
     }

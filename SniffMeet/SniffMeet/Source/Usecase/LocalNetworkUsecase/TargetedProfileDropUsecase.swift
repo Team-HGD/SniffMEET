@@ -97,19 +97,20 @@ final class TargetedProfileDropUsecaseImpl: NSObject, TargetedProfileDropUsecase
     func loadProfileData() {
         do {
             let dog = try dataManager.loadData(
-                forKey: Environment.UserDefaultsKey.dogInfo,
+                forKey: Environment.UserDefaultsKey.profileInfo,
                 type: ProfileInfo.self
             )
             guard let userID = try? SupabaseSessionManager.shared.userID.get() else { return }
-            let imageURL = try? dataManager.loadData(
-                forKey: Environment.UserDefaultsKey.profileImage,
+            let imageName = try? dataManager.loadData(
+                forKey: Environment.UserDefaultsKey.profileImageName,
                 type: String.self
             )
 
-            let dogProfile = DogDTO(id: userID,
+            let dogProfile = DogDTO(
+                id: userID,
                 name: dog.name,
                 keywords: dog.keywords,
-                profileImage: imageURL
+                profileImageName: imageName
             )
             let profileDropDTO = MPCProfileDropDTO(
                 token: nil,

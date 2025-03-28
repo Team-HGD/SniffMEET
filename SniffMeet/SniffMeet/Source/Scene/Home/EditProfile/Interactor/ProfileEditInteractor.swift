@@ -46,8 +46,8 @@ final class ProfileEditInteractor: ProfileEditInteractable {
     func requestProfile() -> (ProfileInfo, Data?) {
         do {
             let profileInfo = try loadUserInfoUsecase.execute()
-            let profileImage = try loadUserProfileImageUsecase.execute()
-            return (profileInfo, profileImage)
+            let profileImageData = try loadUserProfileImageUsecase.execute()
+            return (profileInfo, profileImageData)
         } catch {
             // FIXME: 에러 핸들링 필요
             return (ProfileInfo.example, nil)

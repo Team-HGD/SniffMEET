@@ -12,7 +12,7 @@ struct WalkLog: Codable, Equatable {
     let distance: Double
     let startDate: Date
     let endDate: Date
-    let image: Data?
+    let imageData: Data?
 
     var duration: TimeInterval {
         endDate.timeIntervalSince(startDate)

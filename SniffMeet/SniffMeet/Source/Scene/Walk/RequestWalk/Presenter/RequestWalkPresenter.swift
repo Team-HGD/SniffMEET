@@ -79,7 +79,7 @@ final class RequestWalkPresenter: RequestWalkPresentable {
 extension RequestWalkPresenter: RequestWalkInteractorOutput {
     func didFetchMateInfo(mateInfo: Mate) {
         output.mateInfo.send(mateInfo)
-        if let profileImageName = mateInfo.profileImageURLString {
+        if let profileImageName = mateInfo.profileImageName {
             interactor?.requestProfileImage(imageName: profileImageName)
         }
     }

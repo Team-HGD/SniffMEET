@@ -10,7 +10,7 @@ import Foundation
 protocol ProcessedWalkInteractable: AnyObject {
     var presenter: (any ProcessedWalkInteractorOutput)? { get set }
     func fetchSenderInfo(userID: UUID)
-    func fetchProfileImage(urlString: String)
+    func fetchProfileImage(named imageName: String)
     func convertLocationToText(latitude: Double, longtitude: Double)
 }
 
@@ -44,16 +44,16 @@ final class ProcessedWalkInteractor: ProcessedWalkInteractable {
                     return
                 }
                 presenter?.didFetchUserInfo(senderInfo: senderInfo)
-                guard let profileImageURL = senderInfo.profileImageURL else { return }
-                fetchProfileImage(urlString: profileImageURL)
+                guard let profileImageName = senderInfo.profileImageName else { return }
+                fetchProfileImage(named: profileImageName)
             } catch {
                 presenter?.didFailToFetchWalkRequest(error: error)
             }
         }
     }
-    func fetchProfileImage(urlString: String) {
+    func fetchProfileImage(named imageName: String) {
         Task { [weak self] in
-            let imageData = try await self?.requestProfileImageUsecase.execute(fileName: urlString)
+            let imageData = await self?.requestProfileImageUsecase.execute(fileName: imageName)
             self?.presenter?.didFetchProfileImage(with: imageData)
         }
     }

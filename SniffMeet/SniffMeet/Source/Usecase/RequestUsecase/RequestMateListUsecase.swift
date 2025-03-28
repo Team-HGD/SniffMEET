@@ -39,10 +39,12 @@ struct RequestMateListUsecaseImpl: RequestMateListUsecase {
                 .request()
             let mateDTOList = try jsonDecoder.decode([UserInfoDTO].self, from: data)
             return mateDTOList.map {
-                Mate(name: $0.dogName,
-                     userID: $0.id,
-                     keywords: $0.keywords,
-                     profileImageURLString: $0.profileImageURL)
+                Mate(
+                    name: $0.dogName,
+                    userID: $0.id,
+                    keywords: $0.keywords,
+                    profileImageName: $0.profileImageName
+                )
             }
         } catch let error as SupabaseSessionError {
             throw SNMError(level: .notExistSession, error: error)

@@ -37,6 +37,8 @@ final class ProfileSetInteractor: ProfileSetInteractable {
         Task {
             let profileImageName = try await saveProfileImageUsecase.execute(imageData: imageData)
             try await updateUserInfoUsecase.execute(
+                // TODO: Supabase 테이블 어트리뷰트 이름 조정 후 변경
+                // with: ["nickname": nickname, "profile_image_name": profileImageName]
                 with: ["nickname": nickname, "profile_image_url": profileImageName]
             )
         }

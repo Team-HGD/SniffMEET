@@ -114,7 +114,7 @@ final class TrackWalkInteractor: TrackWalkInteractable {
             distance: totalDistance,
             startDate: startDate,
             endDate: endDate,
-            image: snapshotImageData
+            imageData: snapshotImageData
         )
     }
 

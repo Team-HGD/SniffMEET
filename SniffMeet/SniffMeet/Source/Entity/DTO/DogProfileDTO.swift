@@ -11,13 +11,13 @@ struct DogProfileDTO: Codable {
     let id: UUID
     let name: String
     let keywords: [Keyword]
-    var profileImage: Data?
+    var profileImageData: Data?
     
-    init(id: UUID, name: String, keywords: [Keyword], profileImage: Data? = nil) {
+    init(id: UUID, name: String, keywords: [Keyword], profileImageData: Data? = nil) {
         self.id = id
         self.name = name
         self.keywords = keywords
-        self.profileImage = profileImage
+        self.profileImageData = profileImageData
     }
     init(dogDTO: DogDTO) {
         id = dogDTO.id
@@ -30,12 +30,14 @@ struct DogDTO: Codable {
     let id: UUID
     let name: String
     let keywords: [Keyword]
-    var profileImage: String?
+    var profileImageName: String?
 }
 
 extension DogProfileDTO {
-    static var example: DogProfileDTO = DogProfileDTO(id: UUID(uuidString: "4a8c392f-24af-4fbf-9043-11b4dd4c131b") ?? .init(),
-                                                      name: "두식",
-                                                      keywords: [.energetic, .friendly],
-                                                      profileImage: nil)
+    static var example: DogProfileDTO = DogProfileDTO(
+        id: UUID(uuidString: "4a8c392f-24af-4fbf-9043-11b4dd4c131b") ?? .init(),
+        name: "두식",
+        keywords: [.energetic, .friendly],
+        profileImageData: nil
+    )
 }

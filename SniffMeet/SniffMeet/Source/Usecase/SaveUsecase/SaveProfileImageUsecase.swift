@@ -97,7 +97,7 @@ struct SaveProfileImageUsecaseImpl: SaveProfileImageUsecase {
     private func saveToLocal(fileName: String, imageData: Data) throws {
         try localDataManager.set(
             value: fileName,
-            forKey: Environment.UserDefaultsKey.profileImage
+            forKey: Environment.UserDefaultsKey.profileImageName
         )
         try fileManager.set(
             value: imageData,

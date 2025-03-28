@@ -41,21 +41,21 @@ struct SaveUserInfoUsecaseImpl: SaveUserInfoUsecase {
                 size: userInfo.size,
                 keywords: userInfo.keywords,
                 nickname: userInfo.nickname,
-                profileImageURL: nil
+                profileImageName: nil
             )
             try await saveToRemote(dto: dto)
         } catch let error as UserDefaultsError {
             throw SNMError(level: .logOnly, error: error)
         } catch let error as SupabaseSessionError {
-            try localDataManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
+            try localDataManager.delete(forKey: Environment.UserDefaultsKey.profileInfo)
             throw SNMError(level: .notExistSession, error: error)
         } catch let error as SupabaseDBError {
-            try localDataManager.delete(forKey: Environment.UserDefaultsKey.dogInfo)
+            try localDataManager.delete(forKey: Environment.UserDefaultsKey.profileInfo)
             throw SNMError(level: .retryable, error: error)
         }
     }
     private func saveToLocal(userInfo: ProfileInfo) throws {
-        try localDataManager.set(value: userInfo, forKey: Environment.UserDefaultsKey.dogInfo)
+        try localDataManager.set(value: userInfo, forKey: Environment.UserDefaultsKey.profileInfo)
     }
     private func saveToRemote(dto: UserInfoDTO) async throws {
         let userData = try jsonEncoder.encode(dto)

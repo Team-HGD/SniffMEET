@@ -68,12 +68,9 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
                 constant: -LayoutConstant.horizontalPadding)
         ])
     }
-
-    override func bind() {
-    }
     
     private func setTableView() {
-        preferencesOptions = presenter?.getOptions() ?? []
+        preferencesOptions = presenter?.loadOptions() ?? []
         preferencesTableView.delegate = self
         preferencesTableView.dataSource = self
         preferencesTableView.separatorStyle = .none
@@ -83,7 +80,10 @@ final class PreferencesViewController: BaseViewController, PreferencesViewable {
     
     private func setVersionInfo() {
         guard let dictionary = Bundle.main.infoDictionary,
-        let version = dictionary["CFBundleShortVersionString"] as? String else { return }
+        let version = dictionary["CFBundleShortVersionString"] as? String else {
+            versionInfoLabel.text = Context.unknownVersion
+            return
+        }
         versionInfoLabel.text = Context.versionInfo + version
     }
 }
@@ -102,6 +102,7 @@ extension PreferencesViewController: UITableViewDelegate, UITableViewDataSource 
             for: indexPath)
         let option = preferencesOptions[indexPath.row]
         cell.textLabel?.text = option.title
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
     }
     
@@ -126,6 +127,7 @@ private extension PreferencesViewController {
     enum Context {
         static let title: String = "설정"
         static let versionInfo: String = "버전 정보 "
+        static let unknownVersion: String = "Unknown Version"
         static let preferenceCellID: String = "PreferenceCell"
         
         static let cellHeight: CGFloat = 60

@@ -10,7 +10,7 @@ protocol PersonalInfoPresentable: AnyObject {
     var interactor: (any PersonalInfoInteractable)? { get set }
     var router: (any PersonalInfoRoutable)? { get set }
     
-    func getOptions() -> [PersonalInfoOption]
+    func loadOptions() -> [PersonalInfoOption]
     func didSelectOption(_ type: PersonalInfoType)
 }
 
@@ -24,7 +24,7 @@ final class PersonalInfoPresenter: PersonalInfoPresentable {
     
     private var personalInfoOptions: [PersonalInfoOption] = []
     
-    func getOptions() -> [PersonalInfoOption] {
+    func loadOptions() -> [PersonalInfoOption] {
         personalInfoOptions = [
             PersonalInfoOption(title: "비밀번호 변경", type: .changePW),
             PersonalInfoOption(title: "회원 탈퇴", type: .delectAccount)

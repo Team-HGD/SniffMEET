@@ -29,7 +29,7 @@ final class HomeRouter: NSObject, HomeRoutable {
     }
     func showPreferencesView(homeView: any HomeViewable) {
         guard let homeView = homeView as? UIViewController else { return }
-        let preferencesViewController = PreferencesRouter.create()
+        let preferencesViewController = PreferencesRouter.createPreferencesModule()
         push(from: homeView, to: preferencesViewController, animated: true)
     }
     func showAlert(homeView: any HomeViewable, title: String, message: String) {

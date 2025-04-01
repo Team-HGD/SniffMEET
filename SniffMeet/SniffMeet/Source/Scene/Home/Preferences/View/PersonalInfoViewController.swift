@@ -47,11 +47,8 @@ final class PersonalInfoViewController: BaseViewController, PersonalInfoViewable
         ])
     }
 
-    override func bind() {
-    }
-    
     private func setTableView() {
-        personalInfoOptions = presenter?.getOptions() ?? []
+        personalInfoOptions = presenter?.loadOptions() ?? []
         personalInfoTableView.delegate = self
         personalInfoTableView.dataSource = self
         personalInfoTableView.separatorStyle = .none
@@ -74,6 +71,7 @@ extension PersonalInfoViewController: UITableViewDelegate, UITableViewDataSource
             for: indexPath)
         let option = personalInfoOptions[indexPath.row]
         cell.textLabel?.text = option.title
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
     }
     

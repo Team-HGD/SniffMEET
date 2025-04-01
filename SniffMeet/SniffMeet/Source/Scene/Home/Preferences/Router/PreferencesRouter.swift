@@ -16,7 +16,7 @@ protocol PreferencesRoutable: AnyObject, Routable {
 }
 
 protocol PreferencesModuleBuildable {
-    static func create() -> UIViewController
+    static func createPreferencesModule() -> UIViewController
 }
 
 final class PreferencesRouter: PreferencesRoutable {
@@ -24,7 +24,7 @@ final class PreferencesRouter: PreferencesRoutable {
 
     func showPersonalInfoView(view: any PreferencesViewable) {
         guard let view = view as? UIViewController else { return }
-        let personalInfoView = PersonalInfoRouter.create()
+        let personalInfoView = PersonalInfoRouter.createPersonalInfoModule()
         push(from: view, to: personalInfoView, animated: true)
     }
     func showNotificationSettingView() {
@@ -35,7 +35,7 @@ final class PreferencesRouter: PreferencesRoutable {
 }
 
 extension PreferencesRouter: PreferencesModuleBuildable {
-    static func create() -> UIViewController {
+    static func createPreferencesModule() -> UIViewController {
         let view: PreferencesViewable & UIViewController = PreferencesViewController()
         let presenter: PreferencesPresentable & PreferencesInteractorOutput = PreferencesPresenter()
         let interactor: PreferencesInteractable = PreferencesInteractor()

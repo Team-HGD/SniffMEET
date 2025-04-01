@@ -10,7 +10,7 @@ protocol PreferencesPresentable: AnyObject {
     var interactor: (any PreferencesInteractable)? { get set }
     var router: (any PreferencesRoutable)? { get set }
     
-    func getOptions() -> [PreferencesOption]
+    func loadOptions() -> [PreferencesOption]
     func didSelectOption(_ type: PreferencesType)
 }
 
@@ -24,7 +24,7 @@ final class PreferencesPresenter: PreferencesPresentable {
     
     private var preferencesOptions: [PreferencesOption] = []
     
-    func getOptions() -> [PreferencesOption] {
+    func loadOptions() -> [PreferencesOption] {
         preferencesOptions = [
             PreferencesOption(title: "개인정보 수정", type: .personalInfo),
             PreferencesOption(title: "알림 설정", type: .notificationSetting),

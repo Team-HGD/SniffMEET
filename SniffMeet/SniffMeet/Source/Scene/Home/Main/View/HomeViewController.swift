@@ -126,11 +126,11 @@ final class HomeViewController: BaseViewController, HomeViewable {
             .store(in: &cancellables)
     }
 
-    @objc func notificationBarButtonDidTap() {
+    @objc private func notificationBarButtonDidTap() {
         presenter?.notificationBarButtonDidTap()
     }
     
-    @objc func preferencesBarButtonDidTap() {
+    @objc private func preferencesBarButtonDidTap() {
         presenter?.preferencesBarButtonDidTap()
     }
 }

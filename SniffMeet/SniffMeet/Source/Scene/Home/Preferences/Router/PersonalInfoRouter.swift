@@ -14,7 +14,7 @@ protocol PersonalInfoRoutable: AnyObject, Routable {
 }
 
 protocol PersonalInfoModuleBuildable {
-    static func create() -> UIViewController
+    static func createPersonalInfoModule() -> UIViewController
 }
 
 final class PersonalInfoRouter: PersonalInfoRoutable {
@@ -28,7 +28,7 @@ final class PersonalInfoRouter: PersonalInfoRoutable {
 }
 
 extension PersonalInfoRouter: PersonalInfoModuleBuildable {
-    static func create() -> UIViewController {
+    static func createPersonalInfoModule() -> UIViewController {
         let view: PersonalInfoViewable & UIViewController = PersonalInfoViewController()
         let presenter: PersonalInfoPresentable & PersonalInfoInteractorOutput = PersonalInfoPresenter()
         let interactor: PersonalInfoInteractable = PersonalInfoInteractor()

@@ -228,8 +228,8 @@ final class ProfileEditViewController: BaseViewController, ProfileEditViewable {
         completeEditButton.publisher(event: .touchUpInside)
             .sink { [weak self] _ in
                 self?.completeEditButton.isEnabled = false
-                self?.snmProgressToast.show(in: self?.view, isDim: true)
                 self?.handleCompleteButtonAction()
+                self?.snmProgressToast.show(in: self?.view, isDim: true)
             }
             .store(in: &cancellables)
     }

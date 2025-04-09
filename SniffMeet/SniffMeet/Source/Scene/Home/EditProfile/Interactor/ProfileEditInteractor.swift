@@ -91,7 +91,7 @@ final class ProfileEditInteractor: ProfileEditInteractable {
         do {
             try await updateUserInfoUsecase.execute(
                 with: [
-                    "name": name,
+                    "dog_name": name,
                     "age": age,
                     "size": size,
                     "keywords": keywords

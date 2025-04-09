@@ -51,7 +51,7 @@ struct UpdateUserInfoUsecaseImpl: UpdateUserInfoUsecase {
         from oldProfileInfo: ProfileInfo
     ) throws {
         let newProfileInfo = ProfileInfo(
-            name: updatedProperty["name"] as? String ?? oldProfileInfo.name,
+            name: updatedProperty["dog_name"] as? String ?? oldProfileInfo.name,
             age: updatedProperty["age"] as? UInt8 ?? oldProfileInfo.age,
             sex: oldProfileInfo.sex,
             sexUponIntake: updatedProperty["sexUponIntake"] as? Bool ?? oldProfileInfo.sexUponIntake,

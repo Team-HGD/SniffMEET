@@ -52,4 +52,8 @@ enum Environment {
         static let sessionExpired = Notification.Name("sessionExpired")
         static let profileDropFailed = Notification.Name("profileDropFailed")
     }
+
+    enum GoogleSignIn {
+        static var clientID: String = Bundle.main.infoDictionary?["GOOGLE_CLIENT_ID"] as? String ?? ""
+    }
 }

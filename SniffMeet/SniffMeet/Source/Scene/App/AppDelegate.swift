@@ -8,6 +8,7 @@
 #if !DEBUG
 import Firebase
 #endif
+import GoogleSignIn
 import UIKit
 
 @main
@@ -21,6 +22,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         UNUserNotificationCenter.current().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
+        GIDSignIn.sharedInstance.configuration = GIDConfiguration(
+            clientID: Environment.GoogleSignIn.clientID
+        )
 #if !DEBUG
         FirebaseApp.configure()
 #endif

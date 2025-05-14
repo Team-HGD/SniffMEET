@@ -5,6 +5,7 @@
 //  Created by sole on 11/4/24.
 //
 
+import GoogleSignIn
 import UIKit
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -29,6 +30,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         window?.rootViewController = sessionController
         window?.makeKeyAndVisible()
+    }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let url = URLContexts.first?.url else { return }
+        // TODO: url scheme에 따라 분기처리
+        GIDSignIn.sharedInstance.handle(url)
     }
 
     /// push notification을 통해 앱에 처음 진입한 경우 라우팅을 진행합니다.

@@ -90,7 +90,7 @@ struct SupabaseSessionErrorHandler: ErrorHandler {
                 name: Environment.NotificationCenterName.sessionExpired,
                 object: self
             )
-        case .loadSessionFailed, .refreshSessionFailed, .saveSessionFailed:
+        case .loadSessionFailed, .refreshSessionFailed, .saveSessionFailed, .deleteSessionFailed:
             break
         }
     }

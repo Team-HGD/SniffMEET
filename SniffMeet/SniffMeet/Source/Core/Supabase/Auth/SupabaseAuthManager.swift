@@ -125,7 +125,6 @@ final class SupabaseAuthManager: AuthManageable {
                 throw SupabaseAuthError.signUpFailed
             }
         } catch {
-            print(error.localizedDescription)
             throw SupabaseAuthError.signUpFailed
         }
     }

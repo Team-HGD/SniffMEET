@@ -488,6 +488,31 @@
 		FD119F4E2CED87C200BE22BD /* SelectLocationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD119F4D2CED87BC00BE22BD /* SelectLocationPresenter.swift */; };
 		FD119F502CED87E500BE22BD /* SelectLocationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD119F4F2CED87DD00BE22BD /* SelectLocationRouter.swift */; };
 		FD119F522CED881300BE22BD /* SelectLocationModuleBuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD119F512CED880A00BE22BD /* SelectLocationModuleBuildable.swift */; };
+		FD14C2572DD4727D00AC9ABB /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = FD14C2562DD4727D00AC9ABB /* GoogleSignIn */; };
+		FD14C2592DD4727D00AC9ABB /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FD14C2582DD4727D00AC9ABB /* GoogleSignInSwift */; };
+		FD14C25F2DD472DE00AC9ABB /* SupabaseAuthTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C25E2DD472D700AC9ABB /* SupabaseAuthTypes.swift */; };
+		FD14C2602DD472DE00AC9ABB /* SupabaseAuthTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C25E2DD472D700AC9ABB /* SupabaseAuthTypes.swift */; };
+		FD14C2612DD472DE00AC9ABB /* SupabaseAuthTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C25E2DD472D700AC9ABB /* SupabaseAuthTypes.swift */; };
+		FD14C26C2DD4736600AC9ABB /* GoogleAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C26B2DD4736600AC9ABB /* GoogleAuthManager.swift */; };
+		FD14C26D2DD4736600AC9ABB /* GoogleAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C26B2DD4736600AC9ABB /* GoogleAuthManager.swift */; };
+		FD14C26E2DD4736600AC9ABB /* GoogleAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C26B2DD4736600AC9ABB /* GoogleAuthManager.swift */; };
+		FD14C2702DD4737900AC9ABB /* AppleAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C26F2DD4737900AC9ABB /* AppleAuthManager.swift */; };
+		FD14C2712DD4737900AC9ABB /* AppleAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C26F2DD4737900AC9ABB /* AppleAuthManager.swift */; };
+		FD14C2722DD4737900AC9ABB /* AppleAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C26F2DD4737900AC9ABB /* AppleAuthManager.swift */; };
+		FD14C2742DD4739F00AC9ABB /* SignInEmailUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2732DD4739F00AC9ABB /* SignInEmailUsecase.swift */; };
+		FD14C2752DD4739F00AC9ABB /* SignInEmailUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2732DD4739F00AC9ABB /* SignInEmailUsecase.swift */; };
+		FD14C2772DD473AB00AC9ABB /* SignInAppleUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2762DD473AB00AC9ABB /* SignInAppleUsecase.swift */; };
+		FD14C2782DD473AB00AC9ABB /* SignInAppleUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2762DD473AB00AC9ABB /* SignInAppleUsecase.swift */; };
+		FD14C27A2DD473B400AC9ABB /* SignInGoogleUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2792DD473B400AC9ABB /* SignInGoogleUsecase.swift */; };
+		FD14C27B2DD473B400AC9ABB /* SignInGoogleUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2792DD473B400AC9ABB /* SignInGoogleUsecase.swift */; };
+		FD14C27D2DD473BF00AC9ABB /* SignInOpenIDUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C27C2DD473BF00AC9ABB /* SignInOpenIDUsecase.swift */; };
+		FD14C27E2DD473BF00AC9ABB /* SignInOpenIDUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C27C2DD473BF00AC9ABB /* SignInOpenIDUsecase.swift */; };
+		FD14C2802DD473CD00AC9ABB /* ResendSignUpEmailUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C27F2DD473CD00AC9ABB /* ResendSignUpEmailUsecase.swift */; };
+		FD14C2812DD473CD00AC9ABB /* ResendSignUpEmailUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C27F2DD473CD00AC9ABB /* ResendSignUpEmailUsecase.swift */; };
+		FD14C2832DD473D900AC9ABB /* SignUpEmailUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2822DD473D900AC9ABB /* SignUpEmailUsecase.swift */; };
+		FD14C2842DD473D900AC9ABB /* SignUpEmailUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2822DD473D900AC9ABB /* SignUpEmailUsecase.swift */; };
+		FD14C2872DD4741800AC9ABB /* OpenIDProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2862DD4741800AC9ABB /* OpenIDProvider.swift */; };
+		FD14C2882DD4741800AC9ABB /* OpenIDProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2862DD4741800AC9ABB /* OpenIDProvider.swift */; };
 		FD159A7D2D35166D00B425D9 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD880B612CF433AC0093BEB9 /* Environment.swift */; };
 		FD243CFA2D621FC600971162 /* SNMProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD243CF92D621FC200971162 /* SNMProgressView.swift */; };
 		FD243CFB2D621FC600971162 /* SNMProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD243CF92D621FC200971162 /* SNMProgressView.swift */; };
@@ -867,6 +892,16 @@
 		FD119F4D2CED87BC00BE22BD /* SelectLocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationPresenter.swift; sourceTree = "<group>"; };
 		FD119F4F2CED87DD00BE22BD /* SelectLocationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationRouter.swift; sourceTree = "<group>"; };
 		FD119F512CED880A00BE22BD /* SelectLocationModuleBuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationModuleBuildable.swift; sourceTree = "<group>"; };
+		FD14C25E2DD472D700AC9ABB /* SupabaseAuthTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAuthTypes.swift; sourceTree = "<group>"; };
+		FD14C26B2DD4736600AC9ABB /* GoogleAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthManager.swift; sourceTree = "<group>"; };
+		FD14C26F2DD4737900AC9ABB /* AppleAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthManager.swift; sourceTree = "<group>"; };
+		FD14C2732DD4739F00AC9ABB /* SignInEmailUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailUsecase.swift; sourceTree = "<group>"; };
+		FD14C2762DD473AB00AC9ABB /* SignInAppleUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleUsecase.swift; sourceTree = "<group>"; };
+		FD14C2792DD473B400AC9ABB /* SignInGoogleUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInGoogleUsecase.swift; sourceTree = "<group>"; };
+		FD14C27C2DD473BF00AC9ABB /* SignInOpenIDUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInOpenIDUsecase.swift; sourceTree = "<group>"; };
+		FD14C27F2DD473CD00AC9ABB /* ResendSignUpEmailUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendSignUpEmailUsecase.swift; sourceTree = "<group>"; };
+		FD14C2822DD473D900AC9ABB /* SignUpEmailUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailUsecase.swift; sourceTree = "<group>"; };
+		FD14C2862DD4741800AC9ABB /* OpenIDProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenIDProvider.swift; sourceTree = "<group>"; };
 		FD159A7C2D35104500B425D9 /* SNMTestplan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SNMTestplan.xctestplan; sourceTree = "<group>"; };
 		FD243CF92D621FC200971162 /* SNMProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMProgressView.swift; sourceTree = "<group>"; };
 		FD243CFC2D62332000971162 /* SNMToastAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMToastAnimation.swift; sourceTree = "<group>"; };
@@ -976,9 +1011,11 @@
 				FDC5D9BD2D5C7E0400380533 /* FirebaseAnalytics in Frameworks */,
 				FDC5D9C32D5C7E0400380533 /* FirebaseCore in Frameworks */,
 				FDC5D9BF2D5C7E0400380533 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				FD14C2592DD4727D00AC9ABB /* GoogleSignInSwift in Frameworks */,
 				FDC5D9C52D5C7E0400380533 /* FirebaseCrashlytics in Frameworks */,
 				99A9C0532D394AD100E669C8 /* OrderedCollections in Frameworks */,
 				FDC5D9C12D5C7E0400380533 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				FD14C2572DD4727D00AC9ABB /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,6 +1085,7 @@
 		320044792CEC490600D08B6D /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				FD14C2852DD4741100AC9ABB /* Auth */,
 				A2BD49F02CF72A8800AC72A7 /* DTO */,
 				99E79FA72D556E1500E48552 /* Report.swift */,
 				320522BD2D0181A700F1677C /* ImageCacheable.swift */,
@@ -1126,6 +1164,12 @@
 		320047A42CF9E2A200D08B6D /* RequestUsecase */ = {
 			isa = PBXGroup;
 			children = (
+				FD14C2732DD4739F00AC9ABB /* SignInEmailUsecase.swift */,
+				FD14C2762DD473AB00AC9ABB /* SignInAppleUsecase.swift */,
+				FD14C2792DD473B400AC9ABB /* SignInGoogleUsecase.swift */,
+				FD14C27C2DD473BF00AC9ABB /* SignInOpenIDUsecase.swift */,
+				FD14C27F2DD473CD00AC9ABB /* ResendSignUpEmailUsecase.swift */,
+				FD14C2822DD473D900AC9ABB /* SignUpEmailUsecase.swift */,
 				FD259F2E2D6F0AFA007B182D /* RequestWalkLogListUsecase.swift */,
 				99E79FA42D556C5600E48552 /* RequestReportUsecase.swift */,
 				FD1152742CFB9F33008955C4 /* CheckFirstLaunchUsecase.swift */,
@@ -1192,6 +1236,7 @@
 		32081B1F2D5C7FFA00D19235 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FD14C26A2DD4734D00AC9ABB /* OAuth */,
 				320047B72CFD365700D08B6D /* PushNotification */,
 				FDA4913A2CDA04BB00A36FB0 /* Repository */,
 				FD0634242CE596A7003C9D6B /* SNMNetwork */,
@@ -1611,6 +1656,7 @@
 		A24082652CEB2475009109A0 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				FD14C25E2DD472D700AC9ABB /* SupabaseAuthTypes.swift */,
 				A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */,
 				A240826F2CEB27DE009109A0 /* SupabaseAuthRequest.swift */,
 			);
@@ -1785,6 +1831,23 @@
 				FDE14A4C2CE8CEDD001F7A9D /* Mock */,
 			);
 			path = SNMNetwork;
+			sourceTree = "<group>";
+		};
+		FD14C26A2DD4734D00AC9ABB /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				FD14C26F2DD4737900AC9ABB /* AppleAuthManager.swift */,
+				FD14C26B2DD4736600AC9ABB /* GoogleAuthManager.swift */,
+			);
+			path = OAuth;
+			sourceTree = "<group>";
+		};
+		FD14C2852DD4741100AC9ABB /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FD14C2862DD4741800AC9ABB /* OpenIDProvider.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		FD243CF82D621FBA00971162 /* SNMToast */ = {
@@ -2664,6 +2727,8 @@
 				FDC5D9C02D5C7E0400380533 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				FDC5D9C22D5C7E0400380533 /* FirebaseCore */,
 				FDC5D9C42D5C7E0400380533 /* FirebaseCrashlytics */,
+				FD14C2562DD4727D00AC9ABB /* GoogleSignIn */,
+				FD14C2582DD4727D00AC9ABB /* GoogleSignInSwift */,
 			);
 			productName = SniffMeet;
 			productReference = FD3A03202CD8CDE50047B7ED /* SniffMeet.app */;
@@ -2753,6 +2818,7 @@
 				FD3A03452CD8D2650047B7ED /* XCRemoteSwiftPackageReference "SwiftLint" */,
 				99A9C0512D394ABF00E669C8 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				FDC5D9BB2D5C7E0400380533 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				FD14C2552DD4727D00AC9ABB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = FD3A03212CD8CDE50047B7ED /* Products */;
 			projectDirPath = "";
@@ -2849,6 +2915,7 @@
 				FDC8A02E2D66FA190097F00A /* SNMErrorHandler.swift in Sources */,
 				32BD48EB2D40B4790078DA9C /* SNMColor.swift in Sources */,
 				99525F2D2D7466FE00B6E17E /* ResetPwViewController.swift in Sources */,
+				FD14C27D2DD473BF00AC9ABB /* SignInOpenIDUsecase.swift in Sources */,
 				32BD48EA2D40AEBC0078DA9C /* RemoteDatabaseManagerMock.swift in Sources */,
 				32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */,
 				99E79F5C2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */,
@@ -2868,12 +2935,17 @@
 				99525EBB2D6563E800B6E17E /* UpdateTimeUsecase.swift in Sources */,
 				32BD48412D3FF02C0078DA9C /* ImageCacheable.swift in Sources */,
 				32BD48422D3FF02C0078DA9C /* OnBoardingPage.swift in Sources */,
+				FD14C2812DD473CD00AC9ABB /* ResendSignUpEmailUsecase.swift in Sources */,
+				FD14C27B2DD473B400AC9ABB /* SignInGoogleUsecase.swift in Sources */,
+				FD14C2882DD4741800AC9ABB /* OpenIDProvider.swift in Sources */,
 				32BD48432D3FF02C0078DA9C /* WalkLog.swift in Sources */,
+				FD14C2832DD473D900AC9ABB /* SignUpEmailUsecase.swift in Sources */,
 				32BD48442D3FF02C0078DA9C /* WalkNoti.swift in Sources */,
 				32BD48452D3FF02C0078DA9C /* Mate.swift in Sources */,
 				32081A6A2D547F9F00D19235 /* MPCSessionConcurrencyTest.swift in Sources */,
 				32BD48462D3FF02C0078DA9C /* ProfileInfo.swift in Sources */,
 				32BD48472D3FF02C0078DA9C /* Keyword.swift in Sources */,
+				FD14C2782DD473AB00AC9ABB /* SignInAppleUsecase.swift in Sources */,
 				32BD48482D3FF02C0078DA9C /* Size.swift in Sources */,
 				99E795CA2D8A97D5001C9B18 /* PreferencesPresenter.swift in Sources */,
 				32BD48492D3FF02C0078DA9C /* Sex.swift in Sources */,
@@ -2920,6 +2992,7 @@
 				32BD48672D3FF02C0078DA9C /* SNMRequestConvertible.swift in Sources */,
 				32BD48682D3FF02C0078DA9C /* Endpoint.swift in Sources */,
 				32BD48692D3FF02C0078DA9C /* SNMNetworkResponse.swift in Sources */,
+				FD14C2742DD4739F00AC9ABB /* SignInEmailUsecase.swift in Sources */,
 				99525F332D74685D00B6E17E /* ResetPwPresenter.swift in Sources */,
 				32BD486A2D3FF02C0078DA9C /* Data + append.swift in Sources */,
 				32BD486B2D3FF02C0078DA9C /* URLRequest + append.swift in Sources */,
@@ -2967,6 +3040,7 @@
 				A2FE77232D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */,
 				A2FE77722D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
 				32BD48842D3FF02C0078DA9C /* InputTextField.swift in Sources */,
+				FD14C2722DD4737900AC9ABB /* AppleAuthManager.swift in Sources */,
 				32BD48852D3FF02C0078DA9C /* KeywordButton.swift in Sources */,
 				99E79F9C2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */,
 				32BD48862D3FF02C0078DA9C /* KeywordView.swift in Sources */,
@@ -3007,6 +3081,7 @@
 				32BD48A02D3FF02C0078DA9C /* ProfileEditViewController.swift in Sources */,
 				32BD48A12D3FF02C0078DA9C /* HomeModuleBuilder.swift in Sources */,
 				32BD48A22D3FF02C0078DA9C /* HomeViewController.swift in Sources */,
+				FD14C26E2DD4736600AC9ABB /* GoogleAuthManager.swift in Sources */,
 				32BD48A32D3FF02C0078DA9C /* ProfileCardView.swift in Sources */,
 				32BD48A42D3FF02C0078DA9C /* HomeInteractor.swift in Sources */,
 				32BD48A52D3FF02C0078DA9C /* HomePresenter.swift in Sources */,
@@ -3077,6 +3152,7 @@
 				32BD48D12D3FF02C0078DA9C /* NIManager.swift in Sources */,
 				99E79FAB2D556E8600E48552 /* ReportDTO.swift in Sources */,
 				32BD48D22D3FF02C0078DA9C /* MPCManager.swift in Sources */,
+				FD14C2612DD472DE00AC9ABB /* SupabaseAuthTypes.swift in Sources */,
 				32BD48D32D3FF02C0078DA9C /* MPCAdvertiser.swift in Sources */,
 				32BD48D42D3FF02C0078DA9C /* MPCBroswer.swift in Sources */,
 				32BD48D52D3FF02C0078DA9C /* SupabaseConfig.swift in Sources */,
@@ -3121,11 +3197,14 @@
 				FD159A7D2D35166D00B425D9 /* Environment.swift in Sources */,
 				FD331A8B2CF33E7100F39426 /* UserDefaultsManager.swift in Sources */,
 				FD331A8C2CF33E7100F39426 /* KeychainManager.swift in Sources */,
+				FD14C26D2DD4736600AC9ABB /* GoogleAuthManager.swift in Sources */,
+				FD14C2712DD4737900AC9ABB /* AppleAuthManager.swift in Sources */,
 				A2FE77742D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
 				FD331A7D2CF33D0500F39426 /* SupabaseStorageRequest.swift in Sources */,
 				FD331A7E2CF33D0500F39426 /* SupabaseConfig.swift in Sources */,
 				FD331A802CF33D0500F39426 /* SupabaseAuthManager.swift in Sources */,
 				FD331A8E2CF33F6700F39426 /* SupabaseStorageManager.swift in Sources */,
+				FD14C25F2DD472DE00AC9ABB /* SupabaseAuthTypes.swift in Sources */,
 				FD331A822CF33D0500F39426 /* SupabaseAuthRequest.swift in Sources */,
 				FD331A832CF33D0500F39426 /* SupabaseSession.swift in Sources */,
 				FD331A842CF33D0500F39426 /* SupabaseUser.swift in Sources */,
@@ -3166,6 +3245,7 @@
 				A24B1F322D3C33660012B860 /* CGImageCoder.swift in Sources */,
 				A24082702CEB27DE009109A0 /* SupabaseAuthRequest.swift in Sources */,
 				FDC8A02F2D66FA190097F00A /* SNMErrorHandler.swift in Sources */,
+				FD14C2802DD473CD00AC9ABB /* ResendSignUpEmailUsecase.swift in Sources */,
 				32C539622D64165A00CD89DF /* TrackWalkRouter.swift in Sources */,
 				99525F3B2D746AC000B6E17E /* ResetPwEmailInteractor.swift in Sources */,
 				A2C844D12CDBE1E5007F2970 /* (null) in Sources */,
@@ -3236,6 +3316,7 @@
 				A26BA0092D6DC84C000E5648 /* ProfileSetInteractor.swift in Sources */,
 				FD01D8FA2D40ACAF00AD4940 /* Extension + Array.swift in Sources */,
 				FD5134172CEB738D002E76F3 /* UIControl + Publisher.swift in Sources */,
+				FD14C2602DD472DE00AC9ABB /* SupabaseAuthTypes.swift in Sources */,
 				FD259F432D6FD2D0007B182D /* WalkLogListPresenter.swift in Sources */,
 				320047BE2CFDE37300D08B6D /* WalkRequestDTO.swift in Sources */,
 				320044852CEC836400D08B6D /* PaddingLabel.swift in Sources */,
@@ -3250,6 +3331,7 @@
 				FD9468D52CFD590700417DC1 /* ProfileEditPresenter.swift in Sources */,
 				FD9468D62CFD590700417DC1 /* ProfileEditInteractor.swift in Sources */,
 				FD9468D72CFD590700417DC1 /* ProfileEditRoutable.swift in Sources */,
+				FD14C27A2DD473B400AC9ABB /* SignInGoogleUsecase.swift in Sources */,
 				32C5395C2D64165800CD89DF /* TrackWalkViewPresenter.swift in Sources */,
 				993736422CFCACB100E3DD58 /* UpdateUserInfoUsecase.swift in Sources */,
 				320047B62CFCB8D000D08B6D /* EventConstant.swift in Sources */,
@@ -3269,6 +3351,7 @@
 				FD0634282CE596BD003C9D6B /* SNMRequestConvertible.swift in Sources */,
 				A2BA1B9A2CF260A50080575A /* MateListRouter.swift in Sources */,
 				99525F1C2D70736E00B6E17E /* SignUpViewController.swift in Sources */,
+				FD14C2842DD473D900AC9ABB /* SignUpEmailUsecase.swift in Sources */,
 				320043972CDF493C00D08B6D /* Extension + UIView.swift in Sources */,
 				FD119F4A2CED875F00BE22BD /* UpdateUserLocationUsecase.swift in Sources */,
 				FD1152772CFBA089008955C4 /* SaveFirstLaunchUsecase.swift in Sources */,
@@ -3319,6 +3402,7 @@
 				320043932CDF3D7F00D08B6D /* KeywordView.swift in Sources */,
 				320044772CEB4E1E00D08B6D /* RequestWalkUsecase.swift in Sources */,
 				320044982CED81F400D08B6D /* WalkNoti.swift in Sources */,
+				FD14C2702DD4737900AC9ABB /* AppleAuthManager.swift in Sources */,
 				99525F212D70747100B6E17E /* SignUpPresenter.swift in Sources */,
 				FDE14A502CE8D2FB001F7A9D /* URLRequest + append.swift in Sources */,
 				A2BA1B982CF260780080575A /* MateListPresenter.swift in Sources */,
@@ -3327,6 +3411,7 @@
 				FD06342C2CE5984D003C9D6B /* SNMNetworkResponse.swift in Sources */,
 				3200445E2CE5CA1B00D08B6D /* SaveUserInfoUsecase.swift in Sources */,
 				99525F102D6E80C300B6E17E /* SigninPresenter.swift in Sources */,
+				FD14C2752DD4739F00AC9ABB /* SignInEmailUsecase.swift in Sources */,
 				3200445E2CE5CA1B00D08B6D /* SaveUserInfoUsecase.swift in Sources */,
 				995D94AA2CECF8DD005A47BF /* RequestMateInteractor.swift in Sources */,
 				320522BE2D0181A800F1677C /* ImageCacheable.swift in Sources */,
@@ -3335,6 +3420,7 @@
 				99E795D22D8D440F001C9B18 /* PreferencesOption.swift in Sources */,
 				99E79FA02D54D45600E48552 /* ReportPickerInteractor.swift in Sources */,
 				FD51341B2CEB7AE8002E76F3 /* HomePresenter.swift in Sources */,
+				FD14C26C2DD4736600AC9ABB /* GoogleAuthManager.swift in Sources */,
 				FD11527F2CFC9029008955C4 /* NotificationListInteractor.swift in Sources */,
 				320043942CDF3D7F00D08B6D /* PrimaryButton.swift in Sources */,
 				FDE7689A2CF783EB00B5DE88 /* ConvertToWalkAPSUsecase.swift in Sources */,
@@ -3343,6 +3429,7 @@
 				320043952CDF3D7F00D08B6D /* Extension + Navigation.swift in Sources */,
 				A2AFC9492D016BFF0062B34E /* SNMToast.swift in Sources */,
 				320047B92CFD367300D08B6D /* PushNotificationConfig.swift in Sources */,
+				FD14C27E2DD473BF00AC9ABB /* SignInOpenIDUsecase.swift in Sources */,
 				FDBFA99F2CE1E50C00AA9220 /* SNMFont.swift in Sources */,
 				32C53A0C2D78624400CD89DF /* AlertContent.swift in Sources */,
 				FD119F4E2CED87C200BE22BD /* SelectLocationPresenter.swift in Sources */,
@@ -3376,6 +3463,7 @@
 				320047BB2CFD368100D08B6D /* PushNotificationRequest.swift in Sources */,
 				FD331A562CF23C5300F39426 /* WalkLogListViewController.swift in Sources */,
 				320047AA2CFB1C6200D08B6D /* RequestNotiListUsecase.swift in Sources */,
+				FD14C2872DD4741800AC9ABB /* OpenIDProvider.swift in Sources */,
 				320044672CE6125100D08B6D /* DataManager.swift in Sources */,
 				FD2921342D632333009D0762 /* DimPresentable.swift in Sources */,
 				3200449C2CEDA87800D08B6D /* RespondWalkRequestUsecase.swift in Sources */,
@@ -3414,6 +3502,7 @@
 				A23A3B732CF4683F00A58705 /* Mate.swift in Sources */,
 				99E79FA92D556E1900E48552 /* Report.swift in Sources */,
 				99525F0D2D6E806B00B6E17E /* SigninInteractor.swift in Sources */,
+				FD14C2772DD473AB00AC9ABB /* SignInAppleUsecase.swift in Sources */,
 				FD1152752CFB9F44008955C4 /* CheckFirstLaunchUsecase.swift in Sources */,
 				3200441A2CE48A3D00D08B6D /* MPCBroswer.swift in Sources */,
 				A25BE4562CEBB63A00886763 /* SupabaseUser.swift in Sources */,
@@ -3567,7 +3656,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3592,7 +3680,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SniffMEET pear2";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3645,7 +3733,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SniffMEET pear2";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3662,7 +3750,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = SniffMeet/SniffMeet.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SniffMeet/SniffMeetDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -3677,6 +3765,9 @@
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "'SniffMEET'은 P2P 연결을 지원하기 위해 로컬 네트워크 환경이 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "'SniffMEET'은 산책 기록을 위해 백그라운드에서의 사용자 위치 정보가 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "'SniffMEET'은 산책 기록을 위해 사용자 위치 정보 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "'SniffMEET'은 걸음 수 측정을 위해 데이터 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSNearbyInteractionUsageDescription = "'SniffMEET'은 연결된 기기와의 거리와 방향 측정을 위해 Nearby Interaction 접근이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -3693,7 +3784,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SniffMEET pear2";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3711,7 +3802,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SniffMeet/SniffMeet.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -3723,6 +3814,9 @@
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "'SniffMEET'은 P2P 연결을 지원하기 위해 로컬 네트워크 환경이 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "'SniffMEET'은 산책 기록을 위해 백그라운드에서의 사용자 위치 정보가 필요합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "'SniffMEET'은 산책 기록을 위해 사용자 위치 정보 권한이 필요합니다.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "'SniffMEET'은 걸음 수 측정을 위해 데이터 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSNearbyInteractionUsageDescription = "'SniffMEET'은 연결된 기기와의 거리와 방향 측정을 위해 Nearby Interaction 접근이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -3739,7 +3833,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SniffMEET distribution pear2";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -4049,6 +4143,14 @@
 				minimumVersion = 1.1.4;
 			};
 		};
+		FD14C2552DD4727D00AC9ABB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		FD3A03452CD8D2650047B7ED /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/SwiftLint";
@@ -4082,6 +4184,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 99A9C0512D394ABF00E669C8 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
+		};
+		FD14C2562DD4727D00AC9ABB /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FD14C2552DD4727D00AC9ABB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		FD14C2582DD4727D00AC9ABB /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FD14C2552DD4727D00AC9ABB /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 		FDC5D9BC2D5C7E0400380533 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

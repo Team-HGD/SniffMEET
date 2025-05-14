@@ -17,7 +17,7 @@ final class GoogleAuthManager: GoogleAuthManageable {
 
     @MainActor
     func signIn() async throws -> String {
-        guard let rootViewController = UIViewController.topMostViewController else {
+        guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
             throw GoogleAuthError.viewHierarchyNotFound
         }
         do {

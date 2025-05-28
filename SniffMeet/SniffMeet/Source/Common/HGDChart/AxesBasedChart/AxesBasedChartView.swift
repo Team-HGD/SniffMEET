@@ -23,8 +23,6 @@ class AxesBasedChartView: BaseChartView {
     var pagingItemCount: Int = 7
     /// Y축 눈금의 개수
     var tickCount: Int = 3
-    // 이 아래 값들은 Compositional Layout에서 Decoration View의 한계로 이 부분은 커스텀이 힘들 것 같습니다.
-    // 지금처럼 고정 값을 쓰거나, Decoration View를 포기하고 UIView를 쓰거나 혹은 Static var를 쓸수 있을 것 같은데...
     /// Y축 레이블 영역의 고정 폭
     private let yAxisLabelWidth: CGFloat = 30
     /// Y축 레이블과 축 사이의 간격
@@ -54,13 +52,19 @@ class AxesBasedChartView: BaseChartView {
     /// Y축 눈금을 표시하는 컬렉션 뷰
     private var yAxisCollectionView: UICollectionView!
     
+    // MARK: Delegate
+    /// 차트 뷰의 델리게이트 입니다.
+    ///
+    /// `AxesBasedChartView`의 유저 인터랙션에 대한 이벤트를 외부에 전달하기 위해 사용합니다.
+    /// 외부에서 이 프로퍼티를 설정하여 델리게이트 콜백을 수신할 수 있습니다.
+    weak var delegate: AxesBasedChartViewDelegate?
+    
     // MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
         setupConstraints()
     }
-    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -68,7 +72,7 @@ class AxesBasedChartView: BaseChartView {
     
     // MARK: Layout
     /// 차트 아이템과 축이 포함된 Compositional Layout을 생성합니다.
-    private func createLayout() -> UICollectionViewCompositionalLayout {
+    private func createLayout() -> UICollectionViewCompositionalLayout { // TODO: AxesBasedChartView에서 분리하기
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, environment in
             guard let self = self else {
                 return self?.emptySectionWithAxis()
@@ -97,13 +101,11 @@ class AxesBasedChartView: BaseChartView {
             section.decorationItems = [axisDecoration]
             return section
         }
-
         layout.register(ChartAxisDecorationView.self, forDecorationViewOfKind: "ChartAxisDecoration")
         return layout
     }
-    
     /// 축만 있는 빈 레이아웃을 생성합니다.
-    private func emptySectionWithAxis() -> NSCollectionLayoutSection {
+    private func emptySectionWithAxis() -> NSCollectionLayoutSection { // TODO: AxesBasedChartView에서 분리하기
         let emptyGroupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(1.0)
@@ -117,7 +119,6 @@ class AxesBasedChartView: BaseChartView {
         section.decorationItems = [axisDecoration]
         return section
     }
-    
     /// 차트 컬렉션 뷰, Y축 컬렉션 뷰를 초기화하고 셀을 등록합니다.
     private func setupViews() {
         setupChartCollectionView()
@@ -125,7 +126,7 @@ class AxesBasedChartView: BaseChartView {
         addSubview(chartCollectionView)
         addSubview(yAxisCollectionView)
     }
-    
+    /// 차트 영역을 표시할 `chartCollectionView` 를 초기화하고 설정합니다.
     private func setupChartCollectionView() {
         let layout = createLayout()
         chartCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -138,7 +139,7 @@ class AxesBasedChartView: BaseChartView {
         chartCollectionView.delegate = self
         chartCollectionView.dataSource = self
     }
-    
+    /// Y축 눈금을 표시할 `yAxisCollectionView`를 초기화하고 설정합니다.
     private func setupYAxisCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -151,7 +152,6 @@ class AxesBasedChartView: BaseChartView {
         yAxisCollectionView.delegate = self
         yAxisCollectionView.register(YAxisTickCell.self, forCellWithReuseIdentifier: Identifier.yAxisTickCell)
     }
-    
     /// 차트 컬렉션 뷰 및 Y축 컬렉션 뷰의 오토 레이아웃을 설정합니다.
     private func setupConstraints() {
         chartCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -159,7 +159,7 @@ class AxesBasedChartView: BaseChartView {
             chartCollectionView.topAnchor.constraint(equalTo: topAnchor, constant: topPadding),
             chartCollectionView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
-                constant: yAxisLabelWidth // + yAxisLabelPadding
+                constant: yAxisLabelWidth
             ),
             chartCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             chartCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -bottomPadding)
@@ -172,13 +172,6 @@ class AxesBasedChartView: BaseChartView {
             yAxisCollectionView.widthAnchor.constraint(equalToConstant: yAxisLabelWidth)
         ])
     }
-    
-//    /// 화면 크기에 따라 아이템 레이아웃을 동적으로 조정합니다.
-//    /// - Parameter rect: 뷰의 크기
-//    func updateItemLayout(for rect: CGRect) {
-//        
-//    }
-    
     /// 차트 데이터를 업데이트하고 뷰를 갱신합니다.
     /// - Parameter entries: 표시할 차트 항목 데이터
     func reloadChart(with entries: [ChartDataEntry]) {
@@ -188,14 +181,19 @@ class AxesBasedChartView: BaseChartView {
         yAxisValues = stride(from: maxValue, through: 0, by: -step).map { $0 }
         chartCollectionView.reloadData()
         yAxisCollectionView.reloadData()
-        
         Task { @MainActor in
             let index = IndexPath(item: nearestScrollIndex(for: entries.count), section: 0)
             chartCollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: false)
         }
     }
-    
-    func nearestScrollIndex(for totalCount: Int) -> Int {
+    /// 전체 항목 수에 따라 가장 가까운 스크롤 인덱스를 계산합니다.
+    ///
+    /// 이 메서드는 차트의 가로 페이징 기준에 맞춰, 초기 스크롤 위치를 결정할 때 사용됩니다.
+    /// 주로 `reloadChart(with:)`에서 마지막 페이지로 이동할 때 호출됩니다.
+    ///
+    /// - Parameter totalCount: 전체 데이터 항목의 수
+    /// - Returns: 스크롤할 시작 인덱스. 전체 항목 수가 `pagingItemCount`보다 적으면 0을 반환합니다.
+    func nearestScrollIndex(for totalCount: Int) -> Int { // TODO: AxesBasedChartView에서 분리하기
         guard totalCount >= pagingItemCount else { return 0 }
         return (totalCount / pagingItemCount) * pagingItemCount
     }
@@ -211,7 +209,6 @@ extension AxesBasedChartView: UICollectionViewDataSource {
         default: 0
         }
     }
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
         case chartCollectionView:
@@ -240,15 +237,12 @@ extension AxesBasedChartView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard collectionView == chartCollectionView else { return }
         let entry = entries[indexPath.item]
-        print("\(entry.label) = \(entry.value)")
+        delegate?.chartView(self, didSelectEntry: entry, at: indexPath)
     }
-    
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == yAxisCollectionView {
-            let height = (chartCollectionView.bounds.height - labelHeight) / CGFloat(yAxisValues.count - 1)
-            return CGSize(width: yAxisLabelWidth, height: height)
-        }
-        return .zero
+        guard collectionView == yAxisCollectionView else { return .zero }
+        let height = (chartCollectionView.bounds.height - labelHeight) / CGFloat(yAxisValues.count - 1)
+        return CGSize(width: yAxisLabelWidth, height: height)
     }
 }
 

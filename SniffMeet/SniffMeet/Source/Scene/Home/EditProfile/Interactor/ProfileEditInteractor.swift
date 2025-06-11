@@ -19,7 +19,7 @@ protocol ProfileEditInteractable: AnyObject {
         size: String,
         keywords: [String],
         imageData: Data?
-    )
+    ) async throws
 }
 
 final class ProfileEditInteractor: ProfileEditInteractable {
@@ -59,26 +59,19 @@ final class ProfileEditInteractor: ProfileEditInteractable {
         size: String,
         keywords: [String],
         imageData: Data?
-    ) {
-        Task {
-            do {
-                try await updateUserInfo(
-                    name: name,
-                    age: age,
-                    size: size,
-                    keywords: keywords
-                )
-                guard let imageData else {
-                    presenter?.didSaveUserInfo()
-                    return
-                }
-                try await saveProfile(imageData: imageData)
-                presenter?.didSaveUserInfo()
-            } catch let error {
-                SNMLogger.error(error.localizedDescription)
-            }
+    ) async throws {
+        try await updateUserInfo(
+            name: name,
+            age: age,
+            size: size,
+            keywords: keywords
+        )
+        if let imageData {
+            try await saveProfile(imageData: imageData)
         }
+        presenter?.didSaveUserInfo()
     }
+    
     private func saveProfile(imageData: Data) async throws {
         let _ = try await saveProfileImageUsecase.execute(imageData: imageData)
     }
@@ -91,7 +84,7 @@ final class ProfileEditInteractor: ProfileEditInteractable {
         do {
             try await updateUserInfoUsecase.execute(
                 with: [
-                    "name": name,
+                    "dog_name": name,
                     "age": age,
                     "size": size,
                     "keywords": keywords

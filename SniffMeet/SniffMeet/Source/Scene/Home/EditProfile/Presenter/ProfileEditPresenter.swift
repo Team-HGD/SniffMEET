@@ -69,13 +69,19 @@ final class ProfileEditPresenter: ProfileEditPresentable {
               let keywords else {
             return
         }
-        interactor?.editUserInfo(
-            name: nameText,
-            age: age,
-            size: size.rawValue,
-            keywords: keywords.map { $0.rawValue },
-            imageData: profileImage?.jpegData(compressionQuality: 0.7)
-        )
+        Task {
+            do {
+                try await interactor?.editUserInfo(
+                    name: nameText,
+                    age: age,
+                    size: size.rawValue,
+                    keywords: keywords.map { $0.rawValue },
+                    imageData: profileImage?.jpegData(compressionQuality: 0.7)
+                )
+            } catch {
+                SNMLogger.error(error.localizedDescription)
+            }
+        }
     }
 }
 

@@ -16,11 +16,30 @@
 	<string>&apos;SniffMEET&apos;은 Nearby Interaction과 ARKit을 위해 카메라 접근이 필요합니다.</string>
 	<key>NSNearbyInteractionUsageDescription</key>
 	<string>&apos;SniffMEET&apos;은 연결된 기기와의 거리와 방향 측정을 위해 Nearby Interaction 접근이 필요합니다.</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>$(GOOGLE_REVERSED_CLIENT_ID)</string>
+			</array>
+		</dict>
+	</array>
+	<key>GOOGLE_CLIENT_ID</key>
+	<string>$(GOOGLE_CLIENT_ID)</string>
+	<key>NOTIFICATION_SERVER</key>
+	<string>$(NOTIFICATION_SERVER)</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_SniffMeet._tcp</string>
 		<string>_SniffMeet._udp</string>
 	</array>
+	<key>PUBLIC_KEY</key>
+	<string>$(PUBLIC_KEY)</string>
+	<key>SERVER_URL</key>
+	<string>$(SERVER_URL)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -38,15 +57,9 @@
 			</array>
 		</dict>
 	</dict>
-	<key>SERVER_URL</key>
-	<string>$(SERVER_URL)</string>
-	<key>PUBLIC_KEY</key>
-	<string>$(PUBLIC_KEY)</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
 	</array>
-	<key>NOTIFICATION_SERVER</key>
-	<string>$(NOTIFICATION_SERVER)</string>
 </dict>
 </plist>

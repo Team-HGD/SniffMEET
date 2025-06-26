@@ -9,8 +9,10 @@ import Foundation
 
 struct SupabaseUser: Encodable {
     var userID: UUID
+    let emailVerified: Bool?
 
     init(from response: SupabaseUserResponse) {
         self.userID = response.id
+        self.emailVerified = response.identities.first?.identityData.emailVerified
     }
 }

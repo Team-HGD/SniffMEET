@@ -14,6 +14,7 @@ protocol SessionManageable {
     func restoreSession() async throws
     func saveSession(for session: SupabaseSession?) throws
     func checkSession() async throws
+    func deleteSession() throws
 }
 
 final class SupabaseSessionManager: SessionManageable {
@@ -32,17 +33,17 @@ final class SupabaseSessionManager: SessionManageable {
         }
         return .success(accessToken)
     }
-    
+
     private init() {
         networkProvider = SNMNetworkProvider()
         jsonDecoder = JSONDecoder()
     }
-    
+
     func restoreSession() async throws {
         try loadTokens()
         try await refreshSession()
     }
-    
+
     func saveSession(for session: SupabaseSession?) throws {
         guard let session else { throw SupabaseSessionError.sessionNotExist }
         do {
@@ -67,14 +68,29 @@ final class SupabaseSessionManager: SessionManageable {
             throw SupabaseSessionError.sessionNotExist
         }
     }
-    
+
+    func deleteSession() throws {
+        guard let session else { throw SupabaseSessionError.sessionNotExist }
+        do {
+            try KeychainManager.shared.delete(forKey: Environment.KeychainKey.accessToken)
+            try KeychainManager.shared.delete(forKey: Environment.KeychainKey.refreshToken)
+            try UserDefaultsManager.shared.delete(forKey: Environment.UserDefaultsKey.expiresAt)
+            try UserDefaultsManager.shared.delete(
+                forKey: Environment.UserDefaultsKey.sessionUserInfo
+            )
+            self.session = nil
+        } catch {
+            throw SupabaseSessionError.deleteSessionFailed
+        }
+    }
+
     func checkSession() async throws {
         guard let session else { throw SupabaseSessionError.sessionNotExist }
         if Date(timeIntervalSince1970: TimeInterval(session.expiresAt + Constants.bufferTime)) < Date() {
             try await refreshSession()
         }
     }
-    
+
     private func refreshSession() async throws {
         do {
             guard let refreshToken = session?.refreshToken else {
@@ -99,7 +115,7 @@ final class SupabaseSessionManager: SessionManageable {
             throw SupabaseSessionError.refreshSessionFailed
         }
     }
-    
+
     private func loadTokens() throws {
         do {
             let accessToken = try KeychainManager.shared.get(
@@ -145,13 +161,15 @@ enum SupabaseSessionError: LocalizedError {
     case refreshSessionFailed
     case saveSessionFailed
     case sessionNotExist
-    
+    case deleteSessionFailed
+
     var errorDescription: String? {
         switch self {
         case .loadSessionFailed: "세션 불러오기 실패"
         case .saveSessionFailed: "세션 저장 실패"
         case .refreshSessionFailed: "세션 갱신 실패"
         case .sessionNotExist: "세션 존재하지 않음"
+        case .deleteSessionFailed: "세션 삭제 실패"
         }
     }
 }

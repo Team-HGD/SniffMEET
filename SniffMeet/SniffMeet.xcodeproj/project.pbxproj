@@ -395,6 +395,10 @@
 		A202A1152CEDD50700B98203 /* SupabaseDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */; };
 		A202A1172CEDD5EF00B98203 /* SupabaseDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */; };
 		A20E71522CEC5FE900272B25 /* SupabaseUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20E71512CEC5FE900272B25 /* SupabaseUserResponse.swift */; };
+		A20F6AA62DD4691400EEB957 /* ChartAxisDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F6AA52DD4691400EEB957 /* ChartAxisDecorationView.swift */; };
+		A20F6AA72DD4691400EEB957 /* ChartAxisDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F6AA52DD4691400EEB957 /* ChartAxisDecorationView.swift */; };
+		A20F6AA92DD4A9AB00EEB957 /* YAxisTickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F6AA82DD4A9AB00EEB957 /* YAxisTickCell.swift */; };
+		A20F6AAA2DD4A9AB00EEB957 /* YAxisTickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20F6AA82DD4A9AB00EEB957 /* YAxisTickCell.swift */; };
 		A21435F72CE20D2500564A4D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21435F62CE20D2500564A4D /* TabBarController.swift */; };
 		A220400B2CF6B89800D1E8CB /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */; };
 		A22179702D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A221796F2D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift */; };
@@ -446,6 +450,16 @@
 		A2CF8D1F2D79B71F00FAB817 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */; };
 		A2CF8D202D79B71F00FAB817 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1B2D79B71F00FAB817 /* Release.xcconfig */; };
 		A2CF8D212D79B71F00FAB817 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */; };
+		A2D9DACA2DB371A500899F6C /* WalkReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9DAC92DB371A500899F6C /* WalkReportViewController.swift */; };
+		A2D9DACB2DB371A500899F6C /* WalkReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9DAC92DB371A500899F6C /* WalkReportViewController.swift */; };
+		A2D9DAD22DB372C900899F6C /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9DAD12DB372C900899F6C /* ChartData.swift */; };
+		A2D9DAD32DB372C900899F6C /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9DAD12DB372C900899F6C /* ChartData.swift */; };
+		A2D9DAD82DB37D4D00899F6C /* BaseChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9DAD72DB37D4D00899F6C /* BaseChartView.swift */; };
+		A2D9DAD92DB37D4D00899F6C /* BaseChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9DAD72DB37D4D00899F6C /* BaseChartView.swift */; };
+		A2D9DADF2DB3C44A00899F6C /* AxesBasedChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9DADE2DB3C44A00899F6C /* AxesBasedChartView.swift */; };
+		A2D9DAE02DB3C44A00899F6C /* AxesBasedChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9DADE2DB3C44A00899F6C /* AxesBasedChartView.swift */; };
+		A2D9DAE22DB40CC900899F6C /* BarChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9DAE12DB40CC900899F6C /* BarChartCell.swift */; };
+		A2D9DAE32DB40CC900899F6C /* BarChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9DAE12DB40CC900899F6C /* BarChartCell.swift */; };
 		A2F825D12CDF4BA6000C5419 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F825D02CDF4BA6000C5419 /* HomeViewController.swift */; };
 		A2F825DD2CDFBEB4000C5419 /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F825DC2CDFBEB4000C5419 /* ProfileCardView.swift */; };
 		A2FE77232D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77222D5211C700239F05 /* SupabaseSessionRequest.swift */; };
@@ -816,6 +830,8 @@
 		A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBManager.swift; sourceTree = "<group>"; };
 		A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRequest.swift; sourceTree = "<group>"; };
 		A20E71512CEC5FE900272B25 /* SupabaseUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseUserResponse.swift; sourceTree = "<group>"; };
+		A20F6AA52DD4691400EEB957 /* ChartAxisDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAxisDecorationView.swift; sourceTree = "<group>"; };
+		A20F6AA82DD4A9AB00EEB957 /* YAxisTickCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAxisTickCell.swift; sourceTree = "<group>"; };
 		A21435F62CE20D2500564A4D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		A221796F2D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserProfileImageUsecase.swift; sourceTree = "<group>"; };
@@ -857,6 +873,11 @@
 		A2C328912CE3BEA000D255AB /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		A2CF8D1B2D79B71F00FAB817 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		A2D9DAC92DB371A500899F6C /* WalkReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkReportViewController.swift; sourceTree = "<group>"; };
+		A2D9DAD12DB372C900899F6C /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
+		A2D9DAD72DB37D4D00899F6C /* BaseChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChartView.swift; sourceTree = "<group>"; };
+		A2D9DADE2DB3C44A00899F6C /* AxesBasedChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxesBasedChartView.swift; sourceTree = "<group>"; };
+		A2D9DAE12DB40CC900899F6C /* BarChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartCell.swift; sourceTree = "<group>"; };
 		A2F825D02CDF4BA6000C5419 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A2F825DC2CDFBEB4000C5419 /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
 		A2FE77222D5211C700239F05 /* SupabaseSessionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseSessionRequest.swift; sourceTree = "<group>"; };
@@ -1758,6 +1779,7 @@
 		A2C844CF2CDBE1CB007F2970 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				A2D9DACC2DB3724D00899F6C /* HGDChart */,
 				FDE7688E2CF7823D00B5DE88 /* Base */,
 				FDE768892CF7819D00B5DE88 /* Constant */,
 				FDE768882CF7811900B5DE88 /* Util */,
@@ -1765,6 +1787,99 @@
 				FDE768862CF7810E00B5DE88 /* Design System */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		A2D9DAC42DB370DB00899F6C /* WalkReport */ = {
+			isa = PBXGroup;
+			children = (
+				A2D9DAC52DB370F600899F6C /* View */,
+				A2D9DAC62DB370FD00899F6C /* Interactor */,
+				A2D9DAC72DB3710100899F6C /* Presenter */,
+				A2D9DAC82DB3710500899F6C /* Router */,
+			);
+			path = WalkReport;
+			sourceTree = "<group>";
+		};
+		A2D9DAC52DB370F600899F6C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2D9DAC92DB371A500899F6C /* WalkReportViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A2D9DAC62DB370FD00899F6C /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		A2D9DAC72DB3710100899F6C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		A2D9DAC82DB3710500899F6C /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		A2D9DACC2DB3724D00899F6C /* HGDChart */ = {
+			isa = PBXGroup;
+			children = (
+				A2D9DADD2DB3C3DA00899F6C /* AxesBasedChart */,
+				A2D9DACD2DB3726D00899F6C /* Base */,
+				A2D9DAD02DB3729900899F6C /* Extensions */,
+			);
+			path = HGDChart;
+			sourceTree = "<group>";
+		};
+		A2D9DACD2DB3726D00899F6C /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A2D9DAD12DB372C900899F6C /* ChartData.swift */,
+				A2D9DAD72DB37D4D00899F6C /* BaseChartView.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		A2D9DACE2DB3727900899F6C /* BarChart */ = {
+			isa = PBXGroup;
+			children = (
+				A2D9DAE12DB40CC900899F6C /* BarChartCell.swift */,
+			);
+			path = BarChart;
+			sourceTree = "<group>";
+		};
+		A2D9DACF2DB3729300899F6C /* LineChart */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LineChart;
+			sourceTree = "<group>";
+		};
+		A2D9DAD02DB3729900899F6C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A2D9DADD2DB3C3DA00899F6C /* AxesBasedChart */ = {
+			isa = PBXGroup;
+			children = (
+				A2D9DADE2DB3C44A00899F6C /* AxesBasedChartView.swift */,
+				A20F6AA52DD4691400EEB957 /* ChartAxisDecorationView.swift */,
+				A20F6AA82DD4A9AB00EEB957 /* YAxisTickCell.swift */,
+				A2D9DACF2DB3729300899F6C /* LineChart */,
+				A2D9DACE2DB3727900899F6C /* BarChart */,
+			);
+			path = AxesBasedChart;
 			sourceTree = "<group>";
 		};
 		A2D9E0762D6C2BFB00290EB5 /* SetProfileInfo */ = {
@@ -2109,6 +2224,7 @@
 			children = (
 				3200448A2CEC872D00D08B6D /* RespondWalk */,
 				FDA491932CDA7C6200A36FB0 /* RequestWalk */,
+				A2D9DAC42DB370DB00899F6C /* WalkReport */,
 				FDA4914B2CDA65E200A36FB0 /* WalkLog */,
 				32C539532D6415C400CD89DF /* TrackWalk */,
 			);
@@ -2910,6 +3026,7 @@
 			files = (
 				32192B2B2D41EB1700C876BA /* Extension + Array.swift in Sources */,
 				32192B2A2D41EB1200C876BA /* Extension + UITableViewCell.swift in Sources */,
+				A2D9DAE22DB40CC900899F6C /* BarChartCell.swift in Sources */,
 				32192B292D41EAF600C876BA /* CGImageCoder.swift in Sources */,
 				32192B282D41E91200C876BA /* TaskSerialQueue.swift in Sources */,
 				32192B272D41E8FD00C876BA /* ImageSampler.swift in Sources */,
@@ -2933,6 +3050,7 @@
 				99E79F5C2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */,
 				32BD48382D3FF02C0078DA9C /* WalkRequestDTO.swift in Sources */,
 				32BD48392D3FF02C0078DA9C /* WalkAPSDTO.swift in Sources */,
+				A2D9DAE02DB3C44A00899F6C /* AxesBasedChartView.swift in Sources */,
 				32BD483A2D3FF02C0078DA9C /* SaveDeviceTokenDTO.swift in Sources */,
 				32BD483B2D3FF02C0078DA9C /* NotiListDTO.swift in Sources */,
 				32BD483C2D3FF02C0078DA9C /* MateListDTO.swift in Sources */,
@@ -2998,6 +3116,7 @@
 				32BD48632D3FF02C0078DA9C /* MultipartFormData.swift in Sources */,
 				A2FE772C2D52224700239F05 /* SignInAnonUsecase.swift in Sources */,
 				32BD48642D3FF02C0078DA9C /* HTTPStatusCode.swift in Sources */,
+				A20F6AA92DD4A9AB00EEB957 /* YAxisTickCell.swift in Sources */,
 				32BD48652D3FF02C0078DA9C /* NetworkProvider.swift in Sources */,
 				32BD48662D3FF02C0078DA9C /* SNMRequestType.swift in Sources */,
 				99E79F932D54881300E48552 /* ReportMatePresenter.swift in Sources */,
@@ -3070,6 +3189,7 @@
 				99525F362D74687C00B6E17E /* ResetPwRouter.swift in Sources */,
 				32BD48942D3FF02C0078DA9C /* TabBarModuleBuilder.swift in Sources */,
 				99E79F972D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
+				A2D9DAD82DB37D4D00899F6C /* BaseChartView.swift in Sources */,
 				32BD48952D3FF02C0078DA9C /* TabBarController.swift in Sources */,
 				32BD48962D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */,
 				32BD48972D3FF02C0078DA9C /* ProfileSetViewController.swift in Sources */,
@@ -3098,6 +3218,7 @@
 				32BD48A42D3FF02C0078DA9C /* HomeInteractor.swift in Sources */,
 				32BD48A52D3FF02C0078DA9C /* HomePresenter.swift in Sources */,
 				32BD48A62D3FF02C0078DA9C /* PresentAnimator.swift in Sources */,
+				A2D9DAD32DB372C900899F6C /* ChartData.swift in Sources */,
 				32BD48A72D3FF02C0078DA9C /* HomeRouter.swift in Sources */,
 				32BD48A82D3FF02C0078DA9C /* NotificationCell.swift in Sources */,
 				32BD48A92D3FF02C0078DA9C /* NotificationListViewController.swift in Sources */,
@@ -3133,6 +3254,7 @@
 				32BD48BE2D3FF02C0078DA9C /* RequestWalkInteractor.swift in Sources */,
 				32BD48BF2D3FF02C0078DA9C /* SelectLocationPresenter.swift in Sources */,
 				32BD48C02D3FF02C0078DA9C /* RequestWalkPresenter.swift in Sources */,
+				A2D9DACB2DB371A500899F6C /* WalkReportViewController.swift in Sources */,
 				99E79F8B2D5436B700E48552 /* ReportMateViewController.swift in Sources */,
 				32BD48C12D3FF02C0078DA9C /* SelectLocationModuleBuildable.swift in Sources */,
 				32BD48C22D3FF02C0078DA9C /* RequestWalkRouter.swift in Sources */,
@@ -3181,6 +3303,7 @@
 				32BD48DA2D3FF02C0078DA9C /* SupabaseUser.swift in Sources */,
 				32BD48DB2D3FF02C0078DA9C /* SupabaseSessionResponse.swift in Sources */,
 				32C539552D64161100CD89DF /* TrackWalkViewController.swift in Sources */,
+				A20F6AA62DD4691400EEB957 /* ChartAxisDecorationView.swift in Sources */,
 				32BD48DC2D3FF02C0078DA9C /* SupabaseUserResponse.swift in Sources */,
 				32BD48DD2D3FF02C0078DA9C /* SupabaseRefreshResponse.swift in Sources */,
 				32BD48DE2D3FF02C0078DA9C /* SupabaseTokenRequest.swift in Sources */,
@@ -3269,6 +3392,7 @@
 				99525F472D7867AC00B6E17E /* HapticManager.swift in Sources */,
 				995D94A82CECEF91005A47BF /* RequestMateViewController.swift in Sources */,
 				A2FE77292D521FB200239F05 /* SupabaseSessionManager.swift in Sources */,
+				A2D9DAD92DB37D4D00899F6C /* BaseChartView.swift in Sources */,
 				A2BA1B962CF2606B0080575A /* MateListInteractor.swift in Sources */,
 				FD259F302D6F0AFA007B182D /* RequestWalkLogListUsecase.swift in Sources */,
 				A202A1172CEDD5EF00B98203 /* SupabaseDBRequest.swift in Sources */,
@@ -3277,6 +3401,7 @@
 				FD259F2D2D6F0AE7007B182D /* SaveWalkLogUsecase.swift in Sources */,
 				99E795D92D904E70001C9B18 /* PersonalInfoPresenter.swift in Sources */,
 				3200448D2CEC878300D08B6D /* RespondWalkViewController.swift in Sources */,
+				A2D9DACA2DB371A500899F6C /* WalkReportViewController.swift in Sources */,
 				A28D4F582CFED0CB00A79543 /* AddMateButton.swift in Sources */,
 				FD331A932CF3463200F39426 /* NotificationCell.swift in Sources */,
 				FDA04AA92CE91DF8002605AC /* Data + append.swift in Sources */,
@@ -3285,6 +3410,7 @@
 				FD119F462CED868D00BE22BD /* ConvertLocationToTextUsecase.swift in Sources */,
 				99525F2F2D74678F00B6E17E /* ResetPwInteractor.swift in Sources */,
 				99E79F942D54881300E48552 /* ReportMatePresenter.swift in Sources */,
+				A2D9DADF2DB3C44A00899F6C /* AxesBasedChartView.swift in Sources */,
 				A20E71522CEC5FE900272B25 /* SupabaseUserResponse.swift in Sources */,
 				9919104F2CFF552C008F86D6 /* OnBoardingPage.swift in Sources */,
 				320047B42CFC90C100D08B6D /* SessionViewController.swift in Sources */,
@@ -3335,6 +3461,7 @@
 				FD01D8F72D40AC8600AD4940 /* TaskSerialQueue.swift in Sources */,
 				99E79F9A2D548D9A00E48552 /* ReportMateInteractor.swift in Sources */,
 				320044712CEB45E000D08B6D /* RequestWalkPresenter.swift in Sources */,
+				A20F6AAA2DD4A9AB00EEB957 /* YAxisTickCell.swift in Sources */,
 				995D94262CE32ECE005A47BF /* Extension + Keyboard.swift in Sources */,
 				FD9468D42CFD590700417DC1 /* ProfileEditViewController.swift in Sources */,
 				FD4855242D54996800C66429 /* ConnectedPeerManager.swift in Sources */,
@@ -3377,6 +3504,7 @@
 				FD69B1B32CE3BC76009D71DC /* KeychainManager.swift in Sources */,
 				FD1152732CFB3A8A008955C4 /* RespondMapRouter.swift in Sources */,
 				320043782CDCA49100D08B6D /* (null) in Sources */,
+				A2D9DAE32DB40CC900899F6C /* BarChartCell.swift in Sources */,
 				32C539652D65CB2800CD89DF /* WalkRoute.swift in Sources */,
 				FDDDB9382D004233000D4528 /* ProcessedWalkPresenter.swift in Sources */,
 				A24082612CEB244C009109A0 /* SupabaseConfig.swift in Sources */,
@@ -3447,6 +3575,7 @@
 				FD259F462D6FD2E8007B182D /* WalkLogListInteractor.swift in Sources */,
 				FD243D042D62547D00971162 /* SNMImageToastView.swift in Sources */,
 				99E795CF2D8A97E5001C9B18 /* PreferencesViewController.swift in Sources */,
+				A20F6AA72DD4691400EEB957 /* ChartAxisDecorationView.swift in Sources */,
 				99525F352D74687C00B6E17E /* ResetPwRouter.swift in Sources */,
 				99E79FAC2D556E8600E48552 /* ReportDTO.swift in Sources */,
 				FD259F492D6FD2FC007B182D /* WalkLogListRouter.swift in Sources */,
@@ -3458,6 +3587,7 @@
 				A24082642CEB2470009109A0 /* SupabaseAuthManager.swift in Sources */,
 				3200453D2CF5A60E00D08B6D /* Extension + Date.swift in Sources */,
 				320044562CE59DF500D08B6D /* ProfileCreateRouter.swift in Sources */,
+				A2D9DAD22DB372C900899F6C /* ChartData.swift in Sources */,
 				A2C844D72CDBEF8B007F2970 /* (null) in Sources */,
 				32C5395F2D64165900CD89DF /* TrackWalkInteractor.swift in Sources */,
 				A2FE77732D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,

@@ -9,11 +9,11 @@ import Combine
 import Foundation
 
 protocol RemoteDBManageable {
-    func fetchData() async throws -> RemoteDBRequestBuildable
-    func insertData() async throws -> RemoteDBRequestBuildable
-    func updateData() async throws -> RemoteDBRequestBuildable
-    func deleteData() async throws -> RemoteDBRequestBuildable
-    func rpc() async throws -> RemoteDBRequestBuildable
+    func fetchData() async throws -> any RemoteDBFetchRequestBuildable
+    func insertData() async throws -> any RemoteDBInsertRequestBuildable
+    func updateData() async throws -> any RemoteDBUpdateRequestBuildable
+    func deleteData() async throws -> any RemoteDBDeleteRequestBuildable
+    func rpc() async throws -> any RemoteDBRPCRequestBuildable
 }
 
 final class SupabaseDBManager: RemoteDBManageable {
@@ -27,53 +27,48 @@ final class SupabaseDBManager: RemoteDBManageable {
         self.jsonDecoder = JSONDecoder()
     }
     
-    func fetchData() async throws -> RemoteDBRequestBuildable {
+    func fetchData() async throws -> any RemoteDBFetchRequestBuildable {
         let accessToken = try sessionManager.accessToken.get()
         try await sessionManager.checkSession()
-        return SupabaseDBRequestBuilder(
+        return SupabaseDBFetchRequestBuilder(
             networkProvider: networkProvider,
             accessToken: accessToken,
-            task: .fetch
         )
     }
     
-    func insertData() async throws -> RemoteDBRequestBuildable {
+    func insertData() async throws -> any RemoteDBInsertRequestBuildable {
         let accessToken = try sessionManager.accessToken.get()
         try await sessionManager.checkSession()
-        return SupabaseDBRequestBuilder(
+        return SupabaseDBInsertRequestBuilder(
             networkProvider: networkProvider,
             accessToken: accessToken,
-            task: .insert
         )
     }
     
-    func updateData() async throws -> RemoteDBRequestBuildable {
+    func updateData() async throws -> any RemoteDBUpdateRequestBuildable {
         let accessToken = try sessionManager.accessToken.get()
         try await sessionManager.checkSession()
-        return SupabaseDBRequestBuilder(
+        return SupabaseDBUpdateRequestBuilder(
             networkProvider: networkProvider,
             accessToken: accessToken,
-            task: .update
         )
     }
 
-    func deleteData() async throws -> RemoteDBRequestBuildable {
+    func deleteData() async throws -> any RemoteDBDeleteRequestBuildable {
         let accessToken = try sessionManager.accessToken.get()
         try await sessionManager.checkSession()
-        return SupabaseDBRequestBuilder(
+        return SupabaseDBDeleteRequestBuilder(
             networkProvider: networkProvider,
             accessToken: accessToken,
-            task: .delete
         )
     }
 
-    func rpc() async throws -> RemoteDBRequestBuildable {
+    func rpc() async throws -> any RemoteDBRPCRequestBuildable {
         let accessToken = try sessionManager.accessToken.get()
         try await sessionManager.checkSession()
-        return SupabaseDBRequestBuilder(
+        return SupabaseDBRPCRequestBuilder(
             networkProvider: networkProvider,
             accessToken: accessToken,
-            task: .rpc
         )
     }
 }

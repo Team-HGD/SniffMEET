@@ -28,12 +28,13 @@ final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {
     private var task: SupabaseDBTask
     private var table: String?
     private var data: Data?
-    private var query: [String: String]?
+    private var query: [String: String]
     
     init(networkProvider: any NetworkProvider, accessToken: String?, task: SupabaseDBTask) {
         self.networkProvider = networkProvider
         self.accessToken = accessToken
         self.task = task
+        self.query = [:]
     }
     
     func setTable(_ table: String) -> Self {
@@ -47,8 +48,7 @@ final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {
     }
 
     func setQuery(_ parameter: SupabaseQueryParameter) -> Self {
-        query = query ?? [:]
-        query?[parameter.key] = parameter.value
+        query[parameter.key] = parameter.value
         return self
     }
 
@@ -59,7 +59,7 @@ final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {
             return SupabaseDBRequest.fetchData(
                 table: table,
                 accessToken: accessToken,
-                query: self.query ?? [:]
+                query: query
             )
         case .insert:
             guard let data = self.data,
@@ -79,8 +79,7 @@ final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {
                 query: query
             )
         case .delete:
-            guard let query = self.query,
-                  let table = self.table else { throw SupabaseDBError.deleteDataFailed }
+            guard let table = self.table else { throw SupabaseDBError.deleteDataFailed }
             return SupabaseDBRequest.deleteData(
                 table: table,
                 accessToken: accessToken,
@@ -98,7 +97,6 @@ final class SupabaseDBRequestBuilder: RemoteDBRequestBuildable {
         }
     }
     
-    @discardableResult
     func request() async throws -> Data {
         let response = try await networkProvider.request(
             with: try build()

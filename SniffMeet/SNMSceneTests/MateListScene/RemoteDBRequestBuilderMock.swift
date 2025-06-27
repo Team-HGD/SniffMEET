@@ -7,13 +7,22 @@
 
 import Foundation
 
-final class RemoteDBRequestBuilderMock: RemoteDBRequestBuildable {
+typealias MockDBRequestBuildable = RemoteDBRequestBuildable
+& RemoteDBInsertRequestBuildable
+& RemoteDBUpdateRequestBuildable
+& RemoteDBDeleteRequestBuildable
+& RemoteDBFetchRequestBuildable
+& RemoteDBRPCRequestBuildable
+
+class RemoteDBRequestBuilderMock: MockDBRequestBuildable {
     private var requestType: SupabaseDBTask
-    private var data: Data?
+    var data: Data?
+    var query: [String: String]
     
     init(requestType: SupabaseDBTask, data: Data? = nil) {
         self.requestType = requestType
         self.data = data
+        self.query = [:]
     }
     
     func setTable(_ table: String) -> Self {
@@ -33,3 +42,5 @@ final class RemoteDBRequestBuilderMock: RemoteDBRequestBuildable {
         return data
     }
 }
+
+

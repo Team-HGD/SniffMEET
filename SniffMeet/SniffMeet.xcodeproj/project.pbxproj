@@ -399,6 +399,29 @@
 		A220400B2CF6B89800D1E8CB /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */; };
 		A22179702D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A221796F2D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift */; };
 		A22179712D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A221796F2D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift */; };
+		A22DE6172E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6162E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift */; };
+		A22DE6182E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6162E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift */; };
+		A22DE6192E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6162E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift */; };
+		A22DE61B2E0EEAB80076CAB2 /* HasData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61A2E0EEAB80076CAB2 /* HasData.swift */; };
+		A22DE61C2E0EEAB80076CAB2 /* HasData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61A2E0EEAB80076CAB2 /* HasData.swift */; };
+		A22DE61D2E0EEAB80076CAB2 /* HasData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61A2E0EEAB80076CAB2 /* HasData.swift */; };
+		A22DE61F2E0EEAD20076CAB2 /* HasQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61E2E0EEAD20076CAB2 /* HasQuery.swift */; };
+		A22DE6202E0EEAD20076CAB2 /* HasQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61E2E0EEAD20076CAB2 /* HasQuery.swift */; };
+		A22DE6212E0EEAD20076CAB2 /* HasQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61E2E0EEAD20076CAB2 /* HasQuery.swift */; };
+		A22DE6242E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6232E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift */; };
+		A22DE6252E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6232E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift */; };
+		A22DE6262E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6232E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift */; };
+		A22DE6282E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6272E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift */; };
+		A22DE6292E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6272E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift */; };
+		A22DE62A2E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6272E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift */; };
+		A22DE62C2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62B2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift */; };
+		A22DE62D2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62B2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift */; };
+		A22DE62E2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62B2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift */; };
+		A22DE6302E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62F2E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift */; };
+		A22DE6312E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62F2E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift */; };
+		A22DE6322E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62F2E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift */; };
+		A22DE6342E0EF1F70076CAB2 /* SupabaseDBRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6332E0EF1F70076CAB2 /* SupabaseDBRequestBuilderTests.swift */; };
+		A22DE6362E0EF2570076CAB2 /* MockNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6352E0EF2570076CAB2 /* MockNetworkProvider.swift */; };
 		A23A3B732CF4683F00A58705 /* Mate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23A3B722CF4683F00A58705 /* Mate.swift */; };
 		A24082612CEB244C009109A0 /* SupabaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082602CEB244C009109A0 /* SupabaseConfig.swift */; };
 		A24082642CEB2470009109A0 /* SupabaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */; };
@@ -819,6 +842,15 @@
 		A21435F62CE20D2500564A4D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		A221796F2D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserProfileImageUsecase.swift; sourceTree = "<group>"; };
+		A22DE6162E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBFetchRequestBuilder.swift; sourceTree = "<group>"; };
+		A22DE61A2E0EEAB80076CAB2 /* HasData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasData.swift; sourceTree = "<group>"; };
+		A22DE61E2E0EEAD20076CAB2 /* HasQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasQuery.swift; sourceTree = "<group>"; };
+		A22DE6232E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBInsertRequestBuilder.swift; sourceTree = "<group>"; };
+		A22DE6272E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBUpdateRequestBuilder.swift; sourceTree = "<group>"; };
+		A22DE62B2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBDeleteRequestBuilder.swift; sourceTree = "<group>"; };
+		A22DE62F2E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRPCRequestBuilder.swift; sourceTree = "<group>"; };
+		A22DE6332E0EF1F70076CAB2 /* SupabaseDBRequestBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRequestBuilderTests.swift; sourceTree = "<group>"; };
+		A22DE6352E0EF2570076CAB2 /* MockNetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkProvider.swift; sourceTree = "<group>"; };
 		A23A3B722CF4683F00A58705 /* Mate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mate.swift; sourceTree = "<group>"; };
 		A24082602CEB244C009109A0 /* SupabaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseConfig.swift; sourceTree = "<group>"; };
 		A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAuthManager.swift; sourceTree = "<group>"; };
@@ -1629,7 +1661,7 @@
 				A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */,
 				A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */,
 				A2FE772D2D5378B400239F05 /* SupabaseQueryParameter.swift */,
-				A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */,
+				A22DE6152E0EEA700076CAB2 /* RequestBuilders */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -1641,6 +1673,29 @@
 				A2C3288A2CE2F50100D255AB /* View */,
 			);
 			path = Tab;
+			sourceTree = "<group>";
+		};
+		A22DE6152E0EEA700076CAB2 /* RequestBuilders */ = {
+			isa = PBXGroup;
+			children = (
+				A22DE6222E0EEAE20076CAB2 /* Protocols */,
+				A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */,
+				A22DE6162E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift */,
+				A22DE6232E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift */,
+				A22DE6272E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift */,
+				A22DE62B2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift */,
+				A22DE62F2E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift */,
+			);
+			path = RequestBuilders;
+			sourceTree = "<group>";
+		};
+		A22DE6222E0EEAE20076CAB2 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A22DE61A2E0EEAB80076CAB2 /* HasData.swift */,
+				A22DE61E2E0EEAD20076CAB2 /* HasQuery.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		A24082622CEB2464009109A0 /* Supabase */ = {
@@ -1905,6 +1960,8 @@
 			children = (
 				FDC5D9B92D5BD5D900380533 /* Info.plist */,
 				FD331A712CF33C7F00F39426 /* SupabaseStorageTests.swift */,
+				A22DE6332E0EF1F70076CAB2 /* SupabaseDBRequestBuilderTests.swift */,
+				A22DE6352E0EF2570076CAB2 /* MockNetworkProvider.swift */,
 			);
 			path = SupabaseTests;
 			sourceTree = "<group>";
@@ -2918,6 +2975,7 @@
 				32BD48F02D40B51E0078DA9C /* AppDelegate.swift in Sources */,
 				32BD48F12D40B51E0078DA9C /* AppRouter.swift in Sources */,
 				32BD48EF2D40B5130078DA9C /* SessionViewController.swift in Sources */,
+				A22DE6242E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */,
 				32BD48ED2D40B4BA0078DA9C /* PushNotificationRequest.swift in Sources */,
 				32BD48EE2D40B4BA0078DA9C /* PushNotificationConfig.swift in Sources */,
 				FD259F2F2D6F0AFA007B182D /* RequestWalkLogListUsecase.swift in Sources */,
@@ -2931,6 +2989,7 @@
 				32BD48EA2D40AEBC0078DA9C /* RemoteDatabaseManagerMock.swift in Sources */,
 				32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */,
 				99E79F5C2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */,
+				A22DE62D2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */,
 				32BD48382D3FF02C0078DA9C /* WalkRequestDTO.swift in Sources */,
 				32BD48392D3FF02C0078DA9C /* WalkAPSDTO.swift in Sources */,
 				32BD483A2D3FF02C0078DA9C /* SaveDeviceTokenDTO.swift in Sources */,
@@ -2970,6 +3029,7 @@
 				32BD484F2D3FF02C0078DA9C /* RemoteSaveDeviceTokenUsecase.swift in Sources */,
 				99E7A0212D5C58D200E48552 /* NIDeviceChecker.swift in Sources */,
 				99525F3C2D746AC000B6E17E /* ResetPwEmailInteractor.swift in Sources */,
+				A22DE6292E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */,
 				99525EBD2D65694F00B6E17E /* UpdateUserStepUsecase.swift in Sources */,
 				32BD48502D3FF02C0078DA9C /* RegisterDeviceTokenUsecase.swift in Sources */,
 				32BD48512D3FF02C0078DA9C /* CheckFirstLaunchUsecase.swift in Sources */,
@@ -3014,6 +3074,7 @@
 				FD259F452D6FD2E8007B182D /* WalkLogListInteractor.swift in Sources */,
 				99E795D32D8D440F001C9B18 /* PreferencesOption.swift in Sources */,
 				32BD486F2D3FF02C0078DA9C /* DataStoragable.swift in Sources */,
+				A22DE6212E0EEAD20076CAB2 /* HasQuery.swift in Sources */,
 				99E795D52D904C64001C9B18 /* PersonalInfoViewController.swift in Sources */,
 				FD243CFA2D621FC600971162 /* SNMProgressView.swift in Sources */,
 				32BD48702D3FF02C0078DA9C /* CacheManager.swift in Sources */,
@@ -3069,6 +3130,7 @@
 				32BD48932D3FF02C0078DA9C /* SNMError.swift in Sources */,
 				99525F362D74687C00B6E17E /* ResetPwRouter.swift in Sources */,
 				32BD48942D3FF02C0078DA9C /* TabBarModuleBuilder.swift in Sources */,
+				A22DE6312E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */,
 				99E79F972D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
 				32BD48952D3FF02C0078DA9C /* TabBarController.swift in Sources */,
 				32BD48962D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */,
@@ -3108,6 +3170,7 @@
 				FD243D012D62547400971162 /* SNMImageTextToastView.swift in Sources */,
 				32BD48AE2D3FF02C0078DA9C /* RespondMapViewController.swift in Sources */,
 				FD2921312D62ACE1009D0762 /* SNMAnimationType.swift in Sources */,
+				A22DE6172E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */,
 				99525F142D6E80FB00B6E17E /* SigninRouter.swift in Sources */,
 				A22179712D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */,
 				32BD48AF2D3FF02C0078DA9C /* RespondWalkViewController.swift in Sources */,
@@ -3177,6 +3240,7 @@
 				32BD48D82D3FF02C0078DA9C /* SupabaseAuthRequest.swift in Sources */,
 				A2FE77762D55448800239F05 /* RemoteDBRequestBuilderMock.swift in Sources */,
 				99525F072D6E7FAD00B6E17E /* SigninViewController.swift in Sources */,
+				A22DE61C2E0EEAB80076CAB2 /* HasData.swift in Sources */,
 				32BD48D92D3FF02C0078DA9C /* SupabaseSession.swift in Sources */,
 				32BD48DA2D3FF02C0078DA9C /* SupabaseUser.swift in Sources */,
 				32BD48DB2D3FF02C0078DA9C /* SupabaseSessionResponse.swift in Sources */,
@@ -3206,7 +3270,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				99E79FAD2D55EC8600E48552 /* SNMLogger.swift in Sources */,
+				A22DE6322E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */,
 				FD159A7D2D35166D00B425D9 /* Environment.swift in Sources */,
+				A22DE6252E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */,
 				FD331A8B2CF33E7100F39426 /* UserDefaultsManager.swift in Sources */,
 				FD331A8C2CF33E7100F39426 /* KeychainManager.swift in Sources */,
 				A2FE77742D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
@@ -3215,13 +3281,16 @@
 				FD331A802CF33D0500F39426 /* SupabaseAuthManager.swift in Sources */,
 				FD331A8E2CF33F6700F39426 /* SupabaseStorageManager.swift in Sources */,
 				FD14C25F2DD472DE00AC9ABB /* SupabaseAuthTypes.swift in Sources */,
+				A22DE61F2E0EEAD20076CAB2 /* HasQuery.swift in Sources */,
 				FD331A822CF33D0500F39426 /* SupabaseAuthRequest.swift in Sources */,
 				FD331A832CF33D0500F39426 /* SupabaseSession.swift in Sources */,
 				FD331A842CF33D0500F39426 /* SupabaseUser.swift in Sources */,
 				FD331A852CF33D0500F39426 /* SupabaseSessionResponse.swift in Sources */,
 				A2FE77252D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */,
 				FD331A862CF33D0500F39426 /* SupabaseUserResponse.swift in Sources */,
+				A22DE6282E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */,
 				FD331A872CF33D0500F39426 /* SupabaseRefreshResponse.swift in Sources */,
+				A22DE6362E0EF2570076CAB2 /* MockNetworkProvider.swift in Sources */,
 				3284D34F2D2F941C000ABC04 /* DataStoragable.swift in Sources */,
 				FD331A882CF33D0500F39426 /* SupabaseTokenRequest.swift in Sources */,
 				FD331A892CF33D0500F39426 /* SupabaseDBManager.swift in Sources */,
@@ -3230,12 +3299,16 @@
 				A2FE77272D521FB200239F05 /* SupabaseSessionManager.swift in Sources */,
 				FD331A742CF33CF200F39426 /* HTTPStatusCode.swift in Sources */,
 				FD331A752CF33CF200F39426 /* NetworkProvider.swift in Sources */,
+				A22DE6342E0EF1F70076CAB2 /* SupabaseDBRequestBuilderTests.swift in Sources */,
+				A22DE62C2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */,
 				FD331A762CF33CF200F39426 /* SNMRequestType.swift in Sources */,
 				FD331A772CF33CF200F39426 /* SNMRequestConvertible.swift in Sources */,
 				FD331A782CF33CF200F39426 /* Endpoint.swift in Sources */,
 				FD331A792CF33CF200F39426 /* SNMNetworkResponse.swift in Sources */,
 				FD331A7A2CF33CF200F39426 /* Data + append.swift in Sources */,
+				A22DE61D2E0EEAB80076CAB2 /* HasData.swift in Sources */,
 				FD331A7B2CF33CF200F39426 /* URLRequest + append.swift in Sources */,
+				A22DE6192E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */,
 				FD331A7C2CF33CF200F39426 /* AnyEncodable.swift in Sources */,
 				A2FE772E2D5378B400239F05 /* SupabaseQueryParameter.swift in Sources */,
 				FD331A722CF33C8400F39426 /* SupabaseStorageTests.swift in Sources */,
@@ -3324,6 +3397,7 @@
 				FD51341F2CEB7AFE002E76F3 /* LoadUserInfoUsecase.swift in Sources */,
 				FD331A582CF23CEC00F39426 /* WalkLogCell.swift in Sources */,
 				A26BA0092D6DC84C000E5648 /* ProfileSetInteractor.swift in Sources */,
+				A22DE62A2E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */,
 				FD01D8FA2D40ACAF00AD4940 /* Extension + Array.swift in Sources */,
 				FD5134172CEB738D002E76F3 /* UIControl + Publisher.swift in Sources */,
 				FD14C2602DD472DE00AC9ABB /* SupabaseAuthTypes.swift in Sources */,
@@ -3396,6 +3470,7 @@
 				99525F082D6E7FAD00B6E17E /* SigninViewController.swift in Sources */,
 				FD01D8F52D40AC5300AD4940 /* Extension + UITableViewCell.swift in Sources */,
 				99E795C92D8A97D5001C9B18 /* PreferencesPresenter.swift in Sources */,
+				A22DE6302E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */,
 				FD11526F2CFB33B6008955C4 /* RespondMapViewController.swift in Sources */,
 				FD119F4C2CED87B000BE22BD /* SelectLocationInteractor.swift in Sources */,
 				FD880B622CF433AF0093BEB9 /* Environment.swift in Sources */,
@@ -3410,6 +3485,7 @@
 				A22179702D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */,
 				3200446F2CEB23A700D08B6D /* CardPresentationController.swift in Sources */,
 				320043932CDF3D7F00D08B6D /* KeywordView.swift in Sources */,
+				A22DE6262E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */,
 				320044772CEB4E1E00D08B6D /* RequestWalkUsecase.swift in Sources */,
 				320044982CED81F400D08B6D /* WalkNoti.swift in Sources */,
 				FD14C2702DD4737900AC9ABB /* AppleAuthManager.swift in Sources */,
@@ -3452,6 +3528,7 @@
 				FD259F492D6FD2FC007B182D /* WalkLogListRouter.swift in Sources */,
 				FD5134192CEB7ADE002E76F3 /* HomeRouter.swift in Sources */,
 				FD51341D2CEB7AF0002E76F3 /* HomeInteractor.swift in Sources */,
+				A22DE6202E0EEAD20076CAB2 /* HasQuery.swift in Sources */,
 				3200453F2CF5A8B800D08B6D /* CalculateTimeLimitUsecase.swift in Sources */,
 				320044532CE59A8A00D08B6D /* ProfileInfo.swift in Sources */,
 				99E79FA32D55627F00E48552 /* Extension + UITextViewDelegate.swift in Sources */,
@@ -3483,6 +3560,7 @@
 				FD119F522CED881300BE22BD /* SelectLocationModuleBuildable.swift in Sources */,
 				FD331A522CF23BD000F39426 /* WalkLog.swift in Sources */,
 				99525F2C2D7466FE00B6E17E /* ResetPwViewController.swift in Sources */,
+				A22DE62E2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */,
 				FD11527B2CFC900F008955C4 /* NotificationListPresenter.swift in Sources */,
 				A2C328862CE245AC00D255AB /* TabBarModuleBuilder.swift in Sources */,
 				320044732CEB47B100D08B6D /* RequestWalkInteractor.swift in Sources */,
@@ -3510,6 +3588,7 @@
 				FD0634312CE62578003C9D6B /* AnyEncodable.swift in Sources */,
 				FDE768962CF7831000B5DE88 /* RegisterDeviceTokenUsecase.swift in Sources */,
 				A23A3B732CF4683F00A58705 /* Mate.swift in Sources */,
+				A22DE6182E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */,
 				99E79FA92D556E1900E48552 /* Report.swift in Sources */,
 				99525F0D2D6E806B00B6E17E /* SigninInteractor.swift in Sources */,
 				FD14C2772DD473AB00AC9ABB /* SignInAppleUsecase.swift in Sources */,
@@ -3523,6 +3602,7 @@
 				3200445A2CE5B3AA00D08B6D /* ProfileCreateInteractor.swift in Sources */,
 				A2C328922CE3BEA000D255AB /* AppRouter.swift in Sources */,
 				320043702CDC9A0D00D08B6D /* (null) in Sources */,
+				A22DE61B2E0EEAB80076CAB2 /* HasData.swift in Sources */,
 				3200446B2CEB183300D08B6D /* RequestWalkViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3716,7 +3796,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMeet;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3743,7 +3823,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SniffMEET pear2";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMeet;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3774,7 +3854,6 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "'SniffMEET'은 Nearby Interaction과 ARKit을 위해 카메라 접근이 필요합니다.";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "'SniffMEET'은 P2P 연결을 지원하기 위해 로컬 네트워크 환경이 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "'SniffMEET'은 산책 기록을 위해 백그라운드에서의 사용자 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "'SniffMEET'은 산책 기록을 위해 사용자 위치 정보 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "'SniffMEET'은 걸음 수 측정을 위해 데이터 접근 권한이 필요합니다.";
@@ -3794,7 +3873,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMeet;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3812,7 +3891,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SniffMeet/SniffMeet.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -3823,7 +3902,6 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "'SniffMEET'은 Nearby Interaction과 ARKit을 위해 카메라 접근이 필요합니다.";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "'SniffMEET'은 P2P 연결을 지원하기 위해 로컬 네트워크 환경이 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "'SniffMEET'은 산책 기록을 위해 백그라운드에서의 사용자 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "'SniffMEET'은 산책 기록을 위해 사용자 위치 정보 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "'SniffMEET'은 걸음 수 측정을 위해 데이터 접근 권한이 필요합니다.";
@@ -3843,7 +3921,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SniffMeet Distribution";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

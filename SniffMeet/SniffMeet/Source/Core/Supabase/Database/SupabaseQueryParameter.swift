@@ -18,11 +18,11 @@ enum SupabaseQueryParameter {
     
     var key: String {
         switch self {
-        case let .equal(key, _):
-        case let .notEqual(key, _):
-        case let .isNull(key, _):
-        case let .isTrue(key, _):
-        case let .custom(key, _):
+        case let .equal(key, _),
+             let .notEqual(key, _),
+             let .isNull(key, _),
+             let .isTrue(key, _),
+             let .custom(key, _):
             return key
         }
     }

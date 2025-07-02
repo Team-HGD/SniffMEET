@@ -431,12 +431,6 @@
 		A2C328862CE245AC00D255AB /* TabBarModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C328852CE245AC00D255AB /* TabBarModuleBuilder.swift */; };
 		A2C328882CE2481900D255AB /* HomeModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C328872CE2481900D255AB /* HomeModuleBuilder.swift */; };
 		A2C328922CE3BEA000D255AB /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C328912CE3BEA000D255AB /* AppRouter.swift */; };
-		A2CF8D1C2D79B71F00FAB817 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1B2D79B71F00FAB817 /* Release.xcconfig */; };
-		A2CF8D1D2D79B71F00FAB817 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */; };
-		A2CF8D1E2D79B71F00FAB817 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1B2D79B71F00FAB817 /* Release.xcconfig */; };
-		A2CF8D1F2D79B71F00FAB817 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */; };
-		A2CF8D202D79B71F00FAB817 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1B2D79B71F00FAB817 /* Release.xcconfig */; };
-		A2CF8D212D79B71F00FAB817 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A2CF8D1A2D79B71F00FAB817 /* Debug.xcconfig */; };
 		A2F825D12CDF4BA6000C5419 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F825D02CDF4BA6000C5419 /* HomeViewController.swift */; };
 		A2F825DD2CDFBEB4000C5419 /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F825DC2CDFBEB4000C5419 /* ProfileCardView.swift */; };
 		A2FE77232D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE77222D5211C700239F05 /* SupabaseSessionRequest.swift */; };
@@ -2842,8 +2836,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2CF8D1E2D79B71F00FAB817 /* Release.xcconfig in Resources */,
-				A2CF8D1F2D79B71F00FAB817 /* Debug.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2865,8 +2857,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2CF8D1C2D79B71F00FAB817 /* Release.xcconfig in Resources */,
-				A2CF8D1D2D79B71F00FAB817 /* Debug.xcconfig in Resources */,
 				99A5A1B32CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
 				FD3A033F2CD8CF460047B7ED /* Assets.xcassets in Resources */,
 				FD3A03412CD8CF460047B7ED /* LaunchScreen.storyboard in Resources */,
@@ -2878,8 +2868,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3200453B2CF442D500D08B6D /* Assets.xcassets in Resources */,
-				A2CF8D202D79B71F00FAB817 /* Release.xcconfig in Resources */,
-				A2CF8D212D79B71F00FAB817 /* Debug.xcconfig in Resources */,
 				99A5A1B42CFFE545002F1D2D /* ProfileDrop.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3070,9 +3058,6 @@
 				99525F302D74678F00B6E17E /* ResetPwInteractor.swift in Sources */,
 				32BD489A2D3FF02C0078DA9C /* ProfileSetPresenter.swift in Sources */,
 				32BD489B2D3FF02C0078DA9C /* ProfileCreateRouter.swift in Sources */,
-				32BD489C2D3FF02C0078DA9C /* ProfileSetRouter.swift in Sources */,
-				32BD48972D3FF02C0078DA9C /* ProfileSetViewController.swift in Sources */,
-				32BD489A2D3FF02C0078DA9C /* ProfileSetPresenter.swift in Sources */,
 				32BD489C2D3FF02C0078DA9C /* ProfileSetRouter.swift in Sources */,
 				32C53A0B2D78624400CD89DF /* AlertContent.swift in Sources */,
 				FD259F342D6F10D1007B182D /* WalkLogUsecaseTests.swift in Sources */,
@@ -3341,7 +3326,6 @@
 				A2F825D12CDF4BA6000C5419 /* HomeViewController.swift in Sources */,
 				A24CD92B2D362E8F00492339 /* NearByProfileDropUsecase.swift in Sources */,
 				99525F132D6E80FB00B6E17E /* SigninRouter.swift in Sources */,
-				A24CD92B2D362E8F00492339 /* NearByProfileDropUsecase.swift in Sources */,
 				FD243CFE2D62332500971162 /* SNMToastAnimation.swift in Sources */,
 				A2BA1BA92CF34A6A0080575A /* RequestMateListUsecase.swift in Sources */,
 				FD5134232CEC2BDE002E76F3 /* Routable.swift in Sources */,
@@ -3408,7 +3392,6 @@
 				3200445E2CE5CA1B00D08B6D /* SaveUserInfoUsecase.swift in Sources */,
 				99525F102D6E80C300B6E17E /* SigninPresenter.swift in Sources */,
 				FD14C2752DD4739F00AC9ABB /* SignInEmailUsecase.swift in Sources */,
-				3200445E2CE5CA1B00D08B6D /* SaveUserInfoUsecase.swift in Sources */,
 				995D94AA2CECF8DD005A47BF /* RequestMateInteractor.swift in Sources */,
 				320522BE2D0181A800F1677C /* ImageCacheable.swift in Sources */,
 				99E79F8A2D5436B700E48552 /* ReportMateViewController.swift in Sources */,

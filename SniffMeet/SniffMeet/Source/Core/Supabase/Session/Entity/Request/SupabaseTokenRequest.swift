@@ -13,4 +13,5 @@ struct SupabaseTokenRequest: Encodable {
     enum CodingKeys: String, CodingKey {
         case refreshToken = "refresh_token"
     }
+     
 }

@@ -887,7 +887,7 @@
 		FD14C27F2DD473CD00AC9ABB /* ResendSignUpEmailUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendSignUpEmailUsecase.swift; sourceTree = "<group>"; };
 		FD14C2822DD473D900AC9ABB /* SignUpEmailUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailUsecase.swift; sourceTree = "<group>"; };
 		FD14C2862DD4741800AC9ABB /* OpenIDProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenIDProvider.swift; sourceTree = "<group>"; };
-		FD159A7C2D35104500B425D9 /* SNMTestplan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SNMTestplan.xctestplan; sourceTree = "<group>"; };
+		FD159A7C2D35104500B425D9 /* SNMTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SNMTestPlan.xctestplan; sourceTree = "<group>"; };
 		FD243CF92D621FC200971162 /* SNMProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMProgressView.swift; sourceTree = "<group>"; };
 		FD243CFC2D62332000971162 /* SNMToastAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMToastAnimation.swift; sourceTree = "<group>"; };
 		FD243CFF2D62547300971162 /* SNMImageTextToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNMImageTextToastView.swift; sourceTree = "<group>"; };
@@ -1802,7 +1802,7 @@
 			children = (
 				A24B1F392D3C35C60012B860 /* SNMUtilityTestPlan.xctestplan */,
 				FD011EF02D351FCF0071327A /* SNMNetworkTestPlan.xctestplan */,
-				FD159A7C2D35104500B425D9 /* SNMTestplan.xctestplan */,
+				FD159A7C2D35104500B425D9 /* SNMTestPlan.xctestplan */,
 				FD3E57352D35210D003F3E01 /* SupabaseTestPlan.xctestplan */,
 				FD011EF22D35203C0071327A /* SNMPersistenceTestPlan.xctestplan */,
 				32BD48342D3FECD30078DA9C /* SNMSceneTestPlan.xctestplan */,
@@ -3578,6 +3578,7 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4N97P5J52N;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3602,6 +3603,8 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4N97P5J52N;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 18.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";

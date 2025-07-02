@@ -3774,7 +3774,6 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "'SniffMEET'은 Nearby Interaction과 ARKit을 위해 카메라 접근이 필요합니다.";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "'SniffMEET'은 P2P 연결을 지원하기 위해 로컬 네트워크 환경이 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "'SniffMEET'은 산책 기록을 위해 백그라운드에서의 사용자 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "'SniffMEET'은 산책 기록을 위해 사용자 위치 정보 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "'SniffMEET'은 걸음 수 측정을 위해 데이터 접근 권한이 필요합니다.";
@@ -3794,7 +3793,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMeet;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -3812,7 +3811,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SniffMeet/SniffMeet.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -3823,7 +3822,6 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "'SniffMEET'은 Nearby Interaction과 ARKit을 위해 카메라 접근이 필요합니다.";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "'SniffMEET'은 P2P 연결을 지원하기 위해 로컬 네트워크 환경이 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "산책하기 기능에는 GPS 사용이 필요합니다. ";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "'SniffMEET'은 산책 기록을 위해 백그라운드에서의 사용자 위치 정보가 필요합니다.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "'SniffMEET'은 산책 기록을 위해 사용자 위치 정보 권한이 필요합니다.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "'SniffMEET'은 걸음 수 측정을 위해 데이터 접근 권한이 필요합니다.";
@@ -3843,7 +3841,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SniffMeet Distribution";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

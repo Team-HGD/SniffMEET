@@ -53,5 +53,5 @@ jobs:
           xcodebuild clean test \
           -project SniffMeet/SniffMeet.xcodeproj \
           -scheme SniffMeet \
-          -destination 'platform=iOS Simulator,name=iPhone 13,OS=15.0' \
+          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.0' \
           -skipPackagePluginValidation

@@ -34,20 +34,12 @@ jobs:
           sudo xcode-select -s /Applications/Xcode_16.0.app
       - name: Create .xcconfig debug file
         run: |
-          touch SniffMeet/SniffMeet/Resource/Debug.xcconfig
-          echo "SERVER_URL" = ${{ secrets.SERVER_URL }} >> SniffMeet/SniffMeet/Resource/Debug.xcconfig
-          echo "PUBLIC_KEY" = ${{ secrets.PUBLIC_KEY }} >> SniffMeet/SniffMeet/Resource/Debug.xcconfig
-          echo "NOTIFICATION_SERVER" = ${{ secrets.NOTIFICATION_SERVER }} >> SniffMeet/SniffMeet/Resource/Debug.xcconfig
           touch SniffMeet/Debug.xcconfig
           echo "SERVER_URL" = ${{ secrets.SERVER_URL }} >> SniffMeet/Debug.xcconfig
           echo "PUBLIC_KEY" = ${{ secrets.PUBLIC_KEY }} >> SniffMeet/Debug.xcconfig
           echo "NOTIFICATION_SERVER" = ${{ secrets.NOTIFICATION_SERVER }} >> SniffMeet/Debug.xcconfig
       - name: Create .xcconfig release file
         run: |
-          touch SniffMeet/SniffMeet/Resource/Release.xcconfig
-          echo "SERVER_URL" = ${{ secrets.SERVER_URL }} >> SniffMeet/SniffMeet/Resource/Release.xcconfig
-          echo "PUBLIC_KEY" = ${{ secrets.PUBLIC_KEY }} >> SniffMeet/SniffMeet/Resource/Release.xcconfig
-          echo "NOTIFICATION_SERVER" = ${{ secrets.NOTIFICATION_SERVER }} >> SniffMeet/SniffMeet/Resource/Release.xcconfig
           touch SniffMeet/Release.xcconfig
           echo "SERVER_URL" = ${{ secrets.SERVER_URL }} >> SniffMeet/Release.xcconfig
           echo "PUBLIC_KEY" = ${{ secrets.PUBLIC_KEY }} >> SniffMeet/Release.xcconfig
@@ -61,5 +53,5 @@ jobs:
           xcodebuild clean test \
           -project SniffMeet/SniffMeet.xcodeproj \
           -scheme SniffMeet \
-          -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.0' \
+          -destination 'platform=iOS Simulator,name=iPhone 13,OS=15.0' \
           -skipPackagePluginValidation

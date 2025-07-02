@@ -39,13 +39,6 @@
         "identifier" : "32BD48272D3FEC9D0078DA9C",
         "name" : "SNMSceneTests"
       }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:SniffMeet.xcodeproj",
-        "identifier" : "FD331A642CF33C6700F39426",
-        "name" : "SupabaseTests"
-      }
     }
   ],
   "version" : 1

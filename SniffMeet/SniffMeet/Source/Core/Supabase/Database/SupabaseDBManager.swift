@@ -63,7 +63,7 @@ final class SupabaseDBManager: RemoteDBManageable {
         return SupabaseDBRequestBuilder(
             networkProvider: networkProvider,
             accessToken: accessToken,
-            task: .delete
+            task: .delete,
         )
     }
 

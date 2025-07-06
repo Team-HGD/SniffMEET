@@ -39,14 +39,14 @@
             reference = "container:TestPlan/SupabaseTestPlan.xctestplan">
          </TestPlanReference>
          <TestPlanReference
-            reference = "container:TestPlan/SNMTestplan.xctestplan">
+            reference = "container:TestPlan/SNMTestPlan.xctestplan"
+            default = "YES">
          </TestPlanReference>
          <TestPlanReference
             reference = "container:TestPlan/SNMUtilityTestPlan.xctestplan">
          </TestPlanReference>
          <TestPlanReference
-            reference = "container:TestPlan/SNMSceneTestPlan.xctestplan"
-            default = "YES">
+            reference = "container:TestPlan/SNMSceneTestPlan.xctestplan">
          </TestPlanReference>
       </TestPlans>
       <Testables>

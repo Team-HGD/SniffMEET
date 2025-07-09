@@ -32,7 +32,7 @@ final class SupabaseDBManager: RemoteDBManageable {
         try await sessionManager.checkSession()
         return SupabaseDBFetchRequestBuilder(
             networkProvider: networkProvider,
-            accessToken: accessToken,
+            accessToken: accessToken
         )
     }
     
@@ -41,7 +41,7 @@ final class SupabaseDBManager: RemoteDBManageable {
         try await sessionManager.checkSession()
         return SupabaseDBInsertRequestBuilder(
             networkProvider: networkProvider,
-            accessToken: accessToken,
+            accessToken: accessToken
         )
     }
     
@@ -50,7 +50,7 @@ final class SupabaseDBManager: RemoteDBManageable {
         try await sessionManager.checkSession()
         return SupabaseDBUpdateRequestBuilder(
             networkProvider: networkProvider,
-            accessToken: accessToken,
+            accessToken: accessToken
         )
     }
 
@@ -59,7 +59,7 @@ final class SupabaseDBManager: RemoteDBManageable {
         try await sessionManager.checkSession()
         return SupabaseDBDeleteRequestBuilder(
             networkProvider: networkProvider,
-            accessToken: accessToken,
+            accessToken: accessToken
         )
     }
 
@@ -68,7 +68,7 @@ final class SupabaseDBManager: RemoteDBManageable {
         try await sessionManager.checkSession()
         return SupabaseDBRPCRequestBuilder(
             networkProvider: networkProvider,
-            accessToken: accessToken,
+            accessToken: accessToken
         )
     }
 }

@@ -147,6 +147,30 @@
 		A21435F72CE20D2500564A4D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21435F62CE20D2500564A4D /* TabBarController.swift */; };
 		A220400B2CF6B89800D1E8CB /* UserInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */; };
 		A22179702D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A221796F2D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift */; };
+		A22179712D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A221796F2D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift */; };
+		A22DE6172E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6162E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift */; };
+		A22DE6182E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6162E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift */; };
+		A22DE6192E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6162E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift */; };
+		A22DE61B2E0EEAB80076CAB2 /* HasData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61A2E0EEAB80076CAB2 /* HasData.swift */; };
+		A22DE61C2E0EEAB80076CAB2 /* HasData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61A2E0EEAB80076CAB2 /* HasData.swift */; };
+		A22DE61D2E0EEAB80076CAB2 /* HasData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61A2E0EEAB80076CAB2 /* HasData.swift */; };
+		A22DE61F2E0EEAD20076CAB2 /* HasQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61E2E0EEAD20076CAB2 /* HasQuery.swift */; };
+		A22DE6202E0EEAD20076CAB2 /* HasQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61E2E0EEAD20076CAB2 /* HasQuery.swift */; };
+		A22DE6212E0EEAD20076CAB2 /* HasQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE61E2E0EEAD20076CAB2 /* HasQuery.swift */; };
+		A22DE6242E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6232E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift */; };
+		A22DE6252E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6232E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift */; };
+		A22DE6262E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6232E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift */; };
+		A22DE6282E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6272E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift */; };
+		A22DE6292E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6272E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift */; };
+		A22DE62A2E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6272E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift */; };
+		A22DE62C2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62B2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift */; };
+		A22DE62D2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62B2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift */; };
+		A22DE62E2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62B2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift */; };
+		A22DE6302E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62F2E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift */; };
+		A22DE6312E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62F2E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift */; };
+		A22DE6322E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE62F2E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift */; };
+		A22DE6342E0EF1F70076CAB2 /* SupabaseDBRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6332E0EF1F70076CAB2 /* SupabaseDBRequestBuilderTests.swift */; };
+		A22DE6362E0EF2570076CAB2 /* MockNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6352E0EF2570076CAB2 /* MockNetworkProvider.swift */; };
 		A23A3B732CF4683F00A58705 /* Mate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23A3B722CF4683F00A58705 /* Mate.swift */; };
 		A24082612CEB244C009109A0 /* SupabaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082602CEB244C009109A0 /* SupabaseConfig.swift */; };
 		A24082642CEB2470009109A0 /* SupabaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */; };
@@ -469,6 +493,15 @@
 		A21435F62CE20D2500564A4D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A220400A2CF6B89800D1E8CB /* UserInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDTO.swift; sourceTree = "<group>"; };
 		A221796F2D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUserProfileImageUsecase.swift; sourceTree = "<group>"; };
+		A22DE6162E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBFetchRequestBuilder.swift; sourceTree = "<group>"; };
+		A22DE61A2E0EEAB80076CAB2 /* HasData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasData.swift; sourceTree = "<group>"; };
+		A22DE61E2E0EEAD20076CAB2 /* HasQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasQuery.swift; sourceTree = "<group>"; };
+		A22DE6232E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBInsertRequestBuilder.swift; sourceTree = "<group>"; };
+		A22DE6272E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBUpdateRequestBuilder.swift; sourceTree = "<group>"; };
+		A22DE62B2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBDeleteRequestBuilder.swift; sourceTree = "<group>"; };
+		A22DE62F2E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRPCRequestBuilder.swift; sourceTree = "<group>"; };
+		A22DE6332E0EF1F70076CAB2 /* SupabaseDBRequestBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseDBRequestBuilderTests.swift; sourceTree = "<group>"; };
+		A22DE6352E0EF2570076CAB2 /* MockNetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkProvider.swift; sourceTree = "<group>"; };
 		A23A3B722CF4683F00A58705 /* Mate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mate.swift; sourceTree = "<group>"; };
 		A24082602CEB244C009109A0 /* SupabaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseConfig.swift; sourceTree = "<group>"; };
 		A24082632CEB2470009109A0 /* SupabaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseAuthManager.swift; sourceTree = "<group>"; };
@@ -1224,7 +1257,7 @@
 				A202A1142CEDD50700B98203 /* SupabaseDBManager.swift */,
 				A202A1162CEDD5EF00B98203 /* SupabaseDBRequest.swift */,
 				A2FE772D2D5378B400239F05 /* SupabaseQueryParameter.swift */,
-				A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */,
+				A22DE6152E0EEA700076CAB2 /* RequestBuilders */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -1236,6 +1269,29 @@
 				A2C3288A2CE2F50100D255AB /* View */,
 			);
 			path = Tab;
+			sourceTree = "<group>";
+		};
+		A22DE6152E0EEA700076CAB2 /* RequestBuilders */ = {
+			isa = PBXGroup;
+			children = (
+				A22DE6222E0EEAE20076CAB2 /* Protocols */,
+				A2FE77712D54ACE800239F05 /* SupabaseDBRequestBuilder.swift */,
+				A22DE6162E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift */,
+				A22DE6232E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift */,
+				A22DE6272E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift */,
+				A22DE62B2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift */,
+				A22DE62F2E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift */,
+			);
+			path = RequestBuilders;
+			sourceTree = "<group>";
+		};
+		A22DE6222E0EEAE20076CAB2 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A22DE61A2E0EEAB80076CAB2 /* HasData.swift */,
+				A22DE61E2E0EEAD20076CAB2 /* HasQuery.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		A24082622CEB2464009109A0 /* Supabase */ = {
@@ -1483,6 +1539,17 @@
 				FD331A5F2CF339AA00F39426 /* SupabaseStorageRequest.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		FD331A6F2CF33C7B00F39426 /* SupabaseTests */ = {
+			isa = PBXGroup;
+			children = (
+				FDC5D9B92D5BD5D900380533 /* Info.plist */,
+				FD331A712CF33C7F00F39426 /* SupabaseStorageTests.swift */,
+				A22DE6332E0EF1F70076CAB2 /* SupabaseDBRequestBuilderTests.swift */,
+				A22DE6352E0EF2570076CAB2 /* MockNetworkProvider.swift */,
+			);
+			path = SupabaseTests;
 			sourceTree = "<group>";
 		};
 		FD3A03172CD8CDE50047B7ED = {
@@ -2323,7 +2390,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					A24B1F242D3C32960012B860 = {
 						CreatedOnToolsVersion = 16.2;
@@ -2368,6 +2435,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		32BD48262D3FEC9D0078DA9C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A24B1F232D3C32960012B860 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2404,6 +2478,297 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		32BD48242D3FEC9D0078DA9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32192B2B2D41EB1700C876BA /* Extension + Array.swift in Sources */,
+				32192B2A2D41EB1200C876BA /* Extension + UITableViewCell.swift in Sources */,
+				32192B292D41EAF600C876BA /* CGImageCoder.swift in Sources */,
+				32192B282D41E91200C876BA /* TaskSerialQueue.swift in Sources */,
+				32192B272D41E8FD00C876BA /* ImageSampler.swift in Sources */,
+				32BD48F82D40B5450078DA9C /* SceneDelegate.swift in Sources */,
+				32C5395D2D64165800CD89DF /* TrackWalkViewPresenter.swift in Sources */,
+				32BD48F02D40B51E0078DA9C /* AppDelegate.swift in Sources */,
+				32BD48F12D40B51E0078DA9C /* AppRouter.swift in Sources */,
+				32BD48EF2D40B5130078DA9C /* SessionViewController.swift in Sources */,
+				A22DE6242E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */,
+				32BD48ED2D40B4BA0078DA9C /* PushNotificationRequest.swift in Sources */,
+				32BD48EE2D40B4BA0078DA9C /* PushNotificationConfig.swift in Sources */,
+				FD259F2F2D6F0AFA007B182D /* RequestWalkLogListUsecase.swift in Sources */,
+				FD259F482D6FD2FC007B182D /* WalkLogListRouter.swift in Sources */,
+				32BD48EC2D40B4880078DA9C /* Assets.xcassets in Sources */,
+				FD243CFD2D62332500971162 /* SNMToastAnimation.swift in Sources */,
+				FDC8A02E2D66FA190097F00A /* SNMErrorHandler.swift in Sources */,
+				32BD48EB2D40B4790078DA9C /* SNMColor.swift in Sources */,
+				99525F2D2D7466FE00B6E17E /* ResetPwViewController.swift in Sources */,
+				FD14C27D2DD473BF00AC9ABB /* SignInOpenIDUsecase.swift in Sources */,
+				32BD48EA2D40AEBC0078DA9C /* RemoteDatabaseManagerMock.swift in Sources */,
+				32C539632D64165A00CD89DF /* TrackWalkRouter.swift in Sources */,
+				99E79F5C2D5392C100E48552 /* DeleteMateUseCase.swift in Sources */,
+				A22DE62D2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */,
+				32BD48382D3FF02C0078DA9C /* WalkRequestDTO.swift in Sources */,
+				32BD48392D3FF02C0078DA9C /* WalkAPSDTO.swift in Sources */,
+				32BD483A2D3FF02C0078DA9C /* SaveDeviceTokenDTO.swift in Sources */,
+				32BD483B2D3FF02C0078DA9C /* NotiListDTO.swift in Sources */,
+				32BD483C2D3FF02C0078DA9C /* MateListDTO.swift in Sources */,
+				99E795CC2D8A97DC001C9B18 /* PreferencesInteractor.swift in Sources */,
+				32BD483D2D3FF02C0078DA9C /* MPCProfileDropDTO.swift in Sources */,
+				99E795DC2D9050C7001C9B18 /* PersonalInfoInteractor.swift in Sources */,
+				32BD483E2D3FF02C0078DA9C /* WalkNotiDTO.swift in Sources */,
+				99525F1B2D70736E00B6E17E /* SignUpViewController.swift in Sources */,
+				32BD483F2D3FF02C0078DA9C /* DogProfileDTO.swift in Sources */,
+				32081AD22D5B5D8A00D19235 /* TargetedProfileDropUsecase.swift in Sources */,
+				32BD48402D3FF02C0078DA9C /* UserInfoDTO.swift in Sources */,
+				99525EBB2D6563E800B6E17E /* UpdateTimeUsecase.swift in Sources */,
+				32BD48412D3FF02C0078DA9C /* ImageCacheable.swift in Sources */,
+				32BD48422D3FF02C0078DA9C /* OnBoardingPage.swift in Sources */,
+				FD14C2812DD473CD00AC9ABB /* ResendSignUpEmailUsecase.swift in Sources */,
+				FD14C27B2DD473B400AC9ABB /* SignInGoogleUsecase.swift in Sources */,
+				FD14C2882DD4741800AC9ABB /* OpenIDProvider.swift in Sources */,
+				32BD48432D3FF02C0078DA9C /* WalkLog.swift in Sources */,
+				FD14C2832DD473D900AC9ABB /* SignUpEmailUsecase.swift in Sources */,
+				32BD48442D3FF02C0078DA9C /* WalkNoti.swift in Sources */,
+				32BD48452D3FF02C0078DA9C /* Mate.swift in Sources */,
+				32081A6A2D547F9F00D19235 /* MPCSessionConcurrencyTest.swift in Sources */,
+				32BD48462D3FF02C0078DA9C /* ProfileInfo.swift in Sources */,
+				32BD48472D3FF02C0078DA9C /* Keyword.swift in Sources */,
+				FD14C2782DD473AB00AC9ABB /* SignInAppleUsecase.swift in Sources */,
+				32BD48482D3FF02C0078DA9C /* Size.swift in Sources */,
+				99E795CA2D8A97D5001C9B18 /* PreferencesPresenter.swift in Sources */,
+				32BD48492D3FF02C0078DA9C /* Sex.swift in Sources */,
+				32BD484A2D3FF02C0078DA9C /* UpdateUserInfoUsecase.swift in Sources */,
+				32BD484B2D3FF02C0078DA9C /* SaveFirstLaunchUsecase.swift in Sources */,
+				FD85EBEB2D5F3D7E0017443E /* DeleteNotificationUsecase.swift in Sources */,
+				99E7A0642D5DB75A00E48552 /* Extension + GIFImageView.swift in Sources */,
+				32BD484D2D3FF02C0078DA9C /* SaveProfileImageUsecase.swift in Sources */,
+				32BD484E2D3FF02C0078DA9C /* SaveUserInfoUsecase.swift in Sources */,
+				32BD484F2D3FF02C0078DA9C /* RemoteSaveDeviceTokenUsecase.swift in Sources */,
+				99E7A0212D5C58D200E48552 /* NIDeviceChecker.swift in Sources */,
+				99525F3C2D746AC000B6E17E /* ResetPwEmailInteractor.swift in Sources */,
+				A22DE6292E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */,
+				99525EBD2D65694F00B6E17E /* UpdateUserStepUsecase.swift in Sources */,
+				32BD48502D3FF02C0078DA9C /* RegisterDeviceTokenUsecase.swift in Sources */,
+				32BD48512D3FF02C0078DA9C /* CheckFirstLaunchUsecase.swift in Sources */,
+				32BD48522D3FF02C0078DA9C /* RequestNotiListUsecase.swift in Sources */,
+				32BD48532D3FF02C0078DA9C /* RequestNotificationAuthUsecase.swift in Sources */,
+				32BD48542D3FF02C0078DA9C /* RequestMateInfoUsecase.swift in Sources */,
+				32BD48552D3FF02C0078DA9C /* RequestUserInfoRemoteUsecase.swift in Sources */,
+				32BD48562D3FF02C0078DA9C /* RequestLocationAuthUsecase.swift in Sources */,
+				32BD48572D3FF02C0078DA9C /* UpdateUserLocationUsecase.swift in Sources */,
+				32BD48582D3FF02C0078DA9C /* RequestWalkUsecase.swift in Sources */,
+				32BD48592D3FF02C0078DA9C /* RequestMateListUsecase.swift in Sources */,
+				99E795D82D904E70001C9B18 /* PersonalInfoPresenter.swift in Sources */,
+				99E79F9F2D54D45600E48552 /* ReportPickerInteractor.swift in Sources */,
+				32BD485A2D3FF02C0078DA9C /* RequestProfileImageUsecase.swift in Sources */,
+				A26BA00A2D6DC84C000E5648 /* ProfileSetInteractor.swift in Sources */,
+				FD243D032D62547D00971162 /* SNMImageToastView.swift in Sources */,
+				32BD485B2D3FF02C0078DA9C /* LoadUserInfoUsecase.swift in Sources */,
+				32BD485C2D3FF02C0078DA9C /* RespondWalkRequestUsecase.swift in Sources */,
+				32BD485D2D3FF02C0078DA9C /* RespondMateRequestUsecase.swift in Sources */,
+				32BD485E2D3FF02C0078DA9C /* ConvertToWalkAPSUsecase.swift in Sources */,
+				32BD485F2D3FF02C0078DA9C /* CalculateTimeLimitUsecase.swift in Sources */,
+				32BD48602D3FF02C0078DA9C /* ConvertLocationToTextUsecase.swift in Sources */,
+				32BD48612D3FF02C0078DA9C /* NearByProfileDropUsecase.swift in Sources */,
+				99525F222D70747100B6E17E /* SignUpPresenter.swift in Sources */,
+				32BD48622D3FF02C0078DA9C /* QuitProfileDropUsecase.swift in Sources */,
+				32BD48632D3FF02C0078DA9C /* MultipartFormData.swift in Sources */,
+				A2FE772C2D52224700239F05 /* SignInAnonUsecase.swift in Sources */,
+				32BD48642D3FF02C0078DA9C /* HTTPStatusCode.swift in Sources */,
+				32BD48652D3FF02C0078DA9C /* NetworkProvider.swift in Sources */,
+				32BD48662D3FF02C0078DA9C /* SNMRequestType.swift in Sources */,
+				99E79F932D54881300E48552 /* ReportMatePresenter.swift in Sources */,
+				32BD48672D3FF02C0078DA9C /* SNMRequestConvertible.swift in Sources */,
+				32BD48682D3FF02C0078DA9C /* Endpoint.swift in Sources */,
+				32BD48692D3FF02C0078DA9C /* SNMNetworkResponse.swift in Sources */,
+				FD14C2742DD4739F00AC9ABB /* SignInEmailUsecase.swift in Sources */,
+				99525F332D74685D00B6E17E /* ResetPwPresenter.swift in Sources */,
+				32BD486A2D3FF02C0078DA9C /* Data + append.swift in Sources */,
+				32BD486B2D3FF02C0078DA9C /* URLRequest + append.swift in Sources */,
+				32BD486C2D3FF02C0078DA9C /* AnyEncodable.swift in Sources */,
+				32BD486D2D3FF02C0078DA9C /* MockURLProtocol.swift in Sources */,
+				32BD486E2D3FF02C0078DA9C /* MockRequest.swift in Sources */,
+				FD259F452D6FD2E8007B182D /* WalkLogListInteractor.swift in Sources */,
+				99E795D32D8D440F001C9B18 /* PreferencesOption.swift in Sources */,
+				32BD486F2D3FF02C0078DA9C /* DataStoragable.swift in Sources */,
+				A22DE6212E0EEAD20076CAB2 /* HasQuery.swift in Sources */,
+				99E795D52D904C64001C9B18 /* PersonalInfoViewController.swift in Sources */,
+				FD243CFA2D621FC600971162 /* SNMProgressView.swift in Sources */,
+				32BD48702D3FF02C0078DA9C /* CacheManager.swift in Sources */,
+				32BD48712D3FF02C0078DA9C /* SNMFileManager.swift in Sources */,
+				32BD48722D3FF02C0078DA9C /* UserDefaultsManager.swift in Sources */,
+				32BD48732D3FF02C0078DA9C /* KeychainManager.swift in Sources */,
+				A2FE77302D5378B400239F05 /* SupabaseQueryParameter.swift in Sources */,
+				32BD48742D3FF02C0078DA9C /* BaseView.swift in Sources */,
+				32BD48E42D40855D0078DA9C /* MateListPresenterSpy.swift in Sources */,
+				99E795DE2D9050F5001C9B18 /* PersonalInfoRouter.swift in Sources */,
+				32BD48752D3FF02C0078DA9C /* BaseViewController.swift in Sources */,
+				FD2921332D632333009D0762 /* DimPresentable.swift in Sources */,
+				32BD48762D3FF02C0078DA9C /* Environment.swift in Sources */,
+				32BD48772D3FF02C0078DA9C /* SNMLogger.swift in Sources */,
+				32BD48782D3FF02C0078DA9C /* Extension + UIApplication.swift in Sources */,
+				99525F422D746B0B00B6E17E /* ResetPwEmailRouter.swift in Sources */,
+				32BD487A2D3FF02C0078DA9C /* Extension + UIViewController.swift in Sources */,
+				32081B312D5C84EC00D19235 /* OnBoardingPageViewController.swift in Sources */,
+				32081B322D5C84EC00D19235 /* OnBoardingPresenter.swift in Sources */,
+				32081B332D5C84EC00D19235 /* OnBoardingInteractor.swift in Sources */,
+				32081B342D5C84EC00D19235 /* OnBoardingRouter.swift in Sources */,
+				32081B352D5C84EC00D19235 /* OnBoardingViewController.swift in Sources */,
+				FD259F422D6FD2D0007B182D /* WalkLogListPresenter.swift in Sources */,
+				32BD487B2D3FF02C0078DA9C /* AnyJSONSerializable.swift in Sources */,
+				32BD487C2D3FF02C0078DA9C /* AnyDecodable.swift in Sources */,
+				32BD487D2D3FF02C0078DA9C /* Extension + Date.swift in Sources */,
+				32BD487E2D3FF02C0078DA9C /* UIControl + Publisher.swift in Sources */,
+				FD4855222D548F8200C66429 /* ConnectedPeerManagerSpy.swift in Sources */,
+				32BD487F2D3FF02C0078DA9C /* Extension + Keyboard.swift in Sources */,
+				32BD48802D3FF02C0078DA9C /* Extension + UIView.swift in Sources */,
+				32BD48812D3FF02C0078DA9C /* Extension + Navigation.swift in Sources */,
+				A26DCA092D5E3F2900D8D75A /* CheckNicknameUsecase.swift in Sources */,
+				32BD48822D3FF02C0078DA9C /* ProfileDropAnimation.swift in Sources */,
+				99E79F902D544A4700E48552 /* ReportMateRouter.swift in Sources */,
+				32BD48832D3FF02C0078DA9C /* EventConstant.swift in Sources */,
+				A2FE77232D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */,
+				A2FE77722D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
+				32BD48842D3FF02C0078DA9C /* InputTextField.swift in Sources */,
+				FD14C2722DD4737900AC9ABB /* AppleAuthManager.swift in Sources */,
+				32BD48852D3FF02C0078DA9C /* KeywordButton.swift in Sources */,
+				99E79F9C2D54D0AA00E48552 /* ReportPickerPresenter.swift in Sources */,
+				32BD48862D3FF02C0078DA9C /* KeywordView.swift in Sources */,
+				32BD48872D3FF02C0078DA9C /* PrimaryButton.swift in Sources */,
+				32BD48882D3FF02C0078DA9C /* SNMLineTabBar.swift in Sources */,
+				99E79FA52D556C6400E48552 /* RequestReportUsecase.swift in Sources */,
+				32BD48892D3FF02C0078DA9C /* PaddingLabel.swift in Sources */,
+				99E79F8E2D543F4900E48552 /* ReportPickerViewController.swift in Sources */,
+				99525F3F2D746ADF00B6E17E /* ResetPwEmailPresenter.swift in Sources */,
+				32BD488A2D3FF02C0078DA9C /* LayoutConstant.swift in Sources */,
+				32BD488C2D3FF02C0078DA9C /* SNMFont.swift in Sources */,
+				32BD488D2D3FF02C0078DA9C /* SNMToast.swift in Sources */,
+				32BD48912D3FF02C0078DA9C /* Routable.swift in Sources */,
+				32BD48932D3FF02C0078DA9C /* SNMError.swift in Sources */,
+				99525F362D74687C00B6E17E /* ResetPwRouter.swift in Sources */,
+				32BD48942D3FF02C0078DA9C /* TabBarModuleBuilder.swift in Sources */,
+				A22DE6312E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */,
+				99E79F972D548B6700E48552 /* ReportPickerRouter.swift in Sources */,
+				32BD48952D3FF02C0078DA9C /* TabBarController.swift in Sources */,
+				32BD48962D3FF02C0078DA9C /* ProfileCreateViewController.swift in Sources */,
+				32BD48972D3FF02C0078DA9C /* ProfileSetViewController.swift in Sources */,
+				99525F252D7074C500B6E17E /* SignUpRouter.swift in Sources */,
+				32BD48982D3FF02C0078DA9C /* ProfileCreateInteractor.swift in Sources */,
+				99525F1F2D70743A00B6E17E /* SignUpInteractor.swift in Sources */,
+				32BD48992D3FF02C0078DA9C /* ProfileCreatePresenter.swift in Sources */,
+				99525F302D74678F00B6E17E /* ResetPwInteractor.swift in Sources */,
+				32BD489A2D3FF02C0078DA9C /* ProfileSetPresenter.swift in Sources */,
+				32BD489B2D3FF02C0078DA9C /* ProfileCreateRouter.swift in Sources */,
+				32BD489C2D3FF02C0078DA9C /* ProfileSetRouter.swift in Sources */,
+				32C53A0B2D78624400CD89DF /* AlertContent.swift in Sources */,
+				FD259F342D6F10D1007B182D /* WalkLogUsecaseTests.swift in Sources */,
+				32BD489D2D3FF02C0078DA9C /* ProfileEditInteractor.swift in Sources */,
+				32BD489E2D3FF02C0078DA9C /* ProfileEditPresenter.swift in Sources */,
+				32BD489F2D3FF02C0078DA9C /* ProfileEditRoutable.swift in Sources */,
+				32C539602D64165900CD89DF /* TrackWalkInteractor.swift in Sources */,
+				32BD48A02D3FF02C0078DA9C /* ProfileEditViewController.swift in Sources */,
+				32BD48A12D3FF02C0078DA9C /* HomeModuleBuilder.swift in Sources */,
+				32BD48A22D3FF02C0078DA9C /* HomeViewController.swift in Sources */,
+				FD14C26E2DD4736600AC9ABB /* GoogleAuthManager.swift in Sources */,
+				32BD48A32D3FF02C0078DA9C /* ProfileCardView.swift in Sources */,
+				32BD48A42D3FF02C0078DA9C /* HomeInteractor.swift in Sources */,
+				32BD48A52D3FF02C0078DA9C /* HomePresenter.swift in Sources */,
+				32BD48A62D3FF02C0078DA9C /* PresentAnimator.swift in Sources */,
+				32BD48A72D3FF02C0078DA9C /* HomeRouter.swift in Sources */,
+				32BD48A82D3FF02C0078DA9C /* NotificationCell.swift in Sources */,
+				32BD48A92D3FF02C0078DA9C /* NotificationListViewController.swift in Sources */,
+				32BD48AA2D3FF02C0078DA9C /* NotificationListInteractor.swift in Sources */,
+				32BD48AB2D3FF02C0078DA9C /* NotificationListPresenter.swift in Sources */,
+				32BD48AC2D3FF02C0078DA9C /* NotificationListRouter.swift in Sources */,
+				32BD48AD2D3FF02C0078DA9C /* ProcessedWalkViewController.swift in Sources */,
+				FD243D012D62547400971162 /* SNMImageTextToastView.swift in Sources */,
+				32BD48AE2D3FF02C0078DA9C /* RespondMapViewController.swift in Sources */,
+				FD2921312D62ACE1009D0762 /* SNMAnimationType.swift in Sources */,
+				A22DE6172E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */,
+				99525F142D6E80FB00B6E17E /* SigninRouter.swift in Sources */,
+				A22179712D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */,
+				32BD48AF2D3FF02C0078DA9C /* RespondWalkViewController.swift in Sources */,
+				32BD48B02D3FF02C0078DA9C /* ProcessedWalkInteractor.swift in Sources */,
+				32BD48B12D3FF02C0078DA9C /* RespondWalkInteractor.swift in Sources */,
+				32BD48B22D3FF02C0078DA9C /* ProcessedWalkPresenter.swift in Sources */,
+				32BD48B32D3FF02C0078DA9C /* RespondMapPresenter.swift in Sources */,
+				99E795C72D8A97CA001C9B18 /* PreferencesRouter.swift in Sources */,
+				32BD48B42D3FF02C0078DA9C /* RespondWalkPresenter.swift in Sources */,
+				32BD48B52D3FF02C0078DA9C /* ProcessedWalkRouter.swift in Sources */,
+				32BD48B62D3FF02C0078DA9C /* RespondMapRouter.swift in Sources */,
+				32BD48B72D3FF02C0078DA9C /* RespondWalkRouter.swift in Sources */,
+				32BD48B82D3FF02C0078DA9C /* SelectLocationViewController.swift in Sources */,
+				32BD48E62D408C3E0078DA9C /* UseCaseMock.swift in Sources */,
+				99E795D02D8A97E5001C9B18 /* PreferencesViewController.swift in Sources */,
+				32BD48B92D3FF02C0078DA9C /* LocationSelectionView.swift in Sources */,
+				32BD48BA2D3FF02C0078DA9C /* ProfileView.swift in Sources */,
+				32BD48BB2D3FF02C0078DA9C /* CardPresentationController.swift in Sources */,
+				32BD48BC2D3FF02C0078DA9C /* RequestWalkViewController.swift in Sources */,
+				32BD48BD2D3FF02C0078DA9C /* SelectLocationInteractor.swift in Sources */,
+				99E795BF2D8411CA001C9B18 /* RegexValidation.swift in Sources */,
+				32C539662D65CB2800CD89DF /* WalkRoute.swift in Sources */,
+				32BD48BE2D3FF02C0078DA9C /* RequestWalkInteractor.swift in Sources */,
+				32BD48BF2D3FF02C0078DA9C /* SelectLocationPresenter.swift in Sources */,
+				32BD48C02D3FF02C0078DA9C /* RequestWalkPresenter.swift in Sources */,
+				99E79F8B2D5436B700E48552 /* ReportMateViewController.swift in Sources */,
+				32BD48C12D3FF02C0078DA9C /* SelectLocationModuleBuildable.swift in Sources */,
+				32BD48C22D3FF02C0078DA9C /* RequestWalkRouter.swift in Sources */,
+				32BD48C32D3FF02C0078DA9C /* SelectLocationRouter.swift in Sources */,
+				32BD48C42D3FF02C0078DA9C /* WalkLogCell.swift in Sources */,
+				99525F482D7867AC00B6E17E /* HapticManager.swift in Sources */,
+				32BD48C52D3FF02C0078DA9C /* WalkLogListViewController.swift in Sources */,
+				32BD48C62D3FF02C0078DA9C /* WalkLogPageViewController.swift in Sources */,
+				A2FE77282D521FB200239F05 /* SupabaseSessionManager.swift in Sources */,
+				32BD48C72D3FF02C0078DA9C /* AddMateButton.swift in Sources */,
+				32BD48C82D3FF02C0078DA9C /* MateListViewController.swift in Sources */,
+				FD4855252D54996800C66429 /* ConnectedPeerManager.swift in Sources */,
+				32081C0A2D618D0000D19235 /* ProfileDropViewController.swift in Sources */,
+				32081C0B2D618D0000D19235 /* ProfileDropInteractor.swift in Sources */,
+				32081C0C2D618D0000D19235 /* ConnectionState.swift in Sources */,
+				32081C0D2D618D0000D19235 /* ProfileDropPresenter.swift in Sources */,
+				32081C0E2D618D0000D19235 /* ProfileDropRouter.swift in Sources */,
+				32081A6C2D547FB700D19235 /* MockMPCSession.swift in Sources */,
+				32BD48C92D3FF02C0078DA9C /* MateListInteractor.swift in Sources */,
+				99525F392D746A6600B6E17E /* ResetPwEmailViewController.swift in Sources */,
+				32BD48CA2D3FF02C0078DA9C /* MateListPresenter.swift in Sources */,
+				32BD48CB2D3FF02C0078DA9C /* MateListRouter.swift in Sources */,
+				32BD48CC2D3FF02C0078DA9C /* RequestMateViewController.swift in Sources */,
+				32BD48CD2D3FF02C0078DA9C /* RequestMateInteractor.swift in Sources */,
+				99E79FA22D55627F00E48552 /* Extension + UITextViewDelegate.swift in Sources */,
+				32BD48CE2D3FF02C0078DA9C /* RequestMatePresenter.swift in Sources */,
+				32BD48CF2D3FF02C0078DA9C /* RequestMateRouter.swift in Sources */,
+				32BD48D02D3FF02C0078DA9C /* DataManager.swift in Sources */,
+				32BD48D12D3FF02C0078DA9C /* NIManager.swift in Sources */,
+				99E79FAB2D556E8600E48552 /* ReportDTO.swift in Sources */,
+				32BD48D22D3FF02C0078DA9C /* MPCManager.swift in Sources */,
+				FD14C2612DD472DE00AC9ABB /* SupabaseAuthTypes.swift in Sources */,
+				32BD48D32D3FF02C0078DA9C /* MPCAdvertiser.swift in Sources */,
+				32BD48D42D3FF02C0078DA9C /* MPCBroswer.swift in Sources */,
+				32BD48D52D3FF02C0078DA9C /* SupabaseConfig.swift in Sources */,
+				FD259F2C2D6F0AE7007B182D /* SaveWalkLogUsecase.swift in Sources */,
+				32BD48D62D3FF02C0078DA9C /* SupabaseAuthManager.swift in Sources */,
+				99E79F992D548D9A00E48552 /* ReportMateInteractor.swift in Sources */,
+				99525F0E2D6E806B00B6E17E /* SigninInteractor.swift in Sources */,
+				99525F112D6E80C300B6E17E /* SigninPresenter.swift in Sources */,
+				99E79FA82D556E1900E48552 /* Report.swift in Sources */,
+				32BD48D82D3FF02C0078DA9C /* SupabaseAuthRequest.swift in Sources */,
+				A2FE77762D55448800239F05 /* RemoteDBRequestBuilderMock.swift in Sources */,
+				99525F072D6E7FAD00B6E17E /* SigninViewController.swift in Sources */,
+				A22DE61C2E0EEAB80076CAB2 /* HasData.swift in Sources */,
+				32BD48D92D3FF02C0078DA9C /* SupabaseSession.swift in Sources */,
+				32BD48DA2D3FF02C0078DA9C /* SupabaseUser.swift in Sources */,
+				32BD48DB2D3FF02C0078DA9C /* SupabaseSessionResponse.swift in Sources */,
+				32C539552D64161100CD89DF /* TrackWalkViewController.swift in Sources */,
+				32BD48DC2D3FF02C0078DA9C /* SupabaseUserResponse.swift in Sources */,
+				32BD48DD2D3FF02C0078DA9C /* SupabaseRefreshResponse.swift in Sources */,
+				32BD48DE2D3FF02C0078DA9C /* SupabaseTokenRequest.swift in Sources */,
+				32BD48DF2D3FF02C0078DA9C /* SupabaseStorageManager.swift in Sources */,
+				32BD48E02D3FF02C0078DA9C /* SupabaseStorageRequest.swift in Sources */,
+				32BD48E12D3FF02C0078DA9C /* SupabaseDBManager.swift in Sources */,
+				32BD48E22D3FF02C0078DA9C /* SupabaseDBRequest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A24B1F212D3C32960012B860 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2411,6 +2776,56 @@
 				A24B1F382D3C349F0012B860 /* ImageSamplingTests.swift in Sources */,
 				A24B1F302D3C33500012B860 /* ImageSampler.swift in Sources */,
 				A24B1F332D3C33660012B860 /* CGImageCoder.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD331A612CF33C6700F39426 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99E79FAD2D55EC8600E48552 /* SNMLogger.swift in Sources */,
+				A22DE6322E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */,
+				FD159A7D2D35166D00B425D9 /* Environment.swift in Sources */,
+				A22DE6252E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */,
+				FD331A8B2CF33E7100F39426 /* UserDefaultsManager.swift in Sources */,
+				FD331A8C2CF33E7100F39426 /* KeychainManager.swift in Sources */,
+				A2FE77742D54ACE800239F05 /* SupabaseDBRequestBuilder.swift in Sources */,
+				FD331A7D2CF33D0500F39426 /* SupabaseStorageRequest.swift in Sources */,
+				FD331A7E2CF33D0500F39426 /* SupabaseConfig.swift in Sources */,
+				FD331A802CF33D0500F39426 /* SupabaseAuthManager.swift in Sources */,
+				FD331A8E2CF33F6700F39426 /* SupabaseStorageManager.swift in Sources */,
+				FD14C25F2DD472DE00AC9ABB /* SupabaseAuthTypes.swift in Sources */,
+				A22DE61F2E0EEAD20076CAB2 /* HasQuery.swift in Sources */,
+				FD331A822CF33D0500F39426 /* SupabaseAuthRequest.swift in Sources */,
+				FD331A832CF33D0500F39426 /* SupabaseSession.swift in Sources */,
+				FD331A842CF33D0500F39426 /* SupabaseUser.swift in Sources */,
+				FD331A852CF33D0500F39426 /* SupabaseSessionResponse.swift in Sources */,
+				A2FE77252D5211C700239F05 /* SupabaseSessionRequest.swift in Sources */,
+				FD331A862CF33D0500F39426 /* SupabaseUserResponse.swift in Sources */,
+				A22DE6282E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */,
+				FD331A872CF33D0500F39426 /* SupabaseRefreshResponse.swift in Sources */,
+				A22DE6362E0EF2570076CAB2 /* MockNetworkProvider.swift in Sources */,
+				3284D34F2D2F941C000ABC04 /* DataStoragable.swift in Sources */,
+				FD331A882CF33D0500F39426 /* SupabaseTokenRequest.swift in Sources */,
+				FD331A892CF33D0500F39426 /* SupabaseDBManager.swift in Sources */,
+				FD331A8A2CF33D0500F39426 /* SupabaseDBRequest.swift in Sources */,
+				FD331A732CF33CF200F39426 /* MultipartFormData.swift in Sources */,
+				A2FE77272D521FB200239F05 /* SupabaseSessionManager.swift in Sources */,
+				FD331A742CF33CF200F39426 /* HTTPStatusCode.swift in Sources */,
+				FD331A752CF33CF200F39426 /* NetworkProvider.swift in Sources */,
+				A22DE6342E0EF1F70076CAB2 /* SupabaseDBRequestBuilderTests.swift in Sources */,
+				A22DE62C2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */,
+				FD331A762CF33CF200F39426 /* SNMRequestType.swift in Sources */,
+				FD331A772CF33CF200F39426 /* SNMRequestConvertible.swift in Sources */,
+				FD331A782CF33CF200F39426 /* Endpoint.swift in Sources */,
+				FD331A792CF33CF200F39426 /* SNMNetworkResponse.swift in Sources */,
+				FD331A7A2CF33CF200F39426 /* Data + append.swift in Sources */,
+				A22DE61D2E0EEAB80076CAB2 /* HasData.swift in Sources */,
+				FD331A7B2CF33CF200F39426 /* URLRequest + append.swift in Sources */,
+				A22DE6192E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */,
+				FD331A7C2CF33CF200F39426 /* AnyEncodable.swift in Sources */,
+				A2FE772E2D5378B400239F05 /* SupabaseQueryParameter.swift in Sources */,
+				FD331A722CF33C8400F39426 /* SupabaseStorageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2493,6 +2908,7 @@
 				FD51341F2CEB7AFE002E76F3 /* LoadUserInfoUsecase.swift in Sources */,
 				FD331A582CF23CEC00F39426 /* WalkLogCell.swift in Sources */,
 				A26BA0092D6DC84C000E5648 /* ProfileSetInteractor.swift in Sources */,
+				A22DE62A2E0EEB400076CAB2 /* SupabaseDBUpdateRequestBuilder.swift in Sources */,
 				FD01D8FA2D40ACAF00AD4940 /* Extension + Array.swift in Sources */,
 				FD5134172CEB738D002E76F3 /* UIControl + Publisher.swift in Sources */,
 				FD14C2602DD472DE00AC9ABB /* SupabaseAuthTypes.swift in Sources */,
@@ -2563,6 +2979,7 @@
 				99525F082D6E7FAD00B6E17E /* SigninViewController.swift in Sources */,
 				FD01D8F52D40AC5300AD4940 /* Extension + UITableViewCell.swift in Sources */,
 				99E795C92D8A97D5001C9B18 /* PreferencesPresenter.swift in Sources */,
+				A22DE6302E0EEB630076CAB2 /* SupabaseDBRPCRequestBuilder.swift in Sources */,
 				FD11526F2CFB33B6008955C4 /* RespondMapViewController.swift in Sources */,
 				FD119F4C2CED87B000BE22BD /* SelectLocationInteractor.swift in Sources */,
 				FD880B622CF433AF0093BEB9 /* Environment.swift in Sources */,
@@ -2577,6 +2994,7 @@
 				A22179702D75CFE200309CA2 /* LoadUserProfileImageUsecase.swift in Sources */,
 				3200446F2CEB23A700D08B6D /* CardPresentationController.swift in Sources */,
 				320043932CDF3D7F00D08B6D /* KeywordView.swift in Sources */,
+				A22DE6262E0EEB2E0076CAB2 /* SupabaseDBInsertRequestBuilder.swift in Sources */,
 				320044772CEB4E1E00D08B6D /* RequestWalkUsecase.swift in Sources */,
 				320044982CED81F400D08B6D /* WalkNoti.swift in Sources */,
 				FD14C2702DD4737900AC9ABB /* AppleAuthManager.swift in Sources */,
@@ -2618,6 +3036,7 @@
 				FD259F492D6FD2FC007B182D /* WalkLogListRouter.swift in Sources */,
 				FD5134192CEB7ADE002E76F3 /* HomeRouter.swift in Sources */,
 				FD51341D2CEB7AF0002E76F3 /* HomeInteractor.swift in Sources */,
+				A22DE6202E0EEAD20076CAB2 /* HasQuery.swift in Sources */,
 				3200453F2CF5A8B800D08B6D /* CalculateTimeLimitUsecase.swift in Sources */,
 				320044532CE59A8A00D08B6D /* ProfileInfo.swift in Sources */,
 				99E79FA32D55627F00E48552 /* Extension + UITextViewDelegate.swift in Sources */,
@@ -2648,6 +3067,7 @@
 				FD119F522CED881300BE22BD /* SelectLocationModuleBuildable.swift in Sources */,
 				FD331A522CF23BD000F39426 /* WalkLog.swift in Sources */,
 				99525F2C2D7466FE00B6E17E /* ResetPwViewController.swift in Sources */,
+				A22DE62E2E0EEB520076CAB2 /* SupabaseDBDeleteRequestBuilder.swift in Sources */,
 				FD11527B2CFC900F008955C4 /* NotificationListPresenter.swift in Sources */,
 				A2C328862CE245AC00D255AB /* TabBarModuleBuilder.swift in Sources */,
 				320044732CEB47B100D08B6D /* RequestWalkInteractor.swift in Sources */,
@@ -2674,6 +3094,7 @@
 				FD0634312CE62578003C9D6B /* AnyEncodable.swift in Sources */,
 				FDE768962CF7831000B5DE88 /* RegisterDeviceTokenUsecase.swift in Sources */,
 				A23A3B732CF4683F00A58705 /* Mate.swift in Sources */,
+				A22DE6182E0EEA960076CAB2 /* SupabaseDBFetchRequestBuilder.swift in Sources */,
 				99E79FA92D556E1900E48552 /* Report.swift in Sources */,
 				99525F0D2D6E806B00B6E17E /* SigninInteractor.swift in Sources */,
 				FD14C2772DD473AB00AC9ABB /* SignInAppleUsecase.swift in Sources */,
@@ -2685,6 +3106,7 @@
 				A24082722CEB36B8009109A0 /* SupabaseTokenRequest.swift in Sources */,
 				3200445A2CE5B3AA00D08B6D /* ProfileCreateInteractor.swift in Sources */,
 				A2C328922CE3BEA000D255AB /* AppRouter.swift in Sources */,
+				A22DE61B2E0EEAB80076CAB2 /* HasData.swift in Sources */,
 				3200446B2CEB183300D08B6D /* RequestWalkViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2756,6 +3178,57 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		32BD482E2D3FEC9D0078DA9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4N97P5J52N;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		32BD482F2D3FEC9D0078DA9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4N97P5J52N;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=*]" = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMEET;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		A24B1F2B2D3C32960012B860 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2799,6 +3272,60 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		FD331A6C2CF33C6700F39426 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4N97P5J52N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SupabaseTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMeet;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited) TEST";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		FD331A6D2CF33C6700F39426 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 4N97P5J52N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SupabaseTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hgd1004.SniffMEET;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = SniffMeet;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = TEST;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

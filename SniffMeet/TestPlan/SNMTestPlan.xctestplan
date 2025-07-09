@@ -32,13 +32,6 @@
         "identifier" : "FDCD02BD2CE9172600B627D8",
         "name" : "SNMNetworkTests"
       }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:SniffMeet.xcodeproj",
-        "identifier" : "32BD48272D3FEC9D0078DA9C",
-        "name" : "SNMSceneTests"
-      }
     }
   ],
   "version" : 1

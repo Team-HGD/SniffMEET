@@ -18,38 +18,50 @@ enum SupabaseQueryParameter {
     
     var key: String {
         switch self {
-        case .equal(let key, _):
-            return key
-        case .notEqual(let key, _):
-            return key
-        case .isNull(let key, _):
-            return key
-        case .isTrue(let key, _):
-            return key
-        case .custom(let key, _):
+        case let .equal(key, _),
+             let .notEqual(key, _),
+             let .isNull(key, _),
+             let .isTrue(key, _),
+             let .custom(key, _):
             return key
         }
     }
-    
     var value: String {
         switch self {
         case .equal(_, let value):
-            return "eq." + value.queryValue
+            return SupabaseOperator.eq.rawValue + value.queryValue
         case .notEqual(_, let value):
-            return "neq." + value.queryValue
+            return SupabaseOperator.neq.rawValue + value.queryValue
         case .isNull(_, let isNull):
-            return isNull ? "is.null" : "not.is.null"
+            return (isNull ? SupabaseOperator.isNull : SupabaseOperator.notIsNull).rawValue
         case .isTrue(_, let isTrue):
-            return isTrue ? "is.true" : "is.false"
+            return (isTrue ? SupabaseOperator.isTrue : SupabaseOperator.isFalse).rawValue
         case .custom(_, let value):
             return value.queryValue
         }
     }
 }
 
+// MARK: - SupabaseOperator
+
+extension SupabaseQueryParameter {
+    private enum SupabaseOperator: String {
+        case eq = "eq"
+        case neq = "neq"
+        case isNull = "is.null"
+        case notIsNull = "not.is.null"
+        case isTrue = "is.true"
+        case isFalse = "is.false"
+    }
+}
+
+// MARK: - SupabaseQueryRepresentable Protocol
+
 protocol SupabaseQueryRepresentable {
     var queryValue: String { get }
 }
+
+// MARK: - SupabaseQueryRepresentable Protocol Conformance
 
 extension String: SupabaseQueryRepresentable {
     public var queryValue: String { self }

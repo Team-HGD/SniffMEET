@@ -15,6 +15,13 @@
     {
       "target" : {
         "containerPath" : "container:SniffMeet.xcodeproj",
+        "identifier" : "A24B1F242D3C32960012B860",
+        "name" : "SNMUtilityTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:SniffMeet.xcodeproj",
         "identifier" : "FD69B1B92CE3BCDC009D71DC",
         "name" : "SNMPersistenceTests"
       }
@@ -24,20 +31,6 @@
         "containerPath" : "container:SniffMeet.xcodeproj",
         "identifier" : "FDCD02BD2CE9172600B627D8",
         "name" : "SNMNetworkTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:SniffMeet.xcodeproj",
-        "identifier" : "FD331A642CF33C6700F39426",
-        "name" : "SupabaseTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:SniffMeet.xcodeproj",
-        "identifier" : "A24B1F242D3C32960012B860",
-        "name" : "SNMUtilityTests"
       }
     }
   ],
